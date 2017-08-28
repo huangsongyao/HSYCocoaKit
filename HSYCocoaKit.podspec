@@ -38,5 +38,21 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+
+#依赖的第三方库
+s.dependency 'AFNetworking', '~> 3.1.0'
+s.dependency 'ReactiveCocoa', '~> 2.5'
+s.dependency 'ReactiveCocoa', '~> 2.5'
+s.dependency 'AFNetworking', '~> 2.3'
+s.dependency 'JSONModel', '~> 1.2.0'
+s.dependency 'Masonry', '~> 0.6.4'
+s.dependency 'SDWebImage', '~> 3.7.5'
+s.dependency 'MBProgressHUD', '~> 0.9.2'
+s.dependency 'ReactiveViewModel', '~> 0.3'
+s.dependency 'RegexKitLite', '~> 4.0'
+s.dependency 'UITextView+Placeholder', '~> 1.1.1'
+s.dependency 'TYAttributedLabel', '~> 2.5.6'
+s.dependency 'FMDB', '~> 2.6'
+s.dependency 'TKRoundedView', '~> 0.5'
+
 end

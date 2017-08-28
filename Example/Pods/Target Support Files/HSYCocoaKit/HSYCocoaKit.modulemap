@@ -1,0 +1,6 @@
+framework module HSYCocoaKit {
+  umbrella header "HSYCocoaKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
