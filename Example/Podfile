@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'HSYCocoaKit_Example' do
+  pod 'HSYCocoaKit', :path => '../'
+
+  target 'HSYCocoaKit_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase'
+  end
+end
