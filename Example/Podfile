@@ -1,8 +1,10 @@
 use_frameworks!
 
+#source 'https://github.com/huangsongyao/HSYCocoaKit.git'
+
 target 'HSYCocoaKit_Example' do
   pod 'HSYCocoaKit', :path => '../'
-
+  #pod 'HSYCocoaKit', :podspec => '../HSYCocoaKit.podspec'
   target 'HSYCocoaKit_Tests' do
     inherit! :search_paths
 
