@@ -20,18 +20,17 @@
 - (CGFloat)currentPageY;                                    //获取scrollView的当前页面的y点坐标
 - (CGFloat)currentPageX;                                    //获取scrollView的当前页面的x点坐标
 
-
 /**
- *  上下方向翻页，无动画
- *
- *  @return 设置翻页的页码
+ 上下方向翻页，无动画
+
+ @param page 设置翻页的页码
  */
 - (void)setPageY:(CGFloat)page;
 
 /**
- *  左右方向翻页，无动画
- *
- *  @return 设置翻页的页码
+ 左右方向翻页，无动画
+
+ @param page 设置翻页的页码
  */
 - (void)setPageX:(CGFloat)page;
 
@@ -40,12 +39,20 @@
  *
  *  @param animated  是否有动画
  */
+
+/**
+ 上下方向翻页
+
+ @param page 设置翻页的页码
+ @param animated 是否执行动画
+ */
 - (void)setPageY:(CGFloat)page animated:(BOOL)animated;
 
 /**
- *  左右方向翻页
- *
- *  @param animated  是否有动画
+ 左右方向翻页
+ 
+ @param page 设置翻页的页码
+ @param animated 是否执行动画
  */
 - (void)setPageX:(CGFloat)page animated:(BOOL)animated;
 

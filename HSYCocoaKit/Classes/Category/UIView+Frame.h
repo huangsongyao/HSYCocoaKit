@@ -15,7 +15,7 @@
 @property (nonatomic, readwrite) CGPoint point;         //view的(x,y)坐标点
 @property (nonatomic, readwrite) CGFloat width;         //view的宽度
 @property (nonatomic, readwrite) CGFloat height;        //view的高度
-@property (nonatomic, readwrite) CGSize  size;          //view的(width,height)尺寸
+@property (nonatomic, readwrite) CGSize size;           //view的(width,height)尺寸
 @property (nonatomic, readwrite) CGFloat center_x;      //view的中心点x点坐标
 @property (nonatomic, readwrite) CGFloat center_y;      //view的中心点y点坐标
 

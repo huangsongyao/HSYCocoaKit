@@ -28,6 +28,13 @@
 + (NSString *)mainBundleForPathResource:(NSString *)resource ofType:(NSString *)type;
 
 /**
+ 设备statusBar的size
+
+ @return statusBar的size
+ */
++ (CGSize)iPhoneStatusBarSize;
+
+/**
  *  设备statusBar的高度
  *
  *  @return 高度

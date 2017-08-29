@@ -20,9 +20,14 @@
     return [[NSBundle mainBundle] pathForResource:resource ofType:type];
 }
 
++ (CGSize)iPhoneStatusBarSize
+{
+    return [[UIApplication sharedApplication] statusBarFrame].size;
+}
+
 + (CGFloat)statusBarHeight
 {
-    return [[UIApplication sharedApplication] statusBarFrame].size.height;
+    return [UIApplication iPhoneStatusBarSize].height;
 }
 
 @end

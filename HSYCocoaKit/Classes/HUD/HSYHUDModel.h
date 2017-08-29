@@ -45,7 +45,6 @@ typedef NS_ENUM(NSUInteger, kHSYHUDModelCodeType) {
  *  @param codeType      HUD请求类型，枚举
  *  @param text          HUD展示文字
  *  @param animationTime HUD展示动画时间
- *  @param isTouchCancel HUD是否允许touch屏幕后取消
  *
  *  @return HUDModel对象
  */

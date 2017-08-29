@@ -7,6 +7,7 @@
 //
 
 #import "HSYViewController.h"
+#import "HSYCocoaKit.h"
 
 @interface HSYViewController ()
 
@@ -17,7 +18,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"%@", [NSDate nextDay]);//stringyyyyMMddHHmmssFromDateByTimestamp
+    NSLog(@"%@", [NSDate stringyyyyMMddHHmmssFromDateByTimestamp:@(1503975304000)]);
+    [self observerToKeyboardDidChange:nil subscribeNext:^(CGRect bounds, CGPoint begin, CGPoint end, CGRect frameBegin, CGRect frameEnd, NSNumber *curve, NSNumber *duration, NSNumber *local) {
+        
+    }];
+    
+    UITextField *textField = [NSObject createTextFiledByParam:@{
+                                                                @(kHSYCocoaKitOfTextFiledPropretyTypeBorderWidth) : @(1),
+                                                                @(kHSYCocoaKitOfTextFiledPropretyTypeBorderColor) : [UIColor blackColor],
+                                                                }
+                                       didChangeSubscribeNext:^(NSString *text) {
+                                           
+                                       }];
+    textField.frame = CGRectMake(100, 100, 200, 60);
+    [self.view addSubview:textField];
 	// Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning

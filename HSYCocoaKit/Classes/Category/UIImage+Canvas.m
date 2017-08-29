@@ -43,9 +43,7 @@ static UIImage *createImageWithColor(UIColor *color, CGRect rect)
 {
     UIGraphicsBeginImageContextWithOptions(view.size, view.opaque, 0.0);
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    
     UIGraphicsEndImageContext();
     
     return img;
