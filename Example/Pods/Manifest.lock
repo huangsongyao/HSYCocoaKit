@@ -28,7 +28,7 @@ PODS:
   - FMDB (2.7.2):
     - FMDB/standard (= 2.7.2)
   - FMDB/standard (2.7.2)
-  - HSYCocoaKit (0.1.9):
+  - HSYCocoaKit (0.2.0):
     - AFNetworking (~> 2.3)
     - FMDB (~> 2.6)
     - JSONModel (~> 1.2.0)
@@ -73,7 +73,7 @@ SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
-  HSYCocoaKit: 284402e7f7897bcd310ed5fd1fe92dbb922281bc
+  HSYCocoaKit: fbb6e9b80ceb75f2b286d221b61bde3aedcd55ee
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
@@ -85,6 +85,6 @@ SPEC CHECKSUMS:
   TYAttributedLabel: 251d4cb2bf35813815d0ad632b3e56ba626c6b01
   UITextView+Placeholder: a6fc3e0378f3870036ec562a7537cbf6dbae4bf6
 
-PODFILE CHECKSUM: e619b4bfc3fa1dd4ba631fd398af5bf30674d05a
+PODFILE CHECKSUM: 3810507e2f43d4d63fec1a4e57c10dcc81d262b8
 
 COCOAPODS: 1.3.1
