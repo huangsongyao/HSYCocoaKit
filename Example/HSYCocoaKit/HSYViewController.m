@@ -9,6 +9,21 @@
 #import "HSYViewController.h"
 #import "HSYCocoaKit.h"
 
+@interface TestModel : NSObject
+
+@property (nonatomic, strong) NSString *test_1;
+@property (nonatomic, strong) NSNumber *test_2;
+@property (nonatomic, strong) NSDictionary *test_3;
+@property (nonatomic, strong) NSString *test_4;
+@property (nonatomic, strong) NSString *yyyy;
+
+@end
+
+@implementation TestModel
+
+
+@end
+
 @interface HSYViewController ()
 
 @end
@@ -33,6 +48,20 @@
                                        }];
     textField.frame = CGRectMake(100, 100, 200, 60);
     [self.view addSubview:textField];
+    
+    TestModel *test = [TestModel new];
+    test.test_1 = @"hehehe";
+    test.test_2 = @(100);
+    test.test_3 = @{@"1" : @"1"};
+    
+    NSDictionary *iccc = @{
+                           @"test_1" : @"66",
+                           @"test_2" : @(111),
+                           };
+    
+    id object = [NSObject objectRuntimeValues:iccc classes:[TestModel class]];
+    NSMutableDictionary *dic = [test toRuntimeMutableDictionary];
+    NSLog(@"dic = %@", dic);
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
