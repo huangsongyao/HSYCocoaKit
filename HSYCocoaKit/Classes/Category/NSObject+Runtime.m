@@ -75,7 +75,7 @@
         if (!value) {
             id setValue = [NSObject ivarRuntimeValue:[NSObject objectRuntimeTypeEncoding:ivar]];
             if (!setValue) {
-                setValue = @"";
+                setValue = [NSNull null];
             }
             object_setIvar(object, ivar, setValue);
         }
