@@ -62,7 +62,13 @@
     id object = [NSObject objectRuntimeValues:iccc classes:[TestModel class]];
     NSMutableDictionary *dic = [test toRuntimeMutableDictionary];
     NSLog(@"dic = %@", dic);
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    [RACSignal rac_startClockwiseTimer:1.0f subscribeNext:^BOOL(NSDate *date, CGFloat count) {
+        NSLog(@"date = %@ \n count = %f", date, count);
+        return (count >= 10.0f);
+    }];
+    
+    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -23,7 +23,7 @@
  *
  *  @param next 计时器回调
  */
-- (void)timerSubscribeNext:(void(^)(id x))next;
+- (void)timerSubscribeNext:(void(^)(NSDate *date))next;
 
 /**
  *  停止计时器

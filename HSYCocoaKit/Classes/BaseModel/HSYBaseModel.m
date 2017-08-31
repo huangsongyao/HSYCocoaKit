@@ -27,12 +27,12 @@
 
 #pragma mark - Timer
 
-- (void)timerSubscribeNext:(void(^)(id x))next
+- (void)timerSubscribeNext:(void(^)(NSDate *date))next
 {
     [self stop];
-    _disposable = [[[RACSignal timerSignalOneMinute] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+    _disposable = [[[RACSignal rac_timerSignalOneMinute] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSDate *date) {
         if (next) {
-            next(x);
+            next(date);
         }
     }];
 }
