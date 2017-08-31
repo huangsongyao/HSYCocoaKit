@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, kHSYReflesStatusType) {
  *  网络请求下一页，主要用于分页
  *
  *  @param network 网络请求的方法
- *  @param map     结果映射，由于方法内部已经对self.datas这个数据源数组进行了整理，所有映射时必须映射成结果数组
+ *  @param map     结果映射，由于方法内部已经对self.datas这个数据源数组进行了整理，所以映射时必须映射成结果数组
  *  @param status  上拉或者下拉的枚举
  */
 - (void)updateNext:(RACSignal *(^)())network toMap:(NSMutableArray *(^)(id x))map pullDown:(kHSYReflesStatusType)status;
