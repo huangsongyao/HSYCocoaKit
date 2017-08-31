@@ -88,15 +88,15 @@ static NSString *kHSYValueKey  = @"HSYValueKey";
 
 - (RACSignal *)getNetworkingReachability
 {
+    @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        AFHTTPRequestOperationManager *requestOperationManager = [[AFHTTPRequestOperationManager alloc] init];
-        [requestOperationManager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        @strongify(self);
+        [self.httpManager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
             _isReachable = status;
             NSLog(@"isReachable:%ld\n", (long)status);
             if (status == AFNetworkReachabilityStatusReachableViaWWAN ||
                 status == AFNetworkReachabilityStatusReachableViaWiFi ||
                 status == AFNetworkReachabilityStatusUnknown) {
-                
                 [subscriber sendNext:@(status)]; //发送当前网络类型，WAN/WIFI/Unknown
                 [subscriber sendCompleted];
             } else {
@@ -104,9 +104,24 @@ static NSString *kHSYValueKey  = @"HSYValueKey";
             }
         }];
         // 开启检测
-        [requestOperationManager.reachabilityManager startMonitoring];
+        [self.httpManager.reachabilityManager startMonitoring];
         return nil;
     }];
+}
+
+- (void)networkingStatus:(BOOL(^)(AFNetworkReachabilityStatus status))next
+{
+    @weakify(self);
+    [self.httpManager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        @strongify(self);
+        if (next) {
+            BOOL stopMonitoring = next(status);
+            if (stopMonitoring) {
+                [self.httpManager.reachabilityManager stopMonitoring];
+            }
+        }
+    }];
+    [self.httpManager.reachabilityManager startMonitoring];
 }
 
 @end

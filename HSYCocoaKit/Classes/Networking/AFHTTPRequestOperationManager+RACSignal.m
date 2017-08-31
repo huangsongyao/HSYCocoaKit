@@ -111,7 +111,6 @@ static NSString *重铸完整的请求连接(NSString *urlString)
 {
     NSParameterAssert(path);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        
         RACSignal *signal = nil;  //创建信号，管道中对AF方法进行请求，回调使用signal返回。
         switch (methodType) {
             case kRequestMethodTypeGET: {
@@ -125,30 +124,26 @@ static NSString *重铸完整的请求连接(NSString *urlString)
             default:
                 break;
         }
-        
         //将回调的tuple对象逐级向上发送
         [signal subscribeNext:^(RACTuple *tuple) {
-            
             AFHTTPRequestOperation *requestOperation = (AFHTTPRequestOperation *)tuple.first;
             NSDictionary *heads = [requestOperation response].allHeaderFields;
             NSLog(@"\n//=====================%@====================//\n", heads);
-            
             NSString *value = [heads valueForKey:kHttpErrorHeadKey];
             if (value) {
                 [subscriber sendError:[NSError errorWithErrorType:(kAFNetworkingStatusErrorType)[value integerValue]]];
                 [HSYHUDHelper showHUDViewForMessage:value];
-                [subscriber sendCompleted];
             } else {
                 //把获取到网络回调的数据逐级上传
                 [subscriber sendNext:tuple];
-                [subscriber sendCompleted];
             }
+            [subscriber sendCompleted];
         } error:^(NSError *error) {
             NSLog(@"error: %@\n", error);
             [subscriber sendError:error];
             [subscriber sendCompleted];
         }];
-        return nil;
+        return [RACDisposable disposableWithBlock:^{}];
     }];
 }
 

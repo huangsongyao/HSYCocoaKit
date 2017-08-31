@@ -25,4 +25,11 @@
  */
 - (RACSignal *)getNetworkingReachability;
 
+/**
+ 监听当前网络状态
+ 
+ @param next 网络状态的信号
+ */
+- (void)networkingStatus:(BOOL(^)(AFNetworkReachabilityStatus status))next;
+
 @end
