@@ -300,13 +300,15 @@
         NSValue *value = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeFrame)];
         rect = value.CGRectValue;
     }
-    UICollectionViewFlowLayout *flowLayout = [NSObject createFlowLayoutByParam:@{
-                                                                                 @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection) : @(UICollectionViewScrollDirectionVertical),
-                                                                                 @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH, 44.0f)],
-                                                                                 
-                                                                                 }];
+    UICollectionViewFlowLayout *flowLayout = nil;
     if (param[@(kHSYCocoaKitOfCollectionViewPropretyTypeLayout)]) {
         flowLayout = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeLayout)];
+    } else {
+        flowLayout = [NSObject createFlowLayoutByParam:@{
+                                                         @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection) : @(UICollectionViewScrollDirectionVertical),
+                                                         @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH, 44.0f)],
+                                                         
+                                                         }];
     }
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:rect collectionViewLayout:flowLayout];
     if (param[@(kHSYCocoaKitOfCollectionViewPropretyTypeDelegate)]) {

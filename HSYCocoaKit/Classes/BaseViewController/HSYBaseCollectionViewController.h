@@ -8,6 +8,8 @@
 
 #import "HSYBaseRefleshViewController.h"
 
-@interface HSYBaseCollectionViewController : HSYBaseRefleshViewController
+@interface HSYBaseCollectionViewController : HSYBaseRefleshViewController <UICollectionViewDelegate, UICollectionViewDataSource>
+
+@property (nonatomic, strong, readonly) UICollectionView *collectionView;
 
 @end

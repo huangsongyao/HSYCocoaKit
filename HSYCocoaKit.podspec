@@ -41,7 +41,7 @@ TODO: Add long description of the pod here.
 
 #依赖的第三方库
 s.dependency 'AFNetworking', '~> 3.1.0'
-s.dependency 'ReactiveCocoa', '~> 2.5'
+#s.dependency 'ReactiveCocoa', :git => 'https://github.com/zhao0/ReactiveCocoa.git', :tag => '2.5.2'
 s.dependency 'ReactiveCocoa', '~> 2.5'
 s.dependency 'AFNetworking', '~> 2.3'
 s.dependency 'JSONModel', '~> 1.2.0'

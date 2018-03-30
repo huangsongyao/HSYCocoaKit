@@ -106,14 +106,13 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfScrollViewPropretyType) {
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfCollectionViewPropretyType) {
     
     kHSYCocoaKitOfCollectionViewPropretyTypeFrame                   = 135,  //NSValue\(CGRect)
-    kHSYCocoaKitOfCollectionViewPropretyTypeLayout,                         //
+    kHSYCocoaKitOfCollectionViewPropretyTypeLayout,                         //UICollectionViewFlowLayout
     kHSYCocoaKitOfCollectionViewPropretyTypeDataSource,                     //id\(<UITableViewDelegate>)
     kHSYCocoaKitOfCollectionViewPropretyTypeDelegate,                       //id\(<UITableViewDelegate>)
     kHSYCocoaKitOfCollectionViewPropretyTypeScrollEnabled,                  //NSNumber\(BOOL)
     kHSYCocoaKitOfCollectionViewPropretyTypeBounces,                        //NSNumber\(BOOL)
     kHSYCocoaKitOfCollectionViewPropretyTypeHiddenScrollIndicator,          //NSNumber\(BOOL)
     kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass,                  //NSDictionary\(@{@"Class Name" : @"Identifier"})
-    
 };
 
 //UICollectionViewFlowLayout

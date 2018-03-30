@@ -8,6 +8,8 @@
 
 #import "HSYBaseRefleshViewController.h"
 
-@interface HSYBaseTableViewController : HSYBaseRefleshViewController
+@interface HSYBaseTableViewController : HSYBaseRefleshViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong, readonly) UITableView *tableView;
 
 @end

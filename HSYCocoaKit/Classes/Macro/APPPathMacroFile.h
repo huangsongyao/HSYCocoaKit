@@ -28,4 +28,5 @@
 #define CHANGE_VIDEO_PATH           [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
 #define CHANGE_VIDEO_PATH_URL(path) [NSURL fileURLWithPath:path isDirectory:YES]
 
+
 #endif /* APPPathMacroFile_h */

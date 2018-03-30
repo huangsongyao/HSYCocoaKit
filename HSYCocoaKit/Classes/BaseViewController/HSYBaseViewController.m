@@ -8,12 +8,16 @@
 
 #import "HSYBaseViewController.h"
 #import "NSError+Message.h"
+#import "PublicMacroFile.h"
 
 @implementation HSYBaseViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (VERSION_GTR_IOS8) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
 - (kHSYHUDModelCodeType)requestStateCodeWithStateCode:(id)stateCode

@@ -122,24 +122,14 @@
     return CGRectGetMidY(self.frame);
 }
 
-- (CGFloat)max_x
+- (CGFloat)right
 {
     return CGRectGetMaxX(self.frame);
 }
 
-- (CGFloat)max_y
+- (CGFloat)bottom
 {
     return CGRectGetMaxY(self.frame);
-}
-
-- (CGFloat)min_x
-{
-    return CGRectGetMinX(self.frame);
-}
-
-- (CGFloat)min_y
-{
-    return CGRectGetMinY(self.frame);
 }
 
 
