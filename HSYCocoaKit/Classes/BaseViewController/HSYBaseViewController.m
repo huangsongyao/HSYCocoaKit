@@ -25,8 +25,8 @@
     if([stateCode isKindOfClass:[NSError class]]) {
         [HSYHUDHelper hideAllHUDView];
         NSError *error = (NSError *)stateCode;
-        if (error.userInfo[kErrorKey]) {
-            [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeWrong codeType:kHSYHUDModelCodeTypeDefault text:error.userInfo[kErrorKey] animationTime:HUD_HIDE_TIME];
+        if (error.userInfo[kErrorForNotNetworkKey]) {
+            [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeWrong codeType:kHSYHUDModelCodeTypeDefault text:error.userInfo[kErrorForNotNetworkKey] animationTime:HUD_HIDE_TIME];
         } else if (error.userInfo[NSLocalizedDescriptionKey]) {
             [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeWrong codeType:kHSYHUDModelCodeTypeDefault text:error.userInfo[NSLocalizedDescriptionKey] animationTime:HUD_HIDE_TIME ];
         }

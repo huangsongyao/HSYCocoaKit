@@ -8,6 +8,7 @@
 
 #import "NSError+Message.h"
 
+NSString *const kErrorForNotNetworkKey = @"ErrorForNotNetworkKey";
 static const NSInteger kMessageCode = 1991;
 
 @implementation NSError (Message)
@@ -31,7 +32,7 @@ static const NSInteger kMessageCode = 1991;
 
 + (NSError *)errorWithErrorMessage:(NSString *)message
 {
-    return [[NSError alloc] initWithDomain:@"" code:kMessageCode userInfo:@{kErrorKey : message}];
+    return [[NSError alloc] initWithDomain:@"" code:kMessageCode userInfo:@{kErrorForNotNetworkKey : message}];
 }
 
 @end

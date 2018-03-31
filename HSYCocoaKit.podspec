@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HSYCocoaKit'
-  s.version          = '0.2.1'
+  s.version          = '0.2.2'
   s.summary          = 'A short description of HSYCocoaKit.'
 
 # This description is used to generate tags and improve search results.
@@ -43,16 +43,15 @@ TODO: Add long description of the pod here.
 s.dependency 'AFNetworking', '~> 3.1.0'
 #s.dependency 'ReactiveCocoa', :git => 'https://github.com/zhao0/ReactiveCocoa.git', :tag => '2.5.2'
 s.dependency 'ReactiveCocoa', '~> 2.5'
-s.dependency 'AFNetworking', '~> 2.3'
-s.dependency 'JSONModel', '~> 1.2.0'
-s.dependency 'Masonry', '~> 0.6.4'
-s.dependency 'SDWebImage', '~> 3.7.5'
+s.dependency 'JSONModel', '~> 1.7.0'
+s.dependency 'Masonry', '~> 1.1.0'
+s.dependency 'SDWebImage', '~> 4.3.3'
 s.dependency 'MBProgressHUD', '~> 0.9.2'
 s.dependency 'ReactiveViewModel', '~> 0.3'
 s.dependency 'RegexKitLite', '~> 4.0'
 s.dependency 'UITextView+Placeholder', '~> 1.1.1'
-s.dependency 'TYAttributedLabel', '~> 2.5.6'
-s.dependency 'FMDB', '~> 2.6'
+s.dependency 'TYAttributedLabel', '~> 2.6.6'
+s.dependency 'FMDB', '~> 2.7.2'
 s.dependency 'TKRoundedView', '~> 0.5'
 
 end

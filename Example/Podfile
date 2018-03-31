@@ -3,13 +3,15 @@ platform :ios, '8.0'
 use_frameworks!
 
 #source 'https://github.com/huangsongyao/HSYCocoaKit.git'
+source 'https://github.com/CocoaPods/Specs.git'
 
 target 'HSYCocoaKit_Example' do
   pod 'HSYCocoaKit', :path => '../'
-  #pod 'HSYCocoaKit', :podspec => '../HSYCocoaKit.podspec'
+#  pod 'HSYCocoaKit', :podspec => '../HSYCocoaKit.podspec'
   target 'HSYCocoaKit_Tests' do
     inherit! :search_paths
 
     pod 'FBSnapshotTestCase'
+    
   end
 end

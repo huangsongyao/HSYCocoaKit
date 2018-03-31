@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-static NSString *const kErrorKey = @"ErrorKey";
+FOUNDATION_EXPORT NSString *const kErrorForNotNetworkKey;
 
 typedef NS_ENUM(NSUInteger, kAFNetworkingStatusErrorType) {
     

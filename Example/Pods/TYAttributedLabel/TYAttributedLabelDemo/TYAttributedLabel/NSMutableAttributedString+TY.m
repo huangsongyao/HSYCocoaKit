@@ -88,16 +88,44 @@
     
 }
 
+#pragma mark - 文本空心字及颜色
+
+- (void)addAttributeStrokeWidth:(unichar)strokeWidth
+                    strokeColor:(UIColor *)strokeColor
+{
+    [self addAttributeStrokeWidth:strokeWidth strokeColor:strokeColor range:NSMakeRange(0, self.length)];
+}
+
+- (void)addAttributeStrokeWidth:(unichar)strokeWidth
+                    strokeColor:(UIColor *)strokeColor
+                          range:(NSRange)range
+{
+    [self removeAttribute:(id)kCTStrokeWidthAttributeName range:range];
+    if (strokeWidth > 0) {
+        CFNumberRef num = CFNumberCreate(kCFAllocatorDefault,kCFNumberSInt8Type,&strokeWidth);
+        
+        [self addAttribute:(id)kCTStrokeWidthAttributeName value:(__bridge id)num range:range];
+    }
+    
+    [self removeAttribute:(id)kCTStrokeColorAttributeName range:range];
+    if (strokeColor) {
+        [self addAttribute:(id)kCTStrokeColorAttributeName value:(id)strokeColor.CGColor range:range];
+    }
+    
+}
+
 #pragma mark - 文本段落样式属性
 - (void)addAttributeAlignmentStyle:(CTTextAlignment)textAlignment
                     lineSpaceStyle:(CGFloat)linesSpacing
+               paragraphSpaceStyle:(CGFloat)paragraphSpacing
                     lineBreakStyle:(CTLineBreakMode)lineBreakMode
 {
-    [self addAttributeAlignmentStyle:textAlignment lineSpaceStyle:linesSpacing lineBreakStyle:lineBreakMode range:NSMakeRange(0, self.length)];
+    [self addAttributeAlignmentStyle:textAlignment lineSpaceStyle:linesSpacing paragraphSpaceStyle:paragraphSpacing lineBreakStyle:lineBreakMode range:NSMakeRange(0, self.length)];
 }
 
 - (void)addAttributeAlignmentStyle:(CTTextAlignment)textAlignment
                     lineSpaceStyle:(CGFloat)linesSpacing
+               paragraphSpaceStyle:(CGFloat)paragraphSpacing
                     lineBreakStyle:(CTLineBreakMode)lineBreakMode
                              range:(NSRange)range
 {
@@ -115,6 +143,12 @@
     lineSpaceStyle.valueSize = sizeof(linesSpacing);
     lineSpaceStyle.value = &linesSpacing;
     
+    //段落间距
+    CTParagraphStyleSetting paragraphSpaceStyle;
+    paragraphSpaceStyle.spec = kCTParagraphStyleSpecifierParagraphSpacing;
+    paragraphSpaceStyle.value = &paragraphSpacing;
+    paragraphSpaceStyle.valueSize = sizeof(paragraphSpacing);
+    
     //换行模式
     CTParagraphStyleSetting lineBreakStyle;
     lineBreakStyle.spec = kCTParagraphStyleSpecifierLineBreakMode;
@@ -122,7 +156,7 @@
     lineBreakStyle.valueSize = sizeof(lineBreakMode);
     
     // 创建样式数组
-    CTParagraphStyleSetting settings[] = {alignmentStyle ,lineSpaceStyle ,lineBreakStyle};
+    CTParagraphStyleSetting settings[] = {alignmentStyle ,lineSpaceStyle, paragraphSpaceStyle, lineBreakStyle};
     CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(settings[0]));	// 设置样式
     
     // 设置段落属性

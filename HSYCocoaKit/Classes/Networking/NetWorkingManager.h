@@ -9,12 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import "AFHTTPRequestOperationManager+RACSignal.h"
 
 @interface NetWorkingManager : NSObject
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager *httpManager;           //post request管理者
-@property (nonatomic, assign, readonly) AFNetworkReachabilityStatus isReachable;    //网络状态
+@property (nonatomic, strong, readonly) AFHTTPSessionManager *httpSessionManager;             //>=3.0f version
 
 + (instancetype)shareInstance;
 
@@ -23,13 +21,21 @@
  *
  *  @return 网络状态的信号
  */
-- (RACSignal *)getNetworkingReachability;
+- (RACSignal *)networking_3x_Reachability;
 
 /**
- 监听当前网络状态
- 
- @param next 网络状态的信号
+ 通过字段拼接完整的url，若字段中含有http开头字眼，则默认为是一个完整的链接
+
+ @param path 字段
+ @return 请求地址
  */
-- (void)networkingStatus:(BOOL(^)(AFNetworkReachabilityStatus status))next;
++ (NSString *)urlFromPath:(NSString *)path;
+
+/**
+ 网络监听
+
+ @param next 网络状态回调，如果需要持续对网络状态进行监听，则在block中返回NO
+ */
+- (void)observer_3x_NetworkReachabilityOfNext:(BOOL(^)(AFNetworkReachabilityStatus status, BOOL hasNetwork))next;
 
 @end

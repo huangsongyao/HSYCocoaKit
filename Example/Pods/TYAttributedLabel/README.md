@@ -1,10 +1,12 @@
-# TYAttributedLabel v2.5
+# TYAttributedLabel v2.6
 TYAttributedLabel 简单，强大的属性文本的控件(无需了解CoreText)，支持图文混排显示，支持添加链接，image和UIView控件，支持自定义排版显示<br>
 
 **更新:**
+<br>详细的使用请看[LovePlayNews](https://github.com/12207480/LovePlayNews)项目
 <br>使用autolayout 如果需要自动推断高度，必须设置preferredMaxLayoutWidth
 <br>添加到CocoaPods
 <br>微博demo（建议真机调试） 下载地址：链接: http://pan.baidu.com/s/1sjnBWRj 密码: t7qn
+<br>v2.6 新增宽度自适应isWidthToFit，空心字设置strokeWidth，段落间距paragraphSpacing
 <br>v2.5 把label的一些操作移动textContainer,label只负责draw了。
 <br>v2.4 修复imge放大bug，新增imageAlignment 和 autolayout支持，以及相应的demo，感谢xinzhengzhang，nonstriater
 <br>v2.3 新增 做题demo，代码优化
@@ -16,7 +18,7 @@ TYAttributedLabel 简单，强大的属性文本的控件(无需了解CoreText)�
 
 ## CocoaPods
 ```
-pod 'TYAttributedLabel', '~> 2.5.3'
+pod 'TYAttributedLabel', '~> 2.6.2'
 ```
 
 ## ScreenShot
@@ -37,8 +39,8 @@ weibo demo 使用TYAttributedLabel 截图
 * ARC
 
 ## Features
-* 支持富文本，图文混排显示，支持行间距 字间距，设置行数，自适应高度
-* 支持添加高度自定义文本属性 
+* 支持属性文本，图文混排显示，支持行间距 行间距 段落间距，设置行数，自适应高度，宽度
+* 支持添加自定义文本属性
 * 支持添加属性文本，自定义链接，新增高亮效果显示（文字和背景）
 * 支持添加UIImage和UIView控件
 
@@ -194,7 +196,6 @@ label.textContainer = textContainer;
 ### Contact
 如果你发现bug，please pull reqeust me <br>
 如果你有更好的改进，please pull reqeust me <br>
-如果你有更好的想法或者建议可以联系我，Email:122074809@qq.com
 
 
 

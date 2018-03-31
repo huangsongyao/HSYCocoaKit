@@ -30,6 +30,10 @@
 {
     _ownerView = ownerView;
     
+    if (!ownerView || !_imageURL) {
+        return;
+    }
+    
     if ([_imageURL isKindOfClass:[NSURL class]]
         && ![[TYImageCache cache] imageIsCacheForURL:_imageURL.absoluteString]) {
         
@@ -78,7 +82,9 @@
 }
 
 - (CGRect)rectFitOriginSize:(CGSize)size byRect:(CGRect)byRect{
-    
+    if (_imageAlignment == TYImageAlignmentFill) {
+        return byRect;
+    }
     CGRect scaleRect = byRect;
     CGFloat targetWidth = byRect.size.width;
     CGFloat targetHeight = byRect.size.height;

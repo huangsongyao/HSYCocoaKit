@@ -41,9 +41,14 @@ typedef NS_ENUM(NSUInteger, TYVerticalAlignment) {
 @property (nonatomic, strong)   UIColor     *linkColor;           //链接颜色
 @property (nonatomic, strong)   UIColor     *highlightedLinkColor;//默认nil高亮链接颜色
 @property (nonatomic, strong)   UIColor     *highlightedLinkBackgroundColor;//链接高亮背景颜色
+@property (nonatomic, assign)   CGFloat     highlightedLinkBackgroundRadius; // 高亮背景圆角
+
+@property (nonatomic, assign)   unichar     strokeWidth;    // 空心字边框宽
+@property (nonatomic, strong)   UIColor     *strokeColor;   // 空心字边框颜色
 
 @property (nonatomic, assign)   unichar     characterSpacing;   // 字距
 @property (nonatomic, assign)   CGFloat     linesSpacing;       // 行距
+@property (nonatomic, assign)   CGFloat     paragraphSpacing;   // 段落间距
 
 @property (nonatomic, assign)   CTTextAlignment textAlignment;  // 文本对齐方式 kCTTextAlignmentLeft
 @property (nonatomic, assign)   CTLineBreakMode lineBreakMode;  // 换行模式 kCTLineBreakByCharWrapping
@@ -51,10 +56,11 @@ typedef NS_ENUM(NSUInteger, TYVerticalAlignment) {
 
 @property (nonatomic, strong)   TYTextContainer *textContainer;
 
-/**
- *  Autolayout
- */
-@property(nonatomic) CGFloat preferredMaxLayoutWidth NS_AVAILABLE_IOS(6_0);
+@property (nonatomic, assign)   CGFloat preferredMaxLayoutWidth; // Autolayout
+
+@property (nonatomic, assign)   BOOL isWidthToFit;    // 宽度自适应 默认NO
+
+
 
 /**
  *  获取普通文本内容
@@ -90,7 +96,7 @@ typedef NS_ENUM(NSUInteger, TYVerticalAlignment) {
 /**
  *  添加 textRun数组 （自定义显示内容）
  *
- *  @param textStorageArray textRun数组（需遵循协议TYTextStorageProtocol,否则不会添加）
+ *  @param textRunArray textRun数组（需遵循协议TYTextStorageProtocol,否则不会添加）
  */
 - (void)addTextStorageArray:(NSArray *)textStorageArray;
 
@@ -103,6 +109,11 @@ typedef NS_ENUM(NSUInteger, TYVerticalAlignment) {
  *  获取文本真正的高度
  */
 - (int)getHeightWithWidth:(CGFloat)width;
+
+/**
+ *  获取文本真正的size
+ */
+- (CGSize)getSizeWithWidth:(CGFloat)width;
 
 /**
  *  设置文本位置大小 （自动计算高度，根据宽度）

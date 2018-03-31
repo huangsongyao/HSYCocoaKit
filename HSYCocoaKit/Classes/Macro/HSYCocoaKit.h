@@ -60,8 +60,6 @@
 #import "HSYCocoaKit.h"
 #import "NetworkingRequestPathFile.h"
 #import "PublicMacroFile.h"
-#import "AFHTTPRequestOperation+RACSignal.h"
-#import "AFHTTPRequestOperationManager+RACSignal.h"
 #import "NetWorkingManager.h"
 #import "NSError+Message.h"
 #import "RACSignal+Timer.h"

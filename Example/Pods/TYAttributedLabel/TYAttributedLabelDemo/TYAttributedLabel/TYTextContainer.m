@@ -100,6 +100,7 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     _font = [UIFont systemFontOfSize:15];
     _characterSpacing = 1;
     _linesSpacing = 2;
+    _paragraphSpacing = 0;
     _textAlignment = kCTLeftTextAlignment;
     _lineBreakMode = kCTLineBreakByCharWrapping;
     _textColor = kTextColor;
@@ -171,9 +172,27 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     }
 }
 
+- (void)setStrokeWidth:(unichar)strokeWidth
+{
+    if (_strokeWidth != strokeWidth) {
+        _strokeWidth = strokeWidth;
+        [_attString addAttributeStrokeWidth:strokeWidth strokeColor:_strokeColor];
+        [self resetFrameRef];
+    }
+}
+
+- (void)setStrokeColor:(UIColor *)strokeColor
+{
+    if (strokeColor && _strokeColor != strokeColor) {
+        _strokeColor = strokeColor;
+        [_attString addAttributeStrokeWidth:_strokeWidth strokeColor:strokeColor];
+        [self resetFrameRef];
+    }
+}
+
 - (void)setCharacterSpacing:(unichar)characterSpacing
 {
-    if (characterSpacing >= 0 && _characterSpacing != characterSpacing) {
+    if (_characterSpacing != characterSpacing) {
         _characterSpacing = characterSpacing;
         
         [_attString addAttributeCharacterSpacing:characterSpacing];
@@ -186,7 +205,16 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     if (_linesSpacing != linesSpacing) {
         _linesSpacing = linesSpacing;
         
-        [_attString addAttributeAlignmentStyle:_textAlignment lineSpaceStyle:linesSpacing lineBreakStyle:_lineBreakMode];
+        [self addAttributeAlignmentStyle:_textAlignment lineSpaceStyle:linesSpacing paragraphSpaceStyle:_paragraphSpacing lineBreakStyle:_lineBreakMode];
+        [self resetFrameRef];
+    }
+}
+
+- (void)setParagraphSpacing:(CGFloat)paragraphSpacing
+{
+    if (_paragraphSpacing != paragraphSpacing) {
+        _paragraphSpacing = paragraphSpacing;
+        [self addAttributeAlignmentStyle:_textAlignment lineSpaceStyle:_linesSpacing paragraphSpaceStyle:_paragraphSpacing lineBreakStyle:_lineBreakMode];
         [self resetFrameRef];
     }
 }
@@ -196,7 +224,7 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     if (_textAlignment != textAlignment) {
         _textAlignment = textAlignment;
         
-        [_attString addAttributeAlignmentStyle:textAlignment lineSpaceStyle:_linesSpacing lineBreakStyle:_lineBreakMode];
+        [self addAttributeAlignmentStyle:textAlignment lineSpaceStyle:_linesSpacing paragraphSpaceStyle:_paragraphSpacing lineBreakStyle:_lineBreakMode];
         [self resetFrameRef];
     }
 }
@@ -205,12 +233,8 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
 {
     if (_lineBreakMode != lineBreakMode) {
         _lineBreakMode = lineBreakMode;
-        if (_lineBreakMode == kCTLineBreakByTruncatingTail)
-        {
-            lineBreakMode = _numberOfLines == 1 ? kCTLineBreakByCharWrapping : kCTLineBreakByWordWrapping;
-        }
         
-        [_attString addAttributeAlignmentStyle:_textAlignment lineSpaceStyle:_linesSpacing lineBreakStyle:lineBreakMode];
+        [self addAttributeAlignmentStyle:_textAlignment lineSpaceStyle:_linesSpacing paragraphSpaceStyle:_paragraphSpacing lineBreakStyle:_lineBreakMode];
         [self resetFrameRef];
 
     }
@@ -243,6 +267,11 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     // 添加文本颜色
     [attString addAttributeTextColor:_textColor];
     
+    // 添加空心字体
+    if (_strokeWidth > 0) {
+        [attString addAttributeStrokeWidth:_strokeWidth strokeColor:_strokeColor];
+    }
+    
 }
 
 // 添加文本段落样式
@@ -255,7 +284,19 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     }
     
     // 添加文本段落样式
-    [attString addAttributeAlignmentStyle:_textAlignment lineSpaceStyle:_linesSpacing lineBreakStyle:_lineBreakMode];
+    [self addAttributeAlignmentStyle:_textAlignment lineSpaceStyle:_linesSpacing paragraphSpaceStyle:_paragraphSpacing lineBreakStyle:_lineBreakMode];
+}
+
+- (void)addAttributeAlignmentStyle:(CTTextAlignment)textAlignment
+                    lineSpaceStyle:(CGFloat)linesSpacing
+               paragraphSpaceStyle:(CGFloat)paragraphSpacing
+                    lineBreakStyle:(CTLineBreakMode)lineBreakMode
+{
+    if (lineBreakMode == kCTLineBreakByTruncatingTail)
+    {
+        lineBreakMode = _numberOfLines == 1 ? kCTLineBreakByCharWrapping : kCTLineBreakByWordWrapping;
+    }
+    [_attString addAttributeAlignmentStyle:_textAlignment lineSpaceStyle:_linesSpacing paragraphSpaceStyle:_paragraphSpacing lineBreakStyle:lineBreakMode];
 }
 
 #pragma mark -  add text storage atrributed
@@ -317,6 +358,9 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
 
 - (void)saveTextStorageRectWithFrame:(CTFrameRef)frame
 {
+    if (!frame) {
+        return;
+    }
     // 获取每行
     CFArrayRef lines = CTFrameGetLines(frame);
     CGPoint lineOrigins[CFArrayGetCount(lines)];
@@ -402,14 +446,14 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     _runRectDictionary = runRectDictionary;
 }
 
-- (int)getHeightWithFramesetter:(CTFramesetterRef)framesetter width:(CGFloat)width
+- (CGSize)getSuggestedSizeWithFramesetter:(CTFramesetterRef)framesetter width:(CGFloat)width
 {
     if (_attString == nil || width <= 0) {
-        return 0;
+        return CGSizeZero;
     }
     
     if (_textHeight > 0) {
-        return _textHeight;
+        return CGSizeMake(_textWidth > 0 ? _textWidth : width, _textHeight);
     }
     
     // 是否需要更新frame
@@ -424,15 +468,20 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     CGSize suggestedSize = CTFramesetterSuggestFrameSizeForAttributedStringWithConstraints(framesetter, _attString, CGSizeMake(width,MAXFLOAT), _numberOfLines);
     
     CFRelease(framesetter);
-    
-    return suggestedSize.height+1;
+
+    return CGSizeMake(_isWidthToFit ? suggestedSize.width : width, suggestedSize.height+1);
+}
+- (CGFloat)getHeightWithFramesetter:(CTFramesetterRef)framesetter width:(CGFloat)width
+{
+    return [self getSuggestedSizeWithFramesetter:framesetter width:width].height;
 }
 
--  (CTFrameRef)createFrameRefWithFramesetter:(CTFramesetterRef)framesetter textHeight:(CGFloat)textHeight
+-  (CTFrameRef)createFrameRefWithFramesetter:(CTFramesetterRef)framesetter textSize:(CGSize)textSize
 {
     // 这里你需要创建一个用于绘制文本的路径区域,通过 self.bounds 使用整个视图矩形区域创建 CGPath 引用。
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathAddRect(path, NULL, CGRectMake(0, 0, _textWidth, textHeight));
+    CGFloat textHeight = [self getHeightWithFramesetter:framesetter width:textSize.width];
+    CGPathAddRect(path, NULL, CGRectMake(0, 0, textSize.width, MAX(textHeight, textSize.height)));
     
     CTFrameRef frameRef = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, [_attString length]), path, NULL);
     CFRelease(path);
@@ -449,17 +498,17 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     if (_frameRef) {
         return self;
     }
-    _textWidth = contentSize.width;
-    
+    NSAttributedString *attStr = [self createAttributedString];
     // 创建CTFramesetter
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)[self createAttributedString]);
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attStr);
     
     // 获得建议的size
-    CGFloat textHeight = [self getHeightWithFramesetter:framesetter width:_textWidth];
+    CGSize size = [self getSuggestedSizeWithFramesetter:framesetter width:contentSize.width];
+    _textWidth = size.width;
+    _textHeight = size.height;
     
     // 创建CTFrameRef
-    _frameRef = [self createFrameRefWithFramesetter:framesetter textHeight: contentSize.height > 0 ?contentSize.height : textHeight];
-    _textHeight = textHeight;
+    _frameRef = [self createFrameRefWithFramesetter:framesetter textSize:CGSizeMake(_textWidth, contentSize.height > 0 ? contentSize.height : _textHeight)];
     
     // 释放内存
     CFRelease(framesetter);

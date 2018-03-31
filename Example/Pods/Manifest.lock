@@ -1,24 +1,18 @@
 PODS:
-  - AFNetworking (2.6.3):
-    - AFNetworking/NSURLConnection (= 2.6.3)
-    - AFNetworking/NSURLSession (= 2.6.3)
-    - AFNetworking/Reachability (= 2.6.3)
-    - AFNetworking/Security (= 2.6.3)
-    - AFNetworking/Serialization (= 2.6.3)
-    - AFNetworking/UIKit (= 2.6.3)
-  - AFNetworking/NSURLConnection (2.6.3):
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.3):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.3)
-  - AFNetworking/Security (2.6.3)
-  - AFNetworking/Serialization (2.6.3)
-  - AFNetworking/UIKit (2.6.3):
-    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
@@ -28,21 +22,21 @@ PODS:
   - FMDB (2.7.2):
     - FMDB/standard (= 2.7.2)
   - FMDB/standard (2.7.2)
-  - HSYCocoaKit (0.2.1):
-    - AFNetworking (~> 2.3)
-    - FMDB (~> 2.6)
-    - JSONModel (~> 1.2.0)
-    - Masonry (~> 0.6.4)
+  - HSYCocoaKit (0.2.2):
+    - AFNetworking (~> 3.1.0)
+    - FMDB (~> 2.7.2)
+    - JSONModel (~> 1.7.0)
+    - Masonry (~> 1.1.0)
     - MBProgressHUD (~> 0.9.2)
     - ReactiveCocoa (~> 2.5)
     - ReactiveViewModel (~> 0.3)
     - RegexKitLite (~> 4.0)
-    - SDWebImage (~> 3.7.5)
+    - SDWebImage (~> 4.3.3)
     - TKRoundedView (~> 0.5)
-    - TYAttributedLabel (~> 2.5.6)
+    - TYAttributedLabel (~> 2.6.6)
     - UITextView+Placeholder (~> 1.1.1)
-  - JSONModel (1.2.0)
-  - Masonry (0.6.4)
+  - JSONModel (1.7.0)
+  - Masonry (1.1.0)
   - MBProgressHUD (0.9.2)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
@@ -54,11 +48,11 @@ PODS:
   - ReactiveViewModel (0.3):
     - ReactiveCocoa (~> 2.4)
   - RegexKitLite (4.0)
-  - SDWebImage (3.7.6):
-    - SDWebImage/Core (= 3.7.6)
-  - SDWebImage/Core (3.7.6)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
   - TKRoundedView (0.5)
-  - TYAttributedLabel (2.5.6)
+  - TYAttributedLabel (2.6.6)
   - UITextView+Placeholder (1.1.1)
 
 DEPENDENCIES:
@@ -70,21 +64,21 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
-  HSYCocoaKit: 8f44d62be50d19a0876fcbdf1722814cace2beb1
-  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
-  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  HSYCocoaKit: 6da59cbe4b1059d56bf65071699ed3dce7ecacd7
+  JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   ReactiveViewModel: 58918dcbcec2d3151195ab1ed9163c57a8163999
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
-  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   TKRoundedView: 0886ec88ad9d8f9c1de7503babecfacc06263920
-  TYAttributedLabel: 251d4cb2bf35813815d0ad632b3e56ba626c6b01
+  TYAttributedLabel: cb8fc910d97eb5224936d4f692a78e042af691b2
   UITextView+Placeholder: a6fc3e0378f3870036ec562a7537cbf6dbae4bf6
 
-PODFILE CHECKSUM: 3a8d7305bf116c7ed7f841a269e5f11668dbb3f0
+PODFILE CHECKSUM: 948ebc79a077f6dfef6b6620dd44a6474937d7fb
 
 COCOAPODS: 1.2.0

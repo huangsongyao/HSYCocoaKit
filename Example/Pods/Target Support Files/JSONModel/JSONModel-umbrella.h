@@ -11,10 +11,8 @@
 #endif
 
 #import "JSONModel.h"
-#import "JSONModelArray.h"
 #import "JSONModelClassProperty.h"
 #import "JSONModelError.h"
-#import "NSArray+JSONModel.h"
 #import "JSONModelLib.h"
 #import "JSONAPI.h"
 #import "JSONHTTPClient.h"
