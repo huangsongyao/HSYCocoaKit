@@ -39,11 +39,11 @@
         
         [[TYImageCache cache]saveAsyncImageFromURL:_imageURL.absoluteString thumbImageSize:self.size completion:^(BOOL isCache) {
             
-            if (_isNeedUpdateFrame) {
+            if (self->_isNeedUpdateFrame) {
                 if (ownerView && isCache) {
                     [ownerView setNeedsDisplay];
                 }
-                _isNeedUpdateFrame = NO;
+                self->_isNeedUpdateFrame = NO;
             }
         }];
     }
@@ -65,12 +65,12 @@
         // 图片数据
         [[TYImageCache cache] imageForURL:_imageURL.absoluteString needThumImage:NO found:^(UIImage *loaceImage) {
             image = loaceImage;
-            if (_cacheImageOnMemory) {
-                _image = image;
+            if (self->_cacheImageOnMemory) {
+                self->_image = image;
             }
         } notFound:^{
-            image = _placeholdImageName ? [UIImage imageNamed:_placeholdImageName] : nil;
-            _isNeedUpdateFrame = YES;
+            image = self->_placeholdImageName ? [UIImage imageNamed:self->_placeholdImageName] : nil;
+            self->_isNeedUpdateFrame = YES;
         }];
     }
     

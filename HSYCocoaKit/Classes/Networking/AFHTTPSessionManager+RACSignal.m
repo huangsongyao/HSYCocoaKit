@@ -8,7 +8,7 @@
 
 #import "AFHTTPSessionManager+RACSignal.h"
 #import "NetworkingRequestPathFile.h"
-#import "NetWorkingManager.h"
+#import "HSYNetWorkingManager.h"
 
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
     
@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
 
 static NSString *重铸完整的请求连接(NSString *urlPath)
 {
-    NSString *urlString = [NetWorkingManager urlFromPath:urlPath];
+    NSString *urlString = [HSYNetWorkingManager urlFromPath:urlPath];
     return urlString;
 }
 
@@ -100,7 +100,7 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
                         parameters:(id)parameters
                       taskProgress:(void(^)(NSProgress *downloadProgress))progress
 {
-    return [[[NetWorkingManager shareInstance] networking_3x_Reachability] then:^RACSignal *{
+    return [[[HSYNetWorkingManager shareInstance] networking_3x_Reachability] then:^RACSignal *{
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             __block NSURLSessionDataTask *getTask = [self GET:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [self.class logRequestHeaders:task];
@@ -132,7 +132,7 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
                          parameters:(id)parameters
                        taskProgress:(void(^)(NSProgress *downloadProgress))progress
 {
-    return [[[NetWorkingManager shareInstance] networking_3x_Reachability] then:^RACSignal *{
+    return [[[HSYNetWorkingManager shareInstance] networking_3x_Reachability] then:^RACSignal *{
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             __block NSURLSessionDataTask *postTask = [self POST:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [self.class logRequestHeaders:task];
@@ -159,7 +159,7 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
 {
     NSParameterAssert(url);
     NSParameterAssert(filePath);
-    return [[[NetWorkingManager shareInstance] networking_3x_Reachability] then:^RACSignal *{
+    return [[[HSYNetWorkingManager shareInstance] networking_3x_Reachability] then:^RACSignal *{
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
             NSURLRequest *request = [NSURLRequest requestWithURL:url];

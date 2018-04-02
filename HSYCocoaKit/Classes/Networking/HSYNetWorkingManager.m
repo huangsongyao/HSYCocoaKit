@@ -1,30 +1,30 @@
 //
-//  NetWorkingManager.m
+//  HSYNetWorkingManager.m
 //  Pods
 //
-//  Created by huangsongyao on 2017/3/27.
+//  Created by huangsongyao on 2018/4/2.
 //
 //
 
-#import "NetWorkingManager.h"
+#import "HSYNetWorkingManager.h"
 #import "NetworkingRequestPathFile.h"
 #import "NSError+Message.h"
 
-static NetWorkingManager *networkingManager;
-
 static NSString *kHSYValueKey  = @"HSYValueKey";
 
-@interface NetWorkingManager ()
+static HSYNetWorkingManager *networkingManager;
+
+@interface HSYNetWorkingManager ()
 
 @end
 
-@implementation NetWorkingManager
+@implementation HSYNetWorkingManager
 
 + (instancetype)shareInstance
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        networkingManager = [NetWorkingManager new];
+        networkingManager = [HSYNetWorkingManager new];
     });
     return networkingManager;
 }
@@ -32,13 +32,16 @@ static NSString *kHSYValueKey  = @"HSYValueKey";
 - (instancetype)init
 {
     if (self = [super init]) {
-        _httpSessionManager = [NetWorkingManager defaultHTTPSessionManager:YES];
+        _httpSessionManager = [HSYNetWorkingManager defaultHTTPSessionManager:YES];
     }
     return self;
 }
 
 + (NSString *)urlFromPath:(NSString *)path
 {
+    if ([path hasPrefix:@"http"]) {
+        return path;
+    }
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", BASE_URL, path];
     if (![urlString containsString:@"http"]) {
         NSLog(@"链接不含有http字符串！链接不完整！");

@@ -340,8 +340,8 @@ NSString *const kTYTextRunAttributedName = @"TYTextRunAttributedName";
     
     __typeof (self) __weak weakSelf = self;
     [_textContainer enumerateRunRectContainPoint:point viewHeight:CGRectGetHeight(self.frame) successBlock:^(id<TYTextStorageProtocol> textStorage){
-        if (_delegateFlags.textStorageClickedAtPoint) {
-            [_delegate attributedLabel:weakSelf textStorageClicked:textStorage atPoint:point];
+        if (self->_delegateFlags.textStorageClickedAtPoint) {
+            [self->_delegate attributedLabel:weakSelf textStorageClicked:textStorage atPoint:point];
         }
     }];
 }
@@ -352,7 +352,7 @@ NSString *const kTYTextRunAttributedName = @"TYTextRunAttributedName";
     
     __typeof (self) __weak weakSelf = self;
     [_textContainer enumerateRunRectContainPoint:point viewHeight:CGRectGetHeight(self.frame) successBlock:^(id<TYTextStorageProtocol> textStorage){
-        if (_delegateFlags.textStorageLongPressedOnStateAtPoint) {
+        if (self->_delegateFlags.textStorageLongPressedOnStateAtPoint) {
                 [weakSelf.delegate attributedLabel:weakSelf textStorageLongPressed:textStorage onState:sender.state atPoint:point];
         }
     }];

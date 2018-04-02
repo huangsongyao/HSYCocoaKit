@@ -78,7 +78,7 @@
 /**
  *  添加 textRun数组 （自定义显示内容）
  *
- *  @param textRunArray textRun数组（需遵循协议TYTextStorageProtocol,否则不会添加）
+ *  @param textStorageArray textRun数组（需遵循协议TYTextStorageProtocol,否则不会添加）
  */
 - (void)addTextStorageArray:(NSArray *)textStorageArray;
 
