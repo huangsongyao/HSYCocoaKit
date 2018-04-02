@@ -110,19 +110,19 @@
     self.errorStatusCode = code;
 }
 
-- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(id value))map subscriberNext:(void(^)(id x))next error:(void(^)(NSError *error))error
+- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next error:(void(^)(NSError *error))error
 {
     if (network) {
         RACSignal *signal = network();
-        [[signal map:map] subscribeNext:^(id x) {
+        [[signal map:map] subscribeNext:^(id jsonModel) {
             if (next) {
-                next(x);
+                next(jsonModel);
             }
         } error:error];
     }
 }
 
-- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(id value))map subscriberNext:(void(^)(id x))next
+- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next
 {
     @weakify(self);
     [self requestNetwork:network toMap:map subscriberNext:next error:^(NSError *error) {

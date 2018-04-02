@@ -826,7 +826,7 @@
 		168C704F44EB5D35108DCB91EAEE678E /* RACSequence.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACSequence.h; path = ReactiveCocoa/RACSequence.h; sourceTree = "<group>"; };
 		16D255E50D86A0DD85BC7753061ADCB2 /* JSONModel+networking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "JSONModel+networking.h"; path = "JSONModel/JSONModelNetworking/JSONModel+networking.h"; sourceTree = "<group>"; };
 		1806E52ABF8446CE7E3C2439E321A4DD /* FMResultSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = src/fmdb/FMResultSet.h; sourceTree = "<group>"; };
-		18148ADC27956C8357E976D4CFAD367B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ReactiveCocoa.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		18148ADC27956C8357E976D4CFAD367B /* ReactiveCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		185B2FF011AC0E3537082562592CB210 /* RACSubject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACSubject.m; path = ReactiveCocoa/RACSubject.m; sourceTree = "<group>"; };
 		187BB220AD5336F308D0C0479270C8B2 /* RACScheduler+Subclass.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "RACScheduler+Subclass.h"; path = "ReactiveCocoa/RACScheduler+Subclass.h"; sourceTree = "<group>"; };
 		18D39F76CDC0D532FA43AA7F40574038 /* RACCompoundDisposable.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACCompoundDisposable.m; path = ReactiveCocoa/RACCompoundDisposable.m; sourceTree = "<group>"; };
@@ -842,7 +842,7 @@
 		1E79202889E02B54B6E279BC69191C26 /* NSOrderedSet+RACSequenceAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSOrderedSet+RACSequenceAdditions.h"; path = "ReactiveCocoa/NSOrderedSet+RACSequenceAdditions.h"; sourceTree = "<group>"; };
 		1E94B8C93373834CC907985D5F310244 /* RACSubscriptingAssignmentTrampoline.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACSubscriptingAssignmentTrampoline.h; path = ReactiveCocoa/RACSubscriptingAssignmentTrampoline.h; sourceTree = "<group>"; };
 		1E9CF7CF0D8A2721B9A03BB73DDE0A75 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		1F6399A0E0BC2FD7BDB2C48EA5E26667 /* FMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FMDB.framework; path = FMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F6399A0E0BC2FD7BDB2C48EA5E26667 /* FMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F79018E1BF5BFF270391813B4044C48 /* FBSnapshotTestCase.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FBSnapshotTestCase.xcconfig; sourceTree = "<group>"; };
 		1F8EB498BBD98C8A840C5F24BFDB2DE9 /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCase.m; path = FBSnapshotTestCase/FBSnapshotTestCase.m; sourceTree = "<group>"; };
 		200E3D288E636A28D71D66639F7CD8A6 /* SDWebImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SDWebImage-prefix.pch"; sourceTree = "<group>"; };
@@ -859,7 +859,7 @@
 		2547A5223F9281E248E136531C274756 /* UIStepper+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIStepper+RACSignalSupport.h"; path = "ReactiveCocoa/UIStepper+RACSignalSupport.h"; sourceTree = "<group>"; };
 		256E7EE1B1605B8EA7F059195543795D /* UITextView+Placeholder.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UITextView+Placeholder.xcconfig"; sourceTree = "<group>"; };
 		26AB446E7CD706CE02A610A1BED3CDE2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		26E5EDA60872D2E877CC04039711F645 /* SDWebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SDWebImage.framework; path = SDWebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		26E5EDA60872D2E877CC04039711F645 /* SDWebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SDWebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27958DE948C01A079EAE91EF9C2754B6 /* UIActionSheet+RACSignal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+RACSignal.m"; sourceTree = "<group>"; };
 		2861330CC25285AD4348CEBE8AA772C3 /* HSYBaseCollectionModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HSYBaseCollectionModel.h; sourceTree = "<group>"; };
 		2874E1F44D1C29D0AD7AD9509E8AAE18 /* UIActionSheet+RACSignalSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIActionSheet+RACSignalSupport.m"; path = "ReactiveCocoa/UIActionSheet+RACSignalSupport.m"; sourceTree = "<group>"; };
@@ -907,17 +907,17 @@
 		352F1F4936BA583BA7F712BFE613C00B /* NSNotificationCenter+RACSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSNotificationCenter+RACSupport.m"; path = "ReactiveCocoa/NSNotificationCenter+RACSupport.m"; sourceTree = "<group>"; };
 		35344C7410184BD0AC1A6B2E7306DB42 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35A0C7E7934DEDDD40D3042D11775D00 /* HSYHUDModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HSYHUDModel.h; sourceTree = "<group>"; };
-		35D9D178281E9AE042C9FEC809250E53 /* TYAttributedLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TYAttributedLabel.framework; path = TYAttributedLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		35D9D178281E9AE042C9FEC809250E53 /* TYAttributedLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TYAttributedLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35DAEF11ADBA97103046D050E5236E6B /* RACBlockTrampoline.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACBlockTrampoline.m; path = ReactiveCocoa/RACBlockTrampoline.m; sourceTree = "<group>"; };
 		3671718937D88FD0340497C7948DB1A2 /* ReactiveViewModel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReactiveViewModel-prefix.pch"; sourceTree = "<group>"; };
-		369506C9AAC42E85677A77709698ADA2 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = AFNetworking.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		369506C9AAC42E85677A77709698ADA2 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		369B38B71DE3C29DEB95E35366C3A2D6 /* Masonry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-prefix.pch"; sourceTree = "<group>"; };
 		36BA639C864CEA8A6E6CEABC961262BE /* NSFileManager+Finder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Finder.h"; sourceTree = "<group>"; };
 		376CABC7A8361CCD506EB0991A6278DE /* HSYHUDModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HSYHUDModel.m; sourceTree = "<group>"; };
 		37A22DA53881AD2C52EA7F6E8DB383AB /* NSObject+RACSelectorSignal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+RACSelectorSignal.m"; path = "ReactiveCocoa/NSObject+RACSelectorSignal.m"; sourceTree = "<group>"; };
 		384F29424A2BD8D45C0C4A5DF7D9E8DA /* NSObject+UIKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+UIKit.m"; sourceTree = "<group>"; };
 		38BB01BFDED8F8D455F8271D10544724 /* UITextView+Placeholder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextView+Placeholder.h"; path = "UITextView+Placeholder/UITextView+Placeholder.h"; sourceTree = "<group>"; };
-		38D161A72AC5A6A21E963F9D2EE11C6D /* JSONModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JSONModel.framework; path = JSONModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38D161A72AC5A6A21E963F9D2EE11C6D /* JSONModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3921E2A6D01317946D36CF662FBCE469 /* MBProgressHUD.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MBProgressHUD.modulemap; sourceTree = "<group>"; };
 		39E2CD6E2E07F293EF04703FCC128163 /* FMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = src/fmdb/FMDB.h; sourceTree = "<group>"; };
 		3A1EB6E08CF8A7E8350A9016FCA8B795 /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIKit+AFNetworking.h"; path = "UIKit+AFNetworking/UIKit+AFNetworking.h"; sourceTree = "<group>"; };
@@ -960,14 +960,14 @@
 		495685F9D36E3B3F7829048EECB1F573 /* NSString+RACSequenceAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+RACSequenceAdditions.m"; path = "ReactiveCocoa/NSString+RACSequenceAdditions.m"; sourceTree = "<group>"; };
 		49635C254386F0AEC1DB7D0CAFA84E79 /* JSONModelClassProperty.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSONModelClassProperty.h; path = JSONModel/JSONModel/JSONModelClassProperty.h; sourceTree = "<group>"; };
 		496C23C72CEE0475E368A4AA79854761 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		49DC8B41A25C1D9C26F422A0513C7301 /* RegexKitLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = RegexKitLite.framework; path = RegexKitLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		49DC8B41A25C1D9C26F422A0513C7301 /* RegexKitLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RegexKitLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AA5C449D5E1B7F2ABC6D0F9C930978A /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.m"; sourceTree = "<group>"; };
 		4AE8F582923CDF8547E56D92D8B4F6AA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4B52BF5B84DE693864E36DBE9F295708 /* NSObject+Property.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Property.m"; sourceTree = "<group>"; };
 		4BBF027B8075A3EB14EA2A4ADFF97F52 /* RACSignal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACSignal.h; path = ReactiveCocoa/RACSignal.h; sourceTree = "<group>"; };
 		4D3BA3763193D08D2A5718120F67F3A3 /* NSObject+Property.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+Property.h"; sourceTree = "<group>"; };
 		4DC46C70020345936F90F07A8F8B6DF0 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
-		4FBB2FF93D548E3E2384F4561DBF6054 /* UITextView_Placeholder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = UITextView_Placeholder.framework; path = "UITextView+Placeholder.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FBB2FF93D548E3E2384F4561DBF6054 /* UITextView_Placeholder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UITextView_Placeholder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FBB9E0B2138CDF880D109586CD372E2 /* UITableViewHeaderFooterView+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableViewHeaderFooterView+RACSignalSupport.h"; path = "ReactiveCocoa/UITableViewHeaderFooterView+RACSignalSupport.h"; sourceTree = "<group>"; };
 		50C17E056CB8C34015E794435E029473 /* RACEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACEvent.m; path = ReactiveCocoa/RACEvent.m; sourceTree = "<group>"; };
 		5140B90DE9969F7AE6BC460F01FF55DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -977,7 +977,7 @@
 		5396C1D092D24514FBB4B0A3499AE228 /* NSObject+RACDescription.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+RACDescription.m"; path = "ReactiveCocoa/NSObject+RACDescription.m"; sourceTree = "<group>"; };
 		548EA5CF902681E01233BF7D37B9A794 /* RACEXTScope.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACEXTScope.h; path = ReactiveCocoa/extobjc/RACEXTScope.h; sourceTree = "<group>"; };
 		54A68261A0ABFDD5D2CFC47A21A808F6 /* UISegmentedControl+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UISegmentedControl+RACSignalSupport.h"; path = "ReactiveCocoa/UISegmentedControl+RACSignalSupport.h"; sourceTree = "<group>"; };
-		5510C49F917A2DF14907EBFF9A258D06 /* RACCompoundDisposableProvider.d */ = {isa = PBXFileReference; includeInIndex = 1; name = RACCompoundDisposableProvider.d; path = ReactiveCocoa/RACCompoundDisposableProvider.d; sourceTree = "<group>"; };
+		5510C49F917A2DF14907EBFF9A258D06 /* RACCompoundDisposableProvider.d */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.dtrace; name = RACCompoundDisposableProvider.d; path = ReactiveCocoa/RACCompoundDisposableProvider.d; sourceTree = "<group>"; };
 		5641E6DF5E134671E7E76C3D0500C3A0 /* RACScopedDisposable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACScopedDisposable.h; path = ReactiveCocoa/RACScopedDisposable.h; sourceTree = "<group>"; };
 		5660725CAF06F6F012D1D03DAD90739B /* TKRoundedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TKRoundedView.m; sourceTree = "<group>"; };
 		56C13E6C56C4E89A0900A9327BCA2BA8 /* RACStringSequence.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACStringSequence.h; path = ReactiveCocoa/RACStringSequence.h; sourceTree = "<group>"; };
@@ -1013,7 +1013,7 @@
 		620EBA9E1948A3AA798F1AE087831F44 /* UITextField+RACSignalSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextField+RACSignalSupport.m"; path = "ReactiveCocoa/UITextField+RACSignalSupport.m"; sourceTree = "<group>"; };
 		62C563F14F636DCB5057A17BD8F364D7 /* NSNotificationCenter+RACSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSNotificationCenter+RACSupport.h"; path = "ReactiveCocoa/NSNotificationCenter+RACSupport.h"; sourceTree = "<group>"; };
 		62D1F156930CE52FEE5437C6AB7F4A94 /* NSFileManager+Finder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+Finder.m"; sourceTree = "<group>"; };
-		653386E710C6A7FFA64EBE5DDC54C778 /* RACSignalProvider.d */ = {isa = PBXFileReference; includeInIndex = 1; name = RACSignalProvider.d; path = ReactiveCocoa/RACSignalProvider.d; sourceTree = "<group>"; };
+		653386E710C6A7FFA64EBE5DDC54C778 /* RACSignalProvider.d */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.dtrace; name = RACSignalProvider.d; path = ReactiveCocoa/RACSignalProvider.d; sourceTree = "<group>"; };
 		6543C86AEF21BA69ABE740E5E4CC6A7E /* TYImageStorage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TYImageStorage.m; path = TYAttributedLabelDemo/TYAttributedLabel/TYImageStorage.m; sourceTree = "<group>"; };
 		6549902E8C374E367608E89CF9BC03B6 /* MBProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD-dummy.m"; sourceTree = "<group>"; };
 		65A898830D1350714291D6B037CF06B6 /* MASConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Masonry/MASConstraint.m; sourceTree = "<group>"; };
@@ -1028,14 +1028,14 @@
 		6B571177614490EB746F8D93B60A9947 /* RACKVOTrampoline.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACKVOTrampoline.h; path = ReactiveCocoa/RACKVOTrampoline.h; sourceTree = "<group>"; };
 		6C85ED1507A4A1A96B018C2AFBE7E108 /* HSYBaseTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HSYBaseTableViewController.m; sourceTree = "<group>"; };
 		6D1ADF10E18A9ECF2F19A51F9B2130DC /* TYViewStorage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TYViewStorage.m; path = TYAttributedLabelDemo/TYAttributedLabel/TYViewStorage.m; sourceTree = "<group>"; };
-		6D1CBA11617F6A56871F609D418A4A2D /* TKRoundedView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TKRoundedView.framework; path = TKRoundedView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D1CBA11617F6A56871F609D418A4A2D /* TKRoundedView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TKRoundedView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DC99E5BF849B5F616EBC53DD9476456 /* RACErrorSignal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACErrorSignal.h; path = ReactiveCocoa/RACErrorSignal.h; sourceTree = "<group>"; };
 		6E0168C2AE261BBB452055084370C890 /* RACTestScheduler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACTestScheduler.m; path = ReactiveCocoa/RACTestScheduler.m; sourceTree = "<group>"; };
 		6E0DC6A6E12DC414E7E47EB3023DD109 /* AFImageDownloader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFImageDownloader.m; path = "UIKit+AFNetworking/AFImageDownloader.m"; sourceTree = "<group>"; };
-		6E3DD2AAB95C822D74B234766BC1A627 /* Pods_HSYCocoaKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_HSYCocoaKit_Example.framework; path = "Pods-HSYCocoaKit_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E3DD2AAB95C822D74B234766BC1A627 /* Pods_HSYCocoaKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSYCocoaKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FA6858643BC399FBB0950464E4648A0 /* UITextView+Placeholder-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder-prefix.pch"; sourceTree = "<group>"; };
 		6FE0D2DEF03E0488A7774042F3FE192E /* TKRoundedView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TKRoundedView.xcconfig; sourceTree = "<group>"; };
-		702C7596E2C016485F144E0998327197 /* HSYCocoaKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HSYCocoaKit.framework; path = HSYCocoaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		702C7596E2C016485F144E0998327197 /* HSYCocoaKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HSYCocoaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7059478240C3F1DE0B6F7B38FE9071E4 /* NSObject+Context.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Context.m"; sourceTree = "<group>"; };
 		708FC390C0363E74BC46C604DC8D8F28 /* UISlider+RACSignalSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UISlider+RACSignalSupport.m"; path = "ReactiveCocoa/UISlider+RACSignalSupport.m"; sourceTree = "<group>"; };
 		7199C29419514B094FE5B805C72C3A3B /* FMDB.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMDB.xcconfig; sourceTree = "<group>"; };
@@ -1048,7 +1048,7 @@
 		742F72D4E1A57B968B3182AB9D389120 /* UILabel+SuggestSize.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UILabel+SuggestSize.h"; sourceTree = "<group>"; };
 		7446B35BD5F95CE85D5321B631F281DF /* NSDate+Timestamp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDate+Timestamp.h"; sourceTree = "<group>"; };
 		74AA93CDC9E14200AF04F51A20E9471B /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		74D0DCE099B20A7DDB70DEC3A283F2DA /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Masonry.framework; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		74D0DCE099B20A7DDB70DEC3A283F2DA /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		755C5198185B28CBAAD1C363029E8A57 /* UIImage+ForceDecode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+ForceDecode.h"; path = "SDWebImage/UIImage+ForceDecode.h"; sourceTree = "<group>"; };
 		758AF837AF263BB97A37F245A015A883 /* NSFileHandle+RACSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSFileHandle+RACSupport.h"; path = "ReactiveCocoa/NSFileHandle+RACSupport.h"; sourceTree = "<group>"; };
 		75C6657C493282EEC9CF6CD188427F0A /* UIAlertView+RACSignal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+RACSignal.m"; sourceTree = "<group>"; };
@@ -1083,7 +1083,7 @@
 		80D5D4C01236A9B6D2A01485A42012BB /* SDWebImageTransition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageTransition.h; path = SDWebImage/SDWebImageTransition.h; sourceTree = "<group>"; };
 		810A444EB27107E3D28A7C0FBABD68E3 /* NSObject+RACKVOWrapper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+RACKVOWrapper.m"; path = "ReactiveCocoa/NSObject+RACKVOWrapper.m"; sourceTree = "<group>"; };
 		8291352FE7099DF3629142C789AB0DFD /* SDWebImageTransition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageTransition.m; path = SDWebImage/SDWebImageTransition.m; sourceTree = "<group>"; };
-		8318A8F3636F6E63BFBF2032F98BF11D /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FBSnapshotTestCase.framework; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8318A8F3636F6E63BFBF2032F98BF11D /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83801AED1BA191DDDF8133504FDC9093 /* SDWebImageDownloader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloader.m; path = SDWebImage/SDWebImageDownloader.m; sourceTree = "<group>"; };
 		83D83E13296421E0D42C3FAC8609A865 /* RACEmptySignal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACEmptySignal.h; path = ReactiveCocoa/RACEmptySignal.h; sourceTree = "<group>"; };
 		84476ED9B7CD97CBB61786ABDE7773DD /* JSONModelClassProperty.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONModelClassProperty.m; path = JSONModel/JSONModel/JSONModelClassProperty.m; sourceTree = "<group>"; };
@@ -1126,7 +1126,7 @@
 		91AB9B61731B713CA5F1C25086AB7784 /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIProgressView+AFNetworking.h"; path = "UIKit+AFNetworking/UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
 		9206A561845D61E1DBB20EA6EF9707C7 /* MASViewAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewAttribute.h; path = Masonry/MASViewAttribute.h; sourceTree = "<group>"; };
 		92279A44E3B81768A4473EC5A4A2E5A1 /* UIImageView+HighlightedWebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+HighlightedWebCache.m"; path = "SDWebImage/UIImageView+HighlightedWebCache.m"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93C9BBCADBBFCE5037075A2C8186D924 /* SDWebImagePrefetcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImagePrefetcher.h; path = SDWebImage/SDWebImagePrefetcher.h; sourceTree = "<group>"; };
 		942A1BC42FEA70A06F1C9FB2DC136244 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		9456B7760E6C7EE3B19AB67E7E2A0384 /* UIViewController+Shadow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Shadow.m"; sourceTree = "<group>"; };
@@ -1166,7 +1166,7 @@
 		A72B80DC0C63F5FFCFF6D5D791F9FA1F /* NSArray+RACSequenceAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+RACSequenceAdditions.m"; path = "ReactiveCocoa/NSArray+RACSequenceAdditions.m"; sourceTree = "<group>"; };
 		A807E02BF67177FC4236104E0AB622CF /* NSObject+JSONModelForRuntime.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JSONModelForRuntime.m"; sourceTree = "<group>"; };
 		A894E56829AB570922A78C495F7AE794 /* UITextView+Placeholder-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder-dummy.m"; sourceTree = "<group>"; };
-		A8DBA7D613032DCCE1E56CD5E849A05C /* Pods_HSYCocoaKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_HSYCocoaKit_Tests.framework; path = "Pods-HSYCocoaKit_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8DBA7D613032DCCE1E56CD5E849A05C /* Pods_HSYCocoaKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSYCocoaKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A94488038DA0AD7BC8C9463667408F95 /* NSDictionary+RACSequenceAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+RACSequenceAdditions.h"; path = "ReactiveCocoa/NSDictionary+RACSequenceAdditions.h"; sourceTree = "<group>"; };
 		A9AF95C3C59A8160DE64FEB46EA86EA6 /* SDWebImageGIFCoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageGIFCoder.m; path = SDWebImage/SDWebImageGIFCoder.m; sourceTree = "<group>"; };
 		AA294C3F898463EF65014216305B54E7 /* RACUnit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACUnit.m; path = ReactiveCocoa/RACUnit.m; sourceTree = "<group>"; };
@@ -1213,7 +1213,7 @@
 		B6F56432C8C29A3A791D9ADA4169E234 /* RACDynamicSignal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACDynamicSignal.m; path = ReactiveCocoa/RACDynamicSignal.m; sourceTree = "<group>"; };
 		B71BE207D247E0945290B36F63E8E829 /* UIImage+Diff.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Diff.m"; path = "FBSnapshotTestCase/Categories/UIImage+Diff.m"; sourceTree = "<group>"; };
 		B724080662CA36B14E068F03B8221F19 /* NSObject+RACPropertySubscribing.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+RACPropertySubscribing.m"; path = "ReactiveCocoa/NSObject+RACPropertySubscribing.m"; sourceTree = "<group>"; };
-		B766FF3AE54C5B5A6B8065375B893630 /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MBProgressHUD.framework; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B766FF3AE54C5B5A6B8065375B893630 /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77DF0FC48F02C59B35F917AE2646BA5 /* RACEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACEvent.h; path = ReactiveCocoa/RACEvent.h; sourceTree = "<group>"; };
 		B7C2C53286F88FB2FD1A7A1DCF3B4AD1 /* UISegmentedControl+RACSignalSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UISegmentedControl+RACSignalSupport.m"; path = "ReactiveCocoa/UISegmentedControl+RACSignalSupport.m"; sourceTree = "<group>"; };
 		B7C54AEFC64A43DB17F5BD46D2C65516 /* UIImage+Diff.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+Diff.h"; path = "FBSnapshotTestCase/Categories/UIImage+Diff.h"; sourceTree = "<group>"; };
@@ -1363,7 +1363,7 @@
 		ED3F28B0589702F855B5A4B24B854FA0 /* UITextView+RACSignalSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextView+RACSignalSupport.m"; path = "ReactiveCocoa/UITextView+RACSignalSupport.m"; sourceTree = "<group>"; };
 		ED8120D3AC7A346BA0BF00335D75F4AE /* NSObject+JSONModelForRuntime.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+JSONModelForRuntime.h"; sourceTree = "<group>"; };
 		EDD34866E8B5B46D7BEBB41CA241DFE2 /* MBProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		EED926DB39CBD1790915850C7B4B43BF /* ReactiveViewModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ReactiveViewModel.framework; path = ReactiveViewModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EED926DB39CBD1790915850C7B4B43BF /* ReactiveViewModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveViewModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEEF9AA62CF57EECE503DF11FAD24302 /* UIView+Frame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		EF6D7B39A92758FB8DF5E77E2AD8AC97 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		EF90FD47A62334F39F13B860E717A32D /* UISwitch+RACSignalSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UISwitch+RACSignalSupport.m"; path = "ReactiveCocoa/UISwitch+RACSignalSupport.m"; sourceTree = "<group>"; };
@@ -1578,7 +1578,6 @@
 				824386D007905DC945BE912A4E62ECA4 /* Networking */,
 				973EA3B5DA66317620E7C3A80630BA1C /* RAC */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -1633,7 +1632,6 @@
 				E44D77828E0C1EB34EF726A18A867A82 /* standard */,
 				29C80C1F3292828E95D84BFBBED8681F /* Support Files */,
 			);
-			name = FMDB;
 			path = FMDB;
 			sourceTree = "<group>";
 		};
@@ -1686,7 +1684,6 @@
 				893CCA2F6A6D447CE665C4CEF78C4940 /* JSONValueTransformer.m */,
 				CEE37F55829F5F90AE205E105D2E603B /* Support Files */,
 			);
-			name = JSONModel;
 			path = JSONModel;
 			sourceTree = "<group>";
 		};
@@ -1735,18 +1732,17 @@
 		35875C56DD5530C0CC9511537A1836BC /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
-				2861330CC25285AD4348CEBE8AA772C3 /* HSYBaseCollectionModel.h */,
-				B4547699E4942561AFFAF1D881DCC881 /* HSYBaseCollectionModel.m */,
 				94F4CC66330F1C72EC5904CBC3EE07F3 /* HSYBaseModel.h */,
 				3FB2D6D90BD6A38533BCCB21E9C228A5 /* HSYBaseModel.m */,
 				A21DCDFD3B3BE07C42E13AC702752E27 /* HSYBaseRefleshModel.h */,
 				CEE8B66046816A491DECE685A1A24194 /* HSYBaseRefleshModel.m */,
 				F4348CF49AF1A4A2AD5205E9F3A64E50 /* HSYBaseTableModel.h */,
 				1D4292B8A21AF1F55043485E20FFCD09 /* HSYBaseTableModel.m */,
+				2861330CC25285AD4348CEBE8AA772C3 /* HSYBaseCollectionModel.h */,
+				B4547699E4942561AFFAF1D881DCC881 /* HSYBaseCollectionModel.m */,
 				D450B1F3AD6A2D53C36084341BACD6B4 /* HSYBaseWebModel.h */,
 				BA6B0A8F119693789A9A691B94E2C154 /* HSYBaseWebModel.m */,
 			);
-			name = BaseModel;
 			path = BaseModel;
 			sourceTree = "<group>";
 		};
@@ -1834,7 +1830,6 @@
 				35A0C7E7934DEDDD40D3042D11775D00 /* HSYHUDModel.h */,
 				376CABC7A8361CCD506EB0991A6278DE /* HSYHUDModel.m */,
 			);
-			name = HUD;
 			path = HUD;
 			sourceTree = "<group>";
 		};
@@ -1882,7 +1877,6 @@
 				D6C47CD36051386FB292A0095B2D0BCF /* NetworkingRequestPathFile.h */,
 				1A48DC6033840A671BFD83FDC8BACF6A /* PublicMacroFile.h */,
 			);
-			name = Macro;
 			path = Macro;
 			sourceTree = "<group>";
 		};
@@ -1904,7 +1898,6 @@
 				07C1476C6A44B9EC4DD97286E532927D /* UIViewController+Shadow.h */,
 				9456B7760E6C7EE3B19AB67E7E2A0384 /* UIViewController+Shadow.m */,
 			);
-			name = CustomNavigationController;
 			path = CustomNavigationController;
 			sourceTree = "<group>";
 		};
@@ -1933,7 +1926,6 @@
 				6D1ADF10E18A9ECF2F19A51F9B2130DC /* TYViewStorage.m */,
 				46FD4457E8445B716F4E00832F486EB5 /* Support Files */,
 			);
-			name = TYAttributedLabel;
 			path = TYAttributedLabel;
 			sourceTree = "<group>";
 		};
@@ -1951,7 +1943,6 @@
 				A3F327EB249E62197EAE123DA2CA6632 /* Core */,
 				AAD301822DF8A3B28350CBFF8B96945F /* Support Files */,
 			);
-			name = SDWebImage;
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
@@ -1972,7 +1963,6 @@
 				5660725CAF06F6F012D1D03DAD90739B /* TKRoundedView.m */,
 				2C0E36A7EE36E428EDCEAA2B3D8133EB /* Support Files */,
 			);
-			name = TKRoundedView;
 			path = TKRoundedView;
 			sourceTree = "<group>";
 		};
@@ -1993,7 +1983,6 @@
 			children = (
 				07C9F107FCB3A8B6C8EDF4AB2A215E52 /* Classes */,
 			);
-			name = HSYCocoaKit;
 			path = HSYCocoaKit;
 			sourceTree = "<group>";
 		};
@@ -2007,7 +1996,6 @@
 				9B2E1303F166120C075B39BC25AC8CD1 /* NSError+Message.h */,
 				3351E4BCE210F046434CAD5FB38B85CC /* NSError+Message.m */,
 			);
-			name = Networking;
 			path = Networking;
 			sourceTree = "<group>";
 		};
@@ -2065,7 +2053,6 @@
 				AB0347F49E86127AA4A51964B428E181 /* RegexKitLite.m */,
 				36502DADC100263921E87CFF38159B8D /* Support Files */,
 			);
-			name = RegexKitLite;
 			path = RegexKitLite;
 			sourceTree = "<group>";
 		};
@@ -2098,7 +2085,6 @@
 				D5B93E693FB6025798ADB671C58C6F9E /* RACSignal+Timer.h */,
 				D55D6F07166193AFDE6FB1E1A86C7EE1 /* RACSignal+Timer.m */,
 			);
-			name = RAC;
 			path = RAC;
 			sourceTree = "<group>";
 		};
@@ -2109,7 +2095,6 @@
 				EDD34866E8B5B46D7BEBB41CA241DFE2 /* MBProgressHUD.m */,
 				3D5448228913EFF3828F907D98350D86 /* Support Files */,
 			);
-			name = MBProgressHUD;
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
@@ -2398,7 +2383,6 @@
 				B2330F8A411E69CBFC2E67A6C07B5713 /* Support Files */,
 				1631E158AD9F8598B4FD4E7A41FA668C /* UIKit */,
 			);
-			name = AFNetworking;
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
@@ -2432,7 +2416,6 @@
 				3BB1A3E9DF19BDC55213601A56721EA4 /* ViewController+MASAdditions.m */,
 				4608141E33A19D4F24F3976C0F7C0E1D /* Support Files */,
 			);
-			name = Masonry;
 			path = Masonry;
 			sourceTree = "<group>";
 		};
@@ -2459,7 +2442,6 @@
 				E51C951F7EA77E887791DF1CE9519C04 /* Support Files */,
 				F58AF6C2795D8BBC39CBF7EC2AA8F404 /* SwiftSupport */,
 			);
-			name = FBSnapshotTestCase;
 			path = FBSnapshotTestCase;
 			sourceTree = "<group>";
 		};
@@ -2503,7 +2485,6 @@
 				95544E8852D5D5DF5874F6E7E7B3DAC3 /* Support Files */,
 				86AA16846775A2CFBDC13FD2C9DF8ED7 /* UI */,
 			);
-			name = ReactiveCocoa;
 			path = ReactiveCocoa;
 			sourceTree = "<group>";
 		};
@@ -2540,7 +2521,6 @@
 				721B5D3F30EF70C0097653CA437879D6 /* RVMViewModel.m */,
 				D4C0F3EED12F3AD34F1FD4373BF7FB79 /* Support Files */,
 			);
-			name = ReactiveViewModel;
 			path = ReactiveViewModel;
 			sourceTree = "<group>";
 		};
@@ -2582,7 +2562,6 @@
 				FA7C8F00CCFB05FBF70837C8D8DD2E76 /* HSYFMDBOperationManager+Operation.h */,
 				F9B1CCD73A822326A54C01AECE0C1D68 /* HSYFMDBOperationManager+Operation.m */,
 			);
-			name = FMDB_DataBase;
 			path = FMDB_DataBase;
 			sourceTree = "<group>";
 		};
@@ -2598,7 +2577,6 @@
 				E934FBC00F178E7375DCAE4A417E502B /* NSString+JSONParsing.h */,
 				CDE424458F4BB11DDBB11011939C2F66 /* NSString+JSONParsing.m */,
 			);
-			name = JSON;
 			path = JSON;
 			sourceTree = "<group>";
 		};
@@ -2634,7 +2612,6 @@
 				A541AC2EB2267C7109722745DEFF7553 /* HSYBaseWebViewController.h */,
 				C03B4B1FC24800753444001C88408500 /* HSYBaseWebViewController.m */,
 			);
-			name = BaseViewController;
 			path = BaseViewController;
 			sourceTree = "<group>";
 		};
@@ -2659,7 +2636,6 @@
 				DE7632DB080D31451DEBD141F5F0D2EC /* UITextView+Placeholder.m */,
 				39A3EC05E24F27C72222B1AB3379C4E3 /* Support Files */,
 			);
-			name = "UITextView+Placeholder";
 			path = "UITextView+Placeholder";
 			sourceTree = "<group>";
 		};
@@ -2717,7 +2693,6 @@
 				CF71F82B1B0343C0659003FEFC28F126 /* UIViewController+NavigationItem.h */,
 				A2FA5307CD4BCEFAFEDCE3FB0B2E1BBD /* UIViewController+NavigationItem.m */,
 			);
-			name = Category;
 			path = Category;
 			sourceTree = "<group>";
 		};

@@ -7,20 +7,8 @@
 //
 
 #import "HSYViewController.h"
-#import "HSYCocoaKit.h"
+#import "HSYViewControllerModel.h"
 
-@interface HSYNetWorkingManager (test)
-
-@end
-
-@implementation HSYNetWorkingManager (test)
-
-- (RACSignal *)test:(NSString *)path
-{
-    return [self.httpSessionManager rac_getRequest:path parameters:nil];
-}
-
-@end
 
 
 @interface TestModel : NSObject
@@ -40,6 +28,7 @@
 
 @interface HSYViewController ()
 
+
 @end
 
 @implementation HSYViewController
@@ -48,12 +37,7 @@
 {
     [super viewDidLoad];
     
-    NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
-    [[[[HSYNetWorkingManager shareInstance] test:urlStr] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
-        NSLog(@"x = %@", x);
-    } error:^(NSError *error) {
-        NSLog(@"error = %@", error);
-    }];
+    HSYViewControllerModel *model = [[HSYViewControllerModel alloc] init];
     
     NSLog(@"%@", [NSDate nextDay]);//stringyyyyMMddHHmmssFromDateByTimestamp
     NSLog(@"%@", [NSDate stringyyyyMMddHHmmssFromDateByTimestamp:@(1503975304000)]);

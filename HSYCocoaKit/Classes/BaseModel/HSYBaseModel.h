@@ -84,7 +84,7 @@
  *  @param next    请求成功的回调
  *  @param error   请求失败的回调
  */
-- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(id value))map subscriberNext:(void(^)(id x))next error:(void(^)(NSError *error))error;
+- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next error:(void(^)(NSError *error))error;
 
 /**
  *  网络请求实现，请求失败集中处理
@@ -93,7 +93,7 @@
  *  @param map     结果映射
  *  @param next    请求成功的回调
  */
-- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(id value))map subscriberNext:(void(^)(id x))next;
+- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next;
 
 /**
  *  网络请求实现，请求失败集中处理，不需要映射结果

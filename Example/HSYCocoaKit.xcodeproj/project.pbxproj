@@ -23,6 +23,7 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		AEECCA972071D2100041BA52 /* HSYViewControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEECCA962071D2100041BA52 /* HSYViewControllerModel.m */; };
 		E4BF8F981817DC07DA00DC27 /* Pods_HSYCocoaKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C741A67EF37DC3880AC3E66 /* Pods_HSYCocoaKit_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,8 @@
 		9C741A67EF37DC3880AC3E66 /* Pods_HSYCocoaKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSYCocoaKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EA3FE729B1FBBDC37CC1A7 /* Pods_HSYCocoaKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSYCocoaKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE1046D4206E1A43009BAD86 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = "Pods/../build/Debug-iphoneos/FBSnapshotTestCase/FBSnapshotTestCase.framework"; sourceTree = "<group>"; };
+		AEECCA952071D2100041BA52 /* HSYViewControllerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSYViewControllerModel.h; sourceTree = "<group>"; };
+		AEECCA962071D2100041BA52 /* HSYViewControllerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSYViewControllerModel.m; sourceTree = "<group>"; };
 		DB834CF2CF9515FAFD8A4E05 /* Pods-HSYCocoaKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSYCocoaKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HSYCocoaKit_Tests/Pods-HSYCocoaKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E00952B031F4641AB58B96CC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		EC38690B33C0219815395C34 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -139,6 +142,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* HSYViewController.h */,
 				6003F5A6195388D20070C39A /* HSYViewController.m */,
+				AEECCA952071D2100041BA52 /* HSYViewControllerModel.h */,
+				AEECCA962071D2100041BA52 /* HSYViewControllerModel.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -439,6 +444,7 @@
 				6003F59E195388D20070C39A /* HSYAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* HSYViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				AEECCA972071D2100041BA52 /* HSYViewControllerModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
