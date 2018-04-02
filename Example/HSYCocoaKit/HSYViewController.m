@@ -9,6 +9,20 @@
 #import "HSYViewController.h"
 #import "HSYCocoaKit.h"
 
+@interface HSYNetWorkingManager (test)
+
+@end
+
+@implementation HSYNetWorkingManager (test)
+
+- (RACSignal *)test:(NSString *)path
+{
+    return [self.httpSessionManager rac_getRequest:path parameters:nil];
+}
+
+@end
+
+
 @interface TestModel : NSObject
 
 @property (nonatomic, strong) NSString *test_1;
@@ -33,6 +47,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
+    [[[[HSYNetWorkingManager shareInstance] test:urlStr] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+        NSLog(@"x = %@", x);
+    } error:^(NSError *error) {
+        NSLog(@"error = %@", error);
+    }];
+    
     NSLog(@"%@", [NSDate nextDay]);//stringyyyyMMddHHmmssFromDateByTimestamp
     NSLog(@"%@", [NSDate stringyyyyMMddHHmmssFromDateByTimestamp:@(1503975304000)]);
     [self observerToKeyboardDidChange:nil subscribeNext:^(CGRect bounds, CGPoint begin, CGPoint end, CGRect frameBegin, CGRect frameEnd, NSNumber *curve, NSNumber *duration, NSNumber *local) {

@@ -104,7 +104,8 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             __block NSURLSessionDataTask *getTask = [self GET:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [self.class logRequestHeaders:task];
-                [subscriber sendNext:responseObject];
+                RACTuple *tuple = RACTuplePack(task, responseObject);
+                [subscriber sendNext:tuple];
                 [subscriber sendCompleted];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [self.class logRequestHeaders:task];
@@ -136,7 +137,8 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             __block NSURLSessionDataTask *postTask = [self POST:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [self.class logRequestHeaders:task];
-                [subscriber sendNext:responseObject];
+                RACTuple *tuple = RACTuplePack(task, responseObject);
+                [subscriber sendNext:tuple];
                 [subscriber sendCompleted];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [self.class logRequestHeaders:task];
