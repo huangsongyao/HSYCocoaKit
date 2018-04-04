@@ -10,6 +10,15 @@
 
 @implementation HSYBaseRefleshModel
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        [self updateSize:100];
+        [self firstPage];
+    }
+    return self;
+}
+
 - (void)nextPage
 {
     _page ++;
@@ -28,7 +37,7 @@
     _size = size;
 }
 
-- (void)updateNext:(RACSignal *(^)())network toMap:(NSMutableArray *(^)(id x))map pullDown:(kHSYReflesStatusType)status
+- (void)updateNext:(RACSignal *(^)())network toMap:(NSMutableArray *(^)(RACTuple *tuple))map pullDown:(kHSYReflesStatusType)status
 {
     switch (status) {
         case kHSYReflesStatusTypePullDown:
@@ -41,21 +50,22 @@
             break;
     }
     @weakify(self);
-    [self requestNetwork:network toMap:map subscriberNext:^(NSMutableArray *result) {
+    [self requestNetwork:network toMap:map subscriberNext:^BOOL(NSMutableArray *result) {
         if (result.count == 0) {
-            return;
+            return NO;
         }
         @strongify(self);
         if (status == kHSYReflesStatusTypePullDown) {
             [self.datas removeAllObjects];
             self.datas = [result mutableCopy];
-            self.pullDownStateCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestSuccess];
+            self.pullDownStateCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullDownSuccess];
         } else {
             for (id obj in result) {
                 [self.datas addObject:obj];
             }
-            self.pullUpStateCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestSuccess];
+            self.pullUpStateCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullUpSuccess];
         }
+        return NO;
     }];
 }
 

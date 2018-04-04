@@ -7,7 +7,10 @@
 //
 
 #import "HSYBaseRefleshViewController.h"
+#import <WebKit/WebKit.h>
 
 @interface HSYBaseWebViewController : HSYBaseRefleshViewController
+
+@property (nonatomic, strong) WKWebView *webView;
 
 @end

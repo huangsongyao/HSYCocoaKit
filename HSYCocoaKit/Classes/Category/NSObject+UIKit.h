@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <WebKit/WebKit.h>
 
 //UIButton
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfButtonPropretyType) {
@@ -119,13 +120,19 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfCollectionViewPropretyType) {
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfCollectionViewFlowLayoutPropretyType) {
     
     kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection     = 36,   //NSNumber\(UICollectionViewScrollDirection)
-    kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset,         //NSValue\(CGPoint)
+    kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset,         //NSValue\(UIEdgeInsets)
     kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize,             //NSValue\(CGSize)
     kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeLineSpacing,          //NSNumber
     kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeInteritemSpacing,     //NSNumber
     kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeHeaderReferenceSize,  //NSValue\(CGSize)
     kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeFooterReferenceSize,  //NSValue\(CGSize)
     
+};
+
+//WKWebView
+typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfWKWebViewPropretypType) {
+    
+    kHSYCocoaKitOfWKWebViewPropretypType_a,
 };
 
 @interface NSObject (UIKit)

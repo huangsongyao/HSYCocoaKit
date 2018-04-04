@@ -12,6 +12,7 @@
 typedef NS_ENUM(NSUInteger, kHSYHUDModelCodeType) {
     
     kHSYHUDModelCodeTypeDefault                     = 0,        //默认类型
+    
     kHSYHUDModelCodeTypeRequestSuccess              = 1,        //http请求成功
     kHSYHUDModelCodeTypeRequestFailure              = 2,        //http请求失败
     kHSYHUDModelCodeTypeUpdateLoading               = 3,        //http请求中。。。
@@ -19,6 +20,9 @@ typedef NS_ENUM(NSUInteger, kHSYHUDModelCodeType) {
     kHSYHUDModelCodeTypeSaveFileFailure             = 4,        //上传文件失败
     kHSYHUDModelCodeTypeSaveFileSuccess             = 5,        //上传文件成功
     kHSYHUDModelCodeTypeSaveFileLoading             = 6,        //上传文件中。。。
+    
+    kHSYHUDModelCodeTypeRequestPullUpSuccess        = 7,        //http请求上拉加载更多成功
+    kHSYHUDModelCodeTypeRequestPullDownSuccess      = 8,        //http请求下拉更新成功
     
 };
 
@@ -28,6 +32,7 @@ typedef NS_ENUM(NSUInteger, kHSYHUDModelCodeType) {
 @property (nonatomic, copy) NSString *hudString;                        //hudView的文字
 @property (nonatomic, assign) CGFloat animationTime;                    //动画时长
 @property (nonatomic, assign) kHSYHUDModelCodeType codeType;            //编码类型
+@property (nonatomic, assign) BOOL showPromptContent;                   //是否提示内容，默认为提示
 
 /**
  *  初始化一个HUD

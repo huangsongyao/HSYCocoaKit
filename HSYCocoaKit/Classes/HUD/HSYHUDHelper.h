@@ -12,6 +12,8 @@
 #define HUD_SUCCESS_TEXT                    @"成功"              //成功的文字提示
 #define HUD_FAILURE                         @"失败"              //失败的文字提示
 #define HUD_WAIT_TEXT                       @"加载中..."         //加载中的文字提示
+#define HUD_PULL_DOWN_SUCCESS_TEXT          @""
+#define HUD_PULL_UP_SUCCESS_TEXT            @""
 
 #define HUD_SHOW_TIME                       0.5f                //展示时间
 #define HUD_HIDE_TIME                       -1                  //加载时间

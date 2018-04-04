@@ -17,6 +17,7 @@
 @property (nonatomic, strong) RACSignal *signal;                        //信号，备用
 @property (nonatomic, strong) RACSubject *subject;                      //订阅信号，备用
 @property (nonatomic, strong) id errorStatusCode;                       //请求失败的错误码
+@property (nonatomic, strong) id successStatusCode;                     //请求成功的成功码
 
 /**
  *  启动计时器
@@ -80,27 +81,28 @@
  *  网络请求实现
  *
  *  @param network 网络请求的方法
- *  @param map     结果映射
- *  @param next    请求成功的回调
+ *  @param map     结果映射, map返回一个json数据的映射对象
+ *  @param next    请求成功的回调, BOOL值返回一个是否设置请求成功的statusCode
  *  @param error   请求失败的回调
  */
-- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next error:(void(^)(NSError *error))error;
+- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next error:(void(^)(NSError *error))error;
 
 /**
  *  网络请求实现，请求失败集中处理
  *
  *  @param network 网络请求的方法
- *  @param map     结果映射
- *  @param next    请求成功的回调
+ *  @param map     结果映射, map返回一个json数据的映射对象
+ *  @param next    请求成功的回调, BOOL值返回一个是否设置请求成功的statusCode
  */
-- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next;
+- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next;
 
 /**
- *  网络请求实现，请求失败集中处理，不需要映射结果
+ *  网络请求实现，请求失败集中处理，不需要映射结果，
  *
  *  @param network 网络请求的方法
- *  @param next    请求成功的回调
+ *  @param next    请求成功的回调, BOOL值返回一个是否设置请求成功的statusCode，并且返回一个json
+
  */
-- (void)requestNetwork:(RACSignal *(^)())network subscriberNext:(void(^)(id x))next;
+- (void)requestNetwork:(RACSignal *(^)())network subscriberNext:(BOOL(^)(id x))next;
 
 @end

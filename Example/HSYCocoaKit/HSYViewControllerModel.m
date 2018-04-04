@@ -61,20 +61,26 @@
 {
     if (self = [super init]) {
         NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
-        [self requestNetwork:^RACSignal *{
-            return [[HSYNetWorkingManager shareInstance] test:urlStr];
-        } toMap:^id(RACTuple *tuple) {
-            id json = tuple.second;
-            return [NSObject resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json];
-        } subscriberNext:^(id x) {
-            NSLog(@"");
-        }];
-        
-//        [[[[HSYNetWorkingManager shareInstance] test:urlStr] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
-//            NSLog(@"tuple = %@", tuple);
-//        } error:^(NSError *error) {
-//            NSLog(@"error = %@", error);
+//        [self requestNetwork:^RACSignal *{
+//            return [[HSYNetWorkingManager shareInstance] test:urlStr];
+//        } toMap:^id(RACTuple *tuple) {
+//            id json = tuple.second;
+//            return [NSObject resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json];
+//        } subscriberNext:^BOOL(id x) {
+//            NSLog(@"x = %@", x);
+//            return YES;
 //        }];
+        
+        
+        [self updateNext:^RACSignal *{
+            return [[HSYNetWorkingManager shareInstance] test:urlStr];
+        } toMap:^NSMutableArray *(RACTuple *tuple) {
+            NSMutableArray *array = [[NSMutableArray alloc] init];
+            id json = tuple.second;
+            [array addObject:[NSObject resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json]];
+            return array;
+        } pullDown:kHSYReflesStatusTypePullDown];
+        
     }
     return self;
 }

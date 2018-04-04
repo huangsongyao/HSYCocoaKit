@@ -28,6 +28,7 @@
 
 @interface HSYViewController ()
 
+@property (nonatomic, strong) HSYViewControllerModel *viewModel;
 
 @end
 
@@ -37,7 +38,7 @@
 {
     [super viewDidLoad];
     
-    HSYViewControllerModel *model = [[HSYViewControllerModel alloc] init];
+    self.viewModel = [[HSYViewControllerModel alloc] init];
     
     NSLog(@"%@", [NSDate nextDay]);//stringyyyyMMddHHmmssFromDateByTimestamp
     NSLog(@"%@", [NSDate stringyyyyMMddHHmmssFromDateByTimestamp:@(1503975304000)]);

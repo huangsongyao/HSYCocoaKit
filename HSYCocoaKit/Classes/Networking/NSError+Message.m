@@ -32,7 +32,7 @@ static const NSInteger kMessageCode = 1991;
 
 + (NSError *)errorWithErrorMessage:(NSString *)message
 {
-    return [[NSError alloc] initWithDomain:@"" code:kMessageCode userInfo:@{kErrorForNotNetworkKey : message}];
+    return [[NSError alloc] initWithDomain:@"" code:kMessageCode userInfo:@{kErrorForNotNetworkKey  : message}];
 }
 
 @end

@@ -15,11 +15,30 @@
 
 @implementation HSYBaseTableViewController
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _lineHidden = @(NO);
+        _scrollEnabled = @(YES);
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    NSDictionary *param = @{};
+    NSMutableDictionary *param = [@{
+                                    @(kHSYCocoaKitOfTableViewPropretyTypeTableViewStyle) : @(UITableViewStylePlain),
+                                    @(kHSYCocoaKitOfTableViewPropretyTypeFrame) : [NSValue valueWithCGRect:self.view.bounds],
+                                    @(kHSYCocoaKitOfTableViewPropretyTypeDelegate) : self,
+                                    @(kHSYCocoaKitOfTableViewPropretyTypeDataSource) : self,
+                                    @(kHSYCocoaKitOfTableViewPropretyTypeHiddenCellLine) : self.lineHidden,
+                                    @(kHSYCocoaKitOfTableViewPropretyTypeScrollEnabled) : self.scrollEnabled,
+                                    } mutableCopy];
+    if (self.registerClasses.count > 0) {
+        param[@(kHSYCocoaKitOfTableViewPropretyTypeRegisterClass)] = self.registerClasses;
+    }
     _tableView = [NSObject createTabelViewByParam:param];
     [self.view addSubview:self.tableView];
 }
@@ -44,6 +63,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.didSelectRowAtIndexPath) {
+        self.didSelectRowAtIndexPath(indexPath, nil);
+    }
 }
 
 @end

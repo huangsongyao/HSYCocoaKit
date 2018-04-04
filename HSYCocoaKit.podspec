@@ -52,5 +52,6 @@ s.dependency 'UITextView+Placeholder', '~> 1.1.1'
 s.dependency 'TYAttributedLabel', '~> 2.6.6'
 s.dependency 'FMDB', '~> 2.7.2'
 s.dependency 'TKRoundedView', '~> 0.5'
+s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.6'
 
 end

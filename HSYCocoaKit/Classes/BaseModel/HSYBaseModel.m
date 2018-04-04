@@ -110,19 +110,22 @@
     self.errorStatusCode = code;
 }
 
-- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next error:(void(^)(NSError *error))error
+- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next error:(void(^)(NSError *error))error
 {
     if (network) {
         RACSignal *signal = network();
         [[signal map:map] subscribeNext:^(id jsonModel) {
             if (next) {
-                next(jsonModel);
+                BOOL requestSuccessCode = next(jsonModel);
+                if (requestSuccessCode) {
+                    self.successStatusCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestSuccess];
+                }
             }
         } error:error];
     }
 }
 
-- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next
+- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next
 {
     @weakify(self);
     [self requestNetwork:network toMap:map subscriberNext:next error:^(NSError *error) {
@@ -132,7 +135,7 @@
     }];
 }
 
-- (void)requestNetwork:(RACSignal *(^)())network subscriberNext:(void(^)(id x))next
+- (void)requestNetwork:(RACSignal *(^)())network subscriberNext:(BOOL(^)(id x))next
 {
     @weakify(self);
     [self requestNetwork:network toMap:^id(id value) {

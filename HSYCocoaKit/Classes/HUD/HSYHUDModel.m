@@ -63,6 +63,22 @@
                                        animationTime:HUD_HIDE_TIME];
         }
             break;
+        case kHSYHUDModelCodeTypeRequestPullUpSuccess: {
+            
+            model = [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeText
+                                            codeType:kHSYHUDModelCodeTypeRequestPullUpSuccess
+                                                text:HUD_PULL_UP_SUCCESS_TEXT
+                                       animationTime:HUD_STRING_DISPLAY_TIME];
+        }
+            break;
+        case kHSYHUDModelCodeTypeRequestPullDownSuccess: {
+            
+            model = [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeText
+                                            codeType:kHSYHUDModelCodeTypeRequestPullDownSuccess
+                                                text:HUD_PULL_DOWN_SUCCESS_TEXT
+                                       animationTime:HUD_STRING_DISPLAY_TIME];
+        }
+            break;
         default: {
             model = [[HSYHUDModel alloc] init];
             model.codeType = codeType;
@@ -84,6 +100,7 @@
     model.hudString = text;
     model.animationTime = animationTime;
     model.codeType = codeType;
+    model.showPromptContent = YES;
     
     return model;
 }
