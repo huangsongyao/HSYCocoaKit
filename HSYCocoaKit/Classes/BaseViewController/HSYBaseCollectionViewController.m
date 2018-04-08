@@ -80,7 +80,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
         if (type == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess || type == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
             //下拉刷新成功//上拉加载更多成功
             [self.collectionView reloadData];
-        }
+        } 
     }];
 }
 

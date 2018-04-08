@@ -9,6 +9,9 @@
 #import "HSYBaseViewController.h"
 #import "SVPullToRefresh.h"
 
+FOUNDATION_EXPORT NSString *const kHSYCocoaKitRefreshPullDownStatusKey;
+FOUNDATION_EXPORT NSString *const kHSYCocoaKitRefreshStatusPullUpKey;
+
 @interface HSYBaseRefleshViewController : HSYBaseViewController
 
 @property (nonatomic, assign) BOOL showPullDown;                    //是否添加下拉刷新，默认不添加

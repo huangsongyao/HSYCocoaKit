@@ -37,6 +37,6 @@ typedef NS_ENUM(NSUInteger, kHSYReflesStatusType) {
  *  @param map     结果映射，由于方法内部已经对self.datas这个数据源数组进行了整理，所以映射时必须映射成结果数组
  *  @param status  上拉或者下拉的枚举
  */
-- (void)updateNext:(RACSignal *(^)())network toMap:(NSMutableArray *(^)(RACTuple *tuple))map pullDown:(kHSYReflesStatusType)status;
+- (void)updateNext:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map pullDown:(kHSYReflesStatusType)status;
 
 @end

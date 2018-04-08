@@ -10,6 +10,9 @@
 #import "HSYHUDModel.h"
 #import "PublicMacroFile.h"
 
+NSString *const kHSYCocoaKitRefreshPullDownStatusKey = @"HSYCocoaKitRefreshPullDownStatusKey";
+NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusPullUpKey";
+
 @interface HSYBaseRefleshViewController ()
 
 @end
@@ -87,7 +90,7 @@
     @weakify(self);
     [scrollView addPullToRefreshWithLoadingView:self.pullDownView subscribeActionHandler:^{
         @strongify(self);
-        [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypePerformPullDown) : @""}];
+        [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypePerformPullDown) : kHSYCocoaKitRefreshPullDownStatusKey}];
     }];
 }
 
@@ -97,7 +100,7 @@
     @weakify(self);
     [scrollView addInfiniteScrollingWithLoadingView:self.pullUpView subscribeActionHandler:^{
         @strongify(self);
-        [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypePerformPullUp) : @""}];
+        [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypePerformPullUp) : kHSYCocoaKitRefreshStatusPullUpKey}];
     }];
 }
 

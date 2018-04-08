@@ -68,7 +68,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRACSubjectOfNextType) {
  *
  *  @return RACSignal
  */
-- (RACSignal *)createRACSignals:(id<NSFastEnumeration>)signals reduce:(id(^)())reduceBlock;
+- (RACSignal *)createRACSignals:(id<NSFastEnumeration>)signals reduce:(id(^)(void))reduceBlock;
 
 /**
  *  创建button的command信号
@@ -78,7 +78,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRACSubjectOfNextType) {
  *
  *  @return RACCommand对象
  */
-- (RACCommand *)commandWithSignals:(id<NSFastEnumeration>)signals reduce:(id(^)())next;
+- (RACCommand *)commandWithSignals:(id<NSFastEnumeration>)signals reduce:(id(^)(void))next;
 
 /**
  *  遍历self.datas数组
@@ -86,7 +86,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRACSubjectOfNextType) {
  *  @param next      遍历回调，每次遍历都会被触发
  *  @param completed 遍历结束后的回调
  */
-- (void)rac_datasTraverseSubscribeNext:(void(^)(id result, NSNumber *index))next completed:(void(^)())completed;
+- (void)rac_datasTraverseSubscribeNext:(void(^)(id result, NSNumber *index))next completed:(void(^)(void))completed;
 
 /**
  *  遍历self.datas数组，同时，当不满足condition条件时，next将不被触发
@@ -95,7 +95,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRACSubjectOfNextType) {
  *  @param next      信号触发后的回调
  *  @param completed 遍历结束后的回调
  */
-- (void)rac_filterUntilCondition:(BOOL(^)(id predicate))condition subscribeNext:(void(^)(id x))next completed:(void(^)())completed;
+- (void)rac_filterUntilCondition:(BOOL(^)(id predicate))condition subscribeNext:(void(^)(id x))next completed:(void(^)(void))completed;
 
 /**
  *  网络请求实现
@@ -105,7 +105,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRACSubjectOfNextType) {
  *  @param next    请求成功的回调, BOOL值返回一个是否设置请求成功的statusCode
  *  @param error   请求失败的回调
  */
-- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next error:(void(^)(NSError *error))error;
+- (void)requestNetwork:(RACSignal *(^)(void))network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next error:(void(^)(NSError *error))error;
 
 /**
  *  网络请求实现，请求失败集中处理
@@ -114,7 +114,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRACSubjectOfNextType) {
  *  @param map     结果映射, map返回一个json数据的映射对象
  *  @param next    请求成功的回调, BOOL值返回一个是否设置请求成功的statusCode
  */
-- (void)requestNetwork:(RACSignal *(^)())network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next;
+- (void)requestNetwork:(RACSignal *(^)(void))network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next;
 
 /**
  *  网络请求实现，请求失败集中处理，不需要映射结果，
@@ -123,6 +123,6 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRACSubjectOfNextType) {
  *  @param next    请求成功的回调, BOOL值返回一个是否设置请求成功的statusCode，并且返回一个json
 
  */
-- (void)requestNetwork:(RACSignal *(^)())network subscriberNext:(BOOL(^)(id x))next;
+- (void)requestNetwork:(RACSignal *(^)(void))network subscriberNext:(BOOL(^)(id x))next;
 
 @end

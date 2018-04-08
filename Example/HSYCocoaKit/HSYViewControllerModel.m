@@ -60,7 +60,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
+//        NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
 //        [self requestNetwork:^RACSignal *{
 //            return [[HSYNetWorkingManager shareInstance] test:urlStr];
 //        } toMap:^id(RACTuple *tuple) {
@@ -72,6 +72,7 @@
 //        }];
         
         
+//        NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
 //        [self updateNext:^RACSignal *{
 //            return [[HSYNetWorkingManager shareInstance] test:urlStr];
 //        } toMap:^NSMutableArray *(RACTuple *tuple) {

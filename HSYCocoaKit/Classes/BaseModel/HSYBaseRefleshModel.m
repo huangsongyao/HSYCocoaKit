@@ -37,7 +37,7 @@
     _size = size;
 }
 
-- (void)updateNext:(RACSignal *(^)())network toMap:(NSMutableArray *(^)(RACTuple *tuple))map pullDown:(kHSYReflesStatusType)status
+- (void)updateNext:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map pullDown:(kHSYReflesStatusType)status
 {
     switch (status) {
         case kHSYReflesStatusTypePullDown:
