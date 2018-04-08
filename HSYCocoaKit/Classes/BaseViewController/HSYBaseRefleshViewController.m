@@ -73,18 +73,32 @@
     }];
 }
 
-#pragma mark - Add Pull View
-
-- (void)addPullDownView:(UIView *)pullDownView
-{
-    _pullDownView = pullDownView;
-}
-
-- (void)addPullUpView:(UIView *)pullUpView
-{
-    _pullUpView = pullUpView;
-}
-
 #pragma mark - Set Pull Down && Pull Up
+
+- (void)addRefresh:(UIScrollView *)scrollView
+{
+    [self addPullUpRefresh:scrollView];
+    [self addPullDownRefresh:scrollView];
+}
+
+- (void)addPullDownRefresh:(UIScrollView *)scrollView
+{
+    NSParameterAssert(scrollView);
+    @weakify(self);
+    [scrollView addPullToRefreshWithLoadingView:self.pullDownView subscribeActionHandler:^{
+        @strongify(self);
+        [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypePerformPullDown) : @""}];
+    }];
+}
+
+- (void)addPullUpRefresh:(UIScrollView *)scrollView
+{
+    NSParameterAssert(scrollView);
+    @weakify(self);
+    [scrollView addInfiniteScrollingWithLoadingView:self.pullUpView subscribeActionHandler:^{
+        @strongify(self);
+        [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypePerformPullUp) : @""}];
+    }];
+}
 
 @end

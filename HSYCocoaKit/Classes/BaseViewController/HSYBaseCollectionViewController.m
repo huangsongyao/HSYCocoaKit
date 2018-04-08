@@ -33,6 +33,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //添加默认的collectionView
     NSParameterAssert(self.registerClasses);
     NSDictionary *layoutParam = @{
                                   @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection) : @(UICollectionViewScrollDirectionVertical),
@@ -58,6 +60,19 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
     _collectionView = [NSObject createCollectionViewByParam:collectionParam];
     [self.view addSubview:self.collectionView];
     
+    //添加上下拉
+    if (self.showAllReflesh) {
+        [self addRefresh:self.collectionView];
+    } else {
+        if (self.showPullUp) {
+            [self addPullUpRefresh:self.collectionView];
+        }
+        if (self.showPullDown) {
+            [self addPullDownRefresh:self.collectionView];
+        }
+    }
+    
+    //监听上下拉
     @weakify(self);
     [self.viewModel.subject subscribeNext:^(NSDictionary *signal) {
         @strongify(self);

@@ -72,15 +72,24 @@
 //        }];
         
         
-        [self updateNext:^RACSignal *{
-            return [[HSYNetWorkingManager shareInstance] test:urlStr];
-        } toMap:^NSMutableArray *(RACTuple *tuple) {
-            NSMutableArray *array = [[NSMutableArray alloc] init];
-            id json = tuple.second;
-            [array addObject:[NSObject resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json]];
-            return array;
-        } pullDown:kHSYReflesStatusTypePullDown];
+//        [self updateNext:^RACSignal *{
+//            return [[HSYNetWorkingManager shareInstance] test:urlStr];
+//        } toMap:^NSMutableArray *(RACTuple *tuple) {
+//            NSMutableArray *array = [[NSMutableArray alloc] init];
+//            id json = tuple.second;
+//            [array addObject:[NSObject resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json]];
+//            return array;
+//        } pullDown:kHSYReflesStatusTypePullDown];
         
+        
+        [self.subject subscribeNext:^(id x) {
+            NSLog(@"");
+        }];
+        [self.subject subscribeNext:^(id x) {
+            NSLog(@"");
+        }];
+        
+        [self.subject sendNext:@"1"];
     }
     return self;
 }

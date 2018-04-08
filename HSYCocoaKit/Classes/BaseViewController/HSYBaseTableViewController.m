@@ -28,6 +28,7 @@
 {
     [super viewDidLoad];
     
+    //生成默认的tableView
     NSMutableDictionary *param = [@{
                                     @(kHSYCocoaKitOfTableViewPropretyTypeTableViewStyle) : @(UITableViewStylePlain),
                                     @(kHSYCocoaKitOfTableViewPropretyTypeFrame) : [NSValue valueWithCGRect:self.view.bounds],
@@ -42,6 +43,19 @@
     _tableView = [NSObject createTabelViewByParam:param];
     [self.view addSubview:self.tableView];
     
+    //添加上下拉
+    if (self.showAllReflesh) {
+        [self addRefresh:self.tableView];
+    } else {
+        if (self.showPullUp) {
+            [self addPullUpRefresh:self.tableView];
+        }
+        if (self.showPullDown) {
+            [self addPullDownRefresh:self.tableView];
+        }
+    }
+    
+    //监听上下拉刷新
     @weakify(self);
     [self.viewModel.subject subscribeNext:^(NSDictionary *signal) {
         @strongify(self);

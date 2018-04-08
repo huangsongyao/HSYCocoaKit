@@ -22,6 +22,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRACSubjectOfNextType) {
     
     kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess,                    //下拉刷新成功
     kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess,                      //上拉加载更多成功
+    kHSYCocoaKitRACSubjectOfNextTypePerformPullDown,                    //执行下拉动作
+    kHSYCocoaKitRACSubjectOfNextTypePerformPullUp,                      //执行上拉动作
     
     kHSYCocoaKitRACSubjectOfNextTypeRequestSuccess,                     //一般网络请求加载成功
     kHSYCocoaKitRACSubjectOfNextTypeRequestFailure,                     //一般网络请求加载失败
