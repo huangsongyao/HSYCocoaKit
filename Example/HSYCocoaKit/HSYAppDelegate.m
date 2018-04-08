@@ -7,11 +7,19 @@
 //
 
 #import "HSYAppDelegate.h"
+#import "HSYBaseCustomNavigationController.h"
+#import "HSYViewController.h"
 
 @implementation HSYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor blackColor];
+    HSYViewController *vc = [[HSYViewController alloc] init];
+    HSYBaseCustomNavigationController *nav = [[HSYBaseCustomNavigationController alloc] initWithRootViewController:vc params:@{@(kHSYCustomNavigationControllerParamsKeyOpenTransitionAnimation) : @(YES)}];
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
     return YES;
 }

@@ -26,6 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     //viewModel不允许为nil，可以指向它的子类对象
     NSParameterAssert(self.viewModel);
     if (VERSION_GTR_IOS8) {
