@@ -31,13 +31,17 @@
     [super viewDidLoad];
     //上拉刷新和下拉刷新是否添加 && 以及添加上拉和下拉的监听
     if (self.showAllReflesh) {
+        NSParameterAssert(self.pullUpView);
+        NSParameterAssert(self.pullDownView);
         [self observePullDown];
         [self observePullUp];
     } else {
         if (self.showPullDown) {
+            NSParameterAssert(self.pullDownView);
             [self observePullDown];
         }
         if (self.showPullUp) {
+            NSParameterAssert(self.pullUpView);
             [self observePullUp];
         }
     }
@@ -69,5 +73,18 @@
     }];
 }
 
+#pragma mark - Add Pull View
+
+- (void)addPullDownView:(UIView *)pullDownView
+{
+    _pullDownView = pullDownView;
+}
+
+- (void)addPullUpView:(UIView *)pullUpView
+{
+    _pullUpView = pullUpView;
+}
+
+#pragma mark - Set Pull Down && Pull Up
 
 @end
