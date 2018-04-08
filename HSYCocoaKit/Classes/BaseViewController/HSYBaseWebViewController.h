@@ -9,8 +9,9 @@
 #import "HSYBaseRefleshViewController.h"
 #import <WebKit/WebKit.h>
 
-@interface HSYBaseWebViewController : HSYBaseRefleshViewController
+@interface HSYBaseWebViewController : HSYBaseRefleshViewController <WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler>
 
-@property (nonatomic, strong) WKWebView *webView;
+@property (nonatomic, strong, readonly) WKWebView *webView;
+- (RACSignal *)nativeRunJavaScriptFunction:(NSString *)function;
 
 @end

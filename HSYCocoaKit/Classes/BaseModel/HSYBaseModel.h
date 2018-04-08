@@ -13,9 +13,9 @@
 @interface HSYBaseModel : RVMViewModel
 
 @property (nonatomic, strong) NSMutableArray *datas;                    //数据源
-@property (nonatomic, strong) RACCommand *command;                      //响应信号
-@property (nonatomic, strong) RACSignal *signal;                        //信号，备用
-@property (nonatomic, strong) RACSubject *subject;                      //订阅信号，备用
+@property (nonatomic, strong) RACCommand *command;                      //响应信号，默认为nil
+@property (nonatomic, strong) RACSignal *signal;                        //信号，默认为nil
+@property (nonatomic, strong, readonly) RACSubject *subject;            //订阅信号
 @property (nonatomic, strong) id errorStatusCode;                       //请求失败的错误码
 @property (nonatomic, strong) id successStatusCode;                     //请求成功的成功码
 

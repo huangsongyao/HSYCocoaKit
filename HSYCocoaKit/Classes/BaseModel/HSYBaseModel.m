@@ -21,6 +21,7 @@
 {
     if (self = [super init]) {
         self.datas = [[NSMutableArray alloc] init];
+        _subject = [RACSubject subject];
     }
     return self;
 }
