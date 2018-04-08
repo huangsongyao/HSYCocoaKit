@@ -409,6 +409,13 @@
 		AE258432F3D610C6FA603B8B63F04FC8 /* UIButton+RACCommandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB15152BFE2AAD9FDE11E3A08AAF1D9 /* UIButton+RACCommandSupport.m */; };
 		AE44440C07ECB65B5F3F80C9AFD0E10F /* RACQueueScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 87838EEE59E5E59242C2F9A4A4C52246 /* RACQueueScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E180E3DB54E0C2EC94817CF7CE8DA65 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEECCAB42079C0F30041BA52 /* SVPullToRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = AEECCAAF2079C0F30041BA52 /* SVPullToRefresh.h */; };
+		AEECCAB52079C0F30041BA52 /* UIScrollView+SVInfiniteScrolling.h in Headers */ = {isa = PBXBuildFile; fileRef = AEECCAB02079C0F30041BA52 /* UIScrollView+SVInfiniteScrolling.h */; };
+		AEECCAB62079C0F30041BA52 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = AEECCAB12079C0F30041BA52 /* UIScrollView+SVInfiniteScrolling.m */; };
+		AEECCAB72079C0F30041BA52 /* UIScrollView+SVPullToRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = AEECCAB22079C0F30041BA52 /* UIScrollView+SVPullToRefresh.h */; };
+		AEECCAB82079C0F30041BA52 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AEECCAB32079C0F30041BA52 /* UIScrollView+SVPullToRefresh.m */; };
+		AEECCABB2079C2510041BA52 /* HSYCustomRefreshView.h in Headers */ = {isa = PBXBuildFile; fileRef = AEECCAB92079C2510041BA52 /* HSYCustomRefreshView.h */; };
+		AEECCABC2079C2510041BA52 /* HSYCustomRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEECCABA2079C2510041BA52 /* HSYCustomRefreshView.m */; };
 		AF5491F6E189306795FC1C5E90C9C9AC /* HSYCustomPopTransitionAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 641DBCC87882CA94B1604FF69F8ACD08 /* HSYCustomPopTransitionAnimation.m */; };
 		AF6BB8830FC926B222038992DE1BCA9C /* NSData+RACSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = BA31F1DC7F9D88BF3F8A2B55F40DCF23 /* NSData+RACSupport.m */; };
 		B04924A4ACDD97657343DF35617F8112 /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1698781852489C668CB279690325E5 /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1225,6 +1232,13 @@
 		ADEF1D4CEC46236E5CBE1DAC4A026D76 /* HSYFMDBOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HSYFMDBOperation.h; sourceTree = "<group>"; };
 		AE3E92C839B8A8F8172ED74BD52B867E /* RACDynamicSignal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACDynamicSignal.h; path = ReactiveCocoa/RACDynamicSignal.h; sourceTree = "<group>"; };
 		AECC5D77E6AA0F50F71A46D42DF6DA2E /* Masonry-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-umbrella.h"; sourceTree = "<group>"; };
+		AEECCAAF2079C0F30041BA52 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
+		AEECCAB02079C0F30041BA52 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
+		AEECCAB12079C0F30041BA52 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
+		AEECCAB22079C0F30041BA52 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
+		AEECCAB32079C0F30041BA52 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
+		AEECCAB92079C2510041BA52 /* HSYCustomRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSYCustomRefreshView.h; sourceTree = "<group>"; };
+		AEECCABA2079C2510041BA52 /* HSYCustomRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSYCustomRefreshView.m; sourceTree = "<group>"; };
 		B00E27914355BCCBCF871974EA801FA0 /* HSYFMDBOperationManager+Operation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HSYFMDBOperationManager+Operation.h"; sourceTree = "<group>"; };
 		B02E9B8A0A9692BFD65E8AAC8D21429E /* FMDBMacroFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = FMDBMacroFile.h; sourceTree = "<group>"; };
 		B09BA8B04755E0BF07CD7EF9E150DED7 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
@@ -2421,6 +2435,13 @@
 		AEECCAAE2079C0B30041BA52 /* SVPullToRefresh */ = {
 			isa = PBXGroup;
 			children = (
+				AEECCAAF2079C0F30041BA52 /* SVPullToRefresh.h */,
+				AEECCAB02079C0F30041BA52 /* UIScrollView+SVInfiniteScrolling.h */,
+				AEECCAB12079C0F30041BA52 /* UIScrollView+SVInfiniteScrolling.m */,
+				AEECCAB22079C0F30041BA52 /* UIScrollView+SVPullToRefresh.h */,
+				AEECCAB32079C0F30041BA52 /* UIScrollView+SVPullToRefresh.m */,
+				AEECCAB92079C2510041BA52 /* HSYCustomRefreshView.h */,
+				AEECCABA2079C2510041BA52 /* HSYCustomRefreshView.m */,
 			);
 			path = SVPullToRefresh;
 			sourceTree = "<group>";
@@ -2935,6 +2956,7 @@
 				951E7B9F3ECA015C936EBF873DA2EB62 /* HSYBaseTableModel.h in Headers */,
 				446FD6C8DAF3A369C98ADF5AEA4C3E8B /* HSYBaseTableViewController.h in Headers */,
 				252B27FFA1B8E4DE57D6FB2AB6EE7DA9 /* HSYBaseViewController.h in Headers */,
+				AEECCABB2079C2510041BA52 /* HSYCustomRefreshView.h in Headers */,
 				FB9E12BAF88DC580FF6B338DC4DF5B70 /* HSYBaseWebModel.h in Headers */,
 				3CD7EA8AC6E3F76739F3B007EFC73E0C /* HSYBaseWebViewController.h in Headers */,
 				E39716393787C7258648A45C883425A7 /* HSYCocoaKit-umbrella.h in Headers */,
@@ -2965,17 +2987,20 @@
 				0C13BB4815AAA53D04F1D6691EE15ED8 /* NSObject+Property.h in Headers */,
 				D543A160A1B595F0ECD72D4400B8A8F5 /* NSObject+Runtime.h in Headers */,
 				4776C8103BB22CE3B5D883C93F7FF4DD /* NSObject+Transition.h in Headers */,
+				AEECCAB72079C0F30041BA52 /* UIScrollView+SVPullToRefresh.h in Headers */,
 				A72EEDAE537D43D9D15387F5ABF71A8C /* NSObject+UIKit.h in Headers */,
 				7461E7048E8D69181051B8363207D310 /* NSString+JSONParsing.h in Headers */,
 				2D7B8F70B949822C62CB871BD876116F /* NSString+Replace.h in Headers */,
 				53F5C8A98921EED4745EA36A4083AD38 /* NSString+Size.h in Headers */,
 				BD9D177BEE932B15CDC583A8560BCA45 /* PublicMacroFile.h in Headers */,
 				67A599DEC7A4E65D09255882DE7BF016 /* RACSignal+Timer.h in Headers */,
+				AEECCAB42079C0F30041BA52 /* SVPullToRefresh.h in Headers */,
 				B2EC34E7CF7E1FF66D9E2CB82150B545 /* UIActionSheet+RACSignal.h in Headers */,
 				8ECFAB0AA61BA14B1C52F8C93D5BB91B /* UIAlertView+RACSignal.h in Headers */,
 				923A5AD386E42F105FE40B559244DFFA /* UIApplication+Device.h in Headers */,
 				2764F0AB12E672662801A3F935B13AEB /* UIColor+Hex.h in Headers */,
 				14B9972B99DFA497AF3108A41C32BDCA /* UIImage+Canvas.h in Headers */,
+				AEECCAB52079C0F30041BA52 /* UIScrollView+SVInfiniteScrolling.h in Headers */,
 				EE272E8FB6D00236584A32628B9B0648 /* UILabel+AttributedString.h in Headers */,
 				E0AAE6EE68627213771D1EFA1C64CA23 /* UILabel+SuggestSize.h in Headers */,
 				1686B2370F6B889D3A039C343CBD0795 /* UINavigationBar+Background.h in Headers */,
@@ -3834,12 +3859,14 @@
 				AF5491F6E189306795FC1C5E90C9C9AC /* HSYCustomPopTransitionAnimation.m in Sources */,
 				427B4B5E4635D07EDB2D0F6077C2DD00 /* HSYCustomPushTransitionAnimation.m in Sources */,
 				9C3BDAF46DFF11ABFFCF129861614D87 /* HSYFMDBOperation.m in Sources */,
+				AEECCABC2079C2510041BA52 /* HSYCustomRefreshView.m in Sources */,
 				B48A9E444CEE5FADE25927688D63B1A5 /* HSYFMDBOperationFieldInfo.m in Sources */,
 				C39F7EAA951A63F522284FF36276558F /* HSYFMDBOperationManager+Operation.m in Sources */,
 				E222886FE505CCF2CC4D8190CD0E8CA3 /* HSYFMDBOperationManager.m in Sources */,
 				2C1165FB6C8DD8186D953ACEF9B259DF /* HSYHUDHelper.m in Sources */,
 				F012F609B4FD166F9FA0E61FA211782C /* HSYHUDModel.m in Sources */,
 				1D3DFD15AE2F614A052D32DDB11CECAA /* HSYNavigationController.m in Sources */,
+				AEECCAB62079C0F30041BA52 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				DD7FBC844DE60D029ED4B1EF8B3B6713 /* HSYNetWorkingManager.m in Sources */,
 				967E1B2F6176BCDA1FAF698500E75211 /* NSArray+RACSignal.m in Sources */,
 				0695E5CFEDB1D113D6EC422511AAA529 /* NSDate+Timestamp.m in Sources */,
@@ -3860,6 +3887,7 @@
 				563AB42802D9CDADE92C2A817328E3D5 /* NSString+Replace.m in Sources */,
 				00C71034AD316C9811211FC892FE9A3C /* NSString+Size.m in Sources */,
 				6056C2E58243BD4CB6C9430FC33AE237 /* RACSignal+Timer.m in Sources */,
+				AEECCAB82079C0F30041BA52 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				334DD156AF1A6A098021CB3E2C60BB5D /* UIActionSheet+RACSignal.m in Sources */,
 				D5C4B712DC4A031863A3A8B02F04F2E0 /* UIAlertView+RACSignal.m in Sources */,
 				FFE5E4505B0761EC3D529B0983FDA2AB /* UIApplication+Device.m in Sources */,
