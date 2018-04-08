@@ -10,128 +10,99 @@
 
 @implementation UIView (Frame)
 
-@dynamic x;
-@dynamic y;
-@dynamic point;
-@dynamic width;
-@dynamic height;
-@dynamic size;
-@dynamic center_x;
-@dynamic center_y;
+#pragma mark - Init
+
+- (instancetype)initWithSize:(CGSize)size
+{
+    CGRect rect = (CGRect){CGPointZero, size};
+    return [self initWithFrame:rect];
+}
+
+#pragma mark - Get Property
+
+- (CGPoint)origin
+{
+    return self.frame.origin;
+}
 
 - (CGFloat)x
 {
-    return CGRectGetMinX(self.frame);
-}
-
-- (void)setViewX:(CGFloat)x
-{
-    CGRect rect = self.frame;
-    rect = CGRectMake(x, CGRectGetMinY(rect), CGRectGetWidth(rect), CGRectGetHeight(rect));
-    self.frame = rect;
+    return self.origin.x;
 }
 
 - (CGFloat)y
 {
-    return CGRectGetMinY(self.frame);
-}
-
-- (void)setViewY:(CGFloat)y
-{
-    CGRect rect = self.frame;
-    rect = CGRectMake(CGRectGetMinX(rect), y, CGRectGetWidth(rect), CGRectGetHeight(rect));
-    self.frame = rect;
-}
-
-- (CGPoint)point
-{
-    return CGPointMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame));
-}
-
-- (void)setViewPoint:(CGPoint)point
-{
-    self.x = point.x;
-    self.y = point.y;
-}
-
-- (CGFloat)width
-{
-    return CGRectGetWidth(self.frame);
-}
-
-- (void)setViewWidth:(CGFloat)width
-{
-    CGRect rect = self.frame;
-    rect = CGRectMake(CGRectGetMinX(rect), CGRectGetMinY(rect), width, CGRectGetHeight(rect));
-    self.frame = rect;
-}
-
-- (CGFloat)height
-{    
-    return CGRectGetHeight(self.frame);
-}
-
-- (void)setViewHeight:(CGFloat)height
-{
-    CGRect rect = self.frame;
-    rect = CGRectMake(CGRectGetMinX(rect), CGRectGetMinY(rect), CGRectGetWidth(rect), height);
-    self.frame = rect;
-}
-
-- (CGSize)size
-{
-    return CGSizeMake(CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
-}
-
-- (void)setViewSize:(CGSize)size
-{
-    self.width = size.width;
-    self.height = size.height;
-}
-
-- (CGFloat)center_x
-{
-    return self.center.x;
-}
-
-- (void)setViewCenterX:(CGFloat)centerX
-{
-    self.center = CGPointMake(centerX, self.center.y);
-}
-
-- (CGFloat)center_y
-{
-    return self.center.y;
-}
-
-- (void)setViewCenterY:(CGFloat)centerY
-{
-    self.center = CGPointMake(self.center.x, centerY);
-}
-
-#pragma mark -
-#pragma mark - Azimuthal Coordinates
-
-- (CGFloat)mid_x
-{    
-    return CGRectGetMidX(self.frame);
-}
-
-- (CGFloat)mid_y
-{
-    return CGRectGetMidY(self.frame);
+    return self.origin.y;
 }
 
 - (CGFloat)right
 {
-    return CGRectGetMaxX(self.frame);
+    return self.x + self.width;
 }
 
 - (CGFloat)bottom
 {
-    return CGRectGetMaxY(self.frame);
+    return self.y + self.height;
 }
 
+- (CGSize)size
+{
+    return self.frame.size;
+}
+
+- (CGFloat)height
+{
+    return self.size.height;
+}
+
+- (CGFloat)width
+{
+    return self.size.width;
+}
+
+- (CGFloat)mid_x
+{
+    return (self.x + (self.width / 2));
+}
+
+- (CGFloat)mid_y
+{
+    return (self.y + (self.height / 2));
+}
+
+#pragma mark - Set Origin
+
+- (void)setOrigin:(CGPoint)origin
+{
+    self.frame = (CGRect){origin, self.size};
+}
+
+- (void)setX:(CGFloat)x
+{
+    [self setOrigin:CGPointMake(x, self.y)];
+}
+
+- (void)setY:(CGFloat)y
+{
+    [self setOrigin:CGPointMake(self.x, y)];
+}
+
+#pragma mark - Set Size
+
+- (void)setSize:(CGSize)size
+{
+    self.frame = (CGRect){self.origin, size};
+}
+
+- (void)setWidth:(CGFloat)width
+{
+    [self setSize:CGSizeMake(width, self.height)];
+}
+
+- (void)setHeight:(CGFloat)height
+{
+    [self setSize:CGSizeMake(self.width, height)];
+}
 
 
 @end

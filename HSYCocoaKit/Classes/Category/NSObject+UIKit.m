@@ -37,10 +37,10 @@
         [button setTitle:param[@(kHSYCocoaKitOfButtonPropretyTypeHighTitle)] forState:UIControlStateHighlighted];
     }
     if (param[@(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName)]) {
-        [button setImage:[UIImage imageNamed:param[@(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName)]] forState:UIControlStateNormal];
+        [button setImage:param[@(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName)] forState:UIControlStateNormal];
     }
     if (param[@(kHSYCocoaKitOfButtonPropretyTypePreImageViewName)]) {
-        [button setImage:[UIImage imageNamed:param[@(kHSYCocoaKitOfButtonPropretyTypePreImageViewName)]] forState:UIControlStateHighlighted];
+        [button setImage:param[@(kHSYCocoaKitOfButtonPropretyTypePreImageViewName)] forState:UIControlStateHighlighted];
     }
     if (param[@(kHSYCocoaKitOfButtonPropretyTypeSelectedImageViewName)]) {
         [button setImage:[UIImage imageNamed:param[@(kHSYCocoaKitOfButtonPropretyTypeSelectedImageViewName)]] forState:UIControlStateSelected];

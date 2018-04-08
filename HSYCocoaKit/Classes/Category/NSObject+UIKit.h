@@ -16,8 +16,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfButtonPropretyType) {
     kHSYCocoaKitOfButtonPropretyTypePreBackgroundImageViewName,             //NSString
     kHSYCocoaKitOfButtonPropretyTypeNorTitle,                               //NSString
     kHSYCocoaKitOfButtonPropretyTypeHighTitle,                              //NSString
-    kHSYCocoaKitOfButtonPropretyTypeNorImageViewName,                       //NSString
-    kHSYCocoaKitOfButtonPropretyTypePreImageViewName,                       //NSString
+    kHSYCocoaKitOfButtonPropretyTypeNorImageViewName,                       //UIImage
+    kHSYCocoaKitOfButtonPropretyTypePreImageViewName,                       //UIImage
     kHSYCocoaKitOfButtonPropretyTypeSelectedImageViewName,                  //NSString
     kHSYCocoaKitOfButtonPropretyTypeTitleColor,                             //UIColor
     kHSYCocoaKitOfButtonPropretyTypeTitleFont,                              //UIFont

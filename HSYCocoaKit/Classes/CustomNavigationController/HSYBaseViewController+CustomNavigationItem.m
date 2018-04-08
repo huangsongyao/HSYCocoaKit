@@ -65,7 +65,7 @@
                               @(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : title,
                               @(kHSYCocoaKitOfButtonPropretyTypeHighTitle) : title,
                               };
-        UIButton *button = [NSObject createButtonByParam:@{} clickedOnSubscribeNext:^(UIButton *button) {
+        UIButton *button = [NSObject createButtonByParam:dic clickedOnSubscribeNext:^(UIButton *button) {
             if (next) {
                 next(button, ((kHSYCustomBarButtonItemTag)button.tag));
             }

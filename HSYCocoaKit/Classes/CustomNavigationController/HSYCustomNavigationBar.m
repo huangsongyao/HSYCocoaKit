@@ -58,8 +58,9 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSString *bundleName = bundle.infoDictionary[@"CFBundleName"];
-    NSString *imagePath = [bundle pathForResource:name ofType:nil inDirectory:[NSString stringWithFormat:@"%@.bundle", bundleName]];
-    UIImage *image = [UIImage imageWithContentsOfFile:imagePath];//[UIImage imageNamed:name];
+    NSURL *bundleURL = [bundle URLForResource:bundleName withExtension:@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithURL:bundleURL];
+    UIImage *image = [UIImage imageNamed:name inBundle:resourceBundle compatibleWithTraitCollection:nil];
     NSDictionary *dic = @{
                           @(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName) : image,
                           @(kHSYCocoaKitOfButtonPropretyTypePreImageViewName) : image,
@@ -78,7 +79,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
 + (UIBarButtonItem *)backButtonItem:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
 {
-    return [self.class backButtonItemForImage:@"nav_icon_back@3x" subscribeNext:next];
+    return [self.class backButtonItemForImage:@"nav_icon_back" subscribeNext:next];
 }
 
 #pragma mark - UINavigationBarDelegate

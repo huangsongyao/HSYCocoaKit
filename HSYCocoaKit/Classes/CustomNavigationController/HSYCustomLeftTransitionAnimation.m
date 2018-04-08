@@ -39,7 +39,7 @@
 - (void)toActionsAnimatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext
 {
     [self.contextView insertSubview:self.toViewController.view aboveSubview:self.fromViewController.view];
-    [self.toViewController.view setViewPoint:CGPointMake(IPHONE_WIDTH, 0)];
+    [self.toViewController.view setOrigin:CGPointMake(IPHONE_WIDTH, 0)];
     [self.fromViewController.view addSubview:[self blackShadowView:MIN_ALPHA_COMPONENT]];
     self.fromViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f, 1.0f);
     @weakify(self);
@@ -47,7 +47,7 @@
         @strongify(self);
         [self blackShadowView:MIN_ALPHA_COMPONENT].alpha = MAX_ALPHA_COMPONENT;
         self.fromViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.8f, 0.85f);
-        [self.toViewController.view setViewPoint:CGPointZero];
+        [self.toViewController.view setOrigin:CGPointZero];
     }];
 }
 
@@ -56,13 +56,13 @@
     [self.contextView insertSubview:self.toViewController.view belowSubview:self.fromViewController.view];
     [self.toViewController.view addSubview:[self blackShadowView:MAX_ALPHA_COMPONENT]];
     self.toViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.8f, 0.85f);
-    [self.fromViewController.view setViewPoint:CGPointZero];
+    [self.fromViewController.view setOrigin:CGPointZero];
     @weakify(self);
     [self animatedTransitioning:transitionContext performPushMethods:NO animationForNext:^{
         @strongify(self);
         [self blackShadowView:MIN_ALPHA_COMPONENT].alpha = MIN_ALPHA_COMPONENT;
         self.toViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f, 1.0f);
-        [self.fromViewController.view setViewPoint:CGPointMake(IPHONE_WIDTH, 0)];
+        [self.fromViewController.view setOrigin:CGPointMake(IPHONE_WIDTH, 0)];
     }];
 }
 
