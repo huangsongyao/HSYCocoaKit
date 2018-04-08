@@ -30,7 +30,6 @@ typedef NS_ENUM(NSUInteger, kHSYCustomPercentDrivenInteractiveTransitionActionsT
 
 @property (nonatomic, assign, readonly) kHSYCustomPercentDrivenInteractiveTransitionActionsType actionsType;
 @property (nonatomic, assign, readonly) CGFloat transitionDuration;
-@property (nonatomic, assign) BOOL tranistionFinished;                  //用于判断转场动画是否完成
 
 - (instancetype)initWithTransitionDuration:(CGFloat)transitionDuration
                                actionsType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type;

@@ -20,7 +20,7 @@
 {
     if (self = [super initWithRootViewController:rootViewController]) {
         _banTransition = NO;
-        _panGestureEndedProgress = (params[@(kHSYCustomNavigationControllerParamsKeyEndedProgress)] ? ([params[@(kHSYCustomNavigationControllerParamsKeyEndedProgress)] floatValue]) : 0.65);
+        _panGestureEndedProgress = (params[@(kHSYCustomNavigationControllerParamsKeyEndedProgress)] ? ([params[@(kHSYCustomNavigationControllerParamsKeyEndedProgress)] floatValue]) : 0.45);
         self.openTransitionAnimation = (params[@(kHSYCustomNavigationControllerParamsKeyOpenTransitionAnimation)] ? [params[@(kHSYCustomNavigationControllerParamsKeyOpenTransitionAnimation)] boolValue] : YES);
     }
     return self;
@@ -82,7 +82,6 @@
         return push;
     } else if (operation == UINavigationControllerOperationPop) {
         HSYCustomLeftTransitionAnimation *pop = [[HSYCustomLeftTransitionAnimation alloc] initWithTransitionType:kHSYCustomPercentDrivenInteractiveTransitionActionsTypePop];
-        pop.tranistionFinished = self.tranistionCompleted;
         return pop;
     }
     return nil;
@@ -121,7 +120,6 @@
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
-    _tranistionCompleted = YES;
     return [super popViewControllerAnimated:animated];
 }
 

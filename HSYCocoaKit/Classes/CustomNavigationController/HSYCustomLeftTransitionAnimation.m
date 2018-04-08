@@ -76,10 +76,6 @@
     } completion:^(BOOL finished) {
         @strongify(self);
         [self removeShadow];
-        if (!push) {
-            if (self.tranistionFinished) {
-            }
-        }
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
 }
