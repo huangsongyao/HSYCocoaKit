@@ -40,4 +40,12 @@ typedef NS_ENUM(NSUInteger, kHSYCustomBarButtonItemTag) {
 + (UIBarButtonItem *)backButtonItem:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
 + (UIBarButtonItem *)backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
 
+/**
+ 从当前私有库的bundle中获取资源图片
+
+ @param imageName 图片名称
+ @return UIImage
+ */
++ (UIImage *)imageForBundle:(NSString *)imageName;
+
 @end

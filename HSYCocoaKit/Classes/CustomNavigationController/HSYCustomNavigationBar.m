@@ -56,11 +56,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
 + (UIBarButtonItem *)backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSString *bundleName = bundle.infoDictionary[@"CFBundleName"];
-    NSURL *bundleURL = [bundle URLForResource:bundleName withExtension:@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithURL:bundleURL];
-    UIImage *image = [UIImage imageNamed:name inBundle:resourceBundle compatibleWithTraitCollection:nil];
+    UIImage *image = [self.class imageForBundle:name];
     NSDictionary *dic = @{
                           @(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName) : image,
                           @(kHSYCocoaKitOfButtonPropretyTypePreImageViewName) : image,
@@ -80,6 +76,19 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 + (UIBarButtonItem *)backButtonItem:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
 {
     return [self.class backButtonItemForImage:@"nav_icon_back" subscribeNext:next];
+}
+
++ (UIImage *)imageForBundle:(NSString *)imageName
+{
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSString *bundleName = bundle.infoDictionary[@"CFBundleName"];
+    NSURL *bundleURL = [bundle URLForResource:bundleName withExtension:@"bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithURL:bundleURL];
+    UIImage *image = [UIImage imageNamed:imageName
+                                inBundle:resourceBundle
+           compatibleWithTraitCollection:nil];
+    
+    return image;
 }
 
 #pragma mark - UINavigationBarDelegate
