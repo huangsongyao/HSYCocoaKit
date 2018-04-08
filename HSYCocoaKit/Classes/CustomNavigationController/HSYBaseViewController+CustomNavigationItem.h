@@ -6,7 +6,7 @@
 //
 //
 
-#import <HSYCocoaKit/HSYCocoaKit.h>
+#import "HSYBaseViewController.h"
 
 #define DEFAULT_BUTTOM_SIZE                     40.0f
 #define DEFAULT_BUTTOM_EDGE_INSETS_LEFT         10.0f

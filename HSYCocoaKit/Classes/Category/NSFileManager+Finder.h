@@ -10,7 +10,6 @@
 
 @interface NSFileManager (Finder)
 
-
 /**
  根据文件的名称的后缀类型，到本地资源文件和沙盒中寻找该文件的路径，沙盒路径寻找对象为doucment、cache和library
 

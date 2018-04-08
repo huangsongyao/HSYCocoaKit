@@ -40,6 +40,11 @@
 #import "UIViewController+Device.h"
 #import "UIViewController+Keyboard.h"
 #import "UIViewController+NavigationItem.h"
+#import "HSYBaseCustomNavigationController.h"
+#import "HSYBaseViewController+CustomNavigationItem.h"
+#import "HSYCustomBaseTransitionAnimation.h"
+#import "HSYCustomLeftTransitionAnimation.h"
+#import "HSYCustomNavigationBar.h"
 #import "UIViewController+Shadow.h"
 #import "FMResultSet+Model.h"
 #import "HSYFMDBMacro.h"
@@ -71,6 +76,8 @@
 #import "RACSignal+Timer.h"
 #import "UIActionSheet+RACSignal.h"
 #import "UIAlertView+RACSignal.h"
+
+
 
 
 #endif /* HSYCocoaKit_h */
