@@ -15,7 +15,6 @@
 @property (nonatomic, strong) NSNumber *lineHidden;
 @property (nonatomic, strong) NSNumber *scrollEnabled;
 @property (nonatomic, strong, readonly) UITableView *tableView;
-@property (nonatomic, copy) void(^didSelectRowAtIndexPath)(NSIndexPath *indexPath, id object);
 
 //格式：@[@{@"类名" : @"重用标识",}, @{@"类名" : @"重用标识",}....]
 @property (nonatomic, strong, readwrite) NSArray<NSDictionary *> *registerClasses;

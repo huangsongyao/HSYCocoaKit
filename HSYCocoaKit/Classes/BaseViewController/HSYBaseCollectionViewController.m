@@ -57,6 +57,16 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
     
     _collectionView = [NSObject createCollectionViewByParam:collectionParam];
     [self.view addSubview:self.collectionView];
+    
+    @weakify(self);
+    [self.viewModel.subject subscribeNext:^(NSDictionary *signal) {
+        @strongify(self);
+        kHSYCocoaKitRACSubjectOfNextType type = (kHSYCocoaKitRACSubjectOfNextType)[signal.allKeys.firstObject integerValue];
+        if (type == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess || type == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
+            //下拉刷新成功//上拉加载更多成功
+            [self.collectionView reloadData];
+        }
+    }];
 }
 
 #pragma mark - UICollectionViewDelegate && UICollectionViewDataSource
@@ -79,9 +89,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    if (self.didSelectItemAtIndexPath) {
-        self.didSelectItemAtIndexPath(indexPath, nil);
-    }
+    [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypeCollectionViewDidSelectRow) : indexPath}];
 }
 
 #pragma mark - For Value

@@ -41,6 +41,16 @@
     }
     _tableView = [NSObject createTabelViewByParam:param];
     [self.view addSubview:self.tableView];
+    
+    @weakify(self);
+    [self.viewModel.subject subscribeNext:^(NSDictionary *signal) {
+        @strongify(self);
+        kHSYCocoaKitRACSubjectOfNextType type = (kHSYCocoaKitRACSubjectOfNextType)[signal.allKeys.firstObject integerValue];
+        if (type == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess || type == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
+            //下拉刷新成功//上拉加载更多成功
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
@@ -63,9 +73,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (self.didSelectRowAtIndexPath) {
-        self.didSelectRowAtIndexPath(indexPath, nil);
-    }
+    [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypeTableViewDidSelectRow) : indexPath}];
 }
 
 @end

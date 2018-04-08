@@ -50,9 +50,8 @@
         //监听下拉刷新
         @strongify(self);
         if ([self requestStateCodeWithStateCode:x] == kHSYHUDModelCodeTypeRequestPullDownSuccess) {
-            if (self.observeRefleshPullDown) {
-                self.observeRefleshPullDown(x);
-            }
+            //监听到statusCode下拉状态变更后，发送一个信后，让table格式或者collection格式的两个子类进行reloadData动作
+            [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess) : x}];
         }
     }];
 }
@@ -64,9 +63,8 @@
         //监听上拉刷新
         @strongify(self);
         if ([self requestStateCodeWithStateCode:x] == kHSYHUDModelCodeTypeRequestPullUpSuccess) {
-            if (self.observeRefleshPullUp) {
-                self.observeRefleshPullUp(x);
-            }
+            //监听到statusCode上拉状态变更后，发送一个信后，让table格式或者collection格式的两个子类进行reloadData动作
+            [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) : x}];
         }
     }];
 }

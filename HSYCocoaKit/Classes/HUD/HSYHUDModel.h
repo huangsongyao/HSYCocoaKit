@@ -24,6 +24,8 @@ typedef NS_ENUM(NSUInteger, kHSYHUDModelCodeType) {
     kHSYHUDModelCodeTypeRequestPullUpSuccess        = 7,        //http请求上拉加载更多成功
     kHSYHUDModelCodeTypeRequestPullDownSuccess      = 8,        //http请求下拉更新成功
     
+    kHSYHUDModelCodeTypeError                       = 9,        //失败后统一使用这个枚举作为回调
+    
 };
 
 @interface HSYHUDModel : NSObject

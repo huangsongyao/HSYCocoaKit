@@ -55,6 +55,7 @@
             return NO;
         }
         @strongify(self);
+        //加载成功后动态更新数据源信息，并设置当前的statusCode状态
         if (status == kHSYReflesStatusTypePullDown) {
             [self.datas removeAllObjects];
             self.datas = [result mutableCopy];

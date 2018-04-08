@@ -10,6 +10,24 @@
 #import "NSArray+RACSignal.h"
 #import "HSYHUDModel.h"
 
+typedef NS_ENUM(NSUInteger, kHSYCocoaKitRACSubjectOfNextType) {
+    
+    kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNative = 1993,         //js调用native
+    kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNativeForAlert,        //js触发alert、confirm、prompt等方法
+    kHSYCocoaKitRACSubjectOfNextTypeDidFinished,                        //web页面加载完成
+    kHSYCocoaKitRACSubjectOfNextTypeDidFailed,                          //web页面加载失败
+    
+    kHSYCocoaKitRACSubjectOfNextTypeTableViewDidSelectRow,              //tableView点击
+    kHSYCocoaKitRACSubjectOfNextTypeCollectionViewDidSelectRow,         //collectionView点击
+    
+    kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess,                    //下拉刷新成功
+    kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess,                      //上拉加载更多成功
+    
+    kHSYCocoaKitRACSubjectOfNextTypeRequestSuccess,                     //一般网络请求加载成功
+    kHSYCocoaKitRACSubjectOfNextTypeRequestFailure,                     //一般网络请求加载失败
+    
+};
+
 @interface HSYBaseModel : RVMViewModel
 
 @property (nonatomic, strong) NSMutableArray *datas;                    //数据源

@@ -11,7 +11,6 @@
 @interface HSYBaseCollectionViewController : HSYBaseRefleshViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, strong, readonly) UICollectionView *collectionView;
-@property (nonatomic, copy) void(^didSelectItemAtIndexPath)(NSIndexPath *indexPath, id object);
 
 @property (nonatomic, strong) NSValue *sectionInset;            //上下左右四边距
 @property (nonatomic, strong) NSValue *itemSize;                //item--size

@@ -24,9 +24,7 @@
     @weakify(self);
     [[RACObserve(self, self.viewModel.successStatusCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
         @strongify(self);
-        if (self.requestSuccess) {
-            self.requestSuccess(x);
-        }
+        [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypeRequestSuccess) : x}];
     }];
     //监听一般网络请求失败
     [[RACObserve(self, self.viewModel.errorStatusCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
@@ -42,9 +40,7 @@
             default:
                 break;
         }
-        if (self.requestFailure) {
-            self.requestFailure(x);
-        }
+        [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypeRequestFailure) : x}];
     }];
 }
 
@@ -58,18 +54,17 @@
         } else if (error.userInfo[NSLocalizedDescriptionKey]) {
             [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeWrong codeType:kHSYHUDModelCodeTypeDefault text:error.userInfo[NSLocalizedDescriptionKey] animationTime:HUD_HIDE_TIME ];
         }
-        return error.code;
+        return kHSYHUDModelCodeTypeError;
     } else if ([stateCode isKindOfClass:[HSYHUDModel class]]) {
         HSYHUDModel *model = (HSYHUDModel *)stateCode;
+        [HSYHUDHelper hideAllHUDView];//清除loading页面
         if (model.codeType == kHSYHUDModelCodeTypeUpdateLoading) {
-            [HSYHUDHelper hideAllHUDView];//清除loading页面
             if (model.showPromptContent) {
                 [HSYHUDHelper showHUDViewForShowType:model.showType text:model.hudString hideAfter:model.animationTime ];
             }
         } else if(model.codeType == kHSYHUDModelCodeTypeRequestSuccess) {
-            [HSYHUDHelper hideAllHUDView];//清除loading页面
+        
         } else if (model.codeType == kHSYHUDModelCodeTypeRequestFailure) {
-            [HSYHUDHelper hideAllHUDView];//清除loading页面
             if (model.showPromptContent) {
                 [HSYHUDHelper showHUDViewForShowType:model.showType text:model.hudString hideAfter:model.animationTime];
             }

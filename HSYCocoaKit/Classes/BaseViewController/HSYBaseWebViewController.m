@@ -63,6 +63,8 @@
     [self.view addSubview:self.webView];
 }
 
+#pragma mark - Native Run JS
+
 - (RACSignal *)nativeRunJavaScriptFunction:(NSString *)function
 {
     //native调用js
@@ -79,14 +81,19 @@
     }];
 }
 
-#pragma mark - WKScriptMessageHandler
+#pragma mark - WKScriptMessageHandler-----JS Run Native
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
     //js调用native
     NSString *messageName = message.name;
     if ([messageName isEqualToString:self.runNativeName]) {
-        [self.viewModel.subject sendNext:message.body];
+        if (message.body) {
+            NSDictionary *signal = @{
+                                     @(kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNative) : message.body,
+                                     };
+            [self.viewModel.subject sendNext:signal];
+        }
     }
 }
 
@@ -95,6 +102,12 @@
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
     //HTML或者js的alert、confirm、prompt方法调用时，直接触发此回调
+    if (message) {
+        NSDictionary *signal = @{
+                                 @(kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNativeForAlert) : message,
+                                 };
+        [self.viewModel.subject sendNext:signal];
+    }
 }
 
 #pragma mark - WKNavigationDelegate
@@ -102,11 +115,26 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
 {
     //web页面加载完毕
+    if (navigation) {
+        NSDictionary *signal = @{
+                                 @(kHSYCocoaKitRACSubjectOfNextTypeDidFinished) : navigation,
+                                 };
+        [self.viewModel.subject sendNext:signal];
+    }
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
     //web页面加载失败
+    if (navigation) {
+        NSDictionary *signal = @{
+                                 @(kHSYCocoaKitRACSubjectOfNextTypeDidFailed) : navigation,
+                                 };
+        [self.viewModel.subject sendNext:signal];
+    }
+    if (error) {
+        [self.viewModel.subject sendError:error];
+    }
 }
 
 @end
