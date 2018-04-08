@@ -19,6 +19,7 @@
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController params:(NSDictionary <NSNumber *, id>*)params
 {
     if (self = [super initWithRootViewController:rootViewController]) {
+        _banTransition = NO;
         _panGestureEndedProgress = (params[@(kHSYCustomNavigationControllerParamsKeyEndedProgress)] ? ([params[@(kHSYCustomNavigationControllerParamsKeyEndedProgress)] floatValue]) : 0.65);
         self.openTransitionAnimation = (params[@(kHSYCustomNavigationControllerParamsKeyOpenTransitionAnimation)] ? [params[@(kHSYCustomNavigationControllerParamsKeyOpenTransitionAnimation)] boolValue] : YES);
     }
@@ -102,6 +103,9 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
+    if (self.banTransition) {
+        return NO;
+    }
     return ((self.viewControllers.count > 1) ? YES : NO);
 }
 
