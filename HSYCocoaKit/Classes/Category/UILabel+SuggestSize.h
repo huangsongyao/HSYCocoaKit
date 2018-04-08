@@ -20,7 +20,11 @@
  @param height 最大显示高度，默认最大高度
  @return UILabel
  */
-+ (UILabel *)initWithText:(NSString *)text numberOfLines:(NSInteger)numberOfLines font:(UIFont *)font maxWidth:(CGFloat)width maxHeight:(CGFloat)height;
++ (UILabel *)initWithText:(NSString *)text
+            numberOfLines:(NSInteger)numberOfLines
+                     font:(UIFont *)font
+                 maxWidth:(CGFloat)width
+                maxHeight:(CGFloat)height;
 
 /**
  创建自动算高的标签，行数为最大显示行数，即：numberOfLines == 0
@@ -31,7 +35,10 @@
  @param height 最大显示高度，默认最大高度
  @return UILabel
  */
-+ (UILabel *)initWithText:(NSString *)text font:(UIFont *)font maxWidth:(CGFloat)width maxHeight:(CGFloat)height;
++ (UILabel *)initWithText:(NSString *)text
+                     font:(UIFont *)font
+                 maxWidth:(CGFloat)width
+                maxHeight:(CGFloat)height;
 
 /**
  创建自动算高的标签，行数为1
@@ -42,6 +49,9 @@
  @param height 最大显示高度，默认最大高度
  @return UILabel
  */
-+ (UILabel *)initWithUnilineText:(NSString *)text font:(UIFont *)font maxWidth:(CGFloat)width maxHeight:(CGFloat)height;
++ (UILabel *)initWithUnilineText:(NSString *)text
+                            font:(UIFont *)font
+                        maxWidth:(CGFloat)width
+                       maxHeight:(CGFloat)height;
 
 @end

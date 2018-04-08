@@ -104,7 +104,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypeCollectionViewDidSelectRow) : indexPath}];
+    HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeCollectionViewDidSelectRow subscribeContents:@[indexPath]];
+    [self.viewModel.subject sendNext:object];
 }
 
 #pragma mark - For Value

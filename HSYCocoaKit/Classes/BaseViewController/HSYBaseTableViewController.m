@@ -87,7 +87,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypeTableViewDidSelectRow) : indexPath}];
+    HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeTableViewDidSelectRow subscribeContents:@[indexPath]];
+    [self.viewModel.subject sendNext:object];
 }
 
 @end

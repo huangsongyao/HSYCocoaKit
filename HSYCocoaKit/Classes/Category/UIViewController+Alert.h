@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIAlertView+RACSignal.h"
+#import "UIActionSheet+RACSignal.h"
 
 @interface UIViewController (Alert)
 

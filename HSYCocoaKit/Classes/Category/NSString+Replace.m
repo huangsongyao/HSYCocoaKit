@@ -10,7 +10,7 @@
 
 @implementation NSString (Replace)
 
-- (NSMutableArray <NSValue *>*)allSymbolLocations:(NSString *)symbol
+- (NSMutableArray<NSValue *> *)allSymbolLocations:(NSString *)symbol
 {
     if (!symbol || symbol.length == 0 || self.length == 0) {
         return nil;

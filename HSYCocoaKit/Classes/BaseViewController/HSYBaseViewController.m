@@ -9,8 +9,19 @@
 #import "HSYBaseViewController.h"
 #import "NSError+Message.h"
 #import "PublicMacroFile.h"
+#import "UIView+Frame.h"
+
+#define DEFAULT_NAVIGATION_BAR_HEIGHT           64.0f
 
 @implementation HSYBaseViewController
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _addKeyboardObserver = NO;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -24,24 +35,33 @@
     @weakify(self);
     [[RACObserve(self, self.viewModel.successStatusCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
         @strongify(self);
-        [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypeRequestSuccess) : x}];
+        if (x) {
+            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeRequestSuccess subscribeContents:@[x]];
+            [self.viewModel.subject sendNext:object];
+        }
     }];
     //监听一般网络请求失败
     [[RACObserve(self, self.viewModel.errorStatusCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
         @strongify(self);
-        switch ([self requestStateCodeWithStateCode:x]) {
-            case kHSYHUDModelCodeTypeRequestFailure:
-                [HSYHUDHelper showHUDViewForMessage:HSYLOCALIZED(@"请求失败，请稍后再试")];
-                break;
-            case kHSYHUDModelCodeTypeSaveFileFailure:
-                [HSYHUDHelper showHUDViewForMessage:HSYLOCALIZED(@"上传失败，请稍后再试")];
-                break;
-                
-            default:
-                break;
+        if (x) {
+            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeRequestFailure subscribeContents:@[x]];
+            [self.viewModel.subject sendNext:object];
         }
-        [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypeRequestFailure) : x}];
     }];
+    if (self.addKeyboardObserver) {
+        //键盘监听
+        [self observerToKeyboardDidChange:nil subscribeCompleted:^(CGRect frameBegin, CGRect frameEnd) {
+            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeObserverKeyboard subscribeContents:@[[NSValue valueWithCGRect:frameBegin], [NSValue valueWithCGRect:frameEnd]]];
+            [self.viewModel.subject sendNext:object];
+        }];
+    }
+    //如果开启了自定义转场，则添加定制化的navigationBar
+    if (self.navigationController && [self.navigationController isKindOfClass:[HSYBaseCustomNavigationController class]]) {
+        HSYBaseCustomNavigationController *nav = (HSYBaseCustomNavigationController *)self.navigationController;
+        if (nav.openTransitionAnimation) {
+            [self addCustomNavigationBar];
+        }
+    }
 }
 
 - (kHSYHUDModelCodeType)requestStateCodeWithStateCode:(id)stateCode
@@ -77,5 +97,29 @@
     }
     return kHSYHUDModelCodeTypeDefault;
 }
+
+#pragma mark - NavigationBar
+
+- (void)addCustomNavigationBar
+{
+    _customNavigationBar = [[HSYCustomNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, DEFAULT_NAVIGATION_BAR_HEIGHT)];
+    [self.view addSubview:self.customNavigationBar];
+    if (self.navigationController.viewControllers.count > 1) {
+        [self pushNavigationItemInLeft];
+    }
+}
+
+- (void)pushNavigationItemInLeft
+{
+    @weakify(self);
+    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar backButtonItem:^(UIButton *button, kHSYCustomBarButtonItemTag tag) {
+        @strongify(self);
+        if (tag == kHSYCustomBarButtonItemTagBack) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
+    self.customNavigationBar.customNavigationItem.leftBarButtonItems = @[backButtonItem];
+}
+
 
 @end

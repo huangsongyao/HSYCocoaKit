@@ -19,7 +19,9 @@
  *
  *  @return NSAttributedString
  */
-+ (NSMutableAttributedString *)setLabelRTFAttributedDic:(NSDictionary *)attributedDic attributedString:(NSString *)attributedString range:(NSRange)range;
++ (NSMutableAttributedString *)setLabelRTFAttributedDic:(NSDictionary *)attributedDic
+                                       attributedString:(NSString *)attributedString
+                                                  range:(NSRange)range;
 
 
 @end

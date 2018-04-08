@@ -119,7 +119,7 @@
             if (next) {
                 BOOL requestSuccessCode = next(jsonModel);
                 if (requestSuccessCode) {
-                    self.successStatusCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestSuccess];
+                    self.successStatusCode = jsonModel;
                 }
             }
         } error:error];

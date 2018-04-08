@@ -7,7 +7,8 @@
 //
 
 @import UIKit;
+#import "HSYBaseViewController.h"
 
-@interface HSYViewController : UIViewController
+@interface HSYViewController : HSYBaseViewController
 
 @end

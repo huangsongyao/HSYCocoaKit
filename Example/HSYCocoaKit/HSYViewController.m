@@ -9,8 +9,6 @@
 #import "HSYViewController.h"
 #import "HSYViewControllerModel.h"
 
-
-
 @interface TestModel : NSObject
 
 @property (nonatomic, strong) NSString *test_1;
@@ -28,17 +26,18 @@
 
 @interface HSYViewController ()
 
-@property (nonatomic, strong) HSYViewControllerModel *viewModel;
-
 @end
 
 @implementation HSYViewController
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
     self.viewModel = [[HSYViewControllerModel alloc] init];
+    [super viewDidLoad];
+    [self.viewModel.subject subscribeNext:^(HSYCocoaKitRACSubscribeNotification *notification) {
+        NSLog(@"j_model = %@", [(HSYViewControllerModel *)self.viewModel j_model]);
+        NSLog(@"%lu", (unsigned long)notification.subscribeType);
+    }];
     
     NSLog(@"%@", [NSDate nextDay]);//stringyyyyMMddHHmmssFromDateByTimestamp
     NSLog(@"%@", [NSDate stringyyyyMMddHHmmssFromDateByTimestamp:@(1503975304000)]);
@@ -67,6 +66,7 @@
                            };
     
     id object = [NSObject objectRuntimeValues:iccc classes:[TestModel class]];
+    NSLog(@"id - object = %@", object);
     NSMutableDictionary *dic = [test toRuntimeMutableDictionary];
     NSLog(@"dic = %@", dic);
     

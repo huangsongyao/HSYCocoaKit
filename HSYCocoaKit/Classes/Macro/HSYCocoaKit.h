@@ -14,6 +14,7 @@
 #import "HSYBaseRefleshModel.h"
 #import "HSYBaseTableModel.h"
 #import "HSYBaseWebModel.h"
+#import "HSYCocoaKitRACSubscribeNotification.h"
 #import "HSYBaseCollectionViewController.h"
 #import "HSYBaseRefleshViewController.h"
 #import "HSYBaseTableViewController.h"
@@ -39,12 +40,6 @@
 #import "UIViewController+Device.h"
 #import "UIViewController+Keyboard.h"
 #import "UIViewController+NavigationItem.h"
-#import "HSYBaseCustomTransitionAnimation.h"
-#import "HSYCustomPopTransitionAnimation.h"
-#import "HSYCustomPushTransitionAnimation.h"
-#import "HSYNavigationController.h"
-#import "NSObject+Context.h"
-#import "NSObject+Transition.h"
 #import "UIViewController+Shadow.h"
 #import "FMResultSet+Model.h"
 #import "HSYFMDBMacro.h"
@@ -76,5 +71,6 @@
 #import "RACSignal+Timer.h"
 #import "UIActionSheet+RACSignal.h"
 #import "UIAlertView+RACSignal.h"
+
 
 #endif /* HSYCocoaKit_h */

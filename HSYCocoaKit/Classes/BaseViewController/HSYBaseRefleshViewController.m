@@ -58,7 +58,8 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
         @strongify(self);
         if ([self requestStateCodeWithStateCode:x] == kHSYHUDModelCodeTypeRequestPullDownSuccess) {
             //监听到statusCode下拉状态变更后，发送一个信后，让table格式或者collection格式的两个子类进行reloadData动作
-            [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess) : x}];
+            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess subscribeContents:@[x]];
+            [self.viewModel.subject sendNext:object];
         }
     }];
 }
@@ -71,7 +72,8 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
         @strongify(self);
         if ([self requestStateCodeWithStateCode:x] == kHSYHUDModelCodeTypeRequestPullUpSuccess) {
             //监听到statusCode上拉状态变更后，发送一个信后，让table格式或者collection格式的两个子类进行reloadData动作
-            [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) : x}];
+            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess subscribeContents:@[x]];
+            [self.viewModel.subject sendNext:object];
         }
     }];
 }
@@ -90,7 +92,8 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
     @weakify(self);
     [scrollView addPullToRefreshWithLoadingView:self.pullDownView subscribeActionHandler:^{
         @strongify(self);
-        [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypePerformPullDown) : kHSYCocoaKitRefreshPullDownStatusKey}];
+        HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePerformPullDown subscribeContents:@[kHSYCocoaKitRefreshPullDownStatusKey]];
+        [self.viewModel.subject sendNext:object];
     }];
 }
 
@@ -100,7 +103,8 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
     @weakify(self);
     [scrollView addInfiniteScrollingWithLoadingView:self.pullUpView subscribeActionHandler:^{
         @strongify(self);
-        [self.viewModel.subject sendNext:@{@(kHSYCocoaKitRACSubjectOfNextTypePerformPullUp) : kHSYCocoaKitRefreshStatusPullUpKey}];
+        HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePerformPullUp subscribeContents:@[kHSYCocoaKitRefreshStatusPullUpKey]];
+        [self.viewModel.subject sendNext:object];
     }];
 }
 

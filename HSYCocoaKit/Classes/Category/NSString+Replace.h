@@ -16,7 +16,7 @@
  @param symbol 占位符
  @return 占位符的位置的集合
  */
-- (NSMutableArray <NSValue *>*)allSymbolLocations:(NSString *)symbol;
+- (NSMutableArray<NSValue *> *)allSymbolLocations:(NSString *)symbol;
 
 /**
  过滤字符串中的unicode表情

@@ -89,10 +89,8 @@
     NSString *messageName = message.name;
     if ([messageName isEqualToString:self.runNativeName]) {
         if (message.body) {
-            NSDictionary *signal = @{
-                                     @(kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNative) : message.body,
-                                     };
-            [self.viewModel.subject sendNext:signal];
+            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNative subscribeContents:@[message.body]];
+            [self.viewModel.subject sendNext:object];
         }
     }
 }
@@ -103,10 +101,8 @@
 {
     //HTML或者js的alert、confirm、prompt方法调用时，直接触发此回调
     if (message) {
-        NSDictionary *signal = @{
-                                 @(kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNativeForAlert) : message,
-                                 };
-        [self.viewModel.subject sendNext:signal];
+        HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNativeForAlert subscribeContents:@[message]];
+        [self.viewModel.subject sendNext:object];
     }
 }
 
@@ -116,10 +112,8 @@
 {
     //web页面加载完毕
     if (navigation) {
-        NSDictionary *signal = @{
-                                 @(kHSYCocoaKitRACSubjectOfNextTypeDidFinished) : navigation,
-                                 };
-        [self.viewModel.subject sendNext:signal];
+        HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeDidFinished subscribeContents:@[navigation]];
+        [self.viewModel.subject sendNext:object];
     }
 }
 
@@ -127,10 +121,8 @@
 {
     //web页面加载失败
     if (navigation) {
-        NSDictionary *signal = @{
-                                 @(kHSYCocoaKitRACSubjectOfNextTypeDidFailed) : navigation,
-                                 };
-        [self.viewModel.subject sendNext:signal];
+        HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeDidFailed subscribeContents:@[navigation]];
+        [self.viewModel.subject sendNext:object];
     }
     if (error) {
         [self.viewModel.subject sendError:error];
