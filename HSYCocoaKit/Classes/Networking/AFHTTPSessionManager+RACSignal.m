@@ -10,13 +10,6 @@
 #import "NetworkingRequestPathFile.h"
 #import "HSYNetWorkingManager.h"
 
-typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
-    
-    kHSYCocoaKitNetworkingRequestModel_get,
-    kHSYCocoaKitNetworkingRequestModel_post,
-    
-};
-
 @implementation AFHTTPSessionManager (RACSignal)
 
 #pragma mark - Get & Post Request
@@ -170,6 +163,18 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
     } else {
         NSLog(@"\n request task : %@ \n", task);
     }
+}
+
+#pragma mark - HTTPMethod
+
++ (NSString *)methodFromNetworkingRequestModel:(kHSYCocoaKitNetworkingRequestModel)model
+{
+    if (model == kHSYCocoaKitNetworkingRequestModel_get) {
+        return @"GET";
+    } else if (model == kHSYCocoaKitNetworkingRequestModel_post) {
+        return @"POST";
+    }
+    return nil;
 }
 
 @end

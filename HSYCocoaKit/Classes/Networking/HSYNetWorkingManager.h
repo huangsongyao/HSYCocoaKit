@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import "AFHTTPSessionManager+RACSignal.h"
 #import "AFURLSessionManager+RACSignal.h"
 
 @interface HSYNetWorkingManager : NSObject
@@ -20,9 +19,9 @@
 + (instancetype)shareInstance;
 
 /**
- *  监听当前网络状态
+ *  监听当前网络状态，检测结果为有网时发送completed信号，并结束，不会返回当前网络状态，如果需要获取具体网络状态，请使用“- observer_3x_NetworkReachabilityOfNext:”方法
  *
- *  @return 网络状态的信号
+ *  @return 网络状态的信号，有网络返回completed信号，无则返回error信号
  */
 - (RACSignal *)networking_3x_Reachability;
 
@@ -35,7 +34,7 @@
 + (NSString *)urlFromPath:(NSString *)path;
 
 /**
- 网络监听
+ 网络监听，有无网络均会从next的block进行回调，并且，允许设置该网络监听是否持续存在
  
  @param next 网络状态回调，如果需要持续对网络状态进行监听，则在block中返回NO
  */

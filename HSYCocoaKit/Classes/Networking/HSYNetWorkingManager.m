@@ -65,7 +65,6 @@ static HSYNetWorkingManager *networkingManager;
         AFNetworkReachabilityManager *networkStatusManager = [AFNetworkReachabilityManager sharedManager];
         [networkStatusManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
             if (status != AFNetworkReachabilityStatusNotReachable) {
-                [subscriber sendNext:@(status)]; //发送当前网络类型，WAN/WIFI/Unknown
                 [subscriber sendCompleted];
             } else {
                 [subscriber sendError:[NSError errorWithErrorType:kAFNetworkingStatusErrorTypeNone]];
