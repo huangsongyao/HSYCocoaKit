@@ -36,7 +36,7 @@
         return nil;
     }
     
-    id jsonObject = [NSString resolveToJsonObject:json];
+    id jsonObject = [NSString toJSONObject:json];
     return [self resolveToModelForJsonObject:jsonObject classes:classes];
 }
 
@@ -52,7 +52,7 @@
     if (!jsonString) {
         return nil;
     }
-    id jsonObject = [NSString convertJsonStringToJSONObjectFromJsonString:jsonString];
+    id jsonObject = [NSString jsonStringToJSON:jsonString];
     return [self resolveToModelForJsonObject:jsonObject classes:classes];
 }
 

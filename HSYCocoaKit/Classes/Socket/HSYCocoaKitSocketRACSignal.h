@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ReactiveCocoa.h"
+#import "NSObject+JSONObjc.h"
 
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitSocketConnectStatus) {
     
@@ -33,5 +34,20 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitSocketRACDelegate) {
 @property (nonatomic, assign, readonly) kHSYCocoaKitSocketRACDelegate rac_delegate;
 
 - (instancetype)initWithTuple:(RACTuple *)tuple rac_delegateType:(kHSYCocoaKitSocketRACDelegate)type;
+
+/**
+ json字符串转data
+
+ @param jsonString json字符串
+ @return data
+ */
++ (NSData *)writeData:(NSString *)jsonString;
+
+/**
+ 将tuple中的data转json
+
+ @return json
+ */
+- (id)toJSONReponse;
 
 @end

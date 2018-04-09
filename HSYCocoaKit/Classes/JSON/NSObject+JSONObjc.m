@@ -7,33 +7,25 @@
 //
 
 #import "NSObject+JSONObjc.h"
-#import "NSObject+JSONWriting.h"
-#import "NSString+JSONParsing.h"
 
 @implementation NSObject (JSONObjc)
 
-+ (NSString *)convertJsonToStringFromJSONObject:(id)object
++ (NSString *)jsonToJSONString:(id)object
 {
-    if (!object) {
-        return nil;
-    }
     NSString *jsonString = [object JSONRepresentation];
     return jsonString;
 }
 
-+ (id)convertJsonStringToJSONObjectFromJsonString:(NSString *)jsonString
++ (id)jsonStringToJSON:(NSString *)jsonString
 {
-    if (!jsonString) {
-        return nil;
-    }
-    NSDictionary *dic = jsonString.value;
-    return dic;
+    NSDictionary *json = [jsonString value];
+    return json;
 }
 
-+ (id)resolveToJsonObject:(id)json
++ (id)toJSONObject:(id)json
 {
-    NSString *responseString = [self convertJsonToStringFromJSONObject:json];
-    id jsonObject = [self convertJsonStringToJSONObjectFromJsonString:responseString];
+    NSString *jsonString = [self.class jsonToJSONString:json];
+    id jsonObject = [self.class jsonStringToJSON:jsonString];
     return jsonObject;
 }
 

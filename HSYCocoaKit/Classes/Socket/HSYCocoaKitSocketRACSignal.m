@@ -19,4 +19,21 @@
     return self;
 }
 
++ (NSData *)writeData:(NSString *)jsonString
+{
+    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    return data;
+}
+
+- (id)toJSONReponse
+{
+    id second = self.tuple.second;
+    if ([second isKindOfClass:[NSData class]]) {
+        NSData *data = (NSData *)second;
+        id json = [NSObject toJSONObject:data];
+        return json;
+    }
+    return nil;
+}
+
 @end

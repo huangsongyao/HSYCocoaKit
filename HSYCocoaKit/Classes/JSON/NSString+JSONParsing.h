@@ -10,7 +10,18 @@
 
 @interface NSString (JSONParsing)
 
+/**
+ json字符串转json对象
+
+ @return json对象
+ */
 - (id)JSONValue;
+
+/**
+ json字符串转字典
+
+ @return json字典
+ */
 - (NSDictionary *)value;
 
 @end

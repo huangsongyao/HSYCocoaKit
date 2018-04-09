@@ -14,7 +14,6 @@
 #define DEFAULT_SOCKET_WRITE_TIME               10.0f
 
 NSString *const HSYCocoaKitSocketConnectStatusNotification = @"HSYCocoaKitSocketConnectStatusNotification";
-NSString *const HSYCocoaKitSocketNotNetworkStatusNotification = @"HSYCocoaKitSocketNotNetworkStatusNotification";
 
 static NSInteger connectAgainCount = 0;
 
@@ -23,6 +22,8 @@ static HSYCocoaKitSocketManager *socketManager;
 @interface HSYCocoaKitSocketManager () <GCDAsyncSocketDelegate>
 
 @property (nonatomic, strong, readonly) GCDAsyncSocket *tcpSocket;
+@property (nonatomic, strong, readonly) RACSignal *socketDelegateSignal;
+@property (nonatomic, strong, readonly) RACSubject *delegateSubject;
 @property (nonatomic, strong) NSNumber *observerSockectConnect;
 
 @end
@@ -105,12 +106,29 @@ static HSYCocoaKitSocketManager *socketManager;
 
 #pragma mark - Connect && DisConnect
 
-- (void)connectServer:(NSString *)host onPort:(uint16_t)port
+- (RACSignal *)connectServer:(NSString *)host onPort:(uint16_t)port
 {
     _connectHost = host;
     _connectPort = port;
+    @weakify(self);
+    RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self connect:self.connectHost onPort:self.connectPort errorBlock:^(NSError *error) {
+            [subscriber sendError:error];
+            [subscriber sendCompleted];
+        }];
+        return [RACDisposable disposableWithBlock:^{}];
+    }];
+    [signal subscribe:self.delegateSubject];
+    return signal;
+}
+
+- (void)connect:(NSString *)host onPort:(uint16_t)port errorBlock:(void(^)(NSError *error))block
+{
     [[HSYNetWorkingManager shareInstance] observer_3x_NetworkReachabilityOfNext:^BOOL(AFNetworkReachabilityStatus status, BOOL hasNetwork) {
-        if (hasNetwork) {
+        if (!hasNetwork && block) {
+            block([NSError errorWithErrorType:kAFNetworkingStatusErrorTypeNone]);
+        } else {
             NSError *error = nil;
             BOOL connect = [self.tcpSocket connectToHost:host
                                                   onPort:port
@@ -119,9 +137,6 @@ static HSYCocoaKitSocketManager *socketManager;
             if (error) {
                 NSLog(@"connect error = %@, connect = %d", error, connect);
             }
-        } else {
-            //无网络状态下发送一个通知，告诉外部
-            [[NSNotificationCenter defaultCenter] postNotificationName:HSYCocoaKitSocketNotNetworkStatusNotification object:[NSError errorWithErrorType:kAFNetworkingStatusErrorTypeNone]];
         }
         return YES;
     }];
@@ -129,7 +144,7 @@ static HSYCocoaKitSocketManager *socketManager;
 
 - (void)disConnect
 {
-    if (self.tcpSocket) {
+    if (self.tcpSocket && [self.tcpSocket isConnected]) {
         [self setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_AccordDisConnected];
         [self.tcpSocket disconnect];
     }

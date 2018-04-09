@@ -10,6 +10,11 @@
 
 @interface NSObject (JSONWriting)
 
+/**
+ json对象转json字符串
+
+ @return json字符串
+ */
 - (NSString *)JSONRepresentation;
 
 @end
