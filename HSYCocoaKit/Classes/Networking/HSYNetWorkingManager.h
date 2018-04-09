@@ -13,8 +13,8 @@
 
 @interface HSYNetWorkingManager : NSObject
 
-@property (nonatomic, strong, readonly) AFHTTPSessionManager *httpSessionManager;               //>=3.0f version
-@property (nonatomic, strong, readonly) AFURLSessionManager *fileSessionManager;                //>=3.0f version
+@property (nonatomic, strong, readonly) AFHTTPSessionManager *httpSessionManager;               //>=3.0f version，一般网络请求
+@property (nonatomic, strong, readonly) AFURLSessionManager *fileSessionManager;                //>=3.0f version，文件上传或者下载请求
 
 + (instancetype)shareInstance;
 
