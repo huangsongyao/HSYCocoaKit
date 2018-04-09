@@ -31,6 +31,7 @@
 #import "UIApplication+Device.h"
 #import "UIColor+Hex.h"
 #import "UIImage+Canvas.h"
+#import "UIImageView+UrlString.h"
 #import "UILabel+AttributedString.h"
 #import "UILabel+SuggestSize.h"
 #import "UINavigationBar+Background.h"
@@ -64,19 +65,22 @@
 #import "NetworkingRequestPathFile.h"
 #import "PublicMacroFile.h"
 #import "AFHTTPSessionManager+RACSignal.h"
+#import "AFURLSessionManager+RACSignal.h"
 #import "HSYNetWorkingManager.h"
 #import "NSError+Message.h"
 #import "HSYCustomRefreshView.h"
 #import "SVPullToRefresh.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
 #import "UIScrollView+SVPullToRefresh.h"
+#import "HSYCocoaKitManager.h"
 #import "NSArray+RACSignal.h"
 #import "NSDictionary+RACSignal.h"
 #import "NSMapTable+RACSignal.h"
 #import "RACSignal+Timer.h"
 #import "UIActionSheet+RACSignal.h"
+#import "UIAlertController+RACSignal.h"
 #import "UIAlertView+RACSignal.h"
-
+#import "HSYCocoaKitSocketManager.h"
 
 
 

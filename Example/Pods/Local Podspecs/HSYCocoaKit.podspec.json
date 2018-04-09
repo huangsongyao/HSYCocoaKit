@@ -1,6 +1,6 @@
 {
   "name": "HSYCocoaKit",
-  "version": "0.2.4",
+  "version": "0.2.6",
   "summary": "A short description of HSYCocoaKit.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/huangsongyao/HSYCocoaKit",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/huangsongyao/HSYCocoaKit.git",
-    "tag": "0.2.4"
+    "tag": "0.2.6"
   },
   "platforms": {
     "ios": "8.0"
@@ -63,6 +63,12 @@
     ],
     "UITableView+FDTemplateLayoutCell": [
       "~> 1.6"
+    ],
+    "CocoaAsyncSocket": [
+      "~> 7.6.3"
+    ],
+    "lottie-ios": [
+      "~> 2.5.0"
     ]
   }
 }

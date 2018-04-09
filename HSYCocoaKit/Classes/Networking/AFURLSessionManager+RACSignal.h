@@ -6,8 +6,6 @@
 //
 //
 
-#import <AFNetworking/AFNetworking.h>
-#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "AFHTTPSessionManager+RACSignal.h"
 
 @interface AFURLSessionManager (RACSignal)
