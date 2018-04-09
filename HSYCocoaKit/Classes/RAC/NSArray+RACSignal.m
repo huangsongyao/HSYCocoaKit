@@ -15,32 +15,20 @@
     if (self.count == 0) {
         return nil;
     }
-    static NSInteger index = -1;
-    
     @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        
         if (self.count == 0) {
-            
             [subscriber sendCompleted];
         } else {
             @strongify(self);
             [[self.rac_sequence.signal deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
-                
-                ++ index;
-                [subscriber sendNext:@{
-                                       @(index) : x,
-                                       }];
-                
+                @strongify(self);
+                [subscriber sendNext:@{@([self indexOfObject:x]) : x,}];
             } completed:^{
                 [subscriber sendCompleted];
-                index = -1;
             }];
         }
-        
-        return [RACDisposable disposableWithBlock:^{
-            
-        }];
+        return [RACDisposable disposableWithBlock:^{}];
     }];
 }
 
@@ -70,7 +58,6 @@
 - (void)rac_filterUntilCompleted:(BOOL(^)(id predicate))completed toMap:(id(^)(id value))map subscribeNext:(void(^)(id x))next
 {
     [self rac_filterUntilCompleted:completed toMap:map subscribeNext:next overFilter:^{
-        
     }];
 }
 

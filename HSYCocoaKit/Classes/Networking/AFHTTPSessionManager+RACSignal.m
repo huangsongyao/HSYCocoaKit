@@ -195,6 +195,41 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
     }];
 }
 
+#pragma mark - Upload
+
++ (RACSignal *)uploadFileRequestUrl:(NSURL *)url
+                           filePath:(NSString *)path
+                 completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress))progress
+{
+    NSParameterAssert(url);
+    NSParameterAssert(path);
+    return [[[HSYNetWorkingManager shareInstance] networking_3x_Reachability] then:^RACSignal *{
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURL *pathURL = [NSURL fileURLWithPath:path];
+            NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:pathURL progress:^(NSProgress * _Nonnull uploadProgress) {
+                if (progress) {
+                    CGFloat fractionCompleted = MIN((uploadProgress.fractionCompleted * 100), 1.0f);
+                    progress(uploadProgress, fractionCompleted);
+                }
+            } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                if (error) {
+                    [subscriber sendError:error];
+                } else {
+                    RACTuple *tuple = RACTuplePack(response, responseObject);
+                    [subscriber sendNext:tuple];
+                    [subscriber sendCompleted];
+                }
+            }];
+            [uploadTask resume];
+            return [RACDisposable disposableWithBlock:^{
+                [uploadTask cancel];
+            }];
+        }];
+    }];
+}
+
 #pragma mark - Logs
 
 + (void)logRequestError:(NSError *)error

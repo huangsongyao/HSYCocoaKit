@@ -35,18 +35,14 @@
 - (void)rac_traverseDictionaryForSubscribeNext:(void(^)(id key, id value))next traverseCompleted:(void(^)())completed
 {
     [[self.rac_sequence.signal deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
-        
         RACTupleUnpack(id key, id value) = tuple;
         if (next) {
             next(key, value);
         }
-        
     } completed:^{
-        
         if (completed) {
             completed();
         }
-        
     }];
 }
 
