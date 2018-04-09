@@ -81,6 +81,7 @@
 #import "UIActionSheet+RACSignal.h"
 #import "UIAlertController+RACSignal.h"
 #import "UIAlertView+RACSignal.h"
+#import "GCDAsyncSocket+RACSignal.h"
 #import "HSYCocoaKitSocketManager.h"
 
 FOUNDATION_EXPORT double HSYCocoaKitVersionNumber;
