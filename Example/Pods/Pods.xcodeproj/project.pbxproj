@@ -401,6 +401,8 @@
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E180E3DB54E0C2EC94817CF7CE8DA65 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEECCAED207A29980041BA52 /* UIAlertController+RACSignal.h in Headers */ = {isa = PBXBuildFile; fileRef = AEECCAEB207A29980041BA52 /* UIAlertController+RACSignal.h */; };
 		AEECCAEE207A29980041BA52 /* UIAlertController+RACSignal.m in Sources */ = {isa = PBXBuildFile; fileRef = AEECCAEC207A29980041BA52 /* UIAlertController+RACSignal.m */; };
+		AEECCAF1207B05040041BA52 /* AFURLSessionManager+RACSignal.h in Headers */ = {isa = PBXBuildFile; fileRef = AEECCAEF207B05040041BA52 /* AFURLSessionManager+RACSignal.h */; };
+		AEECCAF2207B05040041BA52 /* AFURLSessionManager+RACSignal.m in Sources */ = {isa = PBXBuildFile; fileRef = AEECCAF0207B05040041BA52 /* AFURLSessionManager+RACSignal.m */; };
 		AFF2AAA963FBFD1BA8440CFEF1C64D64 /* HSYHUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D085BDA2EABEE257E07751B7FEAD7 /* HSYHUDHelper.m */; };
 		B091DF67C87B3EAB4E1C48E6B371E282 /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = A4BA4CB5E397A608AEF7FDB8E3BA3E30 /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B148F2B101A68E8E2EF188F8921E2581 /* RACMulticastConnection+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A0AD8E8E282616792C03640B831CC51 /* RACMulticastConnection+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -1259,6 +1261,8 @@
 		AECC5D77E6AA0F50F71A46D42DF6DA2E /* Masonry-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-umbrella.h"; sourceTree = "<group>"; };
 		AEECCAEB207A29980041BA52 /* UIAlertController+RACSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+RACSignal.h"; sourceTree = "<group>"; };
 		AEECCAEC207A29980041BA52 /* UIAlertController+RACSignal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+RACSignal.m"; sourceTree = "<group>"; };
+		AEECCAEF207B05040041BA52 /* AFURLSessionManager+RACSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFURLSessionManager+RACSignal.h"; sourceTree = "<group>"; };
+		AEECCAF0207B05040041BA52 /* AFURLSessionManager+RACSignal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFURLSessionManager+RACSignal.m"; sourceTree = "<group>"; };
 		B09BA8B04755E0BF07CD7EF9E150DED7 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
 		B183684BDBE17082D8441E3A077B27D7 /* FMResultSet+Model.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMResultSet+Model.h"; sourceTree = "<group>"; };
 		B1D1DD2CCDEA7F9387B367B2BBC7FF5E /* RACGroupedSignal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACGroupedSignal.m; path = ReactiveCocoa/RACGroupedSignal.m; sourceTree = "<group>"; };
@@ -1996,10 +2000,12 @@
 			children = (
 				E1B31FA841836C9689B8D0E15664B45A /* AFHTTPSessionManager+RACSignal.h */,
 				73DE2F6C089AF0697536B02E3AB5381D /* AFHTTPSessionManager+RACSignal.m */,
-				FA119A69D5145B4ABFD842CC90B25964 /* HSYNetWorkingManager.h */,
-				83C68CE9EEEBD27E33DCA7B038E9174B /* HSYNetWorkingManager.m */,
+				AEECCAEF207B05040041BA52 /* AFURLSessionManager+RACSignal.h */,
+				AEECCAF0207B05040041BA52 /* AFURLSessionManager+RACSignal.m */,
 				3DB5B7837B1C4EC9632C14538E11F2A4 /* NSError+Message.h */,
 				08B998A17311FD39FB420AAB5C758F96 /* NSError+Message.m */,
+				FA119A69D5145B4ABFD842CC90B25964 /* HSYNetWorkingManager.h */,
+				83C68CE9EEEBD27E33DCA7B038E9174B /* HSYNetWorkingManager.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -3086,6 +3092,7 @@
 				D058BED917BFB4156AC43D7A023297B6 /* HSYBaseWebModel.h in Headers */,
 				1A8FE636307F83ED3D501F34826B7B48 /* HSYBaseWebViewController.h in Headers */,
 				DC5363D020578C3D6A0239556BED5F94 /* HSYCocoaKit-umbrella.h in Headers */,
+				AEECCAF1207B05040041BA52 /* AFURLSessionManager+RACSignal.h in Headers */,
 				6C9BC7E35F2D748CF27DE49FA2C1B716 /* HSYCocoaKit.h in Headers */,
 				17FDDCAAA87E6DB2AB41F2C24A4DB55D /* HSYCocoaKitRACSubscribeNotification.h in Headers */,
 				FB41DEC2485D2AE5FB5773D78E9A94AA /* HSYCustomBaseTransitionAnimation.h in Headers */,
@@ -3892,6 +3899,7 @@
 				CF33CCBDE52D167C751AAC692661C03B /* RACSignal+Timer.m in Sources */,
 				7D49D244703685E9DEB42EB5615C5C06 /* UIActionSheet+RACSignal.m in Sources */,
 				ED542AB9378EEF149AC172C3ACBEAA93 /* UIAlertView+RACSignal.m in Sources */,
+				AEECCAF2207B05040041BA52 /* AFURLSessionManager+RACSignal.m in Sources */,
 				39684CA35823FF4A53D3D02F3ED45ABA /* UIApplication+Device.m in Sources */,
 				0438372E0DE72E3351A71143694D04EC /* UIColor+Hex.m in Sources */,
 				61FF17A2DFE518352CBF1E256E8F923B /* UIImage+Canvas.m in Sources */,

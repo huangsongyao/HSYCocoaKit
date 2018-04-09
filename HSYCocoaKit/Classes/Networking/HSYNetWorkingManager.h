@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import "AFHTTPSessionManager+RACSignal.h"
+#import "AFURLSessionManager+RACSignal.h"
 
 @interface HSYNetWorkingManager : NSObject
 
-@property (nonatomic, strong, readonly) AFHTTPSessionManager *httpSessionManager;             //>=3.0f version
+@property (nonatomic, strong, readonly) AFHTTPSessionManager *httpSessionManager;               //>=3.0f version
+@property (nonatomic, strong, readonly) AFURLSessionManager *fileSessionManager;                //>=3.0f version
 
 + (instancetype)shareInstance;
 

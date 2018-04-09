@@ -33,6 +33,7 @@ static HSYNetWorkingManager *networkingManager;
 {
     if (self = [super init]) {
         _httpSessionManager = [HSYNetWorkingManager defaultHTTPSessionManager:YES];
+        _fileSessionManager = [HSYNetWorkingManager defaultURLSessionManager];
     }
     return self;
 }
@@ -109,5 +110,12 @@ static HSYNetWorkingManager *networkingManager;
     return manager;
 }
 
++ (AFURLSessionManager *)defaultURLSessionManager
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    return manager;
+}
 
 @end
