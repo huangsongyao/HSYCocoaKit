@@ -62,10 +62,6 @@ static HSYCocoaKitSocketManager *socketManager;
                 }
                     break;
                 case kHSYCocoaKitSocketRACDelegate_socketDisconnected: {
-                    NSError *error = notification.tuple.second;
-                    if (error) {
-                        NSLog(@"- socketDidDisconnect: ==== error = %@", error);
-                    }
                     if (self.socketConnectStatus == kHSYCocoaKitSocketConnectStatus_AccordDisConnected) {
                         return;
                     }
@@ -108,34 +104,87 @@ static HSYCocoaKitSocketManager *socketManager;
 
 - (RACSignal *)connectServer:(NSString *)host onPort:(uint16_t)port
 {
-    _connectHost = host;
-    _connectPort = port;
-    @weakify(self);
-    RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        @strongify(self);
-        [self connect:self.connectHost onPort:self.connectPort errorBlock:^(NSError *error) {
-            [subscriber sendError:error];
-            [subscriber sendCompleted];
-        }];
-        return [RACDisposable disposableWithBlock:^{}];
-    }];
-    [signal subscribe:self.delegateSubject];
-    return signal;
+    return [self connectServer:nil host:host onPort:port];
 }
 
-- (void)connect:(NSString *)host onPort:(uint16_t)port errorBlock:(void(^)(NSError *error))block
+- (RACSignal *)connectServer:(NSString *)urlString
 {
+    return [self connectServer:urlString host:nil onPort:0000];
+}
+
+- (RACSignal *)connectServer:(NSString *)urlString
+                        host:(NSString *)host
+                      onPort:(uint16_t)port
+{
+    _connectHost = host;
+    _connectPort = port;
+    if (urlString) {
+        NSURL *url = [NSURL URLWithString:urlString];
+        _connectHost = url.host;
+        _connectPort = url.port.longLongValue;
+    }
+    @weakify(self);
+    if (!self.socketDelegateSignal) {
+        _socketDelegateSignal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            @strongify(self);
+            if (![self.tcpSocket isConnected]) {
+                [self connect:urlString host:host onPort:port errorBlock:^(NSError *error) {
+                    //为了保持订阅信号的活跃性，此处不能使用"- sendError:"，否则订阅信号会被release
+                    RACTuple *tuple = RACTuplePack(nil, error);
+                    [subscriber sendNext:tuple];
+                }];
+            }
+            [self.delegateSubject subscribeNext:^(id x) {
+                //为了保持订阅信号的活跃性，delegateSubject发送"- sendError:"，否则订阅信号会被release，并且delegateSubject只能"- sendNext:"，x返回类型为HSYCocoaKitSocketRACSignal和NSError
+                RACTuple *tuple = nil;
+                if ([x isKindOfClass:[HSYCocoaKitSocketRACSignal class]]) {
+                    HSYCocoaKitSocketRACSignal *notification = (HSYCocoaKitSocketRACSignal *)x;
+                    tuple = RACTuplePack(notification, nil);
+                } else {
+                    NSError *error = (NSError *)x;
+                    tuple = RACTuplePack(nil, error);
+                }
+                [subscriber sendNext:tuple];
+            }];
+            return [RACDisposable disposableWithBlock:^{
+                NSLog(@"必须保持订阅信号的活跃性，socket订阅信号已经被释放，请check订阅信号是否因其他问题被释放或者调用过“- sendError:”、“- sendCompleted”，方法：- connectServer:");
+            }];
+        }];
+    } else if (![self.tcpSocket isConnected]) {
+        [self connect:urlString host:host onPort:port errorBlock:^(NSError *error) {
+            @strongify(self);
+            [self.delegateSubject sendNext:error];
+        }];
+    }
+    return self.socketDelegateSignal;
+}
+
+- (void)connect:(NSString *)urlString
+           host:(NSString *)host
+         onPort:(uint16_t)port
+     errorBlock:(void(^)(NSError *error))block
+{
+    @weakify(self);
     [[HSYNetWorkingManager shareInstance] observer_3x_NetworkReachabilityOfNext:^BOOL(AFNetworkReachabilityStatus status, BOOL hasNetwork) {
+        @strongify(self);
         if (!hasNetwork && block) {
             block([NSError errorWithErrorType:kAFNetworkingStatusErrorTypeNone]);
         } else {
             NSError *error = nil;
-            BOOL connect = [self.tcpSocket connectToHost:host
-                                                  onPort:port
-                                             withTimeout:DEFAULT_SOCKET_CONNECTED_TIMEOUT
-                                                   error:&error];
-            if (error) {
+            BOOL connect = NO;
+            if (urlString.length > 0) {
+                connect = [self.tcpSocket connectToUrl:[NSURL URLWithString:urlString]
+                                           withTimeout:DEFAULT_SOCKET_CONNECTED_TIMEOUT
+                                                 error:&error];
+            } else {
+                connect = [self.tcpSocket connectToHost:self.connectHost
+                                                 onPort:self.connectPort
+                                            withTimeout:DEFAULT_SOCKET_CONNECTED_TIMEOUT
+                                                  error:&error];
+            }
+            if (error && block) {
                 NSLog(@"connect error = %@, connect = %d", error, connect);
+                block(error);
             }
         }
         return YES;

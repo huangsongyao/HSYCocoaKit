@@ -15,18 +15,15 @@ static const NSInteger kMessageCode = 1991;
 
 + (NSError *)errorWithErrorType:(kAFNetworkingStatusErrorType)errorType
 {    
-    NSDictionary *dic = nil;
-    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     switch (errorType) {
         case kAFNetworkingStatusErrorTypeNone: {
-            
+            dic[kErrorForNotNetworkKey] = @"not net work";
         }
             break;
-            
         default:
             break;
     }
-    
     return [[NSError alloc] initWithDomain:@"" code:errorType userInfo:dic];
 }
 

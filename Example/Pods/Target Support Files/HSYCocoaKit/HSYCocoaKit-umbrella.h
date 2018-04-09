@@ -83,6 +83,7 @@
 #import "UIAlertView+RACSignal.h"
 #import "GCDAsyncSocket+RACSignal.h"
 #import "HSYCocoaKitSocketManager.h"
+#import "HSYCocoaKitSocketRACSignal.h"
 
 FOUNDATION_EXPORT double HSYCocoaKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char HSYCocoaKitVersionString[];
