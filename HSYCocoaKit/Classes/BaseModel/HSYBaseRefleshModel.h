@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, kHSYReflesStatusType) {
  *
  *  @param size 翻页的条数
  */
-- (void)updateSize:(NSInteger)size;
+- (void)hsy_updateSize:(NSInteger)size;
 
 /**
  *  网络请求下一页，主要用于分页，并且重新定义了父类的“- requestNetwork:toMap:subscriberNext:”方法，返回了NO，用与区分普通请求成功后设置statusCode和上拉或者下拉成功后设置的statusCode
@@ -37,6 +37,6 @@ typedef NS_ENUM(NSUInteger, kHSYReflesStatusType) {
  *  @param map     结果映射，由于方法内部已经对self.datas这个数据源数组进行了整理，所以映射时必须映射成结果数组
  *  @param status  上拉或者下拉的枚举
  */
-- (void)updateNext:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map pullDown:(kHSYReflesStatusType)status;
+- (void)hsy_updateNext:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map pullDown:(kHSYReflesStatusType)status;
 
 @end

@@ -37,6 +37,6 @@
  @param function js中触发postMessage方法的对象的名称
  @return 回调信号源
  */
-- (RACSignal *)nativeRunJavaScriptFunction:(NSString *)function;
+- (RACSignal *)hsy_nativeRunJavaScriptFunction:(NSString *)function;
 
 @end

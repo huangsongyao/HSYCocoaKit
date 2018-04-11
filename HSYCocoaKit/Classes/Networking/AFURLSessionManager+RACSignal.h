@@ -21,10 +21,10 @@
  @param cancel 下载失败后返回的已下载的data内容
  @return RACSignal文件下载结果信号
  */
-- (RACSignal *)downloadFileRequestUrl:(NSURL *)url
-                        fileCachePath:(NSString *)filePath
-                   completionProgress:(void(^)(NSProgress *progress, CGFloat downloadProgress, NSURLSessionDownloadTask *downloadTask))progress
-                   cancelByResumeData:(void(^)(NSData *resumeData))cancel;
+- (RACSignal *)hsy_downloadFileRequestUrl:(NSURL *)url
+                            fileCachePath:(NSString *)filePath
+                       completionProgress:(void(^)(NSProgress *progress, CGFloat downloadProgress, NSURLSessionDownloadTask *downloadTask))progress
+                       cancelByResumeData:(void(^)(NSData *resumeData))cancel NS_AVAILABLE_IOS(8_0);
 
 /**
  文件下载，
@@ -36,11 +36,11 @@
  @param cancel 下载失败后返回的已下载的data内容
  @return RACSignal文件下载结果信号
  */
-- (RACSignal *)downloadFileRequestUrl:(NSURL *)url
-                        fileCachePath:(NSString *)filePath
-                        setHTTPMethod:(kHSYCocoaKitNetworkingRequestModel)type
-                   completionProgress:(void(^)(NSProgress *progress, CGFloat downloadProgress, NSURLSessionDownloadTask *downloadTask))progress
-                   cancelByResumeData:(void(^)(NSData *resumeData))cancel;
+- (RACSignal *)hsy_downloadFileRequestUrl:(NSURL *)url
+                            fileCachePath:(NSString *)filePath
+                            setHTTPMethod:(kHSYCocoaKitNetworkingRequestModel)type
+                       completionProgress:(void(^)(NSProgress *progress, CGFloat downloadProgress, NSURLSessionDownloadTask *downloadTask))progress
+                       cancelByResumeData:(void(^)(NSData *resumeData))cancel NS_AVAILABLE_IOS(8_0);
 
 #pragma mark - Upload File
 
@@ -52,9 +52,9 @@
  @param progress 文件上传的进度回调
  @return RACSignal文件上传结果信号
  */
-- (RACSignal *)uploadFileRequestUrl:(NSURL *)url
-                           filePath:(NSString *)path
-                 completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress, NSURLSessionUploadTask *uploadTask))progress;
+- (RACSignal *)hsy_uploadFileRequestUrl:(NSURL *)url
+                               filePath:(NSString *)path
+                     completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress, NSURLSessionUploadTask *uploadTask))progress NS_AVAILABLE_IOS(8_0);
 
 /**
  文件上传，默认不设置method
@@ -65,8 +65,8 @@
  @param progress 文件上传的进度回调
  @return RACSignal文件上传结果信号
  */
-- (RACSignal *)uploadFileRequestUrl:(NSURL *)url
-                           filePath:(NSString *)path
-                      setHTTPMethod:(kHSYCocoaKitNetworkingRequestModel)type
-                 completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress, NSURLSessionUploadTask *uploadTask))progress;
+- (RACSignal *)hsy_uploadFileRequestUrl:(NSURL *)url
+                               filePath:(NSString *)path
+                          setHTTPMethod:(kHSYCocoaKitNetworkingRequestModel)type
+                     completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress, NSURLSessionUploadTask *uploadTask))progress NS_AVAILABLE_IOS(8_0);
 @end

@@ -29,7 +29,7 @@
  *
  *  @return NSMutableArray
  */
-+ (NSMutableArray *)createDatabaseOpeartionFieldInfoForFieldParams:(NSMutableArray <NSDictionary *>*)fieldParams;
++ (NSMutableArray *)hsy_createDatabaseOpeartionFieldInfoForFieldParams:(NSMutableArray <NSDictionary *>*)fieldParams;
 
 /**
  *  创建一个数据库表单操作抽象类
@@ -39,7 +39,7 @@
  *
  *  @return HSYFMDBOperationInfo
  */
-+ (HSYFMDBOperationFieldInfo *)createDatabaseOperationInfoForTableName:(NSString *)tableName fieldParams:(NSMutableArray <NSDictionary *>*)params;
++ (HSYFMDBOperationFieldInfo *)hsy_createDatabaseOperationInfoForTableName:(NSString *)tableName fieldParams:(NSMutableArray <NSDictionary *>*)params;
 
 /**
  *  创建一个数据库表单操作抽象类，用于插入数据
@@ -50,7 +50,7 @@
  *
  *  @return HSYFMDBOperationInfo
  */
-+ (HSYFMDBOperationFieldInfo *)createDatabaseOperationInfoForTableName:(NSString *)tableName fieldParams:(NSMutableArray <NSDictionary *>*)params insertDatas:(NSMutableArray <NSString *>*)datas;
++ (HSYFMDBOperationFieldInfo *)hsy_createDatabaseOperationInfoForTableName:(NSString *)tableName fieldParams:(NSMutableArray <NSDictionary *>*)params insertDatas:(NSMutableArray <NSString *>*)datas;
 
 @end
 
@@ -62,7 +62,7 @@
  * 测试用的数据表
  *  @return 表字段格式集合
  */
-+ (NSMutableArray <NSDictionary *>*)testTableByFields;
++ (NSMutableArray <NSDictionary *>*)hsy_testTableByFields;
 
 
 @end

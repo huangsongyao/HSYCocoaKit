@@ -38,7 +38,7 @@
     return self;
 }
 
-+ (WKWebViewConfiguration *)webViewConfiguration:(NSString *)runNativeName delegate:(id<WKScriptMessageHandler>)delegate
++ (WKWebViewConfiguration *)hsy_webViewConfiguration:(NSString *)runNativeName delegate:(id<WKScriptMessageHandler>)delegate
 {
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     WKUserContentController *userContent = [[WKUserContentController alloc] init];
@@ -51,7 +51,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:[HSYBaseWebViewController webViewConfiguration:self.runNativeName delegate:self]];
+    _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:[HSYBaseWebViewController hsy_webViewConfiguration:self.runNativeName delegate:self]];
     if (self.url) {
         NSURLRequest *request = [NSURLRequest requestWithURL:self.url];
         [self.webView loadRequest:request];
@@ -65,7 +65,7 @@
 
 #pragma mark - Native Run JS
 
-- (RACSignal *)nativeRunJavaScriptFunction:(NSString *)function
+- (RACSignal *)hsy_nativeRunJavaScriptFunction:(NSString *)function
 {
     //native调用js
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {

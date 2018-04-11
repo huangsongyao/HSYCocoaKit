@@ -13,7 +13,7 @@ static const NSInteger kMessageCode = 1991;
 
 @implementation NSError (Message)
 
-+ (NSError *)errorWithErrorType:(kAFNetworkingStatusErrorType)errorType
++ (NSError *)hsy_errorWithErrorType:(kAFNetworkingStatusErrorType)errorType
 {    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     switch (errorType) {
@@ -27,7 +27,7 @@ static const NSInteger kMessageCode = 1991;
     return [[NSError alloc] initWithDomain:@"" code:errorType userInfo:dic];
 }
 
-+ (NSError *)errorWithErrorMessage:(NSString *)message
++ (NSError *)hsy_errorWithErrorMessage:(NSString *)message
 {
     return [[NSError alloc] initWithDomain:@"" code:kMessageCode userInfo:@{kErrorForNotNetworkKey  : message}];
 }

@@ -41,13 +41,13 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitSocketRACDelegate) {
  @param jsonString json字符串
  @return data
  */
-+ (NSData *)writeData:(NSString *)jsonString;
++ (NSData *)hsy_writeData:(NSString *)jsonString;
 
 /**
  将tuple中的data转json
 
  @return json
  */
-- (id)toJSONReponse;
+- (id)hsy_toJSONReponse;
 
 @end

@@ -40,8 +40,8 @@ static HSYFMDBOperationManager *fmdbOperationManager = nil;
 {
     //这是一个测试的数据表
     //如果需要添加其他表，只需要按照这个格式进行添加，并且在HSYFMDBOperationManager(Fields)中添加静态方法标识数据格式，格式请模仿+ (NSMutableArray <NSDictionary *>*)testTableByFields
-    NSMutableArray *fields = [[self.class createDatabaseOpeartionFieldInfoForFieldParams:[self.class testTableByFields]] mutableCopy];
-    HSYFMDBOperationFieldInfo *testTable = [HSYFMDBOperationFieldInfo createDataBaseTableForName:FMDB_DATABASE_TEST_LIST_NAME fields:fields];
+    NSMutableArray *fields = [[self.class hsy_createDatabaseOpeartionFieldInfoForFieldParams:[self.class hsy_testTableByFields]] mutableCopy];
+    HSYFMDBOperationFieldInfo *testTable = [HSYFMDBOperationFieldInfo hsy_createDataBaseTableForName:FMDB_DATABASE_TEST_LIST_NAME fields:fields];
     
     //把表名添加到缓存数组中
     _tableNames = @[
@@ -53,12 +53,12 @@ static HSYFMDBOperationManager *fmdbOperationManager = nil;
                                                                          ] mutableCopy]];
 }
 
-+ (NSMutableArray <HSYFMDBOperationFieldInfo *>*)databaseTables
++ (NSMutableArray <HSYFMDBOperationFieldInfo *>*)hsy_databaseTables
 {
     //这是一个测试的数据表
     //如果需要添加其他表，只需要按照这个格式进行添加，并且在HSYFMDBOperationManager(Fields)中添加静态方法标识数据格式，格式请模仿+ (NSMutableArray <NSDictionary *>*)testTableByFields
-    NSMutableArray *fields = [[self.class createDatabaseOpeartionFieldInfoForFieldParams:[self.class testTableByFields]] mutableCopy];
-    HSYFMDBOperationFieldInfo *testTable = [HSYFMDBOperationFieldInfo createDataBaseTableForName:FMDB_DATABASE_TEST_LIST_NAME fields:fields];
+    NSMutableArray *fields = [[self.class hsy_createDatabaseOpeartionFieldInfoForFieldParams:[self.class hsy_testTableByFields]] mutableCopy];
+    HSYFMDBOperationFieldInfo *testTable = [HSYFMDBOperationFieldInfo hsy_createDataBaseTableForName:FMDB_DATABASE_TEST_LIST_NAME fields:fields];
     
     return [@[testTable] mutableCopy];
 }
@@ -70,7 +70,7 @@ static HSYFMDBOperationManager *fmdbOperationManager = nil;
  *
  *  @return NSMutableArray
  */
-+ (NSMutableArray *)createDatabaseOpeartionFieldInfoForFieldParams:(NSMutableArray <NSDictionary *>*)fieldParams
++ (NSMutableArray *)hsy_createDatabaseOpeartionFieldInfoForFieldParams:(NSMutableArray <NSDictionary *>*)fieldParams
 {
     NSMutableArray *infos = [[NSMutableArray alloc] init];
     for (NSDictionary *param in fieldParams) {
@@ -90,9 +90,9 @@ static HSYFMDBOperationManager *fmdbOperationManager = nil;
  *
  *  @return HSYFMDBOperationInfo
  */
-+ (HSYFMDBOperationFieldInfo *)createDatabaseOperationInfoForTableName:(NSString *)tableName fieldParams:(NSMutableArray <NSDictionary *>*)params
++ (HSYFMDBOperationFieldInfo *)hsy_createDatabaseOperationInfoForTableName:(NSString *)tableName fieldParams:(NSMutableArray <NSDictionary *>*)params
 {
-    HSYFMDBOperationFieldInfo *operation = [HSYFMDBOperationFieldInfo createDataBaseTableForName:tableName fields:[[self.class createDatabaseOpeartionFieldInfoForFieldParams:params] mutableCopy]];
+    HSYFMDBOperationFieldInfo *operation = [HSYFMDBOperationFieldInfo hsy_createDataBaseTableForName:tableName fields:[[self.class hsy_createDatabaseOpeartionFieldInfoForFieldParams:params] mutableCopy]];
     
     return operation;
     
@@ -106,9 +106,9 @@ static HSYFMDBOperationManager *fmdbOperationManager = nil;
  *
  *  @return HSYFMDBOperationInfo
  */
-+ (HSYFMDBOperationFieldInfo *)createDatabaseOperationInfoForTableName:(NSString *)tableName fieldParams:(NSMutableArray <NSDictionary *>*)params insertDatas:(NSMutableArray <NSString *>*)datas
++ (HSYFMDBOperationFieldInfo *)hsy_createDatabaseOperationInfoForTableName:(NSString *)tableName fieldParams:(NSMutableArray <NSDictionary *>*)params insertDatas:(NSMutableArray <NSString *>*)datas
 {
-    HSYFMDBOperationFieldInfo *operation = [HSYFMDBOperationFieldInfo createDataBaseTableForName:tableName fields:[[self.class createDatabaseOpeartionFieldInfoForFieldParams:params] mutableCopy] insertDatas:datas];
+    HSYFMDBOperationFieldInfo *operation = [HSYFMDBOperationFieldInfo hsy_createDataBaseTableForName:tableName fields:[[self.class hsy_createDatabaseOpeartionFieldInfoForFieldParams:params] mutableCopy] insertDatas:datas];
     return operation;
 }
 
@@ -117,7 +117,7 @@ static HSYFMDBOperationManager *fmdbOperationManager = nil;
 
 @implementation HSYFMDBOperationManager (Fields)
 
-+ (NSMutableArray<NSDictionary *> *)testTableByFields
++ (NSMutableArray<NSDictionary *> *)hsy_testTableByFields
 {
     NSMutableArray *params = [@[
                                 @{

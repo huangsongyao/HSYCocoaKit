@@ -19,7 +19,7 @@
     return self;
 }
 
-+ (NSMutableArray *)toOperationFields:(NSMutableArray *)fieldsInfo
++ (NSMutableArray *)hsy_toOperationFields:(NSMutableArray *)fieldsInfo
 {
     if (fieldsInfo.count == 0) {
         return nil;
@@ -45,7 +45,7 @@
     return self;
 }
 
-- (NSString *)toDataBaseTableField
+- (NSString *)hsy_toDataBaseTableField
 {
     if (self.fields.count == 0) {
         return nil;
@@ -60,25 +60,25 @@
     return field;
 }
 
-- (NSString *)toDataBaseTableInsertStatements
+- (NSString *)hsy_toDataBaseTableInsertStatements
 {
     NSMutableArray *new = [[NSMutableArray alloc] init];
     for (NSString *obj in self.statements) {
         [new addObject:[NSString stringWithFormat:@"'%@'", obj]];
     }
-    return [HSYFMDBOperationFieldInfo statementsForParams:new];
+    return [HSYFMDBOperationFieldInfo hsy_statementsForParams:new];
 }
 
-- (NSString *)toDataBaseTableInsertFields
+- (NSString *)hsy_toDataBaseTableInsertFields
 {
     NSMutableArray *temp = [[NSMutableArray alloc] init];
     for (HSYFMDBOperationFields *info in self.fields) {
         [temp addObject:info.fieldName];
     }
-    return [HSYFMDBOperationFieldInfo statementsForParams:temp];
+    return [HSYFMDBOperationFieldInfo hsy_statementsForParams:temp];
 }
 
-+ (NSString *)statementsForParams:(NSMutableArray <NSString *>*)params
++ (NSString *)hsy_statementsForParams:(NSMutableArray <NSString *>*)params
 {
     if (params.count == 0) {
         return nil;
@@ -90,7 +90,7 @@
     return statement;
 }
 
-- (NSDictionary *)toDictionaryFields
+- (NSDictionary *)hsy_toDictionaryFields
 {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     for (NSInteger i = 0; i < self.fields.count; i ++) {
@@ -105,7 +105,7 @@
 
 @implementation HSYFMDBOperationFieldInfo (Show)
 
-+ (HSYFMDBOperationFieldInfo *)createDataBaseTableForName:(NSString *)name fields:(NSMutableArray<HSYFMDBOperationFields *> *)fields
++ (HSYFMDBOperationFieldInfo *)hsy_createDataBaseTableForName:(NSString *)name fields:(NSMutableArray<HSYFMDBOperationFields *> *)fields
 {
     HSYFMDBOperationFieldInfo *operationInfo = [[HSYFMDBOperationFieldInfo alloc] init];
     operationInfo.name = name;
@@ -113,7 +113,7 @@
     return operationInfo;
 }
 
-+ (HSYFMDBOperationFieldInfo *)createDataBaseTableForName:(NSString *)name fields:(NSMutableArray<HSYFMDBOperationFields *> *)fields insertDatas:(NSMutableArray<NSString *> *)statements
++ (HSYFMDBOperationFieldInfo *)hsy_createDataBaseTableForName:(NSString *)name fields:(NSMutableArray<HSYFMDBOperationFields *> *)fields insertDatas:(NSMutableArray<NSString *> *)statements
 {
     HSYFMDBOperationFieldInfo *operationInfo = [[HSYFMDBOperationFieldInfo alloc] init];
     operationInfo.name = name;

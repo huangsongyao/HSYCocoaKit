@@ -17,6 +17,6 @@
  @param opacity 透明度
  @param radius  圆角
  */
-- (void)setShadowForColorRef:(CGColorRef)ref shadowOpacity:(CGFloat)opacity shadowRadius:(CGFloat)radius;
+- (void)hsy_setShadowForColorRef:(CGColorRef)ref shadowOpacity:(CGFloat)opacity shadowRadius:(CGFloat)radius;
 
 @end

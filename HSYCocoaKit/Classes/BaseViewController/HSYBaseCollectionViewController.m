@@ -62,13 +62,13 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
     
     //添加上下拉
     if (self.showAllReflesh) {
-        [self addRefresh:self.collectionView];
+        [self hsy_addRefresh:self.collectionView];
     } else {
         if (self.showPullUp) {
-            [self addPullUpRefresh:self.collectionView];
+            [self hsy_addPullUpRefresh:self.collectionView];
         }
         if (self.showPullDown) {
-            [self addPullDownRefresh:self.collectionView];
+            [self hsy_addPullDownRefresh:self.collectionView];
         }
     }
     

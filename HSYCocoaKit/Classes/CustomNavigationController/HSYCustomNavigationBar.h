@@ -22,14 +22,14 @@ typedef NS_ENUM(NSUInteger, kHSYCustomBarButtonItemTag) {
 /**
  清除底部横线
  */
-- (void)clearNavigationBarBottomLine;
+- (void)hsy_clearNavigationBarBottomLine;
 
 /**
  设置底部横线的色值，高度默认1.0dx
  
  @param color 横线的颜色
  */
-- (void)customBarBottomLineOfColor:(UIColor *)color;
+- (void)hsy_customBarBottomLineOfColor:(UIColor *)color;
 
 /**
  创建导航栏的返回按钮，返回的箭头图片默认为@"nav_icon_back"
@@ -37,8 +37,8 @@ typedef NS_ENUM(NSUInteger, kHSYCustomBarButtonItemTag) {
  @param next 点击回调事件
  @return UIBarButtonItem
  */
-+ (UIBarButtonItem *)backButtonItem:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
-+ (UIBarButtonItem *)backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
++ (UIBarButtonItem *)hsy_backButtonItem:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
++ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
 
 /**
  从当前私有库的bundle中获取资源图片
@@ -46,6 +46,6 @@ typedef NS_ENUM(NSUInteger, kHSYCustomBarButtonItemTag) {
  @param imageName 图片名称
  @return UIImage
  */
-+ (UIImage *)imageForBundle:(NSString *)imageName;
++ (UIImage *)hsy_imageForBundle:(NSString *)imageName;
 
 @end

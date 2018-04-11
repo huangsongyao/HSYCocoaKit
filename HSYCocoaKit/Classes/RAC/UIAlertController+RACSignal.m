@@ -12,7 +12,7 @@
 
 #pragma mark - Alert
 
-+ (RACSignal *)rac_showAlertController:(NSString *)title message:(NSString *)message alertActions:(NSArray<NSDictionary *> *)alertActions
++ (RACSignal *)hsy_rac_showAlertController:(NSString *)title message:(NSString *)message alertActions:(NSArray<NSDictionary *> *)alertActions
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -27,18 +27,18 @@
     }];
 }
 
-+ (RACSignal *)rac_showAlertController:(NSString *)title message:(NSString *)message alertActionTitles:(NSArray<NSString *> *)alertActionTitles
++ (RACSignal *)hsy_rac_showAlertController:(NSString *)title message:(NSString *)message alertActionTitles:(NSArray<NSString *> *)alertActionTitles
 {
     NSMutableArray *alertActions = [NSMutableArray arrayWithCapacity:alertActionTitles.count];
     for (NSString *string in alertActionTitles) {
         [alertActions addObject:@{[string mutableCopy] : @([alertActionTitles indexOfObject:string] == 0 ? UIAlertActionStyleCancel : UIAlertActionStyleDefault)}];
     }
-    return [self.class rac_showAlertController:title message:message alertActions:alertActions];
+    return [self.class hsy_rac_showAlertController:title message:message alertActions:alertActions];
 }
 
 #pragma mark - Sheet
 
-+ (RACSignal *)rac_showSheetController:(NSString *)title message:(NSString *)message sheetActions:(NSArray<NSDictionary *> *)sheetActions
++ (RACSignal *)hsy_rac_showSheetController:(NSString *)title message:(NSString *)message sheetActions:(NSArray<NSDictionary *> *)sheetActions
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         UIAlertController *sheetController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
@@ -53,13 +53,13 @@
     }];
 }
 
-+ (RACSignal *)rac_showSheetController:(NSString *)title message:(NSString *)message sheetActionTitles:(NSArray<NSString *> *)sheetActionTitles
++ (RACSignal *)hsy_rac_showSheetController:(NSString *)title message:(NSString *)message sheetActionTitles:(NSArray<NSString *> *)sheetActionTitles
 {
     NSMutableArray *alertActions = [NSMutableArray arrayWithCapacity:sheetActionTitles.count];
     for (NSString *string in sheetActionTitles) {
         [alertActions addObject:@{[string mutableCopy] : @([sheetActionTitles indexOfObject:string] == 0 ? UIAlertActionStyleCancel : UIAlertActionStyleDefault)}];
     }
-    return [self.class rac_showSheetController:title message:message sheetActions:alertActions];
+    return [self.class hsy_rac_showSheetController:title message:message sheetActions:alertActions];
 }
 
 

@@ -27,19 +27,19 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
         [self setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
         _customNavigationItem = [[UINavigationItem alloc] initWithTitle:@""];
         [self pushNavigationItem:self.customNavigationItem animated:YES];
-        [self clearNavigationBarBottomLine];
+        [self hsy_clearNavigationBarBottomLine];
     }
     return self;
 }
 
 #pragma mark - Line
 
-- (void)clearNavigationBarBottomLine
+- (void)hsy_clearNavigationBarBottomLine
 {
-    [self customBarBottomLineOfColor:[UIColor clearColor]];
+    [self hsy_customBarBottomLineOfColor:[UIColor clearColor]];
 }
 
-- (void)customBarBottomLineOfColor:(UIColor *)color
+- (void)hsy_customBarBottomLineOfColor:(UIColor *)color
 {
     [self setShadowImage:[UIImage createImgWithColor:[UIColor clearColor]]];
     CGFloat height = 1.0f;
@@ -54,9 +54,9 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
 #pragma mark - BarButton Item
 
-+ (UIBarButtonItem *)backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
++ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
 {
-    UIImage *image = [self.class imageForBundle:name];
+    UIImage *image = [self.class hsy_imageForBundle:name];
     NSDictionary *dic = @{
                           @(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName) : image,
                           @(kHSYCocoaKitOfButtonPropretyTypePreImageViewName) : image,
@@ -73,12 +73,12 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
     return backItem;
 }
 
-+ (UIBarButtonItem *)backButtonItem:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
++ (UIBarButtonItem *)hsy_backButtonItem:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
 {
-    return [self.class backButtonItemForImage:@"nav_icon_back" subscribeNext:next];
+    return [self.class hsy_backButtonItemForImage:@"nav_icon_back" subscribeNext:next];
 }
 
-+ (UIImage *)imageForBundle:(NSString *)imageName
++ (UIImage *)hsy_imageForBundle:(NSString *)imageName
 {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSString *bundleName = bundle.infoDictionary[@"CFBundleName"];

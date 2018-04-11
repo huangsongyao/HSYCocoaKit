@@ -11,4 +11,6 @@
 
 @interface HSYCocoaKitManager : NSObject
 
++ (instancetype)shareInstance;
+
 @end

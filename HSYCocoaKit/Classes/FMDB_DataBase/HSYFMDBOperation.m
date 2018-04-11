@@ -23,25 +23,25 @@
 {
     if (self = [super init]) {
         _databaseTables = tables;                               //数据表名，集合
-        [self initDB];
+        [self hsy_initDB];
     }
     return self;
 }
 
 #pragma mark - Init DataBase
 
-- (void)initDB
+- (void)hsy_initDB
 {    
-    _dateBase = [HSYFMDBOperation inits];                           //创建数据库
-    _dateBasePath = [HSYFMDBOperation dataBasePath];                //数据库路径
-    self.dateBase.traceExecution = YES;                             //跟踪执行
+    _dateBase = [HSYFMDBOperation hsy_inits];                           //创建数据库
+    _dateBasePath = [HSYFMDBOperation hsy_dataBasePath];                //数据库路径
+    self.dateBase.traceExecution = YES;                                 //跟踪执行
     if ([self.dateBase open]) {
         for (HSYFMDBOperationFieldInfo *operation in self.databaseTables) {
             BOOL isExist = [self.dateBase tableExists:operation.name];
             if (isExist) {
                 NSLog(@"%@ existing", operation.name);
             } else {
-                BOOL result = [self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"CREATE TABLE %@ (%@)", operation.name, [operation toDataBaseTableField]], nil];
+                BOOL result = [self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"CREATE TABLE %@ (%@)", operation.name, [operation hsy_toDataBaseTableField]], nil];
                 if (result) {
                     NSLog(@"%@ create successful", operation.name);
                 } else {
@@ -55,7 +55,7 @@
     }
 }
 
-- (void)fmdb_operationForExecuteUpdateBlock:(id(^)())block completed:(void(^)(id x))completed
+- (void)hsy_fmdb_operationForExecuteUpdateBlock:(id(^)())block completed:(void(^)(id x))completed
 {
     if (![self.dateBase open]) {
         return;
@@ -74,13 +74,13 @@
 
 #pragma mark - Insert Data
 
-- (void)fmdb_insertDataForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
-                              completed:(void(^)(BOOL result, HSYFMDBOperationFieldInfo *info))completed
+- (void)hsy_fmdb_insertDataForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
+                                  completed:(void(^)(BOOL result, HSYFMDBOperationFieldInfo *info))completed
 {
     @weakify(self);
-    [self fmdb_operationForExecuteUpdateBlock:^{
+    [self hsy_fmdb_operationForExecuteUpdateBlock:^{
         @strongify(self);
-        BOOL result = [self fmdb_insertDataForOperationInfo:operationInfo];
+        BOOL result = [self hsy_fmdb_insertDataForOperationInfo:operationInfo];
         return @(result);
     } completed:^(id x){
         if (completed) {
@@ -89,8 +89,8 @@
     }];
 }
 
-- (void)fmdb_beginTransactionInsertDataForOperationInfos:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)operationInfos
-                                               completed:(void(^)(BOOL result))completed
+- (void)hsy_fmdb_beginTransactionInsertDataForOperationInfos:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)operationInfos
+                                                   completed:(void(^)(BOOL result))completed
 {
     if (![self.dateBase open]) {
         return;
@@ -99,7 +99,7 @@
     BOOL isRollBack = NO;
     @try {
         for (HSYFMDBOperationFieldInfo *operationInfo in operationInfos) {
-            [self fmdb_insertDataForOperationInfo:operationInfo];
+            [self hsy_fmdb_insertDataForOperationInfo:operationInfo];
         }
     }
     @catch (NSException *exception) {
@@ -120,28 +120,28 @@
     [self.dateBase close];
 }
 
-- (BOOL)fmdb_insertDataForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
+- (BOOL)hsy_fmdb_insertDataForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
 {
     BOOL result = NO;
-    result = [self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)", operationInfo.name, [operationInfo toDataBaseTableInsertFields], [operationInfo toDataBaseTableInsertStatements]], nil];
+    result = [self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)", operationInfo.name, [operationInfo hsy_toDataBaseTableInsertFields], [operationInfo hsy_toDataBaseTableInsertStatements]], nil];
     if (!result) {
-        NSLog(@"Insert %@ Failure!", [operationInfo toDataBaseTableInsertStatements]);
+        NSLog(@"Insert %@ Failure!", [operationInfo hsy_toDataBaseTableInsertStatements]);
     }
     return result;
 }
 
 #pragma mark - Query Data
 
-- (void)fmdb_queryAllDataForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
-                                completed:(void(^)(NSMutableArray *result))completed
+- (void)hsy_fmdb_queryAllDataForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
+                                    completed:(void(^)(NSMutableArray *result))completed
 {
     @weakify(self);
-    [self fmdb_operationForExecuteUpdateBlock:^{
+    [self hsy_fmdb_operationForExecuteUpdateBlock:^{
         @strongify(self);
         NSMutableArray *contentArray = [[NSMutableArray alloc] init];
         FMResultSet *resultSet = [self.dateBase executeQueryWithFormat:[NSString stringWithFormat:@"SELECT * FROM %@", operationInfo.name], nil];
         while ([resultSet next]) {
-            NSMutableDictionary *result = [resultSet fmdbForColumn:operationInfo];
+            NSMutableDictionary *result = [resultSet hsy_fmdbForColumn:operationInfo];
             [contentArray addObject:result];
         }
         return contentArray;
@@ -152,18 +152,18 @@
     }];
 }
 
-- (void)fmdb_queryDataForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
-                            whereField:(NSString *)field
-                          whereContent:(NSString *)content
-                             completed:(void(^)(NSMutableArray *result))completed
+- (void)hsy_fmdb_queryDataForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
+                                whereField:(NSString *)field
+                              whereContent:(NSString *)content
+                                 completed:(void(^)(NSMutableArray *result))completed
 {
     @weakify(self);
-    [self fmdb_operationForExecuteUpdateBlock:^{
+    [self hsy_fmdb_operationForExecuteUpdateBlock:^{
         @strongify(self);
         NSMutableArray *contentArray = [[NSMutableArray alloc] init];
         FMResultSet *resultSet = [self.dateBase executeQueryWithFormat:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = '%@'", operationInfo.name, field, content], nil];
         while ([resultSet next]) {
-            NSMutableDictionary *result = [resultSet fmdbForColumn:operationInfo];
+            NSMutableDictionary *result = [resultSet hsy_fmdbForColumn:operationInfo];
             [contentArray addObject:result];
         }
         return contentArray;
@@ -176,13 +176,13 @@
 
 #pragma mark - Delete Data
 
-- (void)fmdb_deleteRowDataForTableName:(NSString *)tableName
-                           deleteValue:(NSString *)value
-                            whereField:(NSString *)field
-                             completed:(void(^)(BOOL result))completed
+- (void)hsy_fmdb_deleteRowDataForTableName:(NSString *)tableName
+                               deleteValue:(NSString *)value
+                                whereField:(NSString *)field
+                                 completed:(void(^)(BOOL result))completed
 {
     @weakify(self);
-    [self fmdb_operationForExecuteUpdateBlock:^id{
+    [self hsy_fmdb_operationForExecuteUpdateBlock:^id{
         @strongify(self);
         BOOL result = [self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = '%@'", tableName, field, value], nil];
         if (!result) {
@@ -198,15 +198,15 @@
 
 #pragma mark - Modify Data
 
-- (void)fmdb_modifyDataForTableName:(NSString *)tableName
-                        updateField:(NSString *)updateField
-                      updateContent:(NSString *)updateContent
-                         whereField:(NSString *)whereField
-                       whereContent:(NSString *)whereContent
-                          completed:(void(^)(BOOL result))completed
+- (void)hsy_fmdb_modifyDataForTableName:(NSString *)tableName
+                            updateField:(NSString *)updateField
+                          updateContent:(NSString *)updateContent
+                             whereField:(NSString *)whereField
+                           whereContent:(NSString *)whereContent
+                              completed:(void(^)(BOOL result))completed
 {
     @weakify(self);
-    [self fmdb_operationForExecuteUpdateBlock:^id{
+    [self hsy_fmdb_operationForExecuteUpdateBlock:^id{
         @strongify(self);
         BOOL result = [self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"UPDATE %@ SET %@ = '%@' WHERE %@ = '%@'", tableName, updateField, updateContent, whereField, whereContent], nil];
         if (!result) {
@@ -223,10 +223,10 @@
 
 #pragma mark - Clean Table
 
-- (void)fmdb_clearDataToTableName:(NSString *)tableName completed:(void(^)(BOOL result))completed
+- (void)hsy_fmdb_clearDataToTableName:(NSString *)tableName completed:(void(^)(BOOL result))completed
 {
     @weakify(self);
-    [self fmdb_operationForExecuteUpdateBlock:^id{
+    [self hsy_fmdb_operationForExecuteUpdateBlock:^id{
         @strongify(self);
         BOOL result =[self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"DELETE FROM %@", tableName], nil];
         if (!result) {
@@ -244,9 +244,9 @@
 
 #pragma mark - Create DataBase
 
-+ (FMDatabase *)inits
++ (FMDatabase *)hsy_inits
 {
-    NSString *databasePath = [HSYFMDBOperation dataBasePath];
+    NSString *databasePath = [HSYFMDBOperation hsy_dataBasePath];
     //创建数据库
     FMDatabase *db = [[FMDatabase alloc] initWithPath:databasePath];
     return db;
@@ -256,19 +256,19 @@
 
 #pragma mark - SQL Path
 
-+ (NSString *)applicationDocumentsDirectory
++ (NSString *)hsy_applicationDocumentsDirectory
 {
     return PATH_DOCUMENT;
 }
 
-+ (NSString *)userDocumentsDirectory
++ (NSString *)hsy_userDocumentsDirectory
 {
-    return [HSYFMDBOperation applicationDocumentsDirectory];
+    return [HSYFMDBOperation hsy_applicationDocumentsDirectory];
 }
 
-+ (NSString *)dataBasePath
++ (NSString *)hsy_dataBasePath
 {
-    NSString *databasePath =  [HSYFMDBOperation userDocumentsDirectory];
+    NSString *databasePath =  [HSYFMDBOperation hsy_userDocumentsDirectory];
     databasePath = [databasePath stringByAppendingPathComponent:FMDB_DATABASE_FILE_NAME];
     return databasePath;
 }

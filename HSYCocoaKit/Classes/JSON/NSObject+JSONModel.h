@@ -21,7 +21,7 @@
  *
  *  @return 解析后的bean抽象对象
  */
-- (id)resultObjectToJSONModelWithClasses:(Class)classes json:(id)json;
+- (id)hsy_resultObjectToJSONModelWithClasses:(Class)classes json:(id)json;
 /**
  *  JSONModel解析范畴__类方法
  *
@@ -30,7 +30,7 @@
  *
  *  @return 解析后的bean抽象对象
  */
-+ (id)resultObjectToJSONModelWithClasses:(Class)classes json:(id)json;
++ (id)hsy_resultObjectToJSONModelWithClasses:(Class)classes json:(id)json;
 
 
 @end

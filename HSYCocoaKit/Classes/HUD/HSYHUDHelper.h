@@ -39,7 +39,7 @@ typedef NS_ENUM(NSUInteger, kShowHUDViewType) {
  *
  *  @return HUD
  */
-+ (MBProgressHUD *)showHUDViewForMessage:(NSString *)message;
++ (MBProgressHUD *)hsy_showHUDViewForMessage:(NSString *)message;
 
 /**
  *  初始化一个HUD，不允许触屏取消
@@ -50,24 +50,24 @@ typedef NS_ENUM(NSUInteger, kShowHUDViewType) {
  *
  *  @return MBProgressHUD对象
  */
-+ (MBProgressHUD *)showHUDViewForShowType:(kShowHUDViewType)showType text:(NSString *)text hideAfter:(CGFloat)time;
++ (MBProgressHUD *)hsy_showHUDViewForShowType:(kShowHUDViewType)showType text:(NSString *)text hideAfter:(CGFloat)time;
 
 /**
  *  取消HUD
  */
-+ (void)hideHUDView;
++ (void)hsy_hideHUDView;
 
 /**
  *  取消所有HUD
  */
-+ (void)hideAllHUDView;
++ (void)hsy_hideAllHUDView;
 
 /**
  *  设置HUD的动画类型
  *
  *  @param animationType 动画类型，枚举
  */
-+ (void)setHUDAnimationType:(MBProgressHUDAnimation)animationType;
++ (void)hsy_setHUDAnimationType:(MBProgressHUDAnimation)animationType;
 
 
 @end

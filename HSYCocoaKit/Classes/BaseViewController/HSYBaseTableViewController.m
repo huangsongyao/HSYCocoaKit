@@ -45,13 +45,13 @@
     
     //添加上下拉
     if (self.showAllReflesh) {
-        [self addRefresh:self.tableView];
+        [self hsy_addRefresh:self.tableView];
     } else {
         if (self.showPullUp) {
-            [self addPullUpRefresh:self.tableView];
+            [self hsy_addPullUpRefresh:self.tableView];
         }
         if (self.showPullDown) {
-            [self addPullDownRefresh:self.tableView];
+            [self hsy_addPullDownRefresh:self.tableView];
         }
     }
     

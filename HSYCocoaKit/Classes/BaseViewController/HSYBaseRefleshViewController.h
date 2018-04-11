@@ -25,21 +25,21 @@ FOUNDATION_EXPORT NSString *const kHSYCocoaKitRefreshStatusPullUpKey;
 
  @param scrollView scrollView及其子类
  */
-- (void)addRefresh:(UIScrollView *)scrollView;
+- (void)hsy_addRefresh:(UIScrollView *)scrollView;
 
 /**
  添加下拉刷新
 
  @param scrollView scrollView及其子类
  */
-- (void)addPullDownRefresh:(UIScrollView *)scrollView;
+- (void)hsy_addPullDownRefresh:(UIScrollView *)scrollView;
 
 /**
  添加上拉加载更多
 
  @param scrollView scrollView及其子类
  */
-- (void)addPullUpRefresh:(UIScrollView *)scrollView;
+- (void)hsy_addPullUpRefresh:(UIScrollView *)scrollView;
 
 
 @end

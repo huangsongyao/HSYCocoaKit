@@ -60,6 +60,7 @@
 #import "NSObject+JSONObjc.h"
 #import "NSObject+JSONWriting.h"
 #import "NSString+JSONParsing.h"
+#import "HSYCocoaKitLottieAnimationManager.h"
 #import "APPPathMacroFile.h"
 #import "FMDBMacroFile.h"
 #import "HSYCocoaKit.h"

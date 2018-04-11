@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, kAFNetworkingStatusErrorType) {
  *
  *  @return NSError对象
  */
-+ (NSError *)errorWithErrorType:(kAFNetworkingStatusErrorType)errorType;
++ (NSError *)hsy_errorWithErrorType:(kAFNetworkingStatusErrorType)errorType;
 
 /**
  *  转换错误信息为提示的error
@@ -33,6 +33,6 @@ typedef NS_ENUM(NSUInteger, kAFNetworkingStatusErrorType) {
  *
  *  @return NSError对象
  */
-+ (NSError *)errorWithErrorMessage:(NSString *)message;
++ (NSError *)hsy_errorWithErrorMessage:(NSString *)message;
 
 @end

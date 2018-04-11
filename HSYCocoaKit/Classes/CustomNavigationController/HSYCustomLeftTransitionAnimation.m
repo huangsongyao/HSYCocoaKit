@@ -28,45 +28,45 @@
 {
     [super animateTransition:transitionContext];
     if (self.actionsType == kHSYCustomPercentDrivenInteractiveTransitionActionsTypePush) {
-        [self toActionsAnimatedTransitioning:transitionContext];
+        [self hsy_toActionsAnimatedTransitioning:transitionContext];
     } else if (self.actionsType == kHSYCustomPercentDrivenInteractiveTransitionActionsTypePop) {
-        [self fromActionsAnimatedTransitioning:transitionContext];
+        [self hsy_fromActionsAnimatedTransitioning:transitionContext];
     }
 }
 
 #pragma mark - Animated Transitioning
 
-- (void)toActionsAnimatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext
+- (void)hsy_toActionsAnimatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext
 {
     [self.contextView insertSubview:self.toViewController.view aboveSubview:self.fromViewController.view];
     [self.toViewController.view setOrigin:CGPointMake(IPHONE_WIDTH, 0)];
-    [self.fromViewController.view addSubview:[self blackShadowView:MIN_ALPHA_COMPONENT]];
+    [self.fromViewController.view addSubview:[self hsy_blackShadowView:MIN_ALPHA_COMPONENT]];
     self.fromViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f, 1.0f);
     @weakify(self);
-    [self animatedTransitioning:transitionContext performPushMethods:YES animationForNext:^{
+    [self hsy_animatedTransitioning:transitionContext performPushMethods:YES animationForNext:^{
         @strongify(self);
-        [self blackShadowView:MIN_ALPHA_COMPONENT].alpha = MAX_ALPHA_COMPONENT;
+        [self hsy_blackShadowView:MIN_ALPHA_COMPONENT].alpha = MAX_ALPHA_COMPONENT;
         self.fromViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.8f, 0.85f);
         [self.toViewController.view setOrigin:CGPointZero];
     }];
 }
 
-- (void)fromActionsAnimatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext
+- (void)hsy_fromActionsAnimatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext
 {
     [self.contextView insertSubview:self.toViewController.view belowSubview:self.fromViewController.view];
-    [self.toViewController.view addSubview:[self blackShadowView:MAX_ALPHA_COMPONENT]];
+    [self.toViewController.view addSubview:[self hsy_blackShadowView:MAX_ALPHA_COMPONENT]];
     self.toViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.8f, 0.85f);
     [self.fromViewController.view setOrigin:CGPointZero];
     @weakify(self);
-    [self animatedTransitioning:transitionContext performPushMethods:NO animationForNext:^{
+    [self hsy_animatedTransitioning:transitionContext performPushMethods:NO animationForNext:^{
         @strongify(self);
-        [self blackShadowView:MIN_ALPHA_COMPONENT].alpha = MIN_ALPHA_COMPONENT;
+        [self hsy_blackShadowView:MIN_ALPHA_COMPONENT].alpha = MIN_ALPHA_COMPONENT;
         self.toViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f, 1.0f);
         [self.fromViewController.view setOrigin:CGPointMake(IPHONE_WIDTH, 0)];
     }];
 }
 
-- (void)animatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext performPushMethods:(BOOL)push animationForNext:(void(^)())next
+- (void)hsy_animatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext performPushMethods:(BOOL)push animationForNext:(void(^)())next
 {
     @weakify(self);
     [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
@@ -75,7 +75,7 @@
         }
     } completion:^(BOOL finished) {
         @strongify(self);
-        [self removeShadow];
+        [self hsy_removeShadow];
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
 }

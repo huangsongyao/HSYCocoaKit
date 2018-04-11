@@ -36,27 +36,27 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
     if (self.showAllReflesh) {
         NSParameterAssert(self.pullUpView);
         NSParameterAssert(self.pullDownView);
-        [self observePullDown];
-        [self observePullUp];
+        [self hsy_observePullDown];
+        [self hsy_observePullUp];
     } else {
         if (self.showPullDown) {
             NSParameterAssert(self.pullDownView);
-            [self observePullDown];
+            [self hsy_observePullDown];
         }
         if (self.showPullUp) {
             NSParameterAssert(self.pullUpView);
-            [self observePullUp];
+            [self hsy_observePullUp];
         }
     }
 }
 
-- (void)observePullDown
+- (void)hsy_observePullDown
 {
     @weakify(self);
     [[RACObserve(self, self.viewModel.pullDownStateCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
         //监听下拉刷新
         @strongify(self);
-        if ([self requestStateCodeWithStateCode:x] == kHSYHUDModelCodeTypeRequestPullDownSuccess) {
+        if ([self hsy_requestStateCodeWithStateCode:x] == kHSYHUDModelCodeTypeRequestPullDownSuccess) {
             //监听到statusCode下拉状态变更后，发送一个信后，让table格式或者collection格式的两个子类进行reloadData动作
             HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess subscribeContents:@[x]];
             [self.viewModel.subject sendNext:object];
@@ -64,13 +64,13 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
     }];
 }
 
-- (void)observePullUp
+- (void)hsy_observePullUp
 {
     @weakify(self);
     [[RACObserve(self, self.viewModel.pullUpStateCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
         //监听上拉刷新
         @strongify(self);
-        if ([self requestStateCodeWithStateCode:x] == kHSYHUDModelCodeTypeRequestPullUpSuccess) {
+        if ([self hsy_requestStateCodeWithStateCode:x] == kHSYHUDModelCodeTypeRequestPullUpSuccess) {
             //监听到statusCode上拉状态变更后，发送一个信后，让table格式或者collection格式的两个子类进行reloadData动作
             HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess subscribeContents:@[x]];
             [self.viewModel.subject sendNext:object];
@@ -80,13 +80,13 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
 
 #pragma mark - Set Pull Down && Pull Up
 
-- (void)addRefresh:(UIScrollView *)scrollView
+- (void)hsy_addRefresh:(UIScrollView *)scrollView
 {
-    [self addPullUpRefresh:scrollView];
-    [self addPullDownRefresh:scrollView];
+    [self hsy_addPullUpRefresh:scrollView];
+    [self hsy_addPullDownRefresh:scrollView];
 }
 
-- (void)addPullDownRefresh:(UIScrollView *)scrollView
+- (void)hsy_addPullDownRefresh:(UIScrollView *)scrollView
 {
     NSParameterAssert(scrollView);
     @weakify(self);
@@ -97,7 +97,7 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
     }];
 }
 
-- (void)addPullUpRefresh:(UIScrollView *)scrollView
+- (void)hsy_addPullUpRefresh:(UIScrollView *)scrollView
 {
     NSParameterAssert(scrollView);
     @weakify(self);

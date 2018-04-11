@@ -27,6 +27,6 @@
  *
  *  @return 状态码枚举或者error的code码
  */
-- (kHSYHUDModelCodeType)requestStateCodeWithStateCode:(id)stateCode;
+- (kHSYHUDModelCodeType)hsy_requestStateCodeWithStateCode:(id)stateCode;
 
 @end

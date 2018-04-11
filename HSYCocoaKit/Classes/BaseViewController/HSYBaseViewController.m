@@ -60,15 +60,15 @@
     if (self.navigationController && [self.navigationController isKindOfClass:[HSYBaseCustomNavigationController class]]) {
         HSYBaseCustomNavigationController *nav = (HSYBaseCustomNavigationController *)self.navigationController;
         if (nav.openTransitionAnimation) {
-            [self addCustomNavigationBar];
+            [self hsy_addCustomNavigationBar];
         }
     }
 }
 
-- (kHSYHUDModelCodeType)requestStateCodeWithStateCode:(id)stateCode
+- (kHSYHUDModelCodeType)hsy_requestStateCodeWithStateCode:(id)stateCode
 {
     if([stateCode isKindOfClass:[NSError class]]) {
-        [HSYHUDHelper hideAllHUDView];
+        [HSYHUDHelper hsy_hideAllHUDView];
         NSError *error = (NSError *)stateCode;
         if (error.userInfo[kErrorForNotNetworkKey]) {
             [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeWrong codeType:kHSYHUDModelCodeTypeDefault text:error.userInfo[kErrorForNotNetworkKey] animationTime:HUD_HIDE_TIME];
@@ -78,16 +78,16 @@
         return kHSYHUDModelCodeTypeError;
     } else if ([stateCode isKindOfClass:[HSYHUDModel class]]) {
         HSYHUDModel *model = (HSYHUDModel *)stateCode;
-        [HSYHUDHelper hideAllHUDView];//清除loading页面
+        [HSYHUDHelper hsy_hideAllHUDView];//清除loading页面
         if (model.codeType == kHSYHUDModelCodeTypeUpdateLoading) {
             if (model.showPromptContent) {
-                [HSYHUDHelper showHUDViewForShowType:model.showType text:model.hudString hideAfter:model.animationTime ];
+                [HSYHUDHelper hsy_showHUDViewForShowType:model.showType text:model.hudString hideAfter:model.animationTime ];
             }
         } else if(model.codeType == kHSYHUDModelCodeTypeRequestSuccess) {
         
         } else if (model.codeType == kHSYHUDModelCodeTypeRequestFailure) {
             if (model.showPromptContent) {
-                [HSYHUDHelper showHUDViewForShowType:model.showType text:model.hudString hideAfter:model.animationTime];
+                [HSYHUDHelper hsy_showHUDViewForShowType:model.showType text:model.hudString hideAfter:model.animationTime];
             }
         } else if (model.codeType == kHSYHUDModelCodeTypeRequestPullUpSuccess) {
             
@@ -101,19 +101,19 @@
 
 #pragma mark - NavigationBar
 
-- (void)addCustomNavigationBar
+- (void)hsy_addCustomNavigationBar
 {
     _customNavigationBar = [[HSYCustomNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, DEFAULT_NAVIGATION_BAR_HEIGHT)];
     [self.view addSubview:self.customNavigationBar];
     if (self.navigationController.viewControllers.count > 1) {
-        [self pushNavigationItemInLeft];
+        [self hsy_pushNavigationItemInLeft];
     }
 }
 
-- (void)pushNavigationItemInLeft
+- (void)hsy_pushNavigationItemInLeft
 {
     @weakify(self);
-    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar backButtonItem:^(UIButton *button, kHSYCustomBarButtonItemTag tag) {
+    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar hsy_backButtonItem:^(UIButton *button, kHSYCustomBarButtonItemTag tag) {
         @strongify(self);
         if (tag == kHSYCustomBarButtonItemTagBack) {
             [self.navigationController popViewControllerAnimated:YES];

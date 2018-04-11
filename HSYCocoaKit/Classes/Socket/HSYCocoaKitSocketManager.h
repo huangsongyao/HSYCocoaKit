@@ -27,7 +27,7 @@ FOUNDATION_EXPORT NSString *const HSYCocoaKitSocketConnectStatusNotification;   
  @param port 端口
  @return RACSignal信号
  */
-- (RACSignal *)connectServer:(NSString *)host onPort:(uint16_t)port;
+- (RACSignal *)hsy_connectServer:(NSString *)host hsy_onPort:(uint16_t)port NS_AVAILABLE_IOS(8_0);
 
 /**
  建立socket长连接，订阅信号的回调类型为RACTuple实例，first表示HSYCocoaKitSocketRACSignal，second表示NSError
@@ -35,7 +35,7 @@ FOUNDATION_EXPORT NSString *const HSYCocoaKitSocketConnectStatusNotification;   
  @param urlString socket长连接的地址
  @return RACSignal信号
  */
-- (RACSignal *)connectServer:(NSString *)urlString;
+- (RACSignal *)hsy_connectServer:(NSString *)urlString NS_AVAILABLE_IOS(8_0);
 
 /**
  向socket服务器丢包
@@ -43,7 +43,7 @@ FOUNDATION_EXPORT NSString *const HSYCocoaKitSocketConnectStatusNotification;   
  @param data data数据
  @param tag tag
  */
-- (void)writeData:(NSData *)data tag:(long)tag;
+- (void)hsy_writeData:(NSData *)data hsy_tag:(long)tag;
 
 
 @end

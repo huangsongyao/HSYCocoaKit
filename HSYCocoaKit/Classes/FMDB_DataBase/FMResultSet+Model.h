@@ -18,6 +18,6 @@
  *
  *  @return 查询的数据集合
  */
-- (NSMutableDictionary *)fmdbForColumn:(HSYFMDBOperationFieldInfo *)operation;
+- (NSMutableDictionary *)hsy_fmdbForColumn:(HSYFMDBOperationFieldInfo *)operation;
 
 @end

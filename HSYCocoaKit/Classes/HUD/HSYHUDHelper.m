@@ -30,27 +30,27 @@ static HSYHUDHelper *hsyHUDHelper = nil;
     return hsyHUDHelper;
 }
 
-+ (MBProgressHUD *)showHUDViewForMessage:(NSString *)message
++ (MBProgressHUD *)hsy_showHUDViewForMessage:(NSString *)message
 {
-    return [[HSYHUDHelper shareInstance] showHUDViewType:kShowHUDViewTypeText text:message hideAfter:HUD_STRING_DISPLAY_TIME];
+    return [[HSYHUDHelper shareInstance] hsy_showHUDViewType:kShowHUDViewTypeText text:message hideAfter:HUD_STRING_DISPLAY_TIME];
 }
 
-+ (MBProgressHUD *)showHUDViewForShowType:(kShowHUDViewType)showType text:(NSString *)text hideAfter:(CGFloat)time
++ (MBProgressHUD *)hsy_showHUDViewForShowType:(kShowHUDViewType)showType text:(NSString *)text hideAfter:(CGFloat)time
 {
-    return [[HSYHUDHelper shareInstance] showHUDViewType:showType text:text hideAfter:time];
+    return [[HSYHUDHelper shareInstance] hsy_showHUDViewType:showType text:text hideAfter:time];
 }
 
-- (MBProgressHUD *)showHUDViewType:(kShowHUDViewType)type text:(NSString *)text hideAfter:(CGFloat)time
+- (MBProgressHUD *)hsy_showHUDViewType:(kShowHUDViewType)type text:(NSString *)text hideAfter:(CGFloat)time
 {
-    MBProgressHUD *hudView = [self createHUDViewType:type text:text hideAfter:time];
+    MBProgressHUD *hudView = [self hsy_createHUDViewType:type text:text hideAfter:time];
     self.currentDisplayHud = hudView;
     return hudView;
 }
 
-- (MBProgressHUD *)createHUDViewType:(kShowHUDViewType)type text:(NSString *)text hideAfter:(CGFloat)time
+- (MBProgressHUD *)hsy_createHUDViewType:(kShowHUDViewType)type text:(NSString *)text hideAfter:(CGFloat)time
 {
     if (self.hudViews.count > 0) {
-        [HSYHUDHelper hideAllHUDView];
+        [HSYHUDHelper hsy_hideAllHUDView];
     }
     
     MBProgressHUD *hudView = [[MBProgressHUD alloc] initWithWindow:[UIApplication keyWindows]];
@@ -90,7 +90,7 @@ static HSYHUDHelper *hsyHUDHelper = nil;
 }
 
 
-- (void)hideHUDView
+- (void)hsy_hideHUDView
 {
     if (!self.currentDisplayHud) {
         return;
@@ -98,27 +98,27 @@ static HSYHUDHelper *hsyHUDHelper = nil;
     [self.currentDisplayHud hide:YES];
 }
 
-+ (void)hideHUDView
++ (void)hsy_hideHUDView
 {
-    [[HSYHUDHelper shareInstance] hideHUDView];
+    [[HSYHUDHelper shareInstance] hsy_hideHUDView];
 }
 
-+ (void)setHUDAnimationType:(MBProgressHUDAnimation)animationType
++ (void)hsy_setHUDAnimationType:(MBProgressHUDAnimation)animationType
 {
-    [[HSYHUDHelper shareInstance] setHUDAnimationType:animationType];
+    [[HSYHUDHelper shareInstance] hsy_setHUDAnimationType:animationType];
 }
 
-- (void)setHUDAnimationType:(MBProgressHUDAnimation)animationType
+- (void)hsy_setHUDAnimationType:(MBProgressHUDAnimation)animationType
 {
     self.hudAnimationType = animationType;
 }
 
-+ (void)hideAllHUDView
++ (void)hsy_hideAllHUDView
 {
-    [[HSYHUDHelper shareInstance] hideAllHUDView];
+    [[HSYHUDHelper shareInstance] hsy_hideAllHUDView];
 }
 
-- (void)hideAllHUDView
+- (void)hsy_hideAllHUDView
 {
     for (MBProgressHUD *hud in self.hudViews) {
         [hud hide:YES];

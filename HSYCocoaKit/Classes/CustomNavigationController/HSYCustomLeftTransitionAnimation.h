@@ -10,6 +10,6 @@
 
 @interface HSYCustomLeftTransitionAnimation : HSYCustomBaseTransitionAnimation
 
-- (instancetype)initWithTransitionType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type;
+- (instancetype)initWithTransitionType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type NS_AVAILABLE_IOS(8_0);
 
 @end

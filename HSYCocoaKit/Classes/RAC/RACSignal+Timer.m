@@ -12,12 +12,12 @@ static RACSignal *oneMinuteSignal = nil;
 
 @implementation RACSignal (Timer)
 
-+ (RACSignal *)rac_timerSignalOneMinute
++ (RACSignal *)hsy_rac_timerSignalOneMinute
 {
-    return [RACSignal rac_timerSignalOneMinuteForInterval:1.0f];
+    return [RACSignal hsy_rac_timerSignalOneMinuteForInterval:1.0f];
 }
 
-+ (RACSignal *)rac_timerSignalOneMinuteForInterval:(NSTimeInterval)interval
++ (RACSignal *)hsy_rac_timerSignalOneMinuteForInterval:(NSTimeInterval)interval
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -26,7 +26,7 @@ static RACSignal *oneMinuteSignal = nil;
     return oneMinuteSignal;
 }
 
-+ (RACDisposable *)rac_startClockwiseTimer:(CGFloat)interval subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
++ (RACDisposable *)hsy_rac_startClockwiseTimer:(CGFloat)interval subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
 {
     static CGFloat count = 0.0f;
     __block RACDisposable *disposable = nil;

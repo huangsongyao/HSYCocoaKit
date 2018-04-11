@@ -19,7 +19,7 @@
 - (instancetype)initWithFieldName:(NSString *)name
                         fieldType:(NSString *)type;
 
-+ (NSMutableArray *)toOperationFields:(NSMutableArray *)fieldsInfo;
++ (NSMutableArray *)hsy_toOperationFields:(NSMutableArray *)fieldsInfo;
 
 @end
 
@@ -29,11 +29,11 @@
 @property (nonatomic, strong) NSMutableArray <HSYFMDBOperationFields *>*fields;     //数据库要添加到表中的字段名称和字段名称对应的类型 的抽象类集合
 @property (nonatomic, strong) NSMutableArray <NSString *>*statements;               //数据库要插入的数据
 
-- (NSString *)toDataBaseTableField;                                                 //通过对fields集合进行处理，获取到一个创建表的字符串
-- (NSString *)toDataBaseTableInsertStatements;                                      //通过对fields集合进行处理，获取到一个用于插入数据的字符串
-- (NSString *)toDataBaseTableInsertFields;
+- (NSString *)hsy_toDataBaseTableField;                                                 //通过对fields集合进行处理，获取到一个创建表的字符串
+- (NSString *)hsy_toDataBaseTableInsertStatements;                                      //通过对fields集合进行处理，获取到一个用于插入数据的字符串
+- (NSString *)hsy_toDataBaseTableInsertFields;
 
-- (NSDictionary *)toDictionaryFields;                                               //通过对fields集合的处理，获取到键值对类型，格式为：@{@"表单字段A" : @"表单字段A的值a", @"表单字段B" : @"表单字段B的值b", ...}
+- (NSDictionary *)hsy_toDictionaryFields;                                               //通过对fields集合的处理，获取到键值对类型，格式为：@{@"表单字段A" : @"表单字段A的值a", @"表单字段B" : @"表单字段B的值b", ...}
 
 @end
 
@@ -47,7 +47,7 @@
  *
  *  @return HSYFMDBOperationInfo
  */
-+ (HSYFMDBOperationFieldInfo *)createDataBaseTableForName:(NSString *)name fields:(NSMutableArray <HSYFMDBOperationFields *>*)fields;
++ (HSYFMDBOperationFieldInfo *)hsy_createDataBaseTableForName:(NSString *)name fields:(NSMutableArray <HSYFMDBOperationFields *>*)fields;
 
 /**
  *  快捷创建，用于插入数据
@@ -58,7 +58,7 @@
  *
  *  @return HSYFMDBOperationInfo
  */
-+ (HSYFMDBOperationFieldInfo *)createDataBaseTableForName:(NSString *)name fields:(NSMutableArray <HSYFMDBOperationFields *>*)fields insertDatas:(NSMutableArray <NSString *>*)statements;
++ (HSYFMDBOperationFieldInfo *)hsy_createDataBaseTableForName:(NSString *)name fields:(NSMutableArray <HSYFMDBOperationFields *>*)fields insertDatas:(NSMutableArray <NSString *>*)statements;
 
 
 @end

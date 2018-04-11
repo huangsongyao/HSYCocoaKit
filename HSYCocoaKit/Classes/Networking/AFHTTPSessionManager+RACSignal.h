@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
  @param parameters 参数
  @return RACSignal
  */
-- (RACSignal *)rac_getRequest:(NSString *)urlPath parameters:(id)parameters;
+- (RACSignal *)hsy_rac_getRequest:(NSString *)urlPath parameters:(id)parameters NS_AVAILABLE_IOS(8_0);
 
 /**
  get请求，允许设置额外的请求头信息
@@ -38,7 +38,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
  @param headers 请求头信息
  @return RACSignal
  */
-- (RACSignal *)rac_getRequest:(NSString *)urlPath parameters:(id)parameters setHeaders:(NSArray<NSDictionary *> *)headers;
+- (RACSignal *)hsy_rac_getRequest:(NSString *)urlPath parameters:(id)parameters setHeaders:(NSArray<NSDictionary *> *)headers NS_AVAILABLE_IOS(8_0);
 
 #pragma mark - Post
 
@@ -49,7 +49,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
  @param parameters 参数
  @return RACSignal
  */
-- (RACSignal *)rac_postRequest:(NSString *)urlPath parameters:(id)parameters;
+- (RACSignal *)hsy_rac_postRequest:(NSString *)urlPath parameters:(id)parameters NS_AVAILABLE_IOS(8_0);
 
 /**
  post请求，允许设置额外的请求头信息
@@ -59,7 +59,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
  @param headers 请求头信息
  @return RACSignal
  */
-- (RACSignal *)rac_postRequest:(NSString *)urlPath parameters:(id)parameters setHeaders:(NSArray<NSDictionary *> *)headers;
+- (RACSignal *)hsy_rac_postRequest:(NSString *)urlPath parameters:(id)parameters setHeaders:(NSArray<NSDictionary *> *)headers NS_AVAILABLE_IOS(8_0);
 
 #pragma mark - Logs
 
@@ -68,14 +68,14 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
 
  @param error error
  */
-+ (void)logRequestError:(NSError *)error;
++ (void)hsy_logRequestError:(NSError *)error;
 
 /**
  log台打印request header
 
  @param task 任务
  */
-+ (void)logRequestHeaders:(NSURLSessionDataTask *)task;
++ (void)hsy_logRequestHeaders:(NSURLSessionDataTask *)task;
 
 #pragma mark - HTTPMethod
 
@@ -85,6 +85,6 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
  @param model 枚举类型
  @return 请求类型
  */
-+ (NSString *)methodFromNetworkingRequestModel:(kHSYCocoaKitNetworkingRequestModel)model;
++ (NSString *)hsy_methodFromNetworkingRequestModel:(kHSYCocoaKitNetworkingRequestModel)model;
 
 @end

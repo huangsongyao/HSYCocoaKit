@@ -32,9 +32,9 @@ typedef NS_ENUM(NSUInteger, kHSYCustomPercentDrivenInteractiveTransitionActionsT
 @property (nonatomic, assign, readonly) CGFloat transitionDuration;
 
 - (instancetype)initWithTransitionDuration:(CGFloat)transitionDuration
-                               actionsType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type;
-+ (kHSYCustomPercentDrivenInteractiveTransitionActionsType)togetherPercentDrivenInteractiveTransitionActionsType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type;
-- (UIView *)blackShadowView:(CGFloat)alpha;
-- (void)removeShadow;
+                               actionsType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type NS_AVAILABLE_IOS(8_0);
++ (kHSYCustomPercentDrivenInteractiveTransitionActionsType)hsy_togetherPercentDrivenInteractiveTransitionActionsType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type NS_AVAILABLE_IOS(8_0);
+- (UIView *)hsy_blackShadowView:(CGFloat)alpha;
+- (void)hsy_removeShadow;
 
 @end

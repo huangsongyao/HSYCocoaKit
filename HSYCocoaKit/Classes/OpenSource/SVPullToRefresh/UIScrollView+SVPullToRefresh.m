@@ -118,7 +118,7 @@ static char UIScrollViewPullToRefreshView;
 
 - (void)setLoadingBackgroundColor:(UIColor *)backgroundColor
 {
-    [self.pullToRefreshView.loadingView updateBackgroundColor:backgroundColor];
+    [self.pullToRefreshView.loadingView hsy_updateBackgroundColor:backgroundColor];
 }
 
 @end
@@ -212,15 +212,15 @@ static char UIScrollViewPullToRefreshView;
             } else if(self.scrollView.isDragging && contentOffset.y >= scrollOffsetThreshold && contentOffset.y < 0) {
                 self.state = SVPullToRefreshStateStopped;
                 CGFloat percent = contentOffset.y/scrollOffsetThreshold;
-                [self.loadingView updateTriggerForPercent:percent refreshState:self.state];
+                [self.loadingView hsy_updateTriggerForPercent:percent refreshState:self.state];
             }
         } else if(self.state == SVPullToRefreshStateStopped) {
             if (contentOffset.y < scrollOffsetThreshold && self.scrollView.isDragging) {
                 self.state = SVPullToRefreshStateTriggered;
-                [self.loadingView updateTriggerForPercent:1 refreshState:_state];
+                [self.loadingView hsy_updateTriggerForPercent:1 refreshState:_state];
             } else if(contentOffset.y >= scrollOffsetThreshold && contentOffset.y < 0) {
                 CGFloat percent = contentOffset.y/scrollOffsetThreshold;
-                [self.loadingView updateTriggerForPercent:percent refreshState:_state];
+                [self.loadingView hsy_updateTriggerForPercent:percent refreshState:_state];
             }
         } else if(self.state != SVPullToRefreshStateStopped ) {
             if (contentOffset.y >= scrollOffsetThreshold) {
@@ -271,7 +271,7 @@ static char UIScrollViewPullToRefreshView;
     switch (newState) {
         case SVPullToRefreshStateAll:
         case SVPullToRefreshStateStopped: {
-            [self.loadingView stop];
+            [self.loadingView hsy_stop];
             [self resetScrollViewContentInset];
         }
             break;
@@ -280,7 +280,7 @@ static char UIScrollViewPullToRefreshView;
             break;
             
         case SVPullToRefreshStateLoading: {
-            [self.loadingView start];
+            [self.loadingView hsy_start];
             [self setScrollViewContentInsetForLoading];
             if(previousState == SVPullToRefreshStateTriggered && _pullToRefreshActionHandler)
                 _pullToRefreshActionHandler();

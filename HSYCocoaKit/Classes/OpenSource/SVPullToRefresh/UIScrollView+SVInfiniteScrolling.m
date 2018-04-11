@@ -250,7 +250,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 
     switch (newState) {
         case SVInfiniteScrollingStateStopped: {
-            [self.loadingView stop];
+            [self.loadingView hsy_stop];
         }
             break;
                 
@@ -259,7 +259,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
                 
         case SVInfiniteScrollingStateLoading: {
             if (self.scrollView.contentOffset.y > 0) {
-                [self.loadingView start];
+                [self.loadingView hsy_start];
             }
         }
             break;

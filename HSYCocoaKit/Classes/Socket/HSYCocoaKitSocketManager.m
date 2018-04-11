@@ -47,7 +47,7 @@ static HSYCocoaKitSocketManager *socketManager;
         
         //rac下对GCDAsyncSocketDelegate监听
         @weakify(self);
-        [[[self.tcpSocket rac_allSocketDelegateSiganl] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitSocketRACSignal *notification) {
+        [[[self.tcpSocket hsy_rac_allSocketDelegateSiganl] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitSocketRACSignal *notification) {
             @strongify(self);
             if (!notification) {
                 return;
@@ -57,7 +57,7 @@ static HSYCocoaKitSocketManager *socketManager;
                 case kHSYCocoaKitSocketRACDelegate_socketConnected: {
                     BOOL connect = [sock isConnected];
                     if (connect) {
-                        [self setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_Connected];
+                        [self hsy_setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_Connected];
                     }
                 }
                     break;
@@ -67,11 +67,11 @@ static HSYCocoaKitSocketManager *socketManager;
                     }
                     if (connectAgainCount <= 3) {
                         connectAgainCount ++;
-                        [self connectServer:sock.connectedHost onPort:sock.connectedPort];
-                        [self setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_ConnectAgain];
+                        [self hsy_connectServer:sock.connectedHost hsy_onPort:sock.connectedPort];
+                        [self hsy_setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_ConnectAgain];
                     } else {
                         connectAgainCount = 0;
-                        [self setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_PassiveDisConnected];
+                        [self hsy_setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_PassiveDisConnected];
                     }
                 }
                     break;
@@ -95,26 +95,26 @@ static HSYCocoaKitSocketManager *socketManager;
             kHSYCocoaKitSocketConnectStatus status = (kHSYCocoaKitSocketConnectStatus)[connect integerValue];
             [[NSNotificationCenter defaultCenter] postNotificationName:HSYCocoaKitSocketConnectStatusNotification object:@(status)];
         }];
-        [self setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_UnConnect];
+        [self hsy_setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_UnConnect];
     }
     return self;
 }
 
 #pragma mark - Connect && DisConnect
 
-- (RACSignal *)connectServer:(NSString *)host onPort:(uint16_t)port
+- (RACSignal *)hsy_connectServer:(NSString *)host hsy_onPort:(uint16_t)port
 {
-    return [self connectServer:nil host:host onPort:port];
+    return [self hsy_connectServer:nil hsy_host:host hsy_onPort:port];
 }
 
-- (RACSignal *)connectServer:(NSString *)urlString
+- (RACSignal *)hsy_connectServer:(NSString *)urlString
 {
-    return [self connectServer:urlString host:nil onPort:0000];
+    return [self hsy_connectServer:urlString hsy_host:nil hsy_onPort:0000];
 }
 
-- (RACSignal *)connectServer:(NSString *)urlString
-                        host:(NSString *)host
-                      onPort:(uint16_t)port
+- (RACSignal *)hsy_connectServer:(NSString *)urlString
+                        hsy_host:(NSString *)host
+                      hsy_onPort:(uint16_t)port
 {
     _connectHost = host;
     _connectPort = port;
@@ -128,7 +128,7 @@ static HSYCocoaKitSocketManager *socketManager;
         _socketDelegateSignal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             @strongify(self);
             if (![self.tcpSocket isConnected]) {
-                [self connect:urlString host:host onPort:port errorBlock:^(NSError *error) {
+                [self hsy_connect:urlString hsy_host:host hsy_onPort:port hsy_errorBlock:^(NSError *error) {
                     //为了保持订阅信号的活跃性，此处不能使用"- sendError:"，否则订阅信号会被release
                     RACTuple *tuple = RACTuplePack(nil, error);
                     [subscriber sendNext:tuple];
@@ -151,7 +151,7 @@ static HSYCocoaKitSocketManager *socketManager;
             }];
         }];
     } else if (![self.tcpSocket isConnected]) {
-        [self connect:urlString host:host onPort:port errorBlock:^(NSError *error) {
+        [self hsy_connect:urlString hsy_host:host hsy_onPort:port hsy_errorBlock:^(NSError *error) {
             @strongify(self);
             [self.delegateSubject sendNext:error];
         }];
@@ -159,16 +159,16 @@ static HSYCocoaKitSocketManager *socketManager;
     return self.socketDelegateSignal;
 }
 
-- (void)connect:(NSString *)urlString
-           host:(NSString *)host
-         onPort:(uint16_t)port
-     errorBlock:(void(^)(NSError *error))block
+- (void)hsy_connect:(NSString *)urlString
+           hsy_host:(NSString *)host
+         hsy_onPort:(uint16_t)port
+     hsy_errorBlock:(void(^)(NSError *error))block
 {
     @weakify(self);
-    [[HSYNetWorkingManager shareInstance] observer_3x_NetworkReachabilityOfNext:^BOOL(AFNetworkReachabilityStatus status, BOOL hasNetwork) {
+    [[HSYNetWorkingManager shareInstance] hsy_observer_3x_NetworkReachabilityOfNext:^BOOL(AFNetworkReachabilityStatus status, BOOL hasNetwork) {
         @strongify(self);
         if (!hasNetwork && block) {
-            block([NSError errorWithErrorType:kAFNetworkingStatusErrorTypeNone]);
+            block([NSError hsy_errorWithErrorType:kAFNetworkingStatusErrorTypeNone]);
         } else {
             NSError *error = nil;
             BOOL connect = NO;
@@ -191,15 +191,15 @@ static HSYCocoaKitSocketManager *socketManager;
     }];
 }
 
-- (void)disConnect
+- (void)hsy_disConnect
 {
     if (self.tcpSocket && [self.tcpSocket isConnected]) {
-        [self setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_AccordDisConnected];
+        [self hsy_setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_AccordDisConnected];
         [self.tcpSocket disconnect];
     }
 }
 
-- (void)setCurrentSocketConnectStatus:(kHSYCocoaKitSocketConnectStatus)statuls
+- (void)hsy_setCurrentSocketConnectStatus:(kHSYCocoaKitSocketConnectStatus)statuls
 {
     _socketConnectStatus = statuls;
     self.observerSockectConnect = @(self.socketConnectStatus);
@@ -207,7 +207,7 @@ static HSYCocoaKitSocketManager *socketManager;
 
 #pragma mark - Operation
 
-- (void)writeData:(NSData *)data tag:(long)tag
+- (void)hsy_writeData:(NSData *)data hsy_tag:(long)tag
 {
     [self.tcpSocket writeData:data withTimeout:DEFAULT_SOCKET_WRITE_TIME tag:tag];
 }

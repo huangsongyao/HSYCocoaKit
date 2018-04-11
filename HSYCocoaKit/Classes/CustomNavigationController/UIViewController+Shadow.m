@@ -10,7 +10,7 @@
 
 @implementation UIViewController (Shadow)
 
-- (void)setShadowForColorRef:(CGColorRef)ref shadowOpacity:(CGFloat)opacity shadowRadius:(CGFloat)radius
+- (void)hsy_setShadowForColorRef:(CGColorRef)ref shadowOpacity:(CGFloat)opacity shadowRadius:(CGFloat)radius
 {
     self.view.layer.shadowColor = ref;
     self.view.layer.shadowOpacity = opacity;

@@ -19,13 +19,13 @@
     return self;
 }
 
-+ (NSData *)writeData:(NSString *)jsonString
++ (NSData *)hsy_writeData:(NSString *)jsonString
 {
     NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     return data;
 }
 
-- (id)toJSONReponse
+- (id)hsy_toJSONReponse
 {
     id second = self.tuple.second;
     if ([second isKindOfClass:[NSData class]]) {

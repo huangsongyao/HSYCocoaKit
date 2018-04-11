@@ -32,13 +32,13 @@ static HSYNetWorkingManager *networkingManager;
 - (instancetype)init
 {
     if (self = [super init]) {
-        _httpSessionManager = [HSYNetWorkingManager defaultHTTPSessionManager:YES];
-        _fileSessionManager = [HSYNetWorkingManager defaultURLSessionManager];
+        _httpSessionManager = [HSYNetWorkingManager hsy_defaultHTTPSessionManager:YES];
+        _fileSessionManager = [HSYNetWorkingManager hsy_defaultURLSessionManager];
     }
     return self;
 }
 
-+ (NSString *)urlFromPath:(NSString *)path
++ (NSString *)hsy_urlFromPath:(NSString *)path
 {
     if ([path hasPrefix:@"http"]) {
         return path;
@@ -51,7 +51,7 @@ static HSYNetWorkingManager *networkingManager;
     return urlString;
 }
 
-+ (NSArray<NSDictionary *> *)defaultHeaders
++ (NSArray<NSDictionary *> *)hsy_defaultHeaders
 {
     return @[
              ];
@@ -59,7 +59,7 @@ static HSYNetWorkingManager *networkingManager;
 
 #pragma mark - >=3.0f version
 
-- (RACSignal *)networking_3x_Reachability
+- (RACSignal *)hsy_networking_3x_Reachability
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         AFNetworkReachabilityManager *networkStatusManager = [AFNetworkReachabilityManager sharedManager];
@@ -67,7 +67,7 @@ static HSYNetWorkingManager *networkingManager;
             if (status != AFNetworkReachabilityStatusNotReachable) {
                 [subscriber sendCompleted];
             } else {
-                [subscriber sendError:[NSError errorWithErrorType:kAFNetworkingStatusErrorTypeNone]];
+                [subscriber sendError:[NSError hsy_errorWithErrorType:kAFNetworkingStatusErrorTypeNone]];
             }
         }];
         [networkStatusManager startMonitoring];
@@ -75,7 +75,7 @@ static HSYNetWorkingManager *networkingManager;
     }];
 }
 
-- (void)observer_3x_NetworkReachabilityOfNext:(BOOL(^)(AFNetworkReachabilityStatus status, BOOL hasNetwork))next
+- (void)hsy_observer_3x_NetworkReachabilityOfNext:(BOOL(^)(AFNetworkReachabilityStatus status, BOOL hasNetwork))next
 {
     AFNetworkReachabilityManager *networkStatusManager = [AFNetworkReachabilityManager sharedManager];
     @weakify(networkStatusManager);
@@ -92,7 +92,7 @@ static HSYNetWorkingManager *networkingManager;
     [networkStatusManager startMonitoring];
 }
 
-+ (AFHTTPSessionManager *)defaultHTTPSessionManager:(BOOL)needTimeoutInterval
++ (AFHTTPSessionManager *)hsy_defaultHTTPSessionManager:(BOOL)needTimeoutInterval
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];   //申明请求参数为json格式
@@ -103,13 +103,13 @@ static HSYNetWorkingManager *networkingManager;
         manager.requestSerializer.timeoutInterval = 60.0f;
         [manager.requestSerializer didChangeValueForKey:@"DidChangeToRequestTimeOutInterval"];
     }
-    for (NSDictionary *dic in self.class.defaultHeaders) {
+    for (NSDictionary *dic in self.class.hsy_defaultHeaders) {
         [manager.requestSerializer setValue:dic.allValues.firstObject forHTTPHeaderField:dic.allKeys.firstObject];
     }
     return manager;
 }
 
-+ (AFURLSessionManager *)defaultURLSessionManager
++ (AFURLSessionManager *)hsy_defaultURLSessionManager
 {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];

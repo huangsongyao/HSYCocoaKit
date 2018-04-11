@@ -11,7 +11,7 @@
 
 @implementation FMResultSet (Model)
 
-- (NSMutableDictionary *)fmdbForColumn:(HSYFMDBOperationFieldInfo *)operation
+- (NSMutableDictionary *)hsy_fmdbForColumn:(HSYFMDBOperationFieldInfo *)operation
 {    
     NSMutableDictionary *paramter = [[NSMutableDictionary alloc] initWithCapacity:operation.fields.count];
     for (HSYFMDBOperationFields *field in operation.fields) {

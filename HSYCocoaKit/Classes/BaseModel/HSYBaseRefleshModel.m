@@ -13,23 +13,23 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        [self updateSize:100];
-        [self firstPage];
+        [self hsy_updateSize:100];
+        [self hsy_firstPage];
     }
     return self;
 }
 
-- (void)nextPage
+- (void)hsy_nextPage
 {
     _page ++;
 }
 
-- (void)firstPage
+- (void)hsy_firstPage
 {
     _page = 1;
 }
 
-- (void)updateSize:(NSInteger)size
+- (void)hsy_updateSize:(NSInteger)size
 {
     if (size <= 0) {
         return;
@@ -37,20 +37,20 @@
     _size = size;
 }
 
-- (void)updateNext:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map pullDown:(kHSYReflesStatusType)status
+- (void)hsy_updateNext:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map pullDown:(kHSYReflesStatusType)status
 {
     switch (status) {
         case kHSYReflesStatusTypePullDown:
-            [self firstPage];
+            [self hsy_firstPage];
             break;
         case kHSYReflesStatusTypePullUp:
-            [self nextPage];
+            [self hsy_nextPage];
             break;
         default:
             break;
     }
     @weakify(self);
-    [self requestNetwork:network toMap:map subscriberNext:^BOOL(NSMutableArray *result) {
+    [self hsy_requestNetwork:network toMap:map subscriberNext:^BOOL(NSMutableArray *result) {
         if (result.count == 0) {
             return NO;
         }

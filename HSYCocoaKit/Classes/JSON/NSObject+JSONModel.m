@@ -11,43 +11,42 @@
 
 @implementation NSObject (JSONModel)
 
-- (id)resultObjectToJSONModelWithClasses:(Class)classes json:(id)json
+- (id)hsy_resultObjectToJSONModelWithClasses:(Class)classes json:(id)json
 {
     if (!json) {
         return nil;
     }
     if ([json isKindOfClass:[NSString class]]) {
-        return [self resultObjectToBeanWithClass:classes jsonString:json];
+        return [self hsy_resultObjectToBeanWithClass:classes jsonString:json];
     } else {
-        return [self resultObjectToBeanWithClass:classes json:json];
+        return [self hsy_resultObjectToBeanWithClass:classes json:json];
     }
 }
 
-+ (id)resultObjectToJSONModelWithClasses:(Class)classes json:(id)json
++ (id)hsy_resultObjectToJSONModelWithClasses:(Class)classes json:(id)json
 {
-    return [[self alloc] resultObjectToJSONModelWithClasses:classes json:json];
+    return [[self alloc] hsy_resultObjectToJSONModelWithClasses:classes json:json];
 }
 
 #pragma mark - Resolve JSON
 
-- (id)resultObjectToBeanWithClass:(Class)classes json:(id)json
+- (id)hsy_resultObjectToBeanWithClass:(Class)classes json:(id)json
 {
     if (!json) {
         return nil;
     }
-    
     id jsonObject = [NSString toJSONObject:json];
     return [self resolveToModelForJsonObject:jsonObject classes:classes];
 }
 
 
-+ (id)resultObjectToBeanWithClass:(Class)classes json:(id)json
++ (id)hsy_resultObjectToBeanWithClass:(Class)classes json:(id)json
 {
-    return [[self alloc] resultObjectToBeanWithClass:classes json:json];
+    return [[self alloc] hsy_resultObjectToBeanWithClass:classes json:json];
 }
 
 
-- (id)resultObjectToBeanWithClass:(Class)classes jsonString:(NSString *)jsonString
+- (id)hsy_resultObjectToBeanWithClass:(Class)classes jsonString:(NSString *)jsonString
 {
     if (!jsonString) {
         return nil;
@@ -56,9 +55,9 @@
     return [self resolveToModelForJsonObject:jsonObject classes:classes];
 }
 
-+ (id)resultObjectToBeanWithClass:(Class)classes jsonString:(NSString *)jsonString
++ (id)hsy_resultObjectToBeanWithClass:(Class)classes jsonString:(NSString *)jsonString
 {
-    return [[self alloc] resultObjectToBeanWithClass:classes jsonString:jsonString];
+    return [[self alloc] hsy_resultObjectToBeanWithClass:classes jsonString:jsonString];
 }
 
 /**

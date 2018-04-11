@@ -35,14 +35,14 @@
 
 #pragma mark - Set Pull Down Background Color
 
-- (void)updateBackgroundColor:(UIColor *)color
+- (void)hsy_updateBackgroundColor:(UIColor *)color
 {
     
 }
 
 #pragma mark - Observer Scroll Percent
 
-- (void)updateTriggerForPercent:(CGFloat)percent refreshState:(SVPullToRefreshState)state
+- (void)hsy_updateTriggerForPercent:(CGFloat)percent refreshState:(SVPullToRefreshState)state
 {
     NSParameterAssert(!(percent < MIN_TRIGGER_PERCENT || percent > MAX_TRIGGER_PERCENT));
     if (!self.contentView) {
@@ -62,14 +62,14 @@
 
 #pragma mark - Start Loading Animation
 
-- (void)start
+- (void)hsy_start
 {
-    [self updateTriggerForPercent:MAX_TRIGGER_PERCENT refreshState:SVPullToRefreshStateLoading];
+    [self hsy_updateTriggerForPercent:MAX_TRIGGER_PERCENT refreshState:SVPullToRefreshStateLoading];
 }
 
 #pragma mark - Stop Loading Animation
 
-- (void)stop
+- (void)hsy_stop
 {
     self.refreshTitleLabel.text = REFRESH_UPDATE_OVER_TITLE;
 }

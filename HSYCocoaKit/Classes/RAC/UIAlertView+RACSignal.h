@@ -22,7 +22,7 @@
  *
  *  @return rac信号，点击到button的index
  */
-+ (RACSignal *)rac_showAlertViewWithTitle:(NSString *)title message:(NSString *)message delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray<NSString *> *)otherButtonTitles;
-+ (RACSignal *)rac_showAlertViewWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray<NSString *> *)otherButtonTitles;
++ (RACSignal *)hsy_rac_showAlertViewWithTitle:(NSString *)title message:(NSString *)message delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray<NSString *> *)otherButtonTitles NS_EXTENSION_UNAVAILABLE_IOS("use - hsy_rac_showAlertController:message:alertActionTitles");
++ (RACSignal *)hsy_rac_showAlertViewWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray<NSString *> *)otherButtonTitles NS_EXTENSION_UNAVAILABLE_IOS("use - hsy_rac_showAlertController:message:alertActionTitles");
 
 @end

@@ -25,12 +25,12 @@
  *
  *  @param next 计时器回调
  */
-- (void)timerSubscribeNext:(void(^)(NSDate *date))next;
+- (void)hsy_timerSubscribeNext:(void(^)(NSDate *date))next;
 
 /**
  *  停止计时器
  */
-- (void)stop;
+- (void)hsy_stop;
 
 /**
  *  创建button的command信号
@@ -39,7 +39,7 @@
  *
  *  @return RACCommand对象
  */
-- (RACCommand *)createCommandWithSignal:(RACSignal *)signal;
+- (RACCommand *)hsy_createCommandWithSignal:(RACSignal *)signal;
 
 /**
  *  创建button的command信号对应的RACSignal
@@ -49,7 +49,7 @@
  *
  *  @return RACSignal
  */
-- (RACSignal *)createRACSignals:(id<NSFastEnumeration>)signals reduce:(id(^)(void))reduceBlock;
+- (RACSignal *)hsy_createRACSignals:(id<NSFastEnumeration>)signals reduce:(id(^)(void))reduceBlock;
 
 /**
  *  创建button的command信号
@@ -59,7 +59,7 @@
  *
  *  @return RACCommand对象
  */
-- (RACCommand *)commandWithSignals:(id<NSFastEnumeration>)signals reduce:(id(^)(void))next;
+- (RACCommand *)hsy_commandWithSignals:(id<NSFastEnumeration>)signals reduce:(id(^)(void))next;
 
 /**
  *  遍历self.datas数组
@@ -67,7 +67,7 @@
  *  @param next      遍历回调，每次遍历都会被触发
  *  @param completed 遍历结束后的回调
  */
-- (void)rac_datasTraverseSubscribeNext:(void(^)(id result, NSNumber *index))next completed:(void(^)(void))completed;
+- (void)hsy_rac_datasTraverseSubscribeNext:(void(^)(id result, NSNumber *index))next completed:(void(^)(void))completed;
 
 /**
  *  遍历self.datas数组，同时，当不满足condition条件时，next将不被触发
@@ -76,7 +76,7 @@
  *  @param next      信号触发后的回调
  *  @param completed 遍历结束后的回调
  */
-- (void)rac_filterUntilCondition:(BOOL(^)(id predicate))condition subscribeNext:(void(^)(id x))next completed:(void(^)(void))completed;
+- (void)hsy_rac_filterUntilCondition:(BOOL(^)(id predicate))condition subscribeNext:(void(^)(id x))next completed:(void(^)(void))completed;
 
 /**
  *  网络请求实现
@@ -86,7 +86,7 @@
  *  @param next    请求成功的回调, BOOL值返回一个是否设置请求成功的statusCode
  *  @param error   请求失败的回调
  */
-- (void)requestNetwork:(RACSignal *(^)(void))network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next error:(void(^)(NSError *error))error;
+- (void)hsy_requestNetwork:(RACSignal *(^)(void))network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next error:(void(^)(NSError *error))error;
 
 /**
  *  网络请求实现，请求失败集中处理
@@ -95,7 +95,7 @@
  *  @param map     结果映射, map返回一个json数据的映射对象
  *  @param next    请求成功的回调, BOOL值返回一个是否设置请求成功的statusCode
  */
-- (void)requestNetwork:(RACSignal *(^)(void))network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next;
+- (void)hsy_requestNetwork:(RACSignal *(^)(void))network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next;
 
 /**
  *  网络请求实现，请求失败集中处理，不需要映射结果，
@@ -104,6 +104,6 @@
  *  @param next    请求成功的回调, BOOL值返回一个是否设置请求成功的statusCode，并且返回一个json
 
  */
-- (void)requestNetwork:(RACSignal *(^)(void))network subscriberNext:(BOOL(^)(id x))next;
+- (void)hsy_requestNetwork:(RACSignal *(^)(void))network subscriberNext:(BOOL(^)(id x))next;
 
 @end

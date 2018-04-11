@@ -24,24 +24,24 @@
  *  @param percent 偏移量的百分比，取值为：[0, 1]
  *  @param state   当前类型枚举
  */
-- (void)updateTriggerForPercent:(CGFloat)percent refreshState:(SVPullToRefreshState)state;
+- (void)hsy_updateTriggerForPercent:(CGFloat)percent refreshState:(SVPullToRefreshState)state;
 
 /**
  *  更新背景的颜色
  *
  *  @param color 颜色
  */
-- (void)updateBackgroundColor:(UIColor *)color;
+- (void)hsy_updateBackgroundColor:(UIColor *)color;
 
 /**
  *  开始刷新
  */
-- (void)start;
+- (void)hsy_start;
 
 /**
  *  刷新结束
  */
-- (void)stop;
+- (void)hsy_stop;
 
 @end
 

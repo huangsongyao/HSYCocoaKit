@@ -36,7 +36,7 @@ static void RACUseDelegateProxy(GCDAsyncSocket *self)
 
 #pragma mark - Delegate
 
-- (RACSignal *)rac_socketConnected
+- (RACSignal *)hsy_rac_socketConnected
 {
     RACSignal *signal = [[[[self.rac_delegateProxy
                             signalForSelector:@selector(socket:didConnectToHost:port:)]
@@ -51,7 +51,7 @@ static void RACUseDelegateProxy(GCDAsyncSocket *self)
     return signal;
 }
 
-- (RACSignal *)rac_socketDisconnected
+- (RACSignal *)hsy_rac_socketDisconnected
 {
     RACSignal *signal = [[[[self.rac_delegateProxy
                             signalForSelector:@selector(socketDidDisconnect:withError:)]
@@ -66,7 +66,7 @@ static void RACUseDelegateProxy(GCDAsyncSocket *self)
     return signal;
 }
 
-- (RACSignal *)rac_socketDidReadData
+- (RACSignal *)hsy_rac_socketDidReadData
 {
     RACSignal *signal = [[[[self.rac_delegateProxy
                             signalForSelector:@selector(socket:didReadData:withTag:)]
@@ -81,7 +81,7 @@ static void RACUseDelegateProxy(GCDAsyncSocket *self)
     return signal;
 }
 
-- (RACSignal *)rac_socketDidWriteData
+- (RACSignal *)hsy_rac_socketDidWriteData
 {
     RACSignal *signal = [[[[self.rac_delegateProxy
                             signalForSelector:@selector(socket:didWriteDataWithTag:)]
@@ -98,13 +98,13 @@ static void RACUseDelegateProxy(GCDAsyncSocket *self)
 
 #pragma mark - All Signal
 
-- (RACSignal *)rac_allSocketDelegateSiganl
+- (RACSignal *)hsy_rac_allSocketDelegateSiganl
 {
     NSArray *racs = @[
-                      self.rac_socketConnected,
-                      self.rac_socketDisconnected,
-                      self.rac_socketDidReadData,
-                      self.rac_socketDidWriteData,
+                      self.hsy_rac_socketConnected,
+                      self.hsy_rac_socketDisconnected,
+                      self.hsy_rac_socketDidReadData,
+                      self.hsy_rac_socketDidWriteData,
                       ];
     RACSignal *signal = [RACSignal combineLatest:racs reduce:^id(HSYCocoaKitSocketRACSignal *connected, HSYCocoaKitSocketRACSignal *disconnect, HSYCocoaKitSocketRACSignal *readData, HSYCocoaKitSocketRACSignal *writeData){
         HSYCocoaKitSocketRACSignal *notification = [self.class signalForReduce:connected

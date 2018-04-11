@@ -16,51 +16,51 @@
 
 static NSString *重铸完整的请求连接(NSString *urlPath)
 {
-    NSString *urlString = [HSYNetWorkingManager urlFromPath:urlPath];
+    NSString *urlString = [HSYNetWorkingManager hsy_urlFromPath:urlPath];
     return urlString;
 }
 
-- (RACSignal *)rac_getRequest:(NSString *)urlPath parameters:(id)parameters
+- (RACSignal *)hsy_rac_getRequest:(NSString *)urlPath parameters:(id)parameters
 {
-    return [self rac_getRequest:urlPath parameters:parameters setHeaders:@[]];
+    return [self hsy_rac_getRequest:urlPath parameters:parameters setHeaders:@[]];
 }
 
-- (RACSignal *)rac_getRequest:(NSString *)urlPath
-                   parameters:(id)parameters
-                   setHeaders:(NSArray<NSDictionary *> *)headers
+- (RACSignal *)hsy_rac_getRequest:(NSString *)urlPath
+                       parameters:(id)parameters
+                       setHeaders:(NSArray<NSDictionary *> *)headers
 {
     NSString *url = 重铸完整的请求连接(urlPath);
-    return [self rac_request:kHSYCocoaKitNetworkingRequestModel_get setHeaders:headers url:url parameters:parameters];
+    return [self hsy_rac_request:kHSYCocoaKitNetworkingRequestModel_get setHeaders:headers url:url parameters:parameters];
 }
 
-- (RACSignal *)rac_postRequest:(NSString *)urlPath parameters:(id)parameters
+- (RACSignal *)hsy_rac_postRequest:(NSString *)urlPath parameters:(id)parameters
 {
-    return [self rac_postRequest:urlPath parameters:parameters setHeaders:@[]];
+    return [self hsy_rac_postRequest:urlPath parameters:parameters setHeaders:@[]];
 }
 
-- (RACSignal *)rac_postRequest:(NSString *)urlPath
-                    parameters:(id)parameters
-                    setHeaders:(NSArray<NSDictionary *> *)headers
+- (RACSignal *)hsy_rac_postRequest:(NSString *)urlPath
+                        parameters:(id)parameters
+                        setHeaders:(NSArray<NSDictionary *> *)headers
 {
     NSString *url = 重铸完整的请求连接(urlPath);
-    return [self rac_request:kHSYCocoaKitNetworkingRequestModel_post setHeaders:headers url:url parameters:parameters];
+    return [self hsy_rac_request:kHSYCocoaKitNetworkingRequestModel_post setHeaders:headers url:url parameters:parameters];
 }
 
 #pragma mark - RAC
 
-- (RACSignal *)rac_request:(kHSYCocoaKitNetworkingRequestModel)type
-                setHeaders:(NSArray<NSDictionary *> *)headers
-                       url:(NSString *)url
-                parameters:(id)parameters
+- (RACSignal *)hsy_rac_request:(kHSYCocoaKitNetworkingRequestModel)type
+                    setHeaders:(NSArray<NSDictionary *> *)headers
+                           url:(NSString *)url
+                    parameters:(id)parameters
 {
     for (NSDictionary *header in headers) {
         [self.requestSerializer setValue:header.allValues.firstObject forHTTPHeaderField:header.allKeys.firstObject];
     }
     NSParameterAssert(url);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        RACSignal *signal = [self getModel_3x_Request:url parameters:parameters];
+        RACSignal *signal = [self hsy_getModel_3x_Request:url parameters:parameters];
         if (type == kHSYCocoaKitNetworkingRequestModel_post) {
-            signal = [self postModel_3x_Request:url parameters:parameters];
+            signal = [self hsy_postModel_3x_Request:url parameters:parameters];
         }
         [signal subscribeNext:^(RACTuple *tuple) {
             [subscriber sendNext:tuple];
@@ -72,37 +72,37 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
     }];
 }
 
-- (RACSignal *)rac_request:(kHSYCocoaKitNetworkingRequestModel)type
-                       url:(NSString *)url
-                parameters:(id)parameters
+- (RACSignal *)hsy_rac_request:(kHSYCocoaKitNetworkingRequestModel)type
+                           url:(NSString *)url
+                    parameters:(id)parameters
 {
-    return [self rac_request:type setHeaders:@[] url:url parameters:parameters];
+    return [self hsy_rac_request:type setHeaders:@[] url:url parameters:parameters];
 }
 
 #pragma mark - Get Model
 
-- (RACSignal *)getModel_3x_Request:(NSString *)url parameters:(id)parameters
+- (RACSignal *)hsy_getModel_3x_Request:(NSString *)url parameters:(id)parameters
 {
-    return [self getModel_3x_Request:url parameters:parameters taskProgress:^(NSProgress *downloadProgress) {
+    return [self hsy_getModel_3x_Request:url parameters:parameters taskProgress:^(NSProgress *downloadProgress) {
         NSLog(@"get request progress = %f", downloadProgress.fractionCompleted * 100);
     }];
 }
 
 
-- (RACSignal *)getModel_3x_Request:(NSString *)url
-                        parameters:(id)parameters
-                      taskProgress:(void(^)(NSProgress *downloadProgress))progress
+- (RACSignal *)hsy_getModel_3x_Request:(NSString *)url
+                            parameters:(id)parameters
+                          taskProgress:(void(^)(NSProgress *downloadProgress))progress
 {
-    return [[[HSYNetWorkingManager shareInstance] networking_3x_Reachability] then:^RACSignal *{
+    return [[[HSYNetWorkingManager shareInstance] hsy_networking_3x_Reachability] then:^RACSignal *{
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             __block NSURLSessionDataTask *getTask = [self GET:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                [self.class logRequestHeaders:task];
+                [self.class hsy_logRequestHeaders:task];
                 RACTuple *tuple = RACTuplePack(task, responseObject);
                 [subscriber sendNext:tuple];
                 [subscriber sendCompleted];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                [self.class logRequestHeaders:task];
-                [self.class logRequestError:error];
+                [self.class hsy_logRequestHeaders:task];
+                [self.class hsy_logRequestError:error];
                 [subscriber sendError:error];
             }];
             return [RACDisposable disposableWithBlock:^{
@@ -115,27 +115,27 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
 
 #pragma mark - Post Model
 
-- (RACSignal *)postModel_3x_Request:(NSString *)url parameters:(id)parameters
+- (RACSignal *)hsy_postModel_3x_Request:(NSString *)url parameters:(id)parameters
 {
-    return [self postModel_3x_Request:url parameters:parameters taskProgress:^(NSProgress *downloadProgress) {
+    return [self hsy_postModel_3x_Request:url parameters:parameters taskProgress:^(NSProgress *downloadProgress) {
         NSLog(@"post request progress = %f", downloadProgress.fractionCompleted * 100);
     }];
 }
 
-- (RACSignal *)postModel_3x_Request:(NSString *)url
-                         parameters:(id)parameters
-                       taskProgress:(void(^)(NSProgress *downloadProgress))progress
+- (RACSignal *)hsy_postModel_3x_Request:(NSString *)url
+                             parameters:(id)parameters
+                           taskProgress:(void(^)(NSProgress *downloadProgress))progress
 {
-    return [[[HSYNetWorkingManager shareInstance] networking_3x_Reachability] then:^RACSignal *{
+    return [[[HSYNetWorkingManager shareInstance] hsy_networking_3x_Reachability] then:^RACSignal *{
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             __block NSURLSessionDataTask *postTask = [self POST:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                [self.class logRequestHeaders:task];
+                [self.class hsy_logRequestHeaders:task];
                 RACTuple *tuple = RACTuplePack(task, responseObject);
                 [subscriber sendNext:tuple];
                 [subscriber sendCompleted];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                [self.class logRequestHeaders:task];
-                [self.class logRequestError:error];
+                [self.class hsy_logRequestHeaders:task];
+                [self.class hsy_logRequestError:error];
                 [subscriber sendError:error];
             }];
             return [RACDisposable disposableWithBlock:^{
@@ -147,14 +147,14 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
 
 #pragma mark - Logs
 
-+ (void)logRequestError:(NSError *)error
++ (void)hsy_logRequestError:(NSError *)error
 {
     if (error) {
         NSLog(@"request failure, error : %@", error);
     }
 }
 
-+ (void)logRequestHeaders:(NSURLSessionDataTask *)task
++ (void)hsy_logRequestHeaders:(NSURLSessionDataTask *)task
 {
     if ([task isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
@@ -167,7 +167,7 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
 
 #pragma mark - HTTPMethod
 
-+ (NSString *)methodFromNetworkingRequestModel:(kHSYCocoaKitNetworkingRequestModel)model
++ (NSString *)hsy_methodFromNetworkingRequestModel:(kHSYCocoaKitNetworkingRequestModel)model
 {
     if (model == kHSYCocoaKitNetworkingRequestModel_get) {
         return @"GET";

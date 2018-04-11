@@ -28,7 +28,7 @@
 
 #pragma mark - Shadow View
 
-- (UIView *)blackShadowView:(CGFloat)alpha
+- (UIView *)hsy_blackShadowView:(CGFloat)alpha
 {
     if (!self.shadowView) {
         _shadowView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, IPHONE_WIDTH, IPHONE_HEIGHT)];
@@ -37,7 +37,7 @@
     return self.shadowView;
 }
 
-- (void)removeShadow
+- (void)hsy_removeShadow
 {
     if (self.shadowView) {
         [self.shadowView removeFromSuperview];
@@ -67,7 +67,7 @@
 
 #pragma mark - Gather Together
 
-+ (kHSYCustomPercentDrivenInteractiveTransitionActionsType)togetherPercentDrivenInteractiveTransitionActionsType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type
++ (kHSYCustomPercentDrivenInteractiveTransitionActionsType)hsy_togetherPercentDrivenInteractiveTransitionActionsType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type
 {
     if (type == kHSYCustomPercentDrivenInteractiveTransitionActionsTypePush) {
         return kHSYCustomPercentDrivenInteractiveTransitionActionsTypePop;

@@ -43,7 +43,7 @@
         self.delegate = self;
         self.navigationBar.hidden = YES;
         self.interactivePopGestureRecognizer.enabled = NO;
-        UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePopRecognizer:)];
+        UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(hsy_handlePopRecognizer:)];
         panGesture.delegate = self;
         [self.view addGestureRecognizer:panGesture];
     }
@@ -51,7 +51,7 @@
 
 #pragma mark - Pan Gesture Handle
 
-- (void)handlePopRecognizer:(UIPanGestureRecognizer *)recognizer
+- (void)hsy_handlePopRecognizer:(UIPanGestureRecognizer *)recognizer
 {
     CGPoint point = [recognizer translationInView:recognizer.view];
     CGFloat progress = point.x / recognizer.view.bounds.size.width;
