@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, kHSYCustomPercentDrivenInteractiveTransitionActionsT
 
 @interface HSYCustomBaseTransitionAnimation : NSObject <UIViewControllerAnimatedTransitioning>
 
-@property (nonatomic, strong, readonly) UIView *contextView;                                                                //上下文容器
+@property (nonatomic, strong, readonly) UIView *contextView;                                                      //上下文容器
 @property (nonatomic, strong, readonly) UIViewController *toViewController;                                                 //push或者pop动作的对象视图
 @property (nonatomic, strong, readonly) UIViewController *fromViewController;                                               //push或者pop动作即将移除或者被覆盖的视图
 

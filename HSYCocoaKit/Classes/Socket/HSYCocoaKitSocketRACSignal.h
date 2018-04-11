@@ -30,8 +30,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitSocketRACDelegate) {
 
 @interface HSYCocoaKitSocketRACSignal : NSObject
 
-@property (nonatomic, strong, readonly) RACTuple *tuple;
-@property (nonatomic, assign, readonly) kHSYCocoaKitSocketRACDelegate rac_delegate;
+@property (nonatomic, strong) RACTuple *hsy_tuple;
+@property (nonatomic, assign) kHSYCocoaKitSocketRACDelegate hsy_rac_delegate;
 
 - (instancetype)initWithTuple:(RACTuple *)tuple rac_delegateType:(kHSYCocoaKitSocketRACDelegate)type;
 

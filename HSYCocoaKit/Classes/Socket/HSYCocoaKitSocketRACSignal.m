@@ -13,8 +13,8 @@
 - (instancetype)initWithTuple:(RACTuple *)tuple rac_delegateType:(kHSYCocoaKitSocketRACDelegate)type
 {
     if (self = [super init]) {
-        _tuple = tuple;
-        _rac_delegate = type;
+        self.hsy_tuple = tuple;
+        self.hsy_rac_delegate = type;
     }
     return self;
 }
@@ -27,7 +27,7 @@
 
 - (id)hsy_toJSONReponse
 {
-    id second = self.tuple.second;
+    id second = self.hsy_tuple.second;
     if ([second isKindOfClass:[NSData class]]) {
         NSData *data = (NSData *)second;
         id json = [NSObject toJSONObject:data];

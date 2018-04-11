@@ -57,7 +57,7 @@
     
     //监听上下拉刷新
     @weakify(self);
-    [self.viewModel.subject subscribeNext:^(NSDictionary *signal) {
+    [self.hsy_viewModel.subject subscribeNext:^(NSDictionary *signal) {
         @strongify(self);
         kHSYCocoaKitRACSubjectOfNextType type = (kHSYCocoaKitRACSubjectOfNextType)[signal.allKeys.firstObject integerValue];
         if (type == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess || type == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
@@ -88,7 +88,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeTableViewDidSelectRow subscribeContents:@[indexPath]];
-    [self.viewModel.subject sendNext:object];
+    [self.hsy_viewModel.subject sendNext:object];
 }
 
 @end

@@ -20,7 +20,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.datas = [[NSMutableArray alloc] init];
+        self.hsy_datas = [[NSMutableArray alloc] init];
         _subject = [RACSubject subject];
     }
     return self;
@@ -76,7 +76,7 @@
 
 - (void)hsy_rac_datasTraverseSubscribeNext:(void(^)(id result, NSNumber *index))next completed:(void(^)(void))completed
 {
-    [[[self.datas rac_traverseArray] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSDictionary *value) {
+    [[[self.hsy_datas rac_traverseArray] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSDictionary *value) {
         if (next) {
             next(value.allValues.firstObject, value.allKeys.firstObject);
         }
@@ -89,7 +89,7 @@
 
 - (void)hsy_rac_filterUntilCondition:(BOOL(^)(id predicate))condition subscribeNext:(void(^)(id x))next completed:(void(^)(void))completed
 {
-    [[[self.datas rac_filterUntilCompleted:^BOOL(id predicate) {
+    [[[self.hsy_datas rac_filterUntilCompleted:^BOOL(id predicate) {
         if (condition) {
             return condition(predicate);
         }
@@ -108,7 +108,7 @@
     if (!code) {
         return;
     }
-    self.errorStatusCode = code;
+    self.hsy_errorStatusCode = code;
 }
 
 - (void)hsy_requestNetwork:(RACSignal *(^)(void))network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next error:(void(^)(NSError *error))error
@@ -119,7 +119,7 @@
             if (next) {
                 BOOL requestSuccessCode = next(jsonModel);
                 if (requestSuccessCode) {
-                    self.successStatusCode = jsonModel;
+                    self.hsy_successStatusCode = jsonModel;
                 }
             }
         } error:error];

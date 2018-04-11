@@ -74,7 +74,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
     
     //监听上下拉
     @weakify(self);
-    [self.viewModel.subject subscribeNext:^(NSDictionary *signal) {
+    [self.hsy_viewModel.subject subscribeNext:^(NSDictionary *signal) {
         @strongify(self);
         kHSYCocoaKitRACSubjectOfNextType type = (kHSYCocoaKitRACSubjectOfNextType)[signal.allKeys.firstObject integerValue];
         if (type == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess || type == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
@@ -105,7 +105,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeCollectionViewDidSelectRow subscribeContents:@[indexPath]];
-    [self.viewModel.subject sendNext:object];
+    [self.hsy_viewModel.subject sendNext:object];
 }
 
 #pragma mark - For Value

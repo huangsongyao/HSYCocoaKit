@@ -81,7 +81,7 @@
             break;
         default: {
             model = [[HSYHUDModel alloc] init];
-            model.codeType = codeType;
+            model.hsy_codeType = codeType;
             return model;
         }
             break;
@@ -96,11 +96,11 @@
                       animationTime:(CGFloat)animationTime
 {
     HSYHUDModel *model = [[HSYHUDModel alloc] init];
-    model.showType = showType;
-    model.hudString = text;
-    model.animationTime = animationTime;
-    model.codeType = codeType;
-    model.showPromptContent = YES;
+    model.hsy_showType = showType;
+    model.hsy_hudString = text;
+    model.hsy_animationTime = animationTime;
+    model.hsy_codeType = codeType;
+    model.hsy_showPromptContent = YES;
     
     return model;
 }

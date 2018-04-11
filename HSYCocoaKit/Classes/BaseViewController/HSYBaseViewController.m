@@ -18,7 +18,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        _addKeyboardObserver = NO;
+        self.hsy_addKeyboardObserver = NO;
     }
     return self;
 }
@@ -28,32 +28,32 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     //viewModel不允许为nil，可以指向它的子类对象
-    NSParameterAssert(self.viewModel);
+    NSParameterAssert(self.hsy_viewModel);
     if (VERSION_GTR_IOS8) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     //监听一般网络请求成功
     @weakify(self);
-    [[RACObserve(self, self.viewModel.successStatusCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+    [[RACObserve(self, self.hsy_viewModel.hsy_successStatusCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
         @strongify(self);
         if (x) {
             HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeRequestSuccess subscribeContents:@[x]];
-            [self.viewModel.subject sendNext:object];
+            [self.hsy_viewModel.subject sendNext:object];
         }
     }];
     //监听一般网络请求失败
-    [[RACObserve(self, self.viewModel.errorStatusCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+    [[RACObserve(self, self.hsy_viewModel.hsy_errorStatusCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
         @strongify(self);
         if (x) {
             HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeRequestFailure subscribeContents:@[x]];
-            [self.viewModel.subject sendNext:object];
+            [self.hsy_viewModel.subject sendNext:object];
         }
     }];
-    if (self.addKeyboardObserver) {
+    if (self.hsy_addKeyboardObserver) {
         //键盘监听
         [self observerToKeyboardDidChange:nil subscribeCompleted:^(CGRect frameBegin, CGRect frameEnd) {
             HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeObserverKeyboard subscribeContents:@[[NSValue valueWithCGRect:frameBegin], [NSValue valueWithCGRect:frameEnd]]];
-            [self.viewModel.subject sendNext:object];
+            [self.hsy_viewModel.subject sendNext:object];
         }];
     }
     //如果开启了自定义转场，则添加定制化的navigationBar
@@ -79,22 +79,22 @@
     } else if ([stateCode isKindOfClass:[HSYHUDModel class]]) {
         HSYHUDModel *model = (HSYHUDModel *)stateCode;
         [HSYHUDHelper hsy_hideAllHUDView];//清除loading页面
-        if (model.codeType == kHSYHUDModelCodeTypeUpdateLoading) {
-            if (model.showPromptContent) {
-                [HSYHUDHelper hsy_showHUDViewForShowType:model.showType text:model.hudString hideAfter:model.animationTime ];
+        if (model.hsy_codeType == kHSYHUDModelCodeTypeUpdateLoading) {
+            if (model.hsy_showPromptContent) {
+                [HSYHUDHelper hsy_showHUDViewForShowType:model.hsy_showType text:model.hsy_hudString hideAfter:model.hsy_animationTime];
             }
-        } else if(model.codeType == kHSYHUDModelCodeTypeRequestSuccess) {
+        } else if(model.hsy_codeType == kHSYHUDModelCodeTypeRequestSuccess) {
         
-        } else if (model.codeType == kHSYHUDModelCodeTypeRequestFailure) {
-            if (model.showPromptContent) {
-                [HSYHUDHelper hsy_showHUDViewForShowType:model.showType text:model.hudString hideAfter:model.animationTime];
+        } else if (model.hsy_codeType == kHSYHUDModelCodeTypeRequestFailure) {
+            if (model.hsy_showPromptContent) {
+                [HSYHUDHelper hsy_showHUDViewForShowType:model.hsy_showType text:model.hsy_hudString hideAfter:model.hsy_animationTime];
             }
-        } else if (model.codeType == kHSYHUDModelCodeTypeRequestPullUpSuccess) {
+        } else if (model.hsy_codeType == kHSYHUDModelCodeTypeRequestPullUpSuccess) {
             
-        } else if (model.codeType == kHSYHUDModelCodeTypeRequestPullDownSuccess) {
+        } else if (model.hsy_codeType == kHSYHUDModelCodeTypeRequestPullDownSuccess) {
             
         }
-        return model.codeType;
+        return model.hsy_codeType;
     }
     return kHSYHUDModelCodeTypeDefault;
 }

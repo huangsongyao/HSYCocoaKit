@@ -37,15 +37,15 @@
     self.dateBase.traceExecution = YES;                                 //跟踪执行
     if ([self.dateBase open]) {
         for (HSYFMDBOperationFieldInfo *operation in self.databaseTables) {
-            BOOL isExist = [self.dateBase tableExists:operation.name];
+            BOOL isExist = [self.dateBase tableExists:operation.hsy_name];
             if (isExist) {
-                NSLog(@"%@ existing", operation.name);
+                NSLog(@"%@ existing", operation.hsy_name);
             } else {
-                BOOL result = [self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"CREATE TABLE %@ (%@)", operation.name, [operation hsy_toDataBaseTableField]], nil];
+                BOOL result = [self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"CREATE TABLE %@ (%@)", operation.hsy_name, [operation hsy_toDataBaseTableField]], nil];
                 if (result) {
-                    NSLog(@"%@ create successful", operation.name);
+                    NSLog(@"%@ create successful", operation.hsy_name);
                 } else {
-                    NSLog(@"%@ create failure", operation.name);
+                    NSLog(@"%@ create failure", operation.hsy_name);
                 }
             }
         }
@@ -123,7 +123,7 @@
 - (BOOL)hsy_fmdb_insertDataForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
 {
     BOOL result = NO;
-    result = [self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)", operationInfo.name, [operationInfo hsy_toDataBaseTableInsertFields], [operationInfo hsy_toDataBaseTableInsertStatements]], nil];
+    result = [self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)", operationInfo.hsy_name, [operationInfo hsy_toDataBaseTableInsertFields], [operationInfo hsy_toDataBaseTableInsertStatements]], nil];
     if (!result) {
         NSLog(@"Insert %@ Failure!", [operationInfo hsy_toDataBaseTableInsertStatements]);
     }
@@ -139,7 +139,7 @@
     [self hsy_fmdb_operationForExecuteUpdateBlock:^{
         @strongify(self);
         NSMutableArray *contentArray = [[NSMutableArray alloc] init];
-        FMResultSet *resultSet = [self.dateBase executeQueryWithFormat:[NSString stringWithFormat:@"SELECT * FROM %@", operationInfo.name], nil];
+        FMResultSet *resultSet = [self.dateBase executeQueryWithFormat:[NSString stringWithFormat:@"SELECT * FROM %@", operationInfo.hsy_name], nil];
         while ([resultSet next]) {
             NSMutableDictionary *result = [resultSet hsy_fmdbForColumn:operationInfo];
             [contentArray addObject:result];
@@ -161,7 +161,7 @@
     [self hsy_fmdb_operationForExecuteUpdateBlock:^{
         @strongify(self);
         NSMutableArray *contentArray = [[NSMutableArray alloc] init];
-        FMResultSet *resultSet = [self.dateBase executeQueryWithFormat:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = '%@'", operationInfo.name, field, content], nil];
+        FMResultSet *resultSet = [self.dateBase executeQueryWithFormat:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = '%@'", operationInfo.hsy_name, field, content], nil];
         while ([resultSet next]) {
             NSMutableDictionary *result = [resultSet hsy_fmdbForColumn:operationInfo];
             [contentArray addObject:result];

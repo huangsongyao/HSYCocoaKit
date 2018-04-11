@@ -57,14 +57,14 @@
         @strongify(self);
         //加载成功后动态更新数据源信息，并设置当前的statusCode状态
         if (status == kHSYReflesStatusTypePullDown) {
-            [self.datas removeAllObjects];
-            self.datas = [result mutableCopy];
-            self.pullDownStateCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullDownSuccess];
+            [self.hsy_datas removeAllObjects];
+            self.hsy_datas = [result mutableCopy];
+            self.hsy_pullDownStateCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullDownSuccess];
         } else {
             for (id obj in result) {
-                [self.datas addObject:obj];
+                [self.hsy_datas addObject:obj];
             }
-            self.pullUpStateCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullUpSuccess];
+            self.hsy_pullUpStateCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullUpSuccess];
         }
         return NO;
     }];

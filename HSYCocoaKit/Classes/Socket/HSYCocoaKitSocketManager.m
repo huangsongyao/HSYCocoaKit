@@ -25,6 +25,8 @@ static HSYCocoaKitSocketManager *socketManager;
 @property (nonatomic, strong, readonly) RACSignal *socketDelegateSignal;
 @property (nonatomic, strong, readonly) RACSubject *delegateSubject;
 @property (nonatomic, strong) NSNumber *observerSockectConnect;
+@property (nonatomic, assign) uint16_t hsy_connectPort;
+@property (nonatomic, copy) NSString *hsy_connectHost;
 
 @end
 
@@ -52,8 +54,8 @@ static HSYCocoaKitSocketManager *socketManager;
             if (!notification) {
                 return;
             }
-            GCDAsyncSocket *sock = notification.tuple.first;
-            switch (notification.rac_delegate) {
+            GCDAsyncSocket *sock = notification.hsy_tuple.first;
+            switch (notification.hsy_rac_delegate) {
                 case kHSYCocoaKitSocketRACDelegate_socketConnected: {
                     BOOL connect = [sock isConnected];
                     if (connect) {
@@ -79,7 +81,7 @@ static HSYCocoaKitSocketManager *socketManager;
                 }
                     break;
                 case kHSYCocoaKitSocketRACDelegate_socketDidWriteData: {
-                    long tag = [notification.tuple.third longLongValue];
+                    long tag = [notification.hsy_tuple.third longLongValue];
                     //数据发送成功后需要重新设置一次数据的timeout时间
                     [sock readDataToData:[GCDAsyncSocket CRLFData] withTimeout:DEFAULT_SOCKET_WRITE_TIME tag:tag];
                 }
@@ -116,12 +118,12 @@ static HSYCocoaKitSocketManager *socketManager;
                         hsy_host:(NSString *)host
                       hsy_onPort:(uint16_t)port
 {
-    _connectHost = host;
-    _connectPort = port;
+    self.hsy_connectHost = host;
+    self.hsy_connectPort = port;
     if (urlString) {
         NSURL *url = [NSURL URLWithString:urlString];
-        _connectHost = url.host;
-        _connectPort = url.port.longLongValue;
+        self.hsy_connectHost = url.host;
+        self.hsy_connectPort = url.port.longLongValue;
     }
     @weakify(self);
     if (!self.socketDelegateSignal) {
@@ -177,8 +179,8 @@ static HSYCocoaKitSocketManager *socketManager;
                                            withTimeout:DEFAULT_SOCKET_CONNECTED_TIMEOUT
                                                  error:&error];
             } else {
-                connect = [self.tcpSocket connectToHost:self.connectHost
-                                                 onPort:self.connectPort
+                connect = [self.tcpSocket connectToHost:self.hsy_connectHost
+                                                 onPort:self.hsy_connectPort
                                             withTimeout:DEFAULT_SOCKET_CONNECTED_TIMEOUT
                                                   error:&error];
             }
@@ -210,6 +212,18 @@ static HSYCocoaKitSocketManager *socketManager;
 - (void)hsy_writeData:(NSData *)data hsy_tag:(long)tag
 {
     [self.tcpSocket writeData:data withTimeout:DEFAULT_SOCKET_WRITE_TIME tag:tag];
+}
+
+#pragma mark - Host & Port
+
+- (NSString *)hsy_serverHost
+{
+    return self.hsy_connectHost;
+}
+
+- (uint16_t)hsy_serverPort
+{
+    return self.hsy_connectPort;
 }
 
 @end

@@ -16,7 +16,7 @@
 @implementation HSYBViewController
 
 - (void)viewDidLoad {
-    self.viewModel = [[HSYViewControllerModel alloc] init];
+    self.hsy_viewModel = [[HSYViewControllerModel alloc] init];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }

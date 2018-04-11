@@ -13,12 +13,12 @@
 
 @interface HSYBaseModel : RVMViewModel
 
-@property (nonatomic, strong) NSMutableArray *datas;                    //数据源
-@property (nonatomic, strong) RACCommand *command;                      //响应信号，默认为nil
-@property (nonatomic, strong) RACSignal *signal;                        //信号，默认为nil
-@property (nonatomic, strong, readonly) RACSubject *subject;            //订阅信号
-@property (nonatomic, strong) id errorStatusCode;                       //请求失败的错误码
-@property (nonatomic, strong) id successStatusCode;                     //请求成功的成功码
+@property (nonatomic, strong) NSMutableArray *hsy_datas;                    //数据源
+@property (nonatomic, strong) RACCommand *hsy_command;                      //响应信号，默认为nil
+@property (nonatomic, strong) RACSignal *hsy_signal;                        //信号，默认为nil
+@property (nonatomic, strong, readonly) RACSubject *subject;                //订阅信号
+@property (nonatomic, strong) id hsy_errorStatusCode;                       //请求失败的错误码
+@property (nonatomic, strong) id hsy_successStatusCode;                     //请求成功的成功码
 
 /**
  *  启动计时器

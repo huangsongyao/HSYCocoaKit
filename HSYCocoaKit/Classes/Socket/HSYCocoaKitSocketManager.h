@@ -15,8 +15,6 @@ FOUNDATION_EXPORT NSString *const HSYCocoaKitSocketConnectStatusNotification;   
 @interface HSYCocoaKitSocketManager : NSObject
 
 @property (nonatomic, assign, readonly) kHSYCocoaKitSocketConnectStatus socketConnectStatus;
-@property (nonatomic, assign, readonly) uint16_t connectPort;
-@property (nonatomic, copy, readonly) NSString *connectHost;
 
 + (instancetype)shareInstance;
 
@@ -45,5 +43,18 @@ FOUNDATION_EXPORT NSString *const HSYCocoaKitSocketConnectStatusNotification;   
  */
 - (void)hsy_writeData:(NSData *)data hsy_tag:(long)tag;
 
+/**
+ 当前链接的socket的ip
+
+ @return ip
+ */
+- (NSString *)hsy_serverHost;
+
+/**
+ 当前链接的socket的端口
+
+ @return 端口
+ */
+- (uint16_t)hsy_serverPort;
 
 @end

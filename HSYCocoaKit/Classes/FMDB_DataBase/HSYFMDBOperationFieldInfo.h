@@ -13,8 +13,8 @@
 @class HSYFMDBOperationFieldInfo;
 @interface HSYFMDBOperationFields : NSObject
 
-@property (nonatomic, strong) NSString *fieldName;                                  //字段名
-@property (nonatomic, strong) NSString *fieldType;                                  //字段类型
+@property (nonatomic, strong) NSString *hsy_fieldName;                                  //字段名
+@property (nonatomic, strong) NSString *hsy_fieldType;                                  //字段类型
 
 - (instancetype)initWithFieldName:(NSString *)name
                         fieldType:(NSString *)type;
@@ -25,9 +25,9 @@
 
 @interface HSYFMDBOperationFieldInfo : NSObject
 
-@property (nonatomic, strong) NSString *name;                                       //数据库表面
-@property (nonatomic, strong) NSMutableArray <HSYFMDBOperationFields *>*fields;     //数据库要添加到表中的字段名称和字段名称对应的类型 的抽象类集合
-@property (nonatomic, strong) NSMutableArray <NSString *>*statements;               //数据库要插入的数据
+@property (nonatomic, strong) NSString *hsy_name;                                       //数据库表面
+@property (nonatomic, strong) NSMutableArray <HSYFMDBOperationFields *>*hsy_fields;     //数据库要添加到表中的字段名称和字段名称对应的类型 的抽象类集合
+@property (nonatomic, strong) NSMutableArray <NSString *>*hsy_statements;               //数据库要插入的数据
 
 - (NSString *)hsy_toDataBaseTableField;                                                 //通过对fields集合进行处理，获取到一个创建表的字符串
 - (NSString *)hsy_toDataBaseTableInsertStatements;                                      //通过对fields集合进行处理，获取到一个用于插入数据的字符串

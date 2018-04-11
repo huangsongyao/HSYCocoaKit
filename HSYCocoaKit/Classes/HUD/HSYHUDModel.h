@@ -30,11 +30,11 @@ typedef NS_ENUM(NSUInteger, kHSYHUDModelCodeType) {
 
 @interface HSYHUDModel : NSObject
 
-@property (nonatomic, assign) kShowHUDViewType showType;                //hudView的model类型
-@property (nonatomic, copy) NSString *hudString;                        //hudView的文字
-@property (nonatomic, assign) CGFloat animationTime;                    //动画时长
-@property (nonatomic, assign) kHSYHUDModelCodeType codeType;            //编码类型
-@property (nonatomic, assign) BOOL showPromptContent;                   //是否提示内容，默认为提示
+@property (nonatomic, assign) kShowHUDViewType hsy_showType;                //hudView的model类型
+@property (nonatomic, copy) NSString *hsy_hudString;                        //hudView的文字
+@property (nonatomic, assign) CGFloat hsy_animationTime;                    //动画时长
+@property (nonatomic, assign) kHSYHUDModelCodeType hsy_codeType;            //编码类型
+@property (nonatomic, assign) BOOL hsy_showPromptContent;                   //是否提示内容，默认为提示
 
 /**
  *  初始化一个HUD

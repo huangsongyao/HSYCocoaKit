@@ -34,7 +34,7 @@
 
 - (void)viewDidLoad
 {
-    self.viewModel = [[HSYViewControllerModel alloc] init];
+    self.hsy_viewModel = [[HSYViewControllerModel alloc] init];
     [super viewDidLoad];
     @weakify(self);
 //    [self.viewModel.subject subscribeNext:^(HSYCocoaKitRACSubscribeNotification *notification) {

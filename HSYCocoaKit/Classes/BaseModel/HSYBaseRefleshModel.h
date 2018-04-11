@@ -17,11 +17,11 @@ typedef NS_ENUM(NSUInteger, kHSYReflesStatusType) {
 
 @interface HSYBaseRefleshModel : HSYBaseModel
 
-@property (nonatomic, assign, readonly) NSInteger page;     //翻页页码，默认为1
-@property (nonatomic, assign, readonly) NSInteger size;     //每页的数据条数，默认为100
+@property (nonatomic, assign, readonly) NSInteger page;         //翻页页码，默认为1
+@property (nonatomic, assign, readonly) NSInteger size;         //每页的数据条数，默认为100
 
-@property (nonatomic, strong) id pullDownStateCode;         //下拉刷新的状态
-@property (nonatomic, strong) id pullUpStateCode;           //上拉刷新的状态
+@property (nonatomic, strong) id hsy_pullDownStateCode;         //下拉刷新的状态
+@property (nonatomic, strong) id hsy_pullUpStateCode;           //上拉刷新的状态
 
 /**
  *  设置每次记载的条数
