@@ -9,6 +9,9 @@
 #ifndef HSYCocoaKit_h
 #define HSYCocoaKit_h
 
+#import "HSYBaseCollectionReusableView.h"
+#import "HSYBaseCollectionViewCell.h"
+#import "HSYBaseTableViewCell.h"
 #import "HSYBaseCollectionModel.h"
 #import "HSYBaseModel.h"
 #import "HSYBaseRefleshModel.h"

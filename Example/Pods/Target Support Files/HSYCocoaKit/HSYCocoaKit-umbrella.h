@@ -10,6 +10,9 @@
 #endif
 #endif
 
+#import "HSYBaseCollectionReusableView.h"
+#import "HSYBaseCollectionViewCell.h"
+#import "HSYBaseTableViewCell.h"
 #import "HSYBaseCollectionModel.h"
 #import "HSYBaseModel.h"
 #import "HSYBaseRefleshModel.h"
