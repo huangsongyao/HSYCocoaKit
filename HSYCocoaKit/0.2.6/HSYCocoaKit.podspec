@@ -53,5 +53,7 @@ s.dependency 'TYAttributedLabel', '~> 2.6.6'
 s.dependency 'FMDB', '~> 2.7.2'
 s.dependency 'TKRoundedView', '~> 0.5'
 s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.6'
+s.dependency 'CocoaAsyncSocket', '~> 7.6.3'
+s.dependency 'lottie-ios', '~> 2.5.0'
 
 end
