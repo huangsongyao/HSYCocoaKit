@@ -31,25 +31,9 @@ static HSYCocoaKitManager *cocoaKitManager;
 
 #pragma mark - UserDefaults
 
-+ (id)objectForKey:(NSString *)key
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    id object = [userDefaults objectForKey:key];
-    return object;
-}
-
 + (void)setObject:(id)object forKey:(NSString *)key
 {
-    [self.class removeObjectForKey:key];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:object forKey:key];
+    
 }
-
-+ (void)removeObjectForKey:(NSString *)key
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults removeObjectForKey:key];
-}
-
 
 @end
