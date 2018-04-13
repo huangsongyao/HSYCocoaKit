@@ -6,8 +6,8 @@
 //  Copyright © 2018年 huangsongyao. All rights reserved.
 //
 
-#import "HSYBaseViewController.h"
+#import "HSYBaseTableViewController.h"
 
-@interface HSYBViewController : HSYBaseViewController
+@interface HSYBViewController : HSYBaseTableViewController
 
 @end

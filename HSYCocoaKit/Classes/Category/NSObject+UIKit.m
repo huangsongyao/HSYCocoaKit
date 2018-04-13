@@ -243,7 +243,7 @@
         tableView.tableFooterView = param[@(kHSYCocoaKitOfTableViewPropretyTypeTableFooterView)];
     }
     if (param[@(kHSYCocoaKitOfTableViewPropretyTypeRegisterClass)]) {
-        NSDictionary *registers = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass)];
+        NSDictionary *registers = param[@(kHSYCocoaKitOfTableViewPropretyTypeRegisterClass)];
         Class class = NSClassFromString(registers.allKeys.firstObject);
         NSString *identifier = registers.allValues.firstObject;
         [tableView registerClass:class forCellReuseIdentifier:identifier];
@@ -333,11 +333,11 @@
     }
     //必须注册cell，此处使用建言宏中断，以方便代码检查
     NSParameterAssert(!param[@(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass)]);
-    NSDictionary *registers = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass)];
-    Class class = NSClassFromString(registers.allKeys.firstObject);
-    NSString *identifier = registers.allValues.firstObject;
-    [collectionView registerClass:class forCellWithReuseIdentifier:identifier];
-    
+    for (NSDictionary *registers in param[@(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass)]) {
+        Class class = NSClassFromString(registers.allKeys.firstObject);
+        NSString *identifier = registers.allValues.firstObject;
+        [collectionView registerClass:class forCellWithReuseIdentifier:identifier];
+    }
     return collectionView;
 }
 

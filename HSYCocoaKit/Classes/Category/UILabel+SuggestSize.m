@@ -13,7 +13,11 @@
 
 @implementation UILabel (SuggestSize)
 
-+ (UILabel *)initWithText:(NSString *)text numberOfLines:(NSInteger)numberOfLines font:(UIFont *)font maxWidth:(CGFloat)width maxHeight:(CGFloat)height
++ (UILabel *)initWithText:(NSString *)text
+            numberOfLines:(NSInteger)numberOfLines
+                     font:(UIFont *)font
+                 maxWidth:(CGFloat)width
+                maxHeight:(CGFloat)height
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     
@@ -22,11 +26,12 @@
     label.textAlignment = NSTextAlignmentLeft;
     label.textColor = [UIColor blackColor];
     label.numberOfLines = numberOfLines;
-    label.lineBreakMode = NSLineBreakByTruncatingTail;
+    label.lineBreakMode = NSLineBreakByCharWrapping;//NSLineBreakByTruncatingTail;
     
     NSString *string = text;
     if (label.numberOfLines == 1) {
         string = HSYLOCALIZED(@"单行");
+        label.lineBreakMode = NSLineBreakByTruncatingTail;
     }
     label.size = [string contentOfSize:label.font
                               maxWidth:width
@@ -35,7 +40,10 @@
     return label;
 }
 
-+ (UILabel *)initWithText:(NSString *)text font:(UIFont *)font maxWidth:(CGFloat)width maxHeight:(CGFloat)height
++ (UILabel *)initWithText:(NSString *)text
+                     font:(UIFont *)font
+                 maxWidth:(CGFloat)width
+                maxHeight:(CGFloat)height
 {
     return [self.class initWithText:text
                       numberOfLines:0
@@ -44,7 +52,10 @@
                           maxHeight:height];
 }
 
-+ (UILabel *)initWithUnilineText:(NSString *)text font:(UIFont *)font maxWidth:(CGFloat)width maxHeight:(CGFloat)height
++ (UILabel *)initWithUnilineText:(NSString *)text
+                            font:(UIFont *)font
+                        maxWidth:(CGFloat)width
+                       maxHeight:(CGFloat)height
 {
     return [self.class initWithText:text
                       numberOfLines:1

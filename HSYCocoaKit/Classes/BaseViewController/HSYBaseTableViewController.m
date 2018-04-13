@@ -20,6 +20,7 @@
     if (self = [super init]) {
         _lineHidden = @(NO);
         _scrollEnabled = @(YES);
+        _tableViewStyle = UITableViewStylePlain;
     }
     return self;
 }
@@ -27,11 +28,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    CGRect rect = self.view.bounds;
+    if (self.customNavigationBar) {
+        rect = CGRectMake(0, self.customNavigationBar.bottom, self.view.width, self.view.height - self.customNavigationBar.bottom);
+    }
     //生成默认的tableView
     NSMutableDictionary *param = [@{
-                                    @(kHSYCocoaKitOfTableViewPropretyTypeTableViewStyle) : @(UITableViewStylePlain),
-                                    @(kHSYCocoaKitOfTableViewPropretyTypeFrame) : [NSValue valueWithCGRect:self.view.bounds],
+                                    @(kHSYCocoaKitOfTableViewPropretyTypeTableViewStyle) : @(self.tableViewStyle),
+                                    @(kHSYCocoaKitOfTableViewPropretyTypeFrame) : [NSValue valueWithCGRect:rect],
                                     @(kHSYCocoaKitOfTableViewPropretyTypeDelegate) : self,
                                     @(kHSYCocoaKitOfTableViewPropretyTypeDataSource) : self,
                                     @(kHSYCocoaKitOfTableViewPropretyTypeHiddenCellLine) : self.lineHidden,
@@ -89,6 +93,13 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeTableViewDidSelectRow subscribeContents:@[indexPath]];
     [self.hsy_viewModel.subject sendNext:object];
+}
+
+- (CGFloat)hsy_heightForCellWithCacheByIndexPath:(NSIndexPath *)indexPath configuration:(void(^)(UITableViewCell *cell))configuration
+{
+    return [self.tableView fd_heightForCellWithIdentifier:self.registerClasses.allValues.firstObject
+                                               cacheByKey:indexPath
+                                            configuration:configuration];
 }
 
 @end

@@ -32,4 +32,22 @@
  */
 - (CGSize)contentOfSize:(UIFont *)font maxWidth:(CGFloat)width maxHeight:(CGFloat)height;
 
+/**
+ 计算文字显示区域,限制最大宽度，计算高度
+
+ @param font font
+ @param width 最大显示宽度
+ @return size
+ */
+- (CGSize)contentOfSize:(UIFont *)font maxWidth:(CGFloat)width;
+
+/**
+ 计算文字显示区域,限制设备高度，计算宽度
+
+ @param font font
+ @param height 最大显示高度
+ @return size
+ */
+- (CGSize)contentOfSize:(UIFont *)font maxHeight:(CGFloat)height;
+
 @end

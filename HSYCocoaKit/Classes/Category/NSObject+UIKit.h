@@ -113,7 +113,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfCollectionViewPropretyType) {
     kHSYCocoaKitOfCollectionViewPropretyTypeScrollEnabled,                  //NSNumber\(BOOL)
     kHSYCocoaKitOfCollectionViewPropretyTypeBounces,                        //NSNumber\(BOOL)
     kHSYCocoaKitOfCollectionViewPropretyTypeHiddenScrollIndicator,          //NSNumber\(BOOL)
-    kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass,                  //NSDictionary\(@{@"Class Name" : @"Identifier"})
+    kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass,                  //NSArray\NSDictionary\(@{@"Class Name" : @"Identifier"})
 };
 
 //UICollectionViewFlowLayout

@@ -38,4 +38,14 @@
                            maxHeight:height];
 }
 
+- (CGSize)contentOfSize:(UIFont *)font maxWidth:(CGFloat)width
+{
+    return [self contentOfSize:font maxWidth:width maxHeight:IPHONE_HEIGHT];
+}
+
+- (CGSize)contentOfSize:(UIFont *)font maxHeight:(CGFloat)height
+{
+    return [self contentOfSize:font maxWidth:IPHONE_WIDTH maxHeight:height];
+}
+
 @end
