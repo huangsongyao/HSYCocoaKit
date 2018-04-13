@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HSYCocoaKit.h"
 
 @interface HSYCocoaKitManager : NSObject
 
-+ (instancetype)shareInstance;
++ (instancetype)hsy_shareInstance;
++ (void)setObject:(id)object forKey:(NSString *)key;
+
 
 @end

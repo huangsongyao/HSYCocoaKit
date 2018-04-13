@@ -6,13 +6,13 @@
 //
 //
 
-#import "HSYCocoaKitManager.h"
+#import "HSYCocoaKit.h"
 
 static HSYCocoaKitManager *cocoaKitManager;
 
 @implementation HSYCocoaKitManager
 
-+ (instancetype)shareInstance
++ (instancetype)hsy_shareInstance
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -27,6 +27,13 @@ static HSYCocoaKitManager *cocoaKitManager;
         
     }
     return self;
+}
+
+#pragma mark - UserDefaults
+
++ (void)setObject:(id)object forKey:(NSString *)key
+{
+    
 }
 
 @end
