@@ -17,6 +17,7 @@
 #import "HSYBaseWebModel.h"
 #import "HSYCocoaKitRACSubscribeNotification.h"
 #import "HSYBaseCollectionViewController.h"
+#import "HSYBaseLaunchScreenViewController.h"
 #import "HSYBaseRefleshViewController.h"
 #import "HSYBaseTableViewController.h"
 #import "HSYBaseViewController.h"

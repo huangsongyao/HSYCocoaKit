@@ -29,6 +29,11 @@
 
 @end
 
+@interface HSYNetWorkingManager (test)
+
+- (RACSignal *)test:(NSString *)path;
+
+@end
 
 @interface HSYViewControllerModel : HSYBaseRefleshModel
 

@@ -138,5 +138,8 @@
 #define HexColorA(c, a) [UIColor colorWithRed:((c>>16)&0xFF)/255.0f green:((c>>8)&0xFF)/255.0f blue:(c&0xFF)/255.0f alpha:a]
 #define HexColorString(rgbValue) [UIColor colorWithRed:((float)((strtoul(((NSString *)rgbValue).UTF8String, 0, 16) & 0xFF0000) >> 16))/255.0 green:((float)((strtoul(((NSString *)rgbValue).UTF8String, 0, 16) & 0xFF00) >> 8))/255.0 blue:((float)(strtoul(((NSString *)rgbValue).UTF8String, 0, 16) & 0xFF))/255.0 alpha:1.0]
 
+//版本弃用
+#define HSY_DEPRECATED(_iOS_version)                                    __attribute__((deprecated))
+
 
 #endif /* PublicMacroFile_h */

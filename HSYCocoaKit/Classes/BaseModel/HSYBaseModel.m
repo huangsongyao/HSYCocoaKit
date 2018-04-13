@@ -153,6 +153,7 @@
 - (void)dealloc
 {
     [self hsy_stop];
+    [self.subject sendCompleted];
 }
 
 @end

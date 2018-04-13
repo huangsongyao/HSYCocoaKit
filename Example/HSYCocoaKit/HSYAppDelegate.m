@@ -7,8 +7,8 @@
 //
 
 #import "HSYAppDelegate.h"
-#import "HSYBaseCustomNavigationController.h"
 #import "HSYViewController.h"
+#import "HSYViewControllerModel.h"
 
 @implementation HSYAppDelegate
 
@@ -16,9 +16,23 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
-    HSYViewController *vc = [[HSYViewController alloc] init];
-    HSYBaseCustomNavigationController *nav = [[HSYBaseCustomNavigationController alloc] initWithRootViewController:vc params:@{@(kHSYCustomNavigationControllerParamsKeyOpenTransitionAnimation) : @(YES)}];
-    self.window.rootViewController = nav;
+    
+    @weakify(self);
+    NSDictionary *dic = @{
+                          @(kHSYCocoaKitLaunchScreenSize_3_5_Inch) : @"i4_sp",
+                          @(kHSYCocoaKitLaunchScreenSize_4_0_Inch) : @"i5_sp",
+                          @(kHSYCocoaKitLaunchScreenSize_4_7_Inch) : @"i6_sp",
+                          @(kHSYCocoaKitLaunchScreenSize_5_5_Inch) : @"i6p_sp",
+                          @(kHSYCocoaKitLaunchScreenSize_5_8_Inch) : @"iX_sp",
+                          };
+    NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
+    HSYBaseLaunchScreenViewController *launchScreenViewController = [HSYBaseLaunchScreenViewController initWithLaunchScreens:dic networkSiganl:[[HSYNetWorkingManager shareInstance] test:urlStr] subscriberNext:^(id sendNext, id<UIApplicationDelegate> appDelegate, NSError *sendError) {
+        @strongify(self);
+        HSYViewController *vc = [[HSYViewController alloc] init];
+        HSYBaseCustomNavigationController *nav = [[HSYBaseCustomNavigationController alloc] initWithRootViewController:vc params:@{@(kHSYCustomNavigationControllerParamsKeyOpenTransitionAnimation) : @(YES)}];
+        self.window.rootViewController = nav;
+    }];
+    self.window.rootViewController = launchScreenViewController;
     [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
     return YES;

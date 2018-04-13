@@ -25,6 +25,11 @@
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		AEECCA972071D2100041BA52 /* HSYViewControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEECCA962071D2100041BA52 /* HSYViewControllerModel.m */; };
 		AEECCAE4207A13310041BA52 /* HSYBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEECCAE3207A13310041BA52 /* HSYBViewController.m */; };
+		AEECCB5E208065880041BA52 /* i4_sp.png in Resources */ = {isa = PBXBuildFile; fileRef = AEECCB59208065880041BA52 /* i4_sp.png */; };
+		AEECCB5F208065880041BA52 /* i5_sp.png in Resources */ = {isa = PBXBuildFile; fileRef = AEECCB5A208065880041BA52 /* i5_sp.png */; };
+		AEECCB60208065880041BA52 /* i6_sp.png in Resources */ = {isa = PBXBuildFile; fileRef = AEECCB5B208065880041BA52 /* i6_sp.png */; };
+		AEECCB61208065880041BA52 /* i6p_sp.png in Resources */ = {isa = PBXBuildFile; fileRef = AEECCB5C208065880041BA52 /* i6p_sp.png */; };
+		AEECCB62208065880041BA52 /* iX_sp.png in Resources */ = {isa = PBXBuildFile; fileRef = AEECCB5D208065880041BA52 /* iX_sp.png */; };
 		E4BF8F981817DC07DA00DC27 /* Pods_HSYCocoaKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C741A67EF37DC3880AC3E66 /* Pods_HSYCocoaKit_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +76,11 @@
 		AEECCA962071D2100041BA52 /* HSYViewControllerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSYViewControllerModel.m; sourceTree = "<group>"; };
 		AEECCAE2207A13310041BA52 /* HSYBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSYBViewController.h; sourceTree = "<group>"; };
 		AEECCAE3207A13310041BA52 /* HSYBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSYBViewController.m; sourceTree = "<group>"; };
+		AEECCB59208065880041BA52 /* i4_sp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = i4_sp.png; sourceTree = "<group>"; };
+		AEECCB5A208065880041BA52 /* i5_sp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = i5_sp.png; sourceTree = "<group>"; };
+		AEECCB5B208065880041BA52 /* i6_sp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = i6_sp.png; sourceTree = "<group>"; };
+		AEECCB5C208065880041BA52 /* i6p_sp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = i6p_sp.png; sourceTree = "<group>"; };
+		AEECCB5D208065880041BA52 /* iX_sp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iX_sp.png; sourceTree = "<group>"; };
 		DB834CF2CF9515FAFD8A4E05 /* Pods-HSYCocoaKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSYCocoaKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HSYCocoaKit_Tests/Pods-HSYCocoaKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E00952B031F4641AB58B96CC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		EC38690B33C0219815395C34 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -150,6 +160,11 @@
 				AEECCA952071D2100041BA52 /* HSYViewControllerModel.h */,
 				AEECCA962071D2100041BA52 /* HSYViewControllerModel.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
+				AEECCB59208065880041BA52 /* i4_sp.png */,
+				AEECCB5A208065880041BA52 /* i5_sp.png */,
+				AEECCB5B208065880041BA52 /* i6_sp.png */,
+				AEECCB5C208065880041BA52 /* i6p_sp.png */,
+				AEECCB5D208065880041BA52 /* iX_sp.png */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -298,8 +313,13 @@
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				AEECCB60208065880041BA52 /* i6_sp.png in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				AEECCB5F208065880041BA52 /* i5_sp.png in Resources */,
+				AEECCB62208065880041BA52 /* iX_sp.png in Resources */,
+				AEECCB61208065880041BA52 /* i6p_sp.png in Resources */,
+				AEECCB5E208065880041BA52 /* i4_sp.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,6 +609,7 @@
 			baseConfigurationReference = 317250C86C93CE0B8E2E564C /* Pods-HSYCocoaKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = K7T7DR2ULH;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -598,6 +619,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -607,6 +629,7 @@
 			baseConfigurationReference = 0957D815DCF8B130323A0F01 /* Pods-HSYCocoaKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = K7T7DR2ULH;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -616,6 +639,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

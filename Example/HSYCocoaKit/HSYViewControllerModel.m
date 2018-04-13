@@ -8,6 +8,7 @@
 
 #import "HSYViewControllerModel.h"
 #import "HSYCocoaKitSocketManager.h"
+#import "HSYBaseLaunchScreenViewController.h"
 
 @implementation TestJ_SubModel
 
@@ -19,9 +20,6 @@
 
 @end
 
-@interface HSYNetWorkingManager (test)
-
-@end
 
 @implementation HSYNetWorkingManager (test)
 
@@ -77,7 +75,7 @@
 //        [self.subject sendNext:@"1"];
         
         
-        [self test];
+//        [self test];
     }
     return self;
 }

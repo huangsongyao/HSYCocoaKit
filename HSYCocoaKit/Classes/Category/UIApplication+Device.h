@@ -41,4 +41,11 @@
  */
 + (CGFloat)statusBarHeight;
 
+/**
+ 获取AppDelegate
+
+ @return AppDelegate
+ */
++ (id<UIApplicationDelegate>)appDelegate;
+
 @end

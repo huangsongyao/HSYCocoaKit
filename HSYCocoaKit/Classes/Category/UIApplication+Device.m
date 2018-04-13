@@ -30,4 +30,9 @@
     return [UIApplication iPhoneStatusBarSize].height;
 }
 
++ (id<UIApplicationDelegate>)appDelegate
+{
+    return [UIApplication sharedApplication].delegate;
+}
+
 @end
