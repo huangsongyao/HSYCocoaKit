@@ -11,5 +11,6 @@
 
 @interface HSYCocoaKitLottieAnimationManager : NSObject
 
++ (LOTAnimationView *)animationView:(NSString *)fileName;
 
 @end
