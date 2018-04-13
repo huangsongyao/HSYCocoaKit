@@ -11,6 +11,5 @@
 
 @interface HSYCocoaKitLottieAnimationManager : NSObject
 
-@property (nonatomic, strong, readonly) LOTAnimationView *animationView;
 
 @end
