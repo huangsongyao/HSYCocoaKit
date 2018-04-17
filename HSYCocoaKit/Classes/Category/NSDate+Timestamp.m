@@ -10,15 +10,6 @@
 #import "PublicMacroFile.h"
 
 static NSInteger _TimeSp = 1000;                    //时间戳倍数
-static NSString *_UTC    = @"UTC";                  //北京时间格式
-
-static const NSString *Sunday       = @"星期天";
-static const NSString *Monday       = @"星期一";
-static const NSString *Tuesday      = @"星期二";
-static const NSString *Wednesday    = @"星期三";
-static const NSString *Thursday     = @"星期四";
-static const NSString *Friday       = @"星期五";
-static const NSString *Saturday     = @"星期六";
 
 @implementation NSDate (Timestamp)
 
@@ -34,20 +25,21 @@ static const NSString *Saturday     = @"星期六";
     return shareFormatter;
 }
 
-+ (NSDate *)locationTimeZone
+#pragma mark - Read Date
+
+- (NSDate *)readDate
 {
-    NSDate *date = [NSDate date];
-    NSTimeZone *zone = [NSTimeZone systemTimeZone];
-    NSInteger interval = [zone secondsFromGMTForDate:date];
-    NSDate *localeDate = [date dateByAddingTimeInterval:interval];
-    return localeDate;
+    NSTimeZone *systemZone = [NSTimeZone systemTimeZone];
+    NSTimeInterval interval = [systemZone secondsFromGMTForDate:self];
+    NSDate *realDate = [self dateByAddingTimeInterval:interval];
+    return realDate;
 }
 
 #pragma mark - Change Timestamp
 
 + (NSDate *)toDate:(NSTimeInterval)timestamp
 {
-    //此处的时间戳必须是除以1000以后的正确时间戳值，且此时间戳对应的是🇺🇸时间
+    //此处的时间戳必须是除以1000以后的正确时间戳值，且此时间戳对应的是标准时间
     return [NSDate dateWithTimeIntervalSince1970:timestamp];
 }
 
@@ -92,12 +84,12 @@ static const NSString *Saturday     = @"星期六";
 
 + (unsigned long long)timestampMillisecond
 {
-    return (unsigned long long)([[NSDate locationTimeZone] timeIntervalSince1970] * _TimeSp);
+    return [[NSDate date] timestampMillisecond];
 }
 
 - (unsigned long long)timestampMillisecond
 {
-    return (unsigned long long)([self timeIntervalSince1970] * _TimeSp);
+    return (unsigned long long)([[self readDate] timeIntervalSince1970] * _TimeSp);
 }
 
 #pragma mark - New Date To Show String
@@ -155,7 +147,7 @@ static const NSString *Saturday     = @"星期六";
 
 + (NSDate *)nextDay
 {
-    NSDate *date = [NSDate locationTimeZone];
+    NSDate *date = [[NSDate date] readDate];
     NSDate *nextDay = [NSDate dateWithTimeInterval:D_DAY sinceDate:date];//后一天
     
     return nextDay;
@@ -163,7 +155,7 @@ static const NSString *Saturday     = @"星期六";
 
 + (NSDate *)lastDay
 {
-    NSDate *date = [NSDate locationTimeZone];
+    NSDate *date = [[NSDate date] readDate];
     NSDate *lastDay = [NSDate dateWithTimeInterval:-D_DAY sinceDate:date];//前一天
     
     return lastDay;
@@ -173,15 +165,16 @@ static const NSString *Saturday     = @"星期六";
 
 + (NSDate *)nextMonth
 {
-    NSDate *new = [NSDate locationTimeZone];
+    NSDate *new = [[NSDate date] readDate];
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger flags = (NSCalendarUnitYear | NSCalendarUnitMonth);
+    NSUInteger flags = (NSCalendarUnitYear |
+                        NSCalendarUnitMonth);
     NSDateComponents *dateComponent = [calendar components:flags fromDate:new];
     NSInteger year = [dateComponent year];
     NSInteger month = [dateComponent month];
     
-    int endDate = 0;
+    NSInteger endDate = 0;
     switch (month) {
         case 1:
         case 3:
@@ -221,53 +214,118 @@ static const NSString *Saturday     = @"星期六";
 
 - (NSString *)dateToWeek
 {
+    NSDictionary *weekday = @{
+                              @(kHSYCocoaKitDateWeekSunday) : Sunday,
+                              @(kHSYCocoaKitDateWeekMonday) : Monday,
+                              @(kHSYCocoaKitDateWeekTuesday) : Tuesday,
+                              @(kHSYCocoaKitDateWeekWednesday) : Wednesday,
+                              @(kHSYCocoaKitDateWeekThursday) : Thursday,
+                              @(kHSYCocoaKitDateWeekFriday) : Friday,
+                              @(kHSYCocoaKitDateWeekSaturday) : Saturday,
+                              };
+    NSString *week = weekday[@(self.weekdayEnum)];
+    return week;
+}
+
+- (kHSYCocoaKitDateWeek)weekdayEnum
+{
+    return ((kHSYCocoaKitDateWeek)self.weekday);
+}
+
+- (NSInteger)weekday
+{
+    NSDateComponents *comps = [self weekDateComponents];
+    return comps.weekday;
+}
+
+- (NSDateComponents *)weekDateComponents
+{
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSInteger unitFlags = NSCalendarUnitYear |
-                          NSCalendarUnitMonth |
-                          NSCalendarUnitDay |
-                          NSCalendarUnitWeekday |
-                          NSCalendarUnitHour |
-                          NSCalendarUnitMinute |
-                          NSCalendarUnitSecond;
+    NSCalendarUnit unitFlags = (NSCalendarUnitYear |
+                                NSCalendarUnitMonth |
+                                NSCalendarUnitDay |
+                                NSCalendarUnitWeekday |
+                                NSCalendarUnitHour |
+                                NSCalendarUnitMinute |
+                                NSCalendarUnitSecond);
     
     NSDateComponents *comps = [[NSDateComponents alloc] init];
-    comps = [calendar components:unitFlags fromDate:self];
+    comps = [calendar components:unitFlags fromDate:self.readDate];
     
-    NSString *week = nil;
-    switch (comps.weekday) {
-        case 1: {
-            week = [Sunday copy];
-        }
-            break;
-        case 2: {
-            week = [Monday copy];
-        }
-            break;
-        case 3: {
-            week = [Tuesday copy];
-        }
-            break;
-        case 4: {
-            week = [Wednesday copy];
-        }
-            break;
-        case 5: {
-            week = [Thursday copy];
-        }
-            break;
-        case 6: {
-            week = [Friday copy];
-        }
-            break;
-        case 7: {
-            week = [Saturday copy];
-        }
-            break;
-        default:
-            break;
-    }
-    
-    return week;
+    return comps;
+}
+
+#pragma mark - Equal Date
+
+- (BOOL)isEqualDayToDate:(NSDate *)date
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendarUnit unitFlags = (NSCalendarUnitYear |
+                                NSCalendarUnitMonth |
+                                NSCalendarUnitDay);
+    NSDateComponents *comp1 = [calendar components:unitFlags fromDate:self.readDate];
+    NSDateComponents *comp2 = [calendar components:unitFlags fromDate:date.readDate];
+    return ([comp1 day] == [comp2 day] && [comp1 month] == [comp2 month] && [comp1 year]  == [comp2 year]);
+}
+
+- (BOOL)isEqualMonthToDate:(NSDate *)date
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendarUnit unitFlags = (NSCalendarUnitYear |
+                                NSCalendarUnitMonth);
+    NSDateComponents *comp1 = [calendar components:unitFlags fromDate:self.readDate];
+    NSDateComponents *comp2 = [calendar components:unitFlags fromDate:date];
+    return ([comp1 month] == [comp2 month] && [comp1 year]  == [comp2 year]);
+}
+
+- (BOOL)isEqualYearToDate:(NSDate *)date
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendarUnit unitFlags = (NSCalendarUnitYear);
+    NSDateComponents *comp1 = [calendar components:unitFlags fromDate:self.readDate];
+    NSDateComponents *comp2 = [calendar components:unitFlags fromDate:date.readDate];
+    return ([comp1 year]  == [comp2 year]);
+}
+
++ (BOOL)beforeToDate:(NSNumber *)timestamp
+{
+    unsigned long long selfSecond = [NSDate date].timestampMillisecond;
+    return (selfSecond < (timestamp.longLongValue/_TimeSp));
+}
+
+#pragma mark - Current Data => Current Year、Month、Day
+
++ (NSInteger)day:(NSDate *)date
+{
+    NSDateComponents *components = [[NSDate date] weekDateComponents];
+    return components.day;
+}
+
++ (NSInteger)month:(NSDate *)date
+{
+    NSDateComponents *components = [[NSDate date] weekDateComponents];
+    return components.month;
+}
+
++ (NSInteger)year:(NSDate *)date
+{
+    NSDateComponents *components = [[NSDate date] weekDateComponents];
+    return components.year;
+}
+
+- (NSInteger)currentDay
+{
+    return [NSDate day:self];
+}
+
+- (NSInteger)currentMonth
+{
+    return [NSDate month:self];
+}
+
+- (NSInteger)currentYear
+{
+    return [NSDate year:self];
 }
 
 

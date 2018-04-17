@@ -27,7 +27,9 @@ typedef NS_ENUM(NSUInteger, kHSYCustomBarButtonItemTag) {
  @param next 点击回调事件，kHSYCustomBarButtonItemTag枚举表示回调的类型
  @return 导航按钮
  */
-+ (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsImages:(NSArray<NSDictionary *> *)images edgeInsetsLeft:(CGFloat)left subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
++ (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsImages:(NSArray<NSDictionary *> *)images
+                                          edgeInsetsLeft:(CGFloat)left
+                                           subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
 
 /**
  创建导航栏按钮集合--------@[UIBarButtonItem]，文字模式
@@ -37,6 +39,8 @@ typedef NS_ENUM(NSUInteger, kHSYCustomBarButtonItemTag) {
  @param next 点击回调事件，kHSYCustomBarButtonItemTag枚举表示回调的类型
  @return 导航按钮
  */
-+ (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsTitles:(NSArray<NSDictionary *> *)titles edgeInsetsLeft:(CGFloat)left subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
++ (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsTitles:(NSArray<NSDictionary *> *)titles
+                                          edgeInsetsLeft:(CGFloat)left
+                                           subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
 
 @end

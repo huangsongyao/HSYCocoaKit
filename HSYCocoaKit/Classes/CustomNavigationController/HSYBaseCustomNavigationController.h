@@ -25,6 +25,7 @@ typedef NS_ENUM(NSUInteger, kHSYCustomNavigationControllerParamsKey) {
 @property (nonatomic, assign) BOOL banTransition NS_AVAILABLE_IOS(8_0);                                                            //默认为NO，如果设置为YES，则不自持手势转场，用于特定页面禁止侧滑
 
 //此入口方法默认打开了自定义转场动画
-- (instancetype)initWithRootViewController:(UIViewController *)rootViewController params:(NSDictionary <NSNumber *, id>*)params NS_AVAILABLE_IOS(8_0);
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController
+                                    params:(NSDictionary <NSNumber *, id>*)params NS_AVAILABLE_IOS(8_0);
 
 @end
