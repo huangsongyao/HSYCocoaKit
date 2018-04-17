@@ -10,6 +10,7 @@
 #import "HSYViewControllerModel.h"
 #import "HSYBViewController.h"
 #import "NSObject+UIKit.h"
+#import "UIViewController+Device.h"
 
 @interface TestModel : NSObject
 
@@ -54,6 +55,11 @@
         @strongify(self);
         HSYBViewController *bvc = [[HSYBViewController alloc] init];
         [self.navigationController pushViewController:bvc animated:YES];
+//        [[self hsy_rac_openEditingSystemVideos] subscribeNext:^(id x) {
+//            NSLog(@"33333");
+//        } completed:^{
+//            NSLog(@"00000");
+//        }];
     }];
     button.backgroundColor = [UIColor redColor];
     button.frame = CGRectMake(100, 300, 60, 56);

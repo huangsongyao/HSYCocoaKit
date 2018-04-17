@@ -23,7 +23,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        UIImage *image = [UIImage createImgWithColor:[UIColor greenColor]];
+        UIImage *image = [UIImage imageWithFillColor:[UIColor greenColor]];
         [self setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
         _customNavigationItem = [[UINavigationItem alloc] initWithTitle:@""];
         [self pushNavigationItem:self.customNavigationItem animated:YES];
@@ -41,7 +41,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
 - (void)hsy_customBarBottomLineOfColor:(UIColor *)color
 {
-    [self setShadowImage:[UIImage createImgWithColor:[UIColor clearColor]]];
+    [self setShadowImage:[UIImage imageWithFillColor:[UIColor clearColor]]];
     CGFloat height = 1.0f;
     UIView *lineView = [self viewWithTag:kHSYCustomNavigationBarBottomLineTag];
     if (!lineView) {
@@ -52,25 +52,42 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
     [self addSubview:lineView];
 }
 
-#pragma mark - BarButton Item
+#pragma mark - BackBarButton Item
 
-+ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
++ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name title:(NSString *)title subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
 {
-    UIImage *image = [self.class hsy_imageForBundle:name];
-    NSDictionary *dic = @{
-                          @(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName) : image,
-                          @(kHSYCocoaKitOfButtonPropretyTypePreImageViewName) : image,
-                          };
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if (title.length > 0) {
+        dic[@(kHSYCocoaKitOfButtonPropretyTypeNorTitle)] = title;
+        dic[@(kHSYCocoaKitOfButtonPropretyTypeHighTitle)] = title;
+    }
+    if (name.length > 0) {
+        UIImage *image = [self.class hsy_imageForBundle:name];
+        dic[@(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName)] = image;
+        dic[@(kHSYCocoaKitOfButtonPropretyTypePreImageViewName)] = image;
+    }
     UIButton *button = [NSObject createButtonByParam:dic clickedOnSubscribeNext:^(UIButton *button) {
         if (next) {
             next(button, kHSYCustomBarButtonItemTagBack);
         }
     }];
-    button.size = CGSizeMake(DEFAULT_BUTTOM_SIZE, DEFAULT_BUTTOM_SIZE);                         //默认点击区域为40x40dx
-    button.contentEdgeInsets = UIEdgeInsetsMake(0, -DEFAULT_BUTTOM_EDGE_INSETS_LEFT, 0, 0);     //默认返回按钮的箭头图片向左编译10dx
+    //默认点击区域为40x40dx
+    button.size = CGSizeMake(DEFAULT_BUTTOM_SIZE, DEFAULT_BUTTOM_SIZE);
+    //默认返回按钮的箭头图片向左便宜10dx
+    button.contentEdgeInsets = UIEdgeInsetsMake(0, -DEFAULT_BUTTOM_EDGE_INSETS_LEFT, 0, 0);
     button.tag = kHSYCustomBarButtonItemTagBack;
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     return backItem;
+}
+
++ (UIBarButtonItem *)hsy_backButtonItemForTitle:(NSString *)title subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
+{
+    return [self.class hsy_backButtonItemForImage:nil title:title subscribeNext:next];
+}
+
++ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
+{
+    return [self.class hsy_backButtonItemForImage:name title:nil subscribeNext:next];
 }
 
 + (UIBarButtonItem *)hsy_backButtonItem:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next

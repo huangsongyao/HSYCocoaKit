@@ -6,7 +6,6 @@
 //  Copyright (c) 2017 huangsongyao. All rights reserved.
 //
 
-@import UIKit;
 #import "HSYBaseViewController.h"
 
 @interface HSYViewController : HSYBaseViewController

@@ -30,6 +30,8 @@
 		AEECCB60208065880041BA52 /* i6_sp.png in Resources */ = {isa = PBXBuildFile; fileRef = AEECCB5B208065880041BA52 /* i6_sp.png */; };
 		AEECCB61208065880041BA52 /* i6p_sp.png in Resources */ = {isa = PBXBuildFile; fileRef = AEECCB5C208065880041BA52 /* i6p_sp.png */; };
 		AEECCB62208065880041BA52 /* iX_sp.png in Resources */ = {isa = PBXBuildFile; fileRef = AEECCB5D208065880041BA52 /* iX_sp.png */; };
+		AEECCB722081F1310041BA52 /* nav_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEECCB702081F1300041BA52 /* nav_back@2x.png */; };
+		AEECCB732081F1310041BA52 /* nav_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEECCB712081F1300041BA52 /* nav_back@3x.png */; };
 		E4BF8F981817DC07DA00DC27 /* Pods_HSYCocoaKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C741A67EF37DC3880AC3E66 /* Pods_HSYCocoaKit_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +83,8 @@
 		AEECCB5B208065880041BA52 /* i6_sp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = i6_sp.png; sourceTree = "<group>"; };
 		AEECCB5C208065880041BA52 /* i6p_sp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = i6p_sp.png; sourceTree = "<group>"; };
 		AEECCB5D208065880041BA52 /* iX_sp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iX_sp.png; sourceTree = "<group>"; };
+		AEECCB702081F1300041BA52 /* nav_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_back@2x.png"; sourceTree = "<group>"; };
+		AEECCB712081F1300041BA52 /* nav_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_back@3x.png"; sourceTree = "<group>"; };
 		DB834CF2CF9515FAFD8A4E05 /* Pods-HSYCocoaKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSYCocoaKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HSYCocoaKit_Tests/Pods-HSYCocoaKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E00952B031F4641AB58B96CC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		EC38690B33C0219815395C34 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 				AEECCAE3207A13310041BA52 /* HSYBViewController.m */,
 				AEECCA952071D2100041BA52 /* HSYViewControllerModel.h */,
 				AEECCA962071D2100041BA52 /* HSYViewControllerModel.m */,
+				AEECCB702081F1300041BA52 /* nav_back@2x.png */,
+				AEECCB712081F1300041BA52 /* nav_back@3x.png */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				AEECCB59208065880041BA52 /* i4_sp.png */,
 				AEECCB5A208065880041BA52 /* i5_sp.png */,
@@ -318,8 +324,10 @@
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				AEECCB5F208065880041BA52 /* i5_sp.png in Resources */,
 				AEECCB62208065880041BA52 /* iX_sp.png in Resources */,
+				AEECCB722081F1310041BA52 /* nav_back@2x.png in Resources */,
 				AEECCB61208065880041BA52 /* i6p_sp.png in Resources */,
 				AEECCB5E208065880041BA52 /* i4_sp.png in Resources */,
+				AEECCB732081F1310041BA52 /* nav_back@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

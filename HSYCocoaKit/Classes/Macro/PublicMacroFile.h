@@ -42,6 +42,8 @@
 #define VERSION_GTR_IOS8                    (IPHONE_SYSTEM_VERSION > 8.0 ? YES : NO)
 #define VERSION_GTR_IOS9                    (IPHONE_SYSTEM_VERSION > 9.0 ? YES : NO)
 #define VERSION_GTR_IOS10                   (IPHONE_SYSTEM_VERSION > 10.0 ? YES : NO)
+#define VERSION_GTR_IOS11                   (IPHONE_SYSTEM_VERSION > 11.0 ? YES : NO)
+
 
 // statusBar高度
 #define IPHONE_STATUS_BAR_HEIGHT                                        ([UIApplication statusBarHeight])

@@ -19,6 +19,7 @@
 {
     if (self = [super init]) {
         self.hsy_addKeyboardObserver = NO;
+        self.hsy_addCustomNavigationBarBackButton = YES;
     }
     return self;
 }
@@ -105,7 +106,8 @@
 {
     _customNavigationBar = [[HSYCustomNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, DEFAULT_NAVIGATION_BAR_HEIGHT)];
     [self.view addSubview:self.customNavigationBar];
-    if (self.navigationController.viewControllers.count > 1) {
+    //添加一个外部标识位用于子类便捷是否创建back按钮，当该标识位为YES并且栈控制器的vc大于1时创建
+    if (self.navigationController.viewControllers.count > 1 && self.hsy_addCustomNavigationBarBackButton) {
         [self hsy_pushNavigationItemInLeft];
     }
 }
@@ -121,6 +123,33 @@
     }];
     self.customNavigationBar.customNavigationItem.leftBarButtonItems = @[backButtonItem];
 }
+
+- (void)hsy_setCustomNavigationBarBackButtonInLeft:(BOOL)left title:(NSString *)title image:(NSString *)image
+{
+    @weakify(self);
+    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar hsy_backButtonItemForImage:image title:title subscribeNext:^(UIButton *button, kHSYCustomBarButtonItemTag tag) {
+        @strongify(self);
+        if (tag == kHSYCustomBarButtonItemTagBack) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
+    if (left) {
+        self.customNavigationBar.customNavigationItem.leftBarButtonItems = @[backButtonItem];
+    } else {
+        self.customNavigationBar.customNavigationItem.rightBarButtonItems = @[backButtonItem];
+    }
+}
+
+- (void)hsy_setCustomNavigationBarBackButtonInLeft:(BOOL)left title:(NSString *)title
+{
+    return [self hsy_setCustomNavigationBarBackButtonInLeft:left title:title image:nil];
+}
+
+- (void)hsy_setCustomNavigationBarBackButtonInLeft:(BOOL)left image:(NSString *)image
+{
+    return [self hsy_setCustomNavigationBarBackButtonInLeft:left title:nil image:image];
+}
+
 
 
 @end

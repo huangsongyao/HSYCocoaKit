@@ -16,7 +16,7 @@
  @param color 图片颜色
  @return UIImage
  */
-+ (UIImage *)createImgWithColor:(UIColor *)color;
++ (UIImage *)imageWithFillColor:(UIColor *)color;
 
 /**
  创建rect区域的图片
@@ -25,7 +25,7 @@
  @param rect 图片区域
  @return UIImage
  */
-+ (UIImage *)createImgWithColor:(UIColor *)color rect:(CGRect)rect;
++ (UIImage *)imageWithFillColor:(UIColor *)color rect:(CGRect)rect;
 
 /**
  将视图剪裁成一张图片

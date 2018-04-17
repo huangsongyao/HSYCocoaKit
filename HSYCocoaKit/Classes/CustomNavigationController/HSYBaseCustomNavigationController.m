@@ -7,6 +7,7 @@
 //
 
 #import "HSYBaseCustomNavigationController.h"
+#import "HSYBaseViewController.h"
 
 @interface HSYBaseCustomNavigationController ()
 
@@ -42,6 +43,7 @@
     if (openTransitionAnimation) {
         self.delegate = self;
         self.navigationBar.hidden = YES;
+        self.navigationBar.backItem.hidesBackButton = YES;
         self.interactivePopGestureRecognizer.enabled = NO;
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(hsy_handlePopRecognizer:)];
         panGesture.delegate = self;

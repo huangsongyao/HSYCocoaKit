@@ -57,7 +57,21 @@
     self.hsy_viewModel = [[HSYViewControllerModel alloc] init];
     self.registerClasses = @{@"TestBaseTableViewCell" : @"uuuufffff"};
     [super viewDidLoad];
+    
+    [self hsy_rightItemsImages:@[@{@(kHSYCustomBarButtonItemTagBack) : @"nav_back@2x"}] subscribeNext:^(UIButton *button, kHSYCustomBarButtonItemTag tag) {
+        
+    }];
+    
+    
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    for (UINavigationItem *view in self.customNavigationBar.items) {
+        NSLog(@"view = %@, leftBarButtonItems = %@, backIndicatorImage = %@", view, view.leftBarButtonItems, self.customNavigationBar.backIndicatorImage);
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

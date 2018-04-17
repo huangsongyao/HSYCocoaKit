@@ -25,7 +25,7 @@ static UIImage *createImageWithColor(UIColor *color, CGRect rect)
     return theImage;
 }
 
-+ (UIImage *)createImgWithColor:(UIColor *)color
++ (UIImage *)imageWithFillColor:(UIColor *)color
 {    
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIImage *image = createImageWithColor(color, rect);
@@ -33,7 +33,7 @@ static UIImage *createImageWithColor(UIColor *color, CGRect rect)
     return image;
 }
 
-+ (UIImage *)createImgWithColor:(UIColor *)color rect:(CGRect)rect
++ (UIImage *)imageWithFillColor:(UIColor *)color rect:(CGRect)rect
 {
     UIImage *image = createImageWithColor(color, rect);
     return image;
