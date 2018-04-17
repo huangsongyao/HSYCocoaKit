@@ -1,15 +1,14 @@
 //
-//  HSYFMDBOperationManager.m
-//  HSYFMDBDatabaseManager
+//  HSYCustomNavigationBar.h
+//  Pods
 //
-//  Created by huangsongyao on 17/2/27.
-//  Copyright © 2017年 huangsongyao. All rights reserved.
+//  Created by huangsongyao on 2018/4/8.
+//
 //
 
 #import "HSYFMDBOperationManager.h"
 #import "HSYFMDBOperationFieldInfo.h"
 #import "HSYFMDBOperation.h"
-#import "HSYFMDBMacro.h"
 
 static HSYFMDBOperationManager *fmdbOperationManager = nil;
 
@@ -28,39 +27,17 @@ static HSYFMDBOperationManager *fmdbOperationManager = nil;
     return fmdbOperationManager;
 }
 
-- (instancetype)init
+- (void)createDatabase:(NSString *)dbName
+       tableFieldInfos:(NSMutableArray<HSYFMDBOperationFieldInfo *> *)tableFieldInfos
 {
-    if (self = [super init]) {
-        [self createDatabase];
+    //预缓存好所有的数据库表名
+    _tableNames = [NSMutableArray arrayWithCapacity:tableFieldInfos.count];
+    for (HSYFMDBOperationFieldInfo *info in tableFieldInfos) {
+        [self.tableNames addObject:info.hsy_name];
     }
-    return self;
-}
-
-- (void)createDatabase
-{
-    //这是一个测试的数据表
-    //如果需要添加其他表，只需要按照这个格式进行添加，并且在HSYFMDBOperationManager(Fields)中添加静态方法标识数据格式，格式请模仿+ (NSMutableArray <NSDictionary *>*)testTableByFields
-    NSMutableArray *fields = [[self.class hsy_createDatabaseOpeartionFieldInfoForFieldParams:[self.class hsy_testTableByFields]] mutableCopy];
-    HSYFMDBOperationFieldInfo *testTable = [HSYFMDBOperationFieldInfo hsy_createDataBaseTableForName:FMDB_DATABASE_TEST_LIST_NAME fields:fields];
-    
-    //把表名添加到缓存数组中
-    _tableNames = @[
-                    FMDB_DATABASE_TEST_LIST_NAME,
-                    ];
     //添加到数据库中
-    _fmdbOperation = [[HSYFMDBOperation alloc] initWithDatabaseTables:[@[
-                                                                         testTable,
-                                                                         ] mutableCopy]];
-}
-
-+ (NSMutableArray <HSYFMDBOperationFieldInfo *>*)hsy_databaseTables
-{
-    //这是一个测试的数据表
-    //如果需要添加其他表，只需要按照这个格式进行添加，并且在HSYFMDBOperationManager(Fields)中添加静态方法标识数据格式，格式请模仿+ (NSMutableArray <NSDictionary *>*)testTableByFields
-    NSMutableArray *fields = [[self.class hsy_createDatabaseOpeartionFieldInfoForFieldParams:[self.class hsy_testTableByFields]] mutableCopy];
-    HSYFMDBOperationFieldInfo *testTable = [HSYFMDBOperationFieldInfo hsy_createDataBaseTableForName:FMDB_DATABASE_TEST_LIST_NAME fields:fields];
-    
-    return [@[testTable] mutableCopy];
+    _fmdbOperation = [[HSYFMDBOperation alloc] initWithDatabaseTables:tableFieldInfos
+                                                         databaseName:nil];
 }
 
 /**
@@ -115,19 +92,3 @@ static HSYFMDBOperationManager *fmdbOperationManager = nil;
 
 @end
 
-@implementation HSYFMDBOperationManager (Fields)
-
-+ (NSMutableArray<NSDictionary *> *)hsy_testTableByFields
-{
-    NSMutableArray *params = [@[
-                                @{
-                                    USERID      : FIELE_TYPE,
-                                    },
-                                @{
-                                    DETAILID    : FIELE_TYPE,
-                                    },
-                                ] mutableCopy];
-    return params;
-}
-
-@end

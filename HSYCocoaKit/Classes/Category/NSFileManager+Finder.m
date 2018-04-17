@@ -37,12 +37,16 @@
     return (path.length > 0);
 }
 
+#pragma mark - File Is Downloaded
+
 + (BOOL)fileExist:(NSString *)filePath
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL exist = [fileManager fileExistsAtPath:filePath];
     return exist;
 }
+
+#pragma mark - File Path
 
 + (NSString *)pathForDocument:(NSString *)name fileType:(NSString *)type
 {

@@ -1,28 +1,31 @@
 //
-//  HSYFMDBOperation.m
-//  HSYFMDBDatabaseManager
+//  HSYCustomNavigationBar.h
+//  Pods
 //
-//  Created by huangsongyao on 17/2/27.
-//  Copyright © 2017年 huangsongyao. All rights reserved.
+//  Created by huangsongyao on 2018/4/8.
+//
 //
 
 #import "HSYFMDBOperation.h"
 #import "HSYFMDBOperationFieldInfo.h"
 #import "ReactiveCocoa.h"
 #import "FMResultSet+Model.h"
-#import "HSYFMDBMacro.h"
+#import "APPPathMacroFile.h"
 
 @interface HSYFMDBOperation ()
 
 @property (nonatomic, strong) NSMutableArray <HSYFMDBOperationFieldInfo *>*databaseTables;
+@property (nonatomic, copy, readonly) NSString *databaseName;
 
 @end
+
 @implementation HSYFMDBOperation
 
-- (instancetype)initWithDatabaseTables:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)tables
+- (instancetype)initWithDatabaseTables:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)tables databaseName:(NSString *)name
 {
     if (self = [super init]) {
         _databaseTables = tables;                               //数据表名，集合
+        _databaseName = name;                                   //数据库名称
         [self hsy_initDB];
     }
     return self;
@@ -32,8 +35,8 @@
 
 - (void)hsy_initDB
 {    
-    _dateBase = [HSYFMDBOperation hsy_inits];                           //创建数据库
-    _dateBasePath = [HSYFMDBOperation hsy_dataBasePath];                //数据库路径
+    _dateBase = [self hsy_inits];                                       //创建数据库
+    _dateBasePath = [self hsy_dataBasePath];                            //数据库路径
     self.dateBase.traceExecution = YES;                                 //跟踪执行
     if ([self.dateBase open]) {
         for (HSYFMDBOperationFieldInfo *operation in self.databaseTables) {
@@ -244,9 +247,9 @@
 
 #pragma mark - Create DataBase
 
-+ (FMDatabase *)hsy_inits
+- (FMDatabase *)hsy_inits
 {
-    NSString *databasePath = [HSYFMDBOperation hsy_dataBasePath];
+    NSString *databasePath = [self hsy_dataBasePath];
     //创建数据库
     FMDatabase *db = [[FMDatabase alloc] initWithPath:databasePath];
     return db;
@@ -258,7 +261,7 @@
 
 + (NSString *)hsy_applicationDocumentsDirectory
 {
-    return PATH_DOCUMENT;
+    return kPATH_DOCUMENT;
 }
 
 + (NSString *)hsy_userDocumentsDirectory
@@ -266,10 +269,10 @@
     return [HSYFMDBOperation hsy_applicationDocumentsDirectory];
 }
 
-+ (NSString *)hsy_dataBasePath
+- (NSString *)hsy_dataBasePath
 {
     NSString *databasePath =  [HSYFMDBOperation hsy_userDocumentsDirectory];
-    databasePath = [databasePath stringByAppendingPathComponent:FMDB_DATABASE_FILE_NAME];
+    databasePath = [databasePath stringByAppendingPathComponent:self.databaseName];
     return databasePath;
 }
 

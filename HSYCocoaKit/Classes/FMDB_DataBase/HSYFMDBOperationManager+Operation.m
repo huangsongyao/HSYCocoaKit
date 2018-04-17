@@ -1,9 +1,9 @@
 //
-//  HSYFMDBOperationManager+Operation.m
-//  HSYFMDBDatabaseManager
+//  HSYCustomNavigationBar.h
+//  Pods
 //
-//  Created by huangsongyao on 17/2/27.
-//  Copyright © 2017年 huangsongyao. All rights reserved.
+//  Created by huangsongyao on 2018/4/8.
+//
 //
 
 #import "HSYFMDBOperationManager+Operation.h"

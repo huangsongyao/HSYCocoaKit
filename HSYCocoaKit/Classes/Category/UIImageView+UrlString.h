@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIImageView+WebCache.h"
 
 @interface UIImageView (UrlString)
+
+- (void)setImageWithUrlString:(NSString *)urlString;
+- (void)setImageWithUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage;
+- (void)setImageWithUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage completed:(SDExternalCompletionBlock)completed;
 
 @end

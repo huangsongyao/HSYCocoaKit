@@ -1,9 +1,9 @@
 //
-//  HSYFMDBOperationFieldInfo.h
-//  HSYFMDBDatabaseManager
+//  HSYCustomNavigationBar.h
+//  Pods
 //
-//  Created by huangsongyao on 17/2/27.
-//  Copyright © 2017年 huangsongyao. All rights reserved.
+//  Created by huangsongyao on 2018/4/8.
+//
 //
 
 #import <Foundation/Foundation.h>
@@ -25,7 +25,7 @@
 
 @interface HSYFMDBOperationFieldInfo : NSObject
 
-@property (nonatomic, strong) NSString *hsy_name;                                       //数据库表面
+@property (nonatomic, strong) NSString *hsy_name;                                       //数据库表名
 @property (nonatomic, strong) NSMutableArray <HSYFMDBOperationFields *>*hsy_fields;     //数据库要添加到表中的字段名称和字段名称对应的类型 的抽象类集合
 @property (nonatomic, strong) NSMutableArray <NSString *>*hsy_statements;               //数据库要插入的数据
 

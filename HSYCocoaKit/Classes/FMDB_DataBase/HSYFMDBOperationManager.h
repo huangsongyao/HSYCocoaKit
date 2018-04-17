@@ -1,9 +1,9 @@
 //
-//  HSYFMDBOperationManager.h
-//  HSYFMDBDatabaseManager
+//  HSYCustomNavigationBar.h
+//  Pods
 //
-//  Created by huangsongyao on 17/2/27.
-//  Copyright © 2017年 huangsongyao. All rights reserved.
+//  Created by huangsongyao on 2018/4/8.
+//
 //
 
 #import <Foundation/Foundation.h>
@@ -13,14 +13,18 @@
 @interface HSYFMDBOperationManager : NSObject
 
 @property (nonatomic, strong, readonly) HSYFMDBOperation *fmdbOperation;                //数据库操作相关封装类
-@property (nonatomic, strong, readonly) NSArray *tableNames;                            //缓存所有当前已经创建的表的表名
+@property (nonatomic, strong, readonly) NSMutableArray *tableNames;                     //缓存所有当前已经创建的表的表名
 
 + (instancetype)shareInstance;
 
 /**
- 子类重载本方法，模仿
+ 创建数据库
+
+ @param dbName 数据库名称
+ @param tableFieldInfos 映射的数据表结构，详情请见“HSYFMDBMacro.h”中的使用说明
  */
-- (void)createDatabase;
+- (void)createDatabase:(NSString *)dbName
+       tableFieldInfos:(NSMutableArray<HSYFMDBOperationFieldInfo *> *)tableFieldInfos;
 
 /**
  *  创建一个数据库表单的字段抽象类集合
@@ -50,19 +54,9 @@
  *
  *  @return HSYFMDBOperationInfo
  */
-+ (HSYFMDBOperationFieldInfo *)hsy_createDatabaseOperationInfoForTableName:(NSString *)tableName fieldParams:(NSMutableArray <NSDictionary *>*)params insertDatas:(NSMutableArray <NSString *>*)datas;
++ (HSYFMDBOperationFieldInfo *)hsy_createDatabaseOperationInfoForTableName:(NSString *)tableName
+                                                               fieldParams:(NSMutableArray <NSDictionary *>*)params
+                                                               insertDatas:(NSMutableArray <NSString *>*)datas;
 
 @end
 
-@interface HSYFMDBOperationManager (Fields)
-
-/**
- * ***表字段格式，如果需要需要添加时，可自行添加方法，格式请务必模范"- testTableByFields"******
- *
- * 测试用的数据表
- *  @return 表字段格式集合
- */
-+ (NSMutableArray <NSDictionary *>*)hsy_testTableByFields;
-
-
-@end

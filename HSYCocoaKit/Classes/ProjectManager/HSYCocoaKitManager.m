@@ -7,6 +7,7 @@
 //
 
 #import "HSYCocoaKit.h"
+#import "HSYFMDBMacro.h"
 
 static HSYCocoaKitManager *cocoaKitManager;
 

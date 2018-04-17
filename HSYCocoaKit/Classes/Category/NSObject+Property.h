@@ -26,6 +26,8 @@
  @param key key
  @param nonatomic objc_AssociationPolicy枚举
  */
-- (void)setProperty:(id)property forKey:(NSString *)key nonatomic:(objc_AssociationPolicy)nonatomic;
+- (void)setProperty:(id)property
+             forKey:(NSString *)key
+          nonatomic:(objc_AssociationPolicy)nonatomic;
 
 @end

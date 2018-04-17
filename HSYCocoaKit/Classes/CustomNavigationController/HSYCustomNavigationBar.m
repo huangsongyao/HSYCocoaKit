@@ -11,6 +11,7 @@
 #import "UIView+Frame.h"
 #import "UIImage+Canvas.h"
 #import "NSObject+UIKit.h"
+#import "NSBundle+PrivateFileResource.h"
 
 static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
@@ -62,7 +63,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
         dic[@(kHSYCocoaKitOfButtonPropretyTypeHighTitle)] = title;
     }
     if (name.length > 0) {
-        UIImage *image = [self.class hsy_imageForBundle:name];
+        UIImage *image = [NSBundle imageForBundle:name];
         dic[@(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName)] = image;
         dic[@(kHSYCocoaKitOfButtonPropretyTypePreImageViewName)] = image;
     }
@@ -93,19 +94,6 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 + (UIBarButtonItem *)hsy_backButtonItem:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
 {
     return [self.class hsy_backButtonItemForImage:@"nav_icon_back" subscribeNext:next];
-}
-
-+ (UIImage *)hsy_imageForBundle:(NSString *)imageName
-{
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSString *bundleName = bundle.infoDictionary[@"CFBundleName"];
-    NSURL *bundleURL = [bundle URLForResource:bundleName withExtension:@"bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithURL:bundleURL];
-    UIImage *image = [UIImage imageNamed:imageName
-                                inBundle:resourceBundle
-           compatibleWithTraitCollection:nil];
-    
-    return image;
 }
 
 #pragma mark - UINavigationBarDelegate

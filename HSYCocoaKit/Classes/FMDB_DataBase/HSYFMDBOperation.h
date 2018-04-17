@@ -1,9 +1,9 @@
 //
-//  HSYFMDBOperation.h
-//  HSYFMDBDatabaseManager
+//  HSYCustomNavigationBar.h
+//  Pods
 //
-//  Created by huangsongyao on 17/2/27.
-//  Copyright © 2017年 huangsongyao. All rights reserved.
+//  Created by huangsongyao on 2018/4/8.
+//
 //
 
 #import <Foundation/Foundation.h>
@@ -19,10 +19,12 @@
  *  初始化方法
  *
  *  @param tables 当前需要创建的表的抽象类集合
+ *  @param name   数据库名称
  *
  *  @return self
  */
-- (instancetype)initWithDatabaseTables:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)tables;
+- (instancetype)initWithDatabaseTables:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)tables
+                          databaseName:(NSString *)name;
 
 /**
  *  单次插入数据

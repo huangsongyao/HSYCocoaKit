@@ -7,6 +7,7 @@
 //
 
 #import "UIApplication+Device.h"
+#import "NSFileManager+Finder.h"
 
 @implementation UIApplication (Device)
 
@@ -15,9 +16,9 @@
     return [[UIApplication sharedApplication] keyWindow];
 }
 
-+ (NSString *)mainBundleForPathResource:(NSString *)resource ofType:(NSString *)type
++ (NSString *)mainBundleForPathResource:(NSString *)name ofType:(NSString *)type
 {
-    return [[NSBundle mainBundle] pathForResource:resource ofType:type];
+    return [NSFileManager finderFileFromName:name fileType:type];
 }
 
 + (CGSize)iPhoneStatusBarSize

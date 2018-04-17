@@ -100,9 +100,6 @@
 // 沙盒下存放配置文件的文件夹路径
 #define PATHDOCUMENT_CONFIG_FILE_PATH                                   @"Config"
 
-// 沙盒下缓存从mov转mp4格式的视频文件路径后缀
-#define CHANGE_VIDEO_PATH_SUFFIX                                        @"cacheVideo.mp4"
-
 // 压缩视频帧数
 #define CHANGE_VIDEO_FGS                                                600
 

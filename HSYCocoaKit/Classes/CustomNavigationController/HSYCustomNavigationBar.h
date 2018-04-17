@@ -64,13 +64,4 @@
  */
 + (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name title:(NSString *)title subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
 
-#pragma mark - Private Framework Resources
-/**
- 从当前私有库的bundle中获取资源图片
-
- @param imageName 图片名称
- @return UIImage
- */
-+ (UIImage *)hsy_imageForBundle:(NSString *)imageName;
-
 @end

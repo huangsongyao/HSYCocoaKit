@@ -18,14 +18,14 @@
 + (UIWindow *)keyWindows;
 
 /**
- *  通过文件类型和文件名称获取文件路径
+ *  通过文件类型和文件名称获取文件路径，内部加载了“NSFileManager+Finder.h”的方法
  *
- *  @param resource 文件名称
+ *  @param name     文件名称
  *  @param type     文件后缀类型
  *
  *  @return 文件路径
  */
-+ (NSString *)mainBundleForPathResource:(NSString *)resource ofType:(NSString *)type;
++ (NSString *)mainBundleForPathResource:(NSString *)name ofType:(NSString *)type;
 
 /**
  设备statusBar的size

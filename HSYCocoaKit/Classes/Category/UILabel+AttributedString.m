@@ -23,8 +23,6 @@
                               value:value
                               range:range];
     }
-    
-    
     return attributedStr;
 }
 
