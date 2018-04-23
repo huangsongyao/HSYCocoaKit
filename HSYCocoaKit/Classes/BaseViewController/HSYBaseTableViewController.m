@@ -66,6 +66,12 @@
         @strongify(self);
         if (signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess ||
             signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
+            if (signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess && [signal.subscribeContents.firstObject isKindOfClass:[HSYHUDModel class]]) {
+                HSYHUDModel *hudModel = signal.subscribeContents.firstObject;
+                if (hudModel.pullUpSize < self.hsy_viewModel.size) {
+                    [self hsy_closePullUp:self.tableView];
+                }
+            }
             //下拉刷新成功//上拉加载更多成功
             [self.tableView reloadData];
         }

@@ -41,5 +41,18 @@ FOUNDATION_EXPORT NSString *const kHSYCocoaKitRefreshStatusPullUpKey;
  */
 - (void)hsy_addPullUpRefresh:(UIScrollView *)scrollView;
 
+/**
+ 关闭上拉
+
+ @param scrollView scrollView
+ */
+- (void)hsy_closePullUp:(UIScrollView *)scrollView;
+
+/**
+ 打开上拉
+
+ @param scrollView scrollView
+ */
+- (void)hsy_openPullUp:(UIScrollView *)scrollView;
 
 @end

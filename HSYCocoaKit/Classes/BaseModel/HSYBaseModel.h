@@ -33,6 +33,13 @@
 - (void)hsy_stop;
 
 /**
+ 请求失败允许外部设置statusCode
+
+ @param code code
+ */
+- (void)hsy_resultStatusCode:(id)code;
+
+/**
  *  创建button的command信号
  *
  *  @param signal RACCommand响应的RACSignal

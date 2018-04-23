@@ -112,7 +112,7 @@
             NSMutableArray *array = [[NSMutableArray alloc] init];
             [array addObject:[NSString stringWithFormat:@"jfiowejfowijfoweijfweoif%d", arc4random()%100000]];
             return array;
-        } subscriberNext:^{
+        } subscriberNext:^(id x) {
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{}];
@@ -127,11 +127,11 @@
             return [[HSYNetWorkingManager shareInstance] test:urlStr];
         } toMap:^NSMutableArray *(RACTuple *tuple) {
             NSMutableArray *array = [[NSMutableArray alloc] init];
-            for (NSInteger i = 0; i < 100; i ++) {
+            for (NSInteger i = 0; i < 10; i ++) {
                 [array addObject:[NSString stringWithFormat:@"%d", arc4random()%100]];
             }
             return array;
-        } subscriberNext:^{
+        } subscriberNext:^(id x) {
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{}];

@@ -95,12 +95,8 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
         @strongify(self);
         [[[self.hsy_viewModel hsy_rac_pullDownMethod] deliverOn:[RACScheduler mainThreadScheduler]] subscribeCompleted:^{
             @strongify(self);
-            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess subscribeContents:self.hsy_viewModel.hsy_datas];
-            [self.hsy_viewModel.subject sendNext:object];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                @strongify(scrollView);
-                [scrollView.pullToRefreshView stopAnimating];
-            });
+            @strongify(scrollView);
+            [self subjectSendNext:YES refreshScrollView:scrollView];
         }];
     }];
 }
@@ -114,14 +110,43 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
         @strongify(self);
         [[[self.hsy_viewModel hsy_rac_pullUpMethod] deliverOn:[RACScheduler mainThreadScheduler]] subscribeCompleted:^{
             @strongify(self);
-            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess subscribeContents:self.hsy_viewModel.hsy_datas];
-            [self.hsy_viewModel.subject sendNext:object];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                @strongify(scrollView);
-                [scrollView.infiniteScrollingView stopAnimating];
-            });
+            @strongify(scrollView);
+            [self subjectSendNext:NO refreshScrollView:scrollView];
         }];
     }];
+}
+
+- (void)subjectSendNext:(BOOL)pullDown refreshScrollView:(UIScrollView *)scrollView
+{
+    kHSYCocoaKitRACSubjectOfNextType type = (pullDown ? kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess : kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess);
+    HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:type subscribeContents:self.hsy_viewModel.hsy_datas];
+    [self.hsy_viewModel.subject sendNext:object];
+    @weakify(scrollView);
+    @weakify(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        @strongify(scrollView);
+        @strongify(self);
+        if (type == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess) {
+            [scrollView.pullToRefreshView stopAnimating];
+            [self hsy_openPullUp:scrollView];
+        } else {
+            [scrollView.infiniteScrollingView stopAnimating];
+        }
+    });
+}
+
+- (void)hsy_closePullUp:(UIScrollView *)scrollView
+{
+    if (self.showPullUp || self.showAllReflesh) {
+        scrollView.showsInfiniteScrolling = NO;
+    }
+}
+
+- (void)hsy_openPullUp:(UIScrollView *)scrollView
+{
+    if (self.showPullUp || self.showAllReflesh) {
+        scrollView.showsInfiniteScrolling = YES;
+    }
 }
 
 @end

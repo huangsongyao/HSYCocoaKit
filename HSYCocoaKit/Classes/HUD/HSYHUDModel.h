@@ -35,6 +35,7 @@ typedef NS_ENUM(NSUInteger, kHSYHUDModelCodeType) {
 @property (nonatomic, assign) CGFloat hsy_animationTime;                    //动画时长
 @property (nonatomic, assign) kHSYHUDModelCodeType hsy_codeType;            //编码类型
 @property (nonatomic, assign) BOOL hsy_showPromptContent;                   //是否提示内容，默认为提示
+@property (nonatomic, assign) NSInteger pullUpSize;                         //上拉加载更多的当前次所加载的内容的条数
 
 /**
  *  初始化一个HUD

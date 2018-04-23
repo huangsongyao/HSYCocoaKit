@@ -52,7 +52,7 @@ typedef NS_ENUM(NSUInteger, kHSYReflesStatusType) {
 - (void)hsy_pullRefresh:(kHSYReflesStatusType)status
              updateNext:(RACSignal *(^)(void))network
                   toMap:(NSMutableArray *(^)(RACTuple *tuple))map
-         subscriberNext:(void(^)(void))next;
+         subscriberNext:(void(^)(id x))next;
 
 /**
  下拉刷新方法，默认返回一个empty，子类中请重载本方法，并返回关于下拉刷新的网络请求，数据源默认由外部重载的子类中自己定义

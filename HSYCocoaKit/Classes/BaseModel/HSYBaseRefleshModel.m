@@ -41,13 +41,13 @@
              updateNext:(RACSignal *(^)(void))network
                   toMap:(NSMutableArray *(^)(RACTuple *tuple))map
 {
-    [self hsy_pullRefresh:status updateNext:network toMap:map subscriberNext:^{}];
+    [self hsy_pullRefresh:status updateNext:network toMap:map subscriberNext:^(id x) {}];
 }
 
 - (void)hsy_pullRefresh:(kHSYReflesStatusType)status
              updateNext:(RACSignal *(^)(void))network
                   toMap:(NSMutableArray *(^)(RACTuple *tuple))map
-         subscriberNext:(void(^)(void))next
+         subscriberNext:(void(^)(id x))next
 {
     switch (status) {
         case kHSYReflesStatusTypePullDown:
@@ -74,31 +74,42 @@
             for (id obj in result) {
                 [self.hsy_datas addObject:obj];
             }
-            self.hsy_pullUpStateCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullUpSuccess];
+            HSYHUDModel *hunModel = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullUpSuccess];
+            hunModel.pullUpSize = result.count;
+            self.hsy_pullUpStateCode = hunModel;
         }
         
         if (next) {
-            next();
+            next(result);
         }
         return NO;
     } error:^(NSError *error) {
+        @strongify(self);
+        [self hsy_resultStatusCode:error];
         if (next) {
-            next();
+            next(error);
         }
     }];
 }
 
+//范例
+//- (RACSignal *)test:(NSString *)path
+//{
+//    return [self.httpSessionManager hsy_rac_getRequest:path parameters:nil];
+//}
 - (RACSignal *)hsy_rac_pullDownMethod
 {
     //范例
 //    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
 //        NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
-//        [[[HSYNetWorkingManager shareInstance] test:urlStr] subscribeNext:^(id x) {
-//            [self.hsy_datas addObject:[NSString stringWithFormat:@"%d", arc4random()%100]];
-//            [subscriber sendNext:x];
+//        [self hsy_pullRefresh:kHSYReflesStatusTypePullDown updateNext:^RACSignal *{
+//            return [[HSYNetWorkingManager shareInstance] test:urlStr];
+//        } toMap:^NSMutableArray *(RACTuple *tuple) {
+//            NSMutableArray *array = [[NSMutableArray alloc] init];
+//            [array addObject:[NSString stringWithFormat:@"jfiowejfowijfoweijfweoif%d", arc4random()%100000]];
+//            return array;
+//        } subscriberNext:^(id x) {
 //            [subscriber sendCompleted];
-//        } error:^(NSError *error) {
-//            [subscriber sendError:error];
 //        }];
 //        return [RACDisposable disposableWithBlock:^{}];
 //    }];
@@ -110,12 +121,16 @@
     //范例
 //    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
 //        NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
-//        [[[HSYNetWorkingManager shareInstance] test:urlStr] subscribeNext:^(id x) {
-//            [self.hsy_datas addObject:[NSString stringWithFormat:@"%d", arc4random()%100]];
-//            [subscriber sendNext:x];
+//        [self hsy_pullRefresh:kHSYReflesStatusTypePullUp updateNext:^RACSignal *{
+//            return [[HSYNetWorkingManager shareInstance] test:urlStr];
+//        } toMap:^NSMutableArray *(RACTuple *tuple) {
+//            NSMutableArray *array = [[NSMutableArray alloc] init];
+//            for (NSInteger i = 0; i < 100; i ++) {
+//                [array addObject:[NSString stringWithFormat:@"%d", arc4random()%100]];
+//            }
+//            return array;
+//        } subscriberNext:^(id x) {
 //            [subscriber sendCompleted];
-//        } error:^(NSError *error) {
-//            [subscriber sendError:error];
 //        }];
 //        return [RACDisposable disposableWithBlock:^{}];
 //    }];

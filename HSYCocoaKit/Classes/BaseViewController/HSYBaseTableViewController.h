@@ -26,6 +26,7 @@
  @param configuration set内容的回调
  @return cell算高
  */
-- (CGFloat)hsy_heightForCellWithCacheByIndexPath:(NSIndexPath *)indexPath configuration:(void (^)(UITableViewCell *cell))configuration;
+- (CGFloat)hsy_heightForCellWithCacheByIndexPath:(NSIndexPath *)indexPath
+                                   configuration:(void(^)(UITableViewCell *cell))configuration;
 
 @end
