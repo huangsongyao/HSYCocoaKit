@@ -56,7 +56,8 @@
     return command;
 }
 
-- (RACSignal *)hsy_createRACSignals:(id<NSFastEnumeration>)signals reduce:(id(^)(void))reduceBlock
+- (RACSignal *)hsy_createRACSignals:(id<NSFastEnumeration>)signals
+                             reduce:(id(^)(void))reduceBlock
 {
     return [RACSignal combineLatest:signals reduce:reduceBlock];
 }
@@ -74,7 +75,8 @@
 
 #pragma mark - Datas Operation
 
-- (void)hsy_rac_datasTraverseSubscribeNext:(void(^)(id result, NSNumber *index))next completed:(void(^)(void))completed
+- (void)hsy_rac_datasTraverseSubscribeNext:(void(^)(id result, NSNumber *index))next
+                                 completed:(void(^)(void))completed
 {
     [[[self.hsy_datas rac_traverseArray] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSDictionary *value) {
         if (next) {
@@ -87,7 +89,9 @@
     }];
 }
 
-- (void)hsy_rac_filterUntilCondition:(BOOL(^)(id predicate))condition subscribeNext:(void(^)(id x))next completed:(void(^)(void))completed
+- (void)hsy_rac_filterUntilCondition:(BOOL(^)(id predicate))condition
+                       subscribeNext:(void(^)(id x))next
+                           completed:(void(^)(void))completed
 {
     [[[self.hsy_datas rac_filterUntilCompleted:^BOOL(id predicate) {
         if (condition) {
@@ -111,7 +115,10 @@
     self.hsy_errorStatusCode = code;
 }
 
-- (void)hsy_requestNetwork:(RACSignal *(^)(void))network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next error:(void(^)(NSError *error))error
+- (void)hsy_requestNetwork:(RACSignal *(^)(void))network
+                     toMap:(id(^)(RACTuple *tuple))map
+            subscriberNext:(BOOL(^)(id x))next
+                     error:(void(^)(NSError *error))error
 {
     if (network) {
         RACSignal *signal = network();
@@ -126,7 +133,9 @@
     }
 }
 
-- (void)hsy_requestNetwork:(RACSignal *(^)(void))network toMap:(id(^)(RACTuple *tuple))map subscriberNext:(BOOL(^)(id x))next
+- (void)hsy_requestNetwork:(RACSignal *(^)(void))network
+                     toMap:(id(^)(RACTuple *tuple))map
+            subscriberNext:(BOOL(^)(id x))next
 {
     @weakify(self);
     [self hsy_requestNetwork:network toMap:map subscriberNext:next error:^(NSError *error) {
@@ -136,7 +145,8 @@
     }];
 }
 
-- (void)hsy_requestNetwork:(RACSignal *(^)(void))network subscriberNext:(BOOL(^)(id x))next
+- (void)hsy_requestNetwork:(RACSignal *(^)(void))network
+            subscriberNext:(BOOL(^)(id x))next
 {
     @weakify(self);
     [self hsy_requestNetwork:network toMap:^id(id value) {

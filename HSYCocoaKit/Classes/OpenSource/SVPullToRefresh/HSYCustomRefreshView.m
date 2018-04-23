@@ -10,6 +10,8 @@
 #import "NSObject+UIKit.h"
 #import "UILabel+SuggestSize.h"
 #import "UIView+Frame.h"
+#import "Masonry.h"
+#import "PublicMacroFile.h"
 
 #define REFRESH_WILL_START_TITLE            @"下拉刷新"
 #define REFRESH_RELEASE_START_TITLE         @"放开后立即更新"
@@ -19,25 +21,48 @@
 @interface HSYCustomRefreshView ()
 
 @property (nonatomic, strong) UILabel *refreshTitleLabel;
+@property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
+@property (nonatomic, strong) UIView *backgroundView;
 
 @end
 
 @implementation HSYCustomRefreshView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithRefreshDown:(BOOL)down
 {
-    if (self = [super initWithFrame:frame]) {
+    if (self = [super initWithFrame:CGRectZero]) {
+        self.backgroundColor = CLEAR_COLOR;
+        self.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+        self.backgroundView.backgroundColor = WHITE_COLOR;
+        [self addSubview:self.backgroundView];
+        [self.backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.mas_left);
+            make.right.equalTo(self.mas_right);
+            if (down) {
+                make.bottom.equalTo(self.mas_bottom);
+                make.top.equalTo(self.mas_top).offset(-IPHONE_HEIGHT);
+            } else {
+                make.top.equalTo(self.mas_top);
+                make.bottom.equalTo(self.mas_bottom).offset(IPHONE_HEIGHT);
+            }
+        }];
         _contentView = [[UIView alloc] initWithFrame:self.bounds];
+        self.contentView.backgroundColor = self.backgroundColor;
         [self addSubview:self.contentView];
+        self.indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:self.bounds];
+        [self addSubview:self.indicatorView];
+        
+        self.refreshTitleLabel = [NSObject createLabelByParam:@{}];
+        [self addSubview:self.refreshTitleLabel];
     }
     return self;
 }
 
 #pragma mark - Set Pull Down Background Color
 
-- (void)hsy_updateBackgroundColor:(UIColor *)color
+- (void)hsy_updateLongTopBackgroundColor:(UIColor *)color
 {
-    
+    self.backgroundView.backgroundColor = color;
 }
 
 #pragma mark - Observer Scroll Percent

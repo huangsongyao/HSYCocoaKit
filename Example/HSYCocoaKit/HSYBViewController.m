@@ -54,7 +54,11 @@
 @implementation HSYBViewController
 
 - (void)viewDidLoad {
-    self.showPullDown = YES;
+    self.showAllReflesh = YES;
+    self.pullDownView = [[HSYCustomRefreshView alloc] initWithRefreshDown:YES];
+    [self.pullDownView hsy_updateLongTopBackgroundColor:[UIColor greenColor]];
+    self.pullUpView = [[HSYCustomRefreshView alloc] initWithRefreshDown:NO];
+//    [self.pullUpView hsy_updateLongTopBackgroundColor:[UIColor redColor]];
     self.hsy_viewModel = [[HSYViewControllerModel alloc] init];
     self.registerClasses = @{@"TestBaseTableViewCell" : @"uuuufffff"};
     [super viewDidLoad];
@@ -65,14 +69,6 @@
     
     
     // Do any additional setup after loading the view.
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    for (UINavigationItem *view in self.customNavigationBar.items) {
-        NSLog(@"view = %@, leftBarButtonItems = %@, backIndicatorImage = %@", view, view.leftBarButtonItems, self.customNavigationBar.backIndicatorImage);
-    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -94,10 +90,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self hsy_heightForCellWithCacheByIndexPath:indexPath configuration:^(UITableViewCell *cell) {
-        TestBaseTableViewCell *realCell = (TestBaseTableViewCell *)cell;
-        [realCell setTestContent:self.hsy_viewModel.hsy_datas[indexPath.row]];
-    }];
+    return 100;
+//    return [self hsy_heightForCellWithCacheByIndexPath:indexPath configuration:^(UITableViewCell *cell) {
+//        TestBaseTableViewCell *realCell = (TestBaseTableViewCell *)cell;
+//        [realCell setTestContent:self.hsy_viewModel.hsy_datas[indexPath.row]];
+//    }];
 }
 
 

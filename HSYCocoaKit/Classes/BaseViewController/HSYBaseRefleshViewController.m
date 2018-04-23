@@ -90,10 +90,18 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
 {
     NSParameterAssert(scrollView);
     @weakify(self);
+    @weakify(scrollView);
     [scrollView addPullToRefreshWithLoadingView:self.pullDownView subscribeActionHandler:^{
         @strongify(self);
-        HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePerformPullDown subscribeContents:@[kHSYCocoaKitRefreshPullDownStatusKey]];
-        [self.hsy_viewModel.subject sendNext:object];
+        [[[self.hsy_viewModel hsy_rac_pullDownMethod] deliverOn:[RACScheduler mainThreadScheduler]] subscribeCompleted:^{
+            @strongify(self);
+            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess subscribeContents:self.hsy_viewModel.hsy_datas];
+            [self.hsy_viewModel.subject sendNext:object];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                @strongify(scrollView);
+                [scrollView.pullToRefreshView stopAnimating];
+            });
+        }];
     }];
 }
 
@@ -101,10 +109,18 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
 {
     NSParameterAssert(scrollView);
     @weakify(self);
+    @weakify(scrollView);
     [scrollView addInfiniteScrollingWithLoadingView:self.pullUpView subscribeActionHandler:^{
         @strongify(self);
-        HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePerformPullUp subscribeContents:@[kHSYCocoaKitRefreshStatusPullUpKey]];
-        [self.hsy_viewModel.subject sendNext:object];
+        [[[self.hsy_viewModel hsy_rac_pullUpMethod] deliverOn:[RACScheduler mainThreadScheduler]] subscribeCompleted:^{
+            @strongify(self);
+            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess subscribeContents:self.hsy_viewModel.hsy_datas];
+            [self.hsy_viewModel.subject sendNext:object];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                @strongify(scrollView);
+                [scrollView.infiniteScrollingView stopAnimating];
+            });
+        }];
     }];
 }
 

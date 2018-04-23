@@ -138,6 +138,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         self.enabled = YES;
         
         _loadingView = loadingView;
+        _loadingView.frame = self.bounds;
         [self addSubview:self.loadingView];
     }
     return self;

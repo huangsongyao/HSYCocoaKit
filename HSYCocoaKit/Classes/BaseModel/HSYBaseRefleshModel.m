@@ -37,7 +37,17 @@
     _size = size;
 }
 
-- (void)hsy_updateNext:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map pullDown:(kHSYReflesStatusType)status
+- (void)hsy_pullRefresh:(kHSYReflesStatusType)status
+             updateNext:(RACSignal *(^)(void))network
+                  toMap:(NSMutableArray *(^)(RACTuple *tuple))map
+{
+    [self hsy_pullRefresh:status updateNext:network toMap:map subscriberNext:^{}];
+}
+
+- (void)hsy_pullRefresh:(kHSYReflesStatusType)status
+             updateNext:(RACSignal *(^)(void))network
+                  toMap:(NSMutableArray *(^)(RACTuple *tuple))map
+         subscriberNext:(void(^)(void))next
 {
     switch (status) {
         case kHSYReflesStatusTypePullDown:
@@ -66,9 +76,50 @@
             }
             self.hsy_pullUpStateCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullUpSuccess];
         }
+        
+        if (next) {
+            next();
+        }
         return NO;
+    } error:^(NSError *error) {
+        if (next) {
+            next();
+        }
     }];
 }
 
+- (RACSignal *)hsy_rac_pullDownMethod
+{
+    //范例
+//    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+//        NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
+//        [[[HSYNetWorkingManager shareInstance] test:urlStr] subscribeNext:^(id x) {
+//            [self.hsy_datas addObject:[NSString stringWithFormat:@"%d", arc4random()%100]];
+//            [subscriber sendNext:x];
+//            [subscriber sendCompleted];
+//        } error:^(NSError *error) {
+//            [subscriber sendError:error];
+//        }];
+//        return [RACDisposable disposableWithBlock:^{}];
+//    }];
+    return [RACSignal empty];
+}
+
+- (RACSignal *)hsy_rac_pullUpMethod
+{
+    //范例
+//    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+//        NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
+//        [[[HSYNetWorkingManager shareInstance] test:urlStr] subscribeNext:^(id x) {
+//            [self.hsy_datas addObject:[NSString stringWithFormat:@"%d", arc4random()%100]];
+//            [subscriber sendNext:x];
+//            [subscriber sendCompleted];
+//        } error:^(NSError *error) {
+//            [subscriber sendError:error];
+//        }];
+//        return [RACDisposable disposableWithBlock:^{}];
+//    }];
+    return [RACSignal empty];
+}
 
 @end

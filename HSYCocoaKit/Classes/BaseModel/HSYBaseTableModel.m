@@ -12,12 +12,12 @@
 
 - (void)hsy_refreshToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
 {
-    [self hsy_updateNext:network toMap:map pullDown:kHSYReflesStatusTypePullUp];
+    [self hsy_pullRefresh:kHSYReflesStatusTypePullUp updateNext:network toMap:map];
 }
 
 - (void)hsy_refreshToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
 {
-    [self hsy_updateNext:network toMap:map pullDown:kHSYReflesStatusTypePullDown];
+    [self hsy_pullRefresh:kHSYReflesStatusTypePullDown updateNext:network toMap:map];
 }
 
 @end

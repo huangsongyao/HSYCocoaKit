@@ -118,7 +118,7 @@ static char UIScrollViewPullToRefreshView;
 
 - (void)setLoadingBackgroundColor:(UIColor *)backgroundColor
 {
-    [self.pullToRefreshView.loadingView hsy_updateBackgroundColor:backgroundColor];
+    [self.pullToRefreshView.loadingView hsy_updateLongTopBackgroundColor:backgroundColor];
 }
 
 @end
@@ -135,6 +135,7 @@ static char UIScrollViewPullToRefreshView;
         self.wasTriggeredByUser = YES;
         
         _loadingView = loadingView;
+        _loadingView.frame = self.bounds;
         [self addSubview:self.loadingView];
     }
     return self;

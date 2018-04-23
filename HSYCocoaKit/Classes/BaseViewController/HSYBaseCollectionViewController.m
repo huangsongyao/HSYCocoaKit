@@ -74,10 +74,10 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
     
     //监听上下拉
     @weakify(self);
-    [self.hsy_viewModel.subject subscribeNext:^(NSDictionary *signal) {
+    [self.hsy_viewModel.subject subscribeNext:^(HSYCocoaKitRACSubscribeNotification *signal) {
         @strongify(self);
-        kHSYCocoaKitRACSubjectOfNextType type = (kHSYCocoaKitRACSubjectOfNextType)[signal.allKeys.firstObject integerValue];
-        if (type == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess || type == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
+        if (signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess ||
+            signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
             //下拉刷新成功//上拉加载更多成功
             [self.collectionView reloadData];
         } 
