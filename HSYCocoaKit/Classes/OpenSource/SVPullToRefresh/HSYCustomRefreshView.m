@@ -87,16 +87,26 @@
 
 #pragma mark - Start Loading Animation
 
-- (void)hsy_start
+- (void)hsy_startPullUp
 {
     [self hsy_updateTriggerForPercent:MAX_TRIGGER_PERCENT refreshState:SVPullToRefreshStateLoading];
 }
 
+- (void)hsy_startPullDown
+{
+    
+}
+
 #pragma mark - Stop Loading Animation
 
-- (void)hsy_stop
+- (void)hsy_stopPullUp
 {
     self.refreshTitleLabel.text = REFRESH_UPDATE_OVER_TITLE;
+}
+
+- (void)hsy_stopPullDown
+{
+    
 }
 
 /*

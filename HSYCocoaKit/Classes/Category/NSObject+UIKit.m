@@ -233,8 +233,6 @@
     
     tableView.clipsToBounds = YES;
     tableView.scrollEnabled = (param[@(kHSYCocoaKitOfTableViewPropretyTypeScrollEnabled)] ? [param[@(kHSYCocoaKitOfTableViewPropretyTypeScrollEnabled)] boolValue] : YES);
-    tableView.estimatedRowHeight = 44.0;
-    tableView.rowHeight = UITableViewAutomaticDimension;
     if ([param[@(kHSYCocoaKitOfTableViewPropretyTypeHiddenCellLine)] boolValue]) {
         //去掉单元格的分割线
         tableView.separatorStyle = UITableViewCellSelectionStyleNone;

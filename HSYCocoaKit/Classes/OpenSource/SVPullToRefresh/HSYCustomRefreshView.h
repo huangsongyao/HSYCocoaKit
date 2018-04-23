@@ -36,14 +36,24 @@
 - (void)hsy_updateLongTopBackgroundColor:(UIColor *)color;
 
 /**
- *  开始刷新
+ 开始上拉
  */
-- (void)hsy_start;
+- (void)hsy_startPullUp;
 
 /**
- *  刷新结束
+ 开始下拉
  */
-- (void)hsy_stop;
+- (void)hsy_startPullDown;
+
+/**
+ 停止上拉
+ */
+- (void)hsy_stopPullUp;
+
+/**
+ 停止下拉
+ */
+- (void)hsy_stopPullDown;
 
 @end
 
