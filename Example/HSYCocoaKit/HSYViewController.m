@@ -11,6 +11,7 @@
 #import "HSYBViewController.h"
 #import "NSObject+UIKit.h"
 #import "UIViewController+Device.h"
+#import "UIViewController+Alert.h"
 
 @interface TestModel : NSObject
 

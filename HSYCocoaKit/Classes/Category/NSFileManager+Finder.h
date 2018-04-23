@@ -11,7 +11,7 @@
 @interface NSFileManager (Finder)
 
 /**
- 根据文件的名称的后缀类型，到本地资源文件和沙盒中寻找该文件的路径，沙盒路径寻找对象为doucment、cache和library，如果存在则返回该资源的本地路径或本地沙盒路径
+ 根据文件的名称的后缀类型，到本地资源文件和沙盒中寻找该文件的路径，沙盒路径寻找对象为doucment、cache和library，如果存在则返回该资源的本地路径或本地沙盒路径，由于搜索内容涵盖doucment、cache和library，最好不要再主线程上使用该方法做太多的耗时操作，以免出现卡顿
 
  @param name 文件名称
  @param type 文件后缀类型
@@ -20,7 +20,7 @@
 + (NSString *)finderFileFromName:(NSString *)name fileType:(NSString *)type;
 
 /**
- 根据文件的名称的后缀类型，到本地资源文件和沙盒中寻找该文件的路径，沙盒路径寻找对象为doucment、cache和library，如果找到了则表示该文件存在，否则不存在
+ 根据文件的名称的后缀类型，到本地资源文件和沙盒中寻找该文件的路径，沙盒路径寻找对象为doucment、cache和library，如果找到了则表示该文件存在，否则不存在，由于搜索内容涵盖doucment、cache和library，最好不要再主线程上使用该方法做太多的耗时操作，以免出现卡顿
 
  @param name 文件名称
  @param type 文件后缀类型

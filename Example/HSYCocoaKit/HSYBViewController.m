@@ -54,6 +54,7 @@
 @implementation HSYBViewController
 
 - (void)viewDidLoad {
+    self.showPullDown = YES;
     self.hsy_viewModel = [[HSYViewControllerModel alloc] init];
     self.registerClasses = @{@"TestBaseTableViewCell" : @"uuuufffff"};
     [super viewDidLoad];
