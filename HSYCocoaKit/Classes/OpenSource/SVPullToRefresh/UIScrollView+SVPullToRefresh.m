@@ -17,9 +17,6 @@
 #define fequal(a,b) (fabs((a) - (b)) < FLT_EPSILON)
 #define fequalzero(a) (fabs(a) < FLT_EPSILON)
 
-static CGFloat const SVPullToRefreshViewHeight = 60;
-
-
 @interface SVPullToRefreshView ()
 
 @property (nonatomic, copy) void (^pullToRefreshActionHandler)(void);
@@ -213,15 +210,15 @@ static char UIScrollViewPullToRefreshView;
             } else if(self.scrollView.isDragging && contentOffset.y >= scrollOffsetThreshold && contentOffset.y < 0) {
                 self.state = SVPullToRefreshStateStopped;
                 CGFloat percent = contentOffset.y/scrollOffsetThreshold;
-                [self.loadingView hsy_updateTriggerForPercent:percent refreshState:self.state];
+                [self.loadingView hsy_updateTriggerForPercent:percent];
             }
         } else if(self.state == SVPullToRefreshStateStopped) {
             if (contentOffset.y < scrollOffsetThreshold && self.scrollView.isDragging) {
                 self.state = SVPullToRefreshStateTriggered;
-                [self.loadingView hsy_updateTriggerForPercent:1 refreshState:_state];
+                [self.loadingView hsy_updateTriggerForPercent:1];
             } else if(contentOffset.y >= scrollOffsetThreshold && contentOffset.y < 0) {
                 CGFloat percent = contentOffset.y/scrollOffsetThreshold;
-                [self.loadingView hsy_updateTriggerForPercent:percent refreshState:_state];
+                [self.loadingView hsy_updateTriggerForPercent:percent];
             }
         } else if(self.state != SVPullToRefreshStateStopped ) {
             if (contentOffset.y >= scrollOffsetThreshold) {
@@ -272,7 +269,7 @@ static char UIScrollViewPullToRefreshView;
     switch (newState) {
         case SVPullToRefreshStateAll:
         case SVPullToRefreshStateStopped: {
-            [self.loadingView hsy_stopPullDown];
+            [self.loadingView hsy_stop];
             [self resetScrollViewContentInset];
         }
             break;
@@ -281,7 +278,7 @@ static char UIScrollViewPullToRefreshView;
             break;
             
         case SVPullToRefreshStateLoading: {
-            [self.loadingView hsy_startPullDown];
+            [self.loadingView hsy_start];
             [self setScrollViewContentInsetForLoading];
             if(previousState == SVPullToRefreshStateTriggered && _pullToRefreshActionHandler)
                 _pullToRefreshActionHandler();

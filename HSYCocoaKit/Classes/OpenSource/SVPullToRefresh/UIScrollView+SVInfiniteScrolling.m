@@ -12,8 +12,6 @@
 #import "UIView+Frame.h"
 #import "HSYCustomRefreshView.h"
 
-static CGFloat const SVInfiniteScrollingViewHeight = 60;
-
 @interface SVInfiniteScrollingView ()
 
 @property (nonatomic, copy) void (^infiniteScrollingHandler)(void);
@@ -208,12 +206,12 @@ UIEdgeInsets scrollViewOriginalContentInsets;
     if(self.state != SVInfiniteScrollingStateLoading && self.enabled) {
         CGFloat scrollViewContentHeight = self.scrollView.contentSize.height;
         CGFloat scrollOffsetThreshold = scrollViewContentHeight-self.scrollView.bounds.size.height;
-        
+        NSLog(@"%f", contentOffset.y/scrollOffsetThreshold);
+        [self.loadingView hsy_updateTriggerForPercent:contentOffset.y/scrollOffsetThreshold];
         if(!self.scrollView.isDragging && self.state == SVInfiniteScrollingStateTriggered) {
             if (self.scrollView.contentOffset.y > 0) {
                 self.state = SVInfiniteScrollingStateLoading;
             }
-           
         } else if(contentOffset.y > scrollOffsetThreshold && self.state == SVInfiniteScrollingStateStopped && self.scrollView.isDragging) {
             self.state = SVInfiniteScrollingStateTriggered;
         } else if(contentOffset.y < scrollOffsetThreshold  && self.state != SVInfiniteScrollingStateStopped) {
@@ -251,7 +249,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 
     switch (newState) {
         case SVInfiniteScrollingStateStopped: {
-            [self.loadingView hsy_stopPullUp];
+            [self.loadingView hsy_stop];
         }
             break;
                 
@@ -260,7 +258,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
                 
         case SVInfiniteScrollingStateLoading: {
             if (self.scrollView.contentOffset.y > 0) {
-                [self.loadingView hsy_startPullUp];
+                [self.loadingView hsy_start];
             }
         }
             break;

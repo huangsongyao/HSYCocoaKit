@@ -56,9 +56,7 @@
 - (void)viewDidLoad {
     self.showAllReflesh = YES;
     self.pullDownView = [[HSYCustomRefreshView alloc] initWithRefreshDown:YES];
-    [self.pullDownView hsy_updateLongTopBackgroundColor:[UIColor greenColor]];
     self.pullUpView = [[HSYCustomRefreshView alloc] initWithRefreshDown:NO];
-//    [self.pullUpView hsy_updateLongTopBackgroundColor:[UIColor redColor]];
     self.hsy_viewModel = [[HSYViewControllerModel alloc] init];
     self.registerClasses = @{@"TestBaseTableViewCell" : @"uuuufffff"};
     [super viewDidLoad];
@@ -90,11 +88,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
-//    return [self hsy_heightForCellWithCacheByIndexPath:indexPath configuration:^(UITableViewCell *cell) {
-//        TestBaseTableViewCell *realCell = (TestBaseTableViewCell *)cell;
-//        [realCell setTestContent:self.hsy_viewModel.hsy_datas[indexPath.row]];
-//    }];
+    return [self hsy_heightForCellWithCacheByIndexPath:indexPath configuration:^(UITableViewCell *cell) {
+        TestBaseTableViewCell *realCell = (TestBaseTableViewCell *)cell;
+        [realCell setTestContent:self.hsy_viewModel.hsy_datas[indexPath.row]];
+    }];
 }
 
 

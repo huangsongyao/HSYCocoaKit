@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 #import <AvailabilityMacros.h>
 
+static CGFloat const SVPullToRefreshViewHeight = 60.0f;
+
 @class SVPullToRefreshView;
 @class HSYCustomRefreshView;
 

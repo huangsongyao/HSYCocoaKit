@@ -10,7 +10,7 @@
 #import "UIScrollView+SVPullToRefresh.h"
 
 #define MAX_TRIGGER_PERCENT     1.0f
-#define MID_TRIGGER_PERCENT     0.6f
+#define MID_TRIGGER_PERCENT     0.9f
 #define MIN_TRIGGER_PERCENT     0.0f
 
 @interface HSYCustomRefreshView : UIView
@@ -24,9 +24,8 @@
  *  更新下拉过程中的偏移量
  *
  *  @param percent 偏移量的百分比，取值为：[0, 1]
- *  @param state   当前类型枚举
  */
-- (void)hsy_updateTriggerForPercent:(CGFloat)percent refreshState:(SVPullToRefreshState)state;
+- (void)hsy_updateTriggerForPercent:(CGFloat)percent;
 
 /**
  *  更新背景的颜色，并且该方案实现方向为，让下拉的视图不管下拉多少，本景色均显示为color
@@ -36,24 +35,15 @@
 - (void)hsy_updateLongTopBackgroundColor:(UIColor *)color;
 
 /**
- 开始上拉
+ 开始刷新
  */
-- (void)hsy_startPullUp;
+- (void)hsy_start;
 
 /**
- 开始下拉
+ 停止刷新
  */
-- (void)hsy_startPullDown;
+- (void)hsy_stop;
 
-/**
- 停止上拉
- */
-- (void)hsy_stopPullUp;
-
-/**
- 停止下拉
- */
-- (void)hsy_stopPullDown;
 
 @end
 

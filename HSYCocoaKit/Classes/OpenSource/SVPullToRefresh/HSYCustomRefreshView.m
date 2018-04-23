@@ -12,9 +12,12 @@
 #import "UIView+Frame.h"
 #import "Masonry.h"
 #import "PublicMacroFile.h"
+#import "SVPullToRefresh.h"
 
 #define REFRESH_WILL_START_TITLE            @"下拉刷新"
+#define REFRESH_WILL_START_UP_TITLE         @"上拉加载更多数据"
 #define REFRESH_RELEASE_START_TITLE         @"放开后立即更新"
+#define REFRESH_RELEASE_START_UP_TITLE      @"放开后立即加载更多数据"
 #define REFRESH_LOADING_TITLE               @"正在刷新..."
 #define REFRESH_UPDATE_OVER_TITLE           @"刷新完毕"
 
@@ -23,6 +26,7 @@
 @property (nonatomic, strong) UILabel *refreshTitleLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
 @property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, assign, readonly) BOOL isPullDown;
 
 @end
 
@@ -31,7 +35,9 @@
 - (instancetype)initWithRefreshDown:(BOOL)down
 {
     if (self = [super initWithFrame:CGRectZero]) {
+        _isPullDown = down;
         self.backgroundColor = CLEAR_COLOR;
+        //上拉或者下拉的无限背景
         self.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
         self.backgroundView.backgroundColor = WHITE_COLOR;
         [self addSubview:self.backgroundView];
@@ -46,14 +52,28 @@
                 make.bottom.equalTo(self.mas_bottom).offset(IPHONE_HEIGHT);
             }
         }];
+        
+        //提示说明文字
+        UIFont *font = UI_SYSTEM_FONT_15;
+        CGFloat width = 200.0f;
+        NSDictionary *dic = @{
+                              @(kHSYCocoaKitOfLabelPropretyTypeText) : (down ? REFRESH_WILL_START_TITLE : REFRESH_WILL_START_UP_TITLE),
+                              @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : font,
+                              @(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake((IPHONE_WIDTH - width)/2, 0, width, SVInfiniteScrollingViewHeight)],
+                              @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentCenter),
+                              };
+        self.refreshTitleLabel = [NSObject createLabelByParam:dic];
+        [self addSubview:self.refreshTitleLabel];
+        
+        //加载的菊花
+        self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.indicatorView.center = self.refreshTitleLabel.center;
+        [self addSubview:self.indicatorView];
+        
+        //预留的content视图
         _contentView = [[UIView alloc] initWithFrame:self.bounds];
         self.contentView.backgroundColor = self.backgroundColor;
         [self addSubview:self.contentView];
-        self.indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:self.bounds];
-        [self addSubview:self.indicatorView];
-        
-        self.refreshTitleLabel = [NSObject createLabelByParam:@{}];
-        [self addSubview:self.refreshTitleLabel];
     }
     return self;
 }
@@ -67,46 +87,36 @@
 
 #pragma mark - Observer Scroll Percent
 
-- (void)hsy_updateTriggerForPercent:(CGFloat)percent refreshState:(SVPullToRefreshState)state
+- (void)hsy_updateTriggerForPercent:(CGFloat)percent
 {
-    NSParameterAssert(!(percent < MIN_TRIGGER_PERCENT || percent > MAX_TRIGGER_PERCENT));
-    if (!self.contentView) {
-        return;
-    }
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    if (percent == MAX_TRIGGER_PERCENT) {
-        self.refreshTitleLabel.text = REFRESH_LOADING_TITLE;
-    } else if (percent >= MID_TRIGGER_PERCENT) {
-        self.refreshTitleLabel.text = REFRESH_RELEASE_START_TITLE;
+    if (percent >= MID_TRIGGER_PERCENT) {
+        self.refreshTitleLabel.text = (self.isPullDown ? REFRESH_RELEASE_START_TITLE : REFRESH_RELEASE_START_UP_TITLE);
     } else {
-        self.refreshTitleLabel.text = REFRESH_WILL_START_TITLE;
+        self.refreshTitleLabel.text = (self.isPullDown ? REFRESH_WILL_START_TITLE : REFRESH_WILL_START_UP_TITLE);
     }
     [CATransaction commit];
 }
 
 #pragma mark - Start Loading Animation
 
-- (void)hsy_startPullUp
+- (void)hsy_start
 {
-    [self hsy_updateTriggerForPercent:MAX_TRIGGER_PERCENT refreshState:SVPullToRefreshStateLoading];
-}
-
-- (void)hsy_startPullDown
-{
-    
+    self.refreshTitleLabel.hidden = YES;
+    if (!self.indicatorView.isAnimating) {
+        [self.indicatorView startAnimating];
+    }
 }
 
 #pragma mark - Stop Loading Animation
 
-- (void)hsy_stopPullUp
+- (void)hsy_stop
 {
-    self.refreshTitleLabel.text = REFRESH_UPDATE_OVER_TITLE;
-}
-
-- (void)hsy_stopPullDown
-{
-    
+    self.refreshTitleLabel.hidden = NO;
+    if (self.indicatorView.isAnimating) {
+        [self.indicatorView stopAnimating];
+    }
 }
 
 /*
