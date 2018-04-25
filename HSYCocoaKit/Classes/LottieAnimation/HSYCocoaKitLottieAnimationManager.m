@@ -7,6 +7,7 @@
 //
 
 #import "HSYCocoaKitLottieAnimationManager.h"
+#import "Lottie.h"
 
 @implementation HSYCocoaKitLottieAnimationManager
 

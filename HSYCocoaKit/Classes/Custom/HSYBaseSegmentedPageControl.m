@@ -49,11 +49,14 @@
         
         //创建按钮集合
         CGFloat x = 0.0f;
-        CGFloat w = self.button_w;
-        CGFloat h = self.button_h;
-        UIColor *selectedTitleColor = [self titleColorObjects].allKeys.firstObject;
-        UIColor *normalTitleColor = [self titleColorObjects].allValues.firstObject;
-        NSNumber *index = self.defaultsSelectedIndex;
+        CGFloat w = self.hsy_button_w;
+        CGFloat h = self.hsy_button_h;
+        UIColor *selectedTitleColor = [self hsy_titleColorObjects].allKeys.firstObject;
+        UIColor *normalTitleColor = [self hsy_titleColorObjects].allValues.firstObject;
+        UIFont *normalFont = [self hsy_titleFontObjects].allValues.firstObject;
+        UIFont *selectedFont = [self hsy_titleFontObjects].allKeys.firstObject;
+        
+        NSNumber *index = self.hsy_defaultsSelectedIndex;
         _selectedIndex = index.integerValue;
         
         @weakify(self);
@@ -63,16 +66,17 @@
             CGRect titleRect = CGRectMake(0, 0, w, h);
             BOOL isButton = ([controls indexOfObject:title] == index.integerValue);
             UIColor *titleColor = (isButton ? selectedTitleColor : normalTitleColor);
+            UIFont *font = (isButton ? selectedFont : normalFont);
             NSDictionary *dicButton = @{
                                         @(kHSYCocoaKitCustomButtonPropertyTypeTitle) : title,
-                                        @(kHSYCocoaKitCustomButtonPropertyTypeFont) : UI_SYSTEM_FONT_15,
+                                        @(kHSYCocoaKitCustomButtonPropertyTypeFont) : font,
                                         @(kHSYCocoaKitCustomButtonPropertyTypeTextColor) : titleColor,
                                         @(kHSYCocoaKitCustomButtonPropertyTypeHighTextColor) : titleColor,
                                         };
             HSYBaseCustomButton *button = [HSYBaseCustomButton showCustomButtonForFrame:rect imageRect:imageRect titleRect:titleRect propertyEnum:dicButton didSelectedBlock:^(HSYBaseCustomButton *btn) {
                 @strongify(self);
                 if (block) {
-                    [self scrollToSelected:btn];
+                    [self hsy_scrollToSelected:btn];
                     NSInteger index = [self.segmentedButton indexOfObject:btn];
                     block(btn, index);
                 }
@@ -110,11 +114,11 @@
     self.selectedImageView.size = size;
     self.selectedImageView.y = (self.height - self.selectedImageView.height);
     NSNumber *index = @(self.selectedIndex);
-    [self scrollToSelected:self.segmentedButton[index.integerValue]];
+    [self hsy_scrollToSelected:self.segmentedButton[index.integerValue]];
     [self.scrollView addSubview:self.selectedImageView];
 }
 
-- (NSNumber *)defaultsSelectedIndex
+- (NSNumber *)hsy_defaultsSelectedIndex
 {
     NSNumber *index = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeSelectedIndex)];
     if (!index) {
@@ -153,7 +157,7 @@
 
 #pragma mark - W && H
 
-- (CGFloat)button_w
+- (CGFloat)hsy_button_w
 {
     CGSize size = [self.paramters[@(kHSYCocoaKitCustomSegmentedTypeButtonSize)] CGSizeValue];
     if (!CGSizeEqualToSize(size, CGSizeZero)) {
@@ -162,7 +166,7 @@
     return (self.width/self.pageControls.count);
 }
 
-- (CGFloat)button_h
+- (CGFloat)hsy_button_h
 {
     CGSize size = [self.paramters[@(kHSYCocoaKitCustomSegmentedTypeButtonSize)] CGSizeValue];
     if (!CGSizeEqualToSize(size, CGSizeZero)) {
@@ -173,7 +177,7 @@
 
 #pragma mark - Scroll Animation
 
-- (void)scrollToSelected:(HSYBaseCustomButton *)button
+- (void)hsy_scrollToSelected:(HSYBaseCustomButton *)button
 {
     if (!self.selectedImageView) {
         return;
@@ -189,7 +193,7 @@
             break;
         }
     }
-    [self scrollToLocation:button];
+    [self hsy_scrollToLocation:button];
     @weakify(self);
     [UIView animateWithDuration:duration animations:^{
         @strongify(self);
@@ -197,26 +201,32 @@
         self.selectedImageView.x = x;
     } completion:^(BOOL finished) {
         @strongify(self);
-        [self setButtonTitleColor:button];
+        [self hsy_setButtonSelectedStatus:button];
     }];
 }
 
 #pragma mark -Update Button Status
 
-- (void)setButtonTitleColor:(HSYBaseCustomButton *)button
+- (void)hsy_setButtonSelectedStatus:(HSYBaseCustomButton *)button
 {
-    UIColor *selectedTitleColor = [self titleColorObjects].allKeys.firstObject;
-    UIColor *normalTitleColor = [self titleColorObjects].allValues.firstObject;
+    UIColor *selectedTitleColor = [self hsy_titleColorObjects].allKeys.firstObject;
+    UIColor *normalTitleColor = [self hsy_titleColorObjects].allValues.firstObject;
+    
+    UIFont *selectedFont = [self hsy_titleFontObjects].allKeys.firstObject;
+    UIFont *normalFont = [self hsy_titleFontObjects].allValues.firstObject;
+    
     for (HSYBaseCustomButton *btn in self.segmentedButton) {
         BOOL isButton = [btn isEqual:button];
         UIColor *titleColor = (isButton ? selectedTitleColor : normalTitleColor);
+        UIFont *font = (isButton ? selectedFont : normalFont);
         [btn setTitleColor:titleColor forState:UIControlStateNormal];
         [btn setTitleColor:titleColor forState:UIControlStateHighlighted];
+        btn.titleLabel.font = font;
         btn.selected = isButton;
     }
 }
 
-- (NSDictionary *)titleColorObjects
+- (NSDictionary *)hsy_titleColorObjects
 {
     UIColor *selectedTitleColor = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeSelTitleColor)];
     if (!selectedTitleColor) {
@@ -229,7 +239,20 @@
     return @{selectedTitleColor : normalTitleColor};
 }
 
-- (void)scrollToLocation:(HSYBaseCustomButton *)button
+- (NSDictionary *)hsy_titleFontObjects
+{
+    UIFont *normalFont = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeTitleFont)];
+    if (!normalFont) {
+        normalFont = UI_SYSTEM_FONT_15;
+    }
+    UIFont *selectedFont = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeTitleFont)];
+    if (!selectedFont) {
+        selectedFont = UI_SYSTEM_FONT_16;
+    }
+    return @{selectedFont : normalFont};
+}
+
+- (void)hsy_scrollToLocation:(HSYBaseCustomButton *)button
 {
     CGFloat x = 0;
     if ((button.x - self.scrollView.contentOffset.x) < self.width/2) {
@@ -258,13 +281,18 @@
 
 #pragma mark - Observer UIScrollViewDelegate
 
-- (void)setContentOffsetFromScale:(CGFloat)scale
+- (void)hsy_setContentOffsetFromScale:(CGFloat)scale
 {
     if (self.selectedImageView && scale < 0 && scale > 1.0f) {
         return;
     }
     HSYBaseCustomButton *button = self.segmentedButton.firstObject;
-    CGFloat offsetX = (button.width - self.selectedImageView.width)/2;
+    CGFloat width = button.width;
+    NSValue *value = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeButtonSize)];
+    if (value) {
+        width = value.CGSizeValue.width;
+    }
+    CGFloat offsetX = (width - self.selectedImageView.width)/2;
     CGFloat sumOffset = (self.scrollView.contentSizeWidth - offsetX*2 - self.selectedImageView.width);
     CGFloat x = offsetX + (sumOffset * scale) + (self.segmentedButton.count == SEGMENTED_CONTROL_TWO ? button.width/2 : 0.0f);
     self.selectedImageView.x = x;
@@ -272,11 +300,11 @@
 
 #pragma mark - Setting
 
-- (void)setCurrentSelectedItem:(NSInteger)selectedIndex
+- (void)hsy_setCurrentSelectedItem:(NSInteger)selectedIndex
 {
     _selectedIndex = selectedIndex;
     if ((selectedIndex < self.segmentedButton.count - 1) && selectedIndex >= 0) {
-        [self scrollToSelected:self.segmentedButton[selectedIndex]];
+        [self hsy_scrollToSelected:self.segmentedButton[selectedIndex]];
     }
 }
 
@@ -292,14 +320,12 @@
 
 @implementation HSYBaseSegmentedPageControl (Show)
 
-+ (HSYBaseSegmentedPageControl *)showSegmentedPageControlInView:(UIView *)view
-                                                          Frame:(CGRect)frame
-                                                      paramters:(NSDictionary<NSNumber *, id> *)paramters
-                                                   pageControls:(NSArray<NSString *> *)controls
-                                                  selectedBlock:(void(^)(HSYBaseCustomButton *button, NSInteger index))block
++ (HSYBaseSegmentedPageControl *)hsy_showSegmentedPageControlFrame:(CGRect)frame
+                                                         paramters:(NSDictionary<NSNumber *, id> *)paramters
+                                                      pageControls:(NSArray<NSString *> *)controls
+                                                     selectedBlock:(void(^)(HSYBaseCustomButton *button, NSInteger index))block
 {
     HSYBaseSegmentedPageControl *control = [[HSYBaseSegmentedPageControl alloc] initWithFrame:frame paramters:paramters pageControls:controls selectedBlock:block];
-    [view addSubview:control];
     return control;
 }
 

@@ -9,6 +9,7 @@
 #import "HSYBaseTableViewController.h"
 #import "NSObject+UIKit.h"
 #import "HSYBaseTableModel.h"
+#import "UITableView+FDTemplateLayoutCell.h"
 
 @interface HSYBaseTableViewController ()
 

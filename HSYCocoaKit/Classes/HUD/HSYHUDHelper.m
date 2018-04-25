@@ -8,6 +8,7 @@
 
 #import "HSYHUDHelper.h"
 #import "UIApplication+Device.h"
+#import "MBProgressHUD.h"
 
 static HSYHUDHelper *hsyHUDHelper = nil;
 

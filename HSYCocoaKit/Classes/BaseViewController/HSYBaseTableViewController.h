@@ -7,7 +7,6 @@
 //
 
 #import "HSYBaseRefleshViewController.h"
-#import "UITableView+FDTemplateLayoutCell.h"
 
 @interface HSYBaseTableViewController : HSYBaseRefleshViewController <UITableViewDelegate, UITableViewDataSource>
 

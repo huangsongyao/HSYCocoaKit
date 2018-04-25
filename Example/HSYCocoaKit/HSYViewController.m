@@ -67,9 +67,10 @@
     button.frame = CGRectMake(100, 300, 60, 56);
     [self.view addSubview:button];
     
-    [HSYBaseSegmentedPageControl showSegmentedPageControlInView:self.view Frame:CGRectMake(0, button.bottom + 100, IPHONE_WIDTH, 64) paramters:@{@(kHSYCocoaKitCustomSegmentedTypeButtonSize) : [NSValue valueWithCGSize:CGSizeMake(75, 64)]} pageControls:@[@"123", @"456", @"789", @"101112", @"444", @"5555", @"66666", @"7777777"] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
+    HSYBaseSegmentedPageControl *control = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:CGRectMake(0, button.bottom + 100, IPHONE_WIDTH, 64) paramters:@{@(kHSYCocoaKitCustomSegmentedTypeButtonSize) : [NSValue valueWithCGSize:CGSizeMake(75, 64)]} pageControls:@[@"123", @"456", @"789", @"101112", @"444", @"5555", @"66666", @"7777777"] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
         
     }];
+    [self.view addSubview:control];
 //    UITextField *textField = [NSObject createTextFiledByParam:@{
 //                                                                @(kHSYCocoaKitOfTextFiledPropretyTypeBorderWidth) : @(1),
 //                                                                @(kHSYCocoaKitOfTextFiledPropretyTypeBorderColor) : [UIColor blackColor],

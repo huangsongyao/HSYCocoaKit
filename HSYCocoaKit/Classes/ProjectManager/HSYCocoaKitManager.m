@@ -8,6 +8,7 @@
 
 #import "HSYCocoaKit.h"
 #import "HSYFMDBMacro.h"
+#import "JSONModel.h"
 
 static HSYCocoaKitManager *cocoaKitManager;
 

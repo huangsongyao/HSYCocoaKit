@@ -11,7 +11,8 @@
 
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitCustomSegmentedType) {
     
-    kHSYCocoaKitCustomSegmentedTypeTitleFont            = 7888,         //按钮字体--UIFont
+    kHSYCocoaKitCustomSegmentedTypeTitleFont            = 7888,         //正常的字体--UIFont
+    kHSYCocoaKitCustomSegmentedTypeSelectedTitleFont,                   //选中后的字体--UIFont
     kHSYCocoaKitCustomSegmentedTypeNorTitleColor,                       //未选中的字体颜色--UIColor
     kHSYCocoaKitCustomSegmentedTypeSelTitleColor,                       //选中后的字体颜色--UIColor
     kHSYCocoaKitCustomSegmentedTypeLineColor,                           //横线颜色--UIColor
@@ -30,30 +31,36 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitCustomSegmentedType) {
 @property (nonatomic, assign, setter=setCurrentSelectedItem:) NSInteger selectedIndex;
 
 /**
- <#Description#>
+ 外部设置横线的比例进度
 
- @param scale <#scale description#>
+ @param scale [0, 1]闭区间，为当前手势交互的滚动范围的映射
  */
-- (void)setContentOffsetFromScale:(CGFloat)scale;
+- (void)hsy_setContentOffsetFromScale:(CGFloat)scale;
+
+/**
+ 外部设置button的点击方法
+
+ @param button button
+ */
+- (void)hsy_scrollToSelected:(HSYBaseCustomButton *)button;
 
 @end
 
 @interface HSYBaseSegmentedPageControl (Show)
 
 /**
- <#Description#>
+ 初始化
 
- @param view <#view description#>
- @param frame <#frame description#>
- @param paramters <#paramters description#>
- @param controls <#controls description#>
- @param block <#block description#>
- @return <#return value description#>
+ @param frame frame
+ @param paramters 属性参数
+ @param controls title的集合
+ @param block 点击的回调事件
+ @return HSYBaseSegmentedPageControl
  */
-+ (HSYBaseSegmentedPageControl *)showSegmentedPageControlInView:(UIView *)view
-                                                          Frame:(CGRect)frame
-                                                      paramters:(NSDictionary<NSNumber *, id> *)paramters
-                                                   pageControls:(NSArray<NSString *> *)controls
-                                                  selectedBlock:(void(^)(HSYBaseCustomButton *button, NSInteger index))block;
++ (HSYBaseSegmentedPageControl *)hsy_showSegmentedPageControlFrame:(CGRect)frame
+                                                         paramters:(NSDictionary<NSNumber *, id> *)paramters
+                                                      pageControls:(NSArray<NSString *> *)controls
+                                                     selectedBlock:(void(^)(HSYBaseCustomButton *button, NSInteger index))block;
+
 
 @end

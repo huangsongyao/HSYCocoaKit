@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Lottie.h"
 
+@class LOTAnimationView;
 @interface HSYCocoaKitLottieAnimationManager : NSObject
 
 + (LOTAnimationView *)animationView:(NSString *)fileName;

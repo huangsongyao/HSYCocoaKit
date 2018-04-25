@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GCDAsyncSocket.h"
 #import "GCDAsyncSocket+RACSignal.h"
+#import "GCDAsyncSocket.h"
 
 FOUNDATION_EXPORT NSString *const HSYCocoaKitSocketConnectStatusNotification;       //socketConnectStatus通知
 

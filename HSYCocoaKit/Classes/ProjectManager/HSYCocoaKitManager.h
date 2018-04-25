@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JSONModel.h"
 
+
+@class JSONModel;
 @interface HSYCocoaKitManager : NSObject
 
 + (instancetype)hsy_shareInstance;

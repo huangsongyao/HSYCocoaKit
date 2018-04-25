@@ -54,7 +54,6 @@
 #define IPHONE_BAR_HEIGHT                                               (IPHONE_STATE_BAR_HEIGHT + IPHONE_NAVIGATION_BAR_HEIGHT)
 #define TABLE_VIEW_HEIGHT                                               (IPHONE_HEIGHT - IPHONE_BAR_HEIGHT)
 
-
 // 设备分辨率
 #define DEVICERESOLUTION                                                (IPHONE_WIDTH * IPHONE_HEIGHT * ([UIScreen mainScreen].scale))
 

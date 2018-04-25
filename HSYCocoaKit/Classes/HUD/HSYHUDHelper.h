@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 
 #define HUD_SUCCESS_TEXT                    @"成功"              //成功的文字提示
@@ -28,6 +29,7 @@ typedef NS_ENUM(NSUInteger, kShowHUDViewType) {
     
 };
 
+//@class MBProgressHUD;
 @interface HSYHUDHelper : NSObject
 
 + (instancetype)shareInstance;

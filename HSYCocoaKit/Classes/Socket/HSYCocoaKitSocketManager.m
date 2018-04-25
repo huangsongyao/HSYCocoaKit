@@ -9,6 +9,7 @@
 #import "HSYCocoaKitSocketManager.h"
 #import "HSYNetWorkingManager.h"
 #import "NSError+Message.h"
+#import "GCDAsyncSocket.h"
 
 #define DEFAULT_SOCKET_CONNECTED_TIMEOUT        20.0f
 #define DEFAULT_SOCKET_WRITE_TIME               10.0f
