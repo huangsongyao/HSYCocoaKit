@@ -15,8 +15,10 @@
 #import "UIScrollView+Page.h"
 
 #define SEGMENTED_CONTROL_TWO                   2
+
 #define DEFAULT_LINE_SIZE                       CGSizeMake(60.0f, 1.0f)
 #define DEFAULT_LINE_ANIMATION_DURATION         0.3f
+#define DEFAULT_SCROLL_OFFSET_X                 50.0f
 
 @interface HSYBaseSegmentedPageControl () <UIScrollViewDelegate>
 
@@ -49,14 +51,8 @@
         CGFloat x = 0.0f;
         CGFloat w = self.button_w;
         CGFloat h = self.button_h;
-        UIColor *selectedTitleColor = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeSelTitleColor)];
-        if (!selectedTitleColor) {
-            selectedTitleColor = GREEN_COLOR;
-        }
-        UIColor *normalTitleColor = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeNorTitleColor)];
-        if (!normalTitleColor) {
-            normalTitleColor = BLACK_COLOR;
-        }
+        UIColor *selectedTitleColor = [self titleColorObjects].allKeys.firstObject;
+        UIColor *normalTitleColor = [self titleColorObjects].allValues.firstObject;
         NSNumber *index = self.defaultsSelectedIndex;
         _selectedIndex = index.integerValue;
         
@@ -65,7 +61,8 @@
             CGRect rect = CGRectMake(x, 0, w, h);
             CGRect imageRect = CGRectZero;
             CGRect titleRect = CGRectMake(0, 0, w, h);
-            UIColor *titleColor = ([controls indexOfObject:title] == index.integerValue ? selectedTitleColor : normalTitleColor);
+            BOOL isButton = ([controls indexOfObject:title] == index.integerValue);
+            UIColor *titleColor = (isButton ? selectedTitleColor : normalTitleColor);
             NSDictionary *dicButton = @{
                                         @(kHSYCocoaKitCustomButtonPropertyTypeTitle) : title,
                                         @(kHSYCocoaKitCustomButtonPropertyTypeFont) : UI_SYSTEM_FONT_15,
@@ -80,6 +77,7 @@
                     block(btn, index);
                 }
             }];
+            button.selected = isButton;
             [self.scrollView addSubview:button];
             [self.segmentedButton addObject:button];
             x = button.right;
@@ -96,9 +94,9 @@
 
 - (void)hsy_line
 {
-    UIImage *image = [UIImage imageWithFillColor:self.paramters[@(kHSYCocoaKitCustomSegmentedTypeLineColor)]];
-    if (!image) {
-        image = [UIImage imageWithFillColor:BLACK_COLOR];
+    UIImage *image = [UIImage imageWithFillColor:SEGMENTED_CONTROL_DEFAULT_SELECTED_COLOR];
+    if (self.paramters[@(kHSYCocoaKitCustomSegmentedTypeLineColor)]) {
+        image = [UIImage imageWithFillColor:self.paramters[@(kHSYCocoaKitCustomSegmentedTypeLineColor)]];
     }
     NSDictionary *dic = @{
                           @(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image,
@@ -184,6 +182,14 @@
     if (duration == 0.0f) {
         duration = DEFAULT_LINE_ANIMATION_DURATION;
     }
+    
+    for (HSYBaseCustomButton *btn in self.segmentedButton) {
+        if ([button isEqual:btn]) {
+            _selectedIndex = [self.segmentedButton indexOfObject:btn];
+            break;
+        }
+    }
+    [self scrollToLocation:button];
     @weakify(self);
     [UIView animateWithDuration:duration animations:^{
         @strongify(self);
@@ -195,21 +201,59 @@
     }];
 }
 
+#pragma mark -Update Button Status
+
 - (void)setButtonTitleColor:(HSYBaseCustomButton *)button
+{
+    UIColor *selectedTitleColor = [self titleColorObjects].allKeys.firstObject;
+    UIColor *normalTitleColor = [self titleColorObjects].allValues.firstObject;
+    for (HSYBaseCustomButton *btn in self.segmentedButton) {
+        BOOL isButton = [btn isEqual:button];
+        UIColor *titleColor = (isButton ? selectedTitleColor : normalTitleColor);
+        [btn setTitleColor:titleColor forState:UIControlStateNormal];
+        [btn setTitleColor:titleColor forState:UIControlStateHighlighted];
+        btn.selected = isButton;
+    }
+}
+
+- (NSDictionary *)titleColorObjects
 {
     UIColor *selectedTitleColor = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeSelTitleColor)];
     if (!selectedTitleColor) {
-        selectedTitleColor = GREEN_COLOR;
+        selectedTitleColor = SEGMENTED_CONTROL_DEFAULT_SELECTED_COLOR;
     }
     UIColor *normalTitleColor = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeNorTitleColor)];
     if (!normalTitleColor) {
         normalTitleColor = BLACK_COLOR;
     }
-    for (HSYBaseCustomButton *btn in self.segmentedButton) {
-        UIColor *titleColor = ([btn isEqual:button] ? selectedTitleColor : normalTitleColor);
-        [btn setTitleColor:titleColor forState:UIControlStateNormal];
-        [btn setTitleColor:titleColor forState:UIControlStateHighlighted];
+    return @{selectedTitleColor : normalTitleColor};
+}
+
+- (void)scrollToLocation:(HSYBaseCustomButton *)button
+{
+    CGFloat x = 0;
+    if ((button.x - self.scrollView.contentOffset.x) < self.width/2) {
+        if (self.selectedIndex > 0) {
+            UIButton *preButton = self.segmentedButton[self.selectedIndex - 1];
+            x = preButton.x;
+            if (x > self.scrollView.contentOffset.x) {
+                return;
+            }
+        } else {
+            x = -DEFAULT_SCROLL_OFFSET_X;
+        }
+    } else {
+        if ((self.selectedIndex + 1) < self.segmentedButton.count) {
+            UIButton *nextButton = self.segmentedButton[(self.selectedIndex + 1)];
+            x = nextButton.right - self.width;
+            if (x < self.scrollView.contentOffset.x) {
+                return;
+            }
+        } else {
+            x = button.right;
+        }
     }
+    [self.scrollView scrollRectToVisible:CGRectMake(x, 0, self.scrollView.width, self.height) animated:YES];
 }
 
 #pragma mark - Observer UIScrollViewDelegate
@@ -231,6 +275,9 @@
 - (void)setCurrentSelectedItem:(NSInteger)selectedIndex
 {
     _selectedIndex = selectedIndex;
+    if ((selectedIndex < self.segmentedButton.count - 1) && selectedIndex >= 0) {
+        [self scrollToSelected:self.segmentedButton[selectedIndex]];
+    }
 }
 
 /*

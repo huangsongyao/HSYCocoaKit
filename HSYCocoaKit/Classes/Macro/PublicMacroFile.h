@@ -72,6 +72,13 @@
 #define HSYCustomViewAnimationSubtypeFromeMiddle                        kCATruncationMiddle
 
 
+//获取RGB颜色
+#define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+#define RGB(r, g, b) RGBA(r, g, b, 1.0f)
+#define HexColor(c) [UIColor colorWithRed:((c>>16)&0xFF)/255.0f green:((c>>8)&0xFF)/255.0f blue:(c&0xFF)/255.0f alpha:1.0f]
+#define HexColorA(c, a) [UIColor colorWithRed:((c>>16)&0xFF)/255.0f green:((c>>8)&0xFF)/255.0f blue:(c&0xFF)/255.0f alpha:a]
+#define HexColorString(rgbValue) [UIColor colorWithRed:((float)((strtoul(((NSString *)rgbValue).UTF8String, 0, 16) & 0xFF0000) >> 16))/255.0 green:((float)((strtoul(((NSString *)rgbValue).UTF8String, 0, 16) & 0xFF00) >> 8))/255.0 blue:((float)(strtoul(((NSString *)rgbValue).UTF8String, 0, 16) & 0xFF))/255.0 alpha:1.0]
+
 
 // 展示页的宏
 #define SHOWIMAGE(ver)                                                  SHPWVC_BG(ver)
@@ -94,8 +101,7 @@
 #define CLEAR_COLOR                                                     [UIColor clearColor]    //透明色
 #define BLACK_COLOR                                                     [UIColor blackColor]    //黑色
 #define WHITE_COLOR                                                     [UIColor whiteColor]    //白色
-#define GREEN_COLOR                                                     [UIColor greenColor]    // 透明色
-
+#define SEGMENTED_CONTROL_DEFAULT_SELECTED_COLOR                        HexColorString(@"77D4FB")
 
 // 沙盒下存放配置文件的文件夹路径
 #define PATHDOCUMENT_CONFIG_FILE_PATH                                   @"Config"
@@ -128,14 +134,6 @@
 #define UI_BOLD_SYSTEM_FONT_11                                          UI_BOLD_FONT_SIZE(11)
 #define UI_BOLD_SYSTEM_FONT_10                                          UI_BOLD_FONT_SIZE(10)
 #define UI_BOLD_SYSTEM_FONT_9                                           UI_BOLD_FONT_SIZE(9)
-
-
-//获取RGB颜色
-#define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
-#define RGB(r, g, b) RGBA(r, g, b, 1.0f)
-#define HexColor(c) [UIColor colorWithRed:((c>>16)&0xFF)/255.0f green:((c>>8)&0xFF)/255.0f blue:(c&0xFF)/255.0f alpha:1.0f]
-#define HexColorA(c, a) [UIColor colorWithRed:((c>>16)&0xFF)/255.0f green:((c>>8)&0xFF)/255.0f blue:(c&0xFF)/255.0f alpha:a]
-#define HexColorString(rgbValue) [UIColor colorWithRed:((float)((strtoul(((NSString *)rgbValue).UTF8String, 0, 16) & 0xFF0000) >> 16))/255.0 green:((float)((strtoul(((NSString *)rgbValue).UTF8String, 0, 16) & 0xFF00) >> 8))/255.0 blue:((float)(strtoul(((NSString *)rgbValue).UTF8String, 0, 16) & 0xFF))/255.0 alpha:1.0]
 
 //版本弃用
 #define HSY_DEPRECATED(_iOS_version)                                    __attribute__((deprecated))
