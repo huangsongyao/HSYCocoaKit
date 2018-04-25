@@ -94,7 +94,7 @@
 #define CLEAR_COLOR                                                     [UIColor clearColor]    //透明色
 #define BLACK_COLOR                                                     [UIColor blackColor]    //黑色
 #define WHITE_COLOR                                                     [UIColor whiteColor]    //白色
-#define CLEAR_COLOR                                                     [UIColor clearColor]    // 透明色
+#define GREEN_COLOR                                                     [UIColor greenColor]    // 透明色
 
 
 // 沙盒下存放配置文件的文件夹路径

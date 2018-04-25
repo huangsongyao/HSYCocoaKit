@@ -29,6 +29,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
         _customNavigationItem = [[UINavigationItem alloc] initWithTitle:@""];
         [self pushNavigationItem:self.customNavigationItem animated:YES];
         [self hsy_clearNavigationBarBottomLine];
+        self.backItem.hidesBackButton = YES;
     }
     return self;
 }

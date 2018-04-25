@@ -46,7 +46,7 @@
       placeholderImage:(UIImage *)placeholderImage
 {
     if (error) {
-        NSLog(@"图片请求失败，error = %@, error.code = %ld", error, error.code);
+        NSLog(@"图片请求失败，error = %@, error.code = %ld", error, (long)error.code);
         self.clipsToBounds = YES;
         self.contentMode = UIViewContentModeScaleAspectFill;
         UIImage *realPlaceholderImage = placeholderImage;

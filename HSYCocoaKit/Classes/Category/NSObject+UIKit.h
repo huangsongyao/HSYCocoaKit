@@ -28,8 +28,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfButtonPropretyType) {
 //UIImageView
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfImageViewPropretyType) {
     
-    kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName             = 877,  //NSString
-    kHSYCocoaKitOfImageViewPropretyTypePreImageViewName,                    //NSString
+    kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName             = 877,  //UIImage
+    kHSYCocoaKitOfImageViewPropretyTypePreImageViewName,                    //UIImage
     kHSYCocoaKitOfImageViewPropretyTypeViewContentMode,                     //NSNumber\(UIViewContentMode)
 };
 

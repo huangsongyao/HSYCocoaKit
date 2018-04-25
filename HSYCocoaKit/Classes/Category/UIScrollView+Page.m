@@ -25,7 +25,6 @@
     return currentPage;
 }
 
-
 - (CGFloat)scrollPercent
 {
     CGFloat width = self.contentSize.width - self.width;
@@ -54,13 +53,23 @@
     return offsetY / pageHeight;
 }
 
-
 - (CGFloat)currentPageX
 {
     CGFloat pageWidth = self.width;
     CGFloat offsetX = self.contentOffset.x;
     return offsetX / pageWidth;
 }
+
+- (CGFloat)contentSizeWidth
+{
+    return self.contentSize.width;
+}
+
+- (CGFloat)contentSizeHeight
+{
+    return self.contentSize.height;
+}
+
 - (void)setPageY:(CGFloat)page
 {
     [self setPageY:page animated:NO];
@@ -79,7 +88,6 @@
     CGPoint offset = CGPointMake(offsetX,offsetY);
     [self setContentOffset:offset animated:animated];
 }
-
 
 - (void)setPageX:(CGFloat)page animated:(BOOL)animated
 {

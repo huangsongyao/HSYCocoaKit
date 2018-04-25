@@ -110,7 +110,7 @@
             return [[HSYNetWorkingManager shareInstance] test:urlStr];
         } toMap:^NSMutableArray *(RACTuple *tuple) {
             NSMutableArray *array = [[NSMutableArray alloc] init];
-            for (NSInteger i = 0; i < 10; i ++) {
+            for (NSInteger i = 0; i < 100; i ++) {
                 [array addObject:[NSString stringWithFormat:@"%d", arc4random()%100]];
             }
             return array;

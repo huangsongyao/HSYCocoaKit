@@ -81,7 +81,7 @@ static HSYCocoaKitSocketManager *socketManager;
                 }
                     break;
                 case kHSYCocoaKitSocketRACDelegate_socketDidWriteData: {
-                    long tag = [notification.hsy_tuple.third longLongValue];
+                    long tag = (long)[notification.hsy_tuple.third longLongValue];
                     //数据发送成功后需要重新设置一次数据的timeout时间
                     [sock readDataToData:[GCDAsyncSocket CRLFData] withTimeout:DEFAULT_SOCKET_WRITE_TIME tag:tag];
                 }

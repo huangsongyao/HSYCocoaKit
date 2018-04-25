@@ -74,10 +74,10 @@
     imageView.clipsToBounds = YES;
     imageView.layer.masksToBounds = YES;
     if (param[@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName)]) {
-        imageView.image = [UIImage imageNamed:param[@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName)]];
+        imageView.image = param[@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName)];
     }
     if (param[@(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName)]) {
-        imageView.highlightedImage = [UIImage imageNamed:param[@(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName)]];
+        imageView.highlightedImage = param[@(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName)];
     }
     UIViewContentMode mode = (param[@(kHSYCocoaKitOfImageViewPropretyTypeViewContentMode)] ? ((UIViewContentMode)[param[@(kHSYCocoaKitOfImageViewPropretyTypeViewContentMode)] integerValue]) : UIViewContentModeScaleToFill);
     imageView.contentMode = mode;
@@ -283,8 +283,8 @@
     }
     
     //隐藏滚动条
-    scrollView.showsVerticalScrollIndicator = (param[@(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator)] ? [param[@(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator)] boolValue] : FALSE);
-    scrollView.showsHorizontalScrollIndicator = (param[@(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator)] ? [param[@(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator)] boolValue] : FALSE);
+    scrollView.showsVerticalScrollIndicator = (param[@(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator)] ? (![param[@(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator)] boolValue]) : TRUE);
+    scrollView.showsHorizontalScrollIndicator = (param[@(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator)] ? (![param[@(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator)] boolValue]) : TRUE);
     
     return scrollView;
 }

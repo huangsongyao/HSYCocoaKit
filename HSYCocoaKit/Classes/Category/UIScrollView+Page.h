@@ -20,6 +20,9 @@
 - (CGFloat)currentPageY;                                    //获取scrollView的当前页面的y点坐标
 - (CGFloat)currentPageX;                                    //获取scrollView的当前页面的x点坐标
 
+- (CGFloat)contentSizeWidth;                                //获取scrollView的滚动宽度
+- (CGFloat)contentSizeHeight;                               //获取scrollView的滚动高度
+
 /**
  上下方向翻页，无动画
 

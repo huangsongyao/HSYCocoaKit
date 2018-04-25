@@ -105,6 +105,7 @@
 - (void)hsy_addCustomNavigationBar
 {
     _customNavigationBar = [[HSYCustomNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, DEFAULT_NAVIGATION_BAR_HEIGHT)];
+    self.navigationController.navigationBar.backItem.hidesBackButton = YES;
     [self.view addSubview:self.customNavigationBar];
     //添加一个外部标识位用于子类便捷是否创建back按钮，当该标识位为YES并且栈控制器的vc大于1时创建
     if (self.navigationController.viewControllers.count > 1 && self.hsy_addCustomNavigationBarBackButton) {
