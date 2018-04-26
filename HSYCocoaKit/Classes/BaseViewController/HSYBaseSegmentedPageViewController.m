@@ -10,6 +10,8 @@
 #import "UIImage+Canvas.h"
 #import "UIScrollView+Page.h"
 #import "NSObject+UIKit.h"
+#import "UIView+Frame.h"
+#import "UIViewController+NavigationItem.h"
 
 @interface HSYBaseSegmentedPageViewController () <UIScrollViewDelegate>
 
@@ -35,12 +37,13 @@
     self.normalColor = BLACK_COLOR;
     self.selectedColor = SEGMENTED_CONTROL_DEFAULT_SELECTED_COLOR;
     self.lineColor = SEGMENTED_CONTROL_DEFAULT_SELECTED_COLOR;
-    self.lineSizeValue = [NSValue valueWithCGSize:CGSizeMake(80.0f, 1.0f)];
-    self.buttonSizeValue = [NSValue valueWithCGSize:CGSizeMake((IPHONE_WIDTH / [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_configs].count), 44.0f)];
-    self.segmentBackgroundImage = [UIImage imageWithFillColor:WHITE_COLOR];
+    self.lineSizeValue = [NSValue valueWithCGSize:CGSizeMake(60.0f, 1.0f)];
+    self.buttonSizeValue = [NSValue valueWithCGSize:CGSizeMake(70.0f, 44.0f)];
+    self.segmentBackgroundImage = [UIImage imageWithFillColor:CLEAR_COLOR];
     self.currentSelectedIndex = @(0);
     self.segmentedControlInView = kHSYCocoaKitBaseSegmentedPageControlInNavigationItem;
-    self.segmentedControlHeight = @(IPHONE_BAR_HEIGHT);
+    self.segmentedControlHeight = @(IPHONE_NAVIGATION_BAR_HEIGHT);
+    self.canScroll = YES;
 }
 
 - (NSDictionary *)hsy_paramters
@@ -60,14 +63,25 @@
 
 - (NSDictionary *)hsy_scrollParamters
 {
-    CGFloat y = (self.segmentedControlInView == kHSYCocoaKitBaseSegmentedPageControlInNavigationItem ? 0.0f : (self.segmentedControlInView == kHSYCocoaKitBaseSegmentedPageControlInNavigationItem ? self.segmentedControlHeight.floatValue : 0.0f));
-    CGFloat h = (y > 0.0f ? (TABLE_VIEW_HEIGHT - IPHONE_BAR_HEIGHT): TABLE_VIEW_HEIGHT);
+    NSDictionary *yDic = @{
+                           @(kHSYCocoaKitBaseSegmentedPageControlInNavigationItem) : (self.customNavigationBar ? @(self.customNavigationBar.bottom) : @(0.0f)),
+                           @(kHSYCocoaKitBaseSegmentedPageControlInScrollViewHeaderView) : (self.customNavigationBar ? @(self.customNavigationBar.bottom + self.segmentedControlHeight.floatValue) : @(self.segmentedControlHeight.floatValue)),
+                           @(kHSYCocoaKitBaseSegmentedPageControlInScrollViewHeaderView) : (self.customNavigationBar ? @(self.customNavigationBar.bottom) : @(0.0f)),
+                          };
+    NSDictionary *hDic = @{
+                           @(kHSYCocoaKitBaseSegmentedPageControlInNavigationItem) : @(TABLE_VIEW_HEIGHT),
+                           @(kHSYCocoaKitBaseSegmentedPageControlInScrollViewHeaderView) :@(IPHONE_HEIGHT - (self.customNavigationBar.bottom + self.segmentedControlHeight.floatValue)),
+                           @(kHSYCocoaKitBaseSegmentedPageControlInScrollViewHeaderView) : @(IPHONE_HEIGHT - (self.customNavigationBar.bottom + self.segmentedControlHeight.floatValue)),
+                           };
+    CGFloat y = [yDic[@(self.segmentedControlInView)] floatValue];
+    CGFloat h = [hDic[@(self.segmentedControlInView)] floatValue];
     NSValue *value = [NSValue valueWithCGRect:CGRectMake(0, y, self.view.width, h)];
     return @{
              @(kHSYCocoaKitOfScrollViewPropretyTypeFrame) : value,
              @(kHSYCocoaKitOfScrollViewPropretyTypeDelegate) : self,
-             @(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled) : @(YES),
+             @(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled) : @(self.canScroll),
              @(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator) : @(YES),
+             @(kHSYCocoaKitOfScrollViewPropretyTypeBounces) : @(NO),
              };
 }
 
@@ -78,9 +92,11 @@
     self.scrollView = [NSObject createScrollViewByParam:self.hsy_scrollParamters];
     [self.view addSubview:self.scrollView];
     
-    CGRect rect = CGRectMake(0, 0, IPHONE_WIDTH, self.segmentedControlHeight.floatValue);
+    CGRect rect = CGRectMake(0, 0, (self.buttonSizeValue.CGSizeValue.width * [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_configs].count), self.segmentedControlHeight.floatValue);
+    @weakify(self);
     _segmentedPageControl = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:rect paramters:self.hsy_paramters pageControls:[(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_titles] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
-        
+        @strongify(self);
+        [self.scrollView setXPage:index animated:YES];
     }];
     switch (self.segmentedControlInView) {
         case kHSYCocoaKitBaseSegmentedPageControlInNavigationItem: {
@@ -107,20 +123,19 @@
     CGFloat x = 0.0f;
     NSString *tableString = @"tableView";
     NSString *collectionString = @"collectionView";
-    NSString *heightPath = @".frame.size.height";
-    NSString *xPath = @".frame.orign.x";
     for (UIViewController *vc in hsy_viewController) {
         NSInteger i = [hsy_viewController indexOfObject:vc];
         NSString *title = [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_titles][i];
-        if ([vc respondsToSelector:NSSelectorFromString(tableString)]) {
-            [vc setValue:@(self.scrollView.height) forKey:[NSString stringWithFormat:@"%@%@", tableString, heightPath]];
-            [vc setValue:@(x) forKey:[NSString stringWithFormat:@"%@%@", tableString, xPath]];
-        } else if ([vc respondsToSelector:NSSelectorFromString(collectionString)]) {
-            [vc setValue:@(self.scrollView.height) forKey:[NSString stringWithFormat:@"%@%@", collectionString, heightPath]];
-            [vc setValue:@(x) forKey:[NSString stringWithFormat:@"%@%@", collectionString, xPath]];
-        }
         if ([vc respondsToSelector:@selector(view)]) {
             vc.view.height = self.scrollView.height;
+            vc.view.origin = CGPointMake(x, 0);
+        }
+        if ([vc respondsToSelector:NSSelectorFromString(tableString)]) {
+            UITableViewController *tvc = (UITableViewController *)vc;
+            tvc.tableView.frame = tvc.view.bounds;
+        } else if ([vc respondsToSelector:NSSelectorFromString(collectionString)]) {
+            UICollectionViewController *cvc = (UICollectionViewController *)vc;
+            cvc.collectionView.frame = cvc.view.bounds;
         }
         [self.scrollView addSubview:vc.view];
         self.navigationItem.title = title;
@@ -129,6 +144,7 @@
         }
         x = vc.view.right;
     }
+    [self.scrollView setContentSize:CGSizeMake(x, 0)];
     // Do any additional setup after loading the view.
 }
 
@@ -137,7 +153,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (self.canScroll) {
-        CGFloat scale = scrollView.contentOffset.x / self.scrollView.contentSizeWidth;
+        CGFloat scale = scrollView.contentOffset.x / (self.scrollView.width * ([(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_titles].count - 1));
         [self.segmentedPageControl hsy_setContentOffsetFromScale:scale];
     }
 }

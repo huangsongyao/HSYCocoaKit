@@ -286,15 +286,9 @@
     if (self.selectedImageView && scale < 0 && scale > 1.0f) {
         return;
     }
-    HSYBaseCustomButton *button = self.segmentedButton.firstObject;
-    CGFloat width = button.width;
-    NSValue *value = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeButtonSize)];
-    if (value) {
-        width = value.CGSizeValue.width;
-    }
-    CGFloat offsetX = (width - self.selectedImageView.width)/2;
+    CGFloat offsetX = ((self.scrollView.contentSizeWidth / self.segmentedButton.count) - self.selectedImageView.width)/2;
     CGFloat sumOffset = (self.scrollView.contentSizeWidth - offsetX*2 - self.selectedImageView.width);
-    CGFloat x = offsetX + (sumOffset * scale) + (self.segmentedButton.count == SEGMENTED_CONTROL_TWO ? button.width/2 : 0.0f);
+    CGFloat x = offsetX + (sumOffset * scale);
     self.selectedImageView.x = x;
 }
 

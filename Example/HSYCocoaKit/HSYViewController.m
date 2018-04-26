@@ -13,6 +13,7 @@
 #import "UIViewController+Device.h"
 #import "UIViewController+Alert.h"
 #import "HSYBaseSegmentedPageControl.h"
+#import "HSYCSegmentedViewController.h"
 
 @interface TestModel : NSObject
 
@@ -55,8 +56,9 @@
     
     UIButton *button = [NSObject createButtonByParam:@{} clickedOnSubscribeNext:^(UIButton *button) {
         @strongify(self);
-        HSYBViewController *bvc = [[HSYBViewController alloc] init];
-        [self.navigationController pushViewController:bvc animated:YES];
+        HSYCSegmentedViewController *vc = [[HSYCSegmentedViewController alloc] init];
+//        HSYBViewController *vc = [[HSYBViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
 //        [[self hsy_rac_openEditingSystemVideos] subscribeNext:^(id x) {
 //            NSLog(@"33333");
 //        } completed:^{

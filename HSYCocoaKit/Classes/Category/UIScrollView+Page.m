@@ -70,17 +70,17 @@
     return self.contentSize.height;
 }
 
-- (void)setPageY:(CGFloat)page
+- (void)setYPage:(NSInteger)page
 {
-    [self setPageY:page animated:NO];
+    [self setYPage:page animated:NO];
 }
 
-- (void)setPageX:(CGFloat)page
+- (void)setXPage:(NSInteger)page
 {
-    [self setPageX:page animated:NO];
+    [self setXPage:page animated:NO];
 }
 
-- (void)setPageY:(CGFloat)page animated:(BOOL)animated
+- (void)setYPage:(NSInteger)page animated:(BOOL)animated
 {
     CGFloat pageHeight = self.height;
     CGFloat offsetY = page * pageHeight;
@@ -89,7 +89,7 @@
     [self setContentOffset:offset animated:animated];
 }
 
-- (void)setPageX:(CGFloat)page animated:(BOOL)animated
+- (void)setXPage:(NSInteger)page animated:(BOOL)animated
 {
     CGFloat pageWidth = self.width;
     CGFloat offsetY = self.contentOffset.y;

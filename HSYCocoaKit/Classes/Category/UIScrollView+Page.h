@@ -28,20 +28,14 @@
 
  @param page 设置翻页的页码
  */
-- (void)setPageY:(CGFloat)page;
+- (void)setYPage:(NSInteger)page;;
 
 /**
  左右方向翻页，无动画
 
  @param page 设置翻页的页码
  */
-- (void)setPageX:(CGFloat)page;
-
-/**
- *  上下方向翻页
- *
- *  @param animated  是否有动画
- */
+- (void)setXPage:(NSInteger)page;
 
 /**
  上下方向翻页
@@ -49,7 +43,7 @@
  @param page 设置翻页的页码
  @param animated 是否执行动画
  */
-- (void)setPageY:(CGFloat)page animated:(BOOL)animated;
+- (void)setYPage:(NSInteger)page animated:(BOOL)animated;
 
 /**
  左右方向翻页
@@ -57,6 +51,6 @@
  @param page 设置翻页的页码
  @param animated 是否执行动画
  */
-- (void)setPageX:(CGFloat)page animated:(BOOL)animated;
+- (void)setXPage:(NSInteger)page animated:(BOOL)animated;
 
 @end
