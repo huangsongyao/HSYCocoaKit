@@ -32,6 +32,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitBaseSegmentedPageControl) {
 @property (nonatomic, strong) UIImage *segmentBackgroundImage;  //segmentedPageControl的背景图
 @property (nonatomic, strong) NSNumber *currentSelectedIndex;   //segmentedPageControl的当前选中的项
 @property (nonatomic, strong) NSNumber *segmentedControlHeight; //segmentedPageControl的高度
+@property (nonatomic, assign) BOOL openScroll;                  //是否允许滚动，默认为YES
 //判断标识位，默认为navigationBar的头部
 @property (nonatomic, assign) kHSYCocoaKitBaseSegmentedPageControl segmentedControlInView;
 
@@ -39,8 +40,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitBaseSegmentedPageControl) {
 
 //分页栏
 @property (nonatomic, strong, readonly) HSYBaseSegmentedPageControl *segmentedPageControl;
-//是否允许滚动，默认为YES
-@property (nonatomic, assign) BOOL openScroll;
+//滚动结束后的监听事件，HSYBaseSegmentedPageViewController子类可以实现本属性，监听滚动状态，用于处理model中vc
+@property (nonatomic, copy) void(^scrollEndFinished)(const NSInteger index, const UIViewController *viewController);
 
 - (instancetype)initWithConfigs:(NSArray<HSYBaseSegmentedPageConfig *> *)configs;
 

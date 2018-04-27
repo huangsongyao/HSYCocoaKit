@@ -15,6 +15,7 @@
 @interface TestBaseTableViewCell : HSYBaseTableViewCell
 
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIButton *button;
 - (void)setTestContent:(NSString *)content;
 
 @end
@@ -25,8 +26,16 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.hsy_useFDTmplateLayout = YES;
-        self.titleLabel = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:self.contentView.bounds], @(kHSYCocoaKitOfLabelPropretyTypeMaxSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH, MAXFLOAT)],}];
+        
+        self.button = [NSObject createButtonByParam:@{@(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : @"888"} clickedOnSubscribeNext:^(UIButton *button) {
+            NSLog(@"0000000000000000099990000");
+        }];
+        self.button.frame = CGRectMake(0, 0, 100, 100);
+        [self.contentView addSubview:self.button];
+        
+        self.titleLabel = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake(0, self.button.bottom, self.contentView.width, self.contentView.height)], @(kHSYCocoaKitOfLabelPropretyTypeMaxSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH, MAXFLOAT)],}];
         [self.contentView addSubview:self.titleLabel];
+        
     }
     return self;
 }
@@ -37,7 +46,7 @@
     self.titleLabel.size = [self.titleLabel.text
                             contentOfSize:self.titleLabel.font
                             maxWidth:IPHONE_WIDTH];
-    self.height = self.titleLabel.height;
+    self.height = self.titleLabel.bottom;
 }
 
 - (CGSize)sizeThatFits:(CGSize)size
@@ -65,6 +74,13 @@
         
     }];
     
+    
+    UIButton *button = [NSObject createButtonByParam:@{} clickedOnSubscribeNext:^(UIButton *button) {
+        NSLog(@"5555555555555555555");
+    }];
+    button.backgroundColor = [UIColor redColor];
+    button.frame = CGRectMake(100, 300, 60, 56);
+    [self.view addSubview:button];
     
     // Do any additional setup after loading the view.
 }
@@ -94,7 +110,10 @@
     }];
 }
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
