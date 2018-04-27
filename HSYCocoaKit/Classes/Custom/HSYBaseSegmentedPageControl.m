@@ -14,10 +14,8 @@
 #import "ReactiveCocoa.h"
 #import "UIScrollView+Page.h"
 
-#define SEGMENTED_CONTROL_TWO                   2
-
-#define DEFAULT_LINE_SIZE                       CGSizeMake(60.0f, 1.0f)
-#define DEFAULT_LINE_ANIMATION_DURATION         0.3f
+#define DEFAULT_LINE_SIZE                       CGSizeMake((self.scrollView.contentSizeWidth / self.segmentedButton.count), 1.0f)
+#define DEFAULT_LINE_ANIMATION_DURATION         0.35f
 #define DEFAULT_SCROLL_OFFSET_X                 50.0f
 
 @interface HSYBaseSegmentedPageControl () <UIScrollViewDelegate>
@@ -60,13 +58,14 @@
         _selectedIndex = index.integerValue;
         
         @weakify(self);
-        for (NSString *title in controls) {
+        for (NSInteger i = 0; i < controls.count; i ++) {
             CGRect rect = CGRectMake(x, 0, w, h);
             CGRect imageRect = CGRectZero;
             CGRect titleRect = CGRectMake(0, 0, w, h);
-            BOOL isButton = ([controls indexOfObject:title] == index.integerValue);
+            BOOL isButton = (i == index.integerValue);
             UIColor *titleColor = (isButton ? selectedTitleColor : normalTitleColor);
             UIFont *font = (isButton ? selectedFont : normalFont);
+            NSString *title = controls[i];
             NSDictionary *dicButton = @{
                                         @(kHSYCocoaKitCustomButtonPropertyTypeTitle) : title,
                                         @(kHSYCocoaKitCustomButtonPropertyTypeFont) : font,
@@ -186,7 +185,6 @@
     if (duration == 0.0f) {
         duration = DEFAULT_LINE_ANIMATION_DURATION;
     }
-    
     for (HSYBaseCustomButton *btn in self.segmentedButton) {
         if ([button isEqual:btn]) {
             _selectedIndex = [self.segmentedButton indexOfObject:btn];
@@ -197,7 +195,7 @@
     @weakify(self);
     [UIView animateWithDuration:duration animations:^{
         @strongify(self);
-        CGFloat x = (button.width - self.selectedImageView.width)/2 + button.x;
+        CGFloat x = (button.x + self.lineOffsetX);
         self.selectedImageView.x = x;
     } completion:^(BOOL finished) {
         @strongify(self);
@@ -286,10 +284,16 @@
     if (self.selectedImageView && scale < 0 && scale > 1.0f) {
         return;
     }
-    CGFloat offsetX = ((self.scrollView.contentSizeWidth / self.segmentedButton.count) - self.selectedImageView.width)/2;
+    CGFloat offsetX = self.lineOffsetX;
     CGFloat sumOffset = (self.scrollView.contentSizeWidth - offsetX*2 - self.selectedImageView.width);
     CGFloat x = offsetX + (sumOffset * scale);
     self.selectedImageView.x = x;
+}
+
+- (CGFloat)lineOffsetX
+{
+    CGFloat offsetX = ((self.scrollView.contentSizeWidth / self.segmentedButton.count) - self.selectedImageView.width)/2;
+    return offsetX;
 }
 
 #pragma mark - Setting

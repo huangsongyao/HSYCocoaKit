@@ -31,6 +31,7 @@
 #import "NSBundle+PrivateFileResource.h"
 #import "NSDate+Timestamp.h"
 #import "NSFileManager+Finder.h"
+#import "NSMutableArray+BasicAlgorithm.h"
 #import "NSObject+JSONModelForRuntime.h"
 #import "NSObject+Property.h"
 #import "NSObject+Runtime.h"

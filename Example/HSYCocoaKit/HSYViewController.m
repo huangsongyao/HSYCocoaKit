@@ -14,6 +14,7 @@
 #import "UIViewController+Alert.h"
 #import "HSYBaseSegmentedPageControl.h"
 #import "HSYCSegmentedViewController.h"
+#import "NSMutableArray+BasicAlgorithm.h"
 
 @interface TestModel : NSObject
 
@@ -40,6 +41,10 @@
 {
     self.hsy_viewModel = [[HSYViewControllerModel alloc] init];
     [super viewDidLoad];
+    
+    NSMutableArray *array = [@[@"10", @"2", @"13", @"48", @"5"] mutableCopy];
+    NSLog(@"%@ \n %@", array.stringAscendingOrderSort, array.stringDescendingOrderSort);
+    
     @weakify(self);
 //    [self.viewModel.subject subscribeNext:^(HSYCocoaKitRACSubscribeNotification *notification) {
 //        @strongify(self);
@@ -68,6 +73,20 @@
     button.backgroundColor = [UIColor redColor];
     button.frame = CGRectMake(100, 300, 60, 56);
     [self.view addSubview:button];
+    
+    UIButton *button1 = [NSObject createButtonByParam:@{} clickedOnSubscribeNext:^(UIButton *button) {
+        @strongify(self);
+        HSYBViewController *vc = [[HSYBViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        //        [[self hsy_rac_openEditingSystemVideos] subscribeNext:^(id x) {
+        //            NSLog(@"33333");
+        //        } completed:^{
+        //            NSLog(@"00000");
+        //        }];
+    }];
+    button1.backgroundColor = [UIColor greenColor];
+    button1.frame = CGRectMake(button.right + 50, 300, 60, 56);
+    [self.view addSubview:button1];
     
     HSYBaseSegmentedPageControl *control = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:CGRectMake(0, button.bottom + 100, IPHONE_WIDTH, 64) paramters:@{@(kHSYCocoaKitCustomSegmentedTypeButtonSize) : [NSValue valueWithCGSize:CGSizeMake(75, 64)]} pageControls:@[@"123", @"456", @"789", @"101112", @"444", @"5555", @"66666", @"7777777"] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
         

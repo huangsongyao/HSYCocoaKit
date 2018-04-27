@@ -16,6 +16,7 @@
 @interface HSYBaseSegmentedPageViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, assign) BOOL canScroll;
 
 @end
 
@@ -44,6 +45,7 @@
     self.segmentedControlInView = kHSYCocoaKitBaseSegmentedPageControlInNavigationItem;
     self.segmentedControlHeight = @(IPHONE_NAVIGATION_BAR_HEIGHT);
     self.canScroll = YES;
+    self.openScroll = YES;
 }
 
 - (NSDictionary *)hsy_paramters
@@ -79,7 +81,7 @@
     return @{
              @(kHSYCocoaKitOfScrollViewPropretyTypeFrame) : value,
              @(kHSYCocoaKitOfScrollViewPropretyTypeDelegate) : self,
-             @(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled) : @(self.canScroll),
+             @(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled) : @(self.openScroll),
              @(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator) : @(YES),
              @(kHSYCocoaKitOfScrollViewPropretyTypeBounces) : @(NO),
              };
@@ -96,6 +98,7 @@
     @weakify(self);
     _segmentedPageControl = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:rect paramters:self.hsy_paramters pageControls:[(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_titles] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
         @strongify(self);
+        self.canScroll = NO;
         [self.scrollView setXPage:index animated:YES];
     }];
     switch (self.segmentedControlInView) {
@@ -161,7 +164,7 @@
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     NSLog(@"- scrollViewDidEndScrollingAnimation:");
-    _canScroll = YES;
+    self.canScroll = YES;
     _currentSelectedIndex = @(scrollView.currentPage);
 }
 

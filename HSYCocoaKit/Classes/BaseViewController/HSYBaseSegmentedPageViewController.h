@@ -40,7 +40,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitBaseSegmentedPageControl) {
 //分页栏
 @property (nonatomic, strong, readonly) HSYBaseSegmentedPageControl *segmentedPageControl;
 //是否允许滚动，默认为YES
-@property (nonatomic, assign) BOOL canScroll;
+@property (nonatomic, assign) BOOL openScroll;
 
 - (instancetype)initWithConfigs:(NSArray<HSYBaseSegmentedPageConfig *> *)configs;
 

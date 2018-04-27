@@ -12,6 +12,7 @@
 #import "UIImage+Canvas.h"
 #import "NSObject+UIKit.h"
 #import "NSBundle+PrivateFileResource.h"
+#import "PublicMacroFile.h"
 
 static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
@@ -24,7 +25,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        UIImage *image = [UIImage imageWithFillColor:[UIColor greenColor]];
+        UIImage *image = [UIImage imageWithFillColor:NAV_DEFAULT_COLOR];
         [self setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
         _customNavigationItem = [[UINavigationItem alloc] initWithTitle:@""];
         [self pushNavigationItem:self.customNavigationItem animated:YES];

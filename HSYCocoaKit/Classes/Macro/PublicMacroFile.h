@@ -101,6 +101,8 @@
 #define BLACK_COLOR                                                     [UIColor blackColor]    //黑色
 #define WHITE_COLOR                                                     [UIColor whiteColor]    //白色
 #define SEGMENTED_CONTROL_DEFAULT_SELECTED_COLOR                        HexColorString(@"77D4FB")
+#define NAV_DEFAULT_COLOR                                               [UIColor grayColor]
+
 
 // 沙盒下存放配置文件的文件夹路径
 #define PATHDOCUMENT_CONFIG_FILE_PATH                                   @"Config"
