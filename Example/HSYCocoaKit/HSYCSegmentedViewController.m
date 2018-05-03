@@ -49,3 +49,8 @@
 */
 
 @end
+
+@implementation HSYTabBarController
+
+
+@end

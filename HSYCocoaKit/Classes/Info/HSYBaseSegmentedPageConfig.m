@@ -30,3 +30,21 @@
 }
 
 @end
+
+@implementation HSYBaseTabBarControllerConfig
+
++ (instancetype)initWithViewControllerClassName:(NSString *)className
+                            viewControllerTitle:(NSString *)title
+                                      paramters:(NSDictionary<NSString *,NSString *> *)paramters
+                             titleColorParamter:(NSDictionary<UIColor *,UIColor *> *)titleColorParamter
+                                  imageParamter:(NSDictionary<NSString *,NSString *> *)imageParamter
+{
+    HSYBaseTabBarControllerConfig *config = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:className viewControllerTitle:title paramters:paramters];
+    config.titleColorParamter = titleColorParamter;
+    config.imageParamter = imageParamter;
+    
+    return config;
+}
+
+@end
+

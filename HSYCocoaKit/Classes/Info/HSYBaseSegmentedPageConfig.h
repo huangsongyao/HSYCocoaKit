@@ -24,3 +24,18 @@
 + (instancetype)initWithViewControllerClassName:(NSString *)className viewControllerTitle:(NSString *)title paramters:(NSDictionary<NSString *, NSString *> *)paramters;
 
 @end
+
+@interface HSYBaseTabBarControllerConfig : HSYBaseSegmentedPageConfig
+
+//格式为：@{normal的color : selected的color}
+@property (nonatomic, strong) NSDictionary<UIColor *, UIColor *> *titleColorParamter;
+//格式为：@{@"normal的image" : @"selected的image"}
+@property (nonatomic, strong) NSDictionary<NSString *, NSString *> *imageParamter;
+
++ (instancetype)initWithViewControllerClassName:(NSString *)className
+                            viewControllerTitle:(NSString *)title
+                                      paramters:(NSDictionary<NSString *, NSString *> *)paramters
+                             titleColorParamter:(NSDictionary<UIColor *, UIColor *> *)titleColorParamter
+                                  imageParamter:(NSDictionary<NSString *, NSString *> *)imageParamter;
+
+@end

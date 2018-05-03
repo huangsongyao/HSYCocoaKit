@@ -19,9 +19,10 @@
 @property (nonatomic, strong) NSNumber *lineSpacing;            //行间距
 @property (nonatomic, strong) NSNumber *interitemSpacing;       //item间距
 
-@property (nonatomic, strong) NSNumber *scrollEnabled;
+@property (nonatomic, strong) NSNumber *scrollEnabled;          //能否支持滚动--BOOL
 @property (nonatomic, strong) NSNumber *scrollIndicator;
-@property (nonatomic, strong) NSNumber *bounces;
+@property (nonatomic, strong) NSNumber *bounces;                //是否支持边界回弹--BOOL
+@property (nonatomic, assign) UICollectionViewScrollDirection scrollDirection;  //横向或者纵向滚动
 
 //格式：@[@{@"类名" : @"重用标识",}, @{@"类名" : @"重用标识",}....]
 @property (nonatomic, strong, readwrite) NSArray<NSDictionary *> *registerClasses;

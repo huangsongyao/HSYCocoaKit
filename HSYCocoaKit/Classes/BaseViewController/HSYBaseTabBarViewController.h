@@ -6,8 +6,15 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import "HSYBaseViewController.h"
+#import "HSYBaseTabBarModel.h"
 
-@interface HSYBaseTabBarViewController : UIViewController
+@interface HSYBaseTabBarViewController : HSYBaseViewController
+
+@property (nonatomic, strong, readonly) UICollectionView *collectionView;
+
+@property (nonatomic, strong) NSNumber *tabbarHeight;
+
+- (instancetype)initWithConfigs:(NSArray<HSYBaseTabBarControllerConfig *> *)configs;
 
 @end

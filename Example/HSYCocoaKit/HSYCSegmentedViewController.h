@@ -11,3 +11,7 @@
 @interface HSYCSegmentedViewController : HSYBaseSegmentedPageViewController
 
 @end
+
+@interface HSYTabBarController : HSYBaseTabBarViewController
+
+@end

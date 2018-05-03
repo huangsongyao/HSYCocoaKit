@@ -76,7 +76,13 @@
     
     UIButton *button1 = [NSObject createButtonByParam:@{} clickedOnSubscribeNext:^(UIButton *button) {
         @strongify(self);
-        HSYBViewController *vc = [[HSYBViewController alloc] init];
+//        HSYBViewController *vc = [[HSYBViewController alloc] init];
+        HSYBaseTabBarControllerConfig *config1 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYBViewController" viewControllerTitle:@"0" paramters:@{} titleColorParamter:@{[UIColor grayColor] : [UIColor greenColor]} imageParamter:@{@"tab_icon_home_default" : @"tab_icon_home_new_selected"}];
+        HSYBaseTabBarControllerConfig *config2 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYViewController" viewControllerTitle:@"1" paramters:@{} titleColorParamter:@{[UIColor grayColor] : [UIColor greenColor]} imageParamter:@{@"tab_icon_invest_default" : @"tab_icon_invest_new_selected"}];
+        HSYBaseTabBarControllerConfig *config3 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYCViewController" viewControllerTitle:@"2" paramters:@{} titleColorParamter:@{[UIColor grayColor] : [UIColor greenColor]} imageParamter:@{@"tab_icon_mine_default" : @"tab_icon_mine_new_selected"}];
+        HSYBaseTabBarControllerConfig *config4 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYDViewController" viewControllerTitle:@"3" paramters:@{} titleColorParamter:@{[UIColor grayColor] : [UIColor greenColor]} imageParamter:@{@"tab_icon_search_default" : @"tab_icon_search_new_selected"}];
+        NSMutableArray *configs = [@[config1, config2, config3, config4] mutableCopy];
+        HSYTabBarController *vc = [[HSYTabBarController alloc] initWithConfigs:configs];
         [self.navigationController pushViewController:vc animated:YES];
         //        [[self hsy_rac_openEditingSystemVideos] subscribeNext:^(id x) {
         //            NSLog(@"33333");

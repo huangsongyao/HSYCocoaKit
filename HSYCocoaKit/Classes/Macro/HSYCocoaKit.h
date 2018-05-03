@@ -96,6 +96,6 @@
 #import "GCDAsyncSocket+RACSignal.h"
 #import "HSYCocoaKitSocketManager.h"
 #import "HSYCocoaKitSocketRACSignal.h"
-
+#import "HSYBaseTabBarViewController.h"
 
 #endif /* HSYCocoaKit_h */

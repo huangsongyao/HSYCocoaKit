@@ -26,6 +26,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
         _scrollIndicator = @(NO);
         _scrollEnabled = @(YES);
         _bounces = @(YES);
+        _scrollDirection = UICollectionViewScrollDirectionVertical;
      }
     return self;
 }
@@ -37,7 +38,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
     //添加默认的collectionView
     NSParameterAssert(self.registerClasses);
     NSDictionary *layoutParam = @{
-                                  @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection) : @(UICollectionViewScrollDirectionVertical),
+                                  @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection) : @(self.scrollDirection),
                                   @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset) : self.sectionInset ? self.sectionInset : [self.class zeroValueForType:kHSYCocoaKitZeroValueEdge],
                                   @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize) : self.itemSize ? self.itemSize : [self.class zeroValueForType:kHSYCocoaKitZeroValueSize],
                                   @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeLineSpacing) : self.lineSpacing ? self.lineSpacing : @(0),

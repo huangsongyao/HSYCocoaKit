@@ -330,7 +330,7 @@
         collectionView.bounces = [param[@(kHSYCocoaKitOfCollectionViewPropretyTypeBounces)] boolValue];//控制控件遇到边框是否反弹
     }
     //必须注册cell，此处使用建言宏中断，以方便代码检查
-    NSParameterAssert(!param[@(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass)]);
+    NSParameterAssert(param[@(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass)]);
     for (NSDictionary *registers in param[@(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass)]) {
         Class class = NSClassFromString(registers.allKeys.firstObject);
         NSString *identifier = registers.allValues.firstObject;
