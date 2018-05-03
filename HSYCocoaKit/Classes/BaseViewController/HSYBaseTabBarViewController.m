@@ -13,7 +13,7 @@
 
 static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentifier";
 
-@interface HSYBaseTabBarViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface HSYBaseTabBarViewController ()
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 

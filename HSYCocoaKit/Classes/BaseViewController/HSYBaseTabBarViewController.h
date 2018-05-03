@@ -9,9 +9,10 @@
 #import "HSYBaseViewController.h"
 #import "HSYBaseTabBarModel.h"
 
-@interface HSYBaseTabBarViewController : HSYBaseViewController
+@interface HSYBaseTabBarViewController : HSYBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, strong, readonly) UICollectionView *collectionView;
+//请在"- initWithConfigs:"方法的子类重载中设置高度，默认为44.0f
 @property (nonatomic, strong) NSNumber *tabbarHeight;
 
 - (instancetype)initWithConfigs:(NSArray<HSYBaseTabBarControllerConfig *> *)configs;
