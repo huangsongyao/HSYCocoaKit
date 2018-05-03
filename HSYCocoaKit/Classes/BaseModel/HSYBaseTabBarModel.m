@@ -37,6 +37,7 @@
             [self.hsy_viewControllers addObject:config.hsy_viewController];
             [self.hsy_titles addObject:config.hsy_title];
             HSYBaseTabBarConfigItem *item = [[HSYBaseTabBarConfigItem alloc] initWithTitle:config.hsy_title normalParamter:@{config.imageParamter.allKeys.firstObject : config.titleColorParamter.allKeys.firstObject} selectedParamter:@{config.imageParamter.allValues.firstObject : config.titleColorParamter.allValues.firstObject}];
+            item.selectedItem = ([self.hsy_configs indexOfObject:config] == 0);
             [self.hsy_configItems addObject:item];
         }
     }

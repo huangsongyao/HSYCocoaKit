@@ -12,6 +12,7 @@
 #import "NSObject+UIKit.h"
 #import "UIView+Frame.h"
 #import "UIViewController+NavigationItem.h"
+#import "HSYBaseTabBarViewController.h"
 
 @interface HSYBaseSegmentedPageViewController () <UIScrollViewDelegate>
 
@@ -122,31 +123,10 @@
             break;
     }
     
-    NSMutableArray *hsy_viewController = [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_viewControllers];
-    CGFloat x = 0.0f;
-    NSString *tableString = @"tableView";
-    NSString *collectionString = @"collectionView";
-    for (UIViewController *vc in hsy_viewController) {
-        NSInteger i = [hsy_viewController indexOfObject:vc];
-        NSString *title = [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_titles][i];
-        if ([vc respondsToSelector:@selector(view)]) {
-            vc.view.height = self.scrollView.height;
-            vc.view.origin = CGPointMake(x, 0);
-        }
-        if ([vc respondsToSelector:NSSelectorFromString(tableString)]) {
-            UITableViewController *tvc = (UITableViewController *)vc;
-            tvc.tableView.frame = tvc.view.bounds;
-        } else if ([vc respondsToSelector:NSSelectorFromString(collectionString)]) {
-            UICollectionViewController *cvc = (UICollectionViewController *)vc;
-            cvc.collectionView.frame = cvc.view.bounds;
-        }
-        [self.scrollView addSubview:vc.view];
-        self.navigationItem.title = title;
-        if (self.customNavigationBar) {
-            self.customNavigationBar.customNavigationItem.title = title;
-        }
-        x = vc.view.right;
-    }
+    NSMutableArray *hsy_viewControllers = [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_viewControllers];
+    CGFloat x = [HSYBaseTabBarViewController hsy_addSubViewController:hsy_viewControllers
+                                                               titles:[(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_titles]
+                                                           scrollView:self.scrollView];
     [self.scrollView setContentSize:CGSizeMake(x, 0)];
     // Do any additional setup after loading the view.
 }

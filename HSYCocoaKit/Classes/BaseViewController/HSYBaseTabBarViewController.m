@@ -33,6 +33,7 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //底部的tabbar
     NSDictionary *layoutParam = @{
                                   @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset) : [NSValue valueWithUIEdgeInsets:UIEdgeInsetsZero],
                                   @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection) : @(UICollectionViewScrollDirectionHorizontal),
@@ -56,21 +57,37 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
     _collectionView = [NSObject createCollectionViewByParam:collectionParam];
     [self.view addSubview:self.collectionView];
     
+    //用于添加的scrollView
     CGFloat y = (self.customNavigationBar ? self.customNavigationBar.bottom : 0.0f);
     CGFloat h = (self.customNavigationBar ? (IPHONE_HEIGHT - self.customNavigationBar.bottom - self.collectionView.height) : (self.view.height - self.collectionView.height));
     CGRect scrollRect = CGRectMake(0, y, self.view.width, h);
     self.scrollView = [NSObject createScrollViewByParam:@{@(kHSYCocoaKitOfScrollViewPropretyTypeFrame) : [NSValue valueWithCGRect:scrollRect], @(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled) : @(NO), @(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator) : @(YES),}];
     [self.view addSubview:self.scrollView];
     
-    NSMutableArray *hsy_viewController = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_viewControllers];
+    //添加子控制器到scrollView
+    NSMutableArray *hsy_viewControllers = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_viewControllers];
+    NSArray *hsy_titles = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_titles];
+    [self.class hsy_addSubViewController:hsy_viewControllers
+                                  titles:hsy_titles
+                              scrollView:self.scrollView];
+    [self hsy_setCurrentNavigationItemTitle:hsy_titles.firstObject];
+    // Do any additional setup after loading the view.
+}
+
+#pragma mark - Set Sub ViewController
+
++ (CGFloat)hsy_addSubViewController:(NSMutableArray *)hsy_viewControllers
+                             titles:(NSArray *)titles
+                         scrollView:(UIScrollView *)scrollView
+{
     CGFloat x = 0.0f;
     NSString *tableString = @"tableView";
     NSString *collectionString = @"collectionView";
-    for (UIViewController *vc in hsy_viewController) {
-        NSInteger i = [hsy_viewController indexOfObject:vc];
-        NSString *title = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_titles][i];
+    for (UIViewController *vc in hsy_viewControllers) {
+        NSInteger i = [hsy_viewControllers indexOfObject:vc];
+        NSString *title = titles[i];
         if ([vc respondsToSelector:@selector(view)]) {
-            vc.view.height = self.scrollView.height;
+            vc.view.height = scrollView.height;
             vc.view.origin = CGPointMake(x, 0);
         }
         if ([vc respondsToSelector:NSSelectorFromString(tableString)]) {
@@ -80,14 +97,22 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
             UICollectionViewController *cvc = (UICollectionViewController *)vc;
             cvc.collectionView.frame = cvc.view.bounds;
         }
-        [self.scrollView addSubview:vc.view];
-        self.navigationItem.title = title;
-        if (self.customNavigationBar) {
-            self.customNavigationBar.customNavigationItem.title = title;
+        [scrollView addSubview:vc.view];
+        vc.navigationItem.title = title;
+        if ([vc isKindOfClass:[HSYBaseViewController class]] && [(HSYBaseViewController *)vc customNavigationBar]) {
+            [(HSYBaseViewController *)vc customNavigationBar].customNavigationItem.title = title;
         }
         x = vc.view.right;
-    }    
-    // Do any additional setup after loading the view.
+    }
+    return x;
+}
+
+- (void)hsy_setCurrentNavigationItemTitle:(NSString *)title
+{
+    self.navigationItem.title = title;
+    if (self.customNavigationBar) {
+        self.customNavigationBar.customNavigationItem.title = title;
+    }
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
@@ -116,6 +141,7 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
 {
     [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_reloadDatas:indexPath];
     [self.scrollView setXPage:indexPath.item];
+    [self hsy_setCurrentNavigationItemTitle:[(HSYBaseTabBarModel *)self.hsy_viewModel hsy_titles][indexPath.item]];
     [self.collectionView reloadData];
 }
 
