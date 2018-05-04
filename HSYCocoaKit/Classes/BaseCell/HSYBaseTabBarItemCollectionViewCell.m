@@ -29,15 +29,15 @@
         [self.contentView addSubview:self.itemImageView];
         [self.itemImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.contentView.mas_centerX);
-            make.bottom.equalTo(self.contentView.mas_centerY);
-            make.size.mas_equalTo(CGSizeMake(18.0f, 18.0f));
+            make.bottom.equalTo(self.contentView.mas_centerY).offset(2.0f);
+            make.size.mas_equalTo(CGSizeMake(20.0f, 20.0f));
         }];
-        self.itemTitleLabel = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeTextFont) : UI_SYSTEM_FONT_12, @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentCenter),}];
+        self.itemTitleLabel = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeTextFont) : UI_SYSTEM_FONT_10, @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentCenter),}];
         [self.contentView addSubview:self.itemTitleLabel];
         [self.itemTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.itemImageView.mas_bottom).offset(2.0f);
             make.left.equalTo(self.contentView.mas_left);
-            make.size.mas_equalTo(CGSizeMake(self.contentView.width, UI_SYSTEM_FONT_12.pointSize));
+            make.size.mas_equalTo(CGSizeMake(self.contentView.width, UI_SYSTEM_FONT_10.pointSize));
         }];
     }
     return self;

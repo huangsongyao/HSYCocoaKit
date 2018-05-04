@@ -143,4 +143,12 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
     return value;
 }
 
+#pragma mark - First Request
+
+- (void)firstRequest
+{
+    [self.collectionView.pullToRefreshView startAnimating];
+}
+
+
 @end

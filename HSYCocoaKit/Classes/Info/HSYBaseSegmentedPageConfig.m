@@ -7,6 +7,7 @@
 //
 
 #import "HSYBaseSegmentedPageConfig.h"
+#import "HSYBaseViewController.h"
 
 @implementation HSYBaseSegmentedPageConfig
 
@@ -20,6 +21,7 @@
     if (self = [super init]) {
         _hsy_viewController = [[NSClassFromString(className) alloc] init];
         _hsy_title = title;
+        self.showNavigationBar = NO;
         for (NSString *key in paramters.allKeys) {
             if ([self.hsy_viewController respondsToSelector:NSSelectorFromString(key)]) {
                 [self.hsy_viewController setValue:paramters[key] forKey:key];
@@ -27,6 +29,16 @@
         }
     }
     return self;
+}
+
+- (void)setShowNavigationBar:(BOOL)showNavigationBar
+{
+    _showNavigationBar = showNavigationBar;
+    if (self.showNavigationBar) {
+        if ([self.hsy_viewController isKindOfClass:[HSYBaseViewController class]]) {
+            [(HSYBaseViewController *)self.hsy_viewController hsy_addCustomNavigationBar];
+        }
+    }
 }
 
 @end
@@ -42,6 +54,7 @@
     HSYBaseTabBarControllerConfig *config = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:className viewControllerTitle:title paramters:paramters];
     config.titleColorParamter = titleColorParamter;
     config.imageParamter = imageParamter;
+    config.showNavigationBar = YES;
     
     return config;
 }

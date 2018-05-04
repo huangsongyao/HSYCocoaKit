@@ -27,4 +27,6 @@
 //格式：@[@{@"类名" : @"重用标识",}, @{@"类名" : @"重用标识",}....]
 @property (nonatomic, strong, readwrite) NSArray<NSDictionary *> *registerClasses;
 
+- (void)firstRequest;
+
 @end

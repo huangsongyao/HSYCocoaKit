@@ -110,4 +110,11 @@
                                             configuration:configuration];;
 }
 
+#pragma mark - First Request
+
+- (void)firstRequest
+{
+    [self.tableView.pullToRefreshView startAnimating];
+}
+
 @end

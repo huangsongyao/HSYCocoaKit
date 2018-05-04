@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) UIViewController *hsy_viewController;
 @property (nonatomic, copy) NSString *hsy_title;
+//默认为NO，NO表示不显示头部的导航栏
+@property (nonatomic, assign) BOOL showNavigationBar;
 
 /**
  根据paramters入参使用kvc方式，将paramters中的allValue设置到UIViewController中

@@ -32,7 +32,7 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self hiddenCustomNavigationBar];
     //底部的tabbar
     NSDictionary *layoutParam = @{
                                   @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset) : [NSValue valueWithUIEdgeInsets:UIEdgeInsetsZero],
@@ -66,11 +66,10 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
     
     //添加子控制器到scrollView
     NSMutableArray *hsy_viewControllers = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_viewControllers];
-    NSArray *hsy_titles = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_titles];
     [self.class hsy_addSubViewController:hsy_viewControllers
-                                  titles:hsy_titles
+                                  titles:[(HSYBaseTabBarModel *)self.hsy_viewModel hsy_titles]
+                                 configs:[(HSYBaseTabBarModel *)self.hsy_viewModel hsy_configs]
                               scrollView:self.scrollView];
-    [self hsy_setCurrentNavigationItemTitle:hsy_titles.firstObject];
     // Do any additional setup after loading the view.
 }
 
@@ -78,6 +77,7 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
 
 + (CGFloat)hsy_addSubViewController:(NSMutableArray *)hsy_viewControllers
                              titles:(NSArray *)titles
+                            configs:(NSMutableArray *)configs
                          scrollView:(UIScrollView *)scrollView
 {
     CGFloat x = 0.0f;
@@ -98,21 +98,19 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
             cvc.collectionView.frame = cvc.view.bounds;
         }
         [scrollView addSubview:vc.view];
+        BOOL hidden = ![configs[i] showNavigationBar];
         vc.navigationItem.title = title;
-        if ([vc isKindOfClass:[HSYBaseViewController class]] && [(HSYBaseViewController *)vc customNavigationBar]) {
-            [(HSYBaseViewController *)vc customNavigationBar].customNavigationItem.title = title;
+        vc.navigationController.navigationBar.hidden = hidden;
+        if ([vc isKindOfClass:[HSYBaseViewController class]]) {
+            HSYBaseViewController *basevc = (HSYBaseViewController *)vc;
+            if (basevc.customNavigationBar) {
+                [(HSYBaseViewController *)vc customNavigationBar].customNavigationItem.title = title;
+                [(HSYBaseViewController *)vc customNavigationBar].hidden = hidden;
+            }
         }
         x = vc.view.right;
     }
     return x;
-}
-
-- (void)hsy_setCurrentNavigationItemTitle:(NSString *)title
-{
-    self.navigationItem.title = title;
-    if (self.customNavigationBar) {
-        self.customNavigationBar.customNavigationItem.title = title;
-    }
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
@@ -141,7 +139,6 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
 {
     [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_reloadDatas:indexPath];
     [self.scrollView setXPage:indexPath.item];
-    [self hsy_setCurrentNavigationItemTitle:[(HSYBaseTabBarModel *)self.hsy_viewModel hsy_titles][indexPath.item]];
     [self.collectionView reloadData];
 }
 

@@ -126,6 +126,7 @@
     NSMutableArray *hsy_viewControllers = [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_viewControllers];
     CGFloat x = [HSYBaseTabBarViewController hsy_addSubViewController:hsy_viewControllers
                                                                titles:[(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_titles]
+                                                              configs:[(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_configs]
                                                            scrollView:self.scrollView];
     [self.scrollView setContentSize:CGSizeMake(x, 0)];
     // Do any additional setup after loading the view.

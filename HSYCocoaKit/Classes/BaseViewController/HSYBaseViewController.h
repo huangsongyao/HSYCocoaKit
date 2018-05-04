@@ -46,4 +46,14 @@
  */
 - (void)hsy_setCustomNavigationBarBackButtonInLeft:(BOOL)left image:(NSString *)image;
 
+/**
+ 隐藏定制的导航栏
+ */
+- (void)hiddenCustomNavigationBar;
+
+/**
+ 允许子类手动添加定制的导航栏
+ */
+- (void)hsy_addCustomNavigationBar;
+
 @end

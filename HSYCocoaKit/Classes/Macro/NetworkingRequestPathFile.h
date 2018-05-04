@@ -15,7 +15,7 @@
 
 #ifdef DEBUG_TARGET
 
-#define BASE_URL                        @"http://192.168.1.11:8380/front/"
+#define BASE_URL                        @"http://zhubaodai.eicp.net:48302/zbd-app"
 
 #define SOCKET_HOST                     @"120.24.222.188"
 #define SOCKET_PORT                     8383
@@ -23,7 +23,7 @@
 
 #else
 
-#define BASE_URL                        @"http://www.study.com/front/"
+#define BASE_URL                        @"http://zhubaodai.eicp.net:48302/zbd-app"
 
 #define SOCKET_HOST                     @"120.24.222.188"
 #define SOCKET_PORT                     8383

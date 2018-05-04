@@ -77,10 +77,13 @@
     UIButton *button1 = [NSObject createButtonByParam:@{} clickedOnSubscribeNext:^(UIButton *button) {
         @strongify(self);
 //        HSYBViewController *vc = [[HSYBViewController alloc] init];
-        HSYBaseTabBarControllerConfig *config1 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYBViewController" viewControllerTitle:@"0" paramters:@{} titleColorParamter:@{[UIColor grayColor] : [UIColor greenColor]} imageParamter:@{@"tab_icon_home_default" : @"tab_icon_home_new_selected"}];
-        HSYBaseTabBarControllerConfig *config2 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYViewController" viewControllerTitle:@"1" paramters:@{} titleColorParamter:@{[UIColor grayColor] : [UIColor greenColor]} imageParamter:@{@"tab_icon_invest_default" : @"tab_icon_invest_new_selected"}];
-        HSYBaseTabBarControllerConfig *config3 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYCViewController" viewControllerTitle:@"2" paramters:@{} titleColorParamter:@{[UIColor grayColor] : [UIColor greenColor]} imageParamter:@{@"tab_icon_mine_default" : @"tab_icon_mine_new_selected"}];
-        HSYBaseTabBarControllerConfig *config4 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYDViewController" viewControllerTitle:@"32222" paramters:@{} titleColorParamter:@{[UIColor grayColor] : [UIColor greenColor]} imageParamter:@{@"tab_icon_search_default" : @"tab_icon_search_new_selected"}];
+        UIColor *color = HexColorString(@"6F6F6F");
+        UIColor *highColor = HexColorString(@"CA4526");
+        HSYBaseTabBarControllerConfig *config1 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYDViewController" viewControllerTitle:@"首页" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_home_default" : @"tab_icon_home_new_selected"}];
+        config1.showNavigationBar = NO;
+        HSYBaseTabBarControllerConfig *config2 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYViewController" viewControllerTitle:@"投资" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_invest_default" : @"tab_icon_invest_new_selected"}];
+        HSYBaseTabBarControllerConfig *config3 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYCViewController" viewControllerTitle:@"我的" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_mine_default" : @"tab_icon_mine_new_selected"}];
+        HSYBaseTabBarControllerConfig *config4 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYBViewController" viewControllerTitle:@"更多" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_search_default" : @"tab_icon_search_new_selected"}];
         NSMutableArray *configs = [@[config1, config2, config3, config4] mutableCopy];
         HSYTabBarController *vc = [[HSYTabBarController alloc] initWithConfigs:configs];
         [self.navigationController pushViewController:vc animated:YES];

@@ -240,6 +240,7 @@ static char UIScrollViewPullToRefreshView;
     if(fequalzero(self.scrollView.contentOffset.y)) {
         [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x, -self.frame.size.height) animated:YES];
         self.wasTriggeredByUser = NO;
+        _state = SVPullToRefreshStateTriggered;
     } else {
         self.wasTriggeredByUser = YES;
     }
@@ -280,8 +281,9 @@ static char UIScrollViewPullToRefreshView;
         case SVPullToRefreshStateLoading: {
             [self.loadingView hsy_start];
             [self setScrollViewContentInsetForLoading];
-            if(previousState == SVPullToRefreshStateTriggered && _pullToRefreshActionHandler)
+            if(previousState == SVPullToRefreshStateTriggered && _pullToRefreshActionHandler) {
                 _pullToRefreshActionHandler();
+            }
         }
             break;
     }
