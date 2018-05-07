@@ -12,13 +12,13 @@
 //UIButton
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfButtonPropretyType) {
     
-    kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName      = 657,  //NSString
-    kHSYCocoaKitOfButtonPropretyTypePreBackgroundImageViewName,             //NSString
+    kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName      = 657,  //UIImage
+    kHSYCocoaKitOfButtonPropretyTypePreBackgroundImageViewName,             //UIImage
     kHSYCocoaKitOfButtonPropretyTypeNorTitle,                               //NSString
     kHSYCocoaKitOfButtonPropretyTypeHighTitle,                              //NSString
     kHSYCocoaKitOfButtonPropretyTypeNorImageViewName,                       //UIImage
     kHSYCocoaKitOfButtonPropretyTypePreImageViewName,                       //UIImage
-    kHSYCocoaKitOfButtonPropretyTypeSelectedImageViewName,                  //NSString
+    kHSYCocoaKitOfButtonPropretyTypeSelectedImageViewName,                  //UIImage
     kHSYCocoaKitOfButtonPropretyTypeTitleColor,                             //UIColor
     kHSYCocoaKitOfButtonPropretyTypeTitleFont,                              //UIFont
     kHSYCocoaKitOfButtonPropretyTypeCornerRadius,                           //NSNumber\CGFloat
@@ -59,6 +59,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfTextFiledPropretyType) {
     kHSYCocoaKitOfTextFiledPropretyTypeTextColor,                           //UIColor
     kHSYCocoaKitOfTextFiledPropretyTypeBackgroundColor,                     //UIColor
     kHSYCocoaKitOfTextFiledPropretyTypeText,                                //NSString
+    kHSYCocoaKitOfTextFiledPropretyTypePlaceholderString,                   //NSString
 };
 
 //UITextView

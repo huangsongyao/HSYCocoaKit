@@ -52,6 +52,7 @@
 		AE07ED8A209C058400542DBB /* search_icon_invite.png in Resources */ = {isa = PBXBuildFile; fileRef = AE07ED87209C058400542DBB /* search_icon_invite.png */; };
 		AE07ED8B209C058400542DBB /* search_icon_invite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE07ED88209C058400542DBB /* search_icon_invite@2x.png */; };
 		AE07ED8C209C058400542DBB /* search_icon_invite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE07ED89209C058400542DBB /* search_icon_invite@3x.png */; };
+		AE07ED8F209C441400542DBB /* CXACMHomePageJSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE07ED8E209C441400542DBB /* CXACMHomePageJSONModel.m */; };
 		AEAA99F72090858F00E0DCBB /* HSYCSegmentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAA99F62090858F00E0DCBB /* HSYCSegmentedViewController.m */; };
 		AEECCA972071D2100041BA52 /* HSYViewControllerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEECCA962071D2100041BA52 /* HSYViewControllerModel.m */; };
 		AEECCAE4207A13310041BA52 /* HSYBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEECCAE3207A13310041BA52 /* HSYBViewController.m */; };
@@ -134,6 +135,8 @@
 		AE07ED87209C058400542DBB /* search_icon_invite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon_invite.png; sourceTree = "<group>"; };
 		AE07ED88209C058400542DBB /* search_icon_invite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_icon_invite@2x.png"; sourceTree = "<group>"; };
 		AE07ED89209C058400542DBB /* search_icon_invite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_icon_invite@3x.png"; sourceTree = "<group>"; };
+		AE07ED8D209C441400542DBB /* CXACMHomePageJSONModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXACMHomePageJSONModel.h; sourceTree = "<group>"; };
+		AE07ED8E209C441400542DBB /* CXACMHomePageJSONModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXACMHomePageJSONModel.m; sourceTree = "<group>"; };
 		AE1046D4206E1A43009BAD86 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = "Pods/../build/Debug-iphoneos/FBSnapshotTestCase/FBSnapshotTestCase.framework"; sourceTree = "<group>"; };
 		AEAA99F52090858F00E0DCBB /* HSYCSegmentedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSYCSegmentedViewController.h; sourceTree = "<group>"; };
 		AEAA99F62090858F00E0DCBB /* HSYCSegmentedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSYCSegmentedViewController.m; sourceTree = "<group>"; };
@@ -226,6 +229,8 @@
 				AE07ED82209B01A700542DBB /* HSYCViewController.m */,
 				AE07ED84209B01AF00542DBB /* HSYDViewController.h */,
 				AE07ED85209B01AF00542DBB /* HSYDViewController.m */,
+				AE07ED8D209C441400542DBB /* CXACMHomePageJSONModel.h */,
+				AE07ED8E209C441400542DBB /* CXACMHomePageJSONModel.m */,
 				AEECCAE2207A13310041BA52 /* HSYBViewController.h */,
 				AEECCAE3207A13310041BA52 /* HSYBViewController.m */,
 				AEAA99F52090858F00E0DCBB /* HSYCSegmentedViewController.h */,
@@ -605,6 +610,7 @@
 				AEECCAE4207A13310041BA52 /* HSYBViewController.m in Sources */,
 				AEAA99F72090858F00E0DCBB /* HSYCSegmentedViewController.m in Sources */,
 				AE07ED86209B01AF00542DBB /* HSYDViewController.m in Sources */,
+				AE07ED8F209C441400542DBB /* CXACMHomePageJSONModel.m in Sources */,
 				AEECCA972071D2100041BA52 /* HSYViewControllerModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

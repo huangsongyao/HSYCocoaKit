@@ -40,13 +40,6 @@
 - (void)hsy_pullRefresh:(kHSYReflesStatusType)status
              updateNext:(RACSignal *(^)(void))network
                   toMap:(NSMutableArray *(^)(RACTuple *tuple))map
-{
-    [self hsy_pullRefresh:status updateNext:network toMap:map subscriberNext:^(id x) {}];
-}
-
-- (void)hsy_pullRefresh:(kHSYReflesStatusType)status
-             updateNext:(RACSignal *(^)(void))network
-                  toMap:(NSMutableArray *(^)(RACTuple *tuple))map
          subscriberNext:(void(^)(id x))next
 {
     switch (status) {

@@ -13,9 +13,9 @@
  *  公开服务器及接口字段头文件，用于公开所有通用的接口字段和相关的url
  */
 
-#ifdef DEBUG_TARGET
+#ifdef DEBUG
 
-#define BASE_URL                        @"http://zhubaodai.eicp.net:48302/zbd-app"
+#define BASE_URL                        @"http://192.168.1.12:8087/zbd-app"
 
 #define SOCKET_HOST                     @"120.24.222.188"
 #define SOCKET_PORT                     8383
@@ -23,7 +23,7 @@
 
 #else
 
-#define BASE_URL                        @"http://zhubaodai.eicp.net:48302/zbd-app"
+#define BASE_URL                        @"https://mobile.zhubaodai.com/zbd-app"
 
 #define SOCKET_HOST                     @"120.24.222.188"
 #define SOCKET_PORT                     8383

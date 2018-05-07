@@ -25,7 +25,9 @@
     }
     NSDictionary * dic = @{NSFontAttributeName : font};
     return [text boundingRectWithSize:CGSizeMake(width, height)
-                              options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                              options:(NSStringDrawingTruncatesLastVisibleLine |
+                                       NSStringDrawingUsesLineFragmentOrigin |
+                                       NSStringDrawingUsesFontLeading)
                            attributes:dic
                               context:nil].size;
 }

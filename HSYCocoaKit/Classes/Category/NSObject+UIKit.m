@@ -25,10 +25,10 @@
     button.layer.masksToBounds = YES;
     
     if (param[@(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName)]) {
-        [button setBackgroundImage:[UIImage imageNamed:param[@(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName)]] forState:UIControlStateNormal];
+        [button setBackgroundImage:param[@(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName)] forState:UIControlStateNormal];
     }
     if (param[@(kHSYCocoaKitOfButtonPropretyTypePreBackgroundImageViewName)]) {
-        [button setBackgroundImage:[UIImage imageNamed:param[@(kHSYCocoaKitOfButtonPropretyTypePreBackgroundImageViewName)]] forState:UIControlStateHighlighted];
+        [button setBackgroundImage:param[@(kHSYCocoaKitOfButtonPropretyTypePreBackgroundImageViewName)] forState:UIControlStateHighlighted];
     }
     if (param[@(kHSYCocoaKitOfButtonPropretyTypeNorTitle)]) {
         [button setTitle:param[@(kHSYCocoaKitOfButtonPropretyTypeNorTitle)] forState:UIControlStateNormal];
@@ -43,14 +43,15 @@
         [button setImage:param[@(kHSYCocoaKitOfButtonPropretyTypePreImageViewName)] forState:UIControlStateHighlighted];
     }
     if (param[@(kHSYCocoaKitOfButtonPropretyTypeSelectedImageViewName)]) {
-        [button setImage:[UIImage imageNamed:param[@(kHSYCocoaKitOfButtonPropretyTypeSelectedImageViewName)]] forState:UIControlStateSelected];
+        [button setImage:param[@(kHSYCocoaKitOfButtonPropretyTypeSelectedImageViewName)] forState:UIControlStateSelected];
     }
     if (param[@(kHSYCocoaKitOfButtonPropretyTypeTitleColor)]) {
         [button setTitleColor:param[@(kHSYCocoaKitOfButtonPropretyTypeTitleColor)] forState:UIControlStateNormal];
         [button setTitleColor:param[@(kHSYCocoaKitOfButtonPropretyTypeTitleColor)] forState:UIControlStateHighlighted];
     }
     if (param[@(kHSYCocoaKitOfButtonPropretyTypeTitleFont)]) {
-        button.titleLabel.font = param[@(kHSYCocoaKitOfButtonPropretyTypeTitleFont)];
+        UIFont *font = param[@(kHSYCocoaKitOfButtonPropretyTypeTitleFont)];
+        button.titleLabel.font = font;
     }
     if (param[@(kHSYCocoaKitOfButtonPropretyTypeCornerRadius)]) {
         button.layer.cornerRadius = [param[@(kHSYCocoaKitOfButtonPropretyTypeCornerRadius)] floatValue];
@@ -157,6 +158,9 @@
     }
     if (param[@(kHSYCocoaKitOfTextFiledPropretyTypeText)]) {
         textField.text = param[@(kHSYCocoaKitOfTextFiledPropretyTypeText)];
+    }
+    if (param[@(kHSYCocoaKitOfTextFiledPropretyTypePlaceholderString)]) {
+        textField.placeholder = param[@(kHSYCocoaKitOfTextFiledPropretyTypePlaceholderString)];
     }
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     if (next) {

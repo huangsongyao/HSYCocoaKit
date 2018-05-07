@@ -20,6 +20,7 @@
     if (self = [super init]) {
         self.hsy_addKeyboardObserver = NO;
         self.hsy_addCustomNavigationBarBackButton = YES;
+        self.hsy_addEndEditedKeyboard = NO;
     }
     return self;
 }

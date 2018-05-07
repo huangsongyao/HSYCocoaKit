@@ -36,17 +36,6 @@ typedef NS_ENUM(NSUInteger, kHSYReflesStatusType) {
  @param status 上拉或者下拉的枚举
  @param network 网络请求的方法
  @param map 结果映射，由于方法内部需要对self.datas这个数据源数组进行了整理，所以映射时必须映射成结果数组
- */
-- (void)hsy_pullRefresh:(kHSYReflesStatusType)status
-             updateNext:(RACSignal *(^)(void))network
-                  toMap:(NSMutableArray *(^)(RACTuple *tuple))map;
-
-/**
- 网络请求下一页，主要用于分页，并且重新定义了父类的“- requestNetwork:toMap:subscriberNext:”方法，返回了NO，用与区分普通请求成功后设置statusCode和上拉或者下拉成功后设置的statusCode
-
- @param status 上拉或者下拉的枚举
- @param network 网络请求的方法
- @param map 结果映射，由于方法内部需要对self.datas这个数据源数组进行了整理，所以映射时必须映射成结果数组
  @param next 数据整理成功后的回调，用于上下拉及时获取block状态
  */
 - (void)hsy_pullRefresh:(kHSYReflesStatusType)status

@@ -16,45 +16,15 @@
 #import "JSONModel.h"
 #import "UIImageView+UrlString.h"
 #import "HSYNetWorkingManager.h"
+#import "CXACMHomePageJSONModel.h"
+#import "NSObject+JSONModel.h"
+#import "NSDate+Timestamp.h"
+#import "NSString+Size.h"
 
 static CGFloat offsetLeft = 22.0f;
 static CGFloat top = 39.0f;
 static CGFloat imgH = 63.0f;
 static CGFloat imgBottom = 11.0f;
-
-@interface CXAMCHomePageInfo : JSONModel
-
-@property (nonatomic, strong) NSString<Optional> *title;
-@property (nonatomic, strong) NSNumber<Optional> *timesmpe;
-@property (nonatomic, strong) NSString<Optional> *source;
-@property (nonatomic, strong) NSString<Optional> *imageUrl;
-
-@end
-
-@implementation CXAMCHomePageInfo
-
-@end
-
-@interface CXAMCHomePageTableTitleLabel : UILabel
-
-@end
-
-@implementation CXAMCHomePageTableTitleLabel
-
-- (CGRect)textRectForBounds:(CGRect)bounds limitedToNumberOfLines:(NSInteger)numberOfLines
-{
-    CGRect textRect = [super textRectForBounds:bounds limitedToNumberOfLines:numberOfLines];
-    textRect.origin.y = bounds.origin.y;
-    return textRect;
-}
-
-- (void)drawTextInRect:(CGRect)rect
-{
-    CGRect actualRect = [self textRectForBounds:rect limitedToNumberOfLines:self.numberOfLines];
-    [super drawTextInRect:actualRect];
-}
-
-@end
 
 @interface CXAMCHomePageTableHeaderView : UIView
 
@@ -67,13 +37,13 @@ static CGFloat imgBottom = 11.0f;
 
 @implementation CXAMCHomePageTableHeaderView
 
-- (instancetype)initWithInfo:(CXAMCHomePageInfo *)info
+- (instancetype)initWithInfo:(CXACMHomePageItemJSONModel *)info
 {
     UIFont *tagFont = UI_FONT_SIZE(26);
     CGFloat tagOffsetBottom = 19.0f;
     CGFloat headerOffsetH = 75.0f;
     CGFloat headerOffsetBottom = 13.0f;
-    UIFont *titleFont = UI_FONT_SIZE(18);
+    UIFont *titleFont = UI_SYSTEM_FONT_18;
     CGFloat titleOffsetBottom = 11.0f;
     UIFont *sourceFont = UI_SYSTEM_FONT_11;
     
@@ -100,7 +70,7 @@ static CGFloat imgBottom = 11.0f;
                                                          @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : titleFont,
                                                          @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentLeft),
                                                          @(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake(tagLabel.x, self.headerImageView.bottom + headerOffsetBottom , self.headerImageView.width, titleFont.pointSize)],
-                                                         @(kHSYCocoaKitOfLabelPropretyTypeText) : info.title,
+                                                         @(kHSYCocoaKitOfLabelPropretyTypeText) : info.tOPIC,
                                                          }];
         [self addSubview:self.titleLabel];
         
@@ -109,7 +79,7 @@ static CGFloat imgBottom = 11.0f;
                                                           @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : sourceFont,
                                                           @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentLeft),
                                                           @(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake(tagLabel.x, self.titleLabel.bottom + titleOffsetBottom , self.headerImageView.width / 2, sourceFont.pointSize)],
-                                                          @(kHSYCocoaKitOfLabelPropretyTypeText) : info.source,
+                                                          @(kHSYCocoaKitOfLabelPropretyTypeText) : [NSString stringWithFormat:@"来源:%@/%@", info.sOURCE, info.aUTHOR],
                                                           }];
         [self addSubview:self.sourceLabel];
         
@@ -117,7 +87,7 @@ static CGFloat imgBottom = 11.0f;
                                                         @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : HexColorString(@"999999"),
                                                         @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : sourceFont,
                                                         @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentRight),
-                                                        @(kHSYCocoaKitOfLabelPropretyTypeText) : info.timesmpe.stringValue,
+                                                        @(kHSYCocoaKitOfLabelPropretyTypeText) : info.sHOW_TIME,
                                                         }];
         [self addSubview:self.timeLabel];
         [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -136,11 +106,11 @@ static CGFloat imgBottom = 11.0f;
 
 @interface CXAMCHomePageTableCell : HSYBaseTableViewCell
 
-@property (nonatomic, strong) CXAMCHomePageTableTitleLabel *titleLabel;
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *sourceLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIImageView *headerImageView;
-@property (nonatomic, strong, setter=setHomePageInfo:) CXAMCHomePageInfo *info;
+@property (nonatomic, strong, setter=setHomePageInfo:) CXACMHomePageItemJSONModel *info;
 
 + (CGFloat)realHeight;
 
@@ -163,8 +133,14 @@ static CGFloat imgBottom = 11.0f;
             make.size.mas_equalTo(imageSize);
         }];
         
-        self.titleLabel = [[CXAMCHomePageTableTitleLabel alloc] initWithFrame:CGRectMake(offsetLeft, top, (IPHONE_WIDTH - (offsetLeft*2 + imageSize.width + imageOffsetLeft)), UI_SYSTEM_FONT_14.pointSize * 2)];
-        self.titleLabel.numberOfLines = 2;
+        UIFont *titleFont = UI_SYSTEM_FONT_18;
+        NSValue *titleValue = [NSValue valueWithCGRect:CGRectMake(offsetLeft, top, (IPHONE_WIDTH - (offsetLeft*2 + imageSize.width + imageOffsetLeft)), 0.0f)];
+        self.titleLabel = [NSObject createLabelByParam:@{
+                                                         @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : titleFont,
+                                                         @(kHSYCocoaKitOfLabelPropretyTypeFrame) : titleValue,
+                                                         }];
+        self.titleLabel.numberOfLines = 0;
+        self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         [self.contentView addSubview:self.titleLabel];
         
         self.timeLabel = [NSObject createLabelByParam:@{
@@ -200,39 +176,44 @@ static CGFloat imgBottom = 11.0f;
     return (top + imgH + imgBottom + UI_SYSTEM_FONT_11.pointSize);
 }
 
-- (void)setHomePageInfo:(CXAMCHomePageInfo *)info
+- (void)setHomePageInfo:(CXACMHomePageItemJSONModel *)info
 {
     _info = info;
-    self.titleLabel.text = info.title;
-    self.sourceLabel.text = info.source;
-    self.timeLabel.text = info.timesmpe.stringValue;
-    [self.headerImageView setImageWithUrlString:info.imageUrl];
+    self.titleLabel.text = info.tOPIC;
+    CGSize size = [self.titleLabel.text contentOfSize:self.titleLabel.font
+                                             maxWidth:self.titleLabel.width
+                                            maxHeight:(self.titleLabel.font.pointSize * 2)];
+    self.titleLabel.height = size.height * 2;
+    self.sourceLabel.text = [NSString stringWithFormat:@"来源:%@/%@", info.sOURCE, info.aUTHOR];
+    self.timeLabel.text = info.sHOW_TIME;
+    [self.headerImageView setImageWithUrlString:info.nEWS_IMG_URL];
 }
 
 @end
 
 @interface HSYNetWorkingManager (HomePage)
 
-- (RACSignal *)rac_newsCent:(NSString *)PRT_BLNTYP page:(NSString *)PAGENO;
+- (RACSignal *)rac_newsCent:(NSString *)PRT_BLNTYP page:(NSString *)PAGENO size:(NSString *)RECNUM;
 
 @end
 
 @implementation HSYNetWorkingManager (HomePage)
 
-- (RACSignal *)rac_newsCent:(NSString *)PRT_BLNTYP page:(NSString *)PAGENO
+- (RACSignal *)rac_newsCent:(NSString *)PRT_BLNTYP page:(NSString *)PAGENO size:(NSString *)RECNUM
 {
     NSDictionary *paramter = @{
                                @"PRT_BLNTYP" : PRT_BLNTYP,
                                @"PAGENO"     : PAGENO,
+                               @"RECNUM"     : RECNUM,
                                };
-    return [self.httpSessionManager hsy_rac_postRequest:@"News/newsCent" parameters:paramter];
+    return [self.httpSessionManager hsy_rac_getRequest:@"News/newsList" parameters:paramter];
 }
 
 @end
 
 @interface CXAMCHomePageModel : HSYBaseTableModel
 
-@property (nonatomic, strong) CXAMCHomePageInfo *headerInfo;
+@property (nonatomic, strong) CXACMHomePageItemJSONModel *headerInfo;
 
 @end
 
@@ -241,20 +222,13 @@ static CGFloat imgBottom = 11.0f;
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.headerInfo = [[CXAMCHomePageInfo alloc] init];
-        self.headerInfo.title = @"公安部提醒：这10种“投资、理财”项目需谨慎！";
-        self.headerInfo.source = @"来源：央广网/马文静";
-        self.headerInfo.timesmpe = @(2921024090);
-        self.headerInfo.imageUrl = @"";
-        
-        for (NSInteger i = 0; i < 10; i ++) {
-            CXAMCHomePageInfo *info = [[CXAMCHomePageInfo alloc] init];
-            info.title = [NSString stringWithFormat:@"%ld--%d", i , arc4random()%100000];
-            info.source = [NSString stringWithFormat:@"来源%ld--%d", i , arc4random()%100000];
-            info.timesmpe = @(arc4random()%100000);
-            info.imageUrl = @"";
-            [self.hsy_datas addObject:info];
-        }
+        self.headerInfo = [[CXACMHomePageItemJSONModel alloc] init];
+        self.headerInfo.tOPIC = @"公安部提醒：这10种“投资、理财”项目需谨慎！";
+        self.headerInfo.sOURCE = @"央广网";
+        self.headerInfo.aUTHOR = @"马文静";
+        self.headerInfo.sHOW_TIME = [NSDate date].stringyyyyMMddHHmmss;
+        self.headerInfo.nEWS_IMG_URL = @"";
+        [self hsy_updateSize:15];
     }
     return self;
 }
@@ -263,10 +237,16 @@ static CGFloat imgBottom = 11.0f;
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         [self hsy_refreshToPullDown:^RACSignal *{
-            return [[HSYNetWorkingManager shareInstance] rac_newsCent:@"04" page:[NSString stringWithFormat:@"%ld", self.page]];
+            return [[HSYNetWorkingManager shareInstance] rac_newsCent:@"04" page:[NSString stringWithFormat:@"%ld", self.page] size:[NSString stringWithFormat:@"%ld", self.size]];
         } toMap:^NSMutableArray *(RACTuple *tuple) {
             NSMutableArray *array = [[NSMutableArray alloc] init];
+            CXACMHomePageJSONModel *model = [NSObject hsy_resultObjectToJSONModelWithClasses:[CXACMHomePageJSONModel class] json:tuple.second];
+            for (CXACMHomePageItemJSONModel *obj in model.message.Body.List.Item) {
+                [array addObject:obj];
+            }
             return array;
+        } subscriberNext:^(id x) {
+            [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{}];
     }];
@@ -276,10 +256,16 @@ static CGFloat imgBottom = 11.0f;
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         [self hsy_refreshToPullUp:^RACSignal *{
-            return [[HSYNetWorkingManager shareInstance] rac_newsCent:@"04" page:[NSString stringWithFormat:@"%ld", self.page]];
+            return [[HSYNetWorkingManager shareInstance] rac_newsCent:@"04" page:[NSString stringWithFormat:@"%ld", self.page] size:[NSString stringWithFormat:@"%ld", self.size]];
         } toMap:^NSMutableArray *(RACTuple *tuple) {
             NSMutableArray *array = [[NSMutableArray alloc] init];
+            CXACMHomePageJSONModel *model = [NSObject hsy_resultObjectToJSONModelWithClasses:[CXACMHomePageJSONModel class] json:tuple.second];
+            for (CXACMHomePageItemJSONModel *obj in model.message.Body.List.Item) {
+                [array addObject:obj];
+            }
             return array;
+        } subscriberNext:^(id x) {
+            [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{}];
     }];
@@ -305,6 +291,8 @@ static CGFloat imgBottom = 11.0f;
     [self firstRequest];
     // Do any additional setup after loading the view.
 }
+
+#pragma mark - UITableViewDelegate, UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

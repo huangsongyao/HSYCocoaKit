@@ -116,6 +116,8 @@
 
 
 //常用系统字号
+#define UI_SYSTEM_FONT_18                                               UI_FONT_SIZE(18)
+#define UI_SYSTEM_FONT_17                                               UI_FONT_SIZE(17)
 #define UI_SYSTEM_FONT_16                                               UI_FONT_SIZE(16)
 #define UI_SYSTEM_FONT_15                                               UI_FONT_SIZE(15)
 #define UI_SYSTEM_FONT_14                                               UI_FONT_SIZE(14)
@@ -127,6 +129,8 @@
 
 
 // 常用系统加粗字号
+#define UI_BOLD_SYSTEM_FONT_18                                          UI_BOLD_FONT_SIZE(18)
+#define UI_BOLD_SYSTEM_FONT_17                                          UI_BOLD_FONT_SIZE(17)
 #define UI_BOLD_SYSTEM_FONT_16                                          UI_BOLD_FONT_SIZE(16)
 #define UI_BOLD_SYSTEM_FONT_15                                          UI_BOLD_FONT_SIZE(15)
 #define UI_BOLD_SYSTEM_FONT_14                                          UI_BOLD_FONT_SIZE(14)
