@@ -54,8 +54,12 @@ static HSYHUDHelper *hsyHUDHelper = nil;
         [HSYHUDHelper hsy_hideAllHUDView];
     }
     
-    MBProgressHUD *hudView = [[MBProgressHUD alloc] initWithWindow:[UIApplication keyWindows]];
-    [[UIApplication keyWindows] addSubview:hudView];
+    UIWindow *window = [UIApplication keyWindows];
+    if (!window) {
+        NSLog(@"\n ---get window failure !----");
+    }
+    MBProgressHUD *hudView = [[MBProgressHUD alloc] initWithWindow:window];
+    [window addSubview:hudView];
     
     switch (type) {
         case kShowHUDViewTypeDefault: {

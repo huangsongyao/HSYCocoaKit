@@ -33,7 +33,8 @@
     if (!validate) {
         return validate;
     }
-    return (self.integerValue >= prefix.integerValue && self.integerValue <= suffix.integerValue);
+    validate = (self.integerValue >= prefix.integerValue && self.integerValue <= suffix.integerValue);
+    return validate;
 }
 
 @end

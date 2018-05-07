@@ -15,11 +15,11 @@
 
 @implementation UIViewController (Alert)
 
-+ (RACSignal *)hsy_rac_showAlertView:(NSString *)title message:(NSString *)message alertActionTitles:(NSArray<NSString *> *)titles
++ (RACSignal *)hsy_rac_showAlertViewController:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message alertActionTitles:(NSArray<NSString *> *)titles
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
-        [[[UIAlertController hsy_rac_showAlertController:title message:message alertActionTitles:titles] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+        [[[UIAlertController hsy_rac_showAlertController:viewController title:title message:message alertActionTitles:titles] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
             [subscriber sendNext:x];
             [subscriber sendCompleted];
         }];
@@ -38,11 +38,11 @@
     }];
 }
 
-+ (RACSignal *)hsy_rac_showSheetView:(NSString *)title message:(NSString *)message sheetActionTitles:(NSArray<NSString *> *)titles
++ (RACSignal *)hsy_rac_showSheetViewController:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message sheetActionTitles:(NSArray<NSString *> *)titles
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
-        [[UIAlertController hsy_rac_showSheetController:title message:message sheetActionTitles:titles] subscribeNext:^(id x) {
+        [[UIAlertController hsy_rac_showSheetController:viewController title:title message:message sheetActionTitles:titles] subscribeNext:^(id x) {
             [subscriber sendNext:x];
             [subscriber sendCompleted];
         }];

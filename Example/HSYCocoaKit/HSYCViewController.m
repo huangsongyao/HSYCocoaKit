@@ -28,7 +28,7 @@ static CGFloat titleLeft = 22.0f;
 
 static NSString *receiveResultString = @"receiveResult";
 
-#define BACKGROUND_COLOR    HexColorString(@"ECECEC");
+#define BACKGROUND_COLOR    HexColorString(@"f7f7f7");
 
 #pragma mark - CXAMCCalculatorInfo
 
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
     CXAMCCalculatorStateTypeInvest  = 14999,     //投资---纯数字
     CXAMCCalculatorStateTypeDate,                //期限---[1, 12]
     CXAMCCalculatorStateTypeRate,                //利率---[1, 100]
-    
+    CXAMCCalculatorStateTypeAgent,               //居间费---纯数字
 };
 
 @interface CXAMCCalculatorInfo : NSObject
@@ -62,7 +62,7 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
                        @{@"title" : @"投资金额", @"text" : @"10000", @"unit" : @"元", @"placeholderString" : @"请输入投资金额", @"hiddenTextField" : @(NO), @"showTriangle" : @(NO), @"state" : [NSString stringWithFormat:@"%@", @(CXAMCCalculatorStateTypeInvest)]},
                        @{@"title" : @"投资期限", @"text" : @"", @"unit" : @"月", @"placeholderString" : @"请输入1-12的数值", @"hiddenTextField" : @(NO), @"showTriangle" : @(YES), @"state" : [NSString stringWithFormat:@"%@", @(CXAMCCalculatorStateTypeDate)]},
                        @{@"title" : @"年化利率", @"text" : @"", @"unit" : @"%", @"placeholderString" : @"请输入1-100的数值", @"hiddenTextField" : @(NO), @"showTriangle" : @(NO), @"state" : [NSString stringWithFormat:@"%@", @(CXAMCCalculatorStateTypeRate)]},
-//                       @{@"title" : @"居间费率", @"text" : @"0", @"unit" : @"%", @"placeholderString" : @"请输入投资金额", @"hiddenTextField" : @(YES), @"showTriangle" : @(NO)},
+//                       @{@"title" : @"居间费率", @"text" : @"0", @"unit" : @"%", @"placeholderString" : @"请输入投资金额", @"hiddenTextField" : @(NO), @"showTriangle" : @(NO), @"state" : [NSString stringWithFormat:@"%@", @(CXAMCCalculatorStateTypeAgent)]},
                        @{@"title" : @"还款方式", @"text" : @"", @"unit" : @"  按月付息，到期还本", @"placeholderString" : @"", @"hiddenTextField" : @(YES), @"showTriangle" : @(NO)},
                        ];
     NSMutableArray *results = [@[] mutableCopy];
@@ -110,29 +110,52 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
 {
     BOOL receiveResult = YES;
     NSString *string = receiveResultString;
+    CGFloat money = 0.0f;
+    CGFloat date = 0.0f;
+    CGFloat rate = 0.0f;
+    CGFloat fee = 0.0f;
+    
     //计算公式：
     for (CXAMCCalculatorInfo *obj in self.hsy_datas) {
-        if ((CXAMCCalculatorStateType)[obj.state integerValue] == CXAMCCalculatorStateTypeInvest) {
-            if (![obj.text regularPureNumber]) {
-                receiveResult = !receiveResult;
-                string = @"投资金额请填入纯数字！";
+        switch ((CXAMCCalculatorStateType)[obj.state integerValue]) {
+            case CXAMCCalculatorStateTypeInvest: {
+                if (![obj.text regularPureNumber]) {
+                    receiveResult = NO;
+                    string = @"投资金额请填入纯数字！";
+                    money = obj.text.doubleValue;
+                    break;
+                }
             }
-        } else if ((CXAMCCalculatorStateType)[obj.state integerValue] == CXAMCCalculatorStateTypeDate ) {
-            BOOL vat = ![obj.text regularPrefixNumber:@"1" suffixNumber:@"12"];
-            if (vat) {
-                receiveResult = !receiveResult;
-                string = @"投资期限必须是1到12之间!";
+                break;
+            case CXAMCCalculatorStateTypeDate: {
+                BOOL vat = [obj.text regularPrefixNumber:@"1" suffixNumber:@"12"];
+                if (!vat) {
+                    receiveResult = NO;
+                    string = @"投资期限必须是1到12之间!";
+                    date = obj.text.doubleValue;
+                    break;
+                }
             }
-        } else if ((CXAMCCalculatorStateType)[obj.state integerValue] == CXAMCCalculatorStateTypeRate) {
-            BOOL vat = ![obj.text regularPrefixNumber:@"1" suffixNumber:@"100"];
-            if (!vat) {
-                receiveResult = !receiveResult;
-                string = @"年化利率必须是1到100之间!";
+                break;
+            case CXAMCCalculatorStateTypeRate: {
+                BOOL vat = [obj.text regularPrefixNumber:@"1" suffixNumber:@"100"];
+                if (!vat) {
+                    receiveResult = NO;
+                    string = @"年化利率必须是1到100之间!";
+                    rate = obj.text.doubleValue / 100.0f;
+                    break;
+                }
             }
-        } else {
-            
+                break;
+            case CXAMCCalculatorStateTypeAgent: {
+                fee = obj.text.doubleValue / 100.0f;
+            }
+                break;
+            default:
+                break;
         }
     }
+    string = [NSString stringWithFormat:@"%@", @(money * rate * date / 12.0f)];
     return @{@(receiveResult) : string};
 }
 
@@ -371,6 +394,8 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
         NSLog(@"result = %@", dic.allValues.firstObject);
         if (![dic.allKeys.firstObject boolValue]) {
             [UIViewController hsy_hudWithMessage:dic.allValues.firstObject];
+        } else {
+            [[[UIViewController hsy_rac_showAlertViewController:self title:@"收益计算结果" message:[NSString stringWithFormat:@"计算结果为:%@", dic.allValues.firstObject] alertActionTitles:@[@"知道了"]] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {}];
         }
     } reset:^(UIButton *button) {
         @strongify(self);
