@@ -32,4 +32,11 @@
  */
 + (RACSignal *)hsy_rac_showSheetView:(NSString *)title message:(NSString *)message sheetActionTitles:(NSArray<NSString *> *)titles;
 
+/**
+ HUD文字提示
+
+ @param message 提示的内容
+ */
++ (void)hsy_hudWithMessage:(NSString *)message;
+
 @end

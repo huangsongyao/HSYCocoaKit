@@ -16,6 +16,9 @@
 #import "JSONModel.h"
 #import "NSObject+Runtime.h"
 #import "UIImage+Canvas.h"
+#import "NSString+Replace.h"
+#import "NSString+Regular.h"
+#import "UIViewController+Alert.h"
 
 static CGFloat textFieldHeight = 43.0f;
 static CGFloat textFieldOffsetBottom = 10.0f;
@@ -23,9 +26,19 @@ static CGFloat textFieldOffsetLeft = 10.0f;
 static CGFloat offset = 30.0f;
 static CGFloat titleLeft = 22.0f;
 
+static NSString *receiveResultString = @"receiveResult";
+
 #define BACKGROUND_COLOR    HexColorString(@"ECECEC");
 
 #pragma mark - CXAMCCalculatorInfo
+
+typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
+    
+    CXAMCCalculatorStateTypeInvest  = 14999,     //投资---纯数字
+    CXAMCCalculatorStateTypeDate,                //期限---[1, 12]
+    CXAMCCalculatorStateTypeRate,                //利率---[1, 100]
+    
+};
 
 @interface CXAMCCalculatorInfo : NSObject
 
@@ -35,6 +48,7 @@ static CGFloat titleLeft = 22.0f;
 @property (nonatomic, copy) NSString *placeholderString;
 @property (nonatomic, strong) NSNumber *hiddenTextField;
 @property (nonatomic, strong) NSNumber *showTriangle;
+@property (nonatomic, strong) NSNumber *state;
 
 + (NSArray<CXAMCCalculatorInfo *> *)calculatorDataSource;
 
@@ -45,9 +59,9 @@ static CGFloat titleLeft = 22.0f;
 + (NSArray<CXAMCCalculatorInfo *> *)calculatorDataSource
 {
     NSArray *array = @[
-                       @{@"title" : @"投资金额", @"text" : @"10000", @"unit" : @"元", @"placeholderString" : @"请输入投资金额", @"hiddenTextField" : @(NO), @"showTriangle" : @(NO)},
-                       @{@"title" : @"投资期限", @"text" : @"", @"unit" : @"月", @"placeholderString" : @"请输入1-12的数值", @"hiddenTextField" : @(NO), @"showTriangle" : @(YES)},
-                       @{@"title" : @"年化利率", @"text" : @"", @"unit" : @"%", @"placeholderString" : @"请输入1-100的数值", @"hiddenTextField" : @(NO), @"showTriangle" : @(NO)},
+                       @{@"title" : @"投资金额", @"text" : @"10000", @"unit" : @"元", @"placeholderString" : @"请输入投资金额", @"hiddenTextField" : @(NO), @"showTriangle" : @(NO), @"state" : [NSString stringWithFormat:@"%@", @(CXAMCCalculatorStateTypeInvest)]},
+                       @{@"title" : @"投资期限", @"text" : @"", @"unit" : @"月", @"placeholderString" : @"请输入1-12的数值", @"hiddenTextField" : @(NO), @"showTriangle" : @(YES), @"state" : [NSString stringWithFormat:@"%@", @(CXAMCCalculatorStateTypeDate)]},
+                       @{@"title" : @"年化利率", @"text" : @"", @"unit" : @"%", @"placeholderString" : @"请输入1-100的数值", @"hiddenTextField" : @(NO), @"showTriangle" : @(NO), @"state" : [NSString stringWithFormat:@"%@", @(CXAMCCalculatorStateTypeRate)]},
 //                       @{@"title" : @"居间费率", @"text" : @"0", @"unit" : @"%", @"placeholderString" : @"请输入投资金额", @"hiddenTextField" : @(YES), @"showTriangle" : @(NO)},
                        @{@"title" : @"还款方式", @"text" : @"", @"unit" : @"  按月付息，到期还本", @"placeholderString" : @"", @"hiddenTextField" : @(YES), @"showTriangle" : @(NO)},
                        ];
@@ -65,6 +79,10 @@ static CGFloat titleLeft = 22.0f;
 
 @interface CXAMCCalculatorModel : HSYBaseTableModel
 
+- (void)hsy_resetDataSource;
+- (void)hsy_updateCalculatorDataSource:(NSIndexPath *)indexPath text:(NSString *)text;
+- (NSDictionary *)hsy_calculatorAnnualInterestRate;
+
 @end
 
 @implementation CXAMCCalculatorModel
@@ -72,9 +90,50 @@ static CGFloat titleLeft = 22.0f;
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.hsy_datas = [NSMutableArray arrayWithArray:[CXAMCCalculatorInfo calculatorDataSource]];
+        [self hsy_resetDataSource];
     }
     return self;
+}
+
+- (void)hsy_resetDataSource
+{
+    self.hsy_datas = [NSMutableArray arrayWithArray:[CXAMCCalculatorInfo calculatorDataSource]];
+}
+
+- (void)hsy_updateCalculatorDataSource:(NSIndexPath *)indexPath text:(NSString *)text
+{
+    CXAMCCalculatorInfo *info = self.hsy_datas[indexPath.row];
+    info.text = text;
+}
+
+- (NSDictionary *)hsy_calculatorAnnualInterestRate
+{
+    BOOL receiveResult = YES;
+    NSString *string = receiveResultString;
+    //计算公式：
+    for (CXAMCCalculatorInfo *obj in self.hsy_datas) {
+        if ((CXAMCCalculatorStateType)[obj.state integerValue] == CXAMCCalculatorStateTypeInvest) {
+            if (![obj.text regularPureNumber]) {
+                receiveResult = !receiveResult;
+                string = @"投资金额请填入纯数字！";
+            }
+        } else if ((CXAMCCalculatorStateType)[obj.state integerValue] == CXAMCCalculatorStateTypeDate ) {
+            BOOL vat = ![obj.text regularPrefixNumber:@"1" suffixNumber:@"12"];
+            if (vat) {
+                receiveResult = !receiveResult;
+                string = @"投资期限必须是1到12之间!";
+            }
+        } else if ((CXAMCCalculatorStateType)[obj.state integerValue] == CXAMCCalculatorStateTypeRate) {
+            BOOL vat = ![obj.text regularPrefixNumber:@"1" suffixNumber:@"100"];
+            if (!vat) {
+                receiveResult = !receiveResult;
+                string = @"年化利率必须是1到100之间!";
+            }
+        } else {
+            
+        }
+    }
+    return @{@(receiveResult) : string};
 }
 
 @end
@@ -219,6 +278,7 @@ static CGFloat titleLeft = 22.0f;
                                                                 @(kHSYCocoaKitOfTextFiledPropretyTypeTextColor) : HexColorString(@"333333"),
                                                                 @(kHSYCocoaKitOfTextFiledPropretyTypeText) : data.text,
                                                                 @(kHSYCocoaKitOfTextFiledPropretyTypePlaceholderString) : data.placeholderString,
+                                                                @(kHSYCocoaKitOfTextFiledPropretyTypeKeyboardType) : @(UIKeyboardTypePhonePad),
                                                                 } didChangeSubscribeNext:changed];
             self.textField.frame = CGRectMake(textFieldOffsetLeft, 0, (self.width - textFieldOffsetLeft - self.contentLabel.width), self.height);
             [self addSubview:self.textField];
@@ -233,9 +293,10 @@ static CGFloat titleLeft = 22.0f;
 
 #pragma mark - CXAMCCalculatorTableCellDelegate
 
+@class CXAMCCalculatorTableCell;
 @protocol CXAMCCalculatorTableCellDelegate <NSObject>
 
-- (void)changedDidText:(NSString *)text;
+- (void)changedDidText:(NSString *)text object:(CXAMCCalculatorTableCell *)cell;
 
 @end
 
@@ -270,8 +331,8 @@ static CGFloat titleLeft = 22.0f;
         @weakify(self);
         self.textField = [[CXAMCCalculatorTableComponentView alloc] initWithDataSource:info masLeft:(self.titleLabel.right + textFieldOffsetLeft) changedText:^(NSString *text) {
             @strongify(self);
-            if (self.delegate && [self.delegate respondsToSelector:@selector(changedDidText:)]) {
-                [self.delegate changedDidText:text];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(changedDidText:object:)]) {
+                [self.delegate changedDidText:text object:self];
             }
         }];
         [self.contentView addSubview:self.textField];
@@ -306,9 +367,16 @@ static CGFloat titleLeft = 22.0f;
     self.tableView.tableFooterView = [[CXAMCCalculatorTableFooterView alloc] initWithCalculator:^(UIButton *button) {
         @strongify(self);
         [self.view endEditing:YES];
+        NSDictionary *dic = [(CXAMCCalculatorModel *)self.hsy_viewModel hsy_calculatorAnnualInterestRate];
+        NSLog(@"result = %@", dic.allValues.firstObject);
+        if (![dic.allKeys.firstObject boolValue]) {
+            [UIViewController hsy_hudWithMessage:dic.allValues.firstObject];
+        }
     } reset:^(UIButton *button) {
         @strongify(self);
         [self.view endEditing:YES];
+        [(CXAMCCalculatorModel *)self.hsy_viewModel hsy_resetDataSource];
+        [self.tableView reloadData];
     }];
     // Do any additional setup after loading the view.
 }
@@ -342,9 +410,10 @@ static CGFloat titleLeft = 22.0f;
 
 #pragma mark - CXAMCCalculatorTableCellDelegate
 
-- (void)changedDidText:(NSString *)text
+- (void)changedDidText:(NSString *)text object:(CXAMCCalculatorTableCell *)cell
 {
-    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    [(CXAMCCalculatorModel *)self.hsy_viewModel hsy_updateCalculatorDataSource:indexPath text:text];
 }
 
 - (void)didReceiveMemoryWarning {

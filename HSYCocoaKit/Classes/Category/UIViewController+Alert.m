@@ -63,4 +63,11 @@
     }];
 }
 
+#pragma mark - HUD
+
++ (void)hsy_hudWithMessage:(NSString *)message
+{
+    [HSYHUDHelper hsy_showHUDViewForMessage:message];
+}
+
 @end
