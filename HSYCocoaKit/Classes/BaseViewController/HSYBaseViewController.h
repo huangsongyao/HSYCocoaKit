@@ -57,4 +57,9 @@
  */
 - (void)hsy_addCustomNavigationBar;
 
+/**
+ hsy_addEndEditedKeyboard设置为YES后，当单机手势关闭键盘后会调用本方法，子类如有需要可重写本方法
+ */
+- (void)hsy_endEditing;
+
 @end

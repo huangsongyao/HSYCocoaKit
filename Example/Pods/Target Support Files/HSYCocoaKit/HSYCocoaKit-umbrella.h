@@ -50,6 +50,7 @@
 #import "UIScrollView+Page.h"
 #import "UIView+DrawPictures.h"
 #import "UIView+Frame.h"
+#import "UIView+Gestures.h"
 #import "UIViewController+Alert.h"
 #import "UIViewController+Device.h"
 #import "UIViewController+Keyboard.h"

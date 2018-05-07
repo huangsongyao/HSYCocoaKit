@@ -302,10 +302,13 @@ static CGFloat titleLeft = 22.0f;
     [super viewDidLoad];
     self.view.backgroundColor = BACKGROUND_COLOR;
     self.tableView.tableHeaderView = [[CXAMCCalculatorTableHeaderView alloc] init];
+    @weakify(self);
     self.tableView.tableFooterView = [[CXAMCCalculatorTableFooterView alloc] initWithCalculator:^(UIButton *button) {
-        
+        @strongify(self);
+        [self.view endEditing:YES];
     } reset:^(UIButton *button) {
-        
+        @strongify(self);
+        [self.view endEditing:YES];
     }];
     // Do any additional setup after loading the view.
 }

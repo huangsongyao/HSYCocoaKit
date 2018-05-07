@@ -10,8 +10,13 @@
 #import "NSError+Message.h"
 #import "PublicMacroFile.h"
 #import "UIView+Frame.h"
+#import "UIView+Gestures.h"
 
-#define DEFAULT_NAVIGATION_BAR_HEIGHT           64.0f
+#define DEFAULT_NAVIGATION_BAR_HEIGHT           IPHONE_BAR_HEIGHT
+
+@interface HSYBaseViewController () <UIGestureRecognizerDelegate>
+
+@end
 
 @implementation HSYBaseViewController
 
@@ -54,8 +59,16 @@
     if (self.hsy_addKeyboardObserver) {
         //键盘监听
         [self observerToKeyboardDidChange:nil subscribeCompleted:^(CGRect frameBegin, CGRect frameEnd) {
+            @strongify(self);
             HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeObserverKeyboard subscribeContents:@[[NSValue valueWithCGRect:frameBegin], [NSValue valueWithCGRect:frameEnd]]];
             [self.hsy_viewModel.subject sendNext:object];
+        }];
+    }
+    if (self.hsy_addEndEditedKeyboard) {
+        [self.view hsy_addTapGestureRecognizerDelegate:self subscribeNext:^(UITapGestureRecognizer *gesture) {
+            @strongify(self);
+            [self.view endEditing:YES];
+            [self hsy_endEditing];
         }];
     }
     //如果开启了自定义转场，则添加定制化的navigationBar
@@ -66,6 +79,8 @@
         }
     }
 }
+
+#pragma mark - State Code
 
 - (kHSYHUDModelCodeType)hsy_requestStateCodeWithStateCode:(id)stateCode
 {
@@ -160,5 +175,11 @@
     _customNavigationBar = nil;
 }
 
+#pragma mark - End Editing
+
+- (void)hsy_endEditing
+{
+    //子类如有需要在键盘关闭后实现逻辑时，请重写本方法
+}
 
 @end

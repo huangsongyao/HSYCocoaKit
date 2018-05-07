@@ -11,11 +11,13 @@
 
 #import "HSYBaseCollectionReusableView.h"
 #import "HSYBaseCollectionViewCell.h"
+#import "HSYBaseTabBarItemCollectionViewCell.h"
 #import "HSYBaseTableViewCell.h"
 #import "HSYBaseCollectionModel.h"
 #import "HSYBaseModel.h"
 #import "HSYBaseRefleshModel.h"
 #import "HSYBaseSegmentedPageControlModel.h"
+#import "HSYBaseTabBarModel.h"
 #import "HSYBaseTableModel.h"
 #import "HSYBaseWebModel.h"
 #import "HSYCocoaKitRACSubscribeNotification.h"
@@ -30,6 +32,7 @@
 #import "NSBundle+PrivateFileResource.h"
 #import "NSDate+Timestamp.h"
 #import "NSFileManager+Finder.h"
+#import "NSMutableArray+BasicAlgorithm.h"
 #import "NSObject+JSONModelForRuntime.h"
 #import "NSObject+Property.h"
 #import "NSObject+Runtime.h"
@@ -46,10 +49,12 @@
 #import "UIScrollView+Page.h"
 #import "UIView+DrawPictures.h"
 #import "UIView+Frame.h"
+#import "UIView+Gestures.h"
 #import "UIViewController+Alert.h"
 #import "UIViewController+Device.h"
 #import "UIViewController+Keyboard.h"
 #import "UIViewController+NavigationItem.h"
+#import "UIViewController+Runtime.h"
 #import "HSYBaseCustomButton.h"
 #import "HSYBaseSegmentedPageControl.h"
 #import "HSYBaseCustomNavigationController.h"
@@ -96,6 +101,6 @@
 #import "GCDAsyncSocket+RACSignal.h"
 #import "HSYCocoaKitSocketManager.h"
 #import "HSYCocoaKitSocketRACSignal.h"
-#import "HSYBaseTabBarViewController.h"
+
 
 #endif /* HSYCocoaKit_h */
