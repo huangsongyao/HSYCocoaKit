@@ -14,6 +14,12 @@
 #import "HSYBaseTableViewCell.h"
 #import "NSObject+Runtime.h"
 #import "UIImageView+UrlString.h"
+#import "UIImage+Canvas.h"
+#import "HSYNetWorkingManager.h"
+
+#define BACKGROUND_COLOR        HexColorString(@"f7f7f7");
+
+#pragma mark - CXAMCPersonalHeaderInfo
 
 @interface CXAMCPersonalHeaderInfo : NSObject
 
@@ -39,6 +45,8 @@
 }
 
 @end
+
+#pragma mark - CXAMCPersonalBodyInfo
 
 @interface CXAMCPersonalBodyInfo : NSObject
 
@@ -69,6 +77,7 @@
 
 @end
 
+#pragma mark - CXAMCPersonalHeaderComponentView
 
 @interface CXAMCPersonalHeaderComponentView : UIView
 
@@ -94,6 +103,7 @@
                                                            @(kHSYCocoaKitOfLabelPropretyTypeMaxSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH/2, UI_SYSTEM_FONT_13.pointSize)],
                                                            }];
         self.contentLabel.origin = CGPointMake(self.iconImageView.right + 5.0f, 0);
+        self.iconImageView.center = CGPointMake(self.iconImageView.center.x, self.contentLabel.center.y);
         [self addSubview:self.contentLabel];
         
         self.size = CGSizeMake(self.contentLabel.right, self.contentLabel.height);
@@ -102,6 +112,8 @@
 }
 
 @end
+
+#pragma mark - CXAMCPersonalTableHeaderView
 
 @interface CXAMCPersonalTableHeaderView : UIView
 
@@ -141,7 +153,7 @@
         [self.userMemberImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.headerImageView.mas_centerX);
             make.top.equalTo(self.headerImageView.mas_bottom).offset(-8.0f);
-            make.size.mas_equalTo(CGSizeMake(size, 16.0f));
+            make.size.mas_equalTo(CGSizeMake(size, image.size.height));
         }];
         
         self.userNameLabel = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeText) : info.userName, @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : WHITE_COLOR, @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : UI_BOLD_SYSTEM_FONT_18, @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentCenter),}];
@@ -188,6 +200,34 @@
 
 @end
 
+#pragma mark - CXAMCPersonalTableFooterView
+
+@interface CXAMCPersonalTableFooterView : UIView
+
+@end
+
+@implementation CXAMCPersonalTableFooterView
+
+- (instancetype)initWithLogout:(void(^)(UIButton *button))logout
+{
+    if (self = [super initWithSize:CGSizeMake(IPHONE_WIDTH, textFieldHeight * 3)]) {
+        self.backgroundColor = BACKGROUND_COLOR;
+        UIButton *logoutButton = [CXAMCPersonalViewController logoutButton:@"退出登录" clickedOn:logout];
+        [self addSubview:logoutButton];
+        [logoutButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.mas_left).offset(titleLeft);
+            make.bottom.equalTo(self.mas_bottom);
+            make.height.equalTo(@(textFieldHeight));
+            make.right.equalTo(self.mas_right).offset(-titleLeft);
+        }];
+    }
+    return self;
+}
+
+@end
+
+#pragma mark - CXAMCPersonalTableCell
+
 @interface CXAMCPersonalTableCell : HSYBaseTableViewCell
 
 @property (nonatomic, strong) UIImageView *iconImageView;
@@ -202,7 +242,7 @@
 - (instancetype)initWithData:(CXAMCPersonalBodyInfo *)data
 {
     if (self = [super init]) {
-        CGFloat left = 22.0f;
+        CGFloat left = titleLeft;
         UIImage *allow = [UIImage imageNamed:@"autobid_icon_right"];
         self.allowImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : allow, @(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : allow}];
         [self.contentView addSubview:self.allowImageView];
@@ -239,12 +279,12 @@
         }];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectZero];
-        line.backgroundColor = HexColorString(@"f7f7f7");
+        line.backgroundColor = BACKGROUND_COLOR;
         [self.contentView addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView.mas_right);
             make.bottom.equalTo(self.contentView.mas_bottom);
-            make.height.equalTo(@(0.6));
+            make.height.equalTo(@(1.0f));
             make.left.equalTo(self.iconImageView.mas_left);
         }];
     }
@@ -252,6 +292,20 @@
 }
 
 @end
+
+#pragma mark - HSYNetWorkingManager (Personal)
+
+@interface HSYNetWorkingManager (Personal)
+
+@end
+
+@implementation HSYNetWorkingManager (Personal)
+
+
+
+@end
+
+#pragma mark - CXAMCPersonalTableModel
 
 @interface CXAMCPersonalTableModel : HSYBaseTableModel
 
@@ -272,6 +326,8 @@
 
 @end
 
+#pragma mark - CXAMCPersonalViewController
+
 @interface CXAMCPersonalViewController ()
 
 @end
@@ -281,9 +337,13 @@
 - (void)viewDidLoad {
     self.tableViewStyle = UITableViewStyleGrouped;
     self.hsy_viewModel = [[CXAMCPersonalTableModel alloc] init];
+    self.scrollEnabled = @(NO);
     self.lineHidden = @(YES);
     [super viewDidLoad];
     self.tableView.tableHeaderView = [[CXAMCPersonalTableHeaderView alloc] initWithHeaderData:[(CXAMCPersonalTableModel *)self.hsy_viewModel headerInfo]];
+    self.tableView.tableFooterView = [[CXAMCPersonalTableFooterView alloc] initWithLogout:^(UIButton *button) {
+        
+    }];
     // Do any additional setup after loading the view.
 }
 
@@ -311,7 +371,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-    view.backgroundColor = WHITE_COLOR;
+    view.backgroundColor = BACKGROUND_COLOR;
     return view;
 }
 
@@ -323,6 +383,22 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.0001f;
+}
+
++ (UIButton *)logoutButton:(NSString *)title clickedOn:(void(^)(UIButton *button))clicked
+{
+    NSDictionary *resetDic = @{
+                               @(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName) : [UIImage imageWithFillColor:WHITE_COLOR],
+                               @(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : title,
+                               @(kHSYCocoaKitOfButtonPropretyTypeHighTitle) : title,
+                               @(kHSYCocoaKitOfButtonPropretyTypeTitleFont) : UI_SYSTEM_FONT_18,
+                               @(kHSYCocoaKitOfButtonPropretyTypeTitleColor) : HexColorString(@"ca4526"),
+                               @(kHSYCocoaKitOfButtonPropretyTypeCornerRadius) : @(2.0f),
+                               };
+    UIButton *logoutButton = [NSObject createButtonByParam:resetDic clickedOnSubscribeNext:clicked];
+    logoutButton.layer.borderWidth = 1.0f;
+    logoutButton.layer.borderColor = HexColorString(@"ca4526").CGColor;
+    return logoutButton;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,6 +8,11 @@
 
 #import "HSYBaseTableViewController.h"
 
+static CGFloat textFieldHeight = 43.0f;
+static CGFloat titleLeft = 22.0f;
+
 @interface CXAMCPersonalViewController : HSYBaseTableViewController
+
++ (UIButton *)logoutButton:(NSString *)title clickedOn:(void(^)(UIButton *button))clicked;
 
 @end

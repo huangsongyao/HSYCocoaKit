@@ -19,12 +19,11 @@
 #import "NSString+Replace.h"
 #import "NSString+Regular.h"
 #import "UIViewController+Alert.h"
+#import "CXAMCPersonalViewController.h"
 
-static CGFloat textFieldHeight = 43.0f;
 static CGFloat textFieldOffsetBottom = 10.0f;
 static CGFloat textFieldOffsetLeft = 10.0f;
 static CGFloat offset = 30.0f;
-static CGFloat titleLeft = 22.0f;
 
 static NSString *receiveResultString = @"receiveResult";
 
@@ -236,17 +235,7 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
             make.top.equalTo(self.mas_top).offset(offset - textFieldOffsetBottom);
         }];
         
-        NSDictionary *resetDic = @{
-                                   @(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName) : [UIImage imageWithFillColor:WHITE_COLOR],
-                                   @(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : @"重置",
-                                   @(kHSYCocoaKitOfButtonPropretyTypeHighTitle) : @"重置",
-                                   @(kHSYCocoaKitOfButtonPropretyTypeTitleFont) : UI_SYSTEM_FONT_18,
-                                   @(kHSYCocoaKitOfButtonPropretyTypeTitleColor) : HexColorString(@"ca4526"),
-                                   @(kHSYCocoaKitOfButtonPropretyTypeCornerRadius) : @(2.0f),
-                                   };
-        UIButton *resetButton = [NSObject createButtonByParam:resetDic clickedOnSubscribeNext:reset];
-        resetButton.layer.borderWidth = 1.0f;
-        resetButton.layer.borderColor = HexColorString(@"ca4526").CGColor;
+        UIButton *resetButton = [CXAMCPersonalViewController logoutButton:@"重置" clickedOn:reset];
         [self addSubview:resetButton];
         [resetButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(calculatorButton.mas_bottom).offset(textFieldOffsetBottom);

@@ -26,6 +26,8 @@ static CGFloat top = 39.0f;
 static CGFloat imgH = 63.0f;
 static CGFloat imgBottom = 11.0f;
 
+#pragma mark - CXAMCHomePageTableHeaderView
+
 @interface CXAMCHomePageTableHeaderView : UIView
 
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -103,6 +105,8 @@ static CGFloat imgBottom = 11.0f;
 }
 
 @end
+
+#pragma mark - CXAMCHomePageTableCell
 
 @interface CXAMCHomePageTableCell : HSYBaseTableViewCell
 
@@ -191,6 +195,8 @@ static CGFloat imgBottom = 11.0f;
 
 @end
 
+#pragma mark - HSYNetWorkingManager (HomePage)
+
 @interface HSYNetWorkingManager (HomePage)
 
 - (RACSignal *)rac_newsCent:(NSString *)PRT_BLNTYP page:(NSString *)PAGENO size:(NSString *)RECNUM;
@@ -210,6 +216,8 @@ static CGFloat imgBottom = 11.0f;
 }
 
 @end
+
+#pragma mark - CXAMCHomePageModel
 
 @interface CXAMCHomePageModel : HSYBaseTableModel
 
@@ -272,6 +280,8 @@ static CGFloat imgBottom = 11.0f;
 }
 
 @end
+
+#pragma mark - 
 
 @interface HSYDViewController ()
 
