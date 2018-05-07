@@ -119,43 +119,45 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
     for (CXAMCCalculatorInfo *obj in self.hsy_datas) {
         switch ((CXAMCCalculatorStateType)[obj.state integerValue]) {
             case CXAMCCalculatorStateTypeInvest: {
+                money = obj.text.integerValue;
                 if (![obj.text regularPureNumber]) {
                     receiveResult = NO;
                     string = @"投资金额请填入纯数字！";
-                    money = obj.text.doubleValue;
                     break;
                 }
             }
                 break;
             case CXAMCCalculatorStateTypeDate: {
                 BOOL vat = [obj.text regularPrefixNumber:@"1" suffixNumber:@"12"];
+                date = obj.text.integerValue;
                 if (!vat) {
                     receiveResult = NO;
                     string = @"投资期限必须是1到12之间!";
-                    date = obj.text.doubleValue;
                     break;
                 }
             }
                 break;
             case CXAMCCalculatorStateTypeRate: {
+                rate = ((CGFloat)obj.text.integerValue) / 100.0f;
                 BOOL vat = [obj.text regularPrefixNumber:@"1" suffixNumber:@"100"];
                 if (!vat) {
                     receiveResult = NO;
                     string = @"年化利率必须是1到100之间!";
-                    rate = obj.text.doubleValue / 100.0f;
                     break;
                 }
             }
                 break;
             case CXAMCCalculatorStateTypeAgent: {
-                fee = obj.text.doubleValue / 100.0f;
+                fee = ((CGFloat)obj.text.integerValue) / 100.0f;
             }
                 break;
             default:
                 break;
         }
     }
-    string = [NSString stringWithFormat:@"%@", @(money * rate * date / 12.0f)];
+    if (receiveResult) {
+        string = [NSString stringWithFormat:@"%@", @(money * rate * date / 12.0f)];
+    }
     return @{@(receiveResult) : string};
 }
 
@@ -395,7 +397,7 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
         if (![dic.allKeys.firstObject boolValue]) {
             [UIViewController hsy_hudWithMessage:dic.allValues.firstObject];
         } else {
-            [[[UIViewController hsy_rac_showAlertViewController:self title:@"收益计算结果" message:[NSString stringWithFormat:@"计算结果为:%@", dic.allValues.firstObject] alertActionTitles:@[@"知道了"]] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {}];
+            [[[UIViewController hsy_rac_showAlertViewController:self title:@"收益计算结果" message:[NSString stringWithFormat:@"计算结果为:%@元", dic.allValues.firstObject] alertActionTitles:@[@"知道了"]] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {}];
         }
     } reset:^(UIButton *button) {
         @strongify(self);
