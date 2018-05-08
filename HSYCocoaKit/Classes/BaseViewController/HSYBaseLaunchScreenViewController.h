@@ -21,6 +21,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitLaunchScreenSize) {
 
 @interface HSYBaseLaunchScreenViewController : UIViewController
 
+@property (nonatomic, strong) UIImage *placeholderImage;
+
 /**
  初始化，入参格式为：@{
                     @(kHSYCocoaKitLaunchScreenSize_3_5_Inch) : @"kHSYCocoaKitLaunchScreenSize_3_5_Inch对应的尺寸的启动图",
@@ -38,5 +40,17 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitLaunchScreenSize) {
 + (instancetype)initWithLaunchScreens:(NSDictionary<NSNumber *,NSString *> *)launchScreens
                         networkSiganl:(RACSignal *)network
                        subscriberNext:(void(^)(id sendNext, id<UIApplicationDelegate> appDelegate, NSError *sendError))next;
+
+/**
+ 初始化，传入完整的网络图片的远端地址和首个配置请求
+
+ @param urlString 用于显示的远端图片地址
+ @param network 首个配置请求
+ @param next 请求回调事件
+ @return self
+ */
++ (instancetype)initWithRequestLaunchScreens:(NSString *)urlString
+                               networkSiganl:(RACSignal *)network
+                              subscriberNext:(void(^)(id sendNext, id<UIApplicationDelegate> appDelegate, NSError *sendError))next;
 
 @end

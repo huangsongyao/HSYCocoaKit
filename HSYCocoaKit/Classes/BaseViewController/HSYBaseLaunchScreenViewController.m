@@ -10,11 +10,13 @@
 #import "NSObject+UIKit.h"
 #import "PublicMacroFile.h"
 #import "UIApplication+Device.h"
+#import "UIImageView+UrlString.h"
 
 @interface HSYBaseLaunchScreenViewController ()
 
 @property (nonatomic, strong) UIImageView *launchScreenImageView;
 @property (nonatomic, strong, readonly) NSDictionary<NSNumber *,NSString *> *launchScreens;
+@property (nonatomic, copy) NSString *urlString;
 
 @end
 
@@ -37,6 +39,23 @@
     return launchScreenViewController;
 }
 
++ (instancetype)initWithRequestLaunchScreens:(NSString *)urlString
+                               networkSiganl:(RACSignal *)network
+                              subscriberNext:(void(^)(id sendNext, id<UIApplicationDelegate> appDelegate, NSError *sendError))next
+{
+    HSYBaseLaunchScreenViewController *launchScreenViewController = [[HSYBaseLaunchScreenViewController alloc] initWithLaunchScreens:@{}];
+    launchScreenViewController.urlString = urlString;
+    [network subscribeNext:^(id x) {
+        if (next) {
+            next(x, [UIApplication appDelegate], nil);
+        }
+    } error:^(NSError *error) {
+        if (next) {
+            next(nil, [UIApplication appDelegate], error);
+        }
+    }];
+    return launchScreenViewController;
+}
 
 - (instancetype)initWithLaunchScreens:(NSDictionary<NSNumber *,NSString *> *)launchScreens
 {
@@ -48,12 +67,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSAssert(self.launchScreens != nil, @"必须含有launchScreens的入参");
+
     kHSYCocoaKitLaunchScreenSize launchScreenSize = (kHSYCocoaKitLaunchScreenSize)IPHONE_HEIGHT;
     UIImage *image = [UIImage imageNamed:self.launchScreens[@(launchScreenSize)]];
     self.launchScreenImageView = [[UIImageView alloc] initWithImage:image highlightedImage:image];
     self.launchScreenImageView.frame = self.view.bounds;
+    if (!image) {
+        [self.launchScreenImageView setImageWithUrlString:self.urlString placeholderImage:self.placeholderImage];
+    }
     [self.view addSubview:self.launchScreenImageView];
     
     // Do any additional setup after loading the view.
