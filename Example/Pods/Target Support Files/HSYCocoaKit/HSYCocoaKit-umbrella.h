@@ -39,7 +39,6 @@
 #import "NSObject+Runtime.h"
 #import "NSObject+UIKit.h"
 #import "NSString+Regular.h"
-#import "NSString+Regular的副本.h"
 #import "NSString+Replace.h"
 #import "NSString+Size.h"
 #import "UIApplication+Device.h"
