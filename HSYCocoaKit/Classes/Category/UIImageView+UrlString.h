@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "UIImageView+WebCache.h"
+#import "SDWebImageManager.h"
 
 @interface UIImageView (UrlString)
 
