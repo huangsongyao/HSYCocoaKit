@@ -14,10 +14,11 @@
 + (UIImage *)imageForBundle:(NSString *)imageName
 {
     NSBundle *bundle = [NSBundle bundleForClass:[HSYBaseViewController class]];
-    NSString *bundleName = @"HSYCocoaKit";//bundle.infoDictionary[@"CFBundleName"];
+    NSString *bundleName = bundle.infoDictionary[@"CFBundleName"];
     NSURL *bundleURL = [bundle URLForResource:bundleName withExtension:@"bundle"];
     if (!bundleURL) {
-        return nil;
+        bundleName = @"HSYCocoaKit";
+        bundleURL = [bundle URLForResource:bundleName withExtension:@"bundle"];
     }
     NSBundle *resourceBundle = [NSBundle bundleWithURL:bundleURL];
     UIImage *image = [UIImage imageNamed:imageName
