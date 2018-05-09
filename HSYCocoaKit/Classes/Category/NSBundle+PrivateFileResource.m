@@ -12,7 +12,6 @@
 
 + (UIImage *)imageForBundle:(NSString *)imageName
 {
-    
     NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"HSYBaseViewController")];
     NSString *bundleName = bundle.infoDictionary[@"CFBundleName"];
     NSURL *bundleURL = [bundle URLForResource:bundleName withExtension:@"bundle"];
