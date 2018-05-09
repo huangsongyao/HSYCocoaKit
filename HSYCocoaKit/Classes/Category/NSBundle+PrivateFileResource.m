@@ -7,13 +7,13 @@
 //
 
 #import "NSBundle+PrivateFileResource.h"
-#import "HSYBaseViewController.h"
 
 @implementation NSBundle (PrivateFileResource)
 
 + (UIImage *)imageForBundle:(NSString *)imageName
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[HSYBaseViewController class]];
+    
+    NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"HSYBaseViewController")];
     NSString *bundleName = bundle.infoDictionary[@"CFBundleName"];
     NSURL *bundleURL = [bundle URLForResource:bundleName withExtension:@"bundle"];
     if (!bundleURL) {
