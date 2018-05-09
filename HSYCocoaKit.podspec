@@ -41,12 +41,10 @@ TODO: Add long description of the pod here.
 
 #依赖的第三方库
 s.dependency 'AFNetworking', '~> 3.1.0'
-s.dependency 'ReactiveCocoa', '~> 2.5'
 s.dependency 'JSONModel', '~> 1.7.0'
 s.dependency 'Masonry', '~> 1.1.0'
 s.dependency 'SDWebImage', '~> 4.3.3'
 s.dependency 'MBProgressHUD', '~> 0.9.2'
-s.dependency 'ReactiveViewModel', '~> 0.3'
 s.dependency 'RegexKitLite', '~> 4.0'
 s.dependency 'UITextView+Placeholder', '~> 1.1.1'
 s.dependency 'TYAttributedLabel', '~> 2.6.6'

@@ -200,13 +200,13 @@ static TYImageCache *_instance;
 }
 
 #pragma mark - image是否存在
-- (void) imageForURL:(NSString *)imageURL found:(void(^)(UIImage* image))found notFound:(void(^)())notFound
+- (void) imageForURL:(NSString *)imageURL found:(void(^)(UIImage* image))found notFound:(void(^)(void))notFound
 {
     [self imageForURL:imageURL needThumImage:NO found:found notFound:notFound];
 }
 
 #pragma mark - image是否存在,是否需要缩略图,如果知道返回缩略图 否则返回原图
-- (void) imageForURL:(NSString *)imageURL needThumImage:(BOOL)needThumImage found:(void(^)(UIImage* image))found notFound:(void(^)())notFound
+- (void) imageForURL:(NSString *)imageURL needThumImage:(BOOL)needThumImage found:(void(^)(UIImage* image))found notFound:(void(^)(void))notFound
 {
     if ( !imageURL ) {
         return;

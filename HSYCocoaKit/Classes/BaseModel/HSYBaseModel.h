@@ -1,12 +1,11 @@
 //
 //  HSYBaseModel.h
-//  Pods
+//  HSYCocoaKit
 //
-//  Created by huangsongyao on 2017/3/28.
-//
+//  Created by huangsongyao on 2018/5/9.
 //
 
-#import <ReactiveViewModel/ReactiveViewModel.h>
+#import "RVMViewModel.h"
 #import "NSArray+RACSignal.h"
 #import "HSYHUDModel.h"
 #import "HSYCocoaKitRACSubscribeNotification.h"
@@ -34,7 +33,7 @@
 
 /**
  请求失败允许外部设置statusCode
-
+ 
  @param code code
  */
 - (void)hsy_resultStatusCode:(id)code;
@@ -109,8 +108,9 @@
  *
  *  @param network 网络请求的方法
  *  @param next    请求成功的回调, BOOL值返回一个是否设置请求成功的statusCode，并且返回一个json
-
+ 
  */
 - (void)hsy_requestNetwork:(RACSignal *(^)(void))network subscriberNext:(BOOL(^)(id x))next;
 
 @end
+

@@ -1,14 +1,18 @@
 //
 //  RVMViewModel.h
-//  ReactiveViewModel
+//  HSYCocoaKit
 //
-//  Created by Josh Abernathy on 9/11/12.
-//  Copyright (c) 2012 GitHub. All rights reserved.
+//  Created by huangsongyao on 2018/5/9.
 //
 
 #import <Foundation/Foundation.h>
+#import "ReactiveCocoa.h"
 
-@class RACSignal;
+//! Project version number for ReactiveViewModel.
+FOUNDATION_EXPORT double ReactiveViewModelVersionNumber;
+
+//! Project version string for ReactiveViewModel.
+FOUNDATION_EXPORT const unsigned char ReactiveViewModelVersionString[];
 
 // Implements behaviors that drive the UI, and/or adapts a domain model to be
 // user-presentable.
@@ -59,3 +63,4 @@
 - (RACSignal *)throttleSignalWhileInactive:(RACSignal *)signal;
 
 @end
+

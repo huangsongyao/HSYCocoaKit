@@ -1,9 +1,8 @@
 //
 //  HSYBaseModel.m
-//  Pods
+//  HSYCocoaKit
 //
-//  Created by huangsongyao on 2017/3/28.
-//
+//  Created by huangsongyao on 2018/5/9.
 //
 
 #import "HSYBaseModel.h"
@@ -167,3 +166,4 @@
 }
 
 @end
+

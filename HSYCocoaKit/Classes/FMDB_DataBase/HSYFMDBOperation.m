@@ -58,7 +58,7 @@
     }
 }
 
-- (void)hsy_fmdb_operationForExecuteUpdateBlock:(id(^)())block completed:(void(^)(id x))completed
+- (void)hsy_fmdb_operationForExecuteUpdateBlock:(id(^)(void))block completed:(void(^)(id x))completed
 {
     if (![self.dateBase open]) {
         return;

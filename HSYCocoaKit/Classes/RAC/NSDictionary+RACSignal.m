@@ -32,7 +32,7 @@
     }];
 }
 
-- (void)rac_traverseDictionaryForSubscribeNext:(void(^)(id key, id value))next traverseCompleted:(void(^)())completed
+- (void)rac_traverseDictionaryForSubscribeNext:(void(^)(id key, id value))next traverseCompleted:(void(^)(void))completed
 {
     [[self.rac_sequence.signal deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
         RACTupleUnpack(id key, id value) = tuple;

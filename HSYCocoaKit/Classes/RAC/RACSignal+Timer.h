@@ -6,7 +6,7 @@
 //
 //
 
-#import <ReactiveCocoa/ReactiveCocoa.h>
+#import "ReactiveCocoa.h"
 
 @interface RACSignal (Timer)
 

@@ -32,7 +32,7 @@
     }];
 }
 
-- (void)rac_filterUntilCompleted:(BOOL(^)(id predicate))completed toMap:(id(^)(id value))map subscribeNext:(void(^)(id x))next overFilter:(void(^)())over
+- (void)rac_filterUntilCompleted:(BOOL(^)(id predicate))completed toMap:(id(^)(id value))map subscribeNext:(void(^)(id x))next overFilter:(void(^)(void))over
 {
     [[[[self.rac_sequence filter:^BOOL(id value) {
         if (completed) {

@@ -66,7 +66,7 @@
     }];
 }
 
-- (void)hsy_animatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext performPushMethods:(BOOL)push animationForNext:(void(^)())next
+- (void)hsy_animatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext performPushMethods:(BOOL)push animationForNext:(void(^)(void))next
 {
     @weakify(self);
     [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{

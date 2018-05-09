@@ -24,12 +24,13 @@
       "HSYCocoaKit/Assets/*.png"
     ]
   },
+  "frameworks": [
+    "UIKit",
+    "Foundation"
+  ],
   "dependencies": {
     "AFNetworking": [
       "~> 3.1.0"
-    ],
-    "ReactiveCocoa": [
-      "~> 2.5"
     ],
     "JSONModel": [
       "~> 1.7.0"
@@ -42,9 +43,6 @@
     ],
     "MBProgressHUD": [
       "~> 0.9.2"
-    ],
-    "ReactiveViewModel": [
-      "~> 0.3"
     ],
     "RegexKitLite": [
       "~> 4.0"

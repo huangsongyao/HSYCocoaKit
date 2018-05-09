@@ -27,7 +27,10 @@ static NSString *const kHSYUIKeyboardBoundsUserInfoKey = @"UIKeyboardBoundsUserI
             CGRect frameEnd = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
             NSNumber *curve = userInfo[UIKeyboardAnimationCurveUserInfoKey];
             NSNumber *duration = userInfo[UIKeyboardAnimationDurationUserInfoKey];
-            NSNumber *local = userInfo[UIKeyboardIsLocalUserInfoKey];
+            NSNumber *local = nil;
+            if (@available(iOS 9.0, *)) {
+                local = userInfo[UIKeyboardIsLocalUserInfoKey];
+            }
             next(bounds, begin, end, frameBegin, frameEnd, curve, duration, local);
         }
     }];

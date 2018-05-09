@@ -219,7 +219,7 @@ typedef RACStream * (^RACStreamBindBlock)(id value, BOOL *stop);
 ///
 /// Returns a new stream containing the results from each invocation of
 /// `reduceBlock`.
-+ (instancetype)zip:(id<NSFastEnumeration>)streams reduce:(id (^)())reduceBlock;
++ (instancetype)zip:(id<NSFastEnumeration>)streams reduce:(id (^)(void))reduceBlock;
 
 /// Returns a stream obtained by concatenating `streams` in order.
 + (instancetype)concat:(id<NSFastEnumeration>)streams;

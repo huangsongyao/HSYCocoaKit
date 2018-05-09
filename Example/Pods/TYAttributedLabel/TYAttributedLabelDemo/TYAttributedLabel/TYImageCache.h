@@ -18,10 +18,10 @@
 - (void)clearCache;
 
 // 是否在本地找到图片,是否需要缩略图
-- (void)imageForURL:(NSString *)imageURL needThumImage:(BOOL)needThumImage found:(void(^)(UIImage* image))found notFound:(void(^)())notFound;
+- (void)imageForURL:(NSString *)imageURL needThumImage:(BOOL)needThumImage found:(void(^)(UIImage* image))found notFound:(void(^)(void))notFound;
 
 // 是否在本地找到图片
-- (void) imageForURL:(NSString *)imageURL found:(void(^)(UIImage* image))found notFound:(void(^)())notFound;
+- (void) imageForURL:(NSString *)imageURL found:(void(^)(UIImage* image))found notFound:(void(^)(void))notFound;
 
 // 图片是否缓存
 - (BOOL)imageIsCacheForURL:(NSString *)imageURL;

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ReactiveCocoa/ReactiveCocoa.h>
+#import "ReactiveCocoa.h"
 
 @interface NSDictionary (RACSignal)
 
@@ -24,6 +24,6 @@
  *  @param next      遍历的字典所包含的元素，key-value
  *  @param completed 遍历结束后
  */
-- (void)rac_traverseDictionaryForSubscribeNext:(void(^)(id key, id value))next traverseCompleted:(void(^)())completed;
+- (void)rac_traverseDictionaryForSubscribeNext:(void(^)(id key, id value))next traverseCompleted:(void(^)(void))completed;
 
 @end
