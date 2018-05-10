@@ -31,4 +31,11 @@
                             configs:(NSMutableArray *)configs
                          scrollView:(UIScrollView *)scrollView;
 
+/**
+ 添加接口允许外部设置翻页页面
+ 
+ @param page 要翻页的页码
+ */
+- (void)scrollToPage:(NSInteger)page;
+
 @end

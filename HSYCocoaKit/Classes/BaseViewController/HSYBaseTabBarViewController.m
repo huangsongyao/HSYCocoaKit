@@ -142,6 +142,16 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
     [self.collectionView reloadData];
 }
 
+#pragma mark - Scroll Page
+
+- (void)scrollToPage:(NSInteger)page
+{
+    if (page >= 0 && page < [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_viewControllers].count) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:page inSection:0];
+        [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
