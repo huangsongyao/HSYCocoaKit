@@ -39,6 +39,7 @@
     if (VERSION_GTR_IOS8) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    [self.class adapterScrollView_iOS_11];
     //监听一般网络请求成功
     @weakify(self);
     [[RACObserve(self, self.hsy_viewModel.hsy_successStatusCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
@@ -180,6 +181,18 @@
 - (void)hsy_endEditing
 {
     //子类如有需要在键盘关闭后实现逻辑时，请重写本方法
+}
+
+#pragma mark - Adapter iOS 11
+
++ (void)adapterScrollView_iOS_11
+{
+    if (@available(iOS 11.0, *)) {
+        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+        [UITableView appearance].estimatedRowHeight = 0;
+        [UITableView appearance].estimatedSectionHeaderHeight = 0;
+        [UITableView appearance].estimatedSectionFooterHeight = 0;
+    }
 }
 
 @end

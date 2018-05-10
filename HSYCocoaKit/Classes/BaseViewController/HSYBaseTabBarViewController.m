@@ -107,7 +107,7 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
                 [(HSYBaseViewController *)vc customNavigationBar].customNavigationItem.title = title;
                 [(HSYBaseViewController *)vc customNavigationBar].hidden = hidden;
             }
-        }
+        } 
         x = vc.view.right;
     }
     return x;

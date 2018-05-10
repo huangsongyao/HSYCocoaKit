@@ -62,4 +62,9 @@
  */
 - (void)hsy_endEditing;
 
+/**
+ 适配iOS 11
+ */
++ (void)adapterScrollView_iOS_11;
+
 @end

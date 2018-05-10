@@ -7,9 +7,32 @@
 //
 
 #import "UIViewController+Runtime.h"
-#import <objc/runtime.h>
+#import "NSObject+Property.h"
+#import "NSObject+Runtime.h"
+
+static NSString *kHSYCocoaKitHsy_runtimeDelegateKey = @"HSYCocoaKitHsy_runtimeDelegateKey";
+
+@implementation UIViewControllerRuntimeDelegateObject
+
++ (instancetype)initWithDictionary:(NSDictionary *)dic
+{
+    UIViewControllerRuntimeDelegateObject *object = [NSObject objectRuntimeValues:dic classes:[UIViewControllerRuntimeDelegateObject class]];
+    return object;
+}
+
+@end
 
 @implementation UIViewController (Runtime)
+
+- (void)setHsy_runtimeDelegate:(id<UIViewControllerRuntimeDelegate>)hsy_runtimeDelegate
+{
+    [self setProperty:hsy_runtimeDelegate forKey:kHSYCocoaKitHsy_runtimeDelegateKey nonatomic:OBJC_ASSOCIATION_ASSIGN];
+}
+
+- (id<UIViewControllerRuntimeDelegate>)hsy_runtimeDelegate
+{
+    return [self getPropertyForKey:kHSYCocoaKitHsy_runtimeDelegateKey];
+}
 
 + (void)load
 {

@@ -45,12 +45,10 @@
     }
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = delegate;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 110000
-    //视频iOS 11
+    //适配iOS 11
     if (@available(iOS 11.0, *)) {
         UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
     }
-#endif
     imagePickerController.allowsEditing = allowsEditing;//打开图片编辑，设置为NO时不会跳转到系统定义下的编辑页面
     NSDictionary *sourceTypes = @{
                                  @(kHSYCocoaKitDeviceTypePhoto)  : @(UIImagePickerControllerSourceTypePhotoLibrary),

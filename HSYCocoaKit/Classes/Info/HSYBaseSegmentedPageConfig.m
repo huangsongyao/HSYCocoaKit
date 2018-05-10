@@ -38,6 +38,10 @@
         if ([self.hsy_viewController isKindOfClass:[HSYBaseViewController class]]) {
             [(HSYBaseViewController *)self.hsy_viewController hsy_addCustomNavigationBar];
         }
+    } else {
+        if ([self.hsy_viewController isKindOfClass:[HSYBaseViewController class]]) {
+            [(HSYBaseViewController *)self.hsy_viewController hiddenCustomNavigationBar];
+        }
     }
 }
 
@@ -54,7 +58,6 @@
     HSYBaseTabBarControllerConfig *config = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:className viewControllerTitle:title paramters:paramters];
     config.titleColorParamter = titleColorParamter;
     config.imageParamter = imageParamter;
-    config.showNavigationBar = YES;
     
     return config;
 }

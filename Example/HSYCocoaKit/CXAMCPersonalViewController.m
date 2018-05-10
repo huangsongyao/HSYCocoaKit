@@ -340,6 +340,7 @@
     self.scrollEnabled = @(NO);
     self.lineHidden = @(YES);
     [super viewDidLoad];
+    self.view.backgroundColor = WHITE_COLOR;
     self.tableView.tableHeaderView = [[CXAMCPersonalTableHeaderView alloc] initWithHeaderData:[(CXAMCPersonalTableModel *)self.hsy_viewModel headerInfo]];
     self.tableView.tableFooterView = [[CXAMCPersonalTableFooterView alloc] initWithLogout:^(UIButton *button) {
         
@@ -375,6 +376,11 @@
     return view;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return textFieldHeight;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 10.0f;
@@ -384,6 +390,14 @@
 {
     return 0.0001f;
 }
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_11_0
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    //适配iOS11
+    return nil;
+}
+#endif
 
 + (UIButton *)logoutButton:(NSString *)title clickedOn:(void(^)(UIButton *button))clicked
 {
