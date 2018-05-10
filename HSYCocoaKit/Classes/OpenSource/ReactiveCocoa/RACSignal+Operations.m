@@ -1337,7 +1337,8 @@ static RACDisposable *subscribeForever (RACSignal *signal, void (^next)(id), voi
 			[currentWindow sendCompleted];
 			currentWindow = nil;
 			currentCloseWindow = nil;
-			[closeObserverDisposable dispose], closeObserverDisposable = nil;
+            [closeObserverDisposable dispose];
+            closeObserverDisposable = nil;
 		};
 
 		RACDisposable *openObserverDisposable = [openSignal subscribe:[RACSubscriber subscriberWithNext:^(id x) {

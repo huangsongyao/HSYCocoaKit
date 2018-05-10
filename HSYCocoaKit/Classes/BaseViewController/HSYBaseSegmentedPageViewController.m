@@ -177,7 +177,7 @@
 {
     NSMutableArray<UIViewController *> *viewControllers = [self.class hsy_addSubViewController:hsy_viewControllers titles:titles configs:configs height:scrollView.height];
     for (UIViewController *vc in viewControllers) {
-        [scrollView addSubview:vc];
+        [scrollView addSubview:vc.view];
     }
     CGFloat x = [viewControllers.lastObject view].x;
     return x;
