@@ -7,6 +7,7 @@
 //
 
 #import "HSYBaseTabBarModel.h"
+#import "HSYBaseSegmentedPageViewController.h"
 
 @implementation HSYBaseTabBarConfigItem
 
@@ -21,6 +22,12 @@
     }
     return self;
 }
+
+@end
+
+@interface HSYBaseTabBarModel ()
+
+@property (nonatomic, assign, readonly) CGFloat contentHeight;
 
 @end
 
@@ -44,11 +51,27 @@
     return self;
 }
 
-- (void)hsy_reloadDatas:(NSIndexPath *)indexPath
+- (UIView *)hsy_reloadDatas:(NSIndexPath *)indexPath
 {
     for (HSYBaseTabBarConfigItem *item in self.hsy_configItems) {
         item.selectedItem = ([self.hsy_configItems indexOfObject:item] == indexPath.item);
     }
+    NSArray *viewControllers = [self hsy_tabBarItemViewControllers:self.contentHeight];
+    UIViewController *vc = viewControllers[indexPath.item];
+    [self.currentContentView removeFromSuperview];
+    _currentContentView = vc.view;
+    return vc.view;
+}
+
+- (NSArray<UIViewController *> *)hsy_tabBarItemViewControllers:(CGFloat)height
+{
+    _contentHeight = height;
+    NSMutableArray *viewControllers = [HSYBaseSegmentedPageViewController hsy_addSubViewController:self.hsy_viewControllers titles:self.hsy_titles configs:self.hsy_configs height:height];
+    for (UIViewController *vc in viewControllers) {
+        vc.view.origin = CGPointZero;
+    }
+    _currentContentView = [viewControllers.firstObject view];
+    return [viewControllers mutableCopy];
 }
 
 @end

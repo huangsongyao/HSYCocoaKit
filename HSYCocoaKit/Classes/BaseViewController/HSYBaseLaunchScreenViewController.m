@@ -86,6 +86,11 @@
     return (launchScreenSize != kHSYCocoaKitLaunchScreenSize_5_8_Inch);
 }
 
++ (BOOL)iPhoneXDevice
+{
+    return (IPHONE_HEIGHT == ((CGFloat)kHSYCocoaKitLaunchScreenSize_5_8_Inch));
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

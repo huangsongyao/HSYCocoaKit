@@ -45,4 +45,15 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitBaseSegmentedPageControl) {
 
 - (instancetype)initWithConfigs:(NSArray<HSYBaseSegmentedPageConfig *> *)configs;
 
+/**
+ 静态方法设置自控制器
+ 
+ @param hsy_viewControllers 控制器集合
+ @param titles 控制器的title
+ @param configs 数据格式集合
+ @param height 内嵌控制器的高度
+ @return 最后一个自控制器的right的值
+ */
++ (NSMutableArray<UIViewController *> *)hsy_addSubViewController:(NSMutableArray *)hsy_viewControllers titles:(NSArray *)titles configs:(NSMutableArray *)configs height:(CGFloat)height;
+
 @end

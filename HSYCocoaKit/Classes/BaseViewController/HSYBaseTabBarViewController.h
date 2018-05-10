@@ -18,20 +18,6 @@
 - (instancetype)initWithConfigs:(NSArray<HSYBaseTabBarControllerConfig *> *)configs;
 
 /**
- 静态方法设置自控制器
-
- @param hsy_viewControllers 控制器集合
- @param titles 控制器的title
- @param configs 数据格式集合
- @param scrollView scrollView
- @return 最后一个自控制器的right的值
- */
-+ (CGFloat)hsy_addSubViewController:(NSMutableArray *)hsy_viewControllers
-                             titles:(NSArray *)titles
-                            configs:(NSMutableArray *)configs
-                         scrollView:(UIScrollView *)scrollView;
-
-/**
  添加接口允许外部设置翻页页面
  
  @param page 要翻页的页码
