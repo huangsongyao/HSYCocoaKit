@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "RACDelegateProxy.h"
+#import "HSYBaseViewController.h"
 
 @implementation UIViewController (Device)
 

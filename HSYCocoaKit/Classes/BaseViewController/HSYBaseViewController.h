@@ -16,7 +16,7 @@
 @interface HSYBaseViewController : UIViewController
 
 //可能为nil，如果使用自定义的转场navigationController则该指针不为nil
-@property (nonatomic, strong, readonly) HSYCustomNavigationBar *customNavigationBar;    //定制与父类的导航栏
+@property (nonatomic, strong, readonly) UIView *customNavigationBar;                    //定制与父类的导航栏，iOS 11前本指针指向HSYCustomNavigationBar类，iOS 11后指向HSYCustomNavigationContentViewBar类
 @property (nonatomic, assign) BOOL hsy_addKeyboardObserver;                             //是否添加键盘监听
 @property (nonatomic, assign) BOOL hsy_addEndEditedKeyboard;                            //是否添加view层的键盘收起事件
 @property (nonatomic, assign) BOOL hsy_addCustomNavigationBarBackButton;                //是否添加返回按钮，默认会根据栈控制器的vc个数来决定（大于1显示），设置为NO后无论栈控制器的vc是否大于1均不显示
@@ -66,5 +66,12 @@
  适配iOS 11
  */
 + (void)adapterScrollView_iOS_11;
+
+/**
+ 返回真正的导航栏的UINavigationItem，兼容iOS 11
+
+ @return UINavigationItem
+ */
+- (UINavigationItem *)hsy_customNavigationBarNavigationItem;
 
 @end

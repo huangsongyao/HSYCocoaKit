@@ -16,18 +16,30 @@
 
 static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
+#pragma mark - Navigation Bar
+
 @interface HSYCustomNavigationBar () <UINavigationBarDelegate>
 
 @end
 
 @implementation HSYCustomNavigationBar
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithObject:(id)object
 {
-    if (self = [super initWithFrame:frame]) {
+    CGFloat height = IPHONE_BAR_HEIGHT;
+    CGFloat width = IPHONE_WIDTH;
+    if (@available(iOS 11.0, *)) {
+        height = IPHONE_NAVIGATION_BAR_HEIGHT;
+    }
+    if (self = [super initWithFrame:CGRectMake(0, 0, width, height)]) {
         UIImage *image = [UIImage imageWithFillColor:NAV_DEFAULT_COLOR];
         [self setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-        _customNavigationItem = [[UINavigationItem alloc] initWithTitle:@""];
+        if ([object isKindOfClass:[NSString class]] || !object) {
+            _customNavigationItem = [[UINavigationItem alloc] initWithTitle:object];
+        } else {
+            _customNavigationItem = [[UINavigationItem alloc] initWithTitle:@""];
+            self.customNavigationItem.titleView = (UIView *)object;
+        }
         [self pushNavigationItem:self.customNavigationItem animated:YES];
         [self hsy_clearNavigationBarBottomLine];
         self.backItem.hidesBackButton = YES;
@@ -110,3 +122,43 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 */
 
 @end
+
+#pragma mark - Custom Bar
+
+@interface HSYCustomNavigationContentViewBar ()
+
+@property (nonatomic, strong) UIImageView *backgroundImage;
+
+@end
+
+@implementation HSYCustomNavigationContentViewBar
+
+- (instancetype)initWithObject:(id)object
+{
+    if (self = [super initWithSize:CGSizeMake(IPHONE_WIDTH, IPHONE_BAR_HEIGHT)]) {
+        self.backgroundColor = NAV_DEFAULT_COLOR;
+        self.backgroundImage = [NSObject createImageViewByParam:@{}];
+        self.backgroundImage.frame = self.bounds;
+        [self addSubview:self.backgroundImage];
+        
+        _navigationBar = [[HSYCustomNavigationBar alloc] initWithObject:object];
+        self.navigationBar.y = 0.0f;
+        if (@available(iOS 11.0, *)) {
+            self.navigationBar.y = IPHONE_STATE_BAR_HEIGHT;
+        }
+        [self addSubview:self.navigationBar];
+    }
+    return self;
+}
+
+- (void)setCustomNavigationContentBarBackgroundImage:(UIImage *)backgroundImage
+{
+    UIImage *image = [UIImage imageWithFillColor:CLEAR_COLOR];
+    [self.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    self.backgroundImage.image = backgroundImage;
+    self.backgroundImage.highlightedImage = backgroundImage;
+}
+
+@end
+
+

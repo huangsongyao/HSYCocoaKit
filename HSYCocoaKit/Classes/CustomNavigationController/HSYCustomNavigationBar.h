@@ -15,6 +15,14 @@
 @property (nonatomic, strong, readonly) UINavigationItem *customNavigationItem;
 
 /**
+ 初始化，object请传入NSString或UIView,如果传入nil，默认不显示
+
+ @param object  NSString或UIView，前者表示title，后者表示titleView
+ @return HSYCustomNavigationBar
+ */
+- (instancetype)initWithObject:(id)object;
+
+/**
  清除底部横线
  */
 - (void)hsy_clearNavigationBarBottomLine;
@@ -63,5 +71,26 @@
  @return UIBarButtonItem
  */
 + (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name title:(NSString *)title subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
+
+@end
+
+NS_CLASS_AVAILABLE_IOS(11_0) @interface HSYCustomNavigationContentViewBar : UIView 
+
+@property (nonatomic, strong, readonly) HSYCustomNavigationBar *navigationBar;
+
+/**
+ 初始化，object请传入NSString或UIView,如果传入nil，默认不显示
+ 
+ @param object  NSString或UIView，前者表示title，后者表示titleView
+ @return HSYCustomNavigationContentViewBar
+ */
+- (instancetype)initWithObject:(id)object;
+
+/**
+ 设置背景图片
+
+ @param backgroundImage 背景图片
+ */
+- (void)setCustomNavigationContentBarBackgroundImage:(UIImage *)backgroundImage;
 
 @end

@@ -106,7 +106,7 @@
         case kHSYCocoaKitBaseSegmentedPageControlInNavigationItem: {
             UINavigationItem *navigationItem = self.navigationItem;
             if (self.customNavigationBar) {
-                navigationItem = self.customNavigationBar.customNavigationItem;
+                navigationItem = self.hsy_customNavigationBarNavigationItem;
             }
             navigationItem.titleView = self.segmentedPageControl;
         }

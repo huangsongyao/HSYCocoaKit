@@ -9,6 +9,7 @@
 #import "HSYCustomLeftTransitionAnimation.h"
 #import "HSYBaseCustomNavigationController.h"
 #import "UIView+Frame.h"
+#import "HSYBaseViewController.h"
 
 #define MIN_ALPHA_COMPONENT                 0.0f
 #define MAX_ALPHA_COMPONENT                 0.6f
@@ -75,10 +76,9 @@
         }
     } completion:^(BOOL finished) {
         @strongify(self);
-        if (push) {
-            if (@available(iOS 11.0, *)) {
-                self.fromViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f, 1.0f);
-            }
+        if (@available(iOS 11.0, *)) {
+            self.fromViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f, 1.0f);
+            self.toViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f, 1.0f);
         }
         [self hsy_removeShadow];
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];

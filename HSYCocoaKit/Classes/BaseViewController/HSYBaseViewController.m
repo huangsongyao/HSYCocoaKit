@@ -122,7 +122,11 @@
 - (void)hsy_addCustomNavigationBar
 {
     if (!self.customNavigationBar) {
-        _customNavigationBar = [[HSYCustomNavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, DEFAULT_NAVIGATION_BAR_HEIGHT)];
+        if (@available(iOS 11.0, *)) {
+            _customNavigationBar = [[HSYCustomNavigationContentViewBar alloc] initWithObject:nil];
+        } else {
+            _customNavigationBar = [[HSYCustomNavigationBar alloc] initWithObject:nil];
+        }
         self.navigationController.navigationBar.backItem.hidesBackButton = YES;
         [self.view addSubview:self.customNavigationBar];
         //添加一个外部标识位用于子类便捷是否创建back按钮，当该标识位为YES并且栈控制器的vc大于1时创建
@@ -141,7 +145,7 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
     }];
-    self.customNavigationBar.customNavigationItem.leftBarButtonItems = @[backButtonItem];
+    self.hsy_customNavigationBarNavigationItem.leftBarButtonItems = @[backButtonItem];
 }
 
 - (void)hsy_setCustomNavigationBarBackButtonInLeft:(BOOL)left title:(NSString *)title image:(NSString *)image
@@ -154,9 +158,9 @@
         }
     }];
     if (left) {
-        self.customNavigationBar.customNavigationItem.leftBarButtonItems = @[backButtonItem];
+        self.hsy_customNavigationBarNavigationItem.leftBarButtonItems = @[backButtonItem];
     } else {
-        self.customNavigationBar.customNavigationItem.rightBarButtonItems = @[backButtonItem];
+        self.hsy_customNavigationBarNavigationItem.rightBarButtonItems = @[backButtonItem];
     }
 }
 
@@ -192,6 +196,17 @@
         [UITableView appearance].estimatedRowHeight = 0;
         [UITableView appearance].estimatedSectionHeaderHeight = 0;
         [UITableView appearance].estimatedSectionFooterHeight = 0;
+    }
+}
+
+- (UINavigationItem *)hsy_customNavigationBarNavigationItem
+{
+    if (@available(iOS 11.0, *)) {
+        HSYCustomNavigationContentViewBar *aboveBar = (HSYCustomNavigationContentViewBar *)self.customNavigationBar;
+        return aboveBar.navigationBar.customNavigationItem;
+    } else {
+        HSYCustomNavigationBar *blewBar = (HSYCustomNavigationBar *)self.customNavigationBar;
+        return blewBar.customNavigationItem;
     }
 }
 
