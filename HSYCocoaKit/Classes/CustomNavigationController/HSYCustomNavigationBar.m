@@ -119,11 +119,6 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
     return [self.class hsy_backButtonItemForImage:name title:nil subscribeNext:next];
 }
 
-+ (UIBarButtonItem *)hsy_backButtonItem:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
-{
-    return [self.class hsy_backButtonItemForImage:@"nav_icon_back" subscribeNext:next];
-}
-
 #pragma mark - UINavigationBarDelegate
 
 

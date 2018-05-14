@@ -48,14 +48,6 @@
 #pragma mark - Back Button
 
 /**
- 创建导航栏的返回按钮，返回的箭头图片默认为@"nav_icon_back"
- 
- @param next 点击回调事件
- @return UIBarButtonItem
- */
-+ (UIBarButtonItem *)hsy_backButtonItem:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
-
-/**
  创建导航栏的返回按钮，图片模式，允许设置图片
  
  @param name 图片名称
