@@ -41,17 +41,22 @@
 + (WKWebViewConfiguration *)hsy_webViewConfiguration:(NSString *)runNativeName delegate:(id<WKScriptMessageHandler>)delegate
 {
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-    WKUserContentController *userContent = [[WKUserContentController alloc] init];
-    [userContent addScriptMessageHandler:delegate name:runNativeName];
-    config.userContentController = userContent;
-    
+    if (runNativeName.length > 0) {
+        WKUserContentController *userContent = [[WKUserContentController alloc] init];
+        [userContent addScriptMessageHandler:delegate name:runNativeName];
+        config.userContentController = userContent;
+    }
     return config;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:[HSYBaseWebViewController hsy_webViewConfiguration:self.runNativeName delegate:self]];
+    CGRect rect = self.view.bounds;
+    if (self.customNavigationBar && !self.customNavigationBar.hidden) {
+        rect = CGRectMake(rect.origin.x, self.customNavigationBar.bottom, rect.size.width, (IPHONE_HEIGHT - self.customNavigationBar.bottom));
+    }
+    _webView = [[WKWebView alloc] initWithFrame:rect configuration:[HSYBaseWebViewController hsy_webViewConfiguration:self.runNativeName delegate:self]];
     if (self.url) {
         NSURLRequest *request = [NSURLRequest requestWithURL:self.url];
         [self.webView loadRequest:request];
@@ -111,6 +116,9 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
 {
     //web页面加载完毕
+    if (self.hsy_showLoading) {
+        [self hsy_endSystemLoading];
+    }
     if (navigation) {
         HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeDidFinished subscribeContents:@[navigation]];
         [self.hsy_viewModel.subject sendNext:object];
@@ -120,6 +128,9 @@
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
     //web页面加载失败
+    if (self.hsy_showLoading) {
+        [self hsy_endSystemLoading];
+    }
     if (navigation) {
         HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeDidFailed subscribeContents:@[navigation]];
         [self.hsy_viewModel.subject sendNext:object];

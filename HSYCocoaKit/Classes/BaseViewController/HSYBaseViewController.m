@@ -16,6 +16,8 @@
 
 @interface HSYBaseViewController () <UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+
 @end
 
 @implementation HSYBaseViewController
@@ -26,6 +28,7 @@
         self.hsy_addKeyboardObserver = NO;
         self.hsy_addCustomNavigationBarBackButton = YES;
         self.hsy_addEndEditedKeyboard = NO;
+        self.hsy_showLoading = NO;
     }
     return self;
 }
@@ -79,9 +82,19 @@
             [self hsy_addCustomNavigationBar];
         }
     }
+    //如果默认设置了系统的loading
+    if (self.hsy_showLoading) {
+        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.activityIndicatorView.frame = self.view.bounds;
+        if (![self.activityIndicatorView isAnimating]) {
+            [self.activityIndicatorView startAnimating];
+        }
+        [self.view addSubview:self.activityIndicatorView];
+        [self.view bringSubviewToFront:self.activityIndicatorView];
+    }
 }
 
-#pragma mark - State Code
+#pragma mark - Network State Code
 
 - (kHSYHUDModelCodeType)hsy_requestStateCodeWithStateCode:(id)stateCode
 {
@@ -102,7 +115,7 @@
                 [HSYHUDHelper hsy_showHUDViewForShowType:model.hsy_showType text:model.hsy_hudString hideAfter:model.hsy_animationTime];
             }
         } else if(model.hsy_codeType == kHSYHUDModelCodeTypeRequestSuccess) {
-        
+            
         } else if (model.hsy_codeType == kHSYHUDModelCodeTypeRequestFailure) {
             if (model.hsy_showPromptContent) {
                 [HSYHUDHelper hsy_showHUDViewForShowType:model.hsy_showType text:model.hsy_hudString hideAfter:model.hsy_animationTime];
@@ -117,7 +130,7 @@
     return kHSYHUDModelCodeTypeDefault;
 }
 
-#pragma mark - NavigationBar
+#pragma mark - Custom NavigationBar
 
 - (void)hsy_addCustomNavigationBar
 {
@@ -207,6 +220,15 @@
     } else {
         HSYCustomNavigationBar *blewBar = (HSYCustomNavigationBar *)self.customNavigationBar;
         return blewBar.customNavigationItem;
+    }
+}
+
+#pragma mark - Loading
+
+- (void)hsy_endSystemLoading
+{
+    if ([self.activityIndicatorView isAnimating]) {
+        [self.activityIndicatorView stopAnimating];
     }
 }
 
