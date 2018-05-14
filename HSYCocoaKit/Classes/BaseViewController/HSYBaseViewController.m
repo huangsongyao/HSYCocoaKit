@@ -28,6 +28,7 @@
         self.hsy_addKeyboardObserver = NO;
         self.hsy_addCustomNavigationBarBackButton = YES;
         self.hsy_addEndEditedKeyboard = NO;
+        self.backItemImage = @"nav_icon_back";
     }
     return self;
 }
@@ -127,6 +128,9 @@
     if (hsy_showLoading) {
         self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         self.activityIndicatorView.frame = self.view.bounds;
+        if (self.customNavigationBar && !self.customNavigationBar.hidden) {
+            self.activityIndicatorView.frame = CGRectMake(0, self.customNavigationBar.bottom, IPHONE_WIDTH, (self.view.height - self.customNavigationBar.bottom));
+        }
         if (![self.activityIndicatorView isAnimating]) {
             [self.activityIndicatorView startAnimating];
         }
@@ -157,7 +161,7 @@
 - (void)hsy_pushNavigationItemInLeft
 {
     @weakify(self);
-    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar hsy_backButtonItem:^(UIButton *button, kHSYCustomBarButtonItemTag tag) {
+    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar hsy_backButtonItemForImage:self.backItemImage subscribeNext:^(UIButton *button, kHSYCustomBarButtonItemTag tag) {
         @strongify(self);
         if (tag == kHSYCustomBarButtonItemTagBack) {
             [self.navigationController popViewControllerAnimated:YES];

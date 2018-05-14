@@ -20,6 +20,7 @@
 
 #pragma mark - 以下属性请在“[super viewDidLoad]”方法调用前设置
 
+@property (nonatomic, copy) NSString *backItemImage;                                    //返回按钮的图标，默认使用@"nav_icon_back"
 @property (nonatomic, assign) BOOL hsy_addKeyboardObserver;                             //是否添加键盘监听
 @property (nonatomic, assign) BOOL hsy_addEndEditedKeyboard;                            //是否添加view层的键盘收起事件
 @property (nonatomic, assign) BOOL hsy_addCustomNavigationBarBackButton;                //是否添加返回按钮，默认会根据栈控制器的vc个数来决定（大于1显示），设置为NO后无论栈控制器的vc是否大于1均不显示
