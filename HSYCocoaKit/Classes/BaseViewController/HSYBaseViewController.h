@@ -23,8 +23,11 @@
 @property (nonatomic, assign) BOOL hsy_addKeyboardObserver;                             //是否添加键盘监听
 @property (nonatomic, assign) BOOL hsy_addEndEditedKeyboard;                            //是否添加view层的键盘收起事件
 @property (nonatomic, assign) BOOL hsy_addCustomNavigationBarBackButton;                //是否添加返回按钮，默认会根据栈控制器的vc个数来决定（大于1显示），设置为NO后无论栈控制器的vc是否大于1均不显示
-@property (nonatomic, assign) BOOL hsy_showLoading;                                     //是否在进入新vc控制器后，显示系统默认的loading，默认为否，并且由于情况种类太多，如果该属性设置为YES，请在需要的时候调用“- hsy_endSystemLoading”方法停止loading动画，父类中不对该loading逻辑做跟进和处理
 @property (nonatomic, strong) HSYBaseRefleshModel *hsy_viewModel;                       //该指针允许指向HSYBaseModel子类中的对象，并且使用了建言模式，不允许为nil，默认为nil，实例化对象请务必在“- viewDidLoad”方法“前”。
+
+#pragma mark - 以下属性无硬性使用规则
+
+@property (nonatomic, assign, setter=showSystemLoading:) BOOL hsy_showLoading;          //是否在进入新vc控制器后，显示系统默认的loading，默认为否，并且由于情况种类太多，如果该属性设置为YES，请在需要的时候调用“- hsy_endSystemLoading”方法停止loading动画，父类中不对该loading逻辑做跟进和处理
 
 #pragma mark - Network State Code
 
@@ -88,6 +91,27 @@
 
 #pragma mark - Loading
 
+/**
+ 停止系统默认的loading，只有hsy_showLoading为YES时，本方法才有效
+ */
 - (void)hsy_endSystemLoading;
+
+#pragma mark - Set Custom NavigationBar BackgroundImage
+
+/**
+ 提供接口方法，允许外部和子类设置定制导航栏的背景图片，方法内已兼容iOS 11
+ 
+ @param backgroundImage 背景图片
+ */
+- (void)hsy_setCustomNavigationBarBackgroundImage:(UIImage *)backgroundImage;
+
+#pragma mark - Real Custom NavigationBar
+
+/**
+ 返回适配当前系统下【主要适配iOS 11和iOS 11以下的CustomNavigationBar】NavigationBar对象
+ 
+ @return HSYCustomNavigationBar
+ */
+- (HSYCustomNavigationBar *)hsy_realCustomNativigation;
 
 @end

@@ -28,7 +28,6 @@
         self.hsy_addKeyboardObserver = NO;
         self.hsy_addCustomNavigationBarBackButton = YES;
         self.hsy_addEndEditedKeyboard = NO;
-        self.hsy_showLoading = NO;
     }
     return self;
 }
@@ -82,16 +81,6 @@
             [self hsy_addCustomNavigationBar];
         }
     }
-    //如果默认设置了系统的loading
-    if (self.hsy_showLoading) {
-        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.activityIndicatorView.frame = self.view.bounds;
-        if (![self.activityIndicatorView isAnimating]) {
-            [self.activityIndicatorView startAnimating];
-        }
-        [self.view addSubview:self.activityIndicatorView];
-        [self.view bringSubviewToFront:self.activityIndicatorView];
-    }
 }
 
 #pragma mark - Network State Code
@@ -128,6 +117,22 @@
         return model.hsy_codeType;
     }
     return kHSYHUDModelCodeTypeDefault;
+}
+
+#pragma mark - Setting
+
+- (void)showSystemLoading:(BOOL)hsy_showLoading
+{
+    _hsy_showLoading = hsy_showLoading;
+    if (hsy_showLoading) {
+        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.activityIndicatorView.frame = self.view.bounds;
+        if (![self.activityIndicatorView isAnimating]) {
+            [self.activityIndicatorView startAnimating];
+        }
+        [self.view addSubview:self.activityIndicatorView];
+        [self.view bringSubviewToFront:self.activityIndicatorView];
+    }
 }
 
 #pragma mark - Custom NavigationBar
@@ -214,22 +219,44 @@
 
 - (UINavigationItem *)hsy_customNavigationBarNavigationItem
 {
-    if (@available(iOS 11.0, *)) {
-        HSYCustomNavigationContentViewBar *aboveBar = (HSYCustomNavigationContentViewBar *)self.customNavigationBar;
-        return aboveBar.navigationBar.customNavigationItem;
-    } else {
-        HSYCustomNavigationBar *blewBar = (HSYCustomNavigationBar *)self.customNavigationBar;
-        return blewBar.customNavigationItem;
-    }
+    return self.hsy_realCustomNativigation.customNavigationItem;
 }
 
 #pragma mark - Loading
 
 - (void)hsy_endSystemLoading
 {
-    if ([self.activityIndicatorView isAnimating]) {
+    if (self.activityIndicatorView && [self.activityIndicatorView isAnimating]) {
         [self.activityIndicatorView stopAnimating];
     }
+}
+
+#pragma mark - Set Custom NavigationBar BackgroundImage
+
+- (void)hsy_setCustomNavigationBarBackgroundImage:(UIImage *)backgroundImage
+{
+    if (@available(iOS 11.0, *)) {
+        HSYCustomNavigationContentViewBar *aboveBar = (HSYCustomNavigationContentViewBar *)self.customNavigationBar;
+        [aboveBar setCustomNavigationContentBarBackgroundImage:backgroundImage];
+    } else {
+        HSYCustomNavigationBar *blewBar = (HSYCustomNavigationBar *)self.customNavigationBar;
+        [blewBar setCustomNavigationBarBackgroundImage:backgroundImage];
+    }
+}
+
+#pragma mark - Real Custom NavigationBar
+
+- (HSYCustomNavigationBar *)hsy_realCustomNativigation
+{
+    HSYCustomNavigationBar *navigationBar = nil;
+    if (@available(iOS 11.0, *)) {
+        HSYCustomNavigationContentViewBar *aboveBar = (HSYCustomNavigationContentViewBar *)self.customNavigationBar;
+        navigationBar = aboveBar.navigationBar;
+    } else {
+        HSYCustomNavigationBar *blewBar = (HSYCustomNavigationBar *)self.customNavigationBar;
+        navigationBar = blewBar;
+    }
+    return navigationBar;
 }
 
 @end

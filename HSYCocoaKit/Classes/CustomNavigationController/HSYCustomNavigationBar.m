@@ -33,7 +33,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
     }
     if (self = [super initWithFrame:CGRectMake(0, 0, width, height)]) {
         UIImage *image = [UIImage imageWithFillColor:NAV_DEFAULT_COLOR];
-        [self setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+        [self setCustomNavigationBarBackgroundImage:image];
         if ([object isKindOfClass:[NSString class]] || !object) {
             _customNavigationItem = [[UINavigationItem alloc] initWithTitle:object];
         } else {
@@ -45,6 +45,17 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
         self.backItem.hidesBackButton = YES;
     }
     return self;
+}
+
+#pragma mark - Set BackgroundImage
+
+- (void)setCustomNavigationBarBackgroundImage:(UIImage *)backgroundImage
+{
+    UIImage *image = backgroundImage;
+    if (!image) {
+        image = [UIImage imageWithFillColor:WHITE_COLOR];
+    }
+    [self setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
 }
 
 #pragma mark - Line
@@ -114,12 +125,12 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 @end
 
@@ -154,7 +165,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 - (void)setCustomNavigationContentBarBackgroundImage:(UIImage *)backgroundImage
 {
     UIImage *image = [UIImage imageWithFillColor:CLEAR_COLOR];
-    [self.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    [self.navigationBar setCustomNavigationBarBackgroundImage:image];
     self.backgroundImage.image = backgroundImage;
     self.backgroundImage.highlightedImage = backgroundImage;
 }
