@@ -88,7 +88,10 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
         dic[@(kHSYCocoaKitOfButtonPropretyTypeHighTitle)] = title;
     }
     if (name.length > 0) {
-        UIImage *image = [NSBundle imageForBundle:name];
+        UIImage *image = [UIImage imageNamed:name];
+        if (!image) {
+            image = [NSBundle imageForBundle:name];
+        }
         dic[@(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName)] = image;
         dic[@(kHSYCocoaKitOfButtonPropretyTypePreImageViewName)] = image;
     }
