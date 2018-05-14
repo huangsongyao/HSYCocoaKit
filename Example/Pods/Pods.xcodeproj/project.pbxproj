@@ -5881,6 +5881,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 590561E2CC7396B2BFBE14B1CF95FE80 /* HSYCocoaKit.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -6039,6 +6040,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 590561E2CC7396B2BFBE14B1CF95FE80 /* HSYCocoaKit.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";

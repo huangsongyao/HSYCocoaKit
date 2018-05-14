@@ -41,7 +41,7 @@
 	return self;
 }
 
-- (id)initWithBlock:(void (^)(void))block {
+- (id)initWithRACBlock:(void (^)(void))block {
 	NSCParameterAssert(block != nil);
 
 	self = [super init];
@@ -54,7 +54,7 @@
 }
 
 + (instancetype)disposableWithBlock:(void (^)(void))block {
-	return [[self alloc] initWithBlock:block];
+	return [[self alloc] initWithRACBlock:block];
 }
 
 - (void)dealloc {

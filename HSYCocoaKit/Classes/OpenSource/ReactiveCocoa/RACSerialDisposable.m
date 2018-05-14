@@ -57,7 +57,7 @@
 	return serialDisposable;
 }
 
-- (id)initWithBlock:(void (^)(void))block {
+- (id)initWithRACBlock:(void (^)(void))block {
 	self = [self init];
 	if (self == nil) return nil;
 

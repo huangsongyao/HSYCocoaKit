@@ -102,7 +102,7 @@ static CFMutableArrayRef RACCreateDisposablesArray(void) {
 	return self;
 }
 
-- (id)initWithBlock:(void (^)(void))block {
+- (id)initWithRACBlock:(void (^)(void))block {
 	RACDisposable *disposable = [RACDisposable disposableWithBlock:block];
 	return [self initWithDisposables:@[ disposable ]];
 }
