@@ -210,15 +210,15 @@ static char UIScrollViewPullToRefreshView;
             } else if(self.scrollView.isDragging && contentOffset.y >= scrollOffsetThreshold && contentOffset.y < 0) {
                 self.state = SVPullToRefreshStateStopped;
                 CGFloat percent = contentOffset.y/scrollOffsetThreshold;
-                [self.loadingView hsy_updateTriggerForPercent:percent];
+                [self.loadingView hsy_updatePullDownTriggerForPercent:percent];
             }
         } else if(self.state == SVPullToRefreshStateStopped) {
             if (contentOffset.y < scrollOffsetThreshold && self.scrollView.isDragging) {
                 self.state = SVPullToRefreshStateTriggered;
-                [self.loadingView hsy_updateTriggerForPercent:1];
+                [self.loadingView hsy_updatePullDownTriggerForPercent:1];
             } else if(contentOffset.y >= scrollOffsetThreshold && contentOffset.y < 0) {
                 CGFloat percent = contentOffset.y/scrollOffsetThreshold;
-                [self.loadingView hsy_updateTriggerForPercent:percent];
+                [self.loadingView hsy_updatePullDownTriggerForPercent:percent];
             }
         } else if(self.state != SVPullToRefreshStateStopped ) {
             if (contentOffset.y >= scrollOffsetThreshold) {

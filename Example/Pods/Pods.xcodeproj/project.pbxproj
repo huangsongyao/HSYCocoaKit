@@ -5636,6 +5636,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 590561E2CC7396B2BFBE14B1CF95FE80 /* HSYCocoaKit.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/HSYCocoaKit";
 				INFOPLIST_FILE = "Target Support Files/HSYCocoaKit/ResourceBundle-HSYCocoaKit-Info.plist";
@@ -6073,6 +6074,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 590561E2CC7396B2BFBE14B1CF95FE80 /* HSYCocoaKit.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/HSYCocoaKit";
 				INFOPLIST_FILE = "Target Support Files/HSYCocoaKit/ResourceBundle-HSYCocoaKit-Info.plist";

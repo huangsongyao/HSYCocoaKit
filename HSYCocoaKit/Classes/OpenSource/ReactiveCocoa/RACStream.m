@@ -231,6 +231,8 @@
 	}] setNameWithFormat:@"+zip: %@", streams];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmismatched-parameter-types"
 + (instancetype)zip:(id<NSFastEnumeration>)streams reduce:(id (^)())reduceBlock {
 	NSCParameterAssert(reduceBlock != nil);
 
@@ -243,6 +245,7 @@
 
 	return [result setNameWithFormat:@"+zip: %@ reduce:", streams];
 }
+#pragma clang diagnostic pop
 
 + (instancetype)concat:(id<NSFastEnumeration>)streams {
 	RACStream *result = self.empty;

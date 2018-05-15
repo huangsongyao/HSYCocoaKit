@@ -69,11 +69,6 @@
         self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         self.indicatorView.center = self.refreshTitleLabel.center;
         [self addSubview:self.indicatorView];
-        
-        //预留的content视图
-        _contentView = [[UIView alloc] initWithFrame:self.bounds];
-        self.contentView.backgroundColor = self.backgroundColor;
-        [self addSubview:self.contentView];
     }
     return self;
 }
@@ -87,14 +82,26 @@
 
 #pragma mark - Observer Scroll Percent
 
-- (void)hsy_updateTriggerForPercent:(CGFloat)percent
+- (void)hsy_updatePullDownTriggerForPercent:(CGFloat)percent
 {
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     if (percent >= MID_TRIGGER_PERCENT) {
-        self.refreshTitleLabel.text = (self.isPullDown ? REFRESH_RELEASE_START_TITLE : REFRESH_RELEASE_START_UP_TITLE);
+        self.refreshTitleLabel.text = REFRESH_RELEASE_START_TITLE;
     } else {
-        self.refreshTitleLabel.text = (self.isPullDown ? REFRESH_WILL_START_TITLE : REFRESH_WILL_START_UP_TITLE);
+        self.refreshTitleLabel.text = REFRESH_WILL_START_TITLE;
+    }
+    [CATransaction commit];
+}
+
+- (void)hsy_updatePullUpTriggerForPercent:(CGFloat)percent
+{
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    if (percent > MAX_TRIGGER_UP_PERCENT) {
+        self.refreshTitleLabel.text = REFRESH_RELEASE_START_UP_TITLE;
+    } else {
+        self.refreshTitleLabel.text = REFRESH_WILL_START_UP_TITLE;
     }
     [CATransaction commit];
 }
