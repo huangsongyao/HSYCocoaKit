@@ -29,7 +29,23 @@
                     completed:(SDExternalCompletionBlock)completed
 {
     if (![urlString hasPrefix:@"http"]) {
-        NSLog(@"请求地址不是以http开头的网络远端地址，URLString = %@", urlString);
+        //如果请求链接不是以http开头的远程地址，则尝试拆分，看看链接是否为本地图片资源地址
+        NSArray *urls = [urlString componentsSeparatedByString:@"."];
+        if (urls.count > 0) {
+            NSArray *suffixs = @[
+                                 @"png",
+                                 @"jpg",
+                                 @"gif",
+                                 ];
+            if ([suffixs containsObject:urls.lastObject]) {
+                UIImage *image = [UIImage imageWithContentsOfFile:urlString];
+                if (image) {
+                    self.image = image;
+                    self.highlightedImage = image;
+                    return;
+                }
+            }
+        }
     }
     @weakify(self);
     [self sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:placeholderImage options:SDWebImageRetryFailed completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
