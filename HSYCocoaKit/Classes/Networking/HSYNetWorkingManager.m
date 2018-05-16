@@ -7,7 +7,6 @@
 //
 
 #import "HSYNetWorkingManager.h"
-#import "NetworkingRequestPathFile.h"
 #import "NSError+Message.h"
 
 static NSString *kHSYValueKey  = @"HSYValueKey";
@@ -15,6 +14,8 @@ static NSString *kHSYValueKey  = @"HSYValueKey";
 static HSYNetWorkingManager *networkingManager;
 
 @interface HSYNetWorkingManager ()
+
+@property (nonatomic, copy, readonly) NSString *baseURL;                //域名地址[http+ip+端口]
 
 @end
 
@@ -38,12 +39,23 @@ static HSYNetWorkingManager *networkingManager;
     return self;
 }
 
+#pragma mark - Address
+
+- (void)hsy_setNetworkBaseUrl:(NSString *)baseUrl
+{
+    BOOL hasHttp = [baseUrl hasSuffix:@"http"];
+    if (!hasHttp) {
+        NSAssert(hasHttp != NO, @"域名地址必须由【http+IP+Port】组成!");
+    }
+    _baseURL = baseUrl;
+}
+
 + (NSString *)hsy_urlFromPath:(NSString *)path
 {
     if ([path hasPrefix:@"http"]) {
         return path;
     }
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@", BASE_URL, path];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", [HSYNetWorkingManager shareInstance].baseURL, path];
     if (![urlString containsString:@"http"]) {
         NSLog(@"链接不含有http字符串！链接不完整！");
         return nil;

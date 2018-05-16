@@ -7,7 +7,6 @@
 //
 
 #import "AFHTTPSessionManager+RACSignal.h"
-#import "NetworkingRequestPathFile.h"
 #import "HSYNetWorkingManager.h"
 
 @implementation AFHTTPSessionManager (RACSignal)

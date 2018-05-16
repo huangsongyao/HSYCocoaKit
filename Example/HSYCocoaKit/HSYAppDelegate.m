@@ -9,6 +9,7 @@
 #import "HSYAppDelegate.h"
 #import "HSYViewController.h"
 #import "HSYViewControllerModel.h"
+#import "HSYNetWorkingManager.h"
 
 @implementation HSYAppDelegate
 
@@ -16,7 +17,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
-    
+    [[HSYNetWorkingManager shareInstance] hsy_setNetworkBaseUrl:@"http://192.168.1.12:8087/zbd-app"];
     @weakify(self);
     NSDictionary *dic = @{
                           @(kHSYCocoaKitLaunchScreenSize_3_5_Inch) : @"i4_sp",
