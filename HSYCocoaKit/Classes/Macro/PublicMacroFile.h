@@ -143,5 +143,7 @@
 //版本弃用
 #define HSY_DEPRECATED(_iOS_version)                                    __attribute__((deprecated))
 
+//版本启用，默认为从iOS8系统开始
+#define HSY_AVAILABLE_IOS_8                                             8_0
 
 #endif /* PublicMacroFile_h */

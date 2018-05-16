@@ -11,6 +11,7 @@
 #import "UIView+Frame.h"
 #import "ReactiveCocoa.h"
 #import "UIViewController+Shadow.h"
+#import "PublicMacroFile.h"
 
 #define DEFAULT_TRANSITION_DURATION                     0.5f
 
@@ -32,8 +33,8 @@ typedef NS_ENUM(NSUInteger, kHSYCustomPercentDrivenInteractiveTransitionActionsT
 @property (nonatomic, assign, readonly) CGFloat transitionDuration;
 
 - (instancetype)initWithTransitionDuration:(CGFloat)transitionDuration
-                               actionsType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type NS_AVAILABLE_IOS(8_0);
-+ (kHSYCustomPercentDrivenInteractiveTransitionActionsType)hsy_togetherPercentDrivenInteractiveTransitionActionsType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type NS_AVAILABLE_IOS(8_0);
+                               actionsType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
++ (kHSYCustomPercentDrivenInteractiveTransitionActionsType)hsy_togetherPercentDrivenInteractiveTransitionActionsType:(kHSYCustomPercentDrivenInteractiveTransitionActionsType)type NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 - (UIView *)hsy_blackShadowView:(CGFloat)alpha;
 - (void)hsy_removeShadow;
 

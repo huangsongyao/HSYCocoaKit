@@ -8,6 +8,7 @@
 
 #import <AFNetworking/AFNetworking.h>
 #import "ReactiveCocoa.h"
+#import "PublicMacroFile.h"
 
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
     
@@ -28,7 +29,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
  @param parameters 参数
  @return RACSignal
  */
-- (RACSignal *)hsy_rac_getRequest:(NSString *)urlPath parameters:(id)parameters NS_AVAILABLE_IOS(8_0);
+- (RACSignal *)hsy_rac_getRequest:(NSString *)urlPath parameters:(id)parameters NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 /**
  get请求，允许设置额外的请求头信息
@@ -38,7 +39,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
  @param headers 请求头信息
  @return RACSignal
  */
-- (RACSignal *)hsy_rac_getRequest:(NSString *)urlPath parameters:(id)parameters setHeaders:(NSArray<NSDictionary *> *)headers NS_AVAILABLE_IOS(8_0);
+- (RACSignal *)hsy_rac_getRequest:(NSString *)urlPath parameters:(id)parameters setHeaders:(NSArray<NSDictionary *> *)headers NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 #pragma mark - Post
 
@@ -49,7 +50,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
  @param parameters 参数
  @return RACSignal
  */
-- (RACSignal *)hsy_rac_postRequest:(NSString *)urlPath parameters:(id)parameters NS_AVAILABLE_IOS(8_0);
+- (RACSignal *)hsy_rac_postRequest:(NSString *)urlPath parameters:(id)parameters NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 /**
  post请求，允许设置额外的请求头信息
@@ -59,7 +60,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
  @param headers 请求头信息
  @return RACSignal
  */
-- (RACSignal *)hsy_rac_postRequest:(NSString *)urlPath parameters:(id)parameters setHeaders:(NSArray<NSDictionary *> *)headers NS_AVAILABLE_IOS(8_0);
+- (RACSignal *)hsy_rac_postRequest:(NSString *)urlPath parameters:(id)parameters setHeaders:(NSArray<NSDictionary *> *)headers NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 #pragma mark - Logs
 

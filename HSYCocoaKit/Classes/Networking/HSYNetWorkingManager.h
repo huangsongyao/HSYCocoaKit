@@ -13,8 +13,8 @@
 
 @interface HSYNetWorkingManager : NSObject
 
-@property (nonatomic, strong, readonly) AFHTTPSessionManager *httpSessionManager NS_AVAILABLE_IOS(8_0);                //>=3.0f version，一般网络请求
-@property (nonatomic, strong, readonly) AFURLSessionManager *fileSessionManager NS_AVAILABLE_IOS(8_0);                //>=3.0f version，文件上传或者下载请求
+@property (nonatomic, strong, readonly) AFHTTPSessionManager *httpSessionManager NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);                //>=3.0f version，一般网络请求
+@property (nonatomic, strong, readonly) AFURLSessionManager *fileSessionManager NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);                //>=3.0f version，文件上传或者下载请求
 
 /**
  单例
@@ -42,7 +42,7 @@
  *
  *  @return 网络状态的信号，有网络返回completed信号，无则返回error信号
  */
-- (RACSignal *)hsy_networking_3x_Reachability NS_AVAILABLE_IOS(8_0);
+- (RACSignal *)hsy_networking_3x_Reachability NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 /**
  通过字段拼接完整的url，若字段中含有http开头字眼，则默认为是一个完整的链接
@@ -57,6 +57,6 @@
  
  @param next 网络状态回调，如果需要持续对网络状态进行监听，则在block中返回NO
  */
-- (void)hsy_observer_3x_NetworkReachabilityOfNext:(BOOL(^)(AFNetworkReachabilityStatus status, BOOL hasNetwork))next NS_AVAILABLE_IOS(8_0);
+- (void)hsy_observer_3x_NetworkReachabilityOfNext:(BOOL(^)(AFNetworkReachabilityStatus status, BOOL hasNetwork))next NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 @end

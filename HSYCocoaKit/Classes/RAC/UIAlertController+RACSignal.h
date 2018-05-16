@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ReactiveCocoa.h"
+#import "PublicMacroFile.h"
 
 @interface UIAlertController (RACSignal)
 
@@ -20,7 +21,7 @@
  @param alertActionTitles alertAction的title的list
  @return RACSignal点击事件的信号
  */
-+ (RACSignal *)hsy_rac_showAlertController:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message alertActionTitles:(NSArray<NSString *> *)alertActionTitles NS_AVAILABLE_IOS(8_0);
++ (RACSignal *)hsy_rac_showAlertController:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message alertActionTitles:(NSArray<NSString *> *)alertActionTitles NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 /**
  sheet show
@@ -31,6 +32,6 @@
  @param sheetActionTitles alertAction的title的list
  @return RACSignal点击事件的信号
  */
-+ (RACSignal *)hsy_rac_showSheetController:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message sheetActionTitles:(NSArray<NSString *> *)sheetActionTitles NS_AVAILABLE_IOS(8_0);
++ (RACSignal *)hsy_rac_showSheetController:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message sheetActionTitles:(NSArray<NSString *> *)sheetActionTitles NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 @end

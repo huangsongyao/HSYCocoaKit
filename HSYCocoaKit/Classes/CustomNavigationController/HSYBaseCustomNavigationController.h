@@ -19,13 +19,13 @@ typedef NS_ENUM(NSUInteger, kHSYCustomNavigationControllerParamsKey) {
 
 @interface HSYBaseCustomNavigationController : UINavigationController <UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
-@property (nonatomic, assign, setter=openCustomTransitionAnimation:) BOOL openTransitionAnimation NS_AVAILABLE_IOS(8_0);                                                            //设置是否打开自定义转场动画
-@property (nonatomic, assign) CGFloat panGestureEndedProgress NS_AVAILABLE_IOS(8_0);                                                            //滑动手势结束后的判定比例，取值范围为[0, 1]，闭区间，默认为0.65
-@property (nonatomic, assign, readonly) BOOL tranistionCompleted NS_AVAILABLE_IOS(8_0);
-@property (nonatomic, assign) BOOL banTransition NS_AVAILABLE_IOS(8_0);                                                            //默认为NO，如果设置为YES，则不自持手势转场，用于特定页面禁止侧滑
+@property (nonatomic, assign, setter=openCustomTransitionAnimation:) BOOL openTransitionAnimation NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);                                      //设置是否打开自定义转场动画
+@property (nonatomic, assign) CGFloat panGestureEndedProgress NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);                                                            //滑动手势结束后的判定比例，取值范围为[0, 1]，闭区间，默认为0.65
+@property (nonatomic, assign, readonly) BOOL tranistionCompleted NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
+@property (nonatomic, assign) BOOL banTransition NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);                                                            //默认为NO，如果设置为YES，则不自持手势转场，用于特定页面禁止侧滑
 
 //此入口方法默认打开了自定义转场动画
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
-                                    params:(NSDictionary <NSNumber *, id>*)params NS_AVAILABLE_IOS(8_0);
+                                    params:(NSDictionary <NSNumber *, id>*)params NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 @end

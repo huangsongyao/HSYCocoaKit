@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @class JSONModel;
 @interface HSYCocoaKitManager : NSObject
 
