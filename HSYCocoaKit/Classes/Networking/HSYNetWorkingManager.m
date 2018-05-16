@@ -43,7 +43,7 @@ static HSYNetWorkingManager *networkingManager;
 
 - (void)hsy_setNetworkBaseUrl:(NSString *)baseUrl
 {
-    BOOL hasHttp = [baseUrl hasSuffix:@"http"];
+    BOOL hasHttp = [baseUrl hasPrefix:@"http"];
     if (!hasHttp) {
         NSAssert(hasHttp != NO, @"域名地址必须由【http+IP+Port】组成!");
     }
