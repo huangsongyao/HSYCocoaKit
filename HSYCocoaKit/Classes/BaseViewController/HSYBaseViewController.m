@@ -14,7 +14,7 @@
 
 #define DEFAULT_NAVIGATION_BAR_HEIGHT           IPHONE_BAR_HEIGHT
 
-@interface HSYBaseViewController () <UIGestureRecognizerDelegate>
+@interface HSYBaseViewController ()
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
@@ -69,6 +69,7 @@
         }];
     }
     if (self.hsy_addEndEditedKeyboard) {
+        //点击屏幕收起键盘的手势
         [self.view hsy_addTapGestureRecognizerDelegate:self subscribeNext:^(UITapGestureRecognizer *gesture) {
             @strongify(self);
             [self.view endEditing:YES];
@@ -82,6 +83,12 @@
             [self hsy_addCustomNavigationBar];
         }
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 #pragma mark - Network State Code
@@ -104,8 +111,6 @@
             if (model.hsy_showPromptContent) {
                 [HSYHUDHelper hsy_showHUDViewForShowType:model.hsy_showType text:model.hsy_hudString hideAfter:model.hsy_animationTime];
             }
-        } else if(model.hsy_codeType == kHSYHUDModelCodeTypeRequestSuccess) {
-            
         } else if (model.hsy_codeType == kHSYHUDModelCodeTypeRequestFailure) {
             if (model.hsy_showPromptContent) {
                 [HSYHUDHelper hsy_showHUDViewForShowType:model.hsy_showType text:model.hsy_hudString hideAfter:model.hsy_animationTime];
@@ -113,6 +118,8 @@
         } else if (model.hsy_codeType == kHSYHUDModelCodeTypeRequestPullUpSuccess) {
             
         } else if (model.hsy_codeType == kHSYHUDModelCodeTypeRequestPullDownSuccess) {
+            
+        } else if(model.hsy_codeType == kHSYHUDModelCodeTypeRequestSuccess) {
             
         }
         return model.hsy_codeType;
@@ -262,5 +269,14 @@
     }
     return navigationBar;
 }
+
+#pragma mark - StatusBar Style
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    //允许外部设置StatusBar的字体颜色，如果本getter方法未被处分，请检测工程的Info.plist文件，查看是否设置了“View controller-based status bar appearance”项，该项必须设置为YES，才能触发
+    return self.statusBarStyle;
+}
+
 
 @end

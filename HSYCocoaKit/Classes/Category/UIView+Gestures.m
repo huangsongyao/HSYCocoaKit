@@ -25,4 +25,5 @@
     [self addGestureRecognizer:tapGestrue];
 }
 
+
 @end

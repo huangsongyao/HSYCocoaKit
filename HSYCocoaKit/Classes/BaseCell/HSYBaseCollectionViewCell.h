@@ -10,4 +10,6 @@
 
 @interface HSYBaseCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic, assign) BOOL tableViewStyle;
+
 @end

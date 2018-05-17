@@ -11,6 +11,7 @@
 
 @interface HSYBaseTabBarViewController : HSYBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
+//底部的tabbar
 @property (nonatomic, strong, readonly) UICollectionView *collectionView;
 //请在"- initWithConfigs:"方法的子类重载中设置高度，默认为44.0f
 @property (nonatomic, strong) NSNumber *tabbarHeight;

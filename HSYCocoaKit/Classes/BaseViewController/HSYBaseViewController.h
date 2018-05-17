@@ -13,7 +13,7 @@
 #import "HSYCustomNavigationBar.h"
 #import "HSYBaseCustomNavigationController.h"
 
-@interface HSYBaseViewController : UIViewController
+@interface HSYBaseViewController : UIViewController <UIGestureRecognizerDelegate>
 
 //可能为nil，如果使用自定义的转场navigationController则该指针不为nil
 @property (nonatomic, strong, readonly) UIView *customNavigationBar;                    //定制与父类的导航栏，iOS 11前本指针指向HSYCustomNavigationBar类，iOS 11后指向HSYCustomNavigationContentViewBar类
@@ -29,6 +29,7 @@
 #pragma mark - 以下属性无硬性使用规则
 
 @property (nonatomic, assign, setter=showSystemLoading:) BOOL hsy_showLoading;          //是否在进入新vc控制器后，显示系统默认的loading，默认为否，并且由于情况种类太多，如果该属性设置为YES，请在需要的时候调用“- hsy_endSystemLoading”方法停止loading动画，父类中不对该loading逻辑做跟进和处理
+@property (nonatomic, assign) UIStatusBarStyle statusBarStyle;                          //状态栏的字体颜色，默认为UIStatusBarStyleDefault
 
 #pragma mark - Network State Code
 

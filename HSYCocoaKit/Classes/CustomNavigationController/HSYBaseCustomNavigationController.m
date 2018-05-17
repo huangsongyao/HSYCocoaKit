@@ -125,6 +125,13 @@
     return [super popViewControllerAnimated:animated];
 }
 
+#pragma mark - StatusBar Style
+
+- (UIViewController *)childViewControllerForStatusBarStyle
+{
+    return self.topViewController;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
