@@ -8,6 +8,8 @@
 
 #import "UIApplication+Device.h"
 #import "NSFileManager+Finder.h"
+#import "PublicMacroFile.h"
+#import "HSYBaseLaunchScreenViewController.h"
 
 @implementation UIApplication (Device)
 
@@ -28,7 +30,11 @@
 
 + (CGFloat)statusBarHeight
 {
-    return [UIApplication iPhoneStatusBarSize].height;
+    CGFloat height = [UIApplication iPhoneStatusBarSize].height;
+    if (height == 0.0f) {
+        height = (IPHONE_HEIGHT == ((CGFloat)kHSYCocoaKitLaunchScreenSize_5_8_Inch) ? 44.0f : 20.0f);
+    }
+    return height;
 }
 
 + (id<UIApplicationDelegate>)appDelegate
