@@ -103,6 +103,19 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
     }
 }
 
+#pragma mark - Set Red Point
+
+- (void)hsy_setRedPointInPage:(NSInteger)page redPointNumbers:(NSNumber *)numbers
+{
+    if (page < 0 || page > [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_viewControllers].count) {
+        NSLog(@"Set Red Point Failure!----Page Over viewControllers.count");
+        return;
+    }
+    HSYBaseTabBarConfigItem *item = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_configItems][page];
+    item.redPointNumber = numbers;
+    [self.collectionView reloadData];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

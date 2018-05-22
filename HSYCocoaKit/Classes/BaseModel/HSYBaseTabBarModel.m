@@ -8,6 +8,8 @@
 
 #import "HSYBaseTabBarModel.h"
 #import "HSYBaseSegmentedPageViewController.h"
+#import "NSString+Size.h"
+#import "HSYBaseTabBarItemCollectionViewCell.h"
 
 @implementation HSYBaseTabBarConfigItem
 
@@ -21,6 +23,41 @@
         _selectedColor = selParamter.allValues.firstObject;
     }
     return self;
+}
+
+- (CGSize)hsy_redPointWidth:(CGFloat)maxWidth
+{
+    NSString *string = self.redPointString;
+    if (!string) {
+        return CGSizeZero;
+    } else if (string.length == 0) {
+        return CGSizeMake(kHSYCocoaKitMinRedPointHeight, kHSYCocoaKitMinRedPointHeight);
+    } else {
+        CGSize size = [string contentOfSize:UI_RED_POINT_FONT maxHeight:kHSYCocoaKitMaxRedPointHeight];
+        if (size.width < kHSYCocoaKitMaxRedPointHeight) {
+            size = CGSizeMake(kHSYCocoaKitMaxRedPointHeight, kHSYCocoaKitMaxRedPointHeight);
+        } else {
+            size = CGSizeMake(maxWidth, kHSYCocoaKitMaxRedPointHeight);
+        }
+        return size;
+    }
+}
+
+- (NSString *)redPointString
+{
+    NSInteger digital = self.redPointNumber.integerValue;
+    NSString *string = nil;
+    if (digital > 0) {
+        NSString *suffix = @"";
+        if (digital > 99) {
+            digital = 99;
+            suffix = @"+";
+        }
+        string = [NSString stringWithFormat:@"%@%ld", suffix, digital];
+    } else if (digital == -1) {
+        string = @"";
+    }
+    return string;
 }
 
 @end

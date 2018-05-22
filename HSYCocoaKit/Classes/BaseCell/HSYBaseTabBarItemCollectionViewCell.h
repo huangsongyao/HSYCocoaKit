@@ -8,6 +8,9 @@
 
 #import "HSYBaseCollectionViewCell.h"
 
+FOUNDATION_EXPORT CGFloat const kHSYCocoaKitMaxRedPointHeight;
+FOUNDATION_EXPORT CGFloat const kHSYCocoaKitMinRedPointHeight;
+
 @class HSYBaseTabBarConfigItem;
 @interface HSYBaseTabBarItemCollectionViewCell : HSYBaseCollectionViewCell
 

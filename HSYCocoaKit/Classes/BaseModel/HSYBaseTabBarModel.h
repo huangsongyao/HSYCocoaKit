@@ -17,9 +17,34 @@
 @property (nonatomic, strong, readonly) UIColor *normalColor;
 @property (nonatomic, strong, readonly) UIColor *selectedColor;
 
+@property (nonatomic, strong) NSNumber *redPointNumber;
 @property (nonatomic, assign) BOOL selectedItem;
 
-- (instancetype)initWithTitle:(NSString *)title normalParamter:(NSDictionary *)norParamter selectedParamter:(NSDictionary *)selParamter;
+/**
+ 入口方法
+
+ @param title title
+ @param norParamter normal状态的参数
+ @param selParamter press状态的参数
+ @return self
+ */
+- (instancetype)initWithTitle:(NSString *)title
+               normalParamter:(NSDictionary *)norParamter
+             selectedParamter:(NSDictionary *)selParamter;
+
+/**
+ 提供一个方法，计算出最大宽度，超过时显示最大宽度
+
+ @return 红点的显示区域
+ */
+- (CGSize)hsy_redPointWidth:(CGFloat)maxWidth;
+
+/**
+ 返回红点显示的条数，如果超过99条返回@"+99"，如果显示条数为-1，则返回一个空的字符串，这种情况下会显示一个小小的红点，否则返回nil，返回nil表示不显示红点
+
+ @return 红点数目
+ */
+- (NSString *)redPointString;
 
 @end
 

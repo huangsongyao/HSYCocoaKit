@@ -140,6 +140,11 @@
 #define UI_BOLD_SYSTEM_FONT_10                                          UI_BOLD_FONT_SIZE(10)
 #define UI_BOLD_SYSTEM_FONT_9                                           UI_BOLD_FONT_SIZE(9)
 
+
+//红点字体
+#define UI_RED_POINT_FONT                                               UI_BOLD_SYSTEM_FONT_9
+
+
 //版本弃用
 #define HSY_DEPRECATED(_iOS_version)                                    __attribute__((deprecated))
 

@@ -373,6 +373,40 @@
     return flowLayout;
 }
 
+#pragma mark - Create UISlider
+
++ (UISlider *)createSliderByParam:(NSDictionary <NSNumber *, id>*)param changedValue:(void(^)(CGFloat news))newValue
+{
+    UISlider *slider = [[UISlider alloc] init];
+    if (param[@(kHSYCocoaKitOfSliderPropertyTypeNorThumbImage)]) {
+        [slider setThumbImage:param[@(kHSYCocoaKitOfSliderPropertyTypeNorThumbImage)] forState:UIControlStateNormal];
+    }
+    if (param[@(kHSYCocoaKitOfSliderPropertyTypePreThumbImage)]) {
+        [slider setThumbImage:param[@(kHSYCocoaKitOfSliderPropertyTypePreThumbImage)] forState:UIControlStateHighlighted];
+    }
+    if (param[@(kHSYCocoaKitOfSliderPropertyTypeNorMinimumTrackTintColor)]) {
+        [slider setMinimumTrackTintColor:param[@(kHSYCocoaKitOfSliderPropertyTypeNorMinimumTrackTintColor)]];
+    }
+    if (param[@(kHSYCocoaKitOfSliderPropertyTypePreMinimumTrackTintColor)]) {
+        [slider setMaximumTrackTintColor:param[@(kHSYCocoaKitOfSliderPropertyTypePreMinimumTrackTintColor)]];
+    }
+    if (param[@(kHSYCocoaKitOfSliderPropertyTypeMaximumValue)]) {
+        slider.maximumValue = [param[@(kHSYCocoaKitOfSliderPropertyTypeMaximumValue)] floatValue];
+    }
+    if (param[@(kHSYCocoaKitOfSliderPropertyTypeMinimumValue)]) {
+        slider.minimumValue = [param[@(kHSYCocoaKitOfSliderPropertyTypeMinimumValue)] floatValue];
+    }
+    if (param[@(kHSYCocoaKitOfSliderPropertyTypeValue)]) {
+        slider.value = [param[@(kHSYCocoaKitOfSliderPropertyTypeValue)] floatValue];
+    }
+    [[[slider rac_signalForControlEvents:UIControlEventValueChanged] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(UISlider *x) {
+        if (newValue) {
+            newValue(x.value);
+        }
+    }];
+    return slider;
+}
+
 @end
 
 

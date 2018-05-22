@@ -25,4 +25,12 @@
  */
 - (void)scrollToPage:(NSInteger)page;
 
+/**
+ 外部设置红点
+
+ @param page 红点的显示位置
+ @param numbers 红点数目
+ */
+- (void)hsy_setRedPointInPage:(NSInteger)page redPointNumbers:(NSNumber *)numbers;
+
 @end

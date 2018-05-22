@@ -136,6 +136,19 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfWKWebViewPropretypType) {
     kHSYCocoaKitOfWKWebViewPropretypType_a,
 };
 
+//UISlider
+typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfSliderPropertyType) {
+    
+    kHSYCocoaKitOfSliderPropertyTypeNorThumbImage                   = 21,   //UIImage
+    kHSYCocoaKitOfSliderPropertyTypePreThumbImage,                          //UIImage
+    kHSYCocoaKitOfSliderPropertyTypeNorMinimumTrackTintColor,               //UIColor
+    kHSYCocoaKitOfSliderPropertyTypePreMinimumTrackTintColor,               //UIColor
+    kHSYCocoaKitOfSliderPropertyTypeMaximumValue,                           //NSNumber\(CGFloat)
+    kHSYCocoaKitOfSliderPropertyTypeMinimumValue,                           //NSNumber\(CGFloat)
+    kHSYCocoaKitOfSliderPropertyTypeValue,                                  //NSNumber\(CGFloat)
+    
+};
+
 @interface NSObject (UIKit)
 
 /**
@@ -213,5 +226,13 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfWKWebViewPropretypType) {
  */
 + (UICollectionViewFlowLayout *)createFlowLayoutByParam:(NSDictionary <NSNumber *, id>*)param;
 
+/**
+ UISlider--------key:@(kHSYCocoaKitOfSliderPropertyType)
+
+ @param param 入参属性
+ @param newValue 触发changed后改变的值的回调事件
+ @return UISlider
+ */
++ (UISlider *)createSliderByParam:(NSDictionary <NSNumber *, id>*)param changedValue:(void(^)(CGFloat news))newValue;
 
 @end
