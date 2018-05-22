@@ -17,7 +17,7 @@
 - (instancetype)init
 {
     HSYBaseSegmentedPageConfig *config1 = [HSYBaseSegmentedPageConfig initWithViewControllerClassName:@"HSYViewController" viewControllerTitle:@"vc_1" paramters:@{}];
-    HSYBaseSegmentedPageConfig *config2 = [HSYBaseSegmentedPageConfig initWithViewControllerClassName:@"HSYBViewController" viewControllerTitle:@"vc_1" paramters:@{}];
+    HSYBaseSegmentedPageConfig *config2 = [HSYBaseSegmentedPageConfig initWithViewControllerClassName:@"HSYTestsViewController" viewControllerTitle:@"vc_1" paramters:@{}];
     HSYBaseSegmentedPageConfig *config3 = [HSYBaseSegmentedPageConfig initWithViewControllerClassName:@"HSYViewController" viewControllerTitle:@"vc_1" paramters:@{}];
     
     NSArray *configs = @[config1, config2, config3];

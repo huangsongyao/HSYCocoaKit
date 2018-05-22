@@ -179,39 +179,8 @@
     for (UIViewController *vc in viewControllers) {
         [scrollView addSubview:vc.view];
     }
-    CGFloat x = [viewControllers.lastObject view].x;
+    CGFloat x = [viewControllers.lastObject view].right;
     return x;
-//    CGFloat x = 0.0f;
-//    NSString *tableString = @"tableView";
-//    NSString *collectionString = @"collectionView";
-//    for (UIViewController *vc in hsy_viewControllers) {
-//        NSInteger i = [hsy_viewControllers indexOfObject:vc];
-//        NSString *title = titles[i];
-//        if ([vc respondsToSelector:@selector(view)]) {
-//            vc.view.height = scrollView.height;
-//            vc.view.origin = CGPointMake(x, 0);
-//        }
-//        if ([vc respondsToSelector:NSSelectorFromString(tableString)]) {
-//            UITableViewController *tvc = (UITableViewController *)vc;
-//            tvc.tableView.frame = tvc.view.bounds;
-//        } else if ([vc respondsToSelector:NSSelectorFromString(collectionString)]) {
-//            UICollectionViewController *cvc = (UICollectionViewController *)vc;
-//            cvc.collectionView.frame = cvc.view.bounds;
-//        }
-//        BOOL hidden = ![configs[i] showNavigationBar];
-//        vc.navigationItem.title = title;
-//        vc.navigationController.navigationBar.hidden = hidden;
-//        if ([vc isKindOfClass:[HSYBaseViewController class]]) {
-//            HSYBaseViewController *basevc = (HSYBaseViewController *)vc;
-//            if (basevc.customNavigationBar) {
-//                [(HSYBaseViewController *)vc hsy_customNavigationBarNavigationItem].title = title;
-//                [(HSYBaseViewController *)vc customNavigationBar].hidden = hidden;
-//            }
-//        }
-//        [scrollView addSubview:vc.view];
-//        x = vc.view.right;
-//    }
-//    return x;
 }
 
 #pragma mark - UIScrollViewDelegate

@@ -89,7 +89,7 @@
         HSYBaseTabBarControllerConfig *config3 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"CXAMCPersonalViewController" viewControllerTitle:@"我的" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_mine_default" : @"tab_icon_mine_new_selected"}];
         config3.showNavigationBar = NO;
         
-        HSYBaseTabBarControllerConfig *config4 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYBViewController" viewControllerTitle:@"更多" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_search_default" : @"tab_icon_search_new_selected"}];
+        HSYBaseTabBarControllerConfig *config4 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYTestsViewController" viewControllerTitle:@"更多" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_search_default" : @"tab_icon_search_new_selected"}];
         NSMutableArray *configs = [@[config1, config2, config3, config4] mutableCopy];
         HSYTabBarController *vc = [[HSYTabBarController alloc] initWithConfigs:configs];
         
@@ -108,6 +108,15 @@
     button1.backgroundColor = [UIColor greenColor];
     button1.frame = CGRectMake(button.right + 50, 300, 60, 56);
     [self.view addSubview:button1];
+    
+    UIButton *button2 = [NSObject createButtonByParam:@{} clickedOnSubscribeNext:^(UIButton *button) {
+        @strongify(self);
+        HSYBViewController *vc = [[HSYBViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    button2.backgroundColor = [UIColor yellowColor];
+    button2.frame = CGRectMake(button.right, button.bottom + 50, 60, 56);
+    [self.view addSubview:button2];
     
     HSYBaseSegmentedPageControl *control = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:CGRectMake(0, button.bottom + 100, IPHONE_WIDTH, 64) paramters:@{@(kHSYCocoaKitCustomSegmentedTypeButtonSize) : [NSValue valueWithCGSize:CGSizeMake(75, 64)]} pageControls:@[@"123", @"456", @"789", @"101112", @"444", @"5555", @"66666", @"7777777"] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
         
