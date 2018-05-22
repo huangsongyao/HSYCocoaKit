@@ -4,7 +4,7 @@
 //
 //  Created by Josh Abernathy on 3/5/12.
 //  Copyright (c) 2012 GitHub, Inc. All rights reserved.
-//
+//  由于ReactiveCocoa前段时间在cocoapods上的2.5版本出现.podspec文件紊乱，导致在更新私有库是出现了编译问题，无法提交新版本到cocoapods上，现将ReactiveCocoa基于2.5版本下的库独立出来并手动添加至私有库中
 
 #import <Foundation/Foundation.h>
 
