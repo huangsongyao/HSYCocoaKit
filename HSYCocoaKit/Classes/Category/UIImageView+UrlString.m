@@ -97,8 +97,8 @@
                 break;
         }
     } else {
-        self.image = image;
-        self.highlightedImage = image;
+        //在Runloop中执行设置加载成功后的网络图片，避免加载网络大图时，出现卡顿
+        [self performSelector:@selector(setImage:) withObject:image afterDelay:0 inModes:@[NSDefaultRunLoopMode]];
     }
 }
 

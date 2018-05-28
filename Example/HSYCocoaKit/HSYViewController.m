@@ -93,11 +93,11 @@
         NSMutableArray *configs = [@[config1, config2, config3, config4] mutableCopy];
         HSYTabBarController *vc = [[HSYTabBarController alloc] initWithConfigs:configs];
         
-//        [vc hsy_setRedPointInPage:1 redPointNumbers:@(1)];          //显示1
-//        [vc hsy_setRedPointInPage:1 redPointNumbers:@(78)];         //显示79
-//        [vc hsy_setRedPointInPage:1 redPointNumbers:@(12222)];      //显示+99
-//        [vc hsy_setRedPointInPage:1 redPointNumbers:@(-1)];         //只显示红点不显示数字
-        [vc hsy_setRedPointInPage:1 redPointNumbers:@(0)];          //不显示红点
+        [vc hsy_setRedPointInPage:0 redPointNumbers:@(1)];          //显示1
+        [vc hsy_setRedPointInPage:1 redPointNumbers:@(78)];         //显示79
+        [vc hsy_setRedPointInPage:2 redPointNumbers:@(12222)];      //显示+99
+        [vc hsy_setRedPointInPage:3 redPointNumbers:@(-1)];         //只显示红点不显示数字
+//        [vc hsy_setRedPointInPage:1 redPointNumbers:@(0)];          //不显示红点
         [self.navigationController pushViewController:vc animated:YES];
         //        [[self hsy_rac_openEditingSystemVideos] subscribeNext:^(id x) {
         //            NSLog(@"33333");
