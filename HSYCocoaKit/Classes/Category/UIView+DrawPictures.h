@@ -17,4 +17,11 @@
  */
 - (UIView *)snapshot;
 
+/**
+ 把视图绘制成一张图片
+
+ @return 绘制好的图片
+ */
+- (UIImageView *)snapshotImageView;
+
 @end

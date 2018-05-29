@@ -18,6 +18,24 @@
 
 + (UIView *)snapshotFromView:(UIView *)view
 {
+    UIImageView *snapshotImageView = [UIView snapshotImageView:view];
+    if (!view) {
+        return nil;
+    }
+    UIView *snapshotView = [[UIView alloc] initWithFrame:snapshotImageView.frame];
+    snapshotImageView.origin = CGPointZero;
+    [snapshotView addSubview:snapshotImageView];
+    
+    return snapshotView;
+}
+
+- (UIImageView *)snapshotImageView
+{
+    return [UIView snapshotImageView:self];
+}
+
++ (UIImageView *)snapshotImageView:(UIView *)view
+{
     if (!view) {
         return nil;
     }
@@ -34,12 +52,7 @@
     snapshotImageView.layer.shadowRadius = view.layer.shadowRadius;
     snapshotImageView.layer.shadowOpacity = view.layer.shadowOpacity;
     
-    UIView *snapshotView = [[UIView alloc] initWithFrame:snapshotImageView.frame];
-    snapshotImageView.origin = CGPointZero;
-    [snapshotView addSubview:snapshotImageView];
-    
-    return snapshotView;
+    return snapshotImageView;
 }
-
 
 @end

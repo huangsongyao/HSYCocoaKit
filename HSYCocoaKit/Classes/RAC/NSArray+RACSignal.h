@@ -12,9 +12,9 @@
 @interface NSArray (RACSignal)
 
 /**
- *  rac遍历数组
+ *  rac遍历数组，并返回sendNext信号，当遍历完成后则返回completed信号并释放
  *
- *  @return 遍历后的信号
+ *  @return 遍历后的信号，格式为：@{@(遍历对象的index) : 遍历对象的id}
  */
 - (RACSignal *)rac_traverseArray;
 

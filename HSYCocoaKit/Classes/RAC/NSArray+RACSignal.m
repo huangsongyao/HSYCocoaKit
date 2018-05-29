@@ -10,8 +10,8 @@
 
 @implementation NSArray (RACSignal)
 
-- (RACSignal *)rac_traverseArray {
-    
+- (RACSignal *)rac_traverseArray
+{
     if (self.count == 0) {
         return nil;
     }
@@ -28,7 +28,9 @@
                 [subscriber sendCompleted];
             }];
         }
-        return [RACDisposable disposableWithBlock:^{}];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"“- rac_traverseArray”方法信号释放");
+        }];
     }];
 }
 
@@ -70,6 +72,7 @@
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{
+            NSLog(@"“- rac_filterUntilCompleted:toMap:”方法信号释放");
         }];
     }];
 }

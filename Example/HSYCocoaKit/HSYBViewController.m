@@ -11,6 +11,8 @@
 #import "HSYBaseTableViewCell.h"
 #import "NSObject+UIKit.h"
 #import "NSString+Size.h"
+#import "UIView+DrawPictures.h"
+//#import "UIViewController+Finder.h"
 
 @interface TestBaseTableViewCell : HSYBaseTableViewCell
 
@@ -92,7 +94,11 @@
     [self.headerView addSubview:btn];
     
     [self hsy_rightItemsImages:@[@{@(kHSYCustomBarButtonItemTagBack) : @"nav_back@2x"}] subscribeNext:^(UIButton *button, kHSYCustomBarButtonItemTag tag) {
-        
+        NSLog(@"x1=%@", [NSDate date]);
+//        UIImageView *imageView = [self.view snapshotImageView];
+//        UIViewController *vc = [UIViewController currentViewController];
+        NSLog(@"x2=%@", [NSDate date]);
+//        NSLog(@"x3=%@", vc);
     }];
     
     

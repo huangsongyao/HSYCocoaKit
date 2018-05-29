@@ -127,6 +127,8 @@
 #import "RACEmptySignal.h"
 #import "RACErrorSignal.h"
 #import "RACEvent.h"
+#import "HSYCustomLargerImageView.h"
+#import "UIViewController+Finder.h"
 #import "RACGroupedSignal.h"
 #import "RACImmediateScheduler.h"
 #import "RACIndexSetSequence.h"

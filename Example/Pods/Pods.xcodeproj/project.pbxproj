@@ -527,6 +527,12 @@
 		AC9864746FCFBE1C1D19D6B794E9A3B3 /* NSObject+RACDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF2883AA60B2A4C27DE1024F425E277 /* NSObject+RACDescription.m */; };
 		AD62AC9308A07F4FEAE0181E49BF6DD0 /* UILabel+SuggestSize.m in Sources */ = {isa = PBXBuildFile; fileRef = F862B73975A7E2D48E6BB952056EC779 /* UILabel+SuggestSize.m */; };
 		AE597EC1CA0358FD18E3783EC14F31EE /* JSONModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A0F02719946FD9E57EF8913AC284E6 /* JSONModel.framework */; };
+		AE64DFB420BD279E003A3AD7 /* HSYCustomLargerImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = AE64DFB220BD279E003A3AD7 /* HSYCustomLargerImageView.h */; };
+		AE64DFB520BD279E003A3AD7 /* HSYCustomLargerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64DFB320BD279E003A3AD7 /* HSYCustomLargerImageView.m */; };
+		AE64DFB820BD360B003A3AD7 /* UIViewController+Finder.h in Headers */ = {isa = PBXBuildFile; fileRef = AE64DFB620BD360B003A3AD7 /* UIViewController+Finder.h */; };
+		AE64DFB920BD360B003A3AD7 /* UIViewController+Finder.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64DFB720BD360B003A3AD7 /* UIViewController+Finder.m */; };
+		AE64DFBC20BD3CB8003A3AD7 /* NSArray+Finder.h in Headers */ = {isa = PBXBuildFile; fileRef = AE64DFBA20BD3CB8003A3AD7 /* NSArray+Finder.h */; };
+		AE64DFBD20BD3CB8003A3AD7 /* NSArray+Finder.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64DFBB20BD3CB8003A3AD7 /* NSArray+Finder.m */; };
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B387A0E4F0088F7A949E733A738ACF5 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEAAB909C3A0D40DE7DAC6AFE3299BC3 /* RACScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 78D69C54FEDDC14A9312F3A7CA274A47 /* RACScheduler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEE0AE1CB830E5ADD8925A374F2BD172 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B36B9225EF2EC6E59121280D558DE5F /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
@@ -1576,6 +1582,12 @@
 		AE14E262281CD7AD6F2BF5A3406AA4B4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE16D9085D1814FF62888674BC611638 /* UISwitch+RACSignalSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UISwitch+RACSignalSupport.m"; sourceTree = "<group>"; };
 		AE23BB02AE2AD002CDDD58DB1E1434CD /* NSFileHandle+RACSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+RACSupport.m"; sourceTree = "<group>"; };
+		AE64DFB220BD279E003A3AD7 /* HSYCustomLargerImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSYCustomLargerImageView.h; sourceTree = "<group>"; };
+		AE64DFB320BD279E003A3AD7 /* HSYCustomLargerImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSYCustomLargerImageView.m; sourceTree = "<group>"; };
+		AE64DFB620BD360B003A3AD7 /* UIViewController+Finder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Finder.h"; sourceTree = "<group>"; };
+		AE64DFB720BD360B003A3AD7 /* UIViewController+Finder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Finder.m"; sourceTree = "<group>"; };
+		AE64DFBA20BD3CB8003A3AD7 /* NSArray+Finder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Finder.h"; sourceTree = "<group>"; };
+		AE64DFBB20BD3CB8003A3AD7 /* NSArray+Finder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Finder.m"; sourceTree = "<group>"; };
 		AE9F7064BD0DDD8D628A336D524B3B42 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF226BD5982A4F53BA32707A28802CB2 /* CocoaAsyncSocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaAsyncSocket.xcconfig; sourceTree = "<group>"; };
 		AF4444109435B8FA68A11B05BF514A81 /* LOTShapeGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LOTShapeGroup.h; path = "lottie-ios/Classes/Models/LOTShapeGroup.h"; sourceTree = "<group>"; };
@@ -2313,6 +2325,8 @@
 				F05C1E2ABAB3BDBB3F316B44F6FC5625 /* UILabel+AttributedString.m */,
 				35ED31E95D7905383528B2B4C4A4F05B /* UILabel+SuggestSize.h */,
 				F862B73975A7E2D48E6BB952056EC779 /* UILabel+SuggestSize.m */,
+				AE64DFBA20BD3CB8003A3AD7 /* NSArray+Finder.h */,
+				AE64DFBB20BD3CB8003A3AD7 /* NSArray+Finder.m */,
 				B4A9D40195D63C1E25074CFC78C58609 /* UINavigationBar+Background.h */,
 				3FAF27324B2D00E32AD538AC88FF913D /* UINavigationBar+Background.m */,
 				8A0DE96C3B94539F944B34ED4494DD35 /* UIScrollView+Page.h */,
@@ -2329,6 +2343,8 @@
 				D11732382925837FF5958D0FA7D7A415 /* UIViewController+Device.m */,
 				824D444F06D769A176A9DF42B2C42B41 /* UIViewController+Keyboard.h */,
 				B7D5210CF95B11A0ED9C626BED7B119B /* UIViewController+Keyboard.m */,
+				AE64DFB620BD360B003A3AD7 /* UIViewController+Finder.h */,
+				AE64DFB720BD360B003A3AD7 /* UIViewController+Finder.m */,
 				BA2D50943215D70A9FF5ACADF5C1384E /* UIViewController+NavigationItem.h */,
 				46AB6A71DED74F3A7B7AB2CE09EC4C23 /* UIViewController+NavigationItem.m */,
 				8A809AA94273D281A8BE9C0809B442AD /* UIViewController+Runtime.h */,
@@ -3464,6 +3480,8 @@
 				C3B03934155B7CB04B05F0D5A0CC4341 /* HSYBaseCustomButton.m */,
 				C2DBCCC4EA508452AA4F5AC631AC31BA /* HSYBaseSegmentedPageControl.h */,
 				ACA9E8116841A1B04372205C4F641D14 /* HSYBaseSegmentedPageControl.m */,
+				AE64DFB220BD279E003A3AD7 /* HSYCustomLargerImageView.h */,
+				AE64DFB320BD279E003A3AD7 /* HSYCustomLargerImageView.m */,
 			);
 			name = Custom;
 			path = HSYCocoaKit/Classes/Custom;
@@ -3804,6 +3822,7 @@
 				037FA03AC7D4D5F90535FE5170BABFDE /* HSYBaseTableViewController.h in Headers */,
 				5C56E8B7DBDEEF69A6CB6F7C4E9FDBA9 /* HSYBaseViewController+CustomNavigationItem.h in Headers */,
 				E3A6A3BF4051CCA6879C2B8683DE0A6A /* HSYBaseViewController.h in Headers */,
+				AE64DFBC20BD3CB8003A3AD7 /* NSArray+Finder.h in Headers */,
 				F1A97E7186C048973D8474089802DE0F /* HSYBaseWebModel.h in Headers */,
 				ECA4211F980C7B023CA69CF16844F1C6 /* HSYBaseWebViewController.h in Headers */,
 				E1E76AFDE2D686DC830F742489E323C6 /* HSYCocoaKit-umbrella.h in Headers */,
@@ -3830,6 +3849,7 @@
 				F12D5E6ED1D9C94A7BEEF8AB395B413F /* NSArray+RACSignal.h in Headers */,
 				60F5BACBE36CAF0F7A51A2D0E81BCD8A /* NSBundle+PrivateFileResource.h in Headers */,
 				F062D6E2BF65FAF6B4F84E1889F58AFA /* NSData+RACSupport.h in Headers */,
+				AE64DFB820BD360B003A3AD7 /* UIViewController+Finder.h in Headers */,
 				BCAECE31C1EBC7A9C28D46D9729D1954 /* NSDate+Timestamp.h in Headers */,
 				80CAD2E43CA28696EFB51F443D0B878F /* NSDictionary+RACSequenceAdditions.h in Headers */,
 				F5E7898415019CDBF9AB39060DA04588 /* NSDictionary+RACSignal.h in Headers */,
@@ -3909,6 +3929,7 @@
 				99D9CBB2EC10873FBD1694537DCA5D61 /* RACSignal+Operations.h in Headers */,
 				6177CA3135F8CCA8DCB03957AFFB17DE /* RACSignal+Timer.h in Headers */,
 				B231CB16323F63214716FB4C2AA8B5DC /* RACSignal.h in Headers */,
+				AE64DFB420BD279E003A3AD7 /* HSYCustomLargerImageView.h in Headers */,
 				D8AA21C5C14063F43695EA08EC05D620 /* RACSignalSequence.h in Headers */,
 				AB08FB421B847792A45DB706E9CC97D2 /* RACStream+Private.h in Headers */,
 				09A7A2E03BADC953B42F28E6D15CA8A8 /* RACStream.h in Headers */,
@@ -4788,6 +4809,7 @@
 				649D16AD82EC2D517B2FDF5ABC9076C6 /* RACSignal+Timer.m in Sources */,
 				10FD602F20D01ACB68D7FD20ADA08428 /* RACSignal.m in Sources */,
 				506077EC9AD673E0F27A5FFD5FE5D37F /* RACSignalProvider.d in Sources */,
+				AE64DFB520BD279E003A3AD7 /* HSYCustomLargerImageView.m in Sources */,
 				386726AED2A01051B8D9CFEBC92340CD /* RACSignalSequence.m in Sources */,
 				8C9AABFAFF0C96B0CD4BA44018C39342 /* RACStream.m in Sources */,
 				393FBC56318F981A70081CAD5F8D0ECE /* RACStringSequence.m in Sources */,
@@ -4796,11 +4818,13 @@
 				4FA78D95D4E9A16E6E178CBC97743DAA /* RACSubscriptingAssignmentTrampoline.m in Sources */,
 				9FE669C720F24AFF6588A2124C0E57FD /* RACSubscriptionScheduler.m in Sources */,
 				50A20BC5CA6B14411DED1060B4988418 /* RACTargetQueueScheduler.m in Sources */,
+				AE64DFB920BD360B003A3AD7 /* UIViewController+Finder.m in Sources */,
 				EAAD4C7809BA1819EFB310A67D3742B5 /* RACTestScheduler.m in Sources */,
 				6022C73F0D4DF6A670206352C2098141 /* RACTuple.m in Sources */,
 				13442DC94D5C947D655A4EC9B037DE7F /* RACTupleSequence.m in Sources */,
 				B5A3290AFFFE0C8556A6C4D835802C7E /* RACUnarySequence.m in Sources */,
 				8B7F23E49D016963EE119DF2F17201BA /* RACUnit.m in Sources */,
+				AE64DFBD20BD3CB8003A3AD7 /* NSArray+Finder.m in Sources */,
 				99EA6F9FF9C6D1DD7D26BB6322E1EAB4 /* RACValueTransformer.m in Sources */,
 				4E76E726AD6A282FDC010227FF743DBF /* RVMViewModel.m in Sources */,
 				EAAF543ECCCAC0F1D91D46F3ED637FDE /* UIActionSheet+RACSignal.m in Sources */,
