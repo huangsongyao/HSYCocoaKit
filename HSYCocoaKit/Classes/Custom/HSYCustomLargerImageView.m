@@ -62,7 +62,8 @@ static CGFloat kHSYCustomAnimatedDuration       = 0.35f;
         [self addSubview:self.currentImageView];
         
         //用于图片组翻页显示的ScrollView
-        self.scrollView = [NSObject createScrollViewByParam:@{@(kHSYCocoaKitOfScrollViewPropretyTypeFrame) : [NSValue valueWithCGRect:self.bounds], @(kHSYCocoaKitOfScrollViewPropretyTypeDelegate) : self, @(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled) : @(YES)}];
+        self.scrollView = [NSObject createScrollViewByParam:@{@(kHSYCocoaKitOfScrollViewPropretyTypeFrame) : [NSValue valueWithCGRect:self.bounds], @(kHSYCocoaKitOfScrollViewPropretyTypeDelegate) : self, @(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled) : @(YES), @(kHSYCocoaKitOfScrollViewPropretyTypeBounces) : @(NO)}];
+        self.scrollView.hidden = YES;
         CGFloat x = 0.0f;
         NSInteger selectedIndex = [paramter.allKeys.firstObject integerValue];
         NSArray *urls = paramter.allValues.firstObject;
@@ -77,6 +78,7 @@ static CGFloat kHSYCustomAnimatedDuration       = 0.35f;
             }
             
             imageView.x = x;
+            [self.scrollView addSubview:imageView];
             x = imageView.right;
         }
         [self.scrollView setContentSize:CGSizeMake(x, 0)];

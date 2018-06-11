@@ -211,7 +211,7 @@
 
 - (void)callBack:(UIImage *)image valueCGRect:(NSValue *)rect
 {
-    [HSYCustomLargerImageView showLargerImageViewSelectedImageParamter:@{rect : image} imagesParamter:@{@(1) : @[[UIImage imageNamed:@"mine_bg_jf"], [UIImage imageNamed:@"v"], [UIImage imageNamed:@"v1"],]}];
+    [HSYCustomLargerImageView showLargerImageViewSelectedImageParamter:@{rect : image} imagesParamter:@{@(0) : @[[UIImage imageNamed:@"mine_bg_jf"], [UIImage imageNamed:@"v"], [UIImage imageNamed:@"v1"],]}];
 }
 
 /*
