@@ -34,15 +34,22 @@
     return [UIView snapshotImageView:self];
 }
 
+- (UIImage *)snapshotImage
+{
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 + (UIImageView *)snapshotImageView:(UIView *)view
 {
     if (!view) {
         return nil;
     }
-    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0);
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage *image = [view snapshotImage];
     
     UIImageView *snapshotImageView = [[UIImageView alloc] initWithImage:image];
     snapshotImageView.center = view.center;

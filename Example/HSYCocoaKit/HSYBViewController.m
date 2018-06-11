@@ -12,12 +12,20 @@
 #import "NSObject+UIKit.h"
 #import "NSString+Size.h"
 #import "UIView+DrawPictures.h"
-//#import "UIViewController+Finder.h"
+#import "HSYCustomLargerImageView.h"
+
+@protocol TestBaseTableViewCellDelegate <NSObject>
+
+- (void)callBack:(UIImage *)image valueCGRect:(NSValue *)rect;
+
+@end
 
 @interface TestBaseTableViewCell : HSYBaseTableViewCell
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIButton *button;
+@property (nonatomic, weak) id<TestBaseTableViewCellDelegate>delegate;
+
 - (void)setTestContent:(NSString *)content;
 
 @end
@@ -29,13 +37,19 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.hsy_useFDTmplateLayout = YES;
         
-        self.button = [NSObject createButtonByParam:@{@(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : @"888"} clickedOnSubscribeNext:^(UIButton *button) {
+        @weakify(self);
+        self.button = [NSObject createButtonByParam:@{@(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : @"888", @(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName) : [UIImage imageNamed:@"mine_bg_jf"]} clickedOnSubscribeNext:^(UIButton *button) {
+            @strongify(self);
             NSLog(@"0000000000000000099990000");
+            NSValue *value = [HSYCustomLargerImageView valueForSelectedImage:button superView:self.contentView];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(callBack:valueCGRect:)]) {
+                [self.delegate callBack:button.currentBackgroundImage valueCGRect:value];
+            }
         }];
         self.button.frame = CGRectMake(0, 0, 100, 100);
         [self.contentView addSubview:self.button];
         
-        self.titleLabel = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake(0, self.button.bottom, self.contentView.width, self.contentView.height)], @(kHSYCocoaKitOfLabelPropretyTypeMaxSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH, MAXFLOAT)],}];
+        self.titleLabel = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeMaxSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH, MAXFLOAT)],}];
         [self.contentView addSubview:self.titleLabel];
         
     }
@@ -48,6 +62,7 @@
     self.titleLabel.size = [self.titleLabel.text
                             contentOfSize:self.titleLabel.font
                             maxWidth:IPHONE_WIDTH];
+    self.titleLabel.y = self.button.bottom;
     self.height = self.titleLabel.bottom;
 }
 
@@ -58,7 +73,7 @@
 
 @end
 
-@interface HSYBViewController ()
+@interface HSYBViewController () <TestBaseTableViewCellDelegate>
 
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, assign) BOOL toped;
@@ -136,6 +151,7 @@
 {
     TestBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"uuuufffff"];
     [cell setTestContent:self.hsy_viewModel.hsy_datas[indexPath.row]];
+    cell.delegate = self;
     return cell;
 }
 
@@ -189,6 +205,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - TestBaseTableViewCellDelegate
+
+- (void)callBack:(UIImage *)image valueCGRect:(NSValue *)rect
+{
+    [HSYCustomLargerImageView showLargerImageViewSelectedImageParamter:@{rect : image} imagesParamter:@{@(1) : @[[UIImage imageNamed:@"mine_bg_jf"], [UIImage imageNamed:@"v"], [UIImage imageNamed:@"v1"],]}];
 }
 
 /*

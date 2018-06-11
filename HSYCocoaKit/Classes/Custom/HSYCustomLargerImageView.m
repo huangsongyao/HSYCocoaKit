@@ -15,8 +15,9 @@
 #import "UIView+Frame.h"
 #import "UIApplication+Device.h"
 #import "ReactiveCocoa.h"
+#import "UIScrollView+Page.h"
+#import "UIImage+Canvas.h"
 
-static CGFloat kHSYCustomEffectDefaultAlpha     = 0.5f;
 static CGFloat kHSYCustomAnimatedDuration       = 0.35f;
 
 @interface HSYCustomLargerImageView () <UIScrollViewDelegate>
@@ -29,27 +30,31 @@ static CGFloat kHSYCustomAnimatedDuration       = 0.35f;
 
 @implementation HSYCustomLargerImageView
 
-//@{选中的图片的CGRect : 选中图片的UIImage}
-//@[@{图片1的CGRect : 图片1的UIImage}, @{图片2的CGRect : 图片2的UIImage}, ..]
+- (instancetype)initWithDefaultSelectedImageParamter:(NSDictionary<NSValue *, UIImage *> *)selectedParamter
+                      imagesParamter:(NSDictionary<NSNumber *, NSArray *> *)paramter
+{
+    return [self initWithStyle:UIBlurEffectStyleLight
+         selectedImageParamter:selectedParamter
+                imagesParamter:paramter];
+}
+
 - (instancetype)initWithStyle:(UIBlurEffectStyle)style
-                  effectAlpha:(CGFloat)alpha
-              backgroundImage:(UIImage *)backgroundImage    //毛玻璃效果的背景图片
         selectedImageParamter:(NSDictionary<NSValue *, UIImage *> *)selectedParamter
                imagesParamter:(NSDictionary<NSNumber *, NSArray *> *)paramter
 {
     if (self = [super initWithSize:CGSizeMake(IPHONE_WIDTH, IPHONE_HEIGHT)]) {
         
         self.backgroundColor = [UIColor clearColor];
-        self.alpha = 0.0f;
         //毛玻璃效果的背景图
+        UIImage *backgroundImage = [UIImage imageWithFillColor:[UIColor clearColor]];
         self.effectImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : backgroundImage, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : backgroundImage}];
         self.effectImageView.frame = self.bounds;
         UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:style];
         UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         visualEffectView.frame = self.effectImageView.bounds;
+        [self.effectImageView addSubview:visualEffectView];
         [self addSubview:self.effectImageView];
         self.effectImageView.alpha = 0.0f;
-        [self.effectImageView addSubview:visualEffectView];
         
         //当前显示到翻页页面上的图片
         self.currentImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : selectedParamter.allValues.firstObject, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : selectedParamter.allValues.firstObject}];
@@ -75,11 +80,8 @@ static CGFloat kHSYCustomAnimatedDuration       = 0.35f;
             x = imageView.right;
         }
         [self.scrollView setContentSize:CGSizeMake(x, 0)];
+        [self.scrollView setXPage:selectedIndex];
         [self addSubview:self.scrollView];
-        
-        //添加至window层
-        [self removeFromSuperview];
-        [[UIApplication keyWindows] addSubview:self];
     }
     return self;
 }
@@ -88,11 +90,19 @@ static CGFloat kHSYCustomAnimatedDuration       = 0.35f;
 
 - (void)show
 {
+    //添加至window层
+    [self removeFromSuperview];
+    UIWindow *window = [UIApplication keyWindows];
+    [window addSubview:self];
     @weakify(self);
     [UIView animateWithDuration:kHSYCustomAnimatedDuration animations:^{
         @strongify(self);
+        self.effectImageView.alpha = 1.0f;
+        [self.currentImageView scaleCentryCGRect];
     } completion:^(BOOL finished) {
-        
+        @strongify(self);
+        self.currentImageView.hidden = YES;
+        self.scrollView.hidden = NO;
     }];
 }
 
@@ -100,17 +110,19 @@ static CGFloat kHSYCustomAnimatedDuration       = 0.35f;
 {
     @weakify(self);
     [UIView animateWithDuration:kHSYCustomAnimatedDuration animations:^{
-        @strongify(self);
-    } completion:^(BOOL finished) {
         
+    } completion:^(BOOL finished) {
+        @strongify(self);
+        [self removeFromSuperview];
     }];
 }
 
 #pragma mark - Rect
 
-+ (NSValue *)valueForSelectedImage:(UIView *)view
++ (NSValue *)valueForSelectedImage:(UIView *)view superView:(UIView *)superView
 {
-    CGRect rect = [[UIApplication keyWindows] convertRect:view.frame fromWindow:[UIApplication keyWindows]];
+    UIWindow *window = [UIApplication keyWindows];
+    CGRect rect = [superView convertRect:view.frame toView:window];
     NSValue *value = [NSValue valueWithCGRect:rect];
     return value;
 }
@@ -122,5 +134,16 @@ static CGFloat kHSYCustomAnimatedDuration       = 0.35f;
     // Drawing code
 }
 */
+
+@end
+
+@implementation HSYCustomLargerImageView (HSYCocoaKit)
+
++ (HSYCustomLargerImageView *)showLargerImageViewSelectedImageParamter:(NSDictionary<NSValue *, UIImage *> *)selectedParamter imagesParamter:(NSDictionary<NSNumber *, NSArray *> *)paramter
+{
+    HSYCustomLargerImageView *larger = [[HSYCustomLargerImageView alloc] initWithDefaultSelectedImageParamter:selectedParamter imagesParamter:paramter];
+    [larger show];
+    return larger;
+}
 
 @end

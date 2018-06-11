@@ -10,4 +10,5 @@
 
 @interface HSYBViewController : HSYBaseTableViewController
 
+
 @end
