@@ -45,6 +45,7 @@
 #import "UIApplication+Device.h"
 #import "UIColor+Hex.h"
 #import "UIImage+Canvas.h"
+#import "UIImageView+Scale.h"
 #import "UIImageView+UrlString.h"
 #import "UILabel+AttributedString.h"
 #import "UILabel+SuggestSize.h"
