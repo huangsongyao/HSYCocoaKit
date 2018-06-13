@@ -58,7 +58,7 @@
     HSYBaseTabBarControllerConfig *config = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:className viewControllerTitle:title paramters:paramters];
     config.titleColorParamter = titleColorParamter;
     config.imageParamter = imageParamter;
-    
+    ·
     return config;
 }
 

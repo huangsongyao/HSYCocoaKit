@@ -10,6 +10,7 @@
 #define PublicMacroFile_h
 
 #import "UIApplication+Device.h"
+#import "HSYBaseLaunchScreenViewController.h"
 
 // debug 模式下的 NSLog
 #ifdef DEBUG
@@ -34,25 +35,31 @@
 
 
 // 设备系统
-#define IPHONE_SYSTEM_VERSION               [[[UIDevice currentDevice] systemVersion] floatValue]
+#define IPHONE_SYSTEM_VERSION                                           [[[UIDevice currentDevice] systemVersion] floatValue]
 
 
 // 设备系统范围
-#define VERSION_GTR_IOS7                    (IPHONE_SYSTEM_VERSION > 7.0 ? YES : NO)
-#define VERSION_GTR_IOS8                    (IPHONE_SYSTEM_VERSION > 8.0 ? YES : NO)
-#define VERSION_GTR_IOS9                    (IPHONE_SYSTEM_VERSION > 9.0 ? YES : NO)
-#define VERSION_GTR_IOS10                   (IPHONE_SYSTEM_VERSION > 10.0 ? YES : NO)
-#define VERSION_GTR_IOS11                   (IPHONE_SYSTEM_VERSION > 11.0 ? YES : NO)
+#define VERSION_GTR_IOS7                                                (IPHONE_SYSTEM_VERSION > 7.0 ? YES : NO)
+#define VERSION_GTR_IOS8                                                (IPHONE_SYSTEM_VERSION > 8.0 ? YES : NO)
+#define VERSION_GTR_IOS9                                                (IPHONE_SYSTEM_VERSION > 9.0 ? YES : NO)
+#define VERSION_GTR_IOS10                                               (IPHONE_SYSTEM_VERSION > 10.0 ? YES : NO)
+#define VERSION_GTR_IOS11                                               (IPHONE_SYSTEM_VERSION > 11.0 ? YES : NO)
 
 
 // statusBar高度
 #define IPHONE_STATUS_BAR_HEIGHT                                        ([UIApplication statusBarHeight])
+
 
 // 导航栏高度
 #define IPHONE_STATE_BAR_HEIGHT                                         IPHONE_STATUS_BAR_HEIGHT
 #define IPHONE_NAVIGATION_BAR_HEIGHT                                    (44.0f)
 #define IPHONE_BAR_HEIGHT                                               (IPHONE_STATE_BAR_HEIGHT + IPHONE_NAVIGATION_BAR_HEIGHT)
 #define TABLE_VIEW_HEIGHT                                               (IPHONE_HEIGHT - IPHONE_BAR_HEIGHT)
+
+
+// TabBar高度
+#define IPHONE_TABBAR_HEIGHT                                            ([HSYBaseLaunchScreenViewController iPhoneXDevice])
+
 
 // 设备分辨率
 #define DEVICERESOLUTION                                                (IPHONE_WIDTH * IPHONE_HEIGHT * ([UIScreen mainScreen].scale))

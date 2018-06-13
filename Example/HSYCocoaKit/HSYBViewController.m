@@ -46,9 +46,19 @@
                 [self.delegate callBack:button.currentBackgroundImage valueCGRect:value];
             }
         }];
-        self.button.frame = CGRectMake(0, 0, 100, 100);
+        self.button.frame = CGRectMake(0, 0, IPHONE_WIDTH/3, 100);
         [self.contentView addSubview:self.button];
-        
+//        for (NSInteger i = 0; i < 2; i ++) {
+//            UIButton *button = [NSObject createButtonByParam:@{@(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : @"888", @(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName) : [UIImage imageNamed:@"mine_bg_jf"]} clickedOnSubscribeNext:^(UIButton *button) {
+//                @strongify(self);
+//                NSValue *value = [HSYCustomLargerImageView valueForSelectedImage:button superView:self.contentView];
+//                if (self.delegate && [self.delegate respondsToSelector:@selector(callBack:valueCGRect:)]) {
+//                    [self.delegate callBack:button.currentBackgroundImage valueCGRect:value];
+//                }
+//            }];
+//            button.frame = CGRectMake((i == 0 ? self.button.right : self.button.right *2), 0, IPHONE_WIDTH/3, 100);
+//            [self.contentView addSubview:button];
+//        }
         self.titleLabel = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeMaxSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH, MAXFLOAT)],}];
         [self.contentView addSubview:self.titleLabel];
         

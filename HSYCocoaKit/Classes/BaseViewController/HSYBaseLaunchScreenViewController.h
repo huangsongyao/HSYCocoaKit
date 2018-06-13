@@ -53,6 +53,11 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitLaunchScreenSize) {
                                networkSiganl:(RACSignal *)network
                               subscriberNext:(void(^)(id sendNext, id<UIApplicationDelegate> appDelegate, NSError *sendError))next;
 
+/**
+ 判断是否为iPhoneX设备
+
+ @return YES or NO
+ */
 + (BOOL)iPhoneXDevice;
 
 @end

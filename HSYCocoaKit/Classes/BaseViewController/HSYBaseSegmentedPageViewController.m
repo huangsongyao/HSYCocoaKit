@@ -43,6 +43,7 @@
     self.buttonSizeValue = [NSValue valueWithCGSize:CGSizeMake(70.0f, 44.0f)];
     self.segmentBackgroundImage = [UIImage imageWithFillColor:CLEAR_COLOR];
     self.currentSelectedIndex = @(0);
+    self.scrollViewHeight = @(0.0f);
     self.segmentedControlInView = kHSYCocoaKitBaseSegmentedPageControlInNavigationItem;
     self.segmentedControlHeight = @(IPHONE_NAVIGATION_BAR_HEIGHT);
     self.canScroll = YES;
@@ -68,16 +69,19 @@
 {
     NSDictionary *yDic = @{
                            @(kHSYCocoaKitBaseSegmentedPageControlInNavigationItem) : (self.customNavigationBar ? @(self.customNavigationBar.bottom) : @(0.0f)),
-                           @(kHSYCocoaKitBaseSegmentedPageControlInScrollViewHeaderView) : (self.customNavigationBar ? @(self.customNavigationBar.bottom + self.segmentedControlHeight.floatValue) : @(self.segmentedControlHeight.floatValue)),
+                           @(kHSYCocoaKitBaseSegmentedPageControlInScrollViewHeaderView) : (self.customNavigationBar ? @(self.customNavigationBar.bottom + self.segmentedControlHeight.floatValue) : (self.navigationController.navigationBar.hidden ? @(self.segmentedControlHeight.floatValue) : @(self.segmentedControlHeight.floatValue + IPHONE_BAR_HEIGHT))),
                            @(kHSYCocoaKitBaseSegmentedPageControlInScrollViewHeaderView) : (self.customNavigationBar ? @(self.customNavigationBar.bottom) : @(0.0f)),
                           };
     NSDictionary *hDic = @{
                            @(kHSYCocoaKitBaseSegmentedPageControlInNavigationItem) : @(TABLE_VIEW_HEIGHT),
-                           @(kHSYCocoaKitBaseSegmentedPageControlInScrollViewHeaderView) :@(IPHONE_HEIGHT - (self.customNavigationBar.bottom + self.segmentedControlHeight.floatValue)),
+                           @(kHSYCocoaKitBaseSegmentedPageControlInScrollViewHeaderView) : @(IPHONE_HEIGHT - (self.customNavigationBar.bottom + self.segmentedControlHeight.floatValue)),
                            @(kHSYCocoaKitBaseSegmentedPageControlInScrollViewHeaderView) : @(IPHONE_HEIGHT - (self.customNavigationBar.bottom + self.segmentedControlHeight.floatValue)),
                            };
     CGFloat y = [yDic[@(self.segmentedControlInView)] floatValue];
     CGFloat h = [hDic[@(self.segmentedControlInView)] floatValue];
+    if (self.scrollViewHeight.floatValue > 0.0f) {
+        h = self.scrollViewHeight.floatValue;
+    }
     NSValue *value = [NSValue valueWithCGRect:CGRectMake(0, y, self.view.width, h)];
     return @{
              @(kHSYCocoaKitOfScrollViewPropretyTypeFrame) : value,
@@ -116,6 +120,10 @@
             [self.view addSubview:self.segmentedPageControl];
             if (self.segmentedControlInView == kHSYCocoaKitBaseSegmentedPageControlInScrollViewFooterView) {
                 self.segmentedPageControl.y = self.scrollView.bottom;
+            } else {
+                if (!self.navigationController.navigationBar.hidden) {
+                    self.segmentedPageControl.y = IPHONE_BAR_HEIGHT;
+                }
             }
         }
             break;
