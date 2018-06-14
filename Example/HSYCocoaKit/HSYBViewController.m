@@ -16,7 +16,7 @@
 
 @protocol TestBaseTableViewCellDelegate <NSObject>
 
-- (void)callBack:(UIImage *)image valueCGRect:(NSValue *)rect values:(NSMutableArray *)values;
+- (void)callBack:(UIImage *)image valueCGRect:(NSValue *)rect values:(NSMutableArray *)values index:(NSInteger)index;
 
 @end
 
@@ -44,8 +44,8 @@
             @strongify(self);
             NSLog(@"0000000000000000099990000");
             NSValue *value = [HSYCustomLargerImageView valueForSelectedImage:button superView:self.contentView];
-            if (self.delegate && [self.delegate respondsToSelector:@selector(callBack:valueCGRect:values:)]) {
-                [self.delegate callBack:button.currentBackgroundImage valueCGRect:value values:self.values];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(callBack:valueCGRect:values:index:)]) {
+                [self.delegate callBack:button.currentBackgroundImage valueCGRect:value values:self.values index:0];
             }
         }];
         self.button.frame = CGRectMake(0, 0, IPHONE_WIDTH/3, 100);
@@ -55,11 +55,12 @@
             UIButton *button = [NSObject createButtonByParam:@{@(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : @"888", @(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName) : [UIImage imageNamed:(i == 0 ? @"v" : @"v1")]} clickedOnSubscribeNext:^(UIButton *button) {
                 @strongify(self);
                 NSValue *value = [HSYCustomLargerImageView valueForSelectedImage:button superView:self.contentView];
-                if (self.delegate && [self.delegate respondsToSelector:@selector(callBack:valueCGRect:values:)]) {
-                    [self.delegate callBack:button.currentBackgroundImage valueCGRect:value values:self.values];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(callBack:valueCGRect:values:index:)]) {
+                    [self.delegate callBack:button.currentBackgroundImage valueCGRect:value values:self.values index:button.tag];
                 }
             }];
             button.frame = CGRectMake((i == 0 ? self.button.right : self.button.right *2), 0, IPHONE_WIDTH/3, 100);
+            button.tag = i+1;
             [self.values addObject:[NSValue valueWithCGRect:button.frame]];
             [self.contentView addSubview:button];
         }
@@ -223,9 +224,9 @@
 
 #pragma mark - TestBaseTableViewCellDelegate
 
-- (void)callBack:(UIImage *)image valueCGRect:(NSValue *)rect values:(NSMutableArray *)values
+- (void)callBack:(UIImage *)image valueCGRect:(NSValue *)rect values:(NSMutableArray *)values index:(NSInteger)index
 {
-    [HSYCustomLargerImageView showLargerImageViewSelectedImageParamter:@{rect : image} imagesParamter:@{@(0) : @[[UIImage imageNamed:@"mine_bg_jf"], [UIImage imageNamed:@"v"], [UIImage imageNamed:@"v1"],]} imageCGRects:values];
+    [HSYCustomLargerImageView showLargerImageViewSelectedImageParamter:@{rect : image} imagesParamter:@{@(index) : @[[UIImage imageNamed:@"mine_bg_jf"], [UIImage imageNamed:@"v"], [UIImage imageNamed:@"v1"],]} imageCGRects:values];
 }
 
 /*
