@@ -109,16 +109,18 @@ static HSYHUDHelper *hsyHUDHelper = nil;
     [[HSYHUDHelper shareInstance] hsy_hideHUDView];
 }
 
-#pragma mark - Set Animation
+#pragma mark - Set Paramter
 
-+ (void)hsy_setHUDAnimationType:(MBProgressHUDAnimation)animationType
+- (void)hsy_setParamter:(NSDictionary<NSString *, id> *)paramter
 {
-    [[HSYHUDHelper shareInstance] hsy_setHUDAnimationType:animationType];
+    if (self.currentDisplayHud) {
+        for (NSString *key in paramter.allKeys) {
+            if ([self.currentDisplayHud respondsToSelector:NSSelectorFromString(key)]) {
+                [self.currentDisplayHud setValue:paramter[key] forKey:key];
+            }
+        }
+    }
 }
 
-- (void)hsy_setHUDAnimationType:(MBProgressHUDAnimation)animationType
-{
-    self.hudAnimationType = animationType;
-}
 
 @end

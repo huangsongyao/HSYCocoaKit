@@ -87,11 +87,11 @@ typedef NS_ENUM(NSUInteger, kShowHUDViewType) {
 + (void)hsy_hideHUDView;
 
 /**
- *  设置HUD的动画类型
- *
- *  @param animationType 动画类型，枚举
+ 使用kvc设置HUD属性，key值必须保持为和属性名称一致的NSString
+
+ @param paramter HUD属性参数
  */
-+ (void)hsy_setHUDAnimationType:(MBProgressHUDAnimation)animationType;
+- (void)hsy_setParamter:(NSDictionary<NSString *, id> *)paramter;
 
 
 @end
