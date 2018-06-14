@@ -7,86 +7,61 @@
 //
 
 #import "HSYHUDModel.h"
+#import "PublicMacroFile.h"
+
+static NSString *const kHSYCocoaKitHUDShowTypeKey           = @"mfow3iofwaf3ioawoienawf";
+static NSString *const kHSYCocoaKitHUDTextKey               = @"f0wo3fapwofwpafwefawf3a";
+static NSString *const kHSYCocoaKitHUDDuraTiemKey           = @"09w39jfa0wf3f90ak3okaw3fok";
 
 @implementation HSYHUDModel
 
++ (NSDictionary *)defaultsConfig
+{
+    return @{
+             @(kHSYHUDModelCodeTypeRequestFailure) : @{
+                        kHSYCocoaKitHUDShowTypeKey : @(kShowHUDViewTypeText),
+                        kHSYCocoaKitHUDTextKey : HSYLOCALIZED(HUD_FAILURE),
+                        kHSYCocoaKitHUDDuraTiemKey : @(HUD_STRING_DISPLAY_TIME),
+                     },
+             @(kHSYHUDModelCodeTypeSaveFileFailure) : @{
+                        kHSYCocoaKitHUDShowTypeKey : @(kShowHUDViewTypeText),
+                        kHSYCocoaKitHUDTextKey : HSYLOCALIZED(HUD_FAILURE),
+                        kHSYCocoaKitHUDDuraTiemKey : @(HUD_STRING_DISPLAY_TIME),
+                        },
+             @(kHSYHUDModelCodeTypeSaveFileSuccess) : @{
+                        kHSYCocoaKitHUDShowTypeKey : @(kShowHUDViewTypeText),
+                        kHSYCocoaKitHUDTextKey : HSYLOCALIZED(HUD_FAILURE),
+                        kHSYCocoaKitHUDDuraTiemKey : @(HUD_STRING_DISPLAY_TIME),
+                        },
+             @(kHSYHUDModelCodeTypeUpdateLoading) : @{
+                        kHSYCocoaKitHUDShowTypeKey : @(kShowHUDViewTypeText),
+                        kHSYCocoaKitHUDTextKey : HSYLOCALIZED(HUD_FAILURE),
+                        kHSYCocoaKitHUDDuraTiemKey : @(HUD_STRING_DISPLAY_TIME),
+                        },
+             @(kHSYHUDModelCodeTypeSaveFileLoading) : @{
+                        kHSYCocoaKitHUDShowTypeKey : @(kShowHUDViewTypeText),
+                        kHSYCocoaKitHUDTextKey : HSYLOCALIZED(HUD_FAILURE),
+                        kHSYCocoaKitHUDDuraTiemKey : @(HUD_STRING_DISPLAY_TIME)
+                        },
+             @(kHSYHUDModelCodeTypeRequestPullUpSuccess) : @{
+                        kHSYCocoaKitHUDShowTypeKey : @(kShowHUDViewTypeText),
+                        kHSYCocoaKitHUDTextKey : HSYLOCALIZED(HUD_FAILURE),
+                        kHSYCocoaKitHUDDuraTiemKey : @(HUD_STRING_DISPLAY_TIME)
+                        },
+             @(kHSYHUDModelCodeTypeRequestPullDownSuccess) : @{
+                        kHSYCocoaKitHUDShowTypeKey : @(kShowHUDViewTypeText),
+                        kHSYCocoaKitHUDTextKey : HSYLOCALIZED(HUD_FAILURE),
+                        kHSYCocoaKitHUDDuraTiemKey : @(HUD_STRING_DISPLAY_TIME),
+                        },
+             };
+}
+
 + (instancetype)initWithCodeType:(kHSYHUDModelCodeType)codeType
-{    
-    HSYHUDModel *model = nil;
-    switch (codeType) {
-        case kHSYHUDModelCodeTypeRequestFailure: {
-            
-            model = [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeText
-                                            codeType:kHSYHUDModelCodeTypeRequestFailure
-                                                text:HUD_FAILURE
-                                       animationTime:HUD_STRING_DISPLAY_TIME];
-        }
-            break;
-        case kHSYHUDModelCodeTypeRequestSuccess: {
-            
-            model = [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeText
-                                            codeType:kHSYHUDModelCodeTypeRequestSuccess
-                                                text:HUD_SUCCESS_TEXT
-                                       animationTime:HUD_STRING_DISPLAY_TIME];
-        }
-            break;
-        case kHSYHUDModelCodeTypeSaveFileFailure: {
-            
-            model = [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeText
-                                            codeType:kHSYHUDModelCodeTypeSaveFileFailure
-                                                text:HUD_FAILURE
-                                       animationTime:HUD_STRING_DISPLAY_TIME];
-        }
-            break;
-        case kHSYHUDModelCodeTypeSaveFileSuccess: {
-            
-            model = [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeText
-                                            codeType:kHSYHUDModelCodeTypeSaveFileSuccess
-                                                text:HUD_FAILURE
-                                       animationTime:HUD_STRING_DISPLAY_TIME];
-        }
-            break;
-        case kHSYHUDModelCodeTypeUpdateLoading: {
-            
-            model = [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeWait
-                                            codeType:kHSYHUDModelCodeTypeUpdateLoading
-                                                text:HUD_WAIT_TEXT
-                                       animationTime:HUD_HIDE_TIME];
-            
-        }
-            break;
-        case kHSYHUDModelCodeTypeSaveFileLoading: {
-            
-            model = [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeWait
-                                            codeType:kHSYHUDModelCodeTypeSaveFileLoading
-                                                text:HUD_WAIT_TEXT
-                                       animationTime:HUD_HIDE_TIME];
-        }
-            break;
-        case kHSYHUDModelCodeTypeRequestPullUpSuccess: {
-            
-            model = [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeText
-                                            codeType:kHSYHUDModelCodeTypeRequestPullUpSuccess
-                                                text:HUD_PULL_UP_SUCCESS_TEXT
-                                       animationTime:HUD_STRING_DISPLAY_TIME];
-        }
-            break;
-        case kHSYHUDModelCodeTypeRequestPullDownSuccess: {
-            
-            model = [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeText
-                                            codeType:kHSYHUDModelCodeTypeRequestPullDownSuccess
-                                                text:HUD_PULL_DOWN_SUCCESS_TEXT
-                                       animationTime:HUD_STRING_DISPLAY_TIME];
-        }
-            break;
-        default: {
-            model = [[HSYHUDModel alloc] init];
-            model.hsy_codeType = codeType;
-            return model;
-        }
-            break;
-    }
-    
+{
+    NSDictionary *subParamter = self.class.defaultsConfig[@(codeType)];
+    HSYHUDModel *model = [HSYHUDModel initWithShowHUDType:(kShowHUDViewType)[subParamter[kHSYCocoaKitHUDShowTypeKey] integerValue]
+                                                 codeType:codeType text:subParamter[kHSYCocoaKitHUDTextKey]
+                                            animationTime:[subParamter[kHSYCocoaKitHUDDuraTiemKey] floatValue]];
     return model;
 }
 

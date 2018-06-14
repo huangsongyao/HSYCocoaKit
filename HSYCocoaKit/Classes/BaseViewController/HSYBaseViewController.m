@@ -102,7 +102,7 @@
         if (!message) {
             message = error.userInfo[NSLocalizedDescriptionKey];
             if (message.length == 0) {
-                message = HSYFONTSIZE(@"未知错误！");
+                message = HSYLOCALIZED(@"未知错误！");
             }
         }
         [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeText codeType:kHSYHUDModelCodeTypeDefault text:message animationTime:HUD_HIDE_TIME];
