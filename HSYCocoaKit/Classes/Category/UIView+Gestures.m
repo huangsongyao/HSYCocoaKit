@@ -11,7 +11,7 @@
 
 @implementation UIView (Gestures)
 
-- (void)hsy_addTapGestureRecognizerDelegate:(id<UIGestureRecognizerDelegate>)delegate subscribeNext:(void(^)(UITapGestureRecognizer *gesture))next
++ (UITapGestureRecognizer *)hsy_tapGestureRecognizerDelegate:(id<UIGestureRecognizerDelegate>)delegate numberOfTouchesRequired:(NSUInteger)numberOfTouchesRequired numberOfTapsRequired:(NSUInteger)numberOfTapsRequired subscribeNext:(void(^)(UITapGestureRecognizer *gesture))next
 {
     UITapGestureRecognizer *tapGestrue = [[UITapGestureRecognizer alloc] init];
     tapGestrue.delegate = delegate;
@@ -22,8 +22,25 @@
             next(x);
         }
     }];
+    return tapGestrue;
+}
+
+- (void)hsy_addTapGestureRecognizerDelegate:(id<UIGestureRecognizerDelegate>)delegate subscribeNext:(void(^)(UITapGestureRecognizer *gesture))next
+{
+    UITapGestureRecognizer *tapGestrue = [self.class hsy_tapGestureRecognizerDelegate:delegate
+                                                              numberOfTouchesRequired:1
+                                                                 numberOfTapsRequired:1
+                                                                        subscribeNext:next];
     [self addGestureRecognizer:tapGestrue];
 }
 
+- (void)hsy_addDoubleGestureRecognizerDelegate:(id<UIGestureRecognizerDelegate>)delegate subscribeNext:(void(^)(UITapGestureRecognizer *gesture))next
+{
+    UITapGestureRecognizer *tapGestrue = [self.class hsy_tapGestureRecognizerDelegate:delegate
+                                                              numberOfTouchesRequired:1
+                                                                 numberOfTapsRequired:2
+                                                                        subscribeNext:next];
+    [self addGestureRecognizer:tapGestrue];
+}
 
 @end

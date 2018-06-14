@@ -62,6 +62,7 @@
 #import "UIViewController+Runtime.h"
 #import "HSYBaseCustomButton.h"
 #import "HSYBaseSegmentedPageControl.h"
+#import "HSYCustomGestureView.h"
 #import "HSYCustomLargerImageView.h"
 #import "HSYBaseCustomNavigationController.h"
 #import "HSYBaseViewController+CustomNavigationItem.h"

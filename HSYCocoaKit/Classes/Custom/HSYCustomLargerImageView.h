@@ -5,9 +5,9 @@
 //  Created by huangsongyao on 2018/5/29.
 //
 
-#import <UIKit/UIKit.h>
+#import "HSYCustomGestureView.h"
 
-@interface HSYCustomLargerImageView : UIView
+@interface HSYCustomLargerImageView : HSYCustomGestureView
 
 /**
  初始化，默认的style为UIBlurEffectStyleLight
@@ -16,8 +16,7 @@
  @param paramter 图片组的内容，格式为：@{@(所选中的图片所在的图片组的位置) : @[图片组的成员，UIImage或者NSString]}
  @return self
  */
-- (instancetype)initWithDefaultSelectedImageParamter:(NSDictionary<NSValue *, UIImage *> *)selectedParamter
-                                      imagesParamter:(NSDictionary<NSNumber *, NSArray *> *)paramter;
+- (instancetype)initWithDefaultSelectedImageParamter:(NSDictionary<NSValue *, UIImage *> *)selectedParamter imagesParamter:(NSDictionary<NSNumber *, NSArray *> *)paramter imageCGRects:(NSArray<NSValue *> *)imageCGRects;
 
 /**
  初始化
@@ -29,7 +28,8 @@
  */
 - (instancetype)initWithStyle:(UIBlurEffectStyle)style
         selectedImageParamter:(NSDictionary<NSValue *, UIImage *> *)selectedParamter  
-               imagesParamter:(NSDictionary<NSNumber *, NSArray *> *)paramter;
+               imagesParamter:(NSDictionary<NSNumber *, NSArray *> *)paramter
+                 imageCGRects:(NSArray<NSValue *> *)imageCGRects;
 
 /**
  将视图view从该视图的父视图的坐标系映射到UIWindow层的坐标系
@@ -44,6 +44,6 @@
 
 @interface HSYCustomLargerImageView (HSYCocoaKit)
 
-+ (HSYCustomLargerImageView *)showLargerImageViewSelectedImageParamter:(NSDictionary<NSValue *, UIImage *> *)selectedParamter imagesParamter:(NSDictionary<NSNumber *, NSArray *> *)paramter;
++ (HSYCustomLargerImageView *)showLargerImageViewSelectedImageParamter:(NSDictionary<NSValue *, UIImage *> *)selectedParamter imagesParamter:(NSDictionary<NSNumber *, NSArray *> *)paramter imageCGRects:(NSArray<NSValue *> *)imageCGRects;
 
 @end
