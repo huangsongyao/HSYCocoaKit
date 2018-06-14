@@ -16,7 +16,7 @@
 
 @protocol TestBaseTableViewCellDelegate <NSObject>
 
-- (void)callBack:(UIImage *)image valueCGRect:(NSValue *)rect values:(NSMutableArray *)values index:(NSInteger)index;
+- (void)callBack:(UIImage *)image values:(NSMutableArray *)values index:(NSInteger)index callMapSuperView:(UIView *)callMapSuperView;
 
 @end
 
@@ -43,9 +43,8 @@
         self.button = [NSObject createButtonByParam:@{@(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : @"888", @(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName) : [UIImage imageNamed:@"mine_bg_jf"]} clickedOnSubscribeNext:^(UIButton *button) {
             @strongify(self);
             NSLog(@"0000000000000000099990000");
-            NSValue *value = [HSYCustomLargerImageView valueForSelectedImage:button superView:self.contentView];
-            if (self.delegate && [self.delegate respondsToSelector:@selector(callBack:valueCGRect:values:index:)]) {
-                [self.delegate callBack:button.currentBackgroundImage valueCGRect:value values:self.values index:0];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(callBack:values:index:callMapSuperView:)]) {
+                [self.delegate callBack:button.currentBackgroundImage values:self.values index:0 callMapSuperView:self.contentView];
             }
         }];
         self.button.frame = CGRectMake(0, 0, IPHONE_WIDTH/3, 100);
@@ -54,9 +53,8 @@
         for (NSInteger i = 0; i < 2; i ++) {
             UIButton *button = [NSObject createButtonByParam:@{@(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : @"888", @(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName) : [UIImage imageNamed:(i == 0 ? @"v" : @"v1")]} clickedOnSubscribeNext:^(UIButton *button) {
                 @strongify(self);
-                NSValue *value = [HSYCustomLargerImageView valueForSelectedImage:button superView:self.contentView];
-                if (self.delegate && [self.delegate respondsToSelector:@selector(callBack:valueCGRect:values:index:)]) {
-                    [self.delegate callBack:button.currentBackgroundImage valueCGRect:value values:self.values index:button.tag];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(callBack:values:index:callMapSuperView:)]) {
+                    [self.delegate callBack:button.currentBackgroundImage values:self.values index:button.tag callMapSuperView:self.contentView];
                 }
             }];
             button.frame = CGRectMake((i == 0 ? self.button.right : self.button.right *2), 0, IPHONE_WIDTH/3, 100);
@@ -224,9 +222,12 @@
 
 #pragma mark - TestBaseTableViewCellDelegate
 
-- (void)callBack:(UIImage *)image valueCGRect:(NSValue *)rect values:(NSMutableArray *)values index:(NSInteger)index
+- (void)callBack:(UIImage *)image values:(NSMutableArray *)values index:(NSInteger)index callMapSuperView:(UIView *)callMapSuperView
 {
-    [HSYCustomLargerImageView showLargerImageViewSelectedImageParamter:@{rect : image} imagesParamter:@{@(index) : @[[UIImage imageNamed:@"mine_bg_jf"], [UIImage imageNamed:@"v"], [UIImage imageNamed:@"v1"],]} imageCGRects:values];
+    [HSYCustomLargerImageView showLargerImageViewSelectedImage:image
+                                                imagesParamter:@{@(index) : @[[UIImage imageNamed:@"mine_bg_jf"], [UIImage imageNamed:@"v"], [UIImage imageNamed:@"v1"],]}
+                                                  imageCGRects:values
+                                              callMapSuperView:callMapSuperView];
 }
 
 /*
