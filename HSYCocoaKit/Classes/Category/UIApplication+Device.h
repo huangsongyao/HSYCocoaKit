@@ -48,4 +48,11 @@
  */
 + (id<UIApplicationDelegate>)appDelegate;
 
+/**
+ 获取设备的Screen Bounds
+
+ @return 设备的Screen Bounds
+ */
++ (CGRect)iPhoneScreenBounds;
+
 @end

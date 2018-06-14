@@ -42,4 +42,9 @@
     return [UIApplication sharedApplication].delegate;
 }
 
++ (CGRect)iPhoneScreenBounds
+{
+    return [UIScreen mainScreen].bounds;
+}
+
 @end
