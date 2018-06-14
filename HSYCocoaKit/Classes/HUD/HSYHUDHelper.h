@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, kShowHUDViewType) {
 + (instancetype)shareInstance;
 
 /**
- *  HUD文字提示
+ *  初始化文字[Text]类型HUD，并添加至window层显示，默认显示时间为：HUD_STRING_DISPLAY_TIME
  *
  *  @param message 提示信息
  *
@@ -43,12 +43,30 @@ typedef NS_ENUM(NSUInteger, kShowHUDViewType) {
 + (MBProgressHUD *)hsy_showHUDViewForMessage:(NSString *)message;
 
 /**
- HUD定制视图
+ 初始化文字[Text]类型HUD，并添加至window层显示
+ 
+ @param message 提示信息
+ @param time 显示时间
+ @return HUD
+ */
++ (MBProgressHUD *)hsy_showHUDViewForMessage:(NSString *)message hideAfter:(CGFloat)time;
+
+/**
+ 初始化[Custom]视图类型的HUD，并添加至window层显示，默认显示时间为：HUD_STRING_DISPLAY_TIME
 
  @param view 定制的视图
  @return HUD
  */
 + (MBProgressHUD *)hsy_showHUDViewForCustomView:(UIView *)view;
+
+/**
+ 初始化[Custom]视图类型的HUD，并添加至window层显示
+ 
+ @param view 定制的视图
+ @param time 显示时间
+ @return HUD
+ */
++ (MBProgressHUD *)hsy_showHUDViewForCustomView:(UIView *)view hideAfter:(CGFloat)time;
 
 /**
  *  初始化一个HUD，不允许触屏取消
