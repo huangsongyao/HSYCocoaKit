@@ -14,7 +14,6 @@ static HSYHUDHelper *hsyHUDHelper = nil;
 
 @interface HSYHUDHelper ()<MBProgressHUDDelegate>
 
-@property (nonatomic, strong) NSMutableArray *hudViews;                  //缓存所有创建的hudView
 @property (nonatomic, strong) MBProgressHUD *currentDisplayHud;          //hudView
 @property (nonatomic, assign) MBProgressHUDAnimation hudAnimationType;   //hudView动画类型
 
@@ -31,57 +30,58 @@ static HSYHUDHelper *hsyHUDHelper = nil;
     return hsyHUDHelper;
 }
 
+#pragma mark - HUD----Text Model
+
 + (MBProgressHUD *)hsy_showHUDViewForMessage:(NSString *)message
 {
-    return [[HSYHUDHelper shareInstance] hsy_showHUDViewType:kShowHUDViewTypeText text:message hideAfter:HUD_STRING_DISPLAY_TIME];
+    return [HSYHUDHelper hsy_showHUDViewForMessage:message hideAfter:HUD_STRING_DISPLAY_TIME];
 }
+
++ (MBProgressHUD *)hsy_showHUDViewForMessage:(NSString *)message hideAfter:(CGFloat)time
+{
+    return [HSYHUDHelper hsy_showHUDViewForShowType:kShowHUDViewTypeText text:message hideAfter:time];
+}
+
+#pragma mark - HUD----Custom View Model
+
++ (MBProgressHUD *)hsy_showHUDViewForCustomView:(UIView *)view
+{
+    return [HSYHUDHelper hsy_showHUDViewForCustomView:view hideAfter:HUD_STRING_DISPLAY_TIME];
+}
+
++ (MBProgressHUD *)hsy_showHUDViewForCustomView:(UIView *)view hideAfter:(CGFloat)time
+{
+    MBProgressHUD *progressHUD = [HSYHUDHelper hsy_showHUDViewForShowType:kShowHUDViewTypeCustom text:nil hideAfter:time];
+    progressHUD.customView = view;
+    return progressHUD;
+}
+
+#pragma mark - Create HUD
 
 + (MBProgressHUD *)hsy_showHUDViewForShowType:(kShowHUDViewType)showType text:(NSString *)text hideAfter:(CGFloat)time
 {
-    return [[HSYHUDHelper shareInstance] hsy_showHUDViewType:showType text:text hideAfter:time];
-}
-
-- (MBProgressHUD *)hsy_showHUDViewType:(kShowHUDViewType)type text:(NSString *)text hideAfter:(CGFloat)time
-{
-    MBProgressHUD *hudView = [self hsy_createHUDViewType:type text:text hideAfter:time];
-    self.currentDisplayHud = hudView;
-    return hudView;
+    return [[HSYHUDHelper shareInstance] hsy_createHUDViewType:showType text:text hideAfter:time];
 }
 
 - (MBProgressHUD *)hsy_createHUDViewType:(kShowHUDViewType)type text:(NSString *)text hideAfter:(CGFloat)time
 {
-    if (self.hudViews.count > 0) {
-        [HSYHUDHelper hsy_hideAllHUDView];
-    }
-    
+    [self hsy_hideHUDView];
     UIWindow *window = [UIApplication keyWindows];
     if (!window) {
         NSLog(@"\n ---get window failure !----");
     }
     MBProgressHUD *hudView = [[MBProgressHUD alloc] initWithWindow:window];
     [window addSubview:hudView];
-    
-    switch (type) {
-        case kShowHUDViewTypeDefault: {
-            hudView.mode = MBProgressHUDModeIndeterminate;
-        }
-            break;
-        case kShowHUDViewTypeText: {
-            hudView.mode = MBProgressHUDModeText;
-        }
-            break;
-        case kShowHUDViewTypeWait: {
-            hudView.mode = MBProgressHUDModeIndeterminate;
-        }
-            break;
-        case kShowHUDViewTypeWrong: {
-            hudView.mode = 	MBProgressHUDModeCustomView;
-        }
-            break;
-        default:
-            break;
+    NSDictionary *modelParamter = @{
+                                    @(kShowHUDViewTypeDefault) : @(MBProgressHUDModeIndeterminate),
+                                    @(kShowHUDViewTypeText) : @(MBProgressHUDModeText),
+                                    @(kShowHUDViewTypeWait) : @(MBProgressHUDModeIndeterminate),
+                                    @(kShowHUDViewTypeCustom) : @(MBProgressHUDModeCustomView),
+                                    };
+    hudView.mode = (MBProgressHUDMode)[modelParamter[@(type)] integerValue];
+    if (text.length > 0) {
+        hudView.labelText = text;
     }
-    hudView.labelText = text;
     hudView.animationType = self.hudAnimationType;
     hudView.removeFromSuperViewOnHide = YES;
     hudView.delegate = self;
@@ -94,6 +94,7 @@ static HSYHUDHelper *hsyHUDHelper = nil;
     return hudView;
 }
 
+#pragma mark - Hidden HUD
 
 - (void)hsy_hideHUDView
 {
@@ -108,6 +109,8 @@ static HSYHUDHelper *hsyHUDHelper = nil;
     [[HSYHUDHelper shareInstance] hsy_hideHUDView];
 }
 
+#pragma mark - Set Animation
+
 + (void)hsy_setHUDAnimationType:(MBProgressHUDAnimation)animationType
 {
     [[HSYHUDHelper shareInstance] hsy_setHUDAnimationType:animationType];
@@ -116,18 +119,6 @@ static HSYHUDHelper *hsyHUDHelper = nil;
 - (void)hsy_setHUDAnimationType:(MBProgressHUDAnimation)animationType
 {
     self.hudAnimationType = animationType;
-}
-
-+ (void)hsy_hideAllHUDView
-{
-    [[HSYHUDHelper shareInstance] hsy_hideAllHUDView];
-}
-
-- (void)hsy_hideAllHUDView
-{
-    for (MBProgressHUD *hud in self.hudViews) {
-        [hud hide:YES];
-    }
 }
 
 @end

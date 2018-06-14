@@ -23,13 +23,12 @@
 typedef NS_ENUM(NSUInteger, kShowHUDViewType) {
     
     kShowHUDViewTypeDefault         = 0,    //默认类型
-    kShowHUDViewTypeWrong           = 1,    //错误的
     kShowHUDViewTypeWait            = 2,    //等待
-    kShowHUDViewTypeText            = 3,    //文字
+    kShowHUDViewTypeText            = 4,    //文字
+    kShowHUDViewTypeCustom          = 6,    //自定义
     
 };
 
-//@class MBProgressHUD;
 @interface HSYHUDHelper : NSObject
 
 + (instancetype)shareInstance;
@@ -44,6 +43,14 @@ typedef NS_ENUM(NSUInteger, kShowHUDViewType) {
 + (MBProgressHUD *)hsy_showHUDViewForMessage:(NSString *)message;
 
 /**
+ HUD定制视图
+
+ @param view 定制的视图
+ @return HUD
+ */
++ (MBProgressHUD *)hsy_showHUDViewForCustomView:(UIView *)view;
+
+/**
  *  初始化一个HUD，不允许触屏取消
  *
  *  @param showType 展示类型，枚举
@@ -52,17 +59,14 @@ typedef NS_ENUM(NSUInteger, kShowHUDViewType) {
  *
  *  @return MBProgressHUD对象
  */
-+ (MBProgressHUD *)hsy_showHUDViewForShowType:(kShowHUDViewType)showType text:(NSString *)text hideAfter:(CGFloat)time;
++ (MBProgressHUD *)hsy_showHUDViewForShowType:(kShowHUDViewType)showType
+                                         text:(NSString *)text
+                                    hideAfter:(CGFloat)time;
 
 /**
  *  取消HUD
  */
 + (void)hsy_hideHUDView;
-
-/**
- *  取消所有HUD
- */
-+ (void)hsy_hideAllHUDView;
 
 /**
  *  设置HUD的动画类型

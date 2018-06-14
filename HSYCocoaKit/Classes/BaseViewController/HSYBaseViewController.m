@@ -96,31 +96,22 @@
 - (kHSYHUDModelCodeType)hsy_requestStateCodeWithStateCode:(id)stateCode
 {
     if([stateCode isKindOfClass:[NSError class]]) {
-        [HSYHUDHelper hsy_hideAllHUDView];
+        [HSYHUDHelper hsy_hideHUDView];
         NSError *error = (NSError *)stateCode;
-        if (error.userInfo[kErrorForNotNetworkKey]) {
-            [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeWrong codeType:kHSYHUDModelCodeTypeDefault text:error.userInfo[kErrorForNotNetworkKey] animationTime:HUD_HIDE_TIME];
-        } else if (error.userInfo[NSLocalizedDescriptionKey]) {
-            [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeWrong codeType:kHSYHUDModelCodeTypeDefault text:error.userInfo[NSLocalizedDescriptionKey] animationTime:HUD_HIDE_TIME ];
+        NSString *message = error.userInfo[kErrorForNotNetworkKey];
+        if (!message) {
+            message = error.userInfo[NSLocalizedDescriptionKey];
+            if (message.length == 0) {
+                message = HSYFONTSIZE(@"未知错误！");
+            }
         }
+        [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeText codeType:kHSYHUDModelCodeTypeDefault text:message animationTime:HUD_HIDE_TIME];
         return kHSYHUDModelCodeTypeError;
     } else if ([stateCode isKindOfClass:[HSYHUDModel class]]) {
         HSYHUDModel *model = (HSYHUDModel *)stateCode;
-        [HSYHUDHelper hsy_hideAllHUDView];//清除loading页面
-        if (model.hsy_codeType == kHSYHUDModelCodeTypeUpdateLoading) {
-            if (model.hsy_showPromptContent) {
-                [HSYHUDHelper hsy_showHUDViewForShowType:model.hsy_showType text:model.hsy_hudString hideAfter:model.hsy_animationTime];
-            }
-        } else if (model.hsy_codeType == kHSYHUDModelCodeTypeRequestFailure) {
-            if (model.hsy_showPromptContent) {
-                [HSYHUDHelper hsy_showHUDViewForShowType:model.hsy_showType text:model.hsy_hudString hideAfter:model.hsy_animationTime];
-            }
-        } else if (model.hsy_codeType == kHSYHUDModelCodeTypeRequestPullUpSuccess) {
-            
-        } else if (model.hsy_codeType == kHSYHUDModelCodeTypeRequestPullDownSuccess) {
-            
-        } else if(model.hsy_codeType == kHSYHUDModelCodeTypeRequestSuccess) {
-            
+        [HSYHUDHelper hsy_hideHUDView];//清除loading页面
+        if (model.hsy_showPromptContent) {
+            [HSYHUDHelper hsy_showHUDViewForShowType:model.hsy_showType text:model.hsy_hudString hideAfter:model.hsy_animationTime];
         }
         return model.hsy_codeType;
     }
