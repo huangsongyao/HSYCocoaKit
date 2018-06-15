@@ -119,7 +119,7 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
         switch ((CXAMCCalculatorStateType)[obj.state integerValue]) {
             case CXAMCCalculatorStateTypeInvest: {
                 money = obj.text.integerValue;
-                if (![obj.text regularPureNumber]) {
+                if (![obj.text isPureNumber]) {
                     receiveResult = NO;
                     string = @"投资金额请填入纯数字！";
                     break;
@@ -127,7 +127,7 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
             }
                 break;
             case CXAMCCalculatorStateTypeDate: {
-                BOOL vat = [obj.text regularPrefixNumber:@"1" suffixNumber:@"12"];
+                BOOL vat = [obj.text isPureNumberFromPrefix:@"1" suffixNumber:@"12"];
                 date = obj.text.integerValue;
                 if (!vat) {
                     receiveResult = NO;
@@ -138,7 +138,7 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
                 break;
             case CXAMCCalculatorStateTypeRate: {
                 rate = ((CGFloat)obj.text.integerValue) / 100.0f;
-                BOOL vat = [obj.text regularPrefixNumber:@"1" suffixNumber:@"100"];
+                BOOL vat = [obj.text isPureNumberFromPrefix:@"1" suffixNumber:@"100"];
                 if (!vat) {
                     receiveResult = NO;
                     string = @"年化利率必须是1到100之间!";

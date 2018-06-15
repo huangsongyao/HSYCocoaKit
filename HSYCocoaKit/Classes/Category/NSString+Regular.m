@@ -10,7 +10,15 @@
 
 @implementation NSString (Regular)
 
-- (BOOL)regularPureNumber
+- (BOOL)isValidateByRegex:(NSString *)regex
+{
+    NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return [pre evaluateWithObject:self];
+}
+
+#pragma mark - Number For Regex
+
+- (BOOL)isPureNumber
 {
     BOOL res = YES;
     NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
@@ -27,14 +35,22 @@
     return res;
 }
 
-- (BOOL)regularPrefixNumber:(NSString *)prefix suffixNumber:(NSString *)suffix
+- (BOOL)isPureNumberFromPrefix:(NSString *)prefix suffixNumber:(NSString *)suffix
 {
-    BOOL validate = [self regularPureNumber];
+    BOOL validate = [self isPureNumber];
     if (!validate) {
         return validate;
     }
     validate = (self.integerValue >= prefix.integerValue && self.integerValue <= suffix.integerValue);
     return validate;
+}
+
+#pragma mark - Email For Regex
+
+- (BOOL)isEmailAddress
+{
+    NSString *emailRegex = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    return [self isValidateByRegex:emailRegex];
 }
 
 @end
