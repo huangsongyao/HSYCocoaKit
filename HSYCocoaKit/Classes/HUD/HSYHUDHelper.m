@@ -80,7 +80,7 @@ static HSYHUDHelper *hsyHUDHelper = nil;
                                     };
     hudView.mode = (MBProgressHUDMode)[modelParamter[@(type)] integerValue];
     if (text.length > 0) {
-        hudView.labelText = text;
+        hudView.detailsLabelText = text;
     }
     hudView.animationType = self.hudAnimationType;
     hudView.removeFromSuperViewOnHide = YES;
