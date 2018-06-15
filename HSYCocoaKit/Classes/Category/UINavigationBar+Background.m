@@ -9,6 +9,7 @@
 #import "UINavigationBar+Background.h"
 #import "UIImage+Canvas.h"
 #import "PublicMacroFile.h"
+#import "UIView+Frame.h"
 
 static NSInteger const kHSYCocoaKitNavigationBarBottomLintDefaultTag = 19911;
 
