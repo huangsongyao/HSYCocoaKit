@@ -13,6 +13,7 @@
 #import "NSObject+UIKit.h"
 #import "NSBundle+PrivateFileResource.h"
 #import "PublicMacroFile.h"
+#import "UINavigationBar+Background.h"
 
 static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
@@ -51,31 +52,19 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
 - (void)setCustomNavigationBarBackgroundImage:(UIImage *)backgroundImage
 {
-    UIImage *image = backgroundImage;
-    if (!image) {
-        image = [UIImage imageWithFillColor:WHITE_COLOR];
-    }
-    [self setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    [self setNavigationBarBackgroundImage:backgroundImage];
 }
 
 #pragma mark - Line
 
 - (void)hsy_clearNavigationBarBottomLine
 {
-    [self hsy_customBarBottomLineOfColor:[UIColor clearColor]];
+    [self hsy_customBarBottomLineOfColor:CLEAR_COLOR];
 }
 
 - (void)hsy_customBarBottomLineOfColor:(UIColor *)color
 {
-    [self setShadowImage:[UIImage imageWithFillColor:[UIColor clearColor]]];
-    CGFloat height = 1.0f;
-    UIView *lineView = [self viewWithTag:kHSYCustomNavigationBarBottomLineTag];
-    if (!lineView) {
-        lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - height, self.width, height)];
-        lineView.tag = kHSYCustomNavigationBarBottomLineTag;
-    }
-    lineView.backgroundColor = color;
-    [self addSubview:lineView];
+    [self setBarBottomLineOfColor:color tag:kHSYCustomNavigationBarBottomLineTag];
 }
 
 #pragma mark - BackBarButton Item
