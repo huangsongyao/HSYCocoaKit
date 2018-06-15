@@ -128,7 +128,7 @@
 
 #pragma mark - Create TextFiled
 
-+ (UITextField *)createTextFiledByParam:(NSDictionary <NSNumber *, id>*)param didChangeSubscribeNext:(void(^)(NSString *text))next
++ (UITextField *)createTextFiledByParam:(NSDictionary <NSNumber *, id>*)param
 {
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectZero];
     
@@ -163,6 +163,12 @@
         textField.placeholder = param[@(kHSYCocoaKitOfTextFiledPropretyTypePlaceholderString)];
     }
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    return textField;
+}
+
++ (UITextField *)createTextFiledByParam:(NSDictionary <NSNumber *, id>*)param didChangeSubscribeNext:(void(^)(NSString *text))next
+{
+    UITextField *textField = [self.class createTextFiledByParam:param];
     if (next) {
         [[[textField rac_textSignal] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
             next(text);

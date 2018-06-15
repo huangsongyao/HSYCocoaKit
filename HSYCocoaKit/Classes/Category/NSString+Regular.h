@@ -33,4 +33,11 @@
  */
 - (BOOL)isEmailAddress;
 
+/**
+ 正则过滤字符串是否为通用密码【汉字+字符+数字+常用字符】
+
+ @return YES or NO
+ */
+- (BOOL)isPassword;
+
 @end

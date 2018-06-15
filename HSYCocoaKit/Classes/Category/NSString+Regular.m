@@ -53,4 +53,12 @@
     return [self isValidateByRegex:emailRegex];
 }
 
+#pragma mark - 汉字+字符+数字+常用字符
+
+- (BOOL)isPassword
+{
+    NSString *passwordRegex =@"[0-9a-zA-Z\u4e00-\u9fa5\\.\\*\\)\\(\\+\\$\\[\\?\\\\\\^\\{\\|\\]\\}%%%@\'\",。‘、-【】·！_——=:;；<>《》‘’“”!#~]+";
+    return [self isValidateByRegex:passwordRegex];
+}
+
 @end

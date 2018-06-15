@@ -184,6 +184,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfSliderPropertyType) {
  @return UITextField
  */
 + (UITextField *)createTextFiledByParam:(NSDictionary <NSNumber *, id>*)param didChangeSubscribeNext:(void(^)(NSString *text))next;
++ (UITextField *)createTextFiledByParam:(NSDictionary <NSNumber *, id>*)param;
 
 /**
  UITextView------key:@(kHSYCocoaKitOfTextViewPropretyType枚举)
