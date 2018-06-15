@@ -57,7 +57,12 @@
 
 - (BOOL)isPassword
 {
-    NSString *passwordRegex =@"[0-9a-zA-Z\u4e00-\u9fa5\\.\\*\\)\\(\\+\\$\\[\\?\\\\\\^\\{\\|\\]\\}%%%@\'\",。‘、-【】·！_——=:;；<>《》‘’“”!#~]+";
+    return [self isPasswordFromPrefix:@"6" suffixNumber:@"16"];
+}
+
+- (BOOL)isPasswordFromPrefix:(NSString *)prefix suffixNumber:(NSString *)suffix
+{
+    NSString *passwordRegex = [NSString stringWithFormat:@"^(?=.*[a-zA-Z0-9].*)(?=.*[a-zA-Z\\W].*)(?=.*[0-9\\W].*).{%@,%@}$", prefix, suffix];
     return [self isValidateByRegex:passwordRegex];
 }
 

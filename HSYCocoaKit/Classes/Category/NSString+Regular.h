@@ -34,10 +34,19 @@
 - (BOOL)isEmailAddress;
 
 /**
- 正则过滤字符串是否为通用密码【汉字+字符+数字+常用字符】
+ 正则过滤字符串是否为通用密码【字母+数字+常用字符】，限制6-16位长度
 
  @return YES or NO
  */
 - (BOOL)isPassword;
+
+/**
+ 正则过滤字符串是否为通用密码【字母+数字+常用字符】，限制prefix-suffix为长度
+
+ @param prefix 最小长度
+ @param suffix 最大长度
+ @return YES or NO
+ */
+- (BOOL)isPasswordFromPrefix:(NSString *)prefix suffixNumber:(NSString *)suffix;
 
 @end
