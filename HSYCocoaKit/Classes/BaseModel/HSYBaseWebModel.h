@@ -10,9 +10,9 @@
 
 @interface HSYBaseWebModel : HSYBaseRefleshModel
 
-@property (nonatomic, strong, readonly) NSURL *url;
-@property (nonatomic, copy, readonly) NSString *htmlString;
-@property (nonatomic, copy, readonly) NSString *runNativeName;
+@property (nonatomic, strong, readonly) NSURL *hsy_url;
+@property (nonatomic, copy, readonly) NSString *hsy_htmlString;
+@property (nonatomic, copy, readonly) NSString *hsy_runNativeName;
 
 /**
  初始化，用于http开头的URL链接

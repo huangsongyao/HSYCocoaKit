@@ -15,8 +15,8 @@
     if (self = [super init]) {
         BOOL canOpen = [urlString hasPrefix:@"http"];
         NSAssert(canOpen != NO, @"warning！！通常链接必须含有http协议");
-        _url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        _runNativeName = name;
+        _hsy_url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        _hsy_runNativeName = name;
     }
     return self;
 }
@@ -24,8 +24,8 @@
 - (instancetype)initWithHtmlString:(NSString *)htmlString runNativeName:(NSString *)name
 {
     if (self = [super init]) {
-        _htmlString = htmlString;
-        _runNativeName = name;
+        _hsy_htmlString = htmlString;
+        _hsy_runNativeName = name;
     }
     return self;
 }

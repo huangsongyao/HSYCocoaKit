@@ -33,12 +33,12 @@
     if (self.customNavigationBar && !self.customNavigationBar.hidden) {
         rect = CGRectMake(rect.origin.x, self.customNavigationBar.bottom, rect.size.width, (IPHONE_HEIGHT - self.customNavigationBar.bottom));
     }
-    _webView = [[WKWebView alloc] initWithFrame:rect configuration:[HSYBaseWebViewController hsy_webViewConfiguration:[(HSYBaseWebModel *)self.hsy_viewModel runNativeName] delegate:self]];
-    if ([(HSYBaseWebModel *)self.hsy_viewModel url]) {
-        NSURLRequest *request = [NSURLRequest requestWithURL:[(HSYBaseWebModel *)self.hsy_viewModel url]];
+    _webView = [[WKWebView alloc] initWithFrame:rect configuration:[HSYBaseWebViewController hsy_webViewConfiguration:[(HSYBaseWebModel *)self.hsy_viewModel hsy_runNativeName] delegate:self]];
+    if ([(HSYBaseWebModel *)self.hsy_viewModel hsy_url]) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[(HSYBaseWebModel *)self.hsy_viewModel hsy_url]];
         [self.webView loadRequest:request];
     } else {
-        [self.webView loadHTMLString:[(HSYBaseWebModel *)self.hsy_viewModel htmlString] baseURL:nil];
+        [self.webView loadHTMLString:[(HSYBaseWebModel *)self.hsy_viewModel hsy_htmlString] baseURL:nil];
     }
     self.webView.UIDelegate = self;
     self.webView.navigationDelegate = self;
@@ -69,7 +69,7 @@
 {
     //js调用native
     NSString *messageName = message.name;
-    if ([messageName isEqualToString:[(HSYBaseWebModel *)self.hsy_viewModel runNativeName]]) {
+    if ([messageName isEqualToString:[(HSYBaseWebModel *)self.hsy_viewModel hsy_runNativeName]]) {
         if (message.body) {
             HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNative subscribeContents:@[message.body]];
             [self.hsy_viewModel.subject sendNext:object];
