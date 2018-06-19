@@ -27,15 +27,29 @@ static RACDisposable *oneMinuteDisposable = nil;
     return oneMinuteSignal;
 }
 
-+ (RACDisposable *)hsy_rac_startClockwiseTimer:(CGFloat)interval subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
++ (RACDisposable *)hsy_rac_timerDisposableOneMinute:(CGFloat)critical subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
+{
+    return [self.class hsy_rac_timerDisposableOneMinuteForInterval:1.0f criticalValue:critical subscribeNext:next];
+}
+
++ (RACDisposable *)hsy_rac_timerDisposableOneMinuteForInterval:(NSTimeInterval)interval criticalValue:(CGFloat)critical subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        oneMinuteDisposable = [self.class hsy_rac_startClockwiseTimer:interval criticalValue:critical subscribeNext:next];
+    });
+    return oneMinuteDisposable;
+}
+
++ (RACDisposable *)hsy_rac_startClockwiseTimer:(CGFloat)interval criticalValue:(CGFloat)critical subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
 {
     static CGFloat count = 0.0f;
     __block RACDisposable *disposable = nil;
-    disposable = [[RACSignal interval:interval onScheduler:[RACScheduler mainThreadScheduler] withLeeway:0.01f] subscribeNext:^(NSDate *date) {
+    disposable = [[RACSignal interval:interval onScheduler:[RACScheduler mainThreadScheduler] withLeeway:0.001f] subscribeNext:^(NSDate *date) {
         count += interval;
         if (next) {
             BOOL stop = next(date, count);
-            if (stop) {
+            if (stop && (count >= critical)) {
                 count = 0.0f;
                 [disposable dispose];
                 disposable = nil;
@@ -45,24 +59,10 @@ static RACDisposable *oneMinuteDisposable = nil;
     return disposable;
 }
 
-+ (RACDisposable *)hsy_rac_startClockwiseTimerSubscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
++ (RACDisposable *)hsy_rac_startClockwiseTimer:(CGFloat)critical subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
 {
-    RACDisposable *disposable = [self.class hsy_rac_startClockwiseTimer:1.0f subscribeNext:next];
+    RACDisposable *disposable = [self.class hsy_rac_startClockwiseTimer:1.0f criticalValue:critical subscribeNext:next];
     return disposable;
-}
-
-+ (RACDisposable *)hsy_rac_timerDisposableOneMinuteSubscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
-{
-    return [self.class hsy_rac_timerDisposableOneMinuteForInterval:1.0f subscribeNext:next];
-}
-
-+ (RACDisposable *)hsy_rac_timerDisposableOneMinuteForInterval:(NSTimeInterval)interval subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        oneMinuteDisposable = [self.class hsy_rac_startClockwiseTimer:interval subscribeNext:next];
-    });
-    return oneMinuteDisposable;
 }
 
 @end
