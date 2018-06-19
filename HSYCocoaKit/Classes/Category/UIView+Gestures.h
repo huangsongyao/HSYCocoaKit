@@ -26,4 +26,12 @@
  */
 - (void)hsy_addDoubleGestureRecognizerDelegate:(id<UIGestureRecognizerDelegate>)delegate subscribeNext:(void(^)(UITapGestureRecognizer *gesture))next;
 
+/**
+ 添加長按手勢，響應時間為0.5f秒
+ 
+ @param delegate 委託
+ @param next 長按響應事件
+ */
+- (void)hsy_addLongGestureRecognizerDelegate:(id<UIGestureRecognizerDelegate>)delegate subscribeNext:(void(^)(UILongPressGestureRecognizer *gesture))next;
+
 @end
