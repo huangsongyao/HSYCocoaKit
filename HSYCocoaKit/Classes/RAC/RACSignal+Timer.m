@@ -9,6 +9,7 @@
 #import "RACSignal+Timer.h"
 
 static RACSignal *oneMinuteSignal = nil;
+static RACDisposable *oneMinuteDisposable = nil;
 
 @implementation RACSignal (Timer)
 
@@ -44,5 +45,24 @@ static RACSignal *oneMinuteSignal = nil;
     return disposable;
 }
 
++ (RACDisposable *)hsy_rac_startClockwiseTimerSubscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
+{
+    RACDisposable *disposable = [self.class hsy_rac_startClockwiseTimer:1.0f subscribeNext:next];
+    return disposable;
+}
+
++ (RACDisposable *)hsy_rac_timerDisposableOneMinuteSubscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
+{
+    return [self.class hsy_rac_timerDisposableOneMinuteForInterval:1.0f subscribeNext:next];
+}
+
++ (RACDisposable *)hsy_rac_timerDisposableOneMinuteForInterval:(NSTimeInterval)interval subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        oneMinuteDisposable = [self.class hsy_rac_startClockwiseTimer:interval subscribeNext:next];
+    });
+    return oneMinuteDisposable;
+}
 
 @end
