@@ -13,6 +13,8 @@ static RACDisposable *oneMinuteDisposable = nil;
 
 @implementation RACSignal (Timer)
 
+#pragma mark - RACSignal Singleton Timer
+
 + (RACSignal *)hsy_rac_timerSignalOneMinute
 {
     return [RACSignal hsy_rac_timerSignalOneMinuteForInterval:1.0f];
@@ -27,6 +29,8 @@ static RACDisposable *oneMinuteDisposable = nil;
     return oneMinuteSignal;
 }
 
+#pragma mark - RACDisposable Singleton Timer
+
 + (RACDisposable *)hsy_rac_timerDisposableOneMinute:(CGFloat)critical subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
 {
     return [self.class hsy_rac_timerDisposableOneMinuteForInterval:1.0f criticalValue:critical subscribeNext:next];
@@ -40,6 +44,15 @@ static RACDisposable *oneMinuteDisposable = nil;
     });
     return oneMinuteDisposable;
 }
+
++ (void)hsy_rac_stopTimerDisposableOneMinute
+{
+    if (oneMinuteDisposable) {
+        [oneMinuteDisposable dispose];
+    }
+}
+
+#pragma mark - RACDisposable Timer
 
 + (RACDisposable *)hsy_rac_startClockwiseTimer:(CGFloat)interval criticalValue:(CGFloat)critical subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
 {

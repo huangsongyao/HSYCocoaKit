@@ -64,4 +64,9 @@
  */
 + (RACDisposable *)hsy_rac_startClockwiseTimer:(CGFloat)critical subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next;
 
+/**
+ 停止顺时针单例计时器
+ */
++ (void)hsy_rac_stopTimerDisposableOneMinute;
+
 @end

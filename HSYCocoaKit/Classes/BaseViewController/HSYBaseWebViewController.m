@@ -7,36 +7,13 @@
 //
 
 #import "HSYBaseWebViewController.h"
+#import "HSYBaseWebModel.h"
 
 @interface HSYBaseWebViewController () 
-
-@property (nonatomic, strong, readonly) NSURL *url;
-@property (nonatomic, copy, readonly) NSString *htmlString;
-@property (nonatomic, copy, readonly) NSString *runNativeName;
 
 @end
 
 @implementation HSYBaseWebViewController
-
-- (instancetype)initWithUrlString:(NSString *)urlString runNativeName:(NSString *)name
-{
-    if (self = [super init]) {
-        BOOL canOpen = [urlString hasPrefix:@"http"];
-        NSAssert(canOpen != NO, @"warning！！通常链接必须含有http协议");
-        _url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        _runNativeName = name;
-    }
-    return self;
-}
-
-- (instancetype)initWithHtmlString:(NSString *)htmlString runNativeName:(NSString *)name
-{
-    if (self = [super init]) {
-        _htmlString = htmlString;
-        _runNativeName = name;
-    }
-    return self;
-}
 
 + (WKWebViewConfiguration *)hsy_webViewConfiguration:(NSString *)runNativeName delegate:(id<WKScriptMessageHandler>)delegate
 {
@@ -56,12 +33,12 @@
     if (self.customNavigationBar && !self.customNavigationBar.hidden) {
         rect = CGRectMake(rect.origin.x, self.customNavigationBar.bottom, rect.size.width, (IPHONE_HEIGHT - self.customNavigationBar.bottom));
     }
-    _webView = [[WKWebView alloc] initWithFrame:rect configuration:[HSYBaseWebViewController hsy_webViewConfiguration:self.runNativeName delegate:self]];
-    if (self.url) {
-        NSURLRequest *request = [NSURLRequest requestWithURL:self.url];
+    _webView = [[WKWebView alloc] initWithFrame:rect configuration:[HSYBaseWebViewController hsy_webViewConfiguration:[(HSYBaseWebModel *)self.hsy_viewModel runNativeName] delegate:self]];
+    if ([(HSYBaseWebModel *)self.hsy_viewModel url]) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[(HSYBaseWebModel *)self.hsy_viewModel url]];
         [self.webView loadRequest:request];
     } else {
-        [self.webView loadHTMLString:self.htmlString baseURL:nil];
+        [self.webView loadHTMLString:[(HSYBaseWebModel *)self.hsy_viewModel htmlString] baseURL:nil];
     }
     self.webView.UIDelegate = self;
     self.webView.navigationDelegate = self;
@@ -92,7 +69,7 @@
 {
     //js调用native
     NSString *messageName = message.name;
-    if ([messageName isEqualToString:self.runNativeName]) {
+    if ([messageName isEqualToString:[(HSYBaseWebModel *)self.hsy_viewModel runNativeName]]) {
         if (message.body) {
             HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNative subscribeContents:@[message.body]];
             [self.hsy_viewModel.subject sendNext:object];
