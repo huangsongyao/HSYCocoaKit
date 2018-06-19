@@ -9,26 +9,6 @@
 
 @implementation UIViewController (Finder)
 
-#pragma mark - Finder NavigationController SubViewController
-
-- (UIViewController *)finderNavigationControllersSubViewControllerByClassName:(NSString *)className
-{
-    return [self.class finderNavigationControllersSubViewControllerByClassName:className andViewControllers:self.navigationController.viewControllers];
-}
-
-+ (UIViewController *)finderNavigationControllersSubViewControllerByClassName:(NSString *)className andViewControllers:(NSArray *)viewControllers
-{
-    if (className.length == 0) {
-        return nil;
-    }
-    for (UIViewController *viewController in viewControllers) {
-        if ([viewController isKindOfClass:NSClassFromString(className)]) {
-            return viewController;
-        }
-    }
-    return nil;
-}
-
 #pragma mark - Finder Device Screen ViewController
 
 + (UIViewController *)currentViewController

@@ -204,5 +204,6 @@
 #import "HSYCocoaKitSocketManager.h"
 #import "HSYCocoaKitSocketRACSignal.h"
 #import "HSYCustomGestureView.h"
+#import "UINavigationController+Pop.h"
 
 #endif /* HSYCocoaKit_h */

@@ -50,6 +50,7 @@
 #import "UILabel+AttributedString.h"
 #import "UILabel+SuggestSize.h"
 #import "UINavigationBar+Background.h"
+#import "UINavigationController+Pop.h"
 #import "UIScrollView+Page.h"
 #import "UIView+DrawPictures.h"
 #import "UIView+Frame.h"
