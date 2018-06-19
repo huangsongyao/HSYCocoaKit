@@ -532,6 +532,8 @@
 		AD1022007B6F2731FD4B18BD8CF92067 /* LOTShapeCircle.h in Headers */ = {isa = PBXBuildFile; fileRef = 29F8817DCB4DB57DA09ADF05FCA5F966 /* LOTShapeCircle.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		AE14196141D610318BC11F8AA40695B0 /* LOTPolygonAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 98242C35FE0917526F86724423558E7A /* LOTPolygonAnimator.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		AE3476D8FEBF334849F404CB7686CFA9 /* LOTTrimPathNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 664CED42FA3825CEC68956F2568DC25E /* LOTTrimPathNode.m */; };
+		AE64DFE620D92123003A3AD7 /* UIView+RotationAnimated.h in Headers */ = {isa = PBXBuildFile; fileRef = AE64DFE420D92123003A3AD7 /* UIView+RotationAnimated.h */; };
+		AE64DFE720D92123003A3AD7 /* UIView+RotationAnimated.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64DFE520D92123003A3AD7 /* UIView+RotationAnimated.m */; };
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B387A0E4F0088F7A949E733A738ACF5 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEB5B887C7AB4DBB99C52E455961CB41 /* NSFileManager+Finder.h in Headers */ = {isa = PBXBuildFile; fileRef = 805C090B43258B7BCC7D8D6BFD641219 /* NSFileManager+Finder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEE101380E9045013E2E08CDC2D3C4A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9EF035C7120C9ECCC445EE7C8F283D /* Foundation.framework */; };
@@ -1615,6 +1617,8 @@
 		ADCFC4B3CAB2C4F6EC1C5E370695F91C /* RACStringSequence.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RACStringSequence.h; sourceTree = "<group>"; };
 		ADEC8A67B9D3B2170844962F032BE51A /* HSYCocoaKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HSYCocoaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE14E262281CD7AD6F2BF5A3406AA4B4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE64DFE420D92123003A3AD7 /* UIView+RotationAnimated.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+RotationAnimated.h"; sourceTree = "<group>"; };
+		AE64DFE520D92123003A3AD7 /* UIView+RotationAnimated.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+RotationAnimated.m"; sourceTree = "<group>"; };
 		AE9F7064BD0DDD8D628A336D524B3B42 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF1B17871EBFED82B9BB019EDBD75041 /* NSObject+UIKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+UIKit.m"; sourceTree = "<group>"; };
 		AF226BD5982A4F53BA32707A28802CB2 /* CocoaAsyncSocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaAsyncSocket.xcconfig; sourceTree = "<group>"; };
@@ -2558,6 +2562,8 @@
 				A954490AD1F90CE86A05C88A5566447A /* UIView+Frame.m */,
 				22EF42EC47BAF479A37672AC46A94A9E /* UIView+Gestures.h */,
 				45D155BFEBF55A6A51A13B2E32CB0C14 /* UIView+Gestures.m */,
+				AE64DFE420D92123003A3AD7 /* UIView+RotationAnimated.h */,
+				AE64DFE520D92123003A3AD7 /* UIView+RotationAnimated.m */,
 				26BBE29F58C4541B6664BEDD9FD7004C /* UIViewController+Alert.h */,
 				85708A7DAD0F83AE243C7EAA65F8A01E /* UIViewController+Alert.m */,
 				B8179E62BE4F3E4BECBE3E5AA3DA1B64 /* UIViewController+Device.h */,
@@ -3924,6 +3930,7 @@
 				CE2150508F9D3277736D595696895DDC /* RACDelegateProxy.h in Headers */,
 				BCD4AC0F17553E8B16B2765FC3035DD0 /* RACDisposable.h in Headers */,
 				825F74EBBED15B5508C0E13A1C9FA900 /* RACDynamicSequence.h in Headers */,
+				AE64DFE620D92123003A3AD7 /* UIView+RotationAnimated.h in Headers */,
 				25FFD303D1008A5F530B39989346E12D /* RACDynamicSignal.h in Headers */,
 				CCF19E14ECFB43108166A4BD51DFDA0A /* RACEagerSequence.h in Headers */,
 				4E8613FEB73B22B19E12F4ADEF5FF6B3 /* RACEmptySequence.h in Headers */,
@@ -4550,6 +4557,7 @@
 				A31C8456CBE829D10E7F29E84B5C6BB3 /* HSYBaseCollectionModel.m in Sources */,
 				769AD5EA03A759C496050E5636CD0AD5 /* HSYBaseCollectionReusableView.m in Sources */,
 				20C015335D34B093783273F5DE9C8A7B /* HSYBaseCollectionViewCell.m in Sources */,
+				AE64DFE720D92123003A3AD7 /* UIView+RotationAnimated.m in Sources */,
 				584A85231BB7017B3ADE5880F0859C52 /* HSYBaseCollectionViewController.m in Sources */,
 				ED5F660C0695565077EB909710AA84E7 /* HSYBaseCustomButton.m in Sources */,
 				175FB90BBC26497D5EF7A36347B01CF7 /* HSYBaseCustomNavigationController.m in Sources */,
