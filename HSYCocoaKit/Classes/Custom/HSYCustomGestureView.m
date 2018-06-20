@@ -43,7 +43,7 @@
 
 + (NSArray<NSString *> *)hsy_defaultUnReponseClasses
 {
-    return @[@"UITableViewCell"];
+    return @[@"UITableViewCellContentView"];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -51,7 +51,7 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(nonnull UITouch *)touch
 {
     for (NSString *classes in self.hsy_unResponseClases) {
-        if ([NSClassFromString(classes) isKindOfClass:touch.view.class]) {
+        if ([NSStringFromClass(touch.view.class) isEqualToString:classes]) {
             return NO;
         }
     }

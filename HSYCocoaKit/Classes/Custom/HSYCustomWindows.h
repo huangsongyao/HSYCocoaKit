@@ -20,7 +20,8 @@ static CGFloat kHSYCocoaKitMinScale                 = 0.0f;
 
 @interface HSYCustomWindows : HSYCustomGestureView
 
-@property (nonatomic, strong, readonly) HSYCustomWindowsComponent *hsy_wicketView;    //主体小窗口的视图层
+@property (nonatomic, strong, readonly) HSYCustomWindowsComponent *hsy_wicketView;      //主体小窗口的视图层
+@property (nonatomic, assign) CGFloat hsy_blackMaskMaxAlpha;                            //黑色遮罩的最大透明度
 
 /**
  初始化，默认主体小弹窗为锚点(0.5, 0.5)的位置，默认主体小窗口的背景图片为白色

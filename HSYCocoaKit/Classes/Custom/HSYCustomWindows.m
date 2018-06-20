@@ -10,6 +10,7 @@
 #import "NSObject+UIKit.h"
 #import "UIView+Frame.h"
 #import "UIImage+Canvas.h"
+#import "Masonry.h"
 
 static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
 
@@ -23,7 +24,7 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
 
 - (instancetype)initWithImage:(UIImage *)image
 {
-    CGFloat kHSYCocoaKitDefaultComponentWidth  = (IPHONE_WIDTH/3);
+    CGFloat kHSYCocoaKitDefaultComponentWidth  = (IPHONE_WIDTH/3+IPHONE_WIDTH/4);
     CGFloat kHSYCocoaKitDefaultComponentHeight = (IPHONE_HEIGHT/3);
     if (self = [super initWithSize:CGSizeMake(kHSYCocoaKitDefaultComponentWidth, kHSYCocoaKitDefaultComponentHeight)]) {
         self.backgroundColor = CLEAR_COLOR;
@@ -32,8 +33,10 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
             backgroundImage = [UIImage imageWithFillColor:WHITE_COLOR];
         }
         _hsy_backgroundImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : backgroundImage, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : backgroundImage, }];
-        self.hsy_backgroundImageView.frame = self.bounds;
         [self addSubview:self.hsy_backgroundImageView];
+        [self.hsy_backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self);
+        }];
     }
     return self;
 }
@@ -95,6 +98,12 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
             }
         }];
         
+        //添加默认的不响应类
+        self.hsy_unResponseClases = [self.class hsy_defaultUnReponseClasses];
+        
+        //黑色遮罩最大透明度默认值
+        self.hsy_blackMaskMaxAlpha = kHSYCocoaKitMaxScale/2;
+        
         //添加至windows层
         [window addSubview:self];
     }
@@ -108,7 +117,7 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
     @weakify(self);
     [UIView animateWithDuration:self.hsy_durations animations:^{
         @strongify(self);
-        self.hsy_blackMaskView.alpha = kHSYCocoaKitMaxScale/2;
+        self.hsy_blackMaskView.alpha = self.hsy_blackMaskMaxAlpha;
         if (show) {
             show(self.hsy_wicketView);
         }

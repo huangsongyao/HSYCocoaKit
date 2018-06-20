@@ -19,6 +19,9 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitGasbagAlertType) {
 @interface HSYCustomGasbagObject : NSObject
 
 @property (nonatomic, copy) NSString *hsy_title;
+@property (nonatomic, strong) NSDictionary *hsy_dictionary;
+@property (nonatomic, strong) id hsy_object;
+@property (nonatomic, strong) NSArray *hsy_array;
 
 @end
 

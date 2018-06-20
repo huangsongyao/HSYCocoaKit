@@ -82,8 +82,13 @@
         _hsy_dataSources = dataSources;
         self.hsy_tableView = [NSObject createTabelViewByParam:@{@(kHSYCocoaKitOfTableViewPropretyTypeDelegate) : self, @(kHSYCocoaKitOfTableViewPropretyTypeDataSource) : self, @(kHSYCocoaKitOfTableViewPropretyTypeHiddenCellLine) : @(YES), }];
         [self addSubview:self.hsy_tableView];
+        CGFloat landscape = 64.0f;
+        CGFloat lengthways = 79.0f;
         [self.hsy_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self);
+            make.top.equalTo(self.mas_top).offset(lengthways/2);
+            make.bottom.equalTo(self.mas_bottom).offset(-lengthways/2);
+            make.left.equalTo(self.mas_left).offset(landscape/2);
+            make.right.equalTo(self.mas_right).offset(-landscape/2);
         }];
     }
     return self;
@@ -117,6 +122,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.hsy_delgate && [self.hsy_delgate respondsToSelector:@selector(hsy_selectRow:)]) {
         [self.hsy_delgate hsy_selectRow:self.hsy_dataSources[indexPath.row]];
     }
@@ -156,6 +162,7 @@
         self.hsy_gasbagView.frame = self.hsy_wicketView.bounds;
         self.hsy_gasbagView.hsy_delgate = self;
         [self.hsy_wicketView addSubview:self.hsy_gasbagView];
+        self.hsy_blackMaskMaxAlpha = kHSYCocoaKitMinScale;
     }
     return self;
 }
@@ -230,10 +237,13 @@
     }
     HSYCustomGasbagAlertView *alertView = [[HSYCustomGasbagAlertView alloc] initWithBackgroundImage:backgroundImage position:position anchorType:type dataSources:dataSources];
     [alertView hsy_showGasbag];
+    @weakify(alertView);
     alertView.hsy_didSelectedRow = ^(HSYCustomGasbagObject *x) {
+        @strongify(alertView);
         if (block) {
             block(x);
         }
+        [alertView hsy_removeGasbag];
     };
     return alertView;
 }
