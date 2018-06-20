@@ -13,7 +13,7 @@
 #import "NSString+Size.h"
 #import "UIView+DrawPictures.h"
 #import "HSYCustomLargerImageView.h"
-#import "HSYCustomWindows.h"
+#import "HSYCustomGasbagAlertView.h"
 
 @protocol TestBaseTableViewCellDelegate <NSObject>
 
@@ -129,23 +129,9 @@
 //        UIViewController *vc = [UIViewController currentViewController];
         NSLog(@"x2=%@", [NSDate date]);
 //        NSLog(@"x3=%@", vc);
-        HSYCustomWindows *wt = [[HSYCustomWindows alloc] initWithDefaults:^(HSYCustomWindows *view) {
-            [[view hsy_rac_removeAlert:YES] subscribeNext:^(UIView *view) {
-                view.transform = HSYCOCOAKIT_GGA_TRANSFORM_SCALE(kHSYCocoaKitMinScale+0.1);
-            } completed:^{
-                
-            }];
-        }];
-        [[wt hsy_rac_showAlert] subscribeNext:^(UIView *view) {
-            @strongify(self);
-            view.transform = HSYCOCOAKIT_GGA_TRANSFORM_SCALE(kHSYCocoaKitMaxScale + 0.1);
-            self.test = view;
-        } completed:^{
-            [UIView animateWithDuration:0.2f animations:^{
-                @strongify(self);
-                self.test.transform = HSYCOCOAKIT_GGA_TRANSFORM_SCALE(kHSYCocoaKitMaxScale);
-            }];
-        }];
+        
+        HSYCustomGasbagAlertView *view = [[HSYCustomGasbagAlertView alloc] initWithDefaultBackgroundImage:<#(UIImage *)#>];
+        [view hsy_showGasbag];
     }];
     
     
