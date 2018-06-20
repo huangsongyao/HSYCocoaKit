@@ -41,6 +41,24 @@
     }];
 }
 
++ (NSArray<NSString *> *)hsy_defaultUnReponseClasses
+{
+    return @[@"UITableViewCell"];
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(nonnull UITouch *)touch
+{
+    for (NSString *classes in self.hsy_unResponseClases) {
+        if ([NSClassFromString(classes) isKindOfClass:touch.view.class]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

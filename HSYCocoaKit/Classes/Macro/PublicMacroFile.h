@@ -155,7 +155,23 @@
 //版本弃用
 #define HSY_DEPRECATED(_iOS_version)                                    __attribute__((deprecated))
 
+
 //版本启用，默认为从iOS8系统开始
 #define HSY_AVAILABLE_IOS_8                                             8_0
+
+
+//layer层锚点
+#define HSYCOCOAKIT_ANCHOR_POINT_X00_Y00                CGPointMake(0.0f, 0.0f)
+#define HSYCOCOAKIT_ANCHOR_POINT_X05_Y00                CGPointMake(0.5f, 0.0f)
+#define HSYCOCOAKIT_ANCHOR_POINT_X10_Y00                CGPointMake(1.0f, 0.0f)
+
+#define HSYCOCOAKIT_ANCHOR_POINT_X00_Y05                CGPointMake(0.0f, 0.5f)
+#define HSYCOCOAKIT_ANCHOR_POINT_X05_Y05                CGPointMake(0.5f, 0.5f)
+#define HSYCOCOAKIT_ANCHOR_POINT_X10_Y05                CGPointMake(1.0f, 0.5f)
+
+#define HSYCOCOAKIT_ANCHOR_POINT_X00_Y10                CGPointMake(0.0f, 1.0f)
+#define HSYCOCOAKIT_ANCHOR_POINT_X05_Y10                CGPointMake(0.5f, 1.0f)
+#define HSYCOCOAKIT_ANCHOR_POINT_X10_Y10                CGPointMake(1.0f, 1.0f)
+
 
 #endif /* PublicMacroFile_h */
