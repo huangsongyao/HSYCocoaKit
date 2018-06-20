@@ -539,8 +539,10 @@
 		ACE0011006B2A66CA216816D69B49264 /* NSString+Regular.h in Headers */ = {isa = PBXBuildFile; fileRef = BD8B5E852D4EC357701B459B598958B4 /* NSString+Regular.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE0A0539EAC7E76FFB74AE3A83F8F328 /* UIImage+ForceDecode.h in Headers */ = {isa = PBXBuildFile; fileRef = 281844EC4CD581BFEA1E9E84C722F6BD /* UIImage+ForceDecode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE5A1BC187EF93F75A7038BB2B913B89 /* RACObjCRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 362A6AF7C03636CBDAB83ECBD9A44ABA /* RACObjCRuntime.m */; };
-		AE64DFF620DA57EB003A3AD7 /* pop_xiala@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE64DFF420DA57EA003A3AD7 /* pop_xiala@2x.png */; };
-		AE64DFF720DA57EB003A3AD7 /* pop_xiala@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE64DFF520DA57EA003A3AD7 /* pop_xiala@3x.png */; };
+		AE64DFFA20DA5A1A003A3AD7 /* pop_xiala@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE64DFF820DA5A19003A3AD7 /* pop_xiala@2x.png */; };
+		AE64DFFB20DA5A1A003A3AD7 /* pop_xiala@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE64DFF820DA5A19003A3AD7 /* pop_xiala@2x.png */; };
+		AE64DFFC20DA5A1A003A3AD7 /* pop_xiala@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE64DFF920DA5A19003A3AD7 /* pop_xiala@3x.png */; };
+		AE64DFFD20DA5A1A003A3AD7 /* pop_xiala@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE64DFF920DA5A19003A3AD7 /* pop_xiala@3x.png */; };
 		AE685223B84E15008167FA3A378ACD93 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 67618497589D2D4DA36F4ECBE1BBEF7E /* MASUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE873B0E829DE77D3D7C1A36FD3315AF /* LOTAnimatorNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C84D012EA32E5BE61581239003BC3A9 /* LOTAnimatorNode.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B387A0E4F0088F7A949E733A738ACF5 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1628,8 +1630,8 @@
 		ADEC8A67B9D3B2170844962F032BE51A /* HSYCocoaKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HSYCocoaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE14E262281CD7AD6F2BF5A3406AA4B4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE58D89A964C6BFD30013EA898901576 /* RACDynamicSignal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RACDynamicSignal.m; sourceTree = "<group>"; };
-		AE64DFF420DA57EA003A3AD7 /* pop_xiala@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pop_xiala@2x.png"; path = "HSYCocoaKit/Assets/pop_xiala@2x.png"; sourceTree = "<group>"; };
-		AE64DFF520DA57EA003A3AD7 /* pop_xiala@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pop_xiala@3x.png"; path = "HSYCocoaKit/Assets/pop_xiala@3x.png"; sourceTree = "<group>"; };
+		AE64DFF820DA5A19003A3AD7 /* pop_xiala@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pop_xiala@2x.png"; path = "HSYCocoaKit/Assets/pop_xiala@2x.png"; sourceTree = "<group>"; };
+		AE64DFF920DA5A19003A3AD7 /* pop_xiala@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pop_xiala@3x.png"; path = "HSYCocoaKit/Assets/pop_xiala@3x.png"; sourceTree = "<group>"; };
 		AE9F7064BD0DDD8D628A336D524B3B42 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF226BD5982A4F53BA32707A28802CB2 /* CocoaAsyncSocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaAsyncSocket.xcconfig; sourceTree = "<group>"; };
 		AF4444109435B8FA68A11B05BF514A81 /* LOTShapeGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LOTShapeGroup.h; path = "lottie-ios/Classes/Models/LOTShapeGroup.h"; sourceTree = "<group>"; };
@@ -2071,8 +2073,8 @@
 		06E48E9B59596F27923A4D108FBFB072 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AE64DFF420DA57EA003A3AD7 /* pop_xiala@2x.png */,
-				AE64DFF520DA57EA003A3AD7 /* pop_xiala@3x.png */,
+				AE64DFF820DA5A19003A3AD7 /* pop_xiala@2x.png */,
+				AE64DFF920DA5A19003A3AD7 /* pop_xiala@3x.png */,
 				603787BE001A59C22906A1F64BBE0A37 /* image_placeholder@2x.png */,
 				E3147C150E4F3A17C2C5BE60072FBE19 /* image_placeholder@3x.png */,
 				8A6E82568F515518ECACD5A739935E50 /* nav_icon_back@2x.png */,
@@ -4439,6 +4441,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0D15AE5FAE2D5654B10CBA629AA3182 /* image_placeholder@2x.png in Resources */,
+				AE64DFFD20DA5A1A003A3AD7 /* pop_xiala@3x.png in Resources */,
+				AE64DFFB20DA5A1A003A3AD7 /* pop_xiala@2x.png in Resources */,
 				7E8159DFF4C1C652BE70A4B2F02A3002 /* image_placeholder@3x.png in Resources */,
 				110E9182A7ADF0369EA0AD30AA9C3934 /* nav_icon_back@2x.png in Resources */,
 				3873CA501F69D2DA47DD241EB5D99773 /* nav_icon_back@3x.png in Resources */,
@@ -4449,8 +4453,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE64DFF620DA57EB003A3AD7 /* pop_xiala@2x.png in Resources */,
-				AE64DFF720DA57EB003A3AD7 /* pop_xiala@3x.png in Resources */,
+				AE64DFFA20DA5A1A003A3AD7 /* pop_xiala@2x.png in Resources */,
+				AE64DFFC20DA5A1A003A3AD7 /* pop_xiala@3x.png in Resources */,
 				7D50D4E5459E2E32E51959C7E169F742 /* HSYCocoaKit.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

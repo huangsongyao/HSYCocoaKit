@@ -229,6 +229,7 @@
         backgroundImage = [NSBundle imageForBundle:@"pop_xiala"];
     }
     HSYCustomGasbagAlertView *alertView = [[HSYCustomGasbagAlertView alloc] initWithBackgroundImage:backgroundImage position:position anchorType:type dataSources:dataSources];
+    [alertView hsy_showGasbag];
     alertView.hsy_didSelectedRow = ^(HSYCustomGasbagObject *x) {
         if (block) {
             block(x);
