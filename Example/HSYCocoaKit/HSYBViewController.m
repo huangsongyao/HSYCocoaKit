@@ -130,8 +130,9 @@
         NSLog(@"x2=%@", [NSDate date]);
 //        NSLog(@"x3=%@", vc);
         
-        HSYCustomGasbagAlertView *view = [[HSYCustomGasbagAlertView alloc] initWithDefaultBackgroundImage:<#(UIImage *)#>];
-        [view hsy_showGasbag];
+        [HSYCustomGasbagAlertView hsy_showGasbagAlert:@[] backgroundImage:nil position:CGPointMake(100, 100) anchorType:kHSYCocoaKitGasbagAlertTypeTop didSelectedRowBlock:^(HSYCustomGasbagObject *x) {
+            
+        }];
     }];
     
     

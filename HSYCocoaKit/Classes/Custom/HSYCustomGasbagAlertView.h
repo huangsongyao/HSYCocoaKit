@@ -16,25 +16,35 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitGasbagAlertType) {
     
 };
 
+@interface HSYCustomGasbagObject : NSObject
+
+@property (nonatomic, copy) NSString *hsy_title;
+
+@end
+
+
 @interface HSYCustomGasbagAlertView : HSYCustomWindows
 
-@property (nonatomic, copy) void(^hsy_)();
+@property (nonatomic, copy) void(^hsy_didSelectedRow)(HSYCustomGasbagObject *x);
+
 /**
  初始化，默认为kHSYCocoaKitGasbagAlertTypeBottom格式
 
  @param backgroundImage 主体小窗口背景图
+ @param position 锚点下的位置
  @return HSYCustomGasbagAlertView
  */
-- (instancetype)initWithDefaultBackgroundImage:(UIImage *)backgroundImage;
+- (instancetype)initWithDefaultBackgroundImage:(UIImage *)backgroundImage position:(CGPoint)position;
 
 /**
  初始化
 
  @param backgroundImage 主体小窗口背景图
+ @param position 锚点下的位置
  @param type 气囊的方向枚举
  @return HSYCustomGasbagAlertView
  */
-- (instancetype)initWithBackgroundImage:(UIImage *)backgroundImage anchorType:(kHSYCocoaKitGasbagAlertType)type;
+- (instancetype)initWithBackgroundImage:(UIImage *)backgroundImage position:(CGPoint)position anchorType:(kHSYCocoaKitGasbagAlertType)type;
 
 /**
  show方法
@@ -58,7 +68,17 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitGasbagAlertType) {
 
 @interface HSYCustomGasbagAlertView (HSYCocoaKit)
 
-+ (HSYCustomGasbagAlertView *)hsy_showGasbagAlert;
+/**
+ 快速方法
+
+ @param dataSources 数据源
+ @param backgroundImage 主体小窗口背景图
+ @param position 锚点下的位置
+ @param type 气囊动画类型
+ @param block 点击回调事件
+ @return HSYCustomGasbagAlertView
+ */
++ (HSYCustomGasbagAlertView *)hsy_showGasbagAlert:(NSArray *)dataSources backgroundImage:(UIImage *)backgroundImage position:(CGPoint)position anchorType:(kHSYCocoaKitGasbagAlertType)type didSelectedRowBlock:(void(^)(HSYCustomGasbagObject *x))block;
 
 @end
 
