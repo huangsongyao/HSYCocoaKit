@@ -32,7 +32,7 @@ NSInteger const kHSYCocoaKitNavigationBarBottomLintDefaultTag = 19911;
 - (void)setBarBottomLineOfColor:(UIColor *)color tag:(NSInteger)tag
 {
     [self setShadowImage:[UIImage imageWithFillColor:[UIColor clearColor]]];
-    CGFloat height = 1.0f;
+    CGFloat height = 0.5f;
     UIView *lineView = [self viewWithTag:tag];
     if (!lineView) {
         lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - height, self.width, height)];
