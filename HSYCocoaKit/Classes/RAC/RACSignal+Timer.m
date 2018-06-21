@@ -29,29 +29,6 @@ static RACDisposable *oneMinuteDisposable = nil;
     return oneMinuteSignal;
 }
 
-#pragma mark - RACDisposable Singleton Timer
-
-+ (RACDisposable *)hsy_rac_timerDisposableOneMinute:(CGFloat)critical subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
-{
-    return [self.class hsy_rac_timerDisposableOneMinuteForInterval:1.0f criticalValue:critical subscribeNext:next];
-}
-
-+ (RACDisposable *)hsy_rac_timerDisposableOneMinuteForInterval:(NSTimeInterval)interval criticalValue:(CGFloat)critical subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        oneMinuteDisposable = [self.class hsy_rac_startClockwiseTimer:interval criticalValue:critical subscribeNext:next];
-    });
-    return oneMinuteDisposable;
-}
-
-+ (void)hsy_rac_stopTimerDisposableOneMinute
-{
-    if (oneMinuteDisposable) {
-        [oneMinuteDisposable dispose];
-    }
-}
-
 #pragma mark - RACDisposable Timer
 
 + (RACDisposable *)hsy_rac_startClockwiseTimer:(CGFloat)interval criticalValue:(CGFloat)critical subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
