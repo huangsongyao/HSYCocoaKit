@@ -38,6 +38,13 @@ static RACDisposable *oneMinuteDisposable = nil;
 
 + (RACDisposable *)hsy_rac_timerDisposableOneMinuteForInterval:(NSTimeInterval)interval criticalValue:(CGFloat)critical subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
 {
+    RACDisposable *disposable = [self.class rac_timerDisposableOneMinuteForInterval:interval criticalValue:critical subscribeNext:next];
+    [disposable dispose];
+    return disposable;
+}
+
++ (RACDisposable *)rac_timerDisposableOneMinuteForInterval:(NSTimeInterval)interval criticalValue:(CGFloat)critical subscribeNext:(BOOL(^)(NSDate *date, CGFloat count))next
+{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         oneMinuteDisposable = [self.class hsy_rac_startClockwiseTimer:interval criticalValue:critical subscribeNext:next];
