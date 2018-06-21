@@ -11,7 +11,7 @@
 #import "PublicMacroFile.h"
 #import "UIView+Frame.h"
 
-static NSInteger const kHSYCocoaKitNavigationBarBottomLintDefaultTag = 19911;
+NSInteger const kHSYCocoaKitNavigationBarBottomLintDefaultTag = 19911;
 
 @implementation UINavigationBar (Background)
 
