@@ -269,5 +269,16 @@
     return self.statusBarStyle;
 }
 
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    for (NSString *className in self.hsy_clashGestures) {
+        if ([NSStringFromClass(touch.view.class) isEqualToString:className]) {
+            return NO;
+        }
+    }
+    return YES;
+}
 
 @end
