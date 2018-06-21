@@ -37,9 +37,9 @@ NSInteger const kHSYCocoaKitNavigationBarBottomLintDefaultTag = 19911;
     if (!lineView) {
         lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - height, self.width, height)];
         lineView.tag = tag;
+        [self addSubview:lineView];
     }
     lineView.backgroundColor = color;
-    [self addSubview:lineView];
 }
 
 @end
