@@ -15,7 +15,7 @@ static NSString *const kHSYUIKeyboardBoundsUserInfoKey = @"UIKeyboardBoundsUserI
 
 @implementation UIViewController (Keyboard)
 
-- (void)observerToKeyboardDidChange:(id)object subscribeNext:(void(^)(CGRect bounds, CGPoint begin, CGPoint end, CGRect frameBegin, CGRect frameEnd, NSNumber *curve, NSNumber *duration, NSNumber *local))next
+- (void)observerToKeyboardDidChanged:(id)object subscribeNext:(void(^)(CGRect bounds, CGPoint begin, CGPoint end, CGRect frameBegin, CGRect frameEnd, NSNumber *curve, NSNumber *duration, NSNumber *local))next
 {
     [[[UIViewController rac_kvoToKeyboardDidChangeByObject:object] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSNotification *notification) {
         if (notification.userInfo && next) {
@@ -36,9 +36,39 @@ static NSString *const kHSYUIKeyboardBoundsUserInfoKey = @"UIKeyboardBoundsUserI
     }];
 }
 
-- (void)observerToKeyboardDidChange:(id)object subscribeCompleted:(void(^)(CGRect frameBegin, CGRect frameEnd))completed
+- (void)observerToKeyboardDidChanged:(id)object subscribeCompleted:(void(^)(CGRect frameBegin, CGRect frameEnd))completed
 {
-    [self observerToKeyboardDidChange:object subscribeNext:^(CGRect bounds, CGPoint begin, CGPoint end, CGRect frameBegin, CGRect frameEnd, NSNumber *curve, NSNumber *duration, NSNumber *local) {
+    [self observerToKeyboardDidChanged:object subscribeNext:^(CGRect bounds, CGPoint begin, CGPoint end, CGRect frameBegin, CGRect frameEnd, NSNumber *curve, NSNumber *duration, NSNumber *local) {
+        if (completed) {
+            completed(frameBegin, frameEnd);
+        }
+    }];
+}
+
+- (void)observerToKeyboardWillChanged:(id)object subscribeNext:(void(^)(CGRect bounds, CGPoint begin, CGPoint end, CGRect frameBegin, CGRect frameEnd, NSNumber *curve, NSNumber *duration, NSNumber *local))next
+{
+    [[[UIViewController rac_kvoToKeyboardWillChangedByObject:object] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSNotification *notification) {
+        if (notification.userInfo && next) {
+            NSDictionary *userInfo = notification.userInfo;
+            CGRect bounds = [userInfo[kHSYUIKeyboardBoundsUserInfoKey] CGRectValue];
+            CGPoint begin = [userInfo[kHSYUIKeyboardCenterBeginUserInfoKey] CGPointValue];
+            CGPoint end = [userInfo[kHSYUIKeyboardCenterEndUserInfoKey] CGPointValue];
+            CGRect frameBegin = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+            CGRect frameEnd = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+            NSNumber *curve = userInfo[UIKeyboardAnimationCurveUserInfoKey];
+            NSNumber *duration = userInfo[UIKeyboardAnimationDurationUserInfoKey];
+            NSNumber *local = nil;
+            if (@available(iOS 9.0, *)) {
+                local = userInfo[UIKeyboardIsLocalUserInfoKey];
+            }
+            next(bounds, begin, end, frameBegin, frameEnd, curve, duration, local);
+        }
+    }];
+}
+
+- (void)observerToKeyboardWillChanged:(id)object subscribeCompleted:(void(^)(CGRect frameBegin, CGRect frameEnd))completed
+{
+    [self observerToKeyboardWillChanged:object subscribeNext:^(CGRect bounds, CGPoint begin, CGPoint end, CGRect frameBegin, CGRect frameEnd, NSNumber *curve, NSNumber *duration, NSNumber *local) {
         if (completed) {
             completed(frameBegin, frameEnd);
         }
@@ -54,7 +84,9 @@ static NSString *const kHSYUIKeyboardBoundsUserInfoKey = @"UIKeyboardBoundsUserI
         [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardWillShowNotification object:object] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSNotification *notification) {
             [subscriber sendNext:notification];
         }];
-        return nil;
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “+ rac_kvoToKeyboardWillShowByObject”");
+        }];
     }];
 }
 
@@ -65,11 +97,12 @@ static NSString *const kHSYUIKeyboardBoundsUserInfoKey = @"UIKeyboardBoundsUserI
         [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardDidShowNotification object:object] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSNotification *notification) {
             [subscriber sendNext:notification];
         }];
-        return nil;
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “+ rac_kvoToKeyboardDidShowByObject”");
+        }];
     }];
 }
-
-
+ 
 + (RACSignal *)rac_kvoToKeyboardDidHideByObject:(id)object
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
@@ -77,21 +110,36 @@ static NSString *const kHSYUIKeyboardBoundsUserInfoKey = @"UIKeyboardBoundsUserI
         [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardDidHideNotification object:object] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSNotification *notification) {
             [subscriber sendNext:notification];
         }];
-        return nil;
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “+ rac_kvoToKeyboardDidHideByObject”");
+        }];
     }];
 }
 
 + (RACSignal *)rac_kvoToKeyboardDidChangeByObject:(id)object
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        
         [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardDidChangeFrameNotification object:nil]
          subscribeNext:^(NSNotification *notification) {
              [subscriber sendNext:notification];
          }];
-        return nil;
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “+ rac_kvoToKeyboardDidChangeByObject”");
+        }];
     }];
 }
 
++ (RACSignal *)rac_kvoToKeyboardWillChangedByObject:(id)object
+{
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardWillChangeFrameNotification object:nil]
+         subscribeNext:^(NSNotification *notification) {
+             [subscriber sendNext:notification];
+         }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “+ rac_kvoToKeyboardWillChangedByObject”");
+        }];
+    }];
+}
 
 @end

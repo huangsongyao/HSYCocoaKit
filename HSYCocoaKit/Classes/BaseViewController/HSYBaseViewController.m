@@ -62,7 +62,7 @@
     }];
     if (self.hsy_addKeyboardObserver) {
         //键盘监听
-        [self observerToKeyboardDidChange:nil subscribeCompleted:^(CGRect frameBegin, CGRect frameEnd) {
+        [self observerToKeyboardWillChanged:nil subscribeCompleted:^(CGRect frameBegin, CGRect frameEnd) {
             @strongify(self);
             HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeObserverKeyboard subscribeContents:@[[NSValue valueWithCGRect:frameBegin], [NSValue valueWithCGRect:frameEnd]]];
             [self.hsy_viewModel.subject sendNext:object];
