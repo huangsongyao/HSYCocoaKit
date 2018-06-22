@@ -8,6 +8,7 @@
 
 #import "UIImage+Canvas.h"
 #import "UIView+Frame.h"
+#import "UIColor+Hex.h"
 
 @implementation UIImage (Canvas)
 
@@ -49,5 +50,28 @@ static UIImage *createImageWithColor(UIColor *color, CGRect rect)
     return img;
 }
 
+#pragma mark - QRCode
+
++ (UIImage *)imageWithQRCode:(CGRect)referenceRect
+                    cropRect:(CGRect)cropRect
+             backgroundColor:(UIColor *)color
+{
+    CGSize referenceSize = CGSizeMake(CGRectGetWidth(referenceRect), CGRectGetHeight(referenceRect));
+    //获取图片颜色的RGB
+    UIGraphicsBeginImageContext(referenceSize);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetRGBFillColor(context, color.red, color.green, color.blue, color.alpha);
+    //设置RGB和对应的透明度
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    CGRect drawRect = CGRectMake(0, 0, screenSize.width,screenSize.height);
+    CGContextFillRect(context, drawRect);
+    drawRect = CGRectMake(cropRect.origin.x-referenceRect.origin.x, cropRect.origin.y-referenceRect.origin.y, cropRect.size.width, cropRect.size.height);
+    CGContextClearRect(context, drawRect);
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
 
 @end

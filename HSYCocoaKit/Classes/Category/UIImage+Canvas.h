@@ -35,4 +35,16 @@
  */
 + (UIImage *)captureImageInView:(UIView *)view;
 
+/**
+ 绘制一张二维码使用的图片
+
+ @param referenceRect 要添加的父视图的frame
+ @param cropRect 中部挖空的frame
+ @param color 图的颜色
+ @return UIImage
+ */
++ (UIImage *)imageWithQRCode:(CGRect)referenceRect
+                    cropRect:(CGRect)cropRect
+             backgroundColor:(UIColor *)color;
+
 @end

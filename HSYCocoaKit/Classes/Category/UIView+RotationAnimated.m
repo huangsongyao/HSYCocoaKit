@@ -6,6 +6,7 @@
 //
 
 #import "UIView+RotationAnimated.h"
+#import "CABasicAnimation+Transform.h"
 
 static NSTimeInterval kHSYCocoaKitDefaultRotatingDuration   = 0.35f;
 
@@ -33,16 +34,7 @@ NSString *const kHSYCocoaKitDefaultInfiniteRotatingKey      = @"o9fejfoejfefoesf
                          repeatCount:(NSInteger)count
                               forKey:(NSString *)key
 {
-    CABasicAnimation *animation =  [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    animation.fromValue = @(formValue);
-    animation.toValue = @(toValue);
-    animation.duration = duration;
-    animation.autoreverses = autoreverses;
-    animation.removedOnCompletion = reset;
-    if (!reset) {
-        animation.fillMode = kCAFillModeForwards;
-    }
-    animation.repeatCount = count;
+    CABasicAnimation *animation =  [CABasicAnimation hsy_rotatingAnimationForDuration:duration formValue:formValue toValue:toValue removedOnCompletion:reset autoreverses:autoreverses repeatCount:count];
     [self.layer addAnimation:animation forKey:key];
 }
 

@@ -20,6 +20,13 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitDeviceType) {
 @interface UIViewController (Device) <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 /**
+ 是否能打开摄像机
+
+ @return BOOL值，YES表示可以
+ */
++ (BOOL)canOpenCamera;
+
+/**
  打开系统相册，默认为选中一张图片后，会进入系统自定的图片编辑模式
 
  @return RACTuple，其中，RACTuple对象自带的1-5个信息体依次顺序分别为：1、UIImagePickerControllerCropRect；2、UIImagePickerControllerEditedImage；3、UIImagePickerControllerMediaType；4、UIImagePickerControllerOriginalImage；5、UIImagePickerControllerReferenceURL；
