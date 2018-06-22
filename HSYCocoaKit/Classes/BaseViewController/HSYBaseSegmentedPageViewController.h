@@ -22,6 +22,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitBaseSegmentedPageControl) {
 
 #pragma mark -- 以下属性请在执行[super viewDidLoad]前设置
 
+//分页器的属性参数总汇，默认segmentedControlParamter为空
+@property (nonatomic, strong) NSDictionary *segmentedControlParamter;
 @property (nonatomic, strong) UIFont *normalFont;               //segmentedPageControl的nor状态的字号
 @property (nonatomic, strong) UIFont *selectedFont;             //segmentedPageControl的sel状态的字号
 @property (nonatomic, strong) UIColor *normalColor;             //segmentedPageControl的nor状态的字体颜色

@@ -13,6 +13,7 @@
 #import "UIImage+Canvas.h"
 #import "ReactiveCocoa.h"
 #import "UIScrollView+Page.h"
+#import "Masonry.h"
 
 #define DEFAULT_LINE_SIZE                       CGSizeMake((self.scrollView.contentSizeWidth / self.segmentedButton.count), 1.0f)
 #define DEFAULT_LINE_ANIMATION_DURATION         0.35f
@@ -87,6 +88,21 @@
         }
         [self.scrollView setContentSize:CGSizeMake(x, self.height)];
         
+        //底部的横线
+        if ([paramters[@(kHSYCocoaKitCustomSegmentedTypeShowBottomLine)] boolValue]) {
+            UIView *line = [[UIView alloc] initWithFrame:CGRectZero];
+            line.backgroundColor = (paramters[@(kHSYCocoaKitCustomSegmentedTypeBottomLineColor)] ? paramters[@(kHSYCocoaKitCustomSegmentedTypeBottomLineColor)] : RGB(204, 204, 204));
+            [self addSubview:line];
+            [line mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.equalTo(self.mas_bottom);
+                make.centerX.equalTo(self.mas_centerX);
+                CGSize size = CGSizeMake(IPHONE_WIDTH, 0.5f);
+                if (paramters[@(kHSYCocoaKitCustomSegmentedTypeBottomLineSize)]) {
+                    size = [paramters[@(kHSYCocoaKitCustomSegmentedTypeBottomLineSize)] CGSizeValue];
+                }
+                make.size.mas_equalTo(size);
+            }];
+        }
         //创建选中的下划线
         [self hsy_line];
     }

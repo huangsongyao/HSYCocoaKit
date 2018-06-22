@@ -26,11 +26,13 @@
     label.textAlignment = NSTextAlignmentLeft;
     label.textColor = [UIColor blackColor];
     label.numberOfLines = numberOfLines;
-    label.lineBreakMode = NSLineBreakByCharWrapping;//NSLineBreakByTruncatingTail;
+    label.lineBreakMode = NSLineBreakByCharWrapping;
     
     NSString *string = text;
     if (label.numberOfLines == 1) {
-        string = HSYLOCALIZED(@"单行");
+        if (string.length == 0) {
+            string = HSYLOCALIZED(@"单行");
+        }
         label.lineBreakMode = NSLineBreakByTruncatingTail;
     }
     label.size = [string contentOfSize:label.font

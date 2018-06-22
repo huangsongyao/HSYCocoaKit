@@ -101,7 +101,11 @@
     
     CGRect rect = CGRectMake(0, 0, (self.buttonSizeValue.CGSizeValue.width * [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_configs].count), self.segmentedControlHeight.floatValue);
     @weakify(self);
-    _segmentedPageControl = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:rect paramters:self.hsy_paramters pageControls:[(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_titles] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
+    NSMutableDictionary *hsy_paramters = [NSMutableDictionary dictionaryWithDictionary:self.hsy_paramters];
+    for (NSNumber *key in self.segmentedControlParamter.allKeys) {
+        hsy_paramters[key] = self.segmentedControlParamter[key];
+    }
+    _segmentedPageControl = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:rect paramters:hsy_paramters pageControls:[(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_titles] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
         @strongify(self);
         self.canScroll = NO;
         [self.scrollView setXPage:index animated:YES];
