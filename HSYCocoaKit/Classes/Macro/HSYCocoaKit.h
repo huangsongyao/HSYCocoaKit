@@ -23,12 +23,14 @@
 #import "HSYCocoaKitRACSubscribeNotification.h"
 #import "HSYBaseCollectionViewController.h"
 #import "HSYBaseLaunchScreenViewController.h"
+#import "HSYBaseQRCodeViewController.h"
 #import "HSYBaseRefleshViewController.h"
 #import "HSYBaseSegmentedPageViewController.h"
 #import "HSYBaseTabBarViewController.h"
 #import "HSYBaseTableViewController.h"
 #import "HSYBaseViewController.h"
 #import "HSYBaseWebViewController.h"
+#import "CABasicAnimation+Transform.h"
 #import "NSArray+Finder.h"
 #import "NSBundle+PrivateFileResource.h"
 #import "NSDate+Timestamp.h"
@@ -60,6 +62,7 @@
 #import "UIViewController+Finder.h"
 #import "UIViewController+Keyboard.h"
 #import "UIViewController+NavigationItem.h"
+#import "UIViewController+QRCode.h"
 #import "UIViewController+Runtime.h"
 #import "HSYBaseCustomButton.h"
 #import "HSYBaseSegmentedPageControl.h"
@@ -208,5 +211,4 @@
 #import "GCDAsyncSocket+RACSignal.h"
 #import "HSYCocoaKitSocketManager.h"
 #import "HSYCocoaKitSocketRACSignal.h"
-
 #endif /* HSYCocoaKit_h */

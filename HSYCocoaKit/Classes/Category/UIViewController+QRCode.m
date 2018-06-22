@@ -18,7 +18,7 @@
                                                                               formValue:0
                                                                                 toValue:toValue
                                                                     removedOnCompletion:YES
-                                                                            repeatCount:HUGE_VALF
+                                                                            repeatCount:HUGE_VALL
                                                                          timingFunction:function];
     [layer addAnimation:animation forKey:key];
 }

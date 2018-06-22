@@ -9,6 +9,7 @@
 #import "HSYHUDHelper.h"
 #import "UIApplication+Device.h"
 #import "MBProgressHUD.h"
+#import "PublicMacroFile.h"
 
 static HSYHUDHelper *hsyHUDHelper = nil;
 
@@ -85,6 +86,7 @@ static HSYHUDHelper *hsyHUDHelper = nil;
     hudView.animationType = self.hudAnimationType;
     hudView.removeFromSuperViewOnHide = YES;
     hudView.delegate = self;
+    hudView.detailsLabelFont = UI_SYSTEM_FONT_16;
     [hudView show:YES];
     self.currentDisplayHud = hudView;
     

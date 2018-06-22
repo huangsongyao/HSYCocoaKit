@@ -15,6 +15,7 @@
 #import "UIViewController+QRCode.h"
 #import "UIViewController+Device.h"
 #import "UIViewController+Alert.h"
+#import "NSBundle+PrivateFileResource.h"
 
 static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnimatedKey";
 
@@ -50,6 +51,7 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = BLACK_COLOR;
     //定义好扫描区域
     CGFloat size = self.view.width - (self.hsy_box * 2);
     self.hsy_boxCGRect = CGRectMake(self.hsy_box, self.hsy_boy, size, size);
@@ -224,6 +226,9 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
 - (UIImageView *)hsy_createScaningLine
 {
     UIImage *image = [UIImage imageNamed:self.hsy_boxScaningLineImageName];
+    if (!image) {
+        image = [NSBundle imageForBundle:self.hsy_boxScaningLineImageName];
+    }
     UIImageView *line = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image}];
     line.frame = (CGRect){self.hsy_boxCGRect.origin, CGRectGetWidth(self.hsy_boxCGRect), image.size.height};
     return line;
@@ -233,6 +238,9 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
 {
     UIView *boxView = [[UIView alloc] initWithFrame:self.hsy_boxCGRect];
     UIImage *image = [UIImage imageNamed:self.hsy_boxBackgroundImageName];
+    if (!image) {
+        image = [NSBundle imageForBundle:self.hsy_boxBackgroundImageName];
+    }
     UIImageView *boxBackgroundImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image}];
     boxBackgroundImageView.frame = boxView.bounds;
     [boxView addSubview:boxBackgroundImageView];
@@ -245,14 +253,19 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
 {
     if (metadataObjects.count > 0) {
-        
-//        [self stopRunning];
-//        AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects firstObject];
-//        NSLog(@"%@",metadataObject.stringValue);//输出扫描字符串
-//
-//        self.qrCodeString = metadataObject.stringValue;
-//        [self removeQRCodeAnimationInLayer:self.scanLayer.layer completion:^() {
-//        }];
+        [self hsy_stopAnimated];
+        [self hsy_stopRunning];
+        @weakify(self);
+        AVMetadataMachineReadableCodeObject *metadataObject = [metadataObjects firstObject];
+        if (self.qrDelgate && [self.qrDelgate respondsToSelector:@selector(hsy_qrCodeDidOutputMetadata:)]) {
+            [[[self.qrDelgate hsy_qrCodeDidOutputMetadata:metadataObject.stringValue] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSNumber *restart) {
+                @strongify(self);
+                if (restart.boolValue) {
+                    [self hsy_startRunning];
+                    [self hsy_startAnimated];
+                }
+            }];
+        }
     }
 }
 

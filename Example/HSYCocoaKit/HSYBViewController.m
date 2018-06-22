@@ -14,6 +14,7 @@
 #import "UIView+DrawPictures.h"
 #import "HSYCustomLargerImageView.h"
 #import "HSYCustomGasbagAlertView.h"
+#import "HSYBaseQRCodeViewController.h"
 
 @protocol TestBaseTableViewCellDelegate <NSObject>
 
@@ -130,13 +131,16 @@
         NSLog(@"x2=%@", [NSDate date]);
 //        NSLog(@"x3=%@", vc);
         
-        HSYCustomGasbagObject *obj_1 = [[HSYCustomGasbagObject alloc] init];
-        obj_1.hsy_title = @"test_1";
-        HSYCustomGasbagObject *obj_2 = [[HSYCustomGasbagObject alloc] init];
-        obj_2.hsy_title = @"test_2";
-        [HSYCustomGasbagAlertView hsy_showGasbagAlert:@[obj_1, obj_2] backgroundImage:nil position:CGPointMake(200, 100) anchorType:kHSYCocoaKitGasbagAlertTypeTop didSelectedRowBlock:^(HSYCustomGasbagObject *x) {
-            
-        }];
+//        HSYCustomGasbagObject *obj_1 = [[HSYCustomGasbagObject alloc] init];
+//        obj_1.hsy_title = @"test_1";
+//        HSYCustomGasbagObject *obj_2 = [[HSYCustomGasbagObject alloc] init];
+//        obj_2.hsy_title = @"test_2";
+//        [HSYCustomGasbagAlertView hsy_showGasbagAlert:@[obj_1, obj_2] backgroundImage:nil position:CGPointMake(200, 100) anchorType:kHSYCocoaKitGasbagAlertTypeTop didSelectedRowBlock:^(HSYCustomGasbagObject *x) {
+//            
+//        }];
+        
+        HSYBaseQRCodeViewController *vc = [[HSYBaseQRCodeViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
     
     
