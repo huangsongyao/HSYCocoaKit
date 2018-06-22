@@ -58,7 +58,7 @@
 
 
 //TabBar高度
-#define IPHONE_TABBAR_HEIGHT                                            ([HSYBaseLaunchScreenViewController iPhoneXDevice])
+#define IPHONE_TABBAR_HEIGHT                                            ([HSYBaseLaunchScreenViewController iPhoneXDevice] ? 83.0f : 49.0f)
 
 
 //设备分辨率
