@@ -15,8 +15,9 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitCustomSegmentedType) {
     kHSYCocoaKitCustomSegmentedTypeSelectedTitleFont,                   //选中后的字体--UIFont
     kHSYCocoaKitCustomSegmentedTypeNorTitleColor,                       //未选中的字体颜色--UIColor
     kHSYCocoaKitCustomSegmentedTypeSelTitleColor,                       //选中后的字体颜色--UIColor
-    kHSYCocoaKitCustomSegmentedTypeLineColor,                           //横线颜色--UIColor
-    kHSYCocoaKitCustomSegmentedTypeLineSize,                            //横线size--NSValue--CGSize
+    kHSYCocoaKitCustomSegmentedTypeLineColor,                           //选中的下划线颜色--UIColor
+    kHSYCocoaKitCustomSegmentedTypeLineSize,                            //选中的下划线size--NSValue--CGSize
+    kHSYCocoaKitCustomSegmentedTypeLineRoundedCorners,                  //选中的是否使用圆角--NSNumber
     kHSYCocoaKitCustomSegmentedTypeButtonSize,                          //按钮点击区域--NSValue--CGSize
     kHSYCocoaKitCustomSegmentedTypeBackgroundImage,                     //背景图片--UIImage
     kHSYCocoaKitCustomSegmentedTypeSelectedIndex,                       //选中位置--NSNumber

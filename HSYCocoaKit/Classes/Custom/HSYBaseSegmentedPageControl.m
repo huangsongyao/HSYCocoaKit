@@ -52,8 +52,8 @@
         CGFloat h = self.hsy_button_h;
         UIColor *selectedTitleColor = [self hsy_titleColorObjects].allKeys.firstObject;
         UIColor *normalTitleColor = [self hsy_titleColorObjects].allValues.firstObject;
-        UIFont *normalFont = [self hsy_titleFontObjects].allValues.firstObject;
         UIFont *selectedFont = [self hsy_titleFontObjects].allKeys.firstObject;
+        UIFont *normalFont = [self hsy_titleFontObjects].allValues.firstObject;
         
         NSNumber *index = self.hsy_defaultsSelectedIndex;
         _selectedIndex = index.integerValue;
@@ -127,6 +127,9 @@
         size = DEFAULT_LINE_SIZE;
     }
     self.selectedImageView.size = size;
+    if ([self.paramters[@(kHSYCocoaKitCustomSegmentedTypeLineRoundedCorners)] boolValue]) {
+        self.selectedImageView.layer.cornerRadius = self.selectedImageView.height/2;
+    }
     self.selectedImageView.y = (self.height - self.selectedImageView.height);
     NSNumber *index = @(self.selectedIndex);
     [self hsy_scrollToSelected:self.segmentedButton[index.integerValue]];
@@ -259,7 +262,7 @@
     if (!normalFont) {
         normalFont = UI_SYSTEM_FONT_15;
     }
-    UIFont *selectedFont = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeTitleFont)];
+    UIFont *selectedFont = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeSelectedTitleFont)];
     if (!selectedFont) {
         selectedFont = UI_SYSTEM_FONT_16;
     }
