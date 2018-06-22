@@ -21,9 +21,9 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitCustomSegmentedType) {
     kHSYCocoaKitCustomSegmentedTypeBackgroundImage,                     //背景图片--UIImage
     kHSYCocoaKitCustomSegmentedTypeSelectedIndex,                       //选中位置--NSNumber
     kHSYCocoaKitCustomSegmentedTypeAnimationDuration,                   //动画时间--NSNumber
-    kHSYCocoaKitCustomSegmentedTypeShowBottomLine,                      //是否底部的横线
-    kHSYCocoaKitCustomSegmentedTypeBottomLineSize,                      //底部横线的宽高
-    kHSYCocoaKitCustomSegmentedTypeBottomLineColor,                     //底部横线的颜色
+    kHSYCocoaKitCustomSegmentedTypeShowBottomLine,                      //是否底部的横线--NSNumber
+    kHSYCocoaKitCustomSegmentedTypeBottomLineSize,                      //底部横线的size--NSValue--CGSize
+    kHSYCocoaKitCustomSegmentedTypeBottomLineColor,                     //底部横线的颜色--UIColor
     
 };
 
