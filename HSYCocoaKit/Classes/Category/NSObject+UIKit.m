@@ -170,7 +170,7 @@
 {
     UITextField *textField = [self.class createTextFiledByParam:param];
     if (next) {
-        [[[textField rac_textSignal] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
+        [[[[textField rac_textSignal] ignore:@""] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
             next(text);
         }];
     }
@@ -179,7 +179,7 @@
 
 #pragma mark - Create TextView
 
-+ (UITextView *)createTextViewByParam:(NSDictionary <NSNumber *, id>*)param didChangeSubscribeNext:(void(^)(NSString *text))next
++ (UITextView *)createTextViewByParam:(NSDictionary <NSNumber *, id>*)param
 {
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
     if (param[@(kHSYCocoaKitOfTextViewPropretyTypeBorderWidth)]) {
@@ -209,8 +209,14 @@
     if (param[@(kHSYCocoaKitOfTextViewPropretyTypeText)]) {
         textView.text = param[@(kHSYCocoaKitOfTextViewPropretyTypeText)];
     }
+    return textView;
+}
+
++ (UITextView *)createTextViewByParam:(NSDictionary <NSNumber *, id>*)param didChangeSubscribeNext:(void(^)(NSString *text))next
+{
+    UITextView *textView = [self.class createTextViewByParam:param];
     if (next) {
-        [[[textView rac_textSignal] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
+        [[[[textView rac_textSignal] ignore:@""] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
             next(text);
         }];
     }

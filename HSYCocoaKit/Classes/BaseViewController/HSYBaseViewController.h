@@ -30,7 +30,7 @@
 
 @property (nonatomic, assign, setter=showSystemLoading:) BOOL hsy_showLoading;          //是否在进入新vc控制器后，显示系统默认的loading，默认为否，并且由于情况种类太多，如果该属性设置为YES，请在需要的时候调用“- hsy_endSystemLoading”方法停止loading动画，父类中不对该loading逻辑做跟进和处理
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;                          //状态栏的字体颜色，默认为UIStatusBarStyleDefault[黑色字体]
-@property (nonatomic, strong) NSArray<NSString *> *hsy_clashGestures;                   //用于处理手势冲突的情况，本数组请填入不支持手势操作交互的类名
+@property (nonatomic, strong) NSMutableArray<NSString *> *hsy_clashGestures;            //用于处理手势冲突的情况，本数组请填入不支持手势操作交互的类名
 
 #pragma mark - Network State Code
 
