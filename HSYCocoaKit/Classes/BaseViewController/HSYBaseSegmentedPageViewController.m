@@ -137,6 +137,9 @@
                                                                      configs:[(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_configs]
                                                                   scrollView:self.scrollView];
     [self.scrollView setContentSize:CGSizeMake(x, 0)];
+    if (self.currentSelectedIndex.integerValue > 0) {
+        [self.scrollView setXPage:self.currentSelectedIndex.integerValue];
+    }
     // Do any additional setup after loading the view.
 }
 
