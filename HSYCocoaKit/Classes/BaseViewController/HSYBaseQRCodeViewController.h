@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 
 @class RACSignal;
-@protocol HSYBaseQRCodeViewController <NSObject>
+@protocol HSYBaseQRCodeViewControllerDelegate <NSObject>
 
 - (RACSignal *)hsy_qrCodeDidOutputMetadata:(NSString *)metadata;
 
@@ -22,7 +22,7 @@
 @property (nonatomic, copy) NSString *hsy_boxBackgroundImageName;   //有效区域的框的图片名称，有默认图片
 @property (nonatomic, copy) NSString *hsy_boxScaningLineImageName;  //有效区域的扫描线图片的名称，有默认图片
 
-@property (nonatomic, weak) id<HSYBaseQRCodeViewController>qrDelgate;
+@property (nonatomic, weak) id<HSYBaseQRCodeViewControllerDelegate>qrDelgate;
 
 /**
  开始扫描
