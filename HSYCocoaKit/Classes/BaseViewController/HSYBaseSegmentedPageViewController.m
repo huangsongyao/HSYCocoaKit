@@ -14,6 +14,24 @@
 #import "UIViewController+NavigationItem.h"
 #import "HSYBaseTabBarViewController.h"
 
+@implementation UIViewController (SegmentdPage)
+
+- (RACSignal *)hsy_layoutReset
+{
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        NSValue *value = [NSValue valueWithCGRect:self.view.frame];
+        [subscriber sendNext:value];
+        [subscriber sendCompleted];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods“- hsy_layoutReset + %@ Class”", NSStringFromClass(self.class));
+        }];
+    }];
+}
+
+@end
+
+//********************************************************************************************************
+
 @interface HSYBaseSegmentedPageViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -143,6 +161,11 @@
     [self.scrollView setContentSize:CGSizeMake(x, 0)];
     if (self.currentSelectedIndex.integerValue > 0) {
         [self.scrollView setXPage:self.currentSelectedIndex.integerValue];
+    }
+    for (UIViewController *vc in hsy_viewControllers) {
+        [[[vc hsy_layoutReset] rac_willDeallocSignal] subscribeCompleted:^{
+            NSLog(@"%@ Class rac_willDeallocSignal", NSStringFromClass(vc.class));
+        }];
     }
     // Do any additional setup after loading the view.
 }

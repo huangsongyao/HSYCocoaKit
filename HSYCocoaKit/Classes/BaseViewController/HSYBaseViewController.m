@@ -126,6 +126,7 @@
     if (hsy_showLoading) {
         self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         self.activityIndicatorView.frame = self.view.bounds;
+        self.activityIndicatorView.backgroundColor = WHITE_COLOR;
         if (self.customNavigationBar && !self.customNavigationBar.hidden) {
             self.activityIndicatorView.frame = CGRectMake(0, self.customNavigationBar.bottom, IPHONE_WIDTH, (self.view.height - self.customNavigationBar.bottom));
         }
