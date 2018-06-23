@@ -23,9 +23,9 @@
 
 @interface HSYCustomRefreshView ()
 
-@property (nonatomic, strong) UILabel *refreshTitleLabel;
-@property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
-@property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, strong) UILabel *hsy_refreshTitleLabel;
+@property (nonatomic, strong) UIActivityIndicatorView *hsy_indicatorView;
+@property (nonatomic, strong) UIView *hsy_backgroundView;
 @property (nonatomic, assign, readonly) BOOL isPullDown;
 
 @end
@@ -38,10 +38,10 @@
         _isPullDown = down;
         self.backgroundColor = CLEAR_COLOR;
         //上拉或者下拉的无限背景
-        self.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-        self.backgroundView.backgroundColor = WHITE_COLOR;
-        [self addSubview:self.backgroundView];
-        [self.backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.hsy_backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+        self.hsy_backgroundView.backgroundColor = WHITE_COLOR;
+        [self addSubview:self.hsy_backgroundView];
+        [self.hsy_backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.mas_left);
             make.right.equalTo(self.mas_right);
             if (down) {
@@ -62,13 +62,14 @@
                               @(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake((IPHONE_WIDTH - width)/2, 0, width, SVInfiniteScrollingViewHeight)],
                               @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentCenter),
                               };
-        self.refreshTitleLabel = [NSObject createLabelByParam:dic];
-        [self addSubview:self.refreshTitleLabel];
+        self.hsy_refreshTitleLabel = [NSObject createLabelByParam:dic];
+        [self addSubview:self.hsy_refreshTitleLabel];
         
         //加载的菊花
-        self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.indicatorView.center = self.refreshTitleLabel.center;
-        [self addSubview:self.indicatorView];
+        self.hsy_indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.hsy_indicatorView.center = self.hsy_refreshTitleLabel.center;
+        [self addSubview:self.hsy_indicatorView];
+        [self bringSubviewToFront:self.hsy_indicatorView];
     }
     return self;
 }
@@ -77,7 +78,7 @@
 
 - (void)hsy_updateLongTopBackgroundColor:(UIColor *)color
 {
-    self.backgroundView.backgroundColor = color;
+    self.hsy_backgroundView.backgroundColor = color;
 }
 
 #pragma mark - Observer Scroll Percent
@@ -87,9 +88,9 @@
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     if (percent >= MID_TRIGGER_PERCENT) {
-        self.refreshTitleLabel.text = REFRESH_RELEASE_START_TITLE;
+        self.hsy_refreshTitleLabel.text = REFRESH_RELEASE_START_TITLE;
     } else {
-        self.refreshTitleLabel.text = REFRESH_WILL_START_TITLE;
+        self.hsy_refreshTitleLabel.text = REFRESH_WILL_START_TITLE;
     }
     [CATransaction commit];
 }
@@ -99,9 +100,9 @@
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     if (percent > MAX_TRIGGER_UP_PERCENT) {
-        self.refreshTitleLabel.text = REFRESH_RELEASE_START_UP_TITLE;
+        self.hsy_refreshTitleLabel.text = REFRESH_RELEASE_START_UP_TITLE;
     } else {
-        self.refreshTitleLabel.text = REFRESH_WILL_START_UP_TITLE;
+        self.hsy_refreshTitleLabel.text = REFRESH_WILL_START_UP_TITLE;
     }
     [CATransaction commit];
 }
@@ -110,9 +111,9 @@
 
 - (void)hsy_start
 {
-    self.refreshTitleLabel.hidden = YES;
-    if (!self.indicatorView.isAnimating) {
-        [self.indicatorView startAnimating];
+    self.hsy_refreshTitleLabel.hidden = YES;
+    if (!self.hsy_indicatorView.isAnimating) {
+        [self.hsy_indicatorView startAnimating];
     }
 }
 
@@ -120,9 +121,9 @@
 
 - (void)hsy_stop
 {
-    self.refreshTitleLabel.hidden = NO;
-    if (self.indicatorView.isAnimating) {
-        [self.indicatorView stopAnimating];
+    self.hsy_refreshTitleLabel.hidden = NO;
+    if (self.hsy_indicatorView.isAnimating) {
+        [self.hsy_indicatorView stopAnimating];
     }
 }
 
