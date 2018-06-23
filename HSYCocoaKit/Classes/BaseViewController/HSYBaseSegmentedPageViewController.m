@@ -242,7 +242,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     _currentSelectedIndex = @(scrollView.currentPage);
-    [self.segmentedPageControl hsy_scrollToSelected:self.segmentedPageControl.segmentedButton[self.currentSelectedIndex.integerValue]];
+    [self.segmentedPageControl hsy_scrollToSelected:self.segmentedPageControl.segmentedButton[self.currentSelectedIndex.integerValue] animation:YES];
     if (self.scrollEndFinished) {
         self.scrollEndFinished(self.currentSelectedIndex.integerValue, [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_viewControllers][self.currentSelectedIndex.integerValue]);
     }

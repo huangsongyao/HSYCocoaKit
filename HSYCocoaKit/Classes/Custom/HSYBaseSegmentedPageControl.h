@@ -43,10 +43,11 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitCustomSegmentedType) {
 
 /**
  外部设置button的点击方法
-
+ 
  @param button button
+ @param animation 是否開啟動畫
  */
-- (void)hsy_scrollToSelected:(HSYBaseCustomButton *)button;
+- (void)hsy_scrollToSelected:(HSYBaseCustomButton *)button animation:(BOOL)animation;
 
 @end
 

@@ -76,7 +76,7 @@
             HSYBaseCustomButton *button = [HSYBaseCustomButton showCustomButtonForFrame:rect imageRect:imageRect titleRect:titleRect propertyEnum:dicButton didSelectedBlock:^(HSYBaseCustomButton *btn) {
                 @strongify(self);
                 if (block) {
-                    [self hsy_scrollToSelected:btn];
+                    [self hsy_scrollToSelected:btn animation:YES];
                     NSInteger index = [self.segmentedButton indexOfObject:btn];
                     block(btn, index);
                 }
@@ -132,7 +132,7 @@
     }
     self.selectedImageView.y = (self.height - self.selectedImageView.height);
     NSNumber *index = @(self.selectedIndex);
-    [self hsy_scrollToSelected:self.segmentedButton[index.integerValue]];
+    [self hsy_scrollToSelected:self.segmentedButton[index.integerValue] animation:NO];
     [self.scrollView addSubview:self.selectedImageView];
 }
 
@@ -195,7 +195,7 @@
 
 #pragma mark - Scroll Animation
 
-- (void)hsy_scrollToSelected:(HSYBaseCustomButton *)button
+- (void)hsy_scrollToSelected:(HSYBaseCustomButton *)button animation:(BOOL)animation
 {
     if (!self.selectedImageView) {
         return;
@@ -211,15 +211,20 @@
         }
     }
     [self hsy_scrollToLocation:button];
-    @weakify(self);
-    [UIView animateWithDuration:duration animations:^{
-        @strongify(self);
-        CGFloat x = (button.x + self.lineOffsetX);
+    CGFloat x = (button.x + self.lineOffsetX);
+    if (animation) {
+        @weakify(self);
+        [UIView animateWithDuration:duration animations:^{
+            @strongify(self);
+            self.selectedImageView.x = x;
+        } completion:^(BOOL finished) {
+            @strongify(self);
+            [self hsy_setButtonSelectedStatus:button];
+        }];
+    } else {
         self.selectedImageView.x = x;
-    } completion:^(BOOL finished) {
-        @strongify(self);
         [self hsy_setButtonSelectedStatus:button];
-    }];
+    }
 }
 
 #pragma mark -Update Button Status
@@ -321,17 +326,17 @@
 {
     _selectedIndex = selectedIndex;
     if ((selectedIndex < self.segmentedButton.count - 1) && selectedIndex >= 0) {
-        [self hsy_scrollToSelected:self.segmentedButton[selectedIndex]];
+        [self hsy_scrollToSelected:self.segmentedButton[selectedIndex] animation:YES];
     }
 }
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 @end
 
