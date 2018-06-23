@@ -154,15 +154,13 @@
     }
     
     NSMutableArray *hsy_viewControllers = [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_viewControllers];
-    CGFloat x = [HSYBaseSegmentedPageViewController hsy_addSubViewController:hsy_viewControllers
-                                                                      titles:[(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_titles]
-                                                                     configs:[(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_configs]
-                                                                  scrollView:self.scrollView];
+    CGFloat x = [HSYBaseSegmentedPageViewController hsy_addSubViewController:hsy_viewControllers titles:[(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_titles] configs:[(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_configs] scrollView:self.scrollView];
     [self.scrollView setContentSize:CGSizeMake(x, 0)];
     if (self.currentSelectedIndex.integerValue > 0) {
         [self.scrollView setXPage:self.currentSelectedIndex.integerValue];
     }
     for (UIViewController *vc in hsy_viewControllers) {
+        //分页控制设置完子控制器布局后，对每个子控制器均发送一个信号，自控制器如果订阅该冷信号，可在next中调整自控制view布局
         [[[vc hsy_layoutReset] rac_willDeallocSignal] subscribeCompleted:^{
             NSLog(@"%@ Class rac_willDeallocSignal", NSStringFromClass(vc.class));
         }];
@@ -250,7 +248,6 @@
     }
     NSLog(@"- scrollViewDidEndDecelerating: 滚动手势结束, 当前页面位置:%@=%@", self.currentSelectedIndex, @(self.segmentedPageControl.selectedIndex));
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
