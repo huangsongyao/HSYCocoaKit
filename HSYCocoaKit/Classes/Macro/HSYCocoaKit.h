@@ -11,6 +11,7 @@
 
 #import "HSYBaseCollectionReusableView.h"
 #import "HSYBaseCollectionViewCell.h"
+#import "HSYBaseHeaderFooterView.h"
 #import "HSYBaseTabBarItemCollectionViewCell.h"
 #import "HSYBaseTableViewCell.h"
 #import "HSYBaseCollectionModel.h"
@@ -211,4 +212,6 @@
 #import "GCDAsyncSocket+RACSignal.h"
 #import "HSYCocoaKitSocketManager.h"
 #import "HSYCocoaKitSocketRACSignal.h"
+
+
 #endif /* HSYCocoaKit_h */

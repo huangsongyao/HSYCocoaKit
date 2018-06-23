@@ -12,6 +12,7 @@
 
 #import "HSYBaseCollectionReusableView.h"
 #import "HSYBaseCollectionViewCell.h"
+#import "HSYBaseHeaderFooterView.h"
 #import "HSYBaseTabBarItemCollectionViewCell.h"
 #import "HSYBaseTableViewCell.h"
 #import "HSYBaseCollectionModel.h"

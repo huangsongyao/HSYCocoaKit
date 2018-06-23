@@ -9,6 +9,7 @@
 #import "HSYBaseTableViewCell.h"
 #import "UIView+Frame.h"
 #import "UITableView+FDTemplateLayoutCell.h"
+#import "Masonry.h"
 
 @implementation HSYBaseTableViewCell
 
@@ -19,6 +20,24 @@
     }
     return self;
 }
+
+#pragma mark - Bottom Line
+
+- (void)hsy_lineInCell:(UIColor *)color constraintMaker:(void(^)(MASConstraintMaker *))block
+{
+    UIView *line = [self.class hsy_line:color];
+    [self.contentView addSubview:line];
+    [line mas_makeConstraints:block];
+}
+
++ (UIView *)hsy_line:(UIColor *)color
+{
+    UIView *line = [[UIView alloc] initWithFrame:CGRectZero];
+    line.backgroundColor = color;
+    return line;
+}
+
+#pragma mark - FDT
 
 - (void)setHsy_useFDTmplateLayout:(BOOL)hsy_useFDTmplateLayout
 {
