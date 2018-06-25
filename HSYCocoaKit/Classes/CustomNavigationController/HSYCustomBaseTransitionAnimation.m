@@ -9,6 +9,20 @@
 #import "HSYCustomBaseTransitionAnimation.h"
 #import "PublicMacroFile.h"
 
+@implementation UIViewController (Shadow)
+
+- (void)hsy_setShadowForColorRef:(CGColorRef)ref shadowOpacity:(CGFloat)opacity shadowRadius:(CGFloat)radius
+{
+    self.view.layer.shadowColor = ref;
+    self.view.layer.shadowOpacity = opacity;
+    self.view.layer.shadowRadius = radius;
+}
+
+
+@end
+
+//******************************************************************************************************
+
 @interface HSYCustomBaseTransitionAnimation ()
 
 @property (nonatomic, strong) UIView *shadowView;             //阴影笼罩
@@ -75,6 +89,40 @@
         return kHSYCustomPercentDrivenInteractiveTransitionActionsTypePush;
     }
     return kHSYCustomPercentDrivenInteractiveTransitionActionsTypeNone;
+}
+
+#pragma mark - Animated
+
+- (void)hsy_animatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext performPushMethods:(BOOL)push animationForNext:(void(^)(void))next
+{
+    @weakify(self);
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+        if (next) {
+            next();
+        }
+    } completion:^(BOOL finished) {
+        @strongify(self);
+        if (@available(iOS 11.0, *)) {
+            self.fromViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f, 1.0f);
+            self.toViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f, 1.0f);
+        }
+        [self hsy_removeShadow];
+        [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+    }];
+}
+
+- (void)hsy_toActionsAnimatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext
+{
+    [self.contextView insertSubview:self.toViewController.view aboveSubview:self.fromViewController.view];
+    [self.toViewController.view setOrigin:CGPointMake(IPHONE_WIDTH, 0)];
+    [self.fromViewController.view addSubview:[self hsy_blackShadowView:MIN_ALPHA_COMPONENT]];
+}
+
+- (void)hsy_fromActionsAnimatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext
+{
+    [self.contextView insertSubview:self.toViewController.view belowSubview:self.fromViewController.view];
+    [self.fromViewController.view setOrigin:CGPointZero];
+    [self.toViewController.view addSubview:[self hsy_blackShadowView:MAX_ALPHA_COMPONENT]];
 }
 
 @end

@@ -50,6 +50,26 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //非自定义的navigationBar模式下，在“- viewWillAppear:”，通过将系统的navigationBar设置到navigationController所有子视图的最底层来掩盖
+    if (!self.customNavigationBar && self.hsy_sendNavigationBarToBack) {
+        [self.navigationController.view sendSubviewToBack:self.navigationController.navigationBar];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    //非自定义的navigationBar模式下，在“- viewWillDisappear:”，通过将系统的navigationBar设置到它原来在navigationController中的原始位置
+    if (!self.customNavigationBar && self.hsy_sendNavigationBarToBack) {
+        [self.navigationController.view bringSubviewToFront:self.navigationController.navigationBar];
+    }
+}
+
+#pragma mark - Observer
+
 - (void)hsy_observePullDown
 {
     @weakify(self);

@@ -73,10 +73,10 @@
 #import "HSYCustomWindows.h"
 #import "HSYBaseCustomNavigationController.h"
 #import "HSYBaseViewController+CustomNavigationItem.h"
+#import "HSYCustomBackTransitionAnimation.h"
 #import "HSYCustomBaseTransitionAnimation.h"
 #import "HSYCustomLeftTransitionAnimation.h"
 #import "HSYCustomNavigationBar.h"
-#import "UIViewController+Shadow.h"
 #import "FMResultSet+Model.h"
 #import "HSYFMDBMacro.h"
 #import "HSYFMDBOperation.h"
@@ -212,6 +212,5 @@
 #import "GCDAsyncSocket+RACSignal.h"
 #import "HSYCocoaKitSocketManager.h"
 #import "HSYCocoaKitSocketRACSignal.h"
-
 
 #endif /* HSYCocoaKit_h */

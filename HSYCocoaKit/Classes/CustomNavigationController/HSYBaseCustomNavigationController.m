@@ -8,6 +8,7 @@
 
 #import "HSYBaseCustomNavigationController.h"
 #import "HSYBaseViewController.h"
+#import "HSYCustomBackTransitionAnimation.h"
 
 @interface HSYBaseCustomNavigationController ()
 
@@ -22,6 +23,7 @@
     if (self = [super initWithRootViewController:rootViewController]) {
         _banTransition = NO;
         _panGestureEndedProgress = (params[@(kHSYCustomNavigationControllerParamsKeyEndedProgress)] ? ([params[@(kHSYCustomNavigationControllerParamsKeyEndedProgress)] floatValue]) : 0.45);
+        _animation = (params[@(kHSYCustomNavigationControllerParamsKeyAnimationType)] ? (kHSYCustomNavigationControllerPushAnimation)[params[@(kHSYCustomNavigationControllerParamsKeyAnimationType)] integerValue] : kHSYCustomNavigationControllerPushAnimationSystemPush);
         self.openTransitionAnimation = (params[@(kHSYCustomNavigationControllerParamsKeyOpenTransitionAnimation)] ? [params[@(kHSYCustomNavigationControllerParamsKeyOpenTransitionAnimation)] boolValue] : YES);
     }
     return self;
@@ -80,10 +82,10 @@
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
 {
     if (operation == UINavigationControllerOperationPush) {
-        HSYCustomLeftTransitionAnimation *push = [[HSYCustomLeftTransitionAnimation alloc] initWithTransitionType:kHSYCustomPercentDrivenInteractiveTransitionActionsTypePush];
+        HSYCustomBaseTransitionAnimation *push = [self hsy_pushTransitionAnimation];
         return push;
     } else if (operation == UINavigationControllerOperationPop) {
-        HSYCustomLeftTransitionAnimation *pop = [[HSYCustomLeftTransitionAnimation alloc] initWithTransitionType:kHSYCustomPercentDrivenInteractiveTransitionActionsTypePop];
+        HSYCustomBaseTransitionAnimation *pop = [self hsy_popTransitionAnimation];
         return pop;
     }
     return nil;
@@ -91,13 +93,35 @@
 
 - (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController
 {
-    if ([animationController isKindOfClass:[HSYCustomLeftTransitionAnimation class]]) {
-        HSYCustomLeftTransitionAnimation *pop = (HSYCustomLeftTransitionAnimation *)animationController;
+    if ([animationController isKindOfClass:[HSYCustomBaseTransitionAnimation class]]) {
+        HSYCustomBaseTransitionAnimation *pop = (HSYCustomBaseTransitionAnimation *)animationController;
         if (pop.actionsType == kHSYCustomPercentDrivenInteractiveTransitionActionsTypePop) {
             return self.interactivePopTransition;
         }
     }
     return nil;
+}
+
+- (HSYCustomBaseTransitionAnimation *)hsy_pushTransitionAnimation
+{
+    HSYCustomBaseTransitionAnimation *animation = nil;
+    if (self.animation == kHSYCustomNavigationControllerPushAnimationCardPush) {
+        animation = [[HSYCustomLeftTransitionAnimation alloc] initWithCardBackTransitionType:kHSYCustomPercentDrivenInteractiveTransitionActionsTypePush];
+    } else if (self.animation == kHSYCustomNavigationControllerPushAnimationSystemPush) {
+        animation = [[HSYCustomBackTransitionAnimation alloc] initWithSystemBackTransitionType:kHSYCustomPercentDrivenInteractiveTransitionActionsTypePush];
+    }
+    return animation;
+}
+
+- (HSYCustomBaseTransitionAnimation *)hsy_popTransitionAnimation
+{
+    HSYCustomBaseTransitionAnimation *animation = nil;
+    if (self.animation == kHSYCustomNavigationControllerPushAnimationCardPush) {
+        animation = [[HSYCustomLeftTransitionAnimation alloc] initWithCardBackTransitionType:kHSYCustomPercentDrivenInteractiveTransitionActionsTypePop];
+    } else if (self.animation == kHSYCustomNavigationControllerPushAnimationSystemPush) {
+        animation = [[HSYCustomBackTransitionAnimation alloc] initWithSystemBackTransitionType:kHSYCustomPercentDrivenInteractiveTransitionActionsTypePop];
+    }
+    return animation;
 }
 
 #pragma mark - UIGestureRecognizerDelegate
