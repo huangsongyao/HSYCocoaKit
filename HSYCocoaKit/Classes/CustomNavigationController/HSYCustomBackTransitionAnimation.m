@@ -32,9 +32,6 @@
 - (void)hsy_toActionsAnimatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext
 {
     [super hsy_toActionsAnimatedTransitioning:transitionContext];
-    [self.toViewController hsy_setShadowForColorRef:BLACK_COLOR.CGColor
-                                      shadowOpacity:5.0f
-                                       shadowRadius:10.0f];
     self.fromViewController.view.origin = CGPointZero;
     @weakify(self);
     [self hsy_animatedTransitioning:transitionContext performPushMethods:YES animationForNext:^{

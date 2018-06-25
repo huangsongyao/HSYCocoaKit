@@ -12,7 +12,7 @@
 #import "ReactiveCocoa.h"
 #import "PublicMacroFile.h"
 
-#define DEFAULT_TRANSITION_DURATION                     2.5f
+#define DEFAULT_TRANSITION_DURATION                     0.5f
 #define MIN_ALPHA_COMPONENT                             0.0f
 #define MAX_ALPHA_COMPONENT                             0.6f
 

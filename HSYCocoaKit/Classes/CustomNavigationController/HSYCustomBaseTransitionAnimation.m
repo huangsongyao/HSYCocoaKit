@@ -116,6 +116,9 @@
     [self.contextView insertSubview:self.toViewController.view aboveSubview:self.fromViewController.view];
     [self.toViewController.view setOrigin:CGPointMake(IPHONE_WIDTH, 0)];
     [self.fromViewController.view addSubview:[self hsy_blackShadowView:MIN_ALPHA_COMPONENT]];
+    [self.toViewController hsy_setShadowForColorRef:BLACK_COLOR.CGColor
+                                      shadowOpacity:5.0f
+                                       shadowRadius:10.0f];
 }
 
 - (void)hsy_fromActionsAnimatedTransitioning:(id<UIViewControllerContextTransitioning>)transitionContext
