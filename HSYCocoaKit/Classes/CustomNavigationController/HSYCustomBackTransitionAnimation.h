@@ -5,7 +5,7 @@
 //  Created by huangsongyao on 2018/6/25.
 //
 
-#import <HSYCocoaKit/HSYCocoaKit.h>
+#import "HSYCustomBaseTransitionAnimation.h"
 
 @interface HSYCustomBackTransitionAnimation : HSYCustomBaseTransitionAnimation
 
