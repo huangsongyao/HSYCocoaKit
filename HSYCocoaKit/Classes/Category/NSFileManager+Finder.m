@@ -11,6 +11,17 @@
 
 @implementation NSFileManager (Finder)
 
++ (NSString *)finderFileFromResources:(NSArray<NSDictionary *> *)resources
+{
+    for (NSDictionary *paramter in resources) {
+        NSString *filePath = [self.class finderFileFromName:paramter.allValues.firstObject fileType:paramter.allKeys.firstObject];
+        if (filePath.length > 0) {
+            return filePath;
+        }
+    }
+    return nil;
+}
+
 + (NSString *)finderFileFromName:(NSString *)name fileType:(NSString *)type
 {
     NSString *resource = [self.class pathForResource:name fileType:type];
