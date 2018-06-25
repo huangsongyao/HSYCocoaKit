@@ -7,7 +7,7 @@
 //
 
 #import "HSYCocoaKit.h"
-#import <JSONModel/JSONModel.h>
+#import "JSONModel.h"
 
 @interface TestJ_SubModel : JSONModel
 

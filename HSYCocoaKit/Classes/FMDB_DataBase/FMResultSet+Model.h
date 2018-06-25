@@ -6,7 +6,7 @@
 //
 //
 
-#import <FMDB/FMDB.h>
+#import "FMDB.h"
 
 @class HSYFMDBOperationFieldInfo;
 @interface FMResultSet (Model)
