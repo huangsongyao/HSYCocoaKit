@@ -13,6 +13,7 @@
 #import "HSYBaseLaunchScreenViewController.h"
 #import "PublicMacroFile.h"
 #import "UIImage+Canvas.h"
+#import "UIViewController+Runtime.h"
 
 static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentifier";
 
@@ -41,7 +42,7 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
 
 //****************************************************************************************************
 
-@interface HSYBaseTabBarViewController ()
+@interface HSYBaseTabBarViewController () <UIViewControllerRuntimeDelegate>
 
 @property (nonatomic, strong) UIImageView *tabBarBackgroundImage;
 
@@ -53,7 +54,7 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
 {
     if (self = [super init]) {
         self.hsy_viewModel = [[HSYBaseTabBarModel alloc] initWithConfigs:configs];
-        _tabbarHeight = @(IPHONE_TABBAR_HEIGHT);
+        _tabBarHeight = @(IPHONE_TABBAR_HEIGHT);
         _hsy_tabBarBackgroundImage = [UIImage imageWithFillColor:WHITE_COLOR];
         _hsy_lineShow = @(YES);
         _hsy_lineDictionary = @{@(0.5f) : RGB(104, 104, 104)};
@@ -65,10 +66,10 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
     [super viewDidLoad];
     [self hiddenCustomNavigationBar];
     //底部的tabbar的布局
-    NSDictionary *layoutParam = @{ @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset) : [NSValue valueWithUIEdgeInsets:UIEdgeInsetsZero], @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection) : @(UICollectionViewScrollDirectionHorizontal), @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize) : [NSValue valueWithCGSize:CGSizeMake((IPHONE_WIDTH/[(HSYBaseTabBarModel *)self.hsy_viewModel hsy_viewControllers].count), self.tabbarHeight.floatValue)], @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeLineSpacing) :@(0), @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeInteritemSpacing) : @(0), };
+    NSDictionary *layoutParam = @{ @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset) : [NSValue valueWithUIEdgeInsets:UIEdgeInsetsZero], @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection) : @(UICollectionViewScrollDirectionHorizontal), @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize) : [NSValue valueWithCGSize:CGSizeMake((IPHONE_WIDTH/[(HSYBaseTabBarModel *)self.hsy_viewModel hsy_viewControllers].count), self.tabBarHeight.floatValue)], @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeLineSpacing) :@(0), @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeInteritemSpacing) : @(0), };
     
     UICollectionViewFlowLayout *layout = [NSObject createFlowLayoutByParam:layoutParam];
-    CGRect rect = CGRectMake(0, ((self.customNavigationBar ? IPHONE_HEIGHT : self.view.height) - self.tabbarHeight.floatValue), IPHONE_WIDTH, self.tabbarHeight.floatValue);
+    CGRect rect = CGRectMake(0, ((self.customNavigationBar ? IPHONE_HEIGHT : self.view.height) - self.tabBarHeight.floatValue), IPHONE_WIDTH, self.tabBarHeight.floatValue);
     
     //作为伪tabBar的背景图
     self.tabBarBackgroundImage = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : self.hsy_tabBarBackgroundImage, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : self.hsy_tabBarBackgroundImage, }];
@@ -93,6 +94,12 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
     NSArray *viewControllers = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_tabBarItemViewControllers:(IPHONE_HEIGHT - self.collectionView.height)];
     [self.view addSubview:[viewControllers.firstObject view]];
     for (UIViewController *vc in viewControllers) {
+        if ([vc isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *nav = (UINavigationController *)vc;
+            [nav.viewControllers firstObject].hsy_runtimeDelegate = self;
+        } else {
+            vc.hsy_runtimeDelegate = self;
+        }
         [[[vc hsy_layoutTabBarReset] rac_willDeallocSignal] subscribeCompleted:^{
             NSLog(@"%@ Class rac_willDeallocSignal", NSStringFromClass(vc.class));
         }];
@@ -181,6 +188,17 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
     HSYBaseTabBarConfigItem *item = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_configItems][page];
     item.redPointNumber = numbers;
     [self.collectionView reloadData];
+}
+
+#pragma mark - UIViewControllerRuntimeDelegate
+
+- (void)hsy_runtimeDelegate:(UIViewControllerRuntimeDelegateObject *)object
+{
+    if (self.hsy_responseRuntimeDelegate) {
+        [[self.hsy_responseRuntimeDelegate(object) deliverOn:[RACScheduler mainThreadScheduler]] subscribeCompleted:^{
+            NSLog(@"UIViewControllerRuntimeDelegate completed!");
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

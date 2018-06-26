@@ -28,6 +28,7 @@
 
 @interface UIViewController (Runtime)
 
+//controller的全局委托
 @property (nonatomic, weak) id<UIViewControllerRuntimeDelegate>hsy_runtimeDelegate;
 
 @end

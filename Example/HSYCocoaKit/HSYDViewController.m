@@ -20,6 +20,7 @@
 #import "NSObject+JSONModel.h"
 #import "NSDate+Timestamp.h"
 #import "NSString+Size.h"
+#import "UIViewController+Runtime.h"
 
 static CGFloat offsetLeft = 22.0f;
 static CGFloat top = 39.0f;
@@ -332,6 +333,15 @@ static CGFloat imgBottom = 11.0f;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [CXAMCHomePageTableCell realHeight];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.hsy_runtimeDelegate) {
+        if ([self.hsy_runtimeDelegate respondsToSelector:@selector(hsy_runtimeDelegate:)]) {
+            [self.hsy_runtimeDelegate hsy_runtimeDelegate:nil];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

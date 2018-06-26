@@ -13,6 +13,7 @@
 #import "UIView+Frame.h"
 #import "UIViewController+NavigationItem.h"
 #import "HSYBaseTabBarViewController.h"
+#import "UIViewController+Runtime.h"
 
 @implementation UIViewController (SegmentdPage)
 
@@ -32,7 +33,7 @@
 
 //********************************************************************************************************
 
-@interface HSYBaseSegmentedPageViewController () <UIScrollViewDelegate>
+@interface HSYBaseSegmentedPageViewController () <UIScrollViewDelegate, UIViewControllerRuntimeDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, assign) BOOL canScroll;
@@ -164,6 +165,12 @@
         [self.scrollView setXPage:self.currentSelectedIndex.integerValue];
     }
     for (UIViewController *vc in hsy_viewControllers) {
+        if ([vc isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *nav = (UINavigationController *)vc;
+            [nav.viewControllers firstObject].hsy_runtimeDelegate = self;
+        } else {
+            vc.hsy_runtimeDelegate = self;
+        }
         //分页控制设置完子控制器布局后，对每个子控制器均发送一个信号，自控制器如果订阅该冷信号，可在next中调整自控制view布局
         [[[vc hsy_layoutReset] rac_willDeallocSignal] subscribeCompleted:^{
             NSLog(@"%@ Class rac_willDeallocSignal", NSStringFromClass(vc.class));
@@ -251,6 +258,17 @@
         self.scrollEndFinished(self.currentSelectedIndex.integerValue, [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_viewControllers][self.currentSelectedIndex.integerValue]);
     }
     NSLog(@"- scrollViewDidEndDecelerating: 滚动手势结束, 当前页面位置:%@=%@", self.currentSelectedIndex, @(self.segmentedPageControl.selectedIndex));
+}
+
+#pragma mark - UIViewControllerRuntimeDelegate
+
+- (void)hsy_runtimeDelegate:(UIViewControllerRuntimeDelegateObject *)object
+{
+    if (self.hsy_responseRuntimeDelegate) {
+        [[self.hsy_responseRuntimeDelegate(object) deliverOn:[RACScheduler mainThreadScheduler]] subscribeCompleted:^{
+            NSLog(@"UIViewControllerRuntimeDelegate completed!");
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

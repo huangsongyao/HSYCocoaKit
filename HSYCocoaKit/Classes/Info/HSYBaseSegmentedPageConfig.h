@@ -34,7 +34,7 @@
 //格式为：@{@"normal的image" : @"selected的image"}
 @property (nonatomic, strong) NSDictionary<NSString *, NSString *> *imageParamter;
 //格式为：@{@"normal的font" : @"selected的font"}
-@property (nonatomic, strong) NSDictionary<NSString *, NSString *> *fontParamter;
+@property (nonatomic, strong) NSDictionary<UIFont *, UIFont *> *fontParamter;
 
 /**
  根据入参提供的tabBarConfig初始化接口

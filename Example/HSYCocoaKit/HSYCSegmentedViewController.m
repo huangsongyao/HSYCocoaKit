@@ -7,6 +7,7 @@
 //
 
 #import "HSYCSegmentedViewController.h"
+#import "HSYBViewController.h"
 
 @interface HSYCSegmentedViewController ()
 
@@ -64,6 +65,13 @@
 {
     [super viewDidLoad];
     [self scrollToPage:0];
+    @weakify(self);
+    self.hsy_responseRuntimeDelegate = ^RACSignal *(UIViewControllerRuntimeDelegateObject *object) {
+        @strongify(self);
+        HSYBViewController *vc = [[HSYBViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return [RACSignal empty];
+    };
 }
 
 
