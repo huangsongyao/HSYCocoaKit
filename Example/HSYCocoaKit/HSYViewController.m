@@ -83,16 +83,16 @@
 //        HSYBViewController *vc = [[HSYBViewController alloc] init];
         UIColor *color = HexColorString(@"6F6F6F");
         UIColor *highColor = HexColorString(@"CA4526");
-        HSYBaseTabBarControllerConfig *config1 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYDViewController" viewControllerTitle:@"首页" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_home_default" : @"tab_icon_home_new_selected"} fontParamter:@{UI_SYSTEM_FONT_15 : UI_SYSTEM_FONT_15}];
+        HSYBaseTabBarControllerConfig *config1 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYDViewController" viewControllerTitle:@"首页" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_home_default" : @"tab_icon_home_new_selected"} fontParamter:@{UI_SYSTEM_FONT_11 : UI_SYSTEM_FONT_11}];
         config1.showNavigationBar = NO;
         
-        HSYBaseTabBarControllerConfig *config2 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYCViewController" viewControllerTitle:@"投资" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_invest_default" : @"tab_icon_invest_new_selected"} fontParamter:@{UI_SYSTEM_FONT_15 : UI_SYSTEM_FONT_15}];
+        HSYBaseTabBarControllerConfig *config2 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYCViewController" viewControllerTitle:@"投资" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_invest_default" : @"tab_icon_invest_new_selected"} fontParamter:@{UI_SYSTEM_FONT_11 : UI_SYSTEM_FONT_11}];
         config2.showNavigationBar = NO;
         
-        HSYBaseTabBarControllerConfig *config3 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"CXAMCPersonalViewController" viewControllerTitle:@"我的" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_mine_default" : @"tab_icon_mine_new_selected"} fontParamter:@{UI_SYSTEM_FONT_15 : UI_SYSTEM_FONT_15}];
+        HSYBaseTabBarControllerConfig *config3 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"CXAMCPersonalViewController" viewControllerTitle:@"我的" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_mine_default" : @"tab_icon_mine_new_selected"} fontParamter:@{UI_SYSTEM_FONT_11 : UI_SYSTEM_FONT_11}];
         config3.showNavigationBar = NO;
         
-        HSYBaseTabBarControllerConfig *config4 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYTestsViewController" viewControllerTitle:@"更多" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_search_default" : @"tab_icon_search_new_selected"} fontParamter:@{UI_SYSTEM_FONT_15 : UI_SYSTEM_FONT_15}];
+        HSYBaseTabBarControllerConfig *config4 = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:@"HSYTestsViewController" viewControllerTitle:@"更多" paramters:@{} titleColorParamter:@{color : highColor} imageParamter:@{@"tab_icon_search_default" : @"tab_icon_search_new_selected"} fontParamter:@{UI_SYSTEM_FONT_11 : UI_SYSTEM_FONT_11}];
         NSMutableArray *configs = [@[config1, config2, config3, config4] mutableCopy];
         HSYTabBarController *vc = [[HSYTabBarController alloc] initWithConfigs:configs];
         

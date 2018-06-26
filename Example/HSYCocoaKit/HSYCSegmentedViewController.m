@@ -52,5 +52,13 @@
 
 @implementation HSYTabBarController
 
+- (instancetype)initWithConfigs:(NSArray<HSYBaseTabBarControllerConfig *> *)configs
+{
+    if (self = [super initWithConfigs:configs]) {
+        
+    }
+    return self;
+}
+
 
 @end

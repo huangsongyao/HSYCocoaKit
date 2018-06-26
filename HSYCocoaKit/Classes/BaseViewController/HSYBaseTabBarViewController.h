@@ -28,6 +28,12 @@
 @property (nonatomic, strong, readonly) UICollectionView *collectionView;
 //请在"- initWithConfigs:"方法的子类重载中设置高度，默认为系统Tabbar高度，即IPHONE_TABBAR_HEIGHT宏
 @property (nonatomic, strong) NSNumber *tabbarHeight;
+//请在"- initWithConfigs:"方法的子类重载中设置，tabBar的背景图，默认为白色
+@property (nonatomic, strong) UIImage *hsy_tabBarBackgroundImage;
+//请在"- initWithConfigs:"方法的子类重载中设置，是否显示tabBar的顶部的横线，默认显示
+@property (nonatomic, strong) NSNumber *hsy_lineShow;
+//请在"- initWithConfigs:"方法的子类重载中设置，当“hsy_lineShow”为YES时，该属性有效，默认为@{@(高0.5f) : @"灰色"}
+@property (nonatomic, strong) NSDictionary *hsy_lineDictionary;
 
 - (instancetype)initWithConfigs:(NSArray<HSYBaseTabBarControllerConfig *> *)configs;
 

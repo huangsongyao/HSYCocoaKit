@@ -17,10 +17,14 @@
 {
     if (self = [super init]) {
         _title = title;
-        _normalImage = [UIImage imageNamed:norParamter.allKeys.firstObject];
-        _normalColor = norParamter.allValues.firstObject;
-        _selectedImage = [UIImage imageNamed:selParamter.allKeys.firstObject];
-        _selectedColor = selParamter.allValues.firstObject;
+        NSString *nor = norParamter[@"normalImage"];
+        _normalImage = [UIImage imageNamed:nor];
+        _normalColor = norParamter[@"normalColor"];
+        _normalFont = norParamter[@"normalFont"];
+        NSString *sel = selParamter[@"selectedImage"];
+        _selectedImage = [UIImage imageNamed:sel];
+        _selectedColor = selParamter[@"selectedColor"];
+        _selectedFont = selParamter[@"selectedFont"];
     }
     return self;
 }
@@ -80,7 +84,7 @@
         for (HSYBaseTabBarControllerConfig *config in self.hsy_configs) {
             [self.hsy_viewControllers addObject:config.hsy_viewController];
             [self.hsy_titles addObject:config.hsy_title];
-            HSYBaseTabBarConfigItem *item = [[HSYBaseTabBarConfigItem alloc] initWithTitle:config.hsy_title normalParamter:@{config.imageParamter.allKeys.firstObject : config.titleColorParamter.allKeys.firstObject} selectedParamter:@{config.imageParamter.allValues.firstObject : config.titleColorParamter.allValues.firstObject}];
+            HSYBaseTabBarConfigItem *item = [[HSYBaseTabBarConfigItem alloc] initWithTitle:config.hsy_title normalParamter:@{@"normalImage" : config.imageParamter.allKeys.firstObject, @"normalColor" : config.titleColorParamter.allKeys.firstObject, @"normalFont" : config.fontParamter.allKeys.firstObject, } selectedParamter:@{@"selectedImage" : config.imageParamter.allValues.firstObject, @"selectedColor" : config.titleColorParamter.allValues.firstObject, @"selectedFont" : config.fontParamter.allValues.firstObject, }];
             item.selectedItem = ([self.hsy_configs indexOfObject:config] == 0);
             [self.hsy_configItems addObject:item];
         }

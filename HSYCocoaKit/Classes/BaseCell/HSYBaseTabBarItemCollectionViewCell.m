@@ -31,6 +31,9 @@ CGFloat const kHSYCocoaKitMinRedPointHeight = 7.0f;
 {
     if (self = [super initWithFrame:frame]) {
         
+        self.backgroundColor = CLEAR_COLOR;
+        self.contentView.backgroundColor = CLEAR_COLOR;
+        
         CGFloat imageSize = 20.0f;
         CGFloat imageOffsetBottom = 4.0f;
         CGFloat labelOffsetTop = 2.0f;

@@ -12,6 +12,7 @@
 #import "HSYBaseSegmentedPageViewController.h"
 #import "HSYBaseLaunchScreenViewController.h"
 #import "PublicMacroFile.h"
+#import "UIImage+Canvas.h"
 
 static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentifier";
 
@@ -35,6 +36,8 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
 
 @interface HSYBaseTabBarViewController ()
 
+@property (nonatomic, strong) UIImageView *tabBarBackgroundImage;
+
 @end
 
 @implementation HSYBaseTabBarViewController
@@ -44,6 +47,9 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
     if (self = [super init]) {
         self.hsy_viewModel = [[HSYBaseTabBarModel alloc] initWithConfigs:configs];
         _tabbarHeight = @(IPHONE_TABBAR_HEIGHT);
+        _hsy_tabBarBackgroundImage = [UIImage imageWithFillColor:WHITE_COLOR];
+        _hsy_lineShow = @(YES);
+        _hsy_lineDictionary = @{@(0.5f) : RGB(104, 104, 104)};
     }
     return self;
 }
@@ -51,28 +57,29 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self hiddenCustomNavigationBar];
-    //底部的tabbar
-    NSDictionary *layoutParam = @{
-                                  @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset) : [NSValue valueWithUIEdgeInsets:UIEdgeInsetsZero],
-                                  @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection) : @(UICollectionViewScrollDirectionHorizontal),
-                                  @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize) : [NSValue valueWithCGSize:CGSizeMake((IPHONE_WIDTH/[(HSYBaseTabBarModel *)self.hsy_viewModel hsy_viewControllers].count), self.tabbarHeight.floatValue)],
-                                  @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeLineSpacing) :@(0),
-                                  @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeInteritemSpacing) : @(0),
-                                  };
+    //底部的tabbar的布局
+    NSDictionary *layoutParam = @{ @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset) : [NSValue valueWithUIEdgeInsets:UIEdgeInsetsZero], @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection) : @(UICollectionViewScrollDirectionHorizontal), @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize) : [NSValue valueWithCGSize:CGSizeMake((IPHONE_WIDTH/[(HSYBaseTabBarModel *)self.hsy_viewModel hsy_viewControllers].count), self.tabbarHeight.floatValue)], @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeLineSpacing) :@(0), @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeInteritemSpacing) : @(0), };
+    
     UICollectionViewFlowLayout *layout = [NSObject createFlowLayoutByParam:layoutParam];
     CGRect rect = CGRectMake(0, ((self.customNavigationBar ? IPHONE_HEIGHT : self.view.height) - self.tabbarHeight.floatValue), IPHONE_WIDTH, self.tabbarHeight.floatValue);
-    NSMutableDictionary *collectionParam = [@{
-                                              @(kHSYCocoaKitOfCollectionViewPropretyTypeFrame) : [NSValue valueWithCGRect:rect],
-                                              @(kHSYCocoaKitOfCollectionViewPropretyTypeLayout) : layout,
-                                              @(kHSYCocoaKitOfCollectionViewPropretyTypeDataSource) : self,
-                                              @(kHSYCocoaKitOfCollectionViewPropretyTypeDelegate) : self,
-                                              @(kHSYCocoaKitOfCollectionViewPropretyTypeScrollEnabled) : @(NO),
-                                              @(kHSYCocoaKitOfCollectionViewPropretyTypeHiddenScrollIndicator) : @(YES),
-                                              @(kHSYCocoaKitOfCollectionViewPropretyTypeBounces) : @(NO),
-                                              @(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass) : @[@{@"HSYBaseTabBarItemCollectionViewCell" : HSYBaseTabBarItemIdentifier}],
-                                              } mutableCopy];
+    
+    //作为伪tabBar的背景图
+    self.tabBarBackgroundImage = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : self.hsy_tabBarBackgroundImage, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : self.hsy_tabBarBackgroundImage, }];
+    self.tabBarBackgroundImage.frame = rect;
+    [self.view addSubview:self.tabBarBackgroundImage];
+    
+    if (self.hsy_lineShow.boolValue) {
+        //顶部的横线
+        UIView *line = [[UIView alloc] initWithSize:CGSizeMake(self.tabBarBackgroundImage.width, [self.hsy_lineDictionary.allKeys.firstObject floatValue])];
+        line.backgroundColor = self.hsy_lineDictionary.allValues.firstObject;
+        [self.tabBarBackgroundImage addSubview:line];
+    }
+    
+    //伪tabBar
+    NSMutableDictionary *collectionParam = [@{ @(kHSYCocoaKitOfCollectionViewPropretyTypeFrame) : [NSValue valueWithCGRect:rect], @(kHSYCocoaKitOfCollectionViewPropretyTypeLayout) : layout, @(kHSYCocoaKitOfCollectionViewPropretyTypeDataSource) : self, @(kHSYCocoaKitOfCollectionViewPropretyTypeDelegate) : self, @(kHSYCocoaKitOfCollectionViewPropretyTypeScrollEnabled) : @(NO), @(kHSYCocoaKitOfCollectionViewPropretyTypeHiddenScrollIndicator) : @(YES), @(kHSYCocoaKitOfCollectionViewPropretyTypeBounces) : @(NO), @(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass) : @[@{@"HSYBaseTabBarItemCollectionViewCell" : HSYBaseTabBarItemIdentifier}], } mutableCopy];
     
     _collectionView = [NSObject createCollectionViewByParam:collectionParam];
+    self.collectionView.backgroundColor = CLEAR_COLOR;
     [self.view addSubview:self.collectionView];
     
     //添加默认的index == 0的item的所属content内容视图
