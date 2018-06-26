@@ -20,7 +20,7 @@
  根据paramters入参使用kvc方式，将paramters中的allValue设置到UIViewController中
 
  @param className UIViewController的类名
- @param paramters UIViewController的属性集合，格式为@{@"属性名称" : @"属性名称对应的值", ...}
+ @param paramters UIViewController的属性集合，格式为：@{@"属性名称" : @"属性名称对应的值", ...}
  @return HSYBaseSegmentedPageConfig
  */
 + (instancetype)initWithViewControllerClassName:(NSString *)className viewControllerTitle:(NSString *)title paramters:(NSDictionary<NSString *, NSString *> *)paramters;
@@ -33,11 +33,25 @@
 @property (nonatomic, strong) NSDictionary<UIColor *, UIColor *> *titleColorParamter;
 //格式为：@{@"normal的image" : @"selected的image"}
 @property (nonatomic, strong) NSDictionary<NSString *, NSString *> *imageParamter;
+//格式为：@{@"normal的font" : @"selected的font"}
+@property (nonatomic, strong) NSDictionary<NSString *, NSString *> *fontParamter;
 
+/**
+ 根据入参提供的tabBarConfig初始化接口
+
+ @param className UIViewController的类名
+ @param title UIViewController的title
+ @param paramters UIViewController的属性集合，格式为：@{@"属性名称" : @"属性名称对应的值", ...}
+ @param titleColorParamter tabBarItem中的字体颜色，格式为：@{@"未选中的颜色" : @"选中后的颜色"}
+ @param imageParamter tabBarItem中的图片，格式为：@{@"未选中的图片名称" : @"选中的图片名称"}
+ @param fontParamter tabBarItem中的字体，格式为：@{@"未选中的字体字号" : @"选中的字体字号"}
+ @return HSYBaseTabBarControllerConfig
+ */
 + (instancetype)initWithViewControllerClassName:(NSString *)className
                             viewControllerTitle:(NSString *)title
                                       paramters:(NSDictionary<NSString *, NSString *> *)paramters
                              titleColorParamter:(NSDictionary<UIColor *, UIColor *> *)titleColorParamter
-                                  imageParamter:(NSDictionary<NSString *, NSString *> *)imageParamter;
+                                  imageParamter:(NSDictionary<NSString *, NSString *> *)imageParamter
+                                   fontParamter:(NSDictionary<UIFont *, UIFont *> *)fontParamter;
 
 @end

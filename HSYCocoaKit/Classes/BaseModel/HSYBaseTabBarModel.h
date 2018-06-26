@@ -16,6 +16,8 @@
 @property (nonatomic, strong, readonly) UIImage *selectedImage;
 @property (nonatomic, strong, readonly) UIColor *normalColor;
 @property (nonatomic, strong, readonly) UIColor *selectedColor;
+@property (nonatomic, strong, readonly) UIFont *normalFont;
+@property (nonatomic, strong, readonly) UIFont *selectedFont;
 
 @property (nonatomic, strong) NSNumber *redPointNumber;
 @property (nonatomic, assign) BOOL selectedItem;

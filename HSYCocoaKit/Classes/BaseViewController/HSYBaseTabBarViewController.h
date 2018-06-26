@@ -9,6 +9,19 @@
 #import "HSYBaseViewController.h"
 #import "HSYBaseTabBarModel.h"
 
+@interface UIViewController (TabBar)
+
+/**
+ 用于tabBar控制器内设置好布局后，如果外部需要对布局做调整，可在子控制器的"- viewDidLoad"方法中内部订阅本信号，重新调整布局
+ 
+ @return RACSignal，会返回一个NSValue--CGRect，为每个子控制器的view在翻页控制器中的scrollView的布局frame
+ */
+- (RACSignal *)hsy_layoutTabBarReset;
+
+@end
+
+//**************************************************************************************************
+
 @interface HSYBaseTabBarViewController : HSYBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
 //底部的tabbar

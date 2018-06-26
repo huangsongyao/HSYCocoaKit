@@ -15,6 +15,24 @@
 
 static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentifier";
 
+@implementation UIViewController (TabBar)
+
+- (RACSignal *)hsy_layoutTabBarReset
+{
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        NSValue *value = [NSValue valueWithCGRect:self.view.frame];
+        [subscriber sendNext:value];
+        [subscriber sendCompleted];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods“- hsy_layoutTabBarReset + %@ Class”", NSStringFromClass(self.class));
+        }];
+    }];
+}
+
+@end
+
+//****************************************************************************************************
+
 @interface HSYBaseTabBarViewController ()
 
 @end
@@ -60,6 +78,11 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
     //添加默认的index == 0的item的所属content内容视图
     NSArray *viewControllers = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_tabBarItemViewControllers:(IPHONE_HEIGHT - self.collectionView.height)];
     [self.view addSubview:[viewControllers.firstObject view]];
+    for (UIViewController *vc in viewControllers) {
+        [[[vc hsy_layoutTabBarReset] rac_willDeallocSignal] subscribeCompleted:^{
+            NSLog(@"%@ Class rac_willDeallocSignal", NSStringFromClass(vc.class));
+        }];
+    }
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource

@@ -54,10 +54,12 @@
                                       paramters:(NSDictionary<NSString *,NSString *> *)paramters
                              titleColorParamter:(NSDictionary<UIColor *,UIColor *> *)titleColorParamter
                                   imageParamter:(NSDictionary<NSString *,NSString *> *)imageParamter
+                                   fontParamter:(NSDictionary<UIFont *,UIFont *> *)fontParamter
 {
     HSYBaseTabBarControllerConfig *config = [HSYBaseTabBarControllerConfig initWithViewControllerClassName:className viewControllerTitle:title paramters:paramters];
     config.titleColorParamter = titleColorParamter;
     config.imageParamter = imageParamter;
+    config.fontParamter = fontParamter;
     
     return config;
 }

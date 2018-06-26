@@ -71,7 +71,7 @@ NSInteger const kHSYCocoaKitDefaultCustomBarItemTag     = 10923;
 {
     NSMutableArray *titleColors = [NSMutableArray arrayWithCapacity:titles.count];
     NSMutableArray *titleFonts = [NSMutableArray arrayWithCapacity:titles.count];
-    for (NSDictionary *dic in titles) {
+    for (NSInteger i = 0; i < titles.count; i ++) {
         [titleColors addObject:BLACK_COLOR];
         [titleFonts addObject:UI_SYSTEM_FONT_15];
     }
