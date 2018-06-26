@@ -160,9 +160,9 @@
 - (void)hsy_pushNavigationItemInLeft
 {
     @weakify(self);
-    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar hsy_backButtonItemForImage:self.backItemImage subscribeNext:^(UIButton *button, kHSYCustomBarButtonItemTag tag) {
+    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar hsy_backButtonItemForImage:self.backItemImage subscribeNext:^(UIButton *button, NSInteger tag) {
         @strongify(self);
-        if (tag == kHSYCustomBarButtonItemTagBack) {
+        if (tag == kHSYCocoaKitDefaultCustomBarItemTag) {
             [self.navigationController popViewControllerAnimated:YES];
         }
     }];
@@ -172,9 +172,9 @@
 - (void)hsy_setCustomNavigationBarBackButtonInLeft:(BOOL)left title:(NSString *)title image:(NSString *)image
 {
     @weakify(self);
-    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar hsy_backButtonItemForImage:image title:title subscribeNext:^(UIButton *button, kHSYCustomBarButtonItemTag tag) {
+    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar hsy_backButtonItemForImage:image title:title subscribeNext:^(UIButton *button, NSInteger tag) {
         @strongify(self);
-        if (tag == kHSYCustomBarButtonItemTagBack) {
+        if (tag == kHSYCocoaKitDefaultCustomBarItemTag) {
             [self.navigationController popViewControllerAnimated:YES];
         }
     }];

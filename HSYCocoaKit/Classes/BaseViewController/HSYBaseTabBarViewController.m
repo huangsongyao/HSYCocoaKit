@@ -11,6 +11,7 @@
 #import "HSYBaseTabBarItemCollectionViewCell.h"
 #import "HSYBaseSegmentedPageViewController.h"
 #import "HSYBaseLaunchScreenViewController.h"
+#import "PublicMacroFile.h"
 
 static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentifier";
 
@@ -24,10 +25,7 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
 {
     if (self = [super init]) {
         self.hsy_viewModel = [[HSYBaseTabBarModel alloc] initWithConfigs:configs];
-        _tabbarHeight = @(44.0f);
-        if ([HSYBaseLaunchScreenViewController iPhoneXDevice]) {
-            _tabbarHeight = @(87.0f);
-        }
+        _tabbarHeight = @(IPHONE_TABBAR_HEIGHT);
     }
     return self;
 }

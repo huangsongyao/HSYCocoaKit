@@ -54,7 +54,7 @@
  @param next 点击回调事件
  @return UIBarButtonItem
  */
-+ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
++ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, NSInteger tag))next;
 
 /**
  创建导航栏的返回按钮，文字模式，允许设置文字
@@ -63,7 +63,7 @@
  @param next 点击回调事件
  @return UIBarButtonItem
  */
-+ (UIBarButtonItem *)hsy_backButtonItemForTitle:(NSString *)title subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
++ (UIBarButtonItem *)hsy_backButtonItemForTitle:(NSString *)title subscribeNext:(void(^)(UIButton *button, NSInteger tag))next;
 
 /**
  创建导航栏的返回按钮，图片+文字模式，允许设置图片和文字
@@ -73,7 +73,7 @@
  @param next 点击回调事件
  @return UIBarButtonItem
  */
-+ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name title:(NSString *)title subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next;
++ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name title:(NSString *)title subscribeNext:(void(^)(UIButton *button, NSInteger tag))next;
 
 @end
 

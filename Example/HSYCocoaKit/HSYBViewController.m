@@ -124,7 +124,7 @@
     self.headerView.hidden = YES;
     [self.headerView addSubview:btn];
     
-    [self hsy_rightItemsImages:@[@{@(kHSYCustomBarButtonItemTagBack) : @"nav_back@2x"}] subscribeNext:^(UIButton *button, kHSYCustomBarButtonItemTag tag) {
+    [self hsy_rightItemsImages:@[@{@(kHSYCocoaKitDefaultCustomBarItemTag) : @"nav_back@2x"}] subscribeNext:^(UIButton *button, NSInteger tag) {
         NSLog(@"x1=%@", [NSDate date]);
 //        UIImageView *imageView = [self.view snapshotImageView];
 //        UIViewController *vc = [UIViewController currentViewController];

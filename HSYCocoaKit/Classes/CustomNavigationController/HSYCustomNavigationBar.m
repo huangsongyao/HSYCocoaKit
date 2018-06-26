@@ -69,7 +69,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
 #pragma mark - BackBarButton Item
 
-+ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name title:(NSString *)title subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
++ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name title:(NSString *)title subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if (title.length > 0) {
@@ -86,24 +86,24 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
     }
     UIButton *button = [NSObject createButtonByParam:dic clickedOnSubscribeNext:^(UIButton *button) {
         if (next) {
-            next(button, kHSYCustomBarButtonItemTagBack);
+            next(button, kHSYCocoaKitDefaultCustomBarItemTag);
         }
     }];
     //默认点击区域为40x40dx
     button.size = CGSizeMake(DEFAULT_BUTTOM_SIZE, DEFAULT_BUTTOM_SIZE);
     //默认返回按钮的箭头图片向左便宜10dx
     button.contentEdgeInsets = UIEdgeInsetsMake(0, -DEFAULT_BUTTOM_EDGE_INSETS_LEFT, 0, 0);
-    button.tag = kHSYCustomBarButtonItemTagBack;
+    button.tag = kHSYCocoaKitDefaultCustomBarItemTag;
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     return backItem;
 }
 
-+ (UIBarButtonItem *)hsy_backButtonItemForTitle:(NSString *)title subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
++ (UIBarButtonItem *)hsy_backButtonItemForTitle:(NSString *)title subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
     return [self.class hsy_backButtonItemForImage:nil title:title subscribeNext:next];
 }
 
-+ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, kHSYCustomBarButtonItemTag tag))next
++ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
     return [self.class hsy_backButtonItemForImage:name title:nil subscribeNext:next];
 }

@@ -13,7 +13,7 @@
 
 //底部的tabbar
 @property (nonatomic, strong, readonly) UICollectionView *collectionView;
-//请在"- initWithConfigs:"方法的子类重载中设置高度，默认为44.0f
+//请在"- initWithConfigs:"方法的子类重载中设置高度，默认为系统Tabbar高度，即IPHONE_TABBAR_HEIGHT宏
 @property (nonatomic, strong) NSNumber *tabbarHeight;
 
 - (instancetype)initWithConfigs:(NSArray<HSYBaseTabBarControllerConfig *> *)configs;
