@@ -12,6 +12,7 @@
 #import "Masonry.h"
 #import "PublicMacroFile.h"
 #import "UIView+Frame.h"
+#import "HSYBaseTabBarViewController.h"
 
 CGFloat const kHSYCocoaKitMaxRedPointHeight = 16.0f;
 CGFloat const kHSYCocoaKitMinRedPointHeight = 7.0f;
@@ -34,17 +35,17 @@ CGFloat const kHSYCocoaKitMinRedPointHeight = 7.0f;
         self.backgroundColor = CLEAR_COLOR;
         self.contentView.backgroundColor = CLEAR_COLOR;
         
-        CGFloat imageSize = 20.0f;
-        CGFloat imageOffsetBottom = 4.0f;
-        CGFloat labelOffsetTop = 2.0f;
-        CGFloat redPointOffsetTop = 3.0f;
+        CGSize imageSize = [HSYBaseTabBarViewController hsy_loadItemImageSize];
+        CGFloat imageOffsetTop = [HSYBaseTabBarViewController hsy_loadItemImageOffsetTop];
+        CGFloat labelOffsetTop = [HSYBaseTabBarViewController hsy_loadItemLabelOffsetTop];
+        CGFloat redPointOffsetTop = [HSYBaseTabBarViewController hsy_loadItemRedPointOffsetTop];
         
         self.itemImageView = [NSObject createImageViewByParam:@{}];
         [self.contentView addSubview:self.itemImageView];
         [self.itemImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.contentView.mas_centerX);
-            make.bottom.equalTo(self.contentView.mas_centerY).offset(imageOffsetBottom);
-            make.size.mas_equalTo(CGSizeMake(imageSize, imageSize));
+            make.top.equalTo(self.contentView.mas_top).offset(imageOffsetTop);
+            make.size.mas_equalTo(imageSize);
         }];
         
         self.itemTitleLabel = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeTextFont) : UI_SYSTEM_FONT_10, @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentCenter),}];
@@ -52,12 +53,12 @@ CGFloat const kHSYCocoaKitMinRedPointHeight = 7.0f;
         [self.itemTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.itemImageView.mas_bottom).offset(labelOffsetTop);
             make.left.equalTo(self.contentView.mas_left);
-            make.size.mas_equalTo(CGSizeMake(self.contentView.width, UI_SYSTEM_FONT_10.pointSize));
+            make.size.mas_equalTo(CGSizeMake(self.contentView.width, [HSYBaseTabBarViewController hsy_loadItemLabelHeight]));
         }];
         
         self.redPointLabel = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeBackgroundColor) : [UIColor redColor], @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentCenter), @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : UI_RED_POINT_FONT, @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : WHITE_COLOR}];
         [self.contentView addSubview:self.redPointLabel];
-        self.redPointLabel.origin = CGPointMake(self.width/2 + 6.0f, redPointOffsetTop);
+        self.redPointLabel.origin = CGPointMake(self.width/2 + [HSYBaseTabBarViewController hsy_loadItemRedPointCentryRight], redPointOffsetTop);
         self.redPointLabel.size = CGSizeMake(0, kHSYCocoaKitMaxRedPointHeight);
         self.redPointLabel.layer.masksToBounds = YES;
         self.redPointLabel.clipsToBounds = YES;

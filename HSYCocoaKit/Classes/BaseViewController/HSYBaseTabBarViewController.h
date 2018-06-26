@@ -52,4 +52,48 @@
  */
 - (void)hsy_setRedPointInPage:(NSInteger)page redPointNumbers:(NSNumber *)numbers;
 
+#pragma mark - Load
+
+/**
+ tabBarItem的布局方式------image的size，子类可重写本方法，返回需要定制的size，默认已有一个size
+
+ @return image的size
+ */
++ (CGSize)hsy_loadItemImageSize;
+
+/**
+ tabBarItem的布局方式------Image的上边距，子类可重写本方法，返回需要定制的top，默认已有一个top
+
+ @return image的top
+ */
++ (CGFloat)hsy_loadItemImageOffsetTop;
+
+/**
+ tabBarItem的布局方式------title的高度，子类可重写本方法，返回需要定制的height，默认已有一个height
+
+ @return title的height
+ */
++ (CGFloat)hsy_loadItemLabelHeight;
+
+/**
+ tabBarItem的布局方式------title的上边距，子类可重写本方法，返回需要定制的top，默认已有一个top
+
+ @return title的top
+ */
++ (CGFloat)hsy_loadItemLabelOffsetTop;
+
+/**
+ tabBarItem的布局方式------红点的上边距，子类可重写本方法，返回需要定制的top，默认已有一个top
+
+ @return 红点的top
+ */
++ (CGFloat)hsy_loadItemRedPointOffsetTop;
+
+/**
+ tabBarItem的布局方式------红点的右边距的偏移量，红点的x坐标为item的中心点的x+本方法返回的偏移量，子类可重写本方法，返回需要定制的右偏移量，默认已有一个右偏移量
+
+ @return 红点的右偏移量
+ */
++ (CGFloat)hsy_loadItemRedPointCentryRight;
+
 @end

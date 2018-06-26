@@ -60,5 +60,11 @@
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self scrollToPage:0];
+}
+
 
 @end

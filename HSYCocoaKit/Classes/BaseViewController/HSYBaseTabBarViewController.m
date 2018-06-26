@@ -16,6 +16,13 @@
 
 static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentifier";
 
+static CGFloat const kHSYCocoaKitDefaultItemImageSize             = 25.0f;
+static CGFloat const kHSYCocoaKitDefaultItemImageOffsetTop        = 6.0f;
+static CGFloat const kHSYCocoaKitDefaultItemLabelHieght           = 11.0f;
+static CGFloat const kHSYCocoaKitDefaultItemLabelOffsetTop        = 4.5f;
+static CGFloat const kHSYCocoaKitDefaultItemRedPointOffsetTop     = 4.0f;
+static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
+
 @implementation UIViewController (TabBar)
 
 - (RACSignal *)hsy_layoutTabBarReset
@@ -119,6 +126,38 @@ static NSString *const HSYBaseTabBarItemIdentifier = @"kHSYBaseTabBarItemIdentif
     UIView *view = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_reloadDatas:indexPath];
     [self.view addSubview:view];
     [self.collectionView reloadData];
+}
+
+#pragma mark - Load
+
++ (CGSize)hsy_loadItemImageSize
+{
+    return CGSizeMake(kHSYCocoaKitDefaultItemImageSize, kHSYCocoaKitDefaultItemImageSize);
+}
+
++ (CGFloat)hsy_loadItemImageOffsetTop
+{
+    return kHSYCocoaKitDefaultItemImageOffsetTop;
+}
+
++ (CGFloat)hsy_loadItemLabelHeight
+{
+    return kHSYCocoaKitDefaultItemLabelHieght;
+}
+
++ (CGFloat)hsy_loadItemLabelOffsetTop
+{
+    return kHSYCocoaKitDefaultItemLabelOffsetTop;
+}
+
++ (CGFloat)hsy_loadItemRedPointOffsetTop
+{
+    return kHSYCocoaKitDefaultItemRedPointOffsetTop;
+}
+
++ (CGFloat)hsy_loadItemRedPointCentryRight
+{
+    return kHSYCocoaKitDefaultItemRedPointCentryRight;
 }
 
 #pragma mark - Scroll Page
