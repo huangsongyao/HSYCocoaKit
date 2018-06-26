@@ -143,9 +143,13 @@
             if (self.segmentedControlInView == kHSYCocoaKitBaseSegmentedPageControlInScrollViewFooterView) {
                 self.segmentedPageControl.y = self.scrollView.bottom;
             } else {
-                if (!self.navigationController.navigationBar.hidden) {
-                    self.segmentedPageControl.y = IPHONE_BAR_HEIGHT;
+                CGFloat y = IPHONE_BAR_HEIGHT;
+                if (self.customNavigationBar) {
+                    y = self.customNavigationBar.bottom;
+                } else if (self.navigationController.navigationBar.hidden) {
+                    y = 0.0f;
                 }
+                self.segmentedPageControl.y = y;
             }
         }
             break;
