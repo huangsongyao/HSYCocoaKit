@@ -21,6 +21,11 @@
     if (self = [super init]) {
         self.hsy_datas = [[NSMutableArray alloc] init];
         _subject = [RACSubject subject];
+        @weakify(self);
+        [[self.subject rac_willDeallocSignal] subscribeCompleted:^{
+            @strongify(self);
+            NSLog(@"hot signal---subject release: class is %@", NSStringFromClass(self.class));
+        }];
     }
     return self;
 }
