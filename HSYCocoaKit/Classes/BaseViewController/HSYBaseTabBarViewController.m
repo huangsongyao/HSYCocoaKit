@@ -44,7 +44,7 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
 
 @interface HSYBaseTabBarViewController () <UIViewControllerRuntimeDelegate>
 
-@property (nonatomic, strong) UIImageView *tabBarBackgroundImage;
+@property (nonatomic, strong) UIImageView *tabBarBackgroundImageView;
 
 @end
 
@@ -72,15 +72,15 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
     CGRect rect = CGRectMake(0, ((self.customNavigationBar ? IPHONE_HEIGHT : self.view.height) - self.tabBarHeight.floatValue), IPHONE_WIDTH, self.tabBarHeight.floatValue);
     
     //作为伪tabBar的背景图
-    self.tabBarBackgroundImage = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : self.hsy_tabBarBackgroundImage, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : self.hsy_tabBarBackgroundImage, }];
-    self.tabBarBackgroundImage.frame = rect;
-    [self.view addSubview:self.tabBarBackgroundImage];
+    self.tabBarBackgroundImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : self.hsy_tabBarBackgroundImage, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : self.hsy_tabBarBackgroundImage, }];
+    self.tabBarBackgroundImageView.frame = rect;
+    [self.view addSubview:self.tabBarBackgroundImageView];
     
     if (self.hsy_lineShow.boolValue) {
         //顶部的横线
-        UIView *line = [[UIView alloc] initWithSize:CGSizeMake(self.tabBarBackgroundImage.width, [self.hsy_lineDictionary.allKeys.firstObject floatValue])];
+        UIView *line = [[UIView alloc] initWithSize:CGSizeMake(self.tabBarBackgroundImageView.width, [self.hsy_lineDictionary.allKeys.firstObject floatValue])];
         line.backgroundColor = self.hsy_lineDictionary.allValues.firstObject;
-        [self.tabBarBackgroundImage addSubview:line];
+        [self.tabBarBackgroundImageView addSubview:line];
     }
     
     //伪tabBar
