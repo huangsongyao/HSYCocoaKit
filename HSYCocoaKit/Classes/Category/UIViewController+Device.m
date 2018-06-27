@@ -79,9 +79,11 @@
         [[[imagePickerController rac_imageSelectedSignal] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
             [subscriber sendNext:x];
             [imagePickerController dismissViewControllerAnimated:YES completion:^{}];
+            [HSYBaseViewController adapterScrollView_iOS_11];
         } completed:^{
             [subscriber sendCompleted];
             [imagePickerController dismissViewControllerAnimated:YES completion:^{}];
+            [HSYBaseViewController adapterScrollView_iOS_11];
         }];
         if (imagePickerController) {
             [self presentViewController:imagePickerController animated:YES completion:^{}];
