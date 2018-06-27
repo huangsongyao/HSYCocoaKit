@@ -11,10 +11,11 @@
 
 @interface HSYBaseSegmentedPageConfig : NSObject
 
-@property (nonatomic, strong) UIViewController *hsy_viewController;
-@property (nonatomic, copy) NSString *hsy_title;
-//默认为NO，NO表示不显示头部的导航栏
-@property (nonatomic, assign) BOOL showNavigationBar;
+@property (nonatomic, strong) UIViewController *hsy_viewController; //子控制器
+@property (nonatomic, copy) NSString *hsy_title;                    //子控制器的title
+@property (nonatomic, assign) BOOL showNavigationBar;               //默认为NO，NO表示不显示头部的导航栏
+@property (nonatomic, copy) NSString *hsy_functionCode;             //预留的功能码字段
+@property (nonatomic, strong) id object;                            //预留的强引用对象指针
 
 /**
  根据paramters入参使用kvc方式，将paramters中的allValue设置到UIViewController中

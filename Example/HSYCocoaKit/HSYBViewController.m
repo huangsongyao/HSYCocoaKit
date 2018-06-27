@@ -125,6 +125,7 @@
     [self.headerView addSubview:btn];
     
     [self hsy_rightItemsImages:@[@{@(kHSYCocoaKitDefaultCustomBarItemTag) : @"nav_back@2x"}] subscribeNext:^(UIButton *button, NSInteger tag) {
+        @strongify(self);
         NSLog(@"x1=%@", [NSDate date]);
 //        UIImageView *imageView = [self.view snapshotImageView];
 //        UIViewController *vc = [UIViewController currentViewController];
@@ -139,8 +140,12 @@
 //            
 //        }];
         
-        HSYBaseQRCodeViewController *vc = [[HSYBaseQRCodeViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+//        HSYBaseQRCodeViewController *vc = [[HSYBaseQRCodeViewController alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+        
+        [[[UIViewController hsy_rac_showSheetViewController:self title:@"test" message:@"" sheetActionTitles:@[@"确定"]] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+            
+        }];
     }];
     
     
