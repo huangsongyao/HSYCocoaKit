@@ -9,6 +9,7 @@
 #import "HSYCocoaKit.h"
 #import "HSYFMDBMacro.h"
 #import "JSONModel.h"
+#import "SDImageCache.h"
 
 static HSYCocoaKitManager *cocoaKitManager;
 
@@ -100,6 +101,31 @@ static HSYCocoaKitManager *cocoaKitManager;
 + (void)hsy_setString:(NSString *)string forKey:(NSString *)key
 {
     [self.class hsy_setObject:string forKey:key];
+}
+
+#pragma mark - Clear Image Cache
+
+- (NSString *)hsy_currentAppImageCache
+{
+    NSUInteger bytesCache = [[SDImageCache sharedImageCache] getSize];
+    CGFloat cache = bytesCache/1000/1000;
+    NSString *cacheString = [NSString stringWithFormat:@"%.2fM", cache];
+    
+    return cacheString;
+}
+
+- (void)hsy_clearCache
+{
+    [self.class hsy_clearCache:^(BOOL finished) {}];
+}
+
++ (void)hsy_clearCache:(void(^)(BOOL finished))completed
+{
+    [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+        if (completed) {
+            completed(YES);
+        }
+    }];
 }
 
 @end

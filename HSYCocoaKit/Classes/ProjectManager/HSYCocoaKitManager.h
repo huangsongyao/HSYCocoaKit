@@ -101,4 +101,16 @@
  */
 + (void)hsy_setString:(NSString *)string forKey:(NSString *)key;
 
+/**
+ 获取当前app中SDWebImage的图片缓存大小，单位为M
+
+ @return 获取当前app中SDWebImage的图片缓存大小
+ */
+- (NSString *)hsy_currentAppImageCache;
+
+/**
+ 清除当前app中SDWebImage的图片缓存内容
+ */
+- (void)hsy_clearCache;
+
 @end
