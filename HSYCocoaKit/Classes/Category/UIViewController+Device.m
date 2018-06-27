@@ -11,6 +11,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "RACDelegateProxy.h"
 #import "HSYBaseViewController.h"
+#import "UIViewController+Alert.h"
 
 @implementation UIViewController (Device)
 
@@ -82,8 +83,12 @@
             [subscriber sendCompleted];
             [imagePickerController dismissViewControllerAnimated:YES completion:^{}];
         }];
-        [self presentViewController:imagePickerController animated:YES completion:^{
-        }];
+        if (imagePickerController) {
+            [self presentViewController:imagePickerController animated:YES completion:^{}];
+        } else {
+            [UIViewController hsy_hudWithMessage:HSYLOCALIZED(@"不支持或无法调用系统设备！")];
+            NSLog(@"imagePickerController is %@, don't call system device", imagePickerController);
+        }
         return [RACDisposable disposableWithBlock:^{}];
     }];
 }
@@ -176,6 +181,28 @@
             NSLog(@"release method “- hsy_rac_openSystemCamera”");
         }];
     }];
+}
+
+#pragma mark - RAC Optional Methods
+
+- (RACSignal *)hsy_rac_openSystemDeviceResources:(kHSYCocoaKitDeviceType)type
+{
+    if (type == kHSYCocoaKitDeviceTypeCamera) {
+        return [self hsy_rac_openSystemCamera];
+    } else if (type == kHSYCocoaKitDeviceTypePhoto) {
+        return [self hsy_rac_openSystemPhoto];
+    }
+    return [self hsy_rac_openSystemVideos];
+}
+
+- (RACSignal *)hsy_rac_openEditingSystemDeviceResources:(kHSYCocoaKitDeviceType)type
+{
+    if (type == kHSYCocoaKitDeviceTypeCamera) {
+        return [self hsy_rac_openEditingSystemCamera];
+    } else if (type == kHSYCocoaKitDeviceTypePhoto) {
+        return [self hsy_rac_openEditingSystemPhoto];
+    }
+    return [self hsy_rac_openEditingSystemVideos];
 }
 
 @end
