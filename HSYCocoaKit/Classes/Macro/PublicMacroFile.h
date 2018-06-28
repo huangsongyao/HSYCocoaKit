@@ -11,6 +11,7 @@
 
 #import "UIApplication+Device.h"
 #import "HSYBaseLaunchScreenViewController.h"
+#import "NSBundle+CFBundle.h"
 
 //debug模式下的NSLog
 #ifdef DEBUG
@@ -176,6 +177,14 @@
 #define HSYCOCOAKIT_ANCHOR_POINT_X00_Y10                CGPointMake(0.0f, 1.0f)
 #define HSYCOCOAKIT_ANCHOR_POINT_X05_Y10                CGPointMake(0.5f, 1.0f)
 #define HSYCOCOAKIT_ANCHOR_POINT_X10_Y10                CGPointMake(1.0f, 1.0f)
+
+
+//app信息
+#define APP_INFO_NAME                                   [NSBundle hsy_appName]
+#define APP_INFO_VERSIONS                               [NSBundle hsy_appVersions]
+#define APP_INFO_BUNDLE_ID                              [NSBundle hsy_appBundleID]
+#define APP_INFO_BUILDS                                 [NSBundle hsy_appBuilds]
+
 
 
 #endif /* PublicMacroFile_h */

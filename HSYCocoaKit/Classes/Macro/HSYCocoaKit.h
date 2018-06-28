@@ -33,6 +33,7 @@
 #import "HSYBaseWebViewController.h"
 #import "CABasicAnimation+Transform.h"
 #import "NSArray+Finder.h"
+#import "NSBundle+CFBundle.h"
 #import "NSBundle+PrivateFileResource.h"
 #import "NSDate+Timestamp.h"
 #import "NSFileManager+Finder.h"
