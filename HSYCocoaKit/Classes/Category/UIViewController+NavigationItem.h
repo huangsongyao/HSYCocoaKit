@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #define DEFAULT_BUTTOM_SIZE                     40.0f
-#define DEFAULT_BUTTOM_EDGE_INSETS_LEFT         10.0f
+#define DEFAULT_BUTTOM_EDGE_INSETS_LEFT         15.0f
 
 FOUNDATION_EXPORT NSInteger const kHSYCocoaKitDefaultCustomBarItemTag;  //默认返回按钮的tag
 

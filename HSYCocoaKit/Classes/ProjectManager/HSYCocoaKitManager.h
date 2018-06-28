@@ -13,6 +13,8 @@
 
 + (instancetype)hsy_shareInstance;
 
+#pragma mark - NSUserDefaults
+
 /**
  NSUserDefaults获取缓存内容
 
@@ -101,6 +103,8 @@
  */
 + (void)hsy_setString:(NSString *)string forKey:(NSString *)key;
 
+#pragma mark - Image Cache
+
 /**
  获取当前app中SDWebImage的图片缓存大小，单位为M
 
@@ -112,5 +116,12 @@
  清除当前app中SDWebImage的图片缓存内容
  */
 - (void)hsy_clearCache;
+
+/**
+ 清除当前app中SDWebImage的图片缓存内容
+
+ @param completed 操作执行完毕后的回调
+ */
++ (void)hsy_clearCache:(void(^)(BOOL finished))completed;
 
 @end
