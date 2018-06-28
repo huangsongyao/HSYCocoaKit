@@ -42,11 +42,10 @@ iOS开发私有库
 3.创建一个demo或者在需要添加的工程，cd到根目录下，执行vim Podfile
 pod的ruby编写的demo如下：
 
-platform :ios, '8.0'
-
-target '你的项目的.xcodeproj名称' do
+    platform :ios, '8.0'
+    target '你的项目的.xcodeproj名称' do
         pod 'HSYCocoaKit', :git => 'https://github.com/huangsongyao/HSYCocoaKit.git'
-end
+    end
 
 4.点击ESC退出编辑模式，执行 :wq ,保持并退出
 
