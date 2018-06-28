@@ -8,7 +8,7 @@
 #import "UIView+RotationAnimated.h"
 #import "CABasicAnimation+Transform.h"
 
-static NSTimeInterval kHSYCocoaKitDefaultRotatingDuration   = 0.35f;
+static NSTimeInterval kHSYCocoaKitDefaultRotatingDuration   = 0.2f;
 
 NSString *const kHSYCocoaKitDefaultSingleRotatingKey        = @"nfsieposnefi3if3fopa";
 NSString *const kHSYCocoaKitDefaultInfiniteRotatingKey      = @"o9fejfoejfefoesfjoef";
@@ -42,7 +42,14 @@ NSString *const kHSYCocoaKitDefaultInfiniteRotatingKey      = @"o9fejfoejfefoesf
 
 - (void)hsy_infiniteRotatingFromValue:(CGFloat)fromValue toValue:(CGFloat)toValue
 {
-    [self rotatingAnimationForDuration:kHSYCocoaKitDefaultRotatingDuration
+    [self hsy_infiniteRotatingFromValue:fromValue
+                                toValue:toValue
+                      animationDuration:[UIView hsy_rotatingAnimationDuration]];
+}
+
+- (void)hsy_infiniteRotatingFromValue:(CGFloat)fromValue toValue:(CGFloat)toValue animationDuration:(NSTimeInterval)duration
+{
+    [self rotatingAnimationForDuration:duration
                              formValue:fromValue
                                toValue:toValue
                    removedOnCompletion:NO
@@ -60,7 +67,14 @@ NSString *const kHSYCocoaKitDefaultInfiniteRotatingKey      = @"o9fejfoejfefoesf
 
 - (void)hsy_singleRotatingFromValue:(CGFloat)fromValue toValue:(CGFloat)toValue
 {
-    [self rotatingAnimationForDuration:kHSYCocoaKitDefaultRotatingDuration
+    [self hsy_singleRotatingFromValue:fromValue
+                              toValue:toValue
+                    animationDuration:[UIView hsy_rotatingAnimationDuration]];
+}
+
+- (void)hsy_singleRotatingFromValue:(CGFloat)fromValue toValue:(CGFloat)toValue animationDuration:(NSTimeInterval)duration
+{
+    [self rotatingAnimationForDuration:duration
                              formValue:fromValue
                                toValue:toValue
                    removedOnCompletion:NO
@@ -72,6 +86,13 @@ NSString *const kHSYCocoaKitDefaultInfiniteRotatingKey      = @"o9fejfoejfefoesf
 - (void)hsy_removeSingleRotating
 {
     [self.layer removeAnimationForKey:kHSYCocoaKitDefaultSingleRotatingKey];
+}
+
+#pragma mark - Animation Duration
+
++ (NSTimeInterval)hsy_rotatingAnimationDuration
+{
+    return kHSYCocoaKitDefaultRotatingDuration;
 }
 
 @end
