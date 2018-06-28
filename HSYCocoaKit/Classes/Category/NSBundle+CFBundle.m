@@ -15,28 +15,28 @@
     return infoDictionary;
 }
 
-- (NSString *)hsy_appName
++ (NSString *)hsy_appName
 {
     NSDictionary *infoDictionary = [NSBundle hsy_appBundle];
     NSString *appName = [infoDictionary objectForKey:@"CFBundleDisplayName"];
     return appName;
 }
 
-- (NSString *)hsy_appVersions
++ (NSString *)hsy_appVersions
 {
     NSDictionary *infoDictionary = [NSBundle hsy_appBundle];
     NSString *appName = [infoDictionary objectForKey:@"CFBundleVersion"];
     return appName;
 }
 
-- (NSString *)hsy_appBundleID
++ (NSString *)hsy_appBundleID
 {
     NSDictionary *infoDictionary = [NSBundle hsy_appBundle];
     NSString *appName = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     return appName;
 }
 
-- (NSString *)hsy_appBuilds
++ (NSString *)hsy_appBuilds
 {
     NSDictionary *infoDictionary = [NSBundle hsy_appBundle];
     NSString *appName = [infoDictionary objectForKey:@"CFBundleVersion"];
