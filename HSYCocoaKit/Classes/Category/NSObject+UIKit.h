@@ -74,6 +74,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfTextViewPropretyType) {
     kHSYCocoaKitOfTextViewPropretyTypeTextColor,                            //UIColor
     kHSYCocoaKitOfTextViewPropretyTypeBackgroundColor,                      //UIColor
     kHSYCocoaKitOfTextViewPropretyTypeText,                                 //NSString
+    kHSYCocoaKitOfTextViewPropretyTypePlaceholder,                          //NSString
     
 };
 

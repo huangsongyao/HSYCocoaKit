@@ -11,6 +11,7 @@
 #import "UILabel+SuggestSize.h"
 #import "UILabel+AttributedString.h"
 #import "PublicMacroFile.h"
+#import "UITextView+Placeholder.h"
 
 @implementation NSObject (UIKit)
 
@@ -170,7 +171,7 @@
 {
     UITextField *textField = [self.class createTextFiledByParam:param];
     if (next) {
-        [[[[textField rac_textSignal] ignore:@""] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
+        [[[textField rac_textSignal] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
             next(text);
         }];
     }
@@ -209,6 +210,9 @@
     if (param[@(kHSYCocoaKitOfTextViewPropretyTypeText)]) {
         textView.text = param[@(kHSYCocoaKitOfTextViewPropretyTypeText)];
     }
+    if ([param[@(kHSYCocoaKitOfTextViewPropretyTypePlaceholder)] length] > 0) {
+        textView.placeholder = param[@(kHSYCocoaKitOfTextViewPropretyTypePlaceholder)];
+    }
     return textView;
 }
 
@@ -216,7 +220,7 @@
 {
     UITextView *textView = [self.class createTextViewByParam:param];
     if (next) {
-        [[[[textView rac_textSignal] ignore:@""] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
+        [[[textView rac_textSignal] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
             next(text);
         }];
     }
