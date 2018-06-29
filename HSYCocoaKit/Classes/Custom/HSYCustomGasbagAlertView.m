@@ -31,14 +31,14 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.hsy_label = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeTextFont) : UI_SYSTEM_FONT_15, @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentCenter), }];
+        self.hsy_label = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeTextFont) : [HSYCustomGasbagAlertView hsy_gasbagCellTitleFont], @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : [HSYCustomGasbagAlertView hsy_gasbagCellTextAlignment], @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : [HSYCustomGasbagAlertView hsy_gasbagCellTitleColor], }];
         [self.contentView addSubview:self.hsy_label];
         [self.hsy_label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
         }];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectZero];
-        line.backgroundColor = HexColorString(@"E1E1E1");
+        line.backgroundColor = RGB(229, 229, 229);
         [self.contentView addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView.mas_left).offset(10.0f);
@@ -218,13 +218,22 @@
     }
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#pragma mark - Load
+
++ (UIFont *)hsy_gasbagCellTitleFont
+{
+    return UI_SYSTEM_FONT_15;
 }
-*/
+
++ (UIColor *)hsy_gasbagCellTitleColor
+{
+    return BLACK_COLOR;
+}
+
++ (NSNumber *)hsy_gasbagCellTextAlignment
+{
+    return @(NSTextAlignmentCenter);
+}
 
 @end
 

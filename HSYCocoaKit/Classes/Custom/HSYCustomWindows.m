@@ -48,6 +48,7 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
 @interface HSYCustomWindows ()
 
 @property (nonatomic, strong) UIView *hsy_blackMaskView;                    //渐变的黑色背景遮罩
+@property (nonatomic, assign, readonly) CGPoint anchorPoint;                //主体小窗口的锚点
 
 @end
 
@@ -70,6 +71,7 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
     UIWindow *window = [UIApplication keyWindows];
     if (self = [super initWithFrame:window.bounds]) {
         self.backgroundColor = CLEAR_COLOR;
+        _anchorPoint = anchorPoint;
         //黑色遮罩
         self.hsy_blackMaskView = [[UIView alloc] initWithFrame:self.bounds];
         self.hsy_blackMaskView.backgroundColor = BLACK_COLOR;
@@ -84,7 +86,11 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
             self.hsy_wicketView.layer.anchorPoint = anchorPoint;
             self.hsy_wicketView.layer.position = position;
         } else {
-            self.hsy_wicketView.origin = CGPointMake((self.width - self.hsy_wicketView.width)/2, (self.height - self.hsy_wicketView.height)/2);
+            if (!CGRectEqualToRect(self.hsy_wicketCGRect, CGRectZero)) {
+                self.hsy_wicketView.frame = self.hsy_wicketCGRect;
+            } else {
+                self.hsy_wicketView.origin = CGPointMake((self.width - self.hsy_wicketView.width)/2, (self.height - self.hsy_wicketView.height)/2);
+            }
         }
         self.hsy_wicketView.transform = HSYCOCOAKIT_GGA_TRANSFORM_SCALE(kHSYCocoaKitMinScale);
         [self addSubview:self.hsy_wicketView];
@@ -154,12 +160,14 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
     return kHSYCocoaKitDefaultDuration;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#pragma mark - Setter
+
+- (void)wicketViewCGRect:(CGRect)hsy_wicketCGRect
+{
+    _hsy_wicketCGRect = hsy_wicketCGRect;
+    if (CGPointEqualToPoint(self.anchorPoint, HSYCOCOAKIT_ANCHOR_POINT_X05_Y05)) {
+        self.hsy_wicketView.frame = hsy_wicketCGRect;
+    }
 }
-*/
 
 @end

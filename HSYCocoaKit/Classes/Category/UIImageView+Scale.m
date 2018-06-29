@@ -11,12 +11,23 @@
 
 @implementation UIImageView (Scale)
 
-- (CGSize)scaleCGSize
++ (CGFloat)hsy_scaleHeight:(CGFloat)displayWidth image:(UIImage *)image
 {
-    if (!self.image) {
-        return self.size;
+    CGFloat height = (image.size.height * displayWidth) / image.size.width;
+    return height;
+}
+
++ (CGFloat)hsy_scaleWidth:(CGFloat)displayHeight image:(UIImage *)image
+{
+    CGFloat width = (image.size.width * displayHeight) / image.size.height;
+    return width;
+}
+
++ (CGSize)hsy_scaleCGSize:(CGSize)imageSize
+{
+    if (CGSizeEqualToSize(imageSize, CGSizeZero)) {
+        return CGSizeZero;
     }
-    CGSize imageSize = self.image.size;
     CGSize scaleSize = CGSizeZero;
     if (imageSize.width >= imageSize.height) {
         //当图片的原始宽度大于图片的原始高度，说明放缩方式以屏幕的宽度为依据
@@ -34,6 +45,11 @@
         }
     }
     return scaleSize;
+}
+
+- (CGSize)scaleCGSize
+{
+    return [UIImageView hsy_scaleCGSize:self.image.size];
 }
 
 - (void)scaleCentryCGRect

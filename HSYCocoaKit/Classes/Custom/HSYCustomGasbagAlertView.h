@@ -67,6 +67,29 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitGasbagAlertType) {
  */
 + (CGPoint)hsy_anchorPoint:(kHSYCocoaKitGasbagAlertType)type;
 
+#pragma mark - Load
+
+/**
+ 默认气囊弹窗的list title的font，如需定制，子类请重写本方法，默认为系统15号字体
+
+ @return 气囊弹窗的list title的font
+ */
++ (UIFont *)hsy_gasbagCellTitleFont;
+
+/**
+ 默认气囊弹窗的list title的textColor，如需定制，子类请重写本方法，默认为系统黑色
+
+ @return 气囊弹窗的list title的textColor
+ */
++ (UIColor *)hsy_gasbagCellTitleColor;
+
+/**
+ 默认气囊弹窗的list title的textAlignment，如需定制，子类请重写本方法，默认为NSTextAlignmentCenter
+
+ @return 气囊弹窗的list title的textAlignment
+ */
++ (NSNumber *)hsy_gasbagCellTextAlignment;
+
 @end
 
 @interface HSYCustomGasbagAlertView (HSYCocoaKit)
