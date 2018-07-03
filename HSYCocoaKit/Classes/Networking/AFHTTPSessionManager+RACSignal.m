@@ -16,6 +16,7 @@
 static NSString *重铸完整的请求连接(NSString *urlPath)
 {
     NSString *urlString = [HSYNetWorkingManager hsy_urlFromPath:urlPath];
+    NSLog(@"\n request urlString = %@ \n", urlString);
     return urlString;
 }
 
@@ -155,7 +156,7 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
 
 + (void)hsy_logRequestHeaders:(NSURLSessionDataTask *)task
 {
-    if ([task isKindOfClass:[NSHTTPURLResponse class]]) {
+    if ([task.response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         NSDictionary *allHeaders = response.allHeaderFields;
         NSLog(@"\n request headers are : %@ \n", allHeaders);

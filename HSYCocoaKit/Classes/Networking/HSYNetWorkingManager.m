@@ -9,13 +9,10 @@
 #import "HSYNetWorkingManager.h"
 #import "NSError+Message.h"
 
-static NSString *kHSYValueKey  = @"HSYValueKey";
-
+static NSString *kHSYCocoaKitDefaultBaseUrlAddress  = @"";
 static HSYNetWorkingManager *networkingManager;
 
 @interface HSYNetWorkingManager ()
-
-@property (nonatomic, copy, readonly) NSString *baseURL;                //域名地址[http+ip+端口]
 
 @end
 
@@ -33,8 +30,8 @@ static HSYNetWorkingManager *networkingManager;
 - (instancetype)init
 {
     if (self = [super init]) {
-        _httpSessionManager = [HSYNetWorkingManager hsy_defaultHTTPSessionManager:YES];
-        _fileSessionManager = [HSYNetWorkingManager hsy_defaultURLSessionManager];
+        _httpSessionManager = [self hsy_defaultHTTPSessionManager:YES];
+        _fileSessionManager = [self hsy_defaultURLSessionManager];
     }
     return self;
 }
@@ -47,7 +44,7 @@ static HSYNetWorkingManager *networkingManager;
     if (!hasHttp) {
         NSAssert(hasHttp != NO, @"域名地址必须由【http+IP+Port】组成!");
     }
-    _baseURL = baseUrl;
+    kHSYCocoaKitDefaultBaseUrlAddress = baseUrl;
 }
 
 + (NSString *)hsy_urlFromPath:(NSString *)path
@@ -55,7 +52,7 @@ static HSYNetWorkingManager *networkingManager;
     if ([path hasPrefix:@"http"]) {
         return path;
     }
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@", [HSYNetWorkingManager shareInstance].baseURL, path];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",kHSYCocoaKitDefaultBaseUrlAddress, path];
     if (![urlString containsString:@"http"]) {
         NSLog(@"链接不含有http字符串！链接不完整！");
         return nil;
@@ -63,10 +60,34 @@ static HSYNetWorkingManager *networkingManager;
     return urlString;
 }
 
-+ (NSArray<NSDictionary *> *)hsy_defaultHeaders
+#pragma mark - Request & response Statement
+
+- (void)hsy_statementHTTPSerializer:(kHSYCocoaKitHTTPStatementSerializer)serializer
 {
-    return @[
-             ];
+    switch (serializer) {
+        case kHSYCocoaKitHTTPStatementSerializerHTTPRequestSerializerAndHTTPResponseSerializer: {
+            self.httpSessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+            self.httpSessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        }
+            break;
+        case kHSYCocoaKitHTTPStatementSerializerHTTPRequestSerializerAndJSONResponseSerializer: {
+            self.httpSessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+            self.httpSessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+        }
+            break;
+        case kHSYCocoaKitHTTPStatementSerializerJSONRequestSerializerAndHTTPResponseSerializer: {
+            self.httpSessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+            self.httpSessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        }
+            break;
+        case kHSYCocoaKitHTTPStatementSerializerJSONRequestSerializerAndJSONResponseSerializer: {
+            self.httpSessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+            self.httpSessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - >=3.0f version
@@ -104,24 +125,20 @@ static HSYNetWorkingManager *networkingManager;
     [networkStatusManager startMonitoring];
 }
 
-+ (AFHTTPSessionManager *)hsy_defaultHTTPSessionManager:(BOOL)needTimeoutInterval
+- (AFHTTPSessionManager *)hsy_defaultHTTPSessionManager:(BOOL)needTimeoutInterval
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];   //申明请求参数为json格式
-    manager.responseSerializer = [AFJSONResponseSerializer serializer]; //申明回调数据为json格式
+    [self hsy_statementHTTPSerializer:kHSYCocoaKitHTTPStatementSerializerJSONRequestSerializerAndJSONResponseSerializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"image/jpeg", @"text/plain", nil];
     if (needTimeoutInterval) {
         [manager.requestSerializer willChangeValueForKey:@"WillChangeToRequestTimeOutInterval"];
         manager.requestSerializer.timeoutInterval = 60.0f;
         [manager.requestSerializer didChangeValueForKey:@"DidChangeToRequestTimeOutInterval"];
     }
-    for (NSDictionary *dic in self.class.hsy_defaultHeaders) {
-        [manager.requestSerializer setValue:dic.allValues.firstObject forHTTPHeaderField:dic.allKeys.firstObject];
-    }
     return manager;
 }
 
-+ (AFURLSessionManager *)hsy_defaultURLSessionManager
+- (AFURLSessionManager *)hsy_defaultURLSessionManager
 {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
