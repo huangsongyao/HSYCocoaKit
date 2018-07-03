@@ -10,6 +10,7 @@
 #import "HSYFMDBMacro.h"
 #import "JSONModel.h"
 #import "SDImageCache.h"
+#import "NSFileManager+Finder.h"
 
 static HSYCocoaKitManager *cocoaKitManager;
 
@@ -126,6 +127,19 @@ static HSYCocoaKitManager *cocoaKitManager;
             completed(YES);
         }
     }];
+}
+
+#pragma mark - File
+
++ (NSDictionary *)hsy_dictionaryWithPlist:(NSString *)name
+{
+    NSString *filePath = [NSFileManager finderFileFromName:name fileType:@"plist"];
+    if (filePath.length == 0) {
+        NSLog(@"%@ file not finder path！", name);
+        return nil;
+    }
+    NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    return dictionary;
 }
 
 @end

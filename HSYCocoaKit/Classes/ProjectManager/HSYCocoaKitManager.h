@@ -124,4 +124,14 @@
  */
 + (void)hsy_clearCache:(void(^)(BOOL finished))completed;
 
+#pragma mark - Resources File
+
+/**
+ 将工程中的plist文件转为NSDictionary的对象
+
+ @param name plsit文件名称
+ @return NSDictionary
+ */
++ (NSDictionary *)hsy_dictionaryWithPlist:(NSString *)name;
+
 @end
