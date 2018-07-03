@@ -11,6 +11,8 @@
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "Masonry.h"
 
+NSInteger const kHSYCocoaKitBaseCellBottomLineTag        = 163;
+
 @implementation HSYBaseTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -28,6 +30,15 @@
     UIView *line = [self.class hsy_line:color];
     [self.contentView addSubview:line];
     [line mas_makeConstraints:block];
+}
+
+- (void)hsy_removeLine
+{
+    UIView *line = [self.contentView viewWithTag:kHSYCocoaKitBaseCellBottomLineTag];
+    if (line) {
+        [line removeFromSuperview];
+        line = nil;
+    }
 }
 
 + (UIView *)hsy_line:(UIColor *)color
