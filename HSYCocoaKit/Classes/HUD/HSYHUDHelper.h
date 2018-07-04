@@ -82,6 +82,13 @@ typedef NS_ENUM(NSUInteger, kShowHUDViewType) {
                                     hideAfter:(CGFloat)time;
 
 /**
+ loading格式的HUD
+
+ @return MBProgressHUD对象
+ */
++ (MBProgressHUD *)hsy_loadingHUDView;
+
+/**
  *  取消HUD
  */
 + (void)hsy_hideHUDView;

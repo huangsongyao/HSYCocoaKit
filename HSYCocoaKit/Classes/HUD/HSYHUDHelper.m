@@ -57,6 +57,13 @@ static HSYHUDHelper *hsyHUDHelper = nil;
     return progressHUD;
 }
 
+#pragma mark - Loading HUD
+
++ (MBProgressHUD *)hsy_loadingHUDView
+{
+    return [[HSYHUDHelper shareInstance] hsy_createHUDViewType:kShowHUDViewTypeWait text:nil hideAfter:HUD_HIDE_TIME];
+}
+
 #pragma mark - Create HUD
 
 + (MBProgressHUD *)hsy_showHUDViewForShowType:(kShowHUDViewType)showType text:(NSString *)text hideAfter:(CGFloat)time

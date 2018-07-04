@@ -105,7 +105,7 @@
                 message = HSYLOCALIZED(@"未知错误！");
             }
         }
-        [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeText codeType:kHSYHUDModelCodeTypeDefault text:message animationTime:HUD_HIDE_TIME];
+        [HSYHUDModel initWithShowHUDType:kShowHUDViewTypeWait codeType:kHSYHUDModelCodeTypeDefault text:message animationTime:HUD_HIDE_TIME];
         return kHSYHUDModelCodeTypeError;
     } else if ([stateCode isKindOfClass:[HSYHUDModel class]]) {
         HSYHUDModel *model = (HSYHUDModel *)stateCode;

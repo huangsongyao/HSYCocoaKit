@@ -60,6 +60,15 @@ static HSYNetWorkingManager *networkingManager;
     return urlString;
 }
 
+#pragma mark - All Headers
+
+- (void)hsy_setHTTPSessionHeaders:(NSArray<NSDictionary *> *)headers
+{
+    for (NSDictionary *header in headers) {
+        [self.httpSessionManager.requestSerializer setValue:header.allValues.firstObject forHTTPHeaderField:header.allKeys.firstObject];
+    }
+}
+
 #pragma mark - Request & response Statement
 
 - (void)hsy_statementHTTPSerializer:(kHSYCocoaKitHTTPStatementSerializer)serializer

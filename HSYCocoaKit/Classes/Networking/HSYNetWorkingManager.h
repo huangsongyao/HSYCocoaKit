@@ -78,4 +78,11 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitHTTPStatementSerializer) {
  */
 - (void)hsy_statementHTTPSerializer:(kHSYCocoaKitHTTPStatementSerializer)serializer;
 
+/**
+ 提供接口允许设置request请求头
+
+ @param headers 请求头的集合，格式为@[@{@"请求头字段A" : @"请求头字段A的内容的value"}, @{@"请求头字段B" : @"请求头字段B的内容的value"}, ...]
+ */
+- (void)hsy_setHTTPSessionHeaders:(NSArray<NSDictionary *> *)headers;
+
 @end
