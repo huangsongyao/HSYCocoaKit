@@ -18,52 +18,111 @@
 
 #pragma mark - Number For Regex
 
-- (BOOL)isPureNumber
+- (kHSYCocoaKitRegularResult)hsy_isPureNumber
 {
-    BOOL res = YES;
-    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    if (self.length == 0) {
+        return kHSYCocoaKitRegularResultLengthIsZero;
+    }
+    kHSYCocoaKitRegularResult res = kHSYCocoaKitRegularResultConform;
+    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
     NSInteger i = 0;
     while (i < self.length) {
         NSString * string = [self substringWithRange:NSMakeRange(i, 1)];
-        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
+        NSRange range = [string rangeOfCharacterFromSet:characterSet];
         if (range.length == 0) {
-            res = NO;
+            res = kHSYCocoaKitRegularResultUnconform;
             break;
         }
-        i++;
+        i ++;
     }
     return res;
 }
 
+- (BOOL)isPureNumber
+{
+    kHSYCocoaKitRegularResult result = self.hsy_isPureNumber;
+    if (result == kHSYCocoaKitRegularResultConform) {
+        return YES;
+    }
+    return NO;
+}
+
+- (kHSYCocoaKitRegularResult)hsy_isPureNumberFromPrefix:(NSString *)prefix suffixNumber:(NSString *)suffix
+{
+    kHSYCocoaKitRegularResult result = self.hsy_isPureNumber;
+    if (result == kHSYCocoaKitRegularResultLengthIsZero) {
+        return result;
+    }
+    result = ((self.integerValue >= prefix.integerValue && self.integerValue <= suffix.integerValue) ? kHSYCocoaKitRegularResultConform : kHSYCocoaKitRegularResultUnconform);
+    return result;
+}
+
 - (BOOL)isPureNumberFromPrefix:(NSString *)prefix suffixNumber:(NSString *)suffix
 {
-    BOOL validate = [self isPureNumber];
-    if (!validate) {
-        return validate;
+    kHSYCocoaKitRegularResult result = [self hsy_isPureNumberFromPrefix:prefix suffixNumber:suffix];
+    if (result == kHSYCocoaKitRegularResultConform) {
+        return YES;
     }
-    validate = (self.integerValue >= prefix.integerValue && self.integerValue <= suffix.integerValue);
-    return validate;
+    return NO;
 }
 
 #pragma mark - Email For Regex
 
-- (BOOL)isEmailAddress
+- (kHSYCocoaKitRegularResult)hsy_isEmailAddress
 {
+    if (self.length == 0) {
+        return kHSYCocoaKitRegularResultLengthIsZero;
+    }
     NSString *emailRegex = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    return [self isValidateByRegex:emailRegex];
+    BOOL isPassRegex = [self isValidateByRegex:emailRegex];
+    if (isPassRegex) {
+        return kHSYCocoaKitRegularResultConform;
+    }
+    return kHSYCocoaKitRegularResultUnconform;
 }
 
-#pragma mark - 汉字+字符+数字+常用字符
+- (BOOL)isEmailAddress
+{
+    kHSYCocoaKitRegularResult result = self.hsy_isEmailAddress;
+    if (result == kHSYCocoaKitRegularResultConform) {
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark - 汉字+字符+数字+常用字符 For Regex
+
+- (kHSYCocoaKitRegularResult)hsy_isPassword
+{
+    return [self hsy_isPasswordFromPrefix:@"6" suffixNumber:@"16"];
+}
 
 - (BOOL)isPassword
 {
-    return [self isPasswordFromPrefix:@"6" suffixNumber:@"16"];
+    kHSYCocoaKitRegularResult result = self.hsy_isPassword;
+    if (result == kHSYCocoaKitRegularResultConform) {
+        return YES;
+    }
+    return NO;
+}
+
+- (kHSYCocoaKitRegularResult)hsy_isPasswordFromPrefix:(NSString *)prefix suffixNumber:(NSString *)suffix
+{
+    if (self.length == 0) {
+        return kHSYCocoaKitRegularResultLengthIsZero;
+    }
+    NSString *passwordRegex = [NSString stringWithFormat:@"^(?=.*[a-zA-Z0-9].*)(?=.*[a-zA-Z\\W].*)(?=.*[0-9\\W].*).{%@,%@}$", prefix, suffix];
+    kHSYCocoaKitRegularResult result = ([self isValidateByRegex:passwordRegex] ? kHSYCocoaKitRegularResultConform : kHSYCocoaKitRegularResultUnconform);
+    return result;
 }
 
 - (BOOL)isPasswordFromPrefix:(NSString *)prefix suffixNumber:(NSString *)suffix
 {
-    NSString *passwordRegex = [NSString stringWithFormat:@"^(?=.*[a-zA-Z0-9].*)(?=.*[a-zA-Z\\W].*)(?=.*[0-9\\W].*).{%@,%@}$", prefix, suffix];
-    return [self isValidateByRegex:passwordRegex];
+    kHSYCocoaKitRegularResult result = [self hsy_isPasswordFromPrefix:prefix suffixNumber:suffix];
+    if (result == kHSYCocoaKitRegularResultConform) {
+        return YES;
+    }
+    return NO;
 }
 
 @end
