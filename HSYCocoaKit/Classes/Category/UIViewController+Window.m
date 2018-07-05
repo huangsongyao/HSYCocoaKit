@@ -12,7 +12,9 @@
 
 @implementation UIViewController (Window)
 
-- (void)hsy_keyboardGestureRecycles:(id)object subscribeNext:(void(^)(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view, BOOL isRecycle))next
+- (void)hsy_keyboardGestureRecycle:(id)object
+                  observerKeyboard:(void(^)(BOOL isRecycle))keyboard
+                     subscribeNext:(void(^)(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view))next
 {
     @weakify(self);
     [self observerToKeyboardWillChanged:object subscribeCompleted:^(CGRect frameBegin, CGRect frameEnd) {
@@ -29,36 +31,51 @@
             single = [[HSYCustomSingleGestureMaskView alloc] initWithSingleGesture:^(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view) {
                 @strongify(self);
                 if (next) {
-                    next(ges, view, isRecycle);
+                    next(ges, view);
                     [self.view endEditing:YES];
                 }
             }];
             [self.view addSubview:single];
             [self.view bringSubviewToFront:single];
         }
-    }];
-}
-
-- (void)hsy_keyboardGestureRecycles:(void(^)(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view, BOOL isRecycle))next
-{
-    [self hsy_keyboardGestureRecycles:nil subscribeNext:next];
-}
-
-- (void)hsy_keyboardGestureRecycle:(id)object subscribeNext:(void(^)(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view))next
-{
-    [self hsy_keyboardGestureRecycles:object subscribeNext:^(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view, BOOL isRecycle) {
-        if (next) {
-            next(ges, view);
+        if (keyboard) {
+            keyboard(isRecycle);
         }
     }];
+}
+
+- (void)hsy_keyboardGestureRecycle:(void(^)(BOOL isRecycle))keyboard
+                     subscribeNext:(void(^)(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view))next
+{
+    [self hsy_keyboardGestureRecycle:nil observerKeyboard:keyboard subscribeNext:next];
+}
+
+- (void)hsy_keyboardGestureRecycle:(id)object
+                  observerKeyboard:(void(^)(BOOL isRecycle))keyboard
+{
+    [self hsy_keyboardGestureRecycle:object observerKeyboard:keyboard subscribeNext:^(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view) {
+        NSLog(@"UITapGestureRecognizer is :%@, HSYCustomSingleGestureMaskView is:%@", ges, view);
+    }];
+}
+
+- (void)hsy_keyboardGestureRecycleObject:(id)object subscribeNext:(void(^)(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view))next
+{
+    [self hsy_keyboardGestureRecycle:object observerKeyboard:^(BOOL isRecycle) {
+        NSLog(@"this is %@ keyboard", @(isRecycle));
+    } subscribeNext:next];
 }
 
 - (void)hsy_keyboardGestureRecycle:(void(^)(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view))next
 {
-    [self hsy_keyboardGestureRecycles:^(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view, BOOL isRecycle) {
-        if (next) {
-            next(ges, view);
-        }
+    [self hsy_keyboardGestureRecycle:^(BOOL isRecycle) {
+        NSLog(@"this is %@ keyboard", @(isRecycle));
+    } subscribeNext:next];
+}
+
+- (void)hsy_keyboardGestureRecycleKeyboard:(void(^)(BOOL isRecycle))keyboard
+{
+    [self hsy_keyboardGestureRecycle:keyboard subscribeNext:^(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view) {
+        NSLog(@"UITapGestureRecognizer is :%@, HSYCustomSingleGestureMaskView is:%@", ges, view);
     }];
 }
 
