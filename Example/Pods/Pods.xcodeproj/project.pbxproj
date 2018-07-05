@@ -548,6 +548,10 @@
 		ACCBF8FAA7669DDAC37886E1F605D683 /* HSYBaseSegmentedPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7783700CF7D8350200345E1CFFBEC651 /* HSYBaseSegmentedPageViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADA04C6888B9742B27F81ADA293EA284 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B7F0196F2775FA97225B08ED3714A8 /* UIImageView+HighlightedWebCache.m */; };
 		AE321ADBDF57C60F8CC2199105BFE711 /* NSDictionary+RACSequenceAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8163D96D9C2BBE0E24C79A9BBE6DDE /* NSDictionary+RACSequenceAdditions.m */; };
+		AE64E0AF20EE0C73003A3AD7 /* HSYCustomBannerView.h in Headers */ = {isa = PBXBuildFile; fileRef = AE64E0AD20EE0C73003A3AD7 /* HSYCustomBannerView.h */; };
+		AE64E0B020EE0C73003A3AD7 /* HSYCustomBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64E0AE20EE0C73003A3AD7 /* HSYCustomBannerView.m */; };
+		AE64E0B420EE0CC3003A3AD7 /* HSYCustomGuideView.h in Headers */ = {isa = PBXBuildFile; fileRef = AE64E0B220EE0CC3003A3AD7 /* HSYCustomGuideView.h */; };
+		AE64E0B520EE0CC3003A3AD7 /* HSYCustomGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64E0B320EE0CC3003A3AD7 /* HSYCustomGuideView.m */; };
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B387A0E4F0088F7A949E733A738ACF5 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEE9644DA0EFCF945438E125BA4F0724 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3E9081AC654E8DFC6421F731BD77BB /* GCDAsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		AEEE8D0A07845E40E07F84EBAC66C833 /* RACSignalSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 85950D97D4A83EBDE58642F91DB49F1C /* RACSignalSequence.m */; };
@@ -1664,6 +1668,10 @@
 		AE14E262281CD7AD6F2BF5A3406AA4B4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE4A691FD7BFFF96E77E8642777BFEE5 /* NSObject+Runtime.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Runtime.m"; sourceTree = "<group>"; };
 		AE61682A704253ED6B24D5CD6A2665F5 /* RACUnarySequence.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RACUnarySequence.h; sourceTree = "<group>"; };
+		AE64E0AD20EE0C73003A3AD7 /* HSYCustomBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSYCustomBannerView.h; sourceTree = "<group>"; };
+		AE64E0AE20EE0C73003A3AD7 /* HSYCustomBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSYCustomBannerView.m; sourceTree = "<group>"; };
+		AE64E0B220EE0CC3003A3AD7 /* HSYCustomGuideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSYCustomGuideView.h; sourceTree = "<group>"; };
+		AE64E0B320EE0CC3003A3AD7 /* HSYCustomGuideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSYCustomGuideView.m; sourceTree = "<group>"; };
 		AE948C75B3AF870A49A4F2BCB18B970C /* RACGroupedSignal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RACGroupedSignal.h; sourceTree = "<group>"; };
 		AE9F7064BD0DDD8D628A336D524B3B42 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF226BD5982A4F53BA32707A28802CB2 /* CocoaAsyncSocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaAsyncSocket.xcconfig; sourceTree = "<group>"; };
@@ -2318,6 +2326,8 @@
 		1D4DEE7174C57CC240A5A4FCC77A1F9C /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				AE64E0B120EE0C82003A3AD7 /* BaseGuideView */,
+				AE64E0AC20EE0C35003A3AD7 /* BaseBanner */,
 				AE64E09920EE098A003A3AD7 /* BaseGasbag */,
 				AE64E09820EE0975003A3AD7 /* BaseLargerImageView */,
 				AE64E09720EE095D003A3AD7 /* BaseAlert */,
@@ -3477,6 +3487,24 @@
 			path = "UIAlertView&UIActionSheet&UIAlertController+RACSignal";
 			sourceTree = "<group>";
 		};
+		AE64E0AC20EE0C35003A3AD7 /* BaseBanner */ = {
+			isa = PBXGroup;
+			children = (
+				AE64E0AD20EE0C73003A3AD7 /* HSYCustomBannerView.h */,
+				AE64E0AE20EE0C73003A3AD7 /* HSYCustomBannerView.m */,
+			);
+			path = BaseBanner;
+			sourceTree = "<group>";
+		};
+		AE64E0B120EE0C82003A3AD7 /* BaseGuideView */ = {
+			isa = PBXGroup;
+			children = (
+				AE64E0B220EE0CC3003A3AD7 /* HSYCustomGuideView.h */,
+				AE64E0B320EE0CC3003A3AD7 /* HSYCustomGuideView.m */,
+			);
+			path = BaseGuideView;
+			sourceTree = "<group>";
+		};
 		B3BDCA9766E97F59E103641DDF211963 /* UITableView+FDTemplateLayoutCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -4425,6 +4453,7 @@
 				ECEBA76FE2E242C8A0C8EC36CDC68E35 /* HSYBaseTabBarViewController.h in Headers */,
 				79D554AFA5E570F0BB27F831E906A95F /* HSYBaseTableModel.h in Headers */,
 				E89F1503D8AC0102A494CEF98A5E4F10 /* HSYBaseTableViewCell.h in Headers */,
+				AE64E0AF20EE0C73003A3AD7 /* HSYCustomBannerView.h in Headers */,
 				6CB02EDCF59859B130DB38C1801C54D2 /* HSYBaseTableViewController.h in Headers */,
 				ED0690BAB1E25347D6EC91A42495E736 /* HSYBaseViewController+CustomNavigationItem.h in Headers */,
 				058E12445D1752ECD8664DB62BE9F795 /* HSYBaseViewController.h in Headers */,
@@ -4550,6 +4579,7 @@
 				911A0674CE0F81393D3A36B4BE6BCCE8 /* RACSubscriptingAssignmentTrampoline.h in Headers */,
 				AEF241D6972DE599F8A90587441449D3 /* RACSubscriptionScheduler.h in Headers */,
 				E94990B603B7E0739920FFB080358A8E /* RACTargetQueueScheduler.h in Headers */,
+				AE64E0B420EE0CC3003A3AD7 /* HSYCustomGuideView.h in Headers */,
 				5D265B9A891CE82DD1587CAB7EB5516C /* RACTestScheduler.h in Headers */,
 				9B92FF0BEC7A0119D2269F7BFD5771F7 /* RACTuple.h in Headers */,
 				4A17D4EBF993641C30165126510B147F /* RACTupleSequence.h in Headers */,
@@ -5314,6 +5344,7 @@
 				14D500347C038C584349A815041A5721 /* HSYCustomLargerImageView.m in Sources */,
 				B3803FF5DDC7C239DAB48EE19B277F40 /* HSYCustomLeftTransitionAnimation.m in Sources */,
 				84F15BEDE9D525D96FB18F327DBCA3FA /* HSYCustomNavigationBar.m in Sources */,
+				AE64E0B020EE0C73003A3AD7 /* HSYCustomBannerView.m in Sources */,
 				9E0943B0C3B868A70BEE70A197A7D249 /* HSYCustomRefreshView.m in Sources */,
 				70C4FFA0657C7C3866679527F69A509F /* HSYCustomWindows.m in Sources */,
 				0FAD5B152CA96A61B8B1ED8B7C6C80BB /* HSYFMDBOperation.m in Sources */,
@@ -5416,6 +5447,7 @@
 				5E4B384BCE4D9098253CD94FFFD20BF0 /* RACTupleSequence.m in Sources */,
 				07452AEE81EF960F5445AD1ED59CEAE2 /* RACUnarySequence.m in Sources */,
 				A414B385CBDAB2F606ACE2B61B8265E4 /* RACUnit.m in Sources */,
+				AE64E0B520EE0CC3003A3AD7 /* HSYCustomGuideView.m in Sources */,
 				B07F615DA90FC511257FA78329433737 /* RACValueTransformer.m in Sources */,
 				B2A83BC6D347554EC676AD2B8006622E /* RVMViewModel.m in Sources */,
 				5A69BC1A70470521EC054BC14D3C515C /* UIActionSheet+RACSignal.m in Sources */,
