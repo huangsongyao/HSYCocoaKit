@@ -2318,18 +2318,11 @@
 		1D4DEE7174C57CC240A5A4FCC77A1F9C /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				B1ACDCB2AC27A7740E36C7891FF05247 /* HSYBaseCustomButton.h */,
-				84B8420133BE43B17A27D6A52F2C5128 /* HSYBaseCustomButton.m */,
-				84AB50D04D13004D9E1A8C9B5A148D41 /* HSYBaseSegmentedPageControl.h */,
-				9933F10528C4993620FAF52F9A8E8509 /* HSYBaseSegmentedPageControl.m */,
-				4EEDAA9C126692787E3652FC56EA31D5 /* HSYCustomGasbagAlertView.h */,
-				C36E03015B4F0689B84CCB738F85F354 /* HSYCustomGasbagAlertView.m */,
-				FD1C3BB2C25856981FB230A715104661 /* HSYCustomGestureView.h */,
-				37E9709B03E69DEFE88903183A8070DC /* HSYCustomGestureView.m */,
-				0188A320AEF8349815BCAAA65E3582D4 /* HSYCustomLargerImageView.h */,
-				01CC8240DAEE500690ECD8803448B0AE /* HSYCustomLargerImageView.m */,
-				B961063DC326DDD96F5101E6BB3999FD /* HSYCustomWindows.h */,
-				D812AF90EA246172AA183F715C8FE17F /* HSYCustomWindows.m */,
+				AE64E09920EE098A003A3AD7 /* BaseGasbag */,
+				AE64E09820EE0975003A3AD7 /* BaseLargerImageView */,
+				AE64E09720EE095D003A3AD7 /* BaseAlert */,
+				AE64E09620EE093E003A3AD7 /* BaseSegmentedControl */,
+				AE64E09520EE092F003A3AD7 /* BaseCustomButton */,
 			);
 			name = Custom;
 			path = HSYCocoaKit/Classes/Custom;
@@ -2338,24 +2331,15 @@
 		1D88859E9D8BE539005A8A1CCB7080FD /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
-				4646E4E94EC165D64BCDC8901096DF14 /* HSYBaseCollectionViewController.h */,
-				A8CF5237FA82F071F380D14C85F72E60 /* HSYBaseCollectionViewController.m */,
-				FA8CE2898337157EAB2CD19AE31B2DF5 /* HSYBaseLaunchScreenViewController.h */,
-				933EBEBDCC7DBAD8F86A273DB39EF334 /* HSYBaseLaunchScreenViewController.m */,
-				B6B949091BEABD88BC5A6B021722B564 /* HSYBaseQRCodeViewController.h */,
-				54DCF51A2C96293A0ACE16D3170D55D4 /* HSYBaseQRCodeViewController.m */,
-				C4E224E0CD48A43DC6D10EA167D8518A /* HSYBaseRefleshViewController.h */,
-				912A087CA6A74EC236C8C85C58A75146 /* HSYBaseRefleshViewController.m */,
-				7783700CF7D8350200345E1CFFBEC651 /* HSYBaseSegmentedPageViewController.h */,
-				8E6F5FEAC67BD0A0A95D6A70EE72EEC7 /* HSYBaseSegmentedPageViewController.m */,
-				1822BF847458F344FC5F3FA6093BFF0D /* HSYBaseTabBarViewController.h */,
-				CAC4FA43D061C5A93D8B713F96B21D0F /* HSYBaseTabBarViewController.m */,
-				599D910721827CC3334A45E52E07E121 /* HSYBaseTableViewController.h */,
-				0D9052A51A74E96251ADFEED9C6F0F19 /* HSYBaseTableViewController.m */,
-				D70CF8C217830B2DD69779D517EBD6DC /* HSYBaseViewController.h */,
-				5165DEF511747DE5751BBB31039935AE /* HSYBaseViewController.m */,
-				B395EBE117558DC0E26B27BED89492F1 /* HSYBaseWebViewController.h */,
-				89B22776BBF844FD2406F96726AD5041 /* HSYBaseWebViewController.m */,
+				AE64E08220EE07AA003A3AD7 /* BaseQRCodeViewController */,
+				AE64E08120EE0791003A3AD7 /* BaseLaunchScreenViewController */,
+				AE64E08020EE077E003A3AD7 /* BaseWebViewController */,
+				AE64E07F20EE0765003A3AD7 /* BaseTabBarViewController */,
+				AE64E07E20EE0751003A3AD7 /* BaseSegmentedPageViewController */,
+				AE64E07D20EE073C003A3AD7 /* BaseRefleshViewController */,
+				AE64E07C20EE072B003A3AD7 /* BaseCollectionViewController */,
+				AE64E07B20EE071C003A3AD7 /* BaseTableViewController */,
+				AE64E07A20EE070C003A3AD7 /* BaseViewController */,
 			);
 			name = BaseViewController;
 			path = HSYCocoaKit/Classes/BaseViewController;
@@ -2463,17 +2447,11 @@
 		2E32A1916ED5968274525C97BFDBE522 /* FMDB_DataBase */ = {
 			isa = PBXGroup;
 			children = (
-				6D24C4C60A60681C98BD8BEBB0C3EBD2 /* FMResultSet+Model.h */,
-				D40C5E8BEA9A5B0691B5251050CB9A48 /* FMResultSet+Model.m */,
 				5288931BD30AF7FCC0C7F89A01DBFEC6 /* HSYFMDBMacro.h */,
-				912C033D3F66017FCA5A48C61A411DB1 /* HSYFMDBOperation.h */,
-				89491F1300CDCD49CCCCC2CC46A3887F /* HSYFMDBOperation.m */,
-				11C0CE65DA10D18CE279F03A15DA8812 /* HSYFMDBOperationFieldInfo.h */,
-				B1A5BCDE76B2624D0887E575B54BB206 /* HSYFMDBOperationFieldInfo.m */,
-				E2CD75A33AA71FC64075B63B04891307 /* HSYFMDBOperationManager.h */,
-				72183CC562EAC49983CE9D59600970D2 /* HSYFMDBOperationManager.m */,
-				05DC39D01919909FFC03AB6E7022FA32 /* HSYFMDBOperationManager+Operation.h */,
-				0BB495D8B2C75B4E02785B325B29926D /* HSYFMDBOperationManager+Operation.m */,
+				AE64E0A020EE0A40003A3AD7 /* FMResultSet+Model */,
+				AE64E09F20EE0A21003A3AD7 /* FMDBOperationFieldInfo */,
+				AE64E09E20EE0A06003A3AD7 /* FMDBOperation */,
+				AE64E09D20EE09F3003A3AD7 /* FMDBManager */,
 			);
 			name = FMDB_DataBase;
 			path = HSYCocoaKit/Classes/FMDB_DataBase;
@@ -2506,20 +2484,11 @@
 		3DFCCB7F6CF01C31715DFB602154B50C /* RAC */ = {
 			isa = PBXGroup;
 			children = (
-				70CEC5039A05287AF7B77D1A3C01FEE1 /* NSArray+RACSignal.h */,
-				244CD29C3A1C4F0BD52EF5DADF4D0189 /* NSArray+RACSignal.m */,
-				57CD716FE19731C285A83F64A75A4308 /* NSDictionary+RACSignal.h */,
-				E87F650B7DC97798338FED5314809903 /* NSDictionary+RACSignal.m */,
-				FBD6F4EF473427DBB1A9F6ADEB5B34EA /* NSMapTable+RACSignal.h */,
-				D4BDA1934CFAD89D1DFD262BA02BDD37 /* NSMapTable+RACSignal.m */,
-				1A3EEE04CFB353D883C404FC243A5AEE /* RACSignal+Timer.h */,
-				68C6A98D2A5DE2C05B13D541A1A54D39 /* RACSignal+Timer.m */,
-				1C3D795B5A37DFE70F55619582364AE4 /* UIActionSheet+RACSignal.h */,
-				C79C02B6E6A4CDED54E0B0C89743921A /* UIActionSheet+RACSignal.m */,
-				DDA0C8DE842B70A939C93407EA10CD1C /* UIAlertController+RACSignal.h */,
-				165A8A67D5DFD2CA7780A1E6F1754F58 /* UIAlertController+RACSignal.m */,
-				81D7267F87B55C865313EF730D29BDE5 /* UIAlertView+RACSignal.h */,
-				E3CCC8B45D9EC0F03BE4962D16DD5B6C /* UIAlertView+RACSignal.m */,
+				AE64E0AB20EE0B6E003A3AD7 /* UIAlertView&UIActionSheet&UIAlertController+RACSignal */,
+				AE64E0AA20EE0B5E003A3AD7 /* RACSignal+Timer */,
+				AE64E0A920EE0B48003A3AD7 /* NSMapTable+RACSignal */,
+				AE64E0A820EE0B2F003A3AD7 /* NSDictionary+RACSignal */,
+				AE64E0A720EE0B1F003A3AD7 /* NSArray+RACSignal */,
 			);
 			name = RAC;
 			path = HSYCocoaKit/Classes/RAC;
@@ -2549,16 +2518,11 @@
 		49895B1B3C74544C30CDF084E9112A03 /* BaseCell */ = {
 			isa = PBXGroup;
 			children = (
-				DC8D0CD89EE1929FF4E0011F5848FCC5 /* HSYBaseCollectionReusableView.h */,
-				A2DF7E57FC03A3E6A0A14309F8E844E2 /* HSYBaseCollectionReusableView.m */,
-				BDAF559AAD1A325C6D53EAA5015AB86C /* HSYBaseCollectionViewCell.h */,
-				1CBD72F5D3E3D27AFA5AF99DF2B91D72 /* HSYBaseCollectionViewCell.m */,
-				E5C2FA004DB8EB68B10400B1B16D54A4 /* HSYBaseHeaderFooterView.h */,
-				ED697CE59B5C5DCB2D670CCBCCC6D303 /* HSYBaseHeaderFooterView.m */,
-				68196630C5242D30067A799A857E70DF /* HSYBaseTabBarItemCollectionViewCell.h */,
-				1A9082B241B24CE46B5EFDEB4F7741F0 /* HSYBaseTabBarItemCollectionViewCell.m */,
-				E7DC76EA7FBE2FA0EED54D8DFD0F6A98 /* HSYBaseTableViewCell.h */,
-				F8E3F75A043799315440F384B67A8D06 /* HSYBaseTableViewCell.m */,
+				AE64E07120EE063C003A3AD7 /* BaseTableCell */,
+				AE64E07020EE0625003A3AD7 /* BaseCollectionCell */,
+				AE64E06F20EE0609003A3AD7 /* TabBarItem_CollectionCell */,
+				AE64E06E20EE05DE003A3AD7 /* BaseHeader&Footer_View */,
+				AE64E06D20EE05B9003A3AD7 /* CollectionReusable */,
 			);
 			name = BaseCell;
 			path = HSYCocoaKit/Classes/BaseCell;
@@ -2584,12 +2548,9 @@
 		5C2B455C4E7D30F80F9B19B3F672CBA4 /* Socket */ = {
 			isa = PBXGroup;
 			children = (
-				1BE4947E3240289E554D66655BF22F0B /* GCDAsyncSocket+RACSignal.h */,
-				471ACB40CB43AA109A35F2D0F14D395F /* GCDAsyncSocket+RACSignal.m */,
-				6428E818E0FF32C94397B08588CA59E9 /* HSYCocoaKitSocketManager.h */,
-				3403D55A46B24E24ED3EB05497BEC15B /* HSYCocoaKitSocketManager.m */,
-				77DBEAAB327AA4F75BF4D538001F2459 /* HSYCocoaKitSocketRACSignal.h */,
-				D592E28297398B503D8FE36D9529DCCB /* HSYCocoaKitSocketRACSignal.m */,
+				AE64E0A620EE0AFD003A3AD7 /* SocketSignalObject */,
+				AE64E0A520EE0AE2003A3AD7 /* GCDAsyncSocket+RACSignal */,
+				AE64E0A420EE0ACD003A3AD7 /* BaseSocketManager */,
 			);
 			name = Socket;
 			path = HSYCocoaKit/Classes/Socket;
@@ -2782,22 +2743,14 @@
 		9DD17CCB88C0591279C2D71A55D27F7C /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
-				4E8E2065769AD380FB08CA57CB2E0305 /* HSYBaseCollectionModel.h */,
-				A3259532BA5E1AB8BB03B91812DF033F /* HSYBaseCollectionModel.m */,
-				486F9AB6EF80464DE6FD5111F94AA9A8 /* HSYBaseModel.h */,
-				A3098DB633AD7EF6C3596E1F6EEC0A3D /* HSYBaseModel.m */,
-				5B5495E0BA9ABE9634D9AC6F5D5DB7F5 /* HSYBaseRefleshModel.h */,
-				0A2A9E7FD245A71956D04AB5EE3960C6 /* HSYBaseRefleshModel.m */,
-				EE9F667F4A58936F502A3E74723E2593 /* HSYBaseSegmentedPageControlModel.h */,
-				F48A5B657AF6DCCFC9E68688E1172405 /* HSYBaseSegmentedPageControlModel.m */,
-				2730E69712D8830FAC11A4986A70499C /* HSYBaseTabBarModel.h */,
-				11B14006D0C2C8D8F62BC9DDE79D2F33 /* HSYBaseTabBarModel.m */,
-				C77AD0CE38C4E5E7C528EA6D6106C858 /* HSYBaseTableModel.h */,
-				A08BD694BA272C999DA409977E3B4363 /* HSYBaseTableModel.m */,
-				5DE439909D706E03412D101CD4887A7D /* HSYBaseWebModel.h */,
-				A381F06F661051122AE456F4806D7ACB /* HSYBaseWebModel.m */,
-				5F47E6B17333ED6961C9E7299C4C9226 /* HSYCocoaKitRACSubscribeNotification.h */,
-				6CEFCBFD7FAB0ED101254E211565441B /* HSYCocoaKitRACSubscribeNotification.m */,
+				AE64E07920EE06EE003A3AD7 /* RACSubscribeNotification */,
+				AE64E07820EE06D9003A3AD7 /* BaseWebViewModel */,
+				AE64E07720EE06C1003A3AD7 /* BaseTabBarViewModel */,
+				AE64E07620EE06AB003A3AD7 /* BaseSegmentedPageViewModel */,
+				AE64E07520EE0699003A3AD7 /* BaseRefleshViewModel */,
+				AE64E07420EE067B003A3AD7 /* BaseCollectionViewModel */,
+				AE64E07320EE065E003A3AD7 /* BaseTableViewModel */,
+				AE64E07220EE064D003A3AD7 /* BaseViewModel */,
 			);
 			name = BaseModel;
 			path = HSYCocoaKit/Classes/BaseModel;
@@ -2905,6 +2858,625 @@
 			path = SVPullToRefresh;
 			sourceTree = "<group>";
 		};
+		AE64E06D20EE05B9003A3AD7 /* CollectionReusable */ = {
+			isa = PBXGroup;
+			children = (
+				DC8D0CD89EE1929FF4E0011F5848FCC5 /* HSYBaseCollectionReusableView.h */,
+				A2DF7E57FC03A3E6A0A14309F8E844E2 /* HSYBaseCollectionReusableView.m */,
+			);
+			path = CollectionReusable;
+			sourceTree = "<group>";
+		};
+		AE64E06E20EE05DE003A3AD7 /* BaseHeader&Footer_View */ = {
+			isa = PBXGroup;
+			children = (
+				E5C2FA004DB8EB68B10400B1B16D54A4 /* HSYBaseHeaderFooterView.h */,
+				ED697CE59B5C5DCB2D670CCBCCC6D303 /* HSYBaseHeaderFooterView.m */,
+			);
+			path = "BaseHeader&Footer_View";
+			sourceTree = "<group>";
+		};
+		AE64E06F20EE0609003A3AD7 /* TabBarItem_CollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				68196630C5242D30067A799A857E70DF /* HSYBaseTabBarItemCollectionViewCell.h */,
+				1A9082B241B24CE46B5EFDEB4F7741F0 /* HSYBaseTabBarItemCollectionViewCell.m */,
+			);
+			path = TabBarItem_CollectionCell;
+			sourceTree = "<group>";
+		};
+		AE64E07020EE0625003A3AD7 /* BaseCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				BDAF559AAD1A325C6D53EAA5015AB86C /* HSYBaseCollectionViewCell.h */,
+				1CBD72F5D3E3D27AFA5AF99DF2B91D72 /* HSYBaseCollectionViewCell.m */,
+			);
+			path = BaseCollectionCell;
+			sourceTree = "<group>";
+		};
+		AE64E07120EE063C003A3AD7 /* BaseTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				E7DC76EA7FBE2FA0EED54D8DFD0F6A98 /* HSYBaseTableViewCell.h */,
+				F8E3F75A043799315440F384B67A8D06 /* HSYBaseTableViewCell.m */,
+			);
+			path = BaseTableCell;
+			sourceTree = "<group>";
+		};
+		AE64E07220EE064D003A3AD7 /* BaseViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				486F9AB6EF80464DE6FD5111F94AA9A8 /* HSYBaseModel.h */,
+				A3098DB633AD7EF6C3596E1F6EEC0A3D /* HSYBaseModel.m */,
+			);
+			path = BaseViewModel;
+			sourceTree = "<group>";
+		};
+		AE64E07320EE065E003A3AD7 /* BaseTableViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C77AD0CE38C4E5E7C528EA6D6106C858 /* HSYBaseTableModel.h */,
+				A08BD694BA272C999DA409977E3B4363 /* HSYBaseTableModel.m */,
+			);
+			path = BaseTableViewModel;
+			sourceTree = "<group>";
+		};
+		AE64E07420EE067B003A3AD7 /* BaseCollectionViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4E8E2065769AD380FB08CA57CB2E0305 /* HSYBaseCollectionModel.h */,
+				A3259532BA5E1AB8BB03B91812DF033F /* HSYBaseCollectionModel.m */,
+			);
+			path = BaseCollectionViewModel;
+			sourceTree = "<group>";
+		};
+		AE64E07520EE0699003A3AD7 /* BaseRefleshViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5B5495E0BA9ABE9634D9AC6F5D5DB7F5 /* HSYBaseRefleshModel.h */,
+				0A2A9E7FD245A71956D04AB5EE3960C6 /* HSYBaseRefleshModel.m */,
+			);
+			path = BaseRefleshViewModel;
+			sourceTree = "<group>";
+		};
+		AE64E07620EE06AB003A3AD7 /* BaseSegmentedPageViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EE9F667F4A58936F502A3E74723E2593 /* HSYBaseSegmentedPageControlModel.h */,
+				F48A5B657AF6DCCFC9E68688E1172405 /* HSYBaseSegmentedPageControlModel.m */,
+			);
+			path = BaseSegmentedPageViewModel;
+			sourceTree = "<group>";
+		};
+		AE64E07720EE06C1003A3AD7 /* BaseTabBarViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2730E69712D8830FAC11A4986A70499C /* HSYBaseTabBarModel.h */,
+				11B14006D0C2C8D8F62BC9DDE79D2F33 /* HSYBaseTabBarModel.m */,
+			);
+			path = BaseTabBarViewModel;
+			sourceTree = "<group>";
+		};
+		AE64E07820EE06D9003A3AD7 /* BaseWebViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5DE439909D706E03412D101CD4887A7D /* HSYBaseWebModel.h */,
+				A381F06F661051122AE456F4806D7ACB /* HSYBaseWebModel.m */,
+			);
+			path = BaseWebViewModel;
+			sourceTree = "<group>";
+		};
+		AE64E07920EE06EE003A3AD7 /* RACSubscribeNotification */ = {
+			isa = PBXGroup;
+			children = (
+				5F47E6B17333ED6961C9E7299C4C9226 /* HSYCocoaKitRACSubscribeNotification.h */,
+				6CEFCBFD7FAB0ED101254E211565441B /* HSYCocoaKitRACSubscribeNotification.m */,
+			);
+			path = RACSubscribeNotification;
+			sourceTree = "<group>";
+		};
+		AE64E07A20EE070C003A3AD7 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D70CF8C217830B2DD69779D517EBD6DC /* HSYBaseViewController.h */,
+				5165DEF511747DE5751BBB31039935AE /* HSYBaseViewController.m */,
+			);
+			path = BaseViewController;
+			sourceTree = "<group>";
+		};
+		AE64E07B20EE071C003A3AD7 /* BaseTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				599D910721827CC3334A45E52E07E121 /* HSYBaseTableViewController.h */,
+				0D9052A51A74E96251ADFEED9C6F0F19 /* HSYBaseTableViewController.m */,
+			);
+			path = BaseTableViewController;
+			sourceTree = "<group>";
+		};
+		AE64E07C20EE072B003A3AD7 /* BaseCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4646E4E94EC165D64BCDC8901096DF14 /* HSYBaseCollectionViewController.h */,
+				A8CF5237FA82F071F380D14C85F72E60 /* HSYBaseCollectionViewController.m */,
+			);
+			path = BaseCollectionViewController;
+			sourceTree = "<group>";
+		};
+		AE64E07D20EE073C003A3AD7 /* BaseRefleshViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C4E224E0CD48A43DC6D10EA167D8518A /* HSYBaseRefleshViewController.h */,
+				912A087CA6A74EC236C8C85C58A75146 /* HSYBaseRefleshViewController.m */,
+			);
+			path = BaseRefleshViewController;
+			sourceTree = "<group>";
+		};
+		AE64E07E20EE0751003A3AD7 /* BaseSegmentedPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7783700CF7D8350200345E1CFFBEC651 /* HSYBaseSegmentedPageViewController.h */,
+				8E6F5FEAC67BD0A0A95D6A70EE72EEC7 /* HSYBaseSegmentedPageViewController.m */,
+			);
+			path = BaseSegmentedPageViewController;
+			sourceTree = "<group>";
+		};
+		AE64E07F20EE0765003A3AD7 /* BaseTabBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1822BF847458F344FC5F3FA6093BFF0D /* HSYBaseTabBarViewController.h */,
+				CAC4FA43D061C5A93D8B713F96B21D0F /* HSYBaseTabBarViewController.m */,
+			);
+			path = BaseTabBarViewController;
+			sourceTree = "<group>";
+		};
+		AE64E08020EE077E003A3AD7 /* BaseWebViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B395EBE117558DC0E26B27BED89492F1 /* HSYBaseWebViewController.h */,
+				89B22776BBF844FD2406F96726AD5041 /* HSYBaseWebViewController.m */,
+			);
+			path = BaseWebViewController;
+			sourceTree = "<group>";
+		};
+		AE64E08120EE0791003A3AD7 /* BaseLaunchScreenViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FA8CE2898337157EAB2CD19AE31B2DF5 /* HSYBaseLaunchScreenViewController.h */,
+				933EBEBDCC7DBAD8F86A273DB39EF334 /* HSYBaseLaunchScreenViewController.m */,
+			);
+			path = BaseLaunchScreenViewController;
+			sourceTree = "<group>";
+		};
+		AE64E08220EE07AA003A3AD7 /* BaseQRCodeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B6B949091BEABD88BC5A6B021722B564 /* HSYBaseQRCodeViewController.h */,
+				54DCF51A2C96293A0ACE16D3170D55D4 /* HSYBaseQRCodeViewController.m */,
+			);
+			path = BaseQRCodeViewController;
+			sourceTree = "<group>";
+		};
+		AE64E08320EE07CA003A3AD7 /* CABasicAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				42A97161B7D0B7CA0E5DA0C5CB5951B4 /* CABasicAnimation+Transform.h */,
+				5FE457BECB9B9D89CDF6DBC71A5F5EE1 /* CABasicAnimation+Transform.m */,
+			);
+			path = CABasicAnimation;
+			sourceTree = "<group>";
+		};
+		AE64E08420EE07E1003A3AD7 /* NSArray */ = {
+			isa = PBXGroup;
+			children = (
+				7DF9A0B6526B9BB93976ADB5E4848A8E /* NSArray+Finder.h */,
+				66D908F6CEB70CFB3A9A39FB41CE12FA /* NSArray+Finder.m */,
+			);
+			path = NSArray;
+			sourceTree = "<group>";
+		};
+		AE64E08520EE07F1003A3AD7 /* NSBundle */ = {
+			isa = PBXGroup;
+			children = (
+				4C885C2FC03C902ADC969BEB02571172 /* NSBundle+CFBundle.h */,
+				76418DBE9E0FD7C93AAE7BA435D643B7 /* NSBundle+CFBundle.m */,
+				0862E29CD00A5B26BC72B6985C5F8477 /* NSBundle+PrivateFileResource.h */,
+				624E95836AFCA926193BC05A8AB98302 /* NSBundle+PrivateFileResource.m */,
+			);
+			path = NSBundle;
+			sourceTree = "<group>";
+		};
+		AE64E08620EE0804003A3AD7 /* NSDate */ = {
+			isa = PBXGroup;
+			children = (
+				6F1A33F1AD49049C3B799374FEB58C90 /* NSDate+Timestamp.h */,
+				64F92206803A59F23D394AC85F670752 /* NSDate+Timestamp.m */,
+			);
+			path = NSDate;
+			sourceTree = "<group>";
+		};
+		AE64E08720EE080E003A3AD7 /* NSFileManager */ = {
+			isa = PBXGroup;
+			children = (
+				E36417D1EE7C8ACFE9A52B989DCEF2F7 /* NSFileManager+Finder.h */,
+				765580D2A48149E5D23472A2E57C758B /* NSFileManager+Finder.m */,
+			);
+			path = NSFileManager;
+			sourceTree = "<group>";
+		};
+		AE64E08820EE0823003A3AD7 /* NSMutableArray */ = {
+			isa = PBXGroup;
+			children = (
+				1F9A73B4A3B6F8510AFE103EEC0228DA /* NSMutableArray+BasicAlgorithm.h */,
+				C85F7B7CDE70132CEB3C5F1A198CCC34 /* NSMutableArray+BasicAlgorithm.m */,
+			);
+			path = NSMutableArray;
+			sourceTree = "<group>";
+		};
+		AE64E08920EE0840003A3AD7 /* NSObject */ = {
+			isa = PBXGroup;
+			children = (
+				E07D4359E4E2CE9118ADAB45950D5000 /* NSObject+JSONModelForRuntime.h */,
+				DDD014736832E6D8983B9F4AAB1EA8D3 /* NSObject+JSONModelForRuntime.m */,
+				A7EF82DD22F6011DAD4F1650E41D7B03 /* NSObject+Property.h */,
+				250517381D552F7D0AB0D15977A92659 /* NSObject+Property.m */,
+				066DF8554364DC21F99D78167EE7F770 /* NSObject+Runtime.h */,
+				AE4A691FD7BFFF96E77E8642777BFEE5 /* NSObject+Runtime.m */,
+				A160B965AC9898261EE94CA71061AD07 /* NSObject+UIKit.h */,
+				C3159EA3DC8E0D3CB3277A32F447991C /* NSObject+UIKit.m */,
+			);
+			path = NSObject;
+			sourceTree = "<group>";
+		};
+		AE64E08A20EE0856003A3AD7 /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				F226F625131AE2952B002A01683CBEF1 /* NSString+Regular.h */,
+				6DB32983357476C3EDDAF886DD0091AD /* NSString+Regular.m */,
+				76681092CAB84A4B8C9F5CFE9379687B /* NSString+Replace.h */,
+				82F522B38B428A13F47654908838A9E3 /* NSString+Replace.m */,
+				95C3828DB7C5476620EFF0D1EA712215 /* NSString+Size.h */,
+				B9E3DD3FD7BD98F9471D74799F1788B3 /* NSString+Size.m */,
+			);
+			path = NSString;
+			sourceTree = "<group>";
+		};
+		AE64E08B20EE0864003A3AD7 /* UIApplication */ = {
+			isa = PBXGroup;
+			children = (
+				CE0681E64E800352C29E8BE586E76F41 /* UIApplication+Device.h */,
+				C2404E8A9DD5D34D561F35E9363F0F8C /* UIApplication+Device.m */,
+			);
+			path = UIApplication;
+			sourceTree = "<group>";
+		};
+		AE64E08C20EE0876003A3AD7 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				6DDDF12DDB2BF1F2D5AE9BDE3E774102 /* UIColor+Hex.h */,
+				422FEADDF5F2DECD6D6C78133AE9E444 /* UIColor+Hex.m */,
+			);
+			path = UIColor;
+			sourceTree = "<group>";
+		};
+		AE64E08D20EE0885003A3AD7 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				3C6B62C3A00B7FDBDBECFB725585CBCE /* UIImage+Canvas.h */,
+				BFCEA9C0EC939CDC144D3B26A3EACC2A /* UIImage+Canvas.m */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		AE64E08E20EE0895003A3AD7 /* UIImageView */ = {
+			isa = PBXGroup;
+			children = (
+				C98DC3389C3970155FD02D474808A579 /* UIImageView+Scale.h */,
+				D9DD79E286ED7201CC8CB57DA0BACC90 /* UIImageView+Scale.m */,
+				EDA7B764E2878BDB159E385C52ACA229 /* UIImageView+UrlString.h */,
+				1F3D858E472E2C4F827D81390C3B1C56 /* UIImageView+UrlString.m */,
+			);
+			path = UIImageView;
+			sourceTree = "<group>";
+		};
+		AE64E08F20EE08A2003A3AD7 /* UILabel */ = {
+			isa = PBXGroup;
+			children = (
+				0E3ABE235D7AD0788AAD79C905428FB6 /* UILabel+AttributedString.h */,
+				C7BCC7EE9FAA927642F527B883B40FBE /* UILabel+AttributedString.m */,
+				35A03BD014C455BAADFE68290E3D0367 /* UILabel+SuggestSize.h */,
+				9F71ACD9195A9F215810B9EB0C8C2888 /* UILabel+SuggestSize.m */,
+			);
+			path = UILabel;
+			sourceTree = "<group>";
+		};
+		AE64E09020EE08AF003A3AD7 /* UINavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				561ACA045417CBCF06762DF54BE48AFC /* UINavigationBar+Background.h */,
+				FBFB23AAB4CA46444000181BDD299586 /* UINavigationBar+Background.m */,
+			);
+			path = UINavigationBar;
+			sourceTree = "<group>";
+		};
+		AE64E09120EE08C1003A3AD7 /* UINavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				6FF0D8B6A1E497F99ACD7FA87A1999B2 /* UINavigationController+Pop.h */,
+				FA1EAB8F84882A065410D6086C626452 /* UINavigationController+Pop.m */,
+			);
+			path = UINavigationController;
+			sourceTree = "<group>";
+		};
+		AE64E09220EE08D5003A3AD7 /* UIScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				7DA431955194520926D1536CD6658A9A /* UIScrollView+Page.h */,
+				3791703CF451C4CC3B2C7E52977BA971 /* UIScrollView+Page.m */,
+			);
+			path = UIScrollView;
+			sourceTree = "<group>";
+		};
+		AE64E09320EE08E2003A3AD7 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				1FA28823C4694EFCD4880E2C25E75142 /* UIView+DrawPictures.h */,
+				57BD6447F4D5916EFECE46C78B8FFB0F /* UIView+DrawPictures.m */,
+				A03A583355AF3286151B8F0C1C4CEAD5 /* UIView+Frame.h */,
+				E95E321E780E3B09072F840AB3E9B386 /* UIView+Frame.m */,
+				976D561980769D01A52A9018E1285115 /* UIView+Gestures.h */,
+				A6A6AB3F935B26B4A967CC13512B8F51 /* UIView+Gestures.m */,
+				2446BEDD3095591D04FBEB2F4D53B192 /* UIView+RotationAnimated.h */,
+				0B4953C532E72E123083D8B32E055105 /* UIView+RotationAnimated.m */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		AE64E09420EE0907003A3AD7 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4C1BAF8FF22B554B31D2D92CDC40CBBD /* UIViewController+Alert.h */,
+				AC007289D39994BFCFD1AB74C3792852 /* UIViewController+Alert.m */,
+				6F8AB6ECEEC73899844178E7398CFDD7 /* UIViewController+Device.h */,
+				FECC13F02762703E948431406EEE3631 /* UIViewController+Device.m */,
+				093BA43CC10524447264681575EAA44C /* UIViewController+Finder.h */,
+				659BA99D7B766BACD781626CC4CDA4D5 /* UIViewController+Finder.m */,
+				D17AC776FCF2AA0FD72026BF3A4CF24F /* UIViewController+Keyboard.h */,
+				84A90C40AD1D2CD32D74ABE81D32E72F /* UIViewController+Keyboard.m */,
+				D3664D51A6C3D39081E14917B90EBA32 /* UIViewController+NavigationItem.h */,
+				D799AE66CEBB716053D74413E1B3167F /* UIViewController+NavigationItem.m */,
+				C7CC92C25A2EE6B0D5E7516F1CC5B1F8 /* UIViewController+QRCode.h */,
+				0EE7D183369FCA84D59E7FA9EEE97B72 /* UIViewController+QRCode.m */,
+				FEDC2567C7858861C0AE6214F7A22715 /* UIViewController+Runtime.h */,
+				0227B6310CB714F48311F005707A62F0 /* UIViewController+Runtime.m */,
+				E6AAB1556FB7C23A7630ACFB3726777F /* UIViewController+Window.h */,
+				42FC2D087A4C1A6F417A02F083E711EB /* UIViewController+Window.m */,
+			);
+			path = UIViewController;
+			sourceTree = "<group>";
+		};
+		AE64E09520EE092F003A3AD7 /* BaseCustomButton */ = {
+			isa = PBXGroup;
+			children = (
+				B1ACDCB2AC27A7740E36C7891FF05247 /* HSYBaseCustomButton.h */,
+				84B8420133BE43B17A27D6A52F2C5128 /* HSYBaseCustomButton.m */,
+			);
+			path = BaseCustomButton;
+			sourceTree = "<group>";
+		};
+		AE64E09620EE093E003A3AD7 /* BaseSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				84AB50D04D13004D9E1A8C9B5A148D41 /* HSYBaseSegmentedPageControl.h */,
+				9933F10528C4993620FAF52F9A8E8509 /* HSYBaseSegmentedPageControl.m */,
+			);
+			path = BaseSegmentedControl;
+			sourceTree = "<group>";
+		};
+		AE64E09720EE095D003A3AD7 /* BaseAlert */ = {
+			isa = PBXGroup;
+			children = (
+				FD1C3BB2C25856981FB230A715104661 /* HSYCustomGestureView.h */,
+				37E9709B03E69DEFE88903183A8070DC /* HSYCustomGestureView.m */,
+				B961063DC326DDD96F5101E6BB3999FD /* HSYCustomWindows.h */,
+				D812AF90EA246172AA183F715C8FE17F /* HSYCustomWindows.m */,
+			);
+			path = BaseAlert;
+			sourceTree = "<group>";
+		};
+		AE64E09820EE0975003A3AD7 /* BaseLargerImageView */ = {
+			isa = PBXGroup;
+			children = (
+				0188A320AEF8349815BCAAA65E3582D4 /* HSYCustomLargerImageView.h */,
+				01CC8240DAEE500690ECD8803448B0AE /* HSYCustomLargerImageView.m */,
+			);
+			path = BaseLargerImageView;
+			sourceTree = "<group>";
+		};
+		AE64E09920EE098A003A3AD7 /* BaseGasbag */ = {
+			isa = PBXGroup;
+			children = (
+				4EEDAA9C126692787E3652FC56EA31D5 /* HSYCustomGasbagAlertView.h */,
+				C36E03015B4F0689B84CCB738F85F354 /* HSYCustomGasbagAlertView.m */,
+			);
+			path = BaseGasbag;
+			sourceTree = "<group>";
+		};
+		AE64E09A20EE09A1003A3AD7 /* BaseCustomNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				7CD4F6B0126A06CE3BED89B64C0984E3 /* HSYBaseCustomNavigationController.h */,
+				A34DB0791006C7D46748A0BE23153BA6 /* HSYBaseCustomNavigationController.m */,
+				7EE502E87C7FD0DBA2A8F2F329EA4D27 /* HSYBaseViewController+CustomNavigationItem.h */,
+				89AFE89B1779A4DBFCD17AE2DD0002EB /* HSYBaseViewController+CustomNavigationItem.m */,
+			);
+			path = BaseCustomNavigationController;
+			sourceTree = "<group>";
+		};
+		AE64E09B20EE09B9003A3AD7 /* BaseCustomNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				DA6F52E9186DDF3BC6512976C61FDAEA /* HSYCustomNavigationBar.h */,
+				F7CEDC8821CA4726BBB859E03A2426BB /* HSYCustomNavigationBar.m */,
+			);
+			path = BaseCustomNavigationBar;
+			sourceTree = "<group>";
+		};
+		AE64E09C20EE09CD003A3AD7 /* BaseCustomTransitionAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				DD7F31221BA9446CE89750B58595EB71 /* HSYCustomBackTransitionAnimation.h */,
+				EA7ED9BDC2D0D0A436A738CEDB86C4D5 /* HSYCustomBackTransitionAnimation.m */,
+				ECE7B3D61E3383421C5C2BFDE0B0E4E2 /* HSYCustomBaseTransitionAnimation.h */,
+				594B2DB2BEB05EEA3E40C4EC66031614 /* HSYCustomBaseTransitionAnimation.m */,
+				0BB4BC94E5D53910484109012CA3462B /* HSYCustomLeftTransitionAnimation.h */,
+				78213A997720E985C43BD5407685FEC5 /* HSYCustomLeftTransitionAnimation.m */,
+			);
+			path = BaseCustomTransitionAnimation;
+			sourceTree = "<group>";
+		};
+		AE64E09D20EE09F3003A3AD7 /* FMDBManager */ = {
+			isa = PBXGroup;
+			children = (
+				E2CD75A33AA71FC64075B63B04891307 /* HSYFMDBOperationManager.h */,
+				72183CC562EAC49983CE9D59600970D2 /* HSYFMDBOperationManager.m */,
+				05DC39D01919909FFC03AB6E7022FA32 /* HSYFMDBOperationManager+Operation.h */,
+				0BB495D8B2C75B4E02785B325B29926D /* HSYFMDBOperationManager+Operation.m */,
+			);
+			path = FMDBManager;
+			sourceTree = "<group>";
+		};
+		AE64E09E20EE0A06003A3AD7 /* FMDBOperation */ = {
+			isa = PBXGroup;
+			children = (
+				912C033D3F66017FCA5A48C61A411DB1 /* HSYFMDBOperation.h */,
+				89491F1300CDCD49CCCCC2CC46A3887F /* HSYFMDBOperation.m */,
+			);
+			path = FMDBOperation;
+			sourceTree = "<group>";
+		};
+		AE64E09F20EE0A21003A3AD7 /* FMDBOperationFieldInfo */ = {
+			isa = PBXGroup;
+			children = (
+				11C0CE65DA10D18CE279F03A15DA8812 /* HSYFMDBOperationFieldInfo.h */,
+				B1A5BCDE76B2624D0887E575B54BB206 /* HSYFMDBOperationFieldInfo.m */,
+			);
+			path = FMDBOperationFieldInfo;
+			sourceTree = "<group>";
+		};
+		AE64E0A020EE0A40003A3AD7 /* FMResultSet+Model */ = {
+			isa = PBXGroup;
+			children = (
+				6D24C4C60A60681C98BD8BEBB0C3EBD2 /* FMResultSet+Model.h */,
+				D40C5E8BEA9A5B0691B5251050CB9A48 /* FMResultSet+Model.m */,
+			);
+			path = "FMResultSet+Model";
+			sourceTree = "<group>";
+		};
+		AE64E0A120EE0A70003A3AD7 /* BseNetworkingManager */ = {
+			isa = PBXGroup;
+			children = (
+				94E4D93C432491D29A5ACCF3BD91DF37 /* HSYNetWorkingManager.h */,
+				32AA02326F5BD350E08ABAB2C7FFB646 /* HSYNetWorkingManager.m */,
+			);
+			path = BseNetworkingManager;
+			sourceTree = "<group>";
+		};
+		AE64E0A220EE0A83003A3AD7 /* AFNetworking+Category+RACSiganl */ = {
+			isa = PBXGroup;
+			children = (
+				B13ED412BFD079DA34FD8D29BE0580D9 /* AFHTTPSessionManager+RACSignal.h */,
+				91BFDC070CDD82439337DD265E791AA7 /* AFHTTPSessionManager+RACSignal.m */,
+				25411D2E1C33FCE918570DBED951E324 /* AFURLSessionManager+RACSignal.h */,
+				C0D76C1E5055148D850ABE0CDFF15FF0 /* AFURLSessionManager+RACSignal.m */,
+			);
+			path = "AFNetworking+Category+RACSiganl";
+			sourceTree = "<group>";
+		};
+		AE64E0A320EE0AA3003A3AD7 /* NSError+Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4A956E5E4C1710CB5D5F5688C53C6AFE /* NSError+Message.h */,
+				FF04EA6E7B2184F0D7FCB7EB7CD045ED /* NSError+Message.m */,
+			);
+			path = "NSError+Networking";
+			sourceTree = "<group>";
+		};
+		AE64E0A420EE0ACD003A3AD7 /* BaseSocketManager */ = {
+			isa = PBXGroup;
+			children = (
+				6428E818E0FF32C94397B08588CA59E9 /* HSYCocoaKitSocketManager.h */,
+				3403D55A46B24E24ED3EB05497BEC15B /* HSYCocoaKitSocketManager.m */,
+			);
+			path = BaseSocketManager;
+			sourceTree = "<group>";
+		};
+		AE64E0A520EE0AE2003A3AD7 /* GCDAsyncSocket+RACSignal */ = {
+			isa = PBXGroup;
+			children = (
+				1BE4947E3240289E554D66655BF22F0B /* GCDAsyncSocket+RACSignal.h */,
+				471ACB40CB43AA109A35F2D0F14D395F /* GCDAsyncSocket+RACSignal.m */,
+			);
+			path = "GCDAsyncSocket+RACSignal";
+			sourceTree = "<group>";
+		};
+		AE64E0A620EE0AFD003A3AD7 /* SocketSignalObject */ = {
+			isa = PBXGroup;
+			children = (
+				77DBEAAB327AA4F75BF4D538001F2459 /* HSYCocoaKitSocketRACSignal.h */,
+				D592E28297398B503D8FE36D9529DCCB /* HSYCocoaKitSocketRACSignal.m */,
+			);
+			path = SocketSignalObject;
+			sourceTree = "<group>";
+		};
+		AE64E0A720EE0B1F003A3AD7 /* NSArray+RACSignal */ = {
+			isa = PBXGroup;
+			children = (
+				70CEC5039A05287AF7B77D1A3C01FEE1 /* NSArray+RACSignal.h */,
+				244CD29C3A1C4F0BD52EF5DADF4D0189 /* NSArray+RACSignal.m */,
+			);
+			path = "NSArray+RACSignal";
+			sourceTree = "<group>";
+		};
+		AE64E0A820EE0B2F003A3AD7 /* NSDictionary+RACSignal */ = {
+			isa = PBXGroup;
+			children = (
+				57CD716FE19731C285A83F64A75A4308 /* NSDictionary+RACSignal.h */,
+				E87F650B7DC97798338FED5314809903 /* NSDictionary+RACSignal.m */,
+			);
+			path = "NSDictionary+RACSignal";
+			sourceTree = "<group>";
+		};
+		AE64E0A920EE0B48003A3AD7 /* NSMapTable+RACSignal */ = {
+			isa = PBXGroup;
+			children = (
+				FBD6F4EF473427DBB1A9F6ADEB5B34EA /* NSMapTable+RACSignal.h */,
+				D4BDA1934CFAD89D1DFD262BA02BDD37 /* NSMapTable+RACSignal.m */,
+			);
+			path = "NSMapTable+RACSignal";
+			sourceTree = "<group>";
+		};
+		AE64E0AA20EE0B5E003A3AD7 /* RACSignal+Timer */ = {
+			isa = PBXGroup;
+			children = (
+				1A3EEE04CFB353D883C404FC243A5AEE /* RACSignal+Timer.h */,
+				68C6A98D2A5DE2C05B13D541A1A54D39 /* RACSignal+Timer.m */,
+			);
+			path = "RACSignal+Timer";
+			sourceTree = "<group>";
+		};
+		AE64E0AB20EE0B6E003A3AD7 /* UIAlertView&UIActionSheet&UIAlertController+RACSignal */ = {
+			isa = PBXGroup;
+			children = (
+				1C3D795B5A37DFE70F55619582364AE4 /* UIActionSheet+RACSignal.h */,
+				C79C02B6E6A4CDED54E0B0C89743921A /* UIActionSheet+RACSignal.m */,
+				DDA0C8DE842B70A939C93407EA10CD1C /* UIAlertController+RACSignal.h */,
+				165A8A67D5DFD2CA7780A1E6F1754F58 /* UIAlertController+RACSignal.m */,
+				81D7267F87B55C865313EF730D29BDE5 /* UIAlertView+RACSignal.h */,
+				E3CCC8B45D9EC0F03BE4962D16DD5B6C /* UIAlertView+RACSignal.m */,
+			);
+			path = "UIAlertView&UIActionSheet&UIAlertController+RACSignal";
+			sourceTree = "<group>";
+		};
 		B3BDCA9766E97F59E103641DDF211963 /* UITableView+FDTemplateLayoutCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2924,18 +3496,9 @@
 		B7B8565E86468AF5E95E2A45A15C9333 /* CustomNavigationController */ = {
 			isa = PBXGroup;
 			children = (
-				7CD4F6B0126A06CE3BED89B64C0984E3 /* HSYBaseCustomNavigationController.h */,
-				A34DB0791006C7D46748A0BE23153BA6 /* HSYBaseCustomNavigationController.m */,
-				7EE502E87C7FD0DBA2A8F2F329EA4D27 /* HSYBaseViewController+CustomNavigationItem.h */,
-				89AFE89B1779A4DBFCD17AE2DD0002EB /* HSYBaseViewController+CustomNavigationItem.m */,
-				DD7F31221BA9446CE89750B58595EB71 /* HSYCustomBackTransitionAnimation.h */,
-				EA7ED9BDC2D0D0A436A738CEDB86C4D5 /* HSYCustomBackTransitionAnimation.m */,
-				ECE7B3D61E3383421C5C2BFDE0B0E4E2 /* HSYCustomBaseTransitionAnimation.h */,
-				594B2DB2BEB05EEA3E40C4EC66031614 /* HSYCustomBaseTransitionAnimation.m */,
-				0BB4BC94E5D53910484109012CA3462B /* HSYCustomLeftTransitionAnimation.h */,
-				78213A997720E985C43BD5407685FEC5 /* HSYCustomLeftTransitionAnimation.m */,
-				DA6F52E9186DDF3BC6512976C61FDAEA /* HSYCustomNavigationBar.h */,
-				F7CEDC8821CA4726BBB859E03A2426BB /* HSYCustomNavigationBar.m */,
+				AE64E09C20EE09CD003A3AD7 /* BaseCustomTransitionAnimation */,
+				AE64E09B20EE09B9003A3AD7 /* BaseCustomNavigationBar */,
+				AE64E09A20EE09A1003A3AD7 /* BaseCustomNavigationController */,
 			);
 			name = CustomNavigationController;
 			path = HSYCocoaKit/Classes/CustomNavigationController;
@@ -2944,14 +3507,9 @@
 		B8D603EBB186467AECB6601B640C2D90 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				B13ED412BFD079DA34FD8D29BE0580D9 /* AFHTTPSessionManager+RACSignal.h */,
-				91BFDC070CDD82439337DD265E791AA7 /* AFHTTPSessionManager+RACSignal.m */,
-				25411D2E1C33FCE918570DBED951E324 /* AFURLSessionManager+RACSignal.h */,
-				C0D76C1E5055148D850ABE0CDFF15FF0 /* AFURLSessionManager+RACSignal.m */,
-				94E4D93C432491D29A5ACCF3BD91DF37 /* HSYNetWorkingManager.h */,
-				32AA02326F5BD350E08ABAB2C7FFB646 /* HSYNetWorkingManager.m */,
-				4A956E5E4C1710CB5D5F5688C53C6AFE /* NSError+Message.h */,
-				FF04EA6E7B2184F0D7FCB7EB7CD045ED /* NSError+Message.m */,
+				AE64E0A320EE0AA3003A3AD7 /* NSError+Networking */,
+				AE64E0A220EE0A83003A3AD7 /* AFNetworking+Category+RACSiganl */,
+				AE64E0A120EE0A70003A3AD7 /* BseNetworkingManager */,
 			);
 			name = Networking;
 			path = HSYCocoaKit/Classes/Networking;
@@ -2970,78 +3528,24 @@
 		C05D8E651EC7497C3547C7D968E604E5 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				42A97161B7D0B7CA0E5DA0C5CB5951B4 /* CABasicAnimation+Transform.h */,
-				5FE457BECB9B9D89CDF6DBC71A5F5EE1 /* CABasicAnimation+Transform.m */,
-				7DF9A0B6526B9BB93976ADB5E4848A8E /* NSArray+Finder.h */,
-				66D908F6CEB70CFB3A9A39FB41CE12FA /* NSArray+Finder.m */,
-				4C885C2FC03C902ADC969BEB02571172 /* NSBundle+CFBundle.h */,
-				76418DBE9E0FD7C93AAE7BA435D643B7 /* NSBundle+CFBundle.m */,
-				0862E29CD00A5B26BC72B6985C5F8477 /* NSBundle+PrivateFileResource.h */,
-				624E95836AFCA926193BC05A8AB98302 /* NSBundle+PrivateFileResource.m */,
-				6F1A33F1AD49049C3B799374FEB58C90 /* NSDate+Timestamp.h */,
-				64F92206803A59F23D394AC85F670752 /* NSDate+Timestamp.m */,
-				E36417D1EE7C8ACFE9A52B989DCEF2F7 /* NSFileManager+Finder.h */,
-				765580D2A48149E5D23472A2E57C758B /* NSFileManager+Finder.m */,
-				1F9A73B4A3B6F8510AFE103EEC0228DA /* NSMutableArray+BasicAlgorithm.h */,
-				C85F7B7CDE70132CEB3C5F1A198CCC34 /* NSMutableArray+BasicAlgorithm.m */,
-				E07D4359E4E2CE9118ADAB45950D5000 /* NSObject+JSONModelForRuntime.h */,
-				DDD014736832E6D8983B9F4AAB1EA8D3 /* NSObject+JSONModelForRuntime.m */,
-				A7EF82DD22F6011DAD4F1650E41D7B03 /* NSObject+Property.h */,
-				250517381D552F7D0AB0D15977A92659 /* NSObject+Property.m */,
-				066DF8554364DC21F99D78167EE7F770 /* NSObject+Runtime.h */,
-				AE4A691FD7BFFF96E77E8642777BFEE5 /* NSObject+Runtime.m */,
-				A160B965AC9898261EE94CA71061AD07 /* NSObject+UIKit.h */,
-				C3159EA3DC8E0D3CB3277A32F447991C /* NSObject+UIKit.m */,
-				F226F625131AE2952B002A01683CBEF1 /* NSString+Regular.h */,
-				6DB32983357476C3EDDAF886DD0091AD /* NSString+Regular.m */,
-				76681092CAB84A4B8C9F5CFE9379687B /* NSString+Replace.h */,
-				82F522B38B428A13F47654908838A9E3 /* NSString+Replace.m */,
-				95C3828DB7C5476620EFF0D1EA712215 /* NSString+Size.h */,
-				B9E3DD3FD7BD98F9471D74799F1788B3 /* NSString+Size.m */,
-				CE0681E64E800352C29E8BE586E76F41 /* UIApplication+Device.h */,
-				C2404E8A9DD5D34D561F35E9363F0F8C /* UIApplication+Device.m */,
-				6DDDF12DDB2BF1F2D5AE9BDE3E774102 /* UIColor+Hex.h */,
-				422FEADDF5F2DECD6D6C78133AE9E444 /* UIColor+Hex.m */,
-				3C6B62C3A00B7FDBDBECFB725585CBCE /* UIImage+Canvas.h */,
-				BFCEA9C0EC939CDC144D3B26A3EACC2A /* UIImage+Canvas.m */,
-				C98DC3389C3970155FD02D474808A579 /* UIImageView+Scale.h */,
-				D9DD79E286ED7201CC8CB57DA0BACC90 /* UIImageView+Scale.m */,
-				EDA7B764E2878BDB159E385C52ACA229 /* UIImageView+UrlString.h */,
-				1F3D858E472E2C4F827D81390C3B1C56 /* UIImageView+UrlString.m */,
-				0E3ABE235D7AD0788AAD79C905428FB6 /* UILabel+AttributedString.h */,
-				C7BCC7EE9FAA927642F527B883B40FBE /* UILabel+AttributedString.m */,
-				35A03BD014C455BAADFE68290E3D0367 /* UILabel+SuggestSize.h */,
-				9F71ACD9195A9F215810B9EB0C8C2888 /* UILabel+SuggestSize.m */,
-				561ACA045417CBCF06762DF54BE48AFC /* UINavigationBar+Background.h */,
-				FBFB23AAB4CA46444000181BDD299586 /* UINavigationBar+Background.m */,
-				6FF0D8B6A1E497F99ACD7FA87A1999B2 /* UINavigationController+Pop.h */,
-				FA1EAB8F84882A065410D6086C626452 /* UINavigationController+Pop.m */,
-				7DA431955194520926D1536CD6658A9A /* UIScrollView+Page.h */,
-				3791703CF451C4CC3B2C7E52977BA971 /* UIScrollView+Page.m */,
-				1FA28823C4694EFCD4880E2C25E75142 /* UIView+DrawPictures.h */,
-				57BD6447F4D5916EFECE46C78B8FFB0F /* UIView+DrawPictures.m */,
-				A03A583355AF3286151B8F0C1C4CEAD5 /* UIView+Frame.h */,
-				E95E321E780E3B09072F840AB3E9B386 /* UIView+Frame.m */,
-				976D561980769D01A52A9018E1285115 /* UIView+Gestures.h */,
-				A6A6AB3F935B26B4A967CC13512B8F51 /* UIView+Gestures.m */,
-				2446BEDD3095591D04FBEB2F4D53B192 /* UIView+RotationAnimated.h */,
-				0B4953C532E72E123083D8B32E055105 /* UIView+RotationAnimated.m */,
-				4C1BAF8FF22B554B31D2D92CDC40CBBD /* UIViewController+Alert.h */,
-				AC007289D39994BFCFD1AB74C3792852 /* UIViewController+Alert.m */,
-				6F8AB6ECEEC73899844178E7398CFDD7 /* UIViewController+Device.h */,
-				FECC13F02762703E948431406EEE3631 /* UIViewController+Device.m */,
-				093BA43CC10524447264681575EAA44C /* UIViewController+Finder.h */,
-				659BA99D7B766BACD781626CC4CDA4D5 /* UIViewController+Finder.m */,
-				D17AC776FCF2AA0FD72026BF3A4CF24F /* UIViewController+Keyboard.h */,
-				84A90C40AD1D2CD32D74ABE81D32E72F /* UIViewController+Keyboard.m */,
-				D3664D51A6C3D39081E14917B90EBA32 /* UIViewController+NavigationItem.h */,
-				D799AE66CEBB716053D74413E1B3167F /* UIViewController+NavigationItem.m */,
-				C7CC92C25A2EE6B0D5E7516F1CC5B1F8 /* UIViewController+QRCode.h */,
-				0EE7D183369FCA84D59E7FA9EEE97B72 /* UIViewController+QRCode.m */,
-				FEDC2567C7858861C0AE6214F7A22715 /* UIViewController+Runtime.h */,
-				0227B6310CB714F48311F005707A62F0 /* UIViewController+Runtime.m */,
-				E6AAB1556FB7C23A7630ACFB3726777F /* UIViewController+Window.h */,
-				42FC2D087A4C1A6F417A02F083E711EB /* UIViewController+Window.m */,
+				AE64E09420EE0907003A3AD7 /* UIViewController */,
+				AE64E09320EE08E2003A3AD7 /* UIView */,
+				AE64E09220EE08D5003A3AD7 /* UIScrollView */,
+				AE64E09120EE08C1003A3AD7 /* UINavigationController */,
+				AE64E09020EE08AF003A3AD7 /* UINavigationBar */,
+				AE64E08F20EE08A2003A3AD7 /* UILabel */,
+				AE64E08E20EE0895003A3AD7 /* UIImageView */,
+				AE64E08D20EE0885003A3AD7 /* UIImage */,
+				AE64E08C20EE0876003A3AD7 /* UIColor */,
+				AE64E08B20EE0864003A3AD7 /* UIApplication */,
+				AE64E08A20EE0856003A3AD7 /* NSString */,
+				AE64E08920EE0840003A3AD7 /* NSObject */,
+				AE64E08820EE0823003A3AD7 /* NSMutableArray */,
+				AE64E08720EE080E003A3AD7 /* NSFileManager */,
+				AE64E08620EE0804003A3AD7 /* NSDate */,
+				AE64E08520EE07F1003A3AD7 /* NSBundle */,
+				AE64E08420EE07E1003A3AD7 /* NSArray */,
+				AE64E08320EE07CA003A3AD7 /* CABasicAnimation */,
 			);
 			name = Category;
 			path = HSYCocoaKit/Classes/Category;

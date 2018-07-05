@@ -396,9 +396,7 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
         [self.tableView reloadData];
     }];
     
-    [self hsy_keyboardGestureRecycle:^(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view) {
-        @strongify(self);
-        [self.view endEditing:YES];
+    [self hsy_keyboardGestureRecycleKeyboard:^(BOOL isRecycle) {
     }];
     // Do any additional setup after loading the view.
 }
