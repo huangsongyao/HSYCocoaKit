@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+FOUNDATION_EXPORT NSInteger const kHSYCocoaKitSingleGestureDefaultTags;
+
 @class RACSignal;
 @interface HSYCustomGestureView : UIView <UIGestureRecognizerDelegate>
 
@@ -34,3 +36,16 @@
 + (NSArray<NSString *> *)hsy_defaultUnReponseClasses;
 
 @end
+
+@interface HSYCustomSingleGestureMaskView : HSYCustomGestureView
+
+/**
+ 初始化一个支持单击手势视图，视图的size为window层的size，backgroundColor为透明色
+
+ @param gesture 手势回调的block
+ @return HSYCustomSingleGestureMaskView
+ */
+- (instancetype)initWithSingleGesture:(void(^)(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view))gesture;
+
+@end
+

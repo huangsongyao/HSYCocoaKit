@@ -20,6 +20,7 @@
 #import "NSString+Regular.h"
 #import "UIViewController+Alert.h"
 #import "CXAMCPersonalViewController.h"
+#import "UIViewController+Window.h"
 
 static CGFloat textFieldOffsetBottom = 10.0f;
 static CGFloat textFieldOffsetLeft = 10.0f;
@@ -371,7 +372,7 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
 
 - (void)viewDidLoad {
     self.hsy_viewModel = [[CXAMCCalculatorModel alloc] init];
-    self.hsy_addEndEditedKeyboard = YES;
+//    self.hsy_addEndEditedKeyboard = YES;
     self.lineHidden = @(YES);
     self.scrollEnabled = @(NO);
     [super viewDidLoad];
@@ -380,7 +381,7 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
     @weakify(self);
     self.tableView.tableFooterView = [[CXAMCCalculatorTableFooterView alloc] initWithCalculator:^(UIButton *button) {
         @strongify(self);
-        [self.view endEditing:YES];
+//        [self.view endEditing:YES];
         NSDictionary *dic = [(CXAMCCalculatorModel *)self.hsy_viewModel hsy_calculatorAnnualInterestRate];
         NSLog(@"result = %@", dic.allValues.firstObject);
         if (![dic.allKeys.firstObject boolValue]) {
@@ -393,6 +394,11 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
         [self.view endEditing:YES];
         [(CXAMCCalculatorModel *)self.hsy_viewModel hsy_resetDataSource];
         [self.tableView reloadData];
+    }];
+    
+    [self hsy_keyboardGestureRecycle:^(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view) {
+        @strongify(self);
+        [self.view endEditing:YES];
     }];
     // Do any additional setup after loading the view.
 }

@@ -67,6 +67,7 @@
 #import "UIViewController+NavigationItem.h"
 #import "UIViewController+QRCode.h"
 #import "UIViewController+Runtime.h"
+#import "UIViewController+Window.h"
 #import "HSYBaseCustomButton.h"
 #import "HSYBaseSegmentedPageControl.h"
 #import "HSYCustomGasbagAlertView.h"

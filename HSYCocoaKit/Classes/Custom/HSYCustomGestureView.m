@@ -8,6 +8,10 @@
 #import "HSYCustomGestureView.h"
 #import "UIView+Gestures.h"
 #import "ReactiveCocoa.h"
+#import "UIView+Frame.h"
+#import "PublicMacroFile.h"
+
+NSInteger const kHSYCocoaKitSingleGestureDefaultTags        = 756;
 
 @implementation HSYCustomGestureView
 
@@ -68,3 +72,27 @@
 */
 
 @end
+
+//****************************************************************************************************
+
+@implementation HSYCustomSingleGestureMaskView
+
+- (instancetype)initWithSingleGesture:(void(^)(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view))gesture
+{
+    if (self = [super initWithSize:CGSizeMake(IPHONE_WIDTH, IPHONE_HEIGHT)]) {
+        self.backgroundColor = CLEAR_COLOR;
+        self.tag = kHSYCocoaKitSingleGestureDefaultTags;
+        @weakify(self);
+        [[[self hsy_addSingleGesture] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(UITapGestureRecognizer *tap) {
+            @strongify(self);
+            if (gesture) {
+                gesture(tap, self);
+            }
+        }];
+    }
+    return self;
+}
+
+@end
+
+
