@@ -16,13 +16,16 @@ static CGFloat kHSYCocoaKitMinScale                 = 0.0f;
 
 @interface HSYCustomWindowsComponent : UIView
 
+@property (nonatomic, strong, readonly) UIImageView *hsy_backgroundImageView;           //背景图
+
 @end
 
 @interface HSYCustomWindows : HSYCustomGestureView
 
 @property (nonatomic, strong, readonly) HSYCustomWindowsComponent *hsy_wicketView;      //主体小窗口的视图层
 @property (nonatomic, assign) CGFloat hsy_blackMaskMaxAlpha;                            //黑色遮罩的最大透明度
-@property (nonatomic, assign, setter=wicketViewCGRect:) CGRect hsy_wicketCGRect;        //接口接口允许外部重置主体小窗口的frame，本属性只对锚点(0.5, 0.5)的位置的默认小窗口有效
+@property (nonatomic, assign, setter=wicketViewCGRect:) CGRect hsy_wicketCGRect;        //添加接口，允许外部重置主体小窗口的frame，本属性只对锚点(0.5, 0.5)的位置的默认小窗口有效
+@property (nonatomic, assign, setter=wicketViewCornerRadius:) CGFloat hsy_wicketRadius; //添加接口，允许外部重置主体小窗口的layer.cornerRadius圆角，本属性只对锚点(0.5, 0.5)的位置的默认小窗口有效
 
 /**
  初始化，默认主体小弹窗为锚点(0.5, 0.5)的位置，默认主体小窗口的背景图片为白色

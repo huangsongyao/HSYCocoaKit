@@ -14,12 +14,6 @@
 
 static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
 
-@interface HSYCustomWindowsComponent ()
-
-@property (nonatomic, strong, readonly) UIImageView *hsy_backgroundImageView;
-
-@end
-
 @implementation HSYCustomWindowsComponent
 
 - (instancetype)initWithImage:(UIImage *)image
@@ -27,6 +21,8 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
     CGFloat kHSYCocoaKitDefaultComponentWidth  = (IPHONE_WIDTH/3+IPHONE_WIDTH/4);
     CGFloat kHSYCocoaKitDefaultComponentHeight = (IPHONE_HEIGHT/3);
     if (self = [super initWithSize:CGSizeMake(kHSYCocoaKitDefaultComponentWidth, kHSYCocoaKitDefaultComponentHeight)]) {
+        self.clipsToBounds = YES;
+        self.layer.masksToBounds = YES;
         self.backgroundColor = CLEAR_COLOR;
         UIImage *backgroundImage = image;
         if (!backgroundImage) {
@@ -80,8 +76,6 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
         
         //主体小窗口
         _hsy_wicketView = [[HSYCustomWindowsComponent alloc] initWithImage:backgroundImage];
-        self.hsy_wicketView.clipsToBounds = YES;
-        self.hsy_wicketView.layer.masksToBounds = YES;
         if (!CGPointEqualToPoint(anchorPoint, HSYCOCOAKIT_ANCHOR_POINT_X05_Y05)) {
             self.hsy_wicketView.layer.anchorPoint = anchorPoint;
             self.hsy_wicketView.layer.position = position;
@@ -166,7 +160,19 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
 {
     _hsy_wicketCGRect = hsy_wicketCGRect;
     if (CGPointEqualToPoint(self.anchorPoint, HSYCOCOAKIT_ANCHOR_POINT_X05_Y05)) {
+        self.hsy_wicketView.transform = HSYCOCOAKIT_GGA_TRANSFORM_SCALE(kHSYCocoaKitMaxScale);
         self.hsy_wicketView.frame = hsy_wicketCGRect;
+        self.hsy_wicketView.transform = HSYCOCOAKIT_GGA_TRANSFORM_SCALE(kHSYCocoaKitMinScale);
+    }
+}
+
+- (void)wicketViewCornerRadius:(CGFloat)hsy_wicketRadius
+{
+    _hsy_wicketRadius = hsy_wicketRadius;
+    if (CGPointEqualToPoint(self.anchorPoint, HSYCOCOAKIT_ANCHOR_POINT_X05_Y05)) {
+        self.hsy_wicketView.transform = HSYCOCOAKIT_GGA_TRANSFORM_SCALE(kHSYCocoaKitMaxScale);
+        self.hsy_wicketView.layer.cornerRadius = hsy_wicketRadius;
+        self.hsy_wicketView.transform = HSYCOCOAKIT_GGA_TRANSFORM_SCALE(kHSYCocoaKitMinScale);
     }
 }
 
