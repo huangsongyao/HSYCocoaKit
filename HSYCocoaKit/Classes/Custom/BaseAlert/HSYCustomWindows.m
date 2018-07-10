@@ -139,7 +139,10 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
             if (![tuple.third boolValue]) {
                 y = [tuple.second CGRectValue].origin.y - self.hsy_wicketView.height;
             }
-            self.hsy_wicketView.y = y;
+            [UIView animateWithDuration:0.25 animations:^{
+                @strongify(self);
+                self.hsy_wicketView.y = y;
+            }];
         }];
         
         //添加默认的不响应类
