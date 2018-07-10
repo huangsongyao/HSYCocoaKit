@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class RACSignal;
 @interface UIViewController (Keyboard)
 
 /**
@@ -43,5 +44,21 @@
  @param completed frameBegin和frameEnd两个回调
  */
 - (void)observerToKeyboardWillChanged:(id)object subscribeCompleted:(void(^)(CGRect frameBegin, CGRect frameEnd))completed;
+
+/**
+ 键盘监听，原始格式，监听类型为did changed
+
+ @param object object
+ @return RACSignal
+ */
++ (RACSignal *)rac_kvoToKeyboardDidChangeByObject:(id)object;
+
+/**
+ 键盘监听，原始格式，监听类型为will changed
+
+ @param object object
+ @return return RACSignal
+ */
++ (RACSignal *)rac_kvoToKeyboardWillChangedByObject:(id)object;
 
 @end

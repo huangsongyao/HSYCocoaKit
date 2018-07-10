@@ -59,8 +59,42 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
                            remove:remove];
 }
 
+- (instancetype)initWithUnimmediatelyDefaults:(void(^)(HSYCustomWindows *view))remove
+{
+    UIImage *backgroundImage = [UIImage imageWithFillColor:WHITE_COLOR];
+    return [self initWithUnimmediatelyDefaults:HSYCOCOAKIT_ANCHOR_POINT_X05_Y05
+                                      position:CGPointZero
+                               backgroundImage:backgroundImage
+                                        remove:remove];
+}
+
 - (instancetype)initWithDefaults:(CGPoint)anchorPoint
                         position:(CGPoint)position
+                 backgroundImage:(UIImage *)backgroundImage
+                          remove:(void(^)(HSYCustomWindows *view))remove
+{
+    return [self initWithDefaults:anchorPoint
+                         position:position
+       immediatelyCompletedSignal:YES
+                  backgroundImage:backgroundImage
+                           remove:remove];
+}
+
+- (instancetype)initWithUnimmediatelyDefaults:(CGPoint)anchorPoint
+                                     position:(CGPoint)position
+                              backgroundImage:(UIImage *)backgroundImage
+                                       remove:(void(^)(HSYCustomWindows *view))remove
+{
+    return [self initWithDefaults:anchorPoint
+                         position:position
+       immediatelyCompletedSignal:NO
+                  backgroundImage:backgroundImage
+                           remove:remove];
+}
+
+- (instancetype)initWithDefaults:(CGPoint)anchorPoint
+                        position:(CGPoint)position
+      immediatelyCompletedSignal:(BOOL)immediately
                  backgroundImage:(UIImage *)backgroundImage
                           remove:(void(^)(HSYCustomWindows *view))remove
 {
@@ -91,11 +125,21 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
         
         //添加单指移除交互
         @weakify(self);
-        [[[self hsy_addSingleGesture] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+        [[[self hsy_addSingleGesture:immediately] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
             @strongify(self);
             if (remove) {
                 remove(self);
             }
+        }];
+        
+        //添加键盘监听
+        [[[self hsy_keyboardObserver:immediately] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
+            @strongify(self);
+            CGFloat y = (self.height - self.hsy_wicketView.height)/2;
+            if (![tuple.third boolValue]) {
+                y = [tuple.second CGRectValue].origin.y - self.hsy_wicketView.height;
+            }
+            self.hsy_wicketView.y = y;
         }];
         
         //添加默认的不响应类

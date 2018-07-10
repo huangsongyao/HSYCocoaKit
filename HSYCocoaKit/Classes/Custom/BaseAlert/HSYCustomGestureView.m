@@ -10,19 +10,56 @@
 #import "ReactiveCocoa.h"
 #import "UIView+Frame.h"
 #import "PublicMacroFile.h"
+#import "UIViewController+Keyboard.h"
 
 NSInteger const kHSYCocoaKitSingleGestureDefaultTags        = 756;
 
 @implementation HSYCustomGestureView
 
+#pragma mark - Keyboard
+
+- (RACSignal *)hsy_keyboardObserver:(BOOL)completedSignal
+{
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [[[UIViewController rac_kvoToKeyboardWillChangedByObject:nil] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSNotification *notification) {
+            if (notification.userInfo) {
+                NSDictionary *userInfo = notification.userInfo;
+                CGRect frameBegin = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+                CGRect frameEnd = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+                BOOL isKeyboardFewer = NO;
+                if (frameEnd.origin.y > frameBegin.origin.y) {
+                    isKeyboardFewer = YES;
+                }
+                RACTuple *tuple = RACTuplePack([NSValue valueWithCGRect:frameBegin], [NSValue valueWithCGRect:frameEnd], @(isKeyboardFewer));
+                [subscriber sendNext:tuple];
+                if (completedSignal) {
+                    [subscriber sendCompleted];
+                }
+            }
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release method “- hsy_keyboardObserver”");
+        }];
+    }];
+}
+
+#pragma mark - Gesture
+
 - (RACSignal *)hsy_addSingleGesture
+{
+    return [self hsy_addSingleGesture:YES];
+}
+
+- (RACSignal *)hsy_addSingleGesture:(BOOL)completedSignal
 {
     @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
         [self hsy_addTapGestureRecognizerDelegate:self subscribeNext:^(UITapGestureRecognizer *gesture) {
             [subscriber sendNext:gesture];
-            [subscriber sendCompleted];
+            if (completedSignal) {
+                [subscriber sendCompleted];
+            }
         }];
         return [RACDisposable disposableWithBlock:^{
             NSLog(@"release method “- hsy_addSingleGesture”");
@@ -32,12 +69,19 @@ NSInteger const kHSYCocoaKitSingleGestureDefaultTags        = 756;
 
 - (RACSignal *)hsy_addDoubleGesture
 {
+    return [self hsy_addDoubleGesture:YES];
+}
+
+- (RACSignal *)hsy_addDoubleGesture:(BOOL)completedSignal
+{
     @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
         [self hsy_addDoubleGestureRecognizerDelegate:self subscribeNext:^(UITapGestureRecognizer *gesture) {
             [subscriber sendNext:gesture];
-            [subscriber sendCompleted];
+            if (completedSignal) {
+                [subscriber sendCompleted];
+            }
         }];
         return [RACDisposable disposableWithBlock:^{
             NSLog(@"release method “- hsy_addDoubleGesture”");
