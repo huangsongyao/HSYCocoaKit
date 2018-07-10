@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfButtonPropretyType) {
     kHSYCocoaKitOfButtonPropretyTypeTitleColor,                             //UIColor
     kHSYCocoaKitOfButtonPropretyTypeTitleFont,                              //UIFont
     kHSYCocoaKitOfButtonPropretyTypeCornerRadius,                           //NSNumber\CGFloat
+    kHSYCocoaKitOfButtonPropretyTypeTextAlignment,                          //NSNumber\(NSTextAlignment)
     
 };
 

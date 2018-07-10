@@ -36,4 +36,5 @@ NSInteger const kDefaultFindFailureIndex = -1234;
     return i;
 }
 
+
 @end

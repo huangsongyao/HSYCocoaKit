@@ -5,7 +5,7 @@
 //  Created by huangsongyao on 2018/6/22.
 //
 
-#import <UIKit/UIKit.h>
+#import "HSYBaseViewController.h"
 
 @class RACSignal;
 @protocol HSYBaseQRCodeViewControllerDelegate <NSObject>
@@ -14,7 +14,9 @@
 
 @end
 
-@interface HSYBaseQRCodeViewController : UIViewController
+@interface HSYBaseQRCodeViewController : HSYBaseViewController
+
+#pragma mark - 请在“[super viewDidLoad]”触发前设置好
 
 @property (nonatomic, assign) CGFloat hsy_box;                      //扫描区域的x坐标，默认为60.0f
 @property (nonatomic, assign) CGFloat hsy_boy;                      //扫描区域的y坐标，默认为140.0f

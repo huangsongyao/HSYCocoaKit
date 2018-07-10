@@ -15,6 +15,7 @@
 #import "HSYCustomLargerImageView.h"
 #import "HSYCustomGasbagAlertView.h"
 #import "HSYBaseQRCodeViewController.h"
+#import "HSYCustomBannerView.h"
 
 @protocol TestBaseTableViewCellDelegate <NSObject>
 
@@ -88,12 +89,15 @@
 
 @end
 
-@interface HSYBViewController () <TestBaseTableViewCellDelegate>
+@interface HSYBViewController () <TestBaseTableViewCellDelegate, HSYCustomBannerViewDelegate, HSYCustomBannerViewDataSource>
 
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, assign) BOOL toped;
 @property (nonatomic, strong) UIView *tableHeaderView;
 @property (nonatomic, strong) UIView *test;
+
+@property (nonatomic, strong) NSArray *testBanners;
+
 
 @end
 
@@ -107,6 +111,8 @@
     self.registerClasses = @{@"TestBaseTableViewCell" : @"uuuufffff"};
     [super viewDidLoad];
     
+    
+    self.tableView.hidden = YES;
     self.tableHeaderView = [self header];
     self.tableView.tableHeaderView = self.tableHeaderView;
     
@@ -156,8 +162,39 @@
     button.frame = CGRectMake(100, 300, 60, 56);
     [self.view addSubview:button];
     
+    
+    NSMutableArray *banners = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < 10; i ++) {
+//        HSYCustomBannerDataSourece *data = [[HSYCustomBannerDataSourece alloc] init];
+        [banners addObject:[NSString stringWithFormat:@"%@", @(i)]];
+    }
+    _testBanners = [banners mutableCopy];
+    HSYCustomBannerView *banner = [[HSYCustomBannerView alloc] initWithFrame:CGRectMake(30, 0, self.view.width - 60, 300) pages:self.testBanners delegate:self dataSource:self];
+    [self.view addSubview:banner];
     // Do any additional setup after loading the view.
 }
+
+#pragma mark - HSYCustomBannerViewDelegate, HSYCustomBannerViewDataSource
+
+- (NSInteger)hsy_numberOfPagesInRevisionBannerView:(HSYCustomBannerView *)bannerView
+{
+    return self.testBanners.count;
+}
+
+- (HSYCustomBannerBaseCell *)hsy_revisionBannerView:(HSYCustomBannerView *)bannerView cellForPageAtIndex:(NSInteger)index
+{
+    HSYCustomBannerCell *cell = [[HSYCustomBannerCell alloc] initWithData:self.testBanners[index]];
+    cell.label.text = self.testBanners[index];
+    return cell;
+}
+
+
+
+
+
+
+
+
 
 - (UIView *)header
 {

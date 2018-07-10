@@ -50,6 +50,7 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
 
 - (void)viewDidLoad
 {
+    self.hsy_viewModel = [[HSYBaseRefleshModel alloc] init];
     [super viewDidLoad];
     self.view.backgroundColor = BLACK_COLOR;
     //定义好扫描区域
@@ -193,7 +194,8 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
 {
     AVCaptureVideoPreviewLayer *previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:session];
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    previewLayer.frame = self.view.layer.bounds;
+    CGRect rect = (self.customNavigationBar ? (CGRect){0.0f, self.customNavigationBar.bottom, self.view.size} : self.view.layer.bounds);
+    previewLayer.frame = rect;
     [showInLayer insertSublayer:previewLayer atIndex:0];
     
     return previewLayer;
@@ -215,11 +217,12 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
 
 - (UIImageView *)hsy_createBackgroundImage
 {
-    UIImage *image = [UIImage imageWithQRCode:self.view.bounds
+    CGRect rect = (self.customNavigationBar ? (CGRect){0.0f, self.customNavigationBar.bottom, self.view.size} : self.view.bounds);
+    UIImage *image = [UIImage imageWithQRCode:rect
                                      cropRect:self.hsy_boxCGRect
                               backgroundColor:self.hsy_boxColor];
     UIImageView *backgroundImage = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image}];
-    backgroundImage.frame = self.view.bounds;
+    backgroundImage.frame = rect;
     return backgroundImage;
 }
 
@@ -260,9 +263,10 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
         if (self.qrDelgate && [self.qrDelgate respondsToSelector:@selector(hsy_qrCodeDidOutputMetadata:)]) {
             [[[self.qrDelgate hsy_qrCodeDidOutputMetadata:metadataObject.stringValue] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSNumber *restart) {
                 @strongify(self);
+                [self hsy_startRunning];
+                [self hsy_startAnimated];
                 if (restart.boolValue) {
-                    [self hsy_startRunning];
-                    [self hsy_startAnimated];
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
             }];
         }

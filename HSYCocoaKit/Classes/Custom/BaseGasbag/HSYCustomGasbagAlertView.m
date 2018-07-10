@@ -10,6 +10,7 @@
 #import "NSObject+UIKit.h"
 #import "Masonry.h"
 #import "NSBundle+PrivateFileResource.h"
+#import "UIImageView+Scale.h"
 
 //********************************************气囊list数据格式********************************************
 
@@ -192,6 +193,7 @@
 
 - (void)hsy_removeGasbag
 {
+    @weakify(self);
     [self hsy_rac_removeAlert:^(UIView *view) {
         view.transform = HSYCOCOAKIT_GGA_TRANSFORM_SCALE(kHSYCocoaKitMaxScale+0.1);
     } completed:^RACSignal *(BOOL finished, UIView *view) {
@@ -200,7 +202,11 @@
             [UIView animateWithDuration:0.2f animations:^{
                 viewBlock.transform = HSYCOCOAKIT_GGA_TRANSFORM_SCALE(kHSYCocoaKitMinScale+0.1);
             } completion:^(BOOL finished) {
+                @strongify(self);
                 [subscriber sendCompleted];
+                if (self.hsy_completedGasbag) {
+                    self.hsy_completedGasbag(finished);
+                }
             }];
             return [RACDisposable disposableWithBlock:^{
                 NSLog(@"“- hsy_removeGasbag”” methods completed");
@@ -241,6 +247,11 @@
 
 + (HSYCustomGasbagAlertView *)hsy_showGasbagAlert:(NSArray *)dataSources backgroundImage:(UIImage *)backgroundImage position:(CGPoint)position anchorType:(kHSYCocoaKitGasbagAlertType)type didSelectedRowBlock:(void(^)(HSYCustomGasbagObject *x))block
 {
+    return [self.class hsy_showGasbagAlert:dataSources backgroundImage:backgroundImage position:position anchorType:type didSelectedRowBlock:block completedGasbag:^(BOOL finished) {}];
+}
+
++ (HSYCustomGasbagAlertView *)hsy_showGasbagAlert:(NSArray *)dataSources backgroundImage:(UIImage *)backgroundImage position:(CGPoint)position anchorType:(kHSYCocoaKitGasbagAlertType)type didSelectedRowBlock:(void(^)(HSYCustomGasbagObject *x))block completedGasbag:(void(^)(BOOL finished))completed
+{
     if (!backgroundImage) {
         backgroundImage = [NSBundle imageForBundle:@"pop_xiala"];
     }
@@ -254,6 +265,7 @@
         }
         [alertView hsy_removeGasbag];
     };
+    alertView.hsy_completedGasbag = completed;
     return alertView;
 }
 

@@ -98,5 +98,16 @@
     [self setContentOffset:offset animated:animated];
 }
 
+- (kHSYCocoaKitScrollDirection)scrollHorizontalDirection
+{
+    CGPoint point =  [self.panGestureRecognizer translationInView:self.superview];
+    return (point.x < 0.0f ? kHSYCocoaKitScrollDirectionToRight : kHSYCocoaKitScrollDirectionToLeft);
+}
+
+- (kHSYCocoaKitScrollDirection)scrollVerticalDirection
+{
+    CGPoint point =  [self.panGestureRecognizer translationInView:self.superview];
+    return (point.y > 0.0f ? kHSYCocoaKitScrollDirectionToUp : kHSYCocoaKitScrollDirectionToDown);
+}
 
 @end

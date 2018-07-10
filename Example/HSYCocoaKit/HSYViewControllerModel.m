@@ -38,20 +38,20 @@
     if (self = [super init]) {
         self.hsy_datas = [self datas];
         @weakify(self);
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            @strongify(self);
-            NSString *urlStr = @"http://study.scho.com/front/task/getTasks?companyId=0&userId=1&page=1&pageSize=10";
-//            NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
-            [self hsy_requestNetwork:^RACSignal *{
-                return [[HSYNetWorkingManager shareInstance] test:urlStr];
-            } toMap:^id(RACTuple *tuple) {
-                id json = tuple.second;
-                return [NSObject hsy_resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json];
-            } subscriberNext:^BOOL(id x) {
-                NSLog(@"x = %@", x);
-                return YES;
-            }];
-        });
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            @strongify(self);
+//            NSString *urlStr = @"http://study.scho.com/front/task/getTasks?companyId=0&userId=1&page=1&pageSize=10";
+////            NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
+//            [self hsy_requestNetwork:^RACSignal *{
+//                return [[HSYNetWorkingManager shareInstance] test:urlStr];
+//            } toMap:^id(RACTuple *tuple) {
+//                id json = tuple.second;
+//                return [NSObject hsy_resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json];
+//            } subscriberNext:^BOOL(id x) {
+//                NSLog(@"x = %@", x);
+//                return YES;
+//            }];
+//        });
         
         
 //        NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";

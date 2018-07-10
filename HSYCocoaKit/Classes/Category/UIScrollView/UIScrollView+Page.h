@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, kHSYCocoaKitScrollDirection) {
+
+    kHSYCocoaKitScrollDirectionToUp             = 47,   //向上滑动
+    kHSYCocoaKitScrollDirectionToDown,                  //向下滑动
+    kHSYCocoaKitScrollDirectionToLeft,                  //向左滑动
+    kHSYCocoaKitScrollDirectionToRight,                 //向右滑动
+};
+
 @interface UIScrollView (Page)
 
 - (NSInteger)pages;                                         //获取scrollView的总页面数
@@ -52,5 +60,8 @@
  @param animated 是否执行动画
  */
 - (void)setXPage:(NSInteger)page animated:(BOOL)animated;
+
+- (kHSYCocoaKitScrollDirection)scrollHorizontalDirection;
+- (kHSYCocoaKitScrollDirection)scrollVerticalDirection;
 
 @end

@@ -35,7 +35,6 @@
 
 @interface HSYBaseSegmentedPageViewController () <UIScrollViewDelegate, UIViewControllerRuntimeDelegate>
 
-@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, assign) BOOL canScroll;
 
 @end
@@ -115,7 +114,7 @@
 {
     [super viewDidLoad];
     
-    self.scrollView = [NSObject createScrollViewByParam:self.hsy_scrollParamters];
+    _scrollView = [NSObject createScrollViewByParam:self.hsy_scrollParamters];
     [self.view addSubview:self.scrollView];
     
     CGRect rect = CGRectMake(0, 0, (self.buttonSizeValue.CGSizeValue.width * [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_configs].count), self.segmentedControlHeight.floatValue);

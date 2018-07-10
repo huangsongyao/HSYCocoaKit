@@ -34,4 +34,18 @@
  */
 - (NSArray *)stringDescendingOrderSort;
 
+/**
+ 只试用于纯NSString的数组，用于对相同字符串进行分类，返回一个分类后的纯NSString二维数组
+
+ @return 分类后的纯NSString二维数组
+ */
+- (NSArray<NSArray *> *)stringElementClassify;
+
+/**
+ 只试用于纯NSNmber的数组，用于对相同字符串进行分类，返回一个分类后的纯NSNmber二维数组
+ 
+ @return 分类后的纯NSNmber二维数组
+ */
+- (NSArray<NSArray *> *)numberElementClassify;
+
 @end

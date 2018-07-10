@@ -20,23 +20,24 @@
     [self observerToKeyboardWillChanged:object subscribeCompleted:^(CGRect frameBegin, CGRect frameEnd) {
         @strongify(self);
         BOOL isRecycle = (frameBegin.origin.y < frameEnd.origin.y);
-        HSYCustomSingleGestureMaskView *single = nil;
+        HSYCustomSingleGestureMaskView *single = [self.view viewWithTag:kHSYCocoaKitSingleGestureDefaultTags];
         if (isRecycle) {
-            single = [self.view viewWithTag:kHSYCocoaKitSingleGestureDefaultTags];
             if (single) {
                 [single removeFromSuperview];
                 single = nil;
             }
         } else {
-            single = [[HSYCustomSingleGestureMaskView alloc] initWithSingleGesture:^(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view) {
-                @strongify(self);
-                if (next) {
-                    next(ges, view);
-                    [self.view endEditing:YES];
-                }
-            }];
-            [self.view addSubview:single];
-            [self.view bringSubviewToFront:single];
+            if (!single) {
+                single = [[HSYCustomSingleGestureMaskView alloc] initWithSingleGesture:^(UITapGestureRecognizer *ges, HSYCustomSingleGestureMaskView *view) {
+                    @strongify(self);
+                    if (next) {
+                        next(ges, view);
+                        [self.view endEditing:YES];
+                    }
+                }];
+                [self.view addSubview:single];
+                [self.view bringSubviewToFront:single];
+            }
         }
         if (keyboard) {
             keyboard(isRecycle);

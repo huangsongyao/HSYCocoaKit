@@ -57,6 +57,9 @@
     if (param[@(kHSYCocoaKitOfButtonPropretyTypeCornerRadius)]) {
         button.layer.cornerRadius = [param[@(kHSYCocoaKitOfButtonPropretyTypeCornerRadius)] floatValue];
     }
+    if (param[@(kHSYCocoaKitOfButtonPropretyTypeTextAlignment)]) {
+        button.titleLabel.textAlignment = (NSTextAlignment)[param[@(kHSYCocoaKitOfButtonPropretyTypeTextAlignment)] integerValue];
+    }
     
     [[[button rac_signalForControlEvents:UIControlEventTouchUpInside] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(UIButton *btn) {
         if (next) {

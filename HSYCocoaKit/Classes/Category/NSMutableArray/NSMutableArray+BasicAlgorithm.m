@@ -58,4 +58,48 @@
     return sortArray;
 }
 
+#pragma mark - Classify
+
+- (NSArray<NSArray *> *)stringElementClassify
+{
+    NSMutableArray<NSArray *> *dataSources = [[NSMutableArray alloc] init];
+    NSMutableArray *copySelf = [NSMutableArray arrayWithArray:self];
+    for (NSInteger i = 0; i < copySelf.count; i ++) {
+        NSString *iString = copySelf[i];
+        NSMutableArray *elements = [[NSMutableArray alloc] init];
+        [elements addObject:iString];
+        for (NSInteger j = (i + 1); j < copySelf.count; j ++) {
+            NSString *jString = copySelf[j];
+            if([iString isEqualToString:jString]){
+                [elements addObject:jString];
+                [copySelf removeObjectAtIndex:j];
+                j -= 1;
+            }
+        }
+        [dataSources addObject:[elements mutableCopy]];
+    }
+    return [dataSources mutableCopy];
+}
+
+- (NSArray<NSArray *> *)numberElementClassify
+{
+    NSMutableArray<NSArray *> *dataSources = [[NSMutableArray alloc] init];
+    NSMutableArray *copySelf = [NSMutableArray arrayWithArray:self];
+    for (NSInteger i = 0; i < copySelf.count; i ++) {
+        NSNumber *iNumber = copySelf[i];
+        NSMutableArray *elements = [[NSMutableArray alloc] init];
+        [elements addObject:iNumber];
+        for (NSInteger j = (i + 1); j < copySelf.count; j ++) {
+            NSNumber *jNumber = copySelf[j];
+            if([iNumber isEqualToNumber:jNumber]){
+                [elements addObject:jNumber];
+                [copySelf removeObjectAtIndex:j];
+                j -= 1;
+            }
+        }
+        [dataSources addObject:[elements mutableCopy]];
+    }
+    return [dataSources mutableCopy];
+}
+
 @end

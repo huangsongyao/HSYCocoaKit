@@ -61,6 +61,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitBaseSegmentedPageControl) {
 @property (nonatomic, copy) void(^scrollEndFinished)(const NSInteger index, const UIViewController *viewController);
 //监听子控制器的UIViewControllerRuntimeDelegate委托响应，子类可通过这个block处理子控制器回调给segmentedPageController的信号
 @property (nonatomic, copy) RACSignal *(^hsy_responseRuntimeDelegate)(UIViewControllerRuntimeDelegateObject *object);
+//滚动条
+@property (nonatomic, strong, readonly) UIScrollView *scrollView;
 
 - (instancetype)initWithConfigs:(NSArray<HSYBaseSegmentedPageConfig *> *)configs;
 

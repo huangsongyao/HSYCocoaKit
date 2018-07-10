@@ -1,13 +1,13 @@
 //
-//  HSYCustomBannerView.m
+//  HSYCustomBannerPageControl.m
 //  HSYCocoaKit
 //
 //  Created by huangsongyao on 2018/7/5.
 //
 
-#import "HSYCustomBannerView.h"
+#import "HSYCustomBannerPageControl.h"
 
-@implementation HSYCustomBannerView
+@implementation HSYCustomBannerPageControl
 
 /*
 // Only override drawRect: if you perform custom drawing.
