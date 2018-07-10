@@ -33,6 +33,7 @@
 #import "HSYBaseViewController.h"
 #import "HSYBaseWebViewController.h"
 #import "CABasicAnimation+Transform.h"
+#import "CIDetector+QRCode.h"
 #import "NSArray+Finder.h"
 #import "NSBundle+CFBundle.h"
 #import "NSBundle+PrivateFileResource.h"

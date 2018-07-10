@@ -46,9 +46,9 @@
 
 #pragma mark - Left Single BarButton
 
-- (void)hsy_leftItemTitleParamter:(NSDictionary *)titleParamter titleColorParamter:(UIColor *)titleColorParamter titleFontParamter:(UIFont *)titleFontParamter subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
+- (void)hsy_leftItemTitleParamter:(NSDictionary *)titleParamter titleColor:(UIColor *)titleColor titleFont:(UIFont *)titleFont subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
-    [self hsy_leftItemsTitles:@[titleParamter] titleColors:@[titleColorParamter] titleFonts:@[titleFontParamter] subscribeNext:next];
+    [self hsy_leftItemsTitles:@[titleParamter] titleColors:@[titleColor] titleFonts:@[titleFont] subscribeNext:next];
 }
 
 - (void)hsy_leftItemImageParamter:(NSDictionary *)imageParamter subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
@@ -58,9 +58,9 @@
 
 #pragma mark - Right Single BarButton
 
-- (void)hsy_rightItemTitleParamter:(NSDictionary *)titleParamter titleColorParamter:(UIColor *)titleColorParamter titleFontParamter:(UIFont *)titleFontParamter subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
+- (void)hsy_rightItemTitleParamter:(NSDictionary *)titleParamter titleColor:(UIColor *)titleColor titleFont:(UIFont *)titleFont subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
-    [self hsy_rightItemsTitles:@[titleParamter] titleColors:@[titleColorParamter] titleFonts:@[titleFontParamter] subscribeNext:next];
+    [self hsy_rightItemsTitles:@[titleParamter] titleColors:@[titleColor] titleFonts:@[titleFont] subscribeNext:next];
 }
 
 - (void)hsy_rightItemImageParamter:(NSDictionary *)imageParamter subscribeNext:(void(^)(UIButton *button, NSInteger tag))next

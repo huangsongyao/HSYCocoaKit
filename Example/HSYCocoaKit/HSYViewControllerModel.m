@@ -37,7 +37,7 @@
 {
     if (self = [super init]) {
         self.hsy_datas = [self datas];
-        @weakify(self);
+//        @weakify(self);
 //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //            @strongify(self);
 //            NSString *urlStr = @"http://study.scho.com/front/task/getTasks?companyId=0&userId=1&page=1&pageSize=10";
