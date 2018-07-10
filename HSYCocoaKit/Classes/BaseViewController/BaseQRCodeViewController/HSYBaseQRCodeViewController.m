@@ -194,8 +194,7 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
 {
     AVCaptureVideoPreviewLayer *previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:session];
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    CGRect rect = (self.customNavigationBar ? (CGRect){0.0f, self.customNavigationBar.bottom, self.view.size} : self.view.layer.bounds);
-    previewLayer.frame = rect;
+    previewLayer.frame = self.view.layer.bounds;
     [showInLayer insertSublayer:previewLayer atIndex:0];
     
     return previewLayer;
@@ -217,12 +216,11 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
 
 - (UIImageView *)hsy_createBackgroundImage
 {
-    CGRect rect = (self.customNavigationBar ? (CGRect){0.0f, self.customNavigationBar.bottom, self.view.size} : self.view.bounds);
-    UIImage *image = [UIImage imageWithQRCode:rect
+    UIImage *image = [UIImage imageWithQRCode:self.view.bounds
                                      cropRect:self.hsy_boxCGRect
                               backgroundColor:self.hsy_boxColor];
     UIImageView *backgroundImage = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image}];
-    backgroundImage.frame = rect;
+    backgroundImage.frame = self.view.bounds;
     return backgroundImage;
 }
 
