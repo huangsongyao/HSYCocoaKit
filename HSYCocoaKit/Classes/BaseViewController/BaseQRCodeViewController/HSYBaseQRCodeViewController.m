@@ -61,6 +61,13 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //开始扫描动画
+    [self hsy_startAnimated];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -91,8 +98,6 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
     //有效区域的扫描线
     self.scanLayer = self.hsy_createScaningLine;
     [self.view addSubview:self.scanLayer];
-    //开始扫描动画
-    [self hsy_startAnimated];
 }
 
 #pragma mark - Create QRCode Camera
