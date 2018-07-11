@@ -20,11 +20,15 @@
 
 #pragma mark - 以下属性请在“[super viewDidLoad]”方法调用前设置
 
-@property (nonatomic, copy) NSString *backItemImage;                                    //返回按钮的图标，默认使用@"nav_icon_back"
+@property (nonatomic, copy) NSString *backItemImage;                                    //返回按钮的normal图标，默认使用@"nav_icon_back"
+@property (nonatomic, copy) NSString *backItemHighImage;                                //返回按钮的press图标，默认使用@"nav_icon_back"
+@property (nonatomic, strong) NSNumber *barButtonUIEdgeInset;                           //导航栏的按钮的内容偏移，负数表示左偏移，正数表示由偏移，默认为：DEFAULT_BUTTOM_EDGE_INSETS_LEFT
+
 @property (nonatomic, assign) BOOL hsy_addKeyboardObserver;                             //是否添加键盘监听
 @property (nonatomic, assign) BOOL hsy_addEndEditedKeyboard;                            //是否添加view层的键盘收起事件
 @property (nonatomic, strong) id hsy_keyboardObserObject;                               //当“hsy_addKeyboardObserver”为YES时，允许设置本属性，用于keyboard监听的id类型的Object传参
 @property (nonatomic, assign) BOOL hsy_addCustomNavigationBarBackButton;                //是否添加返回按钮，默认会根据栈控制器的vc个数来决定（大于1显示），设置为NO后无论栈控制器的vc是否大于1均不显示
+
 @property (nonatomic, strong) HSYBaseRefleshModel *hsy_viewModel;                       //该指针允许指向HSYBaseModel子类中的对象，并且使用了建言模式，不允许为nil，默认为nil，实例化对象请务必在“- viewDidLoad”方法“前”。
 
 #pragma mark - 以下属性无硬性使用规则
@@ -44,23 +48,75 @@
  */
 - (kHSYHUDModelCodeType)hsy_requestStateCodeWithStateCode:(id)stateCode;
 
-#pragma mark - Custom NavigationBar
+#pragma mark - Custom NavigationBar BarButton
 
 /**
- 提供接口方法允许子类重新设置返回按钮，模式为：文字模式
- 
- @param left left为YES表示按钮在左侧，否则表示按钮在右侧
- @param title 按钮的title
+ 提供接口允许子类设置“左边”部的导航栏按钮-----图片格式，normal和press的图片为“相同的”
+
+ @param images 图片normal类型集合，格式为：@[@{@(按钮的tag) : @"按钮的图片"}, ...]
+ @param next 点击回调事件
  */
-- (void)hsy_setCustomNavigationBarBackButtonInLeft:(BOOL)left title:(NSString *)title;
+- (void)hsy_setLeftBarButtonImages:(NSArray<NSDictionary *> *)images
+                     subscribeNext:(void(^)(UIButton *button, NSInteger tag))next;
 
 /**
- 提供接口方法允许子类重新设置返回按钮，模式为：图片模式
- 
- @param left left为YES表示按钮在左侧，否则表示按钮在右侧
- @param image 按钮的图片名称
+ 提供接口允许子类设置“左边”部的导航栏按钮-----图片格式，normal和press的图片为“不同的”
+
+ @param images 图片normal类型集合，格式为：@[@{@(按钮的tag) : @"按钮的图片"}, ...]
+ @param highImages 图片press类型集合，格式为：@[@{@(按钮的tag) : @"按钮的图片"}, ...]
+ @param next 点击回调事件
  */
-- (void)hsy_setCustomNavigationBarBackButtonInLeft:(BOOL)left image:(NSString *)image;
+- (void)hsy_setLeftBarButtonImages:(NSArray<NSDictionary *> *)images
+                        highImages:(NSArray<NSDictionary *> *)highImages
+                     subscribeNext:(void(^)(UIButton *button, NSInteger tag))next;
+
+/**
+ 提供接口允许子类设置“右边”部的导航栏按钮-----图片格式，normal和press的图片为“相同的”
+
+ @param images 图片normal类型集合，格式为：@[@{@(按钮的tag) : @"按钮的图片"}, ...]
+ @param next 点击回调事件
+ */
+- (void)hsy_setRightBarButtonImages:(NSArray<NSDictionary *> *)images
+                      subscribeNext:(void(^)(UIButton *button, NSInteger tag))next;
+
+/**
+ 提供接口允许子类设置“右边”部的导航栏按钮-----图片格式，normal和press的图片为“不同的”
+
+ @param images 图片normal类型集合，格式为：@[@{@(按钮的tag) : @"按钮的图片"}, ...]
+ @param highImages 图片press类型集合，格式为：@[@{@(按钮的tag) : @"按钮的图片"}, ...]
+ @param next 点击回调事件
+ */
+- (void)hsy_setRightBarButtonImages:(NSArray<NSDictionary *> *)images
+                         highImages:(NSArray<NSDictionary *> *)highImages
+                      subscribeNext:(void(^)(UIButton *button, NSInteger tag))next;
+
+/**
+ 提供接口允许子类设置“左边”部的导航栏按钮-----文字格式
+
+ @param titles 按钮的文字集合，格式为：@[@{@(按钮的tag) : @"按钮的文字"}, ...]
+ @param titleColors 按钮的字体颜色集合
+ @param titleFonts 按钮的字体字号集合
+ @param next 点击回调事件
+ */
+- (void)hsy_setLeftBarButtonTitles:(NSArray<NSDictionary *> *)titles
+                       titleColors:(NSArray<UIColor *> *)titleColors
+                        titleFonts:(NSArray<UIFont *> *)titleFonts
+                     subscribeNext:(void(^)(UIButton *button, NSInteger tag))next;
+
+/**
+ 提供接口允许子类设置“右边”部的导航栏按钮-----文字格式
+
+ @param titles 按钮的文字集合，格式为：@[@{@(按钮的tag) : @"按钮的文字"}, ...]
+ @param titleColors 按钮的字体颜色集合
+ @param titleFonts 按钮的字体字号集合
+ @param next 点击回调事件
+ */
+- (void)hsy_setRightBarButtonTitles:(NSArray<NSDictionary *> *)titles
+                        titleColors:(NSArray<UIColor *> *)titleColors
+                         titleFonts:(NSArray<UIFont *> *)titleFonts
+                      subscribeNext:(void(^)(UIButton *button, NSInteger tag))next;
+
+#pragma mark - NavigationBar
 
 /**
  隐藏定制的导航栏

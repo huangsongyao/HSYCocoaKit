@@ -19,7 +19,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
 #pragma mark - Navigation Bar
 
-@interface HSYCustomNavigationBar () <UINavigationBarDelegate>
+@interface HSYCustomNavigationBar ()
 
 @end
 
@@ -69,55 +69,57 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 
 #pragma mark - BackBarButton Item
 
-+ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name title:(NSString *)title subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
++ (UIBarButtonItem *)hsy_defalutBackButtonItemForImage:(NSString *)normal
+                                             highImage:(NSString *)press
+                                                 title:(NSString *)title
+                                         subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    if (title.length > 0) {
-        dic[@(kHSYCocoaKitOfButtonPropretyTypeNorTitle)] = title;
-        dic[@(kHSYCocoaKitOfButtonPropretyTypeHighTitle)] = title;
-    }
-    if (name.length > 0) {
-        UIImage *image = [UIImage imageNamed:name];
-        if (!image) {
-            image = [NSBundle imageForBundle:name];
-        }
-        dic[@(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName)] = image;
-        dic[@(kHSYCocoaKitOfButtonPropretyTypePreImageViewName)] = image;
-    }
-    UIButton *button = [NSObject createButtonByParam:dic clickedOnSubscribeNext:^(UIButton *button) {
-        if (next) {
-            next(button, kHSYCocoaKitDefaultCustomBarItemTag);
-        }
-    }];
-    //默认点击区域为40x40dx
-    button.size = CGSizeMake(DEFAULT_BUTTOM_SIZE, DEFAULT_BUTTOM_SIZE);
-    //默认返回按钮的箭头图片向左便宜10dx
-    button.contentEdgeInsets = UIEdgeInsetsMake(0, -DEFAULT_BUTTOM_EDGE_INSETS_LEFT, 0, 0);
-    button.tag = kHSYCocoaKitDefaultCustomBarItemTag;
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    UIBarButtonItem *backItem = [self.class hsy_defalutBackButtonItemForImage:normal highImage:press title:title left:-DEFAULT_BUTTOM_EDGE_INSETS_LEFT subscribeNext:next];
     return backItem;
 }
 
-+ (UIBarButtonItem *)hsy_backButtonItemForTitle:(NSString *)title subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
++ (UIBarButtonItem *)hsy_defalutBackButtonItemForImage:(NSString *)normal
+                                             highImage:(NSString *)press
+                                                 title:(NSString *)title
+                                                  left:(CGFloat)left
+                                         subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
-    return [self.class hsy_backButtonItemForImage:nil title:title subscribeNext:next];
+    NSArray<UIBarButtonItem *> *barButtonItems = [UIViewController hsy_barButtonItemsImages:@[@{@(kHSYCocoaKitDefaultCustomBarItemTag) : normal, }] highImages:@[@{@(kHSYCocoaKitDefaultCustomBarItemTag) : normal, }] edgeInsetsLeft:left subscribeNext:next];
+    UIBarButtonItem *backItem = barButtonItems.firstObject;
+    return backItem;
 }
 
-+ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)name subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
++ (UIBarButtonItem *)hsy_backButtonItemForTitle:(NSString *)title
+                                           left:(CGFloat)left
+                                  subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
-    return [self.class hsy_backButtonItemForImage:name title:nil subscribeNext:next];
+    UIBarButtonItem *backItem = [self.class hsy_defalutBackButtonItemForImage:nil highImage:nil title:title left:left subscribeNext:next];
+    return backItem;
 }
 
-#pragma mark - UINavigationBarDelegate
++ (UIBarButtonItem *)hsy_backButtonItemForTitle:(NSString *)title
+                                  subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
+{
+    UIBarButtonItem *backItem = [self.class hsy_backButtonItemForTitle:title left:-DEFAULT_BUTTOM_EDGE_INSETS_LEFT subscribeNext:next];
+    return backItem;
+}
 
++ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)normal
+                                      highImage:(NSString *)press
+                                           left:(CGFloat)left
+                                  subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
+{
+    UIBarButtonItem *backItem = [self.class hsy_defalutBackButtonItemForImage:normal highImage:press title:nil left:left subscribeNext:next];
+    return backItem;
+}
 
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
++ (UIBarButtonItem *)hsy_backButtonItemForImage:(NSString *)normal
+                                      highImage:(NSString *)press
+                                  subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
+{
+    UIBarButtonItem *backItem = [self.class hsy_backButtonItemForImage:normal highImage:press left:-DEFAULT_BUTTOM_EDGE_INSETS_LEFT subscribeNext:next];
+    return backItem;
+}
 
 @end
 

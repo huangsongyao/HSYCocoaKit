@@ -11,22 +11,44 @@
 #import "NSObject+UIKit.h"
 #import "PublicMacroFile.h"
 #import "NSString+Size.h"
+#import "NSBundle+PrivateFileResource.h"
 
 NSInteger const kHSYCocoaKitDefaultCustomBarItemTag     = 10923;
 
 @implementation UIViewController (NavigationItem)
 
-+ (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsImages:(NSArray<NSDictionary *> *)images edgeInsetsLeft:(CGFloat)left subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
++ (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsImages:(NSArray<NSDictionary *> *)images
+                                          edgeInsetsLeft:(CGFloat)left
+                                           subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
+{
+    return [UIViewController hsy_barButtonItemsImages:images
+                                           highImages:images
+                                       edgeInsetsLeft:left
+                                        subscribeNext:next];
+}
+
++ (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsImages:(NSArray<NSDictionary *> *)images
+                                              highImages:(NSArray<NSDictionary *> *)highImages
+                                          edgeInsetsLeft:(CGFloat)left
+                                           subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:images.count];
     for (NSDictionary *dic in images) {
-        NSString *name = dic.allValues.firstObject;
-        UIImage *image = [UIImage imageNamed:name];
-        NSDictionary *dic = @{
-                              @(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName) : image,
-                              @(kHSYCocoaKitOfButtonPropretyTypePreImageViewName) : image,
-                              };
-        UIButton *button = [NSObject createButtonByParam:dic clickedOnSubscribeNext:^(UIButton *button) {
+        NSString *normal = dic.allValues.firstObject;
+        NSString *press = [highImages[[images indexOfObject:dic]] allValues].firstObject;
+        UIImage *image = [UIImage imageNamed:normal];
+        UIImage *highImage = [UIImage imageNamed:press];
+        if (!image) {
+            image = [NSBundle imageForBundle:normal];
+        }
+        if (!highImage) {
+            highImage = [NSBundle imageForBundle:press];
+        }
+        NSDictionary *paramter = @{
+                                   @(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName) : image,
+                                   @(kHSYCocoaKitOfButtonPropretyTypePreImageViewName) : highImage,
+                                   };
+        UIButton *button = [NSObject createButtonByParam:paramter clickedOnSubscribeNext:^(UIButton *button) {
             if (next) {
                 next(button, (button.tag));
             }
@@ -40,7 +62,11 @@ NSInteger const kHSYCocoaKitDefaultCustomBarItemTag     = 10923;
     return items;
 }
 
-+ (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsTitles:(NSArray<NSDictionary *> *)titles titleColors:(NSArray<UIColor *> *)titleColors titleFonts:(NSArray<UIFont *> *)titleFonts edgeInsetsLeft:(CGFloat)left subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
++ (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsTitles:(NSArray<NSDictionary *> *)titles
+                                             titleColors:(NSArray<UIColor *> *)titleColors
+                                              titleFonts:(NSArray<UIFont *> *)titleFonts
+                                          edgeInsetsLeft:(CGFloat)left
+                                           subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:titles.count];
     for (NSDictionary *dic in titles) {
@@ -48,13 +74,13 @@ NSInteger const kHSYCocoaKitDefaultCustomBarItemTag     = 10923;
         NSString *title = dic.allValues.firstObject;
         UIColor *titleColor = titleColors[i];
         UIFont *font = titleFonts[i];
-        NSDictionary *dic = @{
-                              @(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : title,
-                              @(kHSYCocoaKitOfButtonPropretyTypeHighTitle) : title,
-                              @(kHSYCocoaKitOfButtonPropretyTypeTitleColor) : titleColor,
-                              @(kHSYCocoaKitOfButtonPropretyTypeTitleFont) : font,
-                              };
-        UIButton *button = [NSObject createButtonByParam:dic clickedOnSubscribeNext:^(UIButton *button) {
+        NSDictionary *paramter = @{
+                                   @(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : title,
+                                   @(kHSYCocoaKitOfButtonPropretyTypeHighTitle) : title,
+                                   @(kHSYCocoaKitOfButtonPropretyTypeTitleColor) : titleColor,
+                                   @(kHSYCocoaKitOfButtonPropretyTypeTitleFont) : font,
+                                   };
+        UIButton *button = [NSObject createButtonByParam:paramter clickedOnSubscribeNext:^(UIButton *button) {
             if (next) {
                 next(button, (button.tag));
             }
@@ -69,7 +95,9 @@ NSInteger const kHSYCocoaKitDefaultCustomBarItemTag     = 10923;
     return items;
 }
 
-+ (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsTitles:(NSArray<NSDictionary *> *)titles edgeInsetsLeft:(CGFloat)left subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
++ (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsTitles:(NSArray<NSDictionary *> *)titles
+                                          edgeInsetsLeft:(CGFloat)left
+                                           subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
     NSMutableArray *titleColors = [NSMutableArray arrayWithCapacity:titles.count];
     NSMutableArray *titleFonts = [NSMutableArray arrayWithCapacity:titles.count];

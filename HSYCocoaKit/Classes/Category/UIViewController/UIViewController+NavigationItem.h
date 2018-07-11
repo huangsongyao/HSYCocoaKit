@@ -16,7 +16,7 @@ FOUNDATION_EXPORT NSInteger const kHSYCocoaKitDefaultCustomBarItemTag;  //默认
 @interface UIViewController (NavigationItem)
 
 /**
- 创建导航栏按钮集合--------@[UIBarButtonItem]，图片模式
+ 创建导航栏按钮集合--------@[UIBarButtonItem]，图片模式，normal和press为“相同”图片
 
  @param images 导航栏按钮的背景图片集合，格式为:@[@{@(tag1) : @"图片1名称"}, @{@(tag2) : @"图片2名称"}, ...]
  @param left 正数表示左偏移量，负数表示右偏移量
@@ -24,6 +24,20 @@ FOUNDATION_EXPORT NSInteger const kHSYCocoaKitDefaultCustomBarItemTag;  //默认
  @return 导航按钮
  */
 + (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsImages:(NSArray<NSDictionary *> *)images
+                                          edgeInsetsLeft:(CGFloat)left
+                                           subscribeNext:(void(^)(UIButton *button, NSInteger tag))next;
+
+/**
+ 创建导航栏按钮集合--------@[UIBarButtonItem]，图片模式，normal和press为“不同”图片
+
+ @param images 导航栏按钮的normal背景图片集合，格式为:@[@{@(tag1) : @"图片1名称"}, @{@(tag2) : @"图片2名称"}, ...]
+ @param highImages 导航栏按钮的press背景图片集合，格式为:@[@{@(tag1) : @"图片1名称"}, @{@(tag2) : @"图片2名称"}, ...]
+ @param left 正数表示左偏移量，负数表示右偏移量
+ @param next 点击回调事件
+ @return 点击回调事件
+ */
++ (NSArray <UIBarButtonItem *>*)hsy_barButtonItemsImages:(NSArray<NSDictionary *> *)images
+                                              highImages:(NSArray<NSDictionary *> *)highImages
                                           edgeInsetsLeft:(CGFloat)left
                                            subscribeNext:(void(^)(UIButton *button, NSInteger tag))next;
 

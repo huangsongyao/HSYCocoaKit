@@ -11,6 +11,7 @@
 #import "PublicMacroFile.h"
 #import "UIView+Frame.h"
 #import "UIView+Gestures.h"
+#import "HSYBaseViewController+CustomNavigationItem.h"
 
 #define DEFAULT_NAVIGATION_BAR_HEIGHT           IPHONE_BAR_HEIGHT
 
@@ -29,6 +30,8 @@
         self.hsy_addCustomNavigationBarBackButton = YES;
         self.hsy_addEndEditedKeyboard = NO;
         self.backItemImage = @"nav_icon_back";
+        self.backItemHighImage = @"nav_icon_back";
+        self.barButtonUIEdgeInset = @(DEFAULT_BUTTOM_EDGE_INSETS_LEFT);
     }
     return self;
 }
@@ -138,7 +141,7 @@
     }
 }
 
-#pragma mark - Custom NavigationBar
+#pragma mark - NavigationBar
 
 - (void)hsy_addCustomNavigationBar
 {
@@ -157,10 +160,18 @@
     }
 }
 
+- (void)hiddenCustomNavigationBar
+{
+    [self.customNavigationBar removeFromSuperview];
+    _customNavigationBar = nil;
+}
+
+#pragma mark - Custom NavigationBar BarButton
+
 - (void)hsy_pushNavigationItemInLeft
 {
     @weakify(self);
-    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar hsy_backButtonItemForImage:self.backItemImage subscribeNext:^(UIButton *button, NSInteger tag) {
+    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar hsy_backButtonItemForImage:self.backItemImage highImage:self.backItemHighImage subscribeNext:^(UIButton *button, NSInteger tag) {
         @strongify(self);
         if (tag == kHSYCocoaKitDefaultCustomBarItemTag) {
             [self.navigationController popViewControllerAnimated:YES];
@@ -169,36 +180,46 @@
     self.hsy_customNavigationBarNavigationItem.leftBarButtonItems = @[backButtonItem];
 }
 
-- (void)hsy_setCustomNavigationBarBackButtonInLeft:(BOOL)left title:(NSString *)title image:(NSString *)image
+- (void)hsy_setLeftBarButtonImages:(NSArray<NSDictionary *> *)images
+                     subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
-    @weakify(self);
-    UIBarButtonItem *backButtonItem = [HSYCustomNavigationBar hsy_backButtonItemForImage:image title:title subscribeNext:^(UIButton *button, NSInteger tag) {
-        @strongify(self);
-        if (tag == kHSYCocoaKitDefaultCustomBarItemTag) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    }];
-    if (left) {
-        self.hsy_customNavigationBarNavigationItem.leftBarButtonItems = @[backButtonItem];
-    } else {
-        self.hsy_customNavigationBarNavigationItem.rightBarButtonItems = @[backButtonItem];
-    }
+    [self hsy_leftItemsImages:images left:-self.barButtonUIEdgeInset.floatValue subscribeNext:next];
 }
 
-- (void)hsy_setCustomNavigationBarBackButtonInLeft:(BOOL)left title:(NSString *)title
+- (void)hsy_setLeftBarButtonImages:(NSArray<NSDictionary *> *)images
+                        highImages:(NSArray<NSDictionary *> *)highImages
+                     subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
-    return [self hsy_setCustomNavigationBarBackButtonInLeft:left title:title image:nil];
+    [self hsy_leftItemsImages:images highImages:highImages left:-self.barButtonUIEdgeInset.floatValue subscribeNext:next];
 }
 
-- (void)hsy_setCustomNavigationBarBackButtonInLeft:(BOOL)left image:(NSString *)image
+- (void)hsy_setRightBarButtonImages:(NSArray<NSDictionary *> *)images
+                      subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
-    return [self hsy_setCustomNavigationBarBackButtonInLeft:left title:nil image:image];
+    [self hsy_rightItemsImages:images left:self.barButtonUIEdgeInset.floatValue subscribeNext:next];
 }
 
-- (void)hiddenCustomNavigationBar
+- (void)hsy_setRightBarButtonImages:(NSArray<NSDictionary *> *)images
+                         highImages:(NSArray<NSDictionary *> *)highImages
+                      subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
-    [self.customNavigationBar removeFromSuperview];
-    _customNavigationBar = nil;
+    [self hsy_rightItemsImages:images highImages:highImages left:self.barButtonUIEdgeInset.floatValue subscribeNext:next];
+}
+
+- (void)hsy_setLeftBarButtonTitles:(NSArray<NSDictionary *> *)titles
+                       titleColors:(NSArray<UIColor *> *)titleColors
+                        titleFonts:(NSArray<UIFont *> *)titleFonts
+                     subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
+{
+    [self hsy_leftItemsTitles:titles titleColors:titleColors titleFonts:titleFonts left:-self.barButtonUIEdgeInset.floatValue subscribeNext:next];
+}
+
+- (void)hsy_setRightBarButtonTitles:(NSArray<NSDictionary *> *)titles
+                        titleColors:(NSArray<UIColor *> *)titleColors
+                         titleFonts:(NSArray<UIFont *> *)titleFonts
+                      subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
+{
+    [self hsy_rightItemsTitles:titles titleColors:titleColors titleFonts:titleFonts left:self.barButtonUIEdgeInset.floatValue subscribeNext:next];
 }
 
 #pragma mark - End Editing
