@@ -84,7 +84,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
                                                   left:(CGFloat)left
                                          subscribeNext:(void(^)(UIButton *button, NSInteger tag))next
 {
-    NSArray<UIBarButtonItem *> *barButtonItems = [UIViewController hsy_barButtonItemsImages:@[@{@(kHSYCocoaKitDefaultCustomBarItemTag) : normal, }] highImages:@[@{@(kHSYCocoaKitDefaultCustomBarItemTag) : normal, }] edgeInsetsLeft:left subscribeNext:next];
+    NSArray<UIBarButtonItem *> *barButtonItems = [UIViewController hsy_barButtonItemsImages:@[@{@(kHSYCocoaKitDefaultCustomBarItemTag) : normal, }] highImages:@[@{@(kHSYCocoaKitDefaultCustomBarItemTag) : press, }] edgeInsetsLeft:left subscribeNext:next];
     UIBarButtonItem *backItem = barButtonItems.firstObject;
     return backItem;
 }
