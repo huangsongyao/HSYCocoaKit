@@ -259,8 +259,6 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
 {
     if (metadataObjects.count > 0) {
-        [self hsy_stopAnimated];
-        [self hsy_stopRunning];
         @weakify(self);
         AVMetadataMachineReadableCodeObject *metadataObject = [metadataObjects firstObject];
         if (self.qrDelgate && [self.qrDelgate respondsToSelector:@selector(hsy_qrCodeDidOutputMetadata:)]) {
