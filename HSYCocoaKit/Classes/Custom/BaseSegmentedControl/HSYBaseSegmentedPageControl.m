@@ -322,10 +322,10 @@
 
 #pragma mark - Setting
 
-- (void)hsy_setCurrentSelectedItem:(NSInteger)selectedIndex
+- (void)setCurrentSelectedItem:(NSInteger)selectedIndex
 {
     _selectedIndex = selectedIndex;
-    if ((selectedIndex < self.segmentedButton.count - 1) && selectedIndex >= 0) {
+    if ((selectedIndex <= self.segmentedButton.count - 1) && selectedIndex >= 0) {
         [self hsy_scrollToSelected:self.segmentedButton[selectedIndex] animation:YES];
     }
 }
