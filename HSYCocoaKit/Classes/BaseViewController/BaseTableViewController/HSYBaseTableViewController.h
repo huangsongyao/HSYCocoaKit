@@ -28,6 +28,9 @@
 - (CGFloat)hsy_heightForCellWithCacheByIndexPath:(NSIndexPath *)indexPath
                                    configuration:(void(^)(UITableViewCell *cell))configuration;
 
+/**
+ 首次请求
+ */
 - (void)firstRequest;
 
 @end

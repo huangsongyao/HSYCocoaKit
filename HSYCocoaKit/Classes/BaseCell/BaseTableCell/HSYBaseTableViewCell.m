@@ -23,6 +23,13 @@ NSInteger const kHSYCocoaKitBaseCellBottomLineTag        = 163;
     return self;
 }
 
+#pragma mark - Frame
+
+- (void)hsy_masonryForFrame
+{
+    [self layoutIfNeeded];
+}
+
 #pragma mark - Bottom Line
 
 - (void)hsy_lineInCell:(UIColor *)color constraintMaker:(void(^)(MASConstraintMaker *))block

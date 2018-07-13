@@ -29,4 +29,9 @@ FOUNDATION_EXPORT NSInteger const kHSYCocoaKitBaseCellBottomLineTag;
  */
 - (void)hsy_removeLine;
 
+/**
+ 执行“- layoutIfNeeded”方法，用于自动布局立即获取frame
+ */
+- (void)hsy_masonryForFrame;
+
 @end
