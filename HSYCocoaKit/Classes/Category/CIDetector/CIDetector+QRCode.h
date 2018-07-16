@@ -18,4 +18,31 @@
  */
 + (NSString *)detectorQRCodeImage:(UIImage *)image NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
+/**
+ 根据给定的字符串生成”高容错“率的二维码图片
+
+ @param qrString 给定的字符串
+ @param size 二维码图片的size
+ @return 二维码图片
+ */
++ (UIImage *)filterHighQrCodeImage:(NSString *)qrString withImageSize:(CGFloat)size NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
+
+/**
+ 根据给定的字符串生成“中容错”率的二维码图片
+ 
+ @param qrString 给定的字符串
+ @param size 二维码图片的size
+ @return 二维码图片
+ */
++ (UIImage *)filterMiddleQrCodeImage:(NSString *)qrString withImageSize:(CGFloat)size NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
+
+/**
+ 根据给定的字符串生成“低容错”率的二维码图片
+ 
+ @param qrString 给定的字符串
+ @param size 二维码图片的size
+ @return 二维码图片
+ */
++ (UIImage *)filterLowQrCodeImage:(NSString *)qrString withImageSize:(CGFloat)size NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
+
 @end

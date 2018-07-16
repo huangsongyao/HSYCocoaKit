@@ -17,6 +17,7 @@
 #import "NSMutableArray+BasicAlgorithm.h"
 #import "CXAMCPersonalViewController.h"
 #import "UIViewController+Alert.h"
+#import "CIDetector+QRCode.h"
 
 @interface TestModel : NSObject
 
@@ -125,6 +126,9 @@
         
     }];
     [self.view addSubview:control];
+    
+    UIImage *image = [CIDetector filterHighQrCodeImage:@"8iiiifff" withImageSize:100];
+    NSLog(@"image = %@", image);
 //    UITextField *textField = [NSObject createTextFiledByParam:@{
 //                                                                @(kHSYCocoaKitOfTextFiledPropretyTypeBorderWidth) : @(1),
 //                                                                @(kHSYCocoaKitOfTextFiledPropretyTypeBorderColor) : [UIColor blackColor],
