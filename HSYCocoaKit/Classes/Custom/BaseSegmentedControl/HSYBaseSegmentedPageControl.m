@@ -330,6 +330,16 @@
     }
 }
 
+#pragma mark - Load
+
+- (CGSize)intrinsicContentSize
+{
+    if (@available(iOS 11.0, *)) {
+        return UILayoutFittingExpandedSize;
+    }
+    return [super intrinsicContentSize];
+}
+
 /*
  // Only override drawRect: if you perform custom drawing.
  // An empty implementation adversely affects performance during animation.

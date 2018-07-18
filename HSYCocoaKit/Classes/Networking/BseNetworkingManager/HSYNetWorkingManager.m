@@ -140,9 +140,9 @@ static HSYNetWorkingManager *networkingManager;
     [self hsy_statementHTTPSerializer:kHSYCocoaKitHTTPStatementSerializerJSONRequestSerializerAndJSONResponseSerializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"image/jpeg", @"text/plain", nil];
     if (needTimeoutInterval) {
-        [manager.requestSerializer willChangeValueForKey:@"WillChangeToRequestTimeOutInterval"];
-        manager.requestSerializer.timeoutInterval = 60.0f;
-        [manager.requestSerializer didChangeValueForKey:@"DidChangeToRequestTimeOutInterval"];
+        [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+        manager.requestSerializer.timeoutInterval = 60;
+        [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     }
     return manager;
 }

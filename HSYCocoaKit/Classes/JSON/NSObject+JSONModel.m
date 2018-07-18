@@ -8,6 +8,7 @@
 
 #import "NSObject+JSONModel.h"
 #import "JSONModel.h"
+#import "NSObject+JSONModelForRuntime.h"
 
 @implementation NSObject (JSONModel)
 
@@ -75,11 +76,13 @@
     if ([jsonObject isKindOfClass:[NSDictionary class]]) {
         result = [[classes alloc] initWithDictionary:(NSDictionary *)jsonObject error:&error];
         if (!error) {
+            [result setJSONModelRuntimeNullValue];
             return result;
         }
     } else if ([jsonObject isKindOfClass:[NSArray class]]) {
         result = [classes arrayOfModelsFromDictionaries:(NSArray *)jsonObject error:&error];
         if (!error) {
+            [result setJSONModelRuntimeNullValue];
             return result;
         }
     } else {

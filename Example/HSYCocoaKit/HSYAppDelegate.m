@@ -10,6 +10,46 @@
 #import "HSYViewController.h"
 #import "HSYViewControllerModel.h"
 #import "HSYNetWorkingManager.h"
+#import "JSONModel.h"
+#import "NSObject+JSONModelForRuntime.h"
+
+@interface dddMidel : JSONModel
+
+@property (nonatomic, strong) NSString<Optional> *title;
+@property (nonatomic, strong) NSNumber<Optional> *number;
+
+@end
+
+@implementation dddMidel
+
+@end
+
+@protocol dddMidel;
+@interface tttttttMidel : JSONModel
+
+@property (nonatomic, strong) NSString<Optional> *name;
+@property (nonatomic, strong) NSNumber<Optional> *sex;
+@property (nonatomic, strong) NSArray<Optional> *array;
+@property (nonatomic, strong) NSMutableArray<Optional, dddMidel> *dddMidels;
+@property (nonatomic, strong) dddMidel<Optional> *dddMid;
+@property (nonatomic, strong) NSDictionary<Optional> *dicdd;
+
+@end
+
+@implementation tttttttMidel
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        dddMidel *a = [[dddMidel alloc] init];
+        a.title = @"dddddddddddddoooooo";
+        _dddMidels = [@[a] mutableCopy];
+    }
+    return self;
+}
+
+@end
+
 
 @implementation HSYAppDelegate
 
@@ -35,6 +75,13 @@
     }];
     self.window.rootViewController = launchScreenViewController;
     [self.window makeKeyAndVisible];
+    
+    
+    //test
+    tttttttMidel *tes = [[tttttttMidel alloc] init];
+    [tes setJSONModelRuntimeNullValue];
+    NSLog(@"");
+    
     // Override point for customization after application launch.
     return YES;
 }

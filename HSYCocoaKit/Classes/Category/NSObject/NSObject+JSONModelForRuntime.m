@@ -8,6 +8,7 @@
 
 #import "NSObject+JSONModelForRuntime.h"
 #import "NSObject+Runtime.h"
+#import "JSONModel.h"
 
 @implementation NSObject (JSONModelForRuntime)
 
@@ -24,16 +25,29 @@
     for (NSInteger i = 0; i < count; i++) {
         Ivar ivar = ivars[i];
         id value = object_getIvar(object, ivar);
-        if (!value) {
-            NSString *propertyType = [NSObject objectRuntimeTypeEncoding:ivar];
-            id setValue = [NSObject ivarJSONModelRuntimeValue:propertyType];
-            if (!setValue) {
-                setValue = [self.class structJSONModel:propertyType];
-                if (!setValue) {
-                    setValue = [NSNull null];
+        NSString *propertyType = [NSObject objectRuntimeTypeEncoding:ivar];
+        BOOL isContains = [NSObject ivarJSONModelContainsSystemClasses:propertyType];
+        if (!value || (value && !isContains)) {
+            if (value) {
+                if ([value isKindOfClass:[NSArray class]]) {
+                    for (id obj in (NSArray *)value) {
+                        if ([obj isKindOfClass:[JSONModel class]]) {
+                            [obj setJSONModelRuntimeNullValue];
+                        }
+                    }
+                } else {
+                    [value setJSONModelRuntimeNullValue];
                 }
+            } else {
+                id setValue = [NSObject ivarJSONModelRuntimeValue:propertyType];
+                if (!setValue) {
+                    setValue = [self.class structJSONModel:propertyType];
+                    if (!setValue) {
+                        setValue = [NSNull null];
+                    }
+                }
+                object_setIvar(object, ivar, setValue);
             }
-            object_setIvar(object, ivar, setValue);
         }
     }
     free(ivars);
@@ -57,7 +71,7 @@
             return [@{} mutableCopy];
         } else {
             id object = [[NSClassFromString(className) alloc] init];
-            [NSObject setRuntimeValue:object];
+            [NSObject setJSONModelRuntimeNullValue:object];
             return object;
         }
     }
@@ -84,6 +98,29 @@
         return [NSData data];
     }
     return nil;
+}
+
++ (BOOL)ivarJSONModelContainsSystemClasses:(NSString *)propertyString
+{
+    NSArray *systemClasses = @[
+                               @"@\"NSString\"",
+                               @"@\"NSString<Optional>\"",
+                               @"@\"NSNumber\"",
+                               @"@\"NSNumber<Optional>\"",
+                               @"@\"NSArray\"",
+                               @"@\"NSArray<Optional>\"",
+                               @"@\"NSDictionary\"",
+                               @"@\"NSDictionary<Optional>\"",
+                               @"@\"NSMutableArray\"",
+                               @"@\"NSMutableArray<Optional>\"",
+                               @"@\"NSMutableDictionary\"",
+                               @"@\"NSMutableDictionary<Optional>\"",
+                               @"@\"NSDate\"",
+                               @"@\"NSDate<Optional>\"",
+                               @"@\"NSData\"",
+                               @"@\"NSData<Optional>\"", ];
+    BOOL isContains = [systemClasses containsObject:propertyString];
+    return isContains;
 }
 
 @end
