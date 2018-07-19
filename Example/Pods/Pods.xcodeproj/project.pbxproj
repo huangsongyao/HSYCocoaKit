@@ -534,6 +534,8 @@
 		ADA089C145BB3DA7A0E590EA106BEF96 /* LOTShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 456593BBC27B47DD4A9B222307BF7827 /* LOTShapeRectangle.m */; };
 		AE037A47B4A9DC1CF06B4AD6FC8C7B72 /* LOTBezierPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF75A36CE928B57D9B9F9A8AF223B60 /* LOTBezierPath.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		AE16F351304FCA201B6244A24435C547 /* RACScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD0C290E103C983CBD48C655D8E099D /* RACScheduler.m */; };
+		AE64E0DD2100205D003A3AD7 /* NSData+Encrypt.h in Headers */ = {isa = PBXBuildFile; fileRef = AE64E0DB2100205D003A3AD7 /* NSData+Encrypt.h */; };
+		AE64E0DE2100205D003A3AD7 /* NSData+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64E0DC2100205D003A3AD7 /* NSData+Encrypt.m */; };
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B387A0E4F0088F7A949E733A738ACF5 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEACE46764F1D47FE703A843457C751D /* UIButton+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 258492861B1982FE1E6F07920B283646 /* UIButton+WebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEB6D732D71CCBF0ED643257538F4F40 /* HSYCustomWindows.h in Headers */ = {isa = PBXBuildFile; fileRef = D82E188B65B94D777257140FC54969CE /* HSYCustomWindows.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1684,6 +1686,8 @@
 		ADC3DD33039DEA2CC8CB65A1C7857704 /* NSString+Regular.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+Regular.h"; sourceTree = "<group>"; };
 		ADEC8A67B9D3B2170844962F032BE51A /* HSYCocoaKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HSYCocoaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE14E262281CD7AD6F2BF5A3406AA4B4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE64E0DB2100205D003A3AD7 /* NSData+Encrypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+Encrypt.h"; sourceTree = "<group>"; };
+		AE64E0DC2100205D003A3AD7 /* NSData+Encrypt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+Encrypt.m"; sourceTree = "<group>"; };
 		AE9F7064BD0DDD8D628A336D524B3B42 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF226BD5982A4F53BA32707A28802CB2 /* CocoaAsyncSocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaAsyncSocket.xcconfig; sourceTree = "<group>"; };
 		AF2A668E33AAF24B6237190FFAAB20BB /* HSYNetWorkingManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HSYNetWorkingManager.h; sourceTree = "<group>"; };
@@ -3384,6 +3388,15 @@
 			path = SocketSignalObject;
 			sourceTree = "<group>";
 		};
+		AE64E0DA21001FF8003A3AD7 /* NSData */ = {
+			isa = PBXGroup;
+			children = (
+				AE64E0DB2100205D003A3AD7 /* NSData+Encrypt.h */,
+				AE64E0DC2100205D003A3AD7 /* NSData+Encrypt.m */,
+			);
+			path = NSData;
+			sourceTree = "<group>";
+		};
 		AFBE59A97ED371D76A630C08436E7055 /* BaseCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -4008,6 +4021,7 @@
 		EE8BF13A2503FCD9D31F8FD9520485EA /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				AE64E0DA21001FF8003A3AD7 /* NSData */,
 				4F86E895BC132A394551431F15E06135 /* CABasicAnimation */,
 				431F5E7CEACC8A062CF2F6F966CA3AA2 /* CIDetector */,
 				CB790A5D9B4D18503B4ED45E043ABFC1 /* NSArray */,
@@ -4263,6 +4277,7 @@
 				5EAE2C518D3CC6DEABF6E3E8C3A12AA0 /* HSYFMDBMacro.h in Headers */,
 				AD88378F3EEFB89ADB40E30C9B848ED5 /* HSYFMDBOperation.h in Headers */,
 				DA741DE2688AC6545888D5883F992F66 /* HSYFMDBOperationFieldInfo.h in Headers */,
+				AE64E0DD2100205D003A3AD7 /* NSData+Encrypt.h in Headers */,
 				866230B0746BE29A2923DB2EDA1DA583 /* HSYFMDBOperationManager+Operation.h in Headers */,
 				31FEC7F02F1DC2F80592DFECB2B91BC8 /* HSYFMDBOperationManager.h in Headers */,
 				7315AA6233FAF65FE5ACFD3599F4F516 /* HSYHUDHelper.h in Headers */,
@@ -5281,6 +5296,7 @@
 				39E61F50A5F2F2844F1B982B33CCDBA8 /* RACUnarySequence.m in Sources */,
 				C6DDB8088F19FC89849EA31F6AC92D2F /* RACUnit.m in Sources */,
 				FC2629386A678FDF58FC6ADA5A8C1A67 /* RACValueTransformer.m in Sources */,
+				AE64E0DE2100205D003A3AD7 /* NSData+Encrypt.m in Sources */,
 				7B2769DACD0EF8CFDF54220FB4674867 /* RVMViewModel.m in Sources */,
 				5440409326412F0B04D3BF0153EECBF2 /* UIActionSheet+RACSignal.m in Sources */,
 				9893A2881A94A6604E8CD9CD784081F9 /* UIActionSheet+RACSignalSupport.m in Sources */,

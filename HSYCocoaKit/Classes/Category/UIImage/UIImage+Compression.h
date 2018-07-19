@@ -25,4 +25,13 @@
  */
 - (UIImage *)imageCompressionScale:(CGFloat)scale;
 
+/**
+ 压缩图片质量，利用while循环，根据给定最大图片质量值maxSize，循环压缩，直至图片的data.length长度小于等于maxSize
+ 
+ @param maxSize 给定最大图片质量值
+ @return 压缩后的图片
+ */
+- (NSData *)imageCompression:(CGFloat)maxSize;
+
+
 @end
