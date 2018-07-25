@@ -9,6 +9,7 @@
 #import "NSObject+Property.h"
 
 static NSString *kHSYCocoaKitInterfaceOrientationKey    = @"HSYCocoaKitInterfaceOrientationKey";
+static NSString *kHSYCocoaKitLandscapeDirectionKey      = @"kHSYCocoaKitLandscapeDirectionKey";
 
 @implementation UIResponder (Orientation)
 
@@ -25,6 +26,17 @@ static NSString *kHSYCocoaKitInterfaceOrientationKey    = @"HSYCocoaKitInterface
     [self setProperty:hsy_landscapeInterfaceOrientation forKey:kHSYCocoaKitInterfaceOrientationKey nonatomic:OBJC_ASSOCIATION_RETAIN_NONATOMIC];
 }
 
+- (NSNumber *)hsy_landscapeDirection
+{
+    NSNumber *direction = [self getPropertyForKey:kHSYCocoaKitLandscapeDirectionKey];
+    return direction;
+}
+
+- (void)setHsy_landscapeDirection:(NSNumber *)hsy_landscapeDirection
+{
+    [self setProperty:hsy_landscapeDirection forKey:kHSYCocoaKitLandscapeDirectionKey nonatomic:OBJC_ASSOCIATION_RETAIN_NONATOMIC];
+}
+
 #pragma mark - Methods
 
 + (void)interfaceOrientation:(UIInterfaceOrientation)orientation
@@ -38,6 +50,18 @@ static NSString *kHSYCocoaKitInterfaceOrientationKey    = @"HSYCocoaKitInterface
         [invocation setArgument:&val atIndex:2];
         [invocation invoke];
     }
+}
+
+- (void)landscapeDirection:(BOOL)landscape
+{
+    UIInterfaceOrientation interfaceOrientation = UIInterfaceOrientationPortrait;
+    if (landscape) {
+        interfaceOrientation = UIInterfaceOrientationLandscapeLeft;
+    }
+    NSDictionary *dic = @{@(UIInterfaceOrientationPortrait) : @(UIInterfaceOrientationMaskPortrait), @(UIInterfaceOrientationLandscapeLeft) : @(UIInterfaceOrientationMaskLandscapeLeft), };
+    UIInterfaceOrientationMask interfaceOrientationMask = [dic[@(interfaceOrientation)] integerValue];
+    self.hsy_landscapeDirection = @(interfaceOrientationMask);
+    [UIResponder interfaceOrientation:interfaceOrientation];
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 @import UIKit;
+#import "UIResponder+Orientation.h"
 
 @interface HSYAppDelegate : UIResponder <UIApplicationDelegate>
 

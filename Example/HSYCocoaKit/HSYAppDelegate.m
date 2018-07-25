@@ -86,10 +86,14 @@
     return YES;
 }
 
-//- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
-//{
-//    
-//}
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    UIInterfaceOrientationMask orientationMask = (UIInterfaceOrientationMask)[self.hsy_landscapeDirection integerValue];
+    if (orientationMask == 0) {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+    return orientationMask;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
