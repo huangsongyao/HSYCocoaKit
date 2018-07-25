@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSNumber *hsy_landscapeInterfaceOrientation;
 
 /**
- 控制横竖屏的方向枚举，请和“- (void)landscapeDirection:(BOOL)landscape”方法一起使用，默认为nil，当“- (void)landscapeDirection:(BOOL)landscape”被调用时，本属性会根据landscape做动态设置为UIInterfaceOrientationPortrait（NO）或UIInterfaceOrientationLandscapeLeft（YES），并且请在“- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window”委托中返回本属性
+ 控制横竖屏的方向枚举，请和“- (void)landscapeDirection:(BOOL)landscape”方法一起使用，默认为nil，当“- (void)landscapeDirection:(BOOL)landscape”被调用时，本属性会根据landscape做动态设置为UIInterfaceOrientationPortrait（NO）或UIInterfaceOrientationLandscapeRight（YES），并且请在“- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window”委托中返回本属性
  */
 @property (nonatomic, strong) NSNumber *hsy_landscapeDirection;
 

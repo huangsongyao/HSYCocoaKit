@@ -56,9 +56,9 @@ static NSString *kHSYCocoaKitLandscapeDirectionKey      = @"kHSYCocoaKitLandscap
 {
     UIInterfaceOrientation interfaceOrientation = UIInterfaceOrientationPortrait;
     if (landscape) {
-        interfaceOrientation = UIInterfaceOrientationLandscapeLeft;
+        interfaceOrientation = UIInterfaceOrientationLandscapeRight;
     }
-    NSDictionary *dic = @{@(UIInterfaceOrientationPortrait) : @(UIInterfaceOrientationMaskPortrait), @(UIInterfaceOrientationLandscapeLeft) : @(UIInterfaceOrientationMaskLandscapeLeft), };
+    NSDictionary *dic = @{@(UIInterfaceOrientationPortrait) : @(UIInterfaceOrientationMaskPortrait), @(UIInterfaceOrientationLandscapeRight) : @(UIInterfaceOrientationMaskLandscapeRight), };
     UIInterfaceOrientationMask interfaceOrientationMask = [dic[@(interfaceOrientation)] integerValue];
     self.hsy_landscapeDirection = @(interfaceOrientationMask);
     [UIResponder interfaceOrientation:interfaceOrientation];
