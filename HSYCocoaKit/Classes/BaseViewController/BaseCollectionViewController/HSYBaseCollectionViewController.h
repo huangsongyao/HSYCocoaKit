@@ -25,7 +25,7 @@
 @property (nonatomic, assign) UICollectionViewScrollDirection scrollDirection;  //横向或者纵向滚动
 
 //格式：@[@{@"类名" : @"重用标识",}, @{@"类名" : @"重用标识",}....]
-@property (nonatomic, strong, readwrite) NSArray<NSDictionary *> *registerClasses;
+@property (nonatomic, strong, readwrite) NSArray<NSDictionary<NSString *, NSString *> *> *registerClasses;
 
 /**
  首次请求

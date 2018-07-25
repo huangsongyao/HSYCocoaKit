@@ -9,6 +9,27 @@
 
 @implementation UIImage (Compression)
 
+- (NSData *)imageCompression:(CGFloat)maxSize
+{
+    NSData *data = UIImageJPEGRepresentation(self, 1.0f);
+    if (data.length > maxSize) {
+        CGFloat bytes = (data.length / 1024.0f);
+        CGFloat maxQuality = 0.99f;
+        CGFloat lastData = bytes;
+        while ((bytes > maxSize && maxQuality > 0.01f)) {
+            maxQuality -= 0.01f;
+            data = UIImageJPEGRepresentation(self, maxQuality);
+            bytes = (data.length / 1024.0f);
+            if (lastData <= bytes) {
+                break;
+            } else {
+                lastData = bytes;
+            }
+        }
+    }
+    return data;
+}
+
 - (UIImage *)imageCompressionScale:(CGFloat)scale compressionSize:(CGSize)size
 {
     UIImage *realImage = nil;
@@ -30,27 +51,6 @@
         UIGraphicsEndImageContext();
     }
     return realImage;
-}
-
-- (NSData *)imageCompression:(CGFloat)maxSize
-{
-    NSData *data = UIImageJPEGRepresentation(self, 1.0f);
-    if (data.length > maxSize) {
-        CGFloat bytes = (data.length / 1024.0f);
-        CGFloat maxQuality = 0.99f;
-        CGFloat lastData = bytes;
-        while ((bytes > maxSize && maxQuality > 0.01f)) {
-            maxQuality -= 0.01f;
-            data = UIImageJPEGRepresentation(self, maxQuality);
-            bytes = (data.length / 1024.0f);
-            if (lastData <= bytes) {
-                break;
-            } else {
-                lastData = bytes;
-            }
-        }
-    }
-    return data;
 }
 
 - (UIImage *)imageCompressionSize:(CGSize)size

@@ -27,7 +27,7 @@
 @property (nonatomic, assign) BOOL hsy_addKeyboardObserver;                             //是否添加键盘监听
 @property (nonatomic, assign) BOOL hsy_addEndEditedKeyboard;                            //是否添加view层的键盘收起事件
 @property (nonatomic, strong) id hsy_keyboardObserObject;                               //当“hsy_addKeyboardObserver”为YES时，允许设置本属性，用于keyboard监听的id类型的Object传参
-@property (nonatomic, assign) BOOL hsy_addCustomNavigationBarBackButton;                //是否添加返回按钮，默认会根据栈控制器的vc个数来决定（大于1显示），设置为NO后无论栈控制器的vc是否大于1均不显示
+@property (nonatomic, assign) BOOL hsy_addCustomNavigationBarBackButton;                //是否添加返回按钮，默认会根据栈控制器的vc个数来决定（大于1显示），设置为NO后无论栈控制器的vc是否大于1均不添加
 
 @property (nonatomic, strong) HSYBaseRefleshModel *hsy_viewModel;                       //该指针允许指向HSYBaseModel子类中的对象，并且使用了建言模式，不允许为nil，默认为nil，实例化对象请务必在“- viewDidLoad”方法“前”。
 

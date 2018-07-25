@@ -11,7 +11,7 @@
 
 @interface HSYBaseTabBarConfigItem : NSObject
 
-@property (nonatomic, copy, readonly) NSString *title;
+@property (nonatomic, copy) NSString *title;
 @property (nonatomic, strong, readonly) UIImage *normalImage;
 @property (nonatomic, strong, readonly) UIImage *selectedImage;
 @property (nonatomic, strong, readonly) UIColor *normalColor;

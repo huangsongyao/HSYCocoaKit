@@ -536,6 +536,8 @@
 		AE16F351304FCA201B6244A24435C547 /* RACScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD0C290E103C983CBD48C655D8E099D /* RACScheduler.m */; };
 		AE64E0DD2100205D003A3AD7 /* NSData+Encrypt.h in Headers */ = {isa = PBXBuildFile; fileRef = AE64E0DB2100205D003A3AD7 /* NSData+Encrypt.h */; };
 		AE64E0DE2100205D003A3AD7 /* NSData+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64E0DC2100205D003A3AD7 /* NSData+Encrypt.m */; };
+		AE64E0E3210745BA003A3AD7 /* UIResponder+Orientation.h in Headers */ = {isa = PBXBuildFile; fileRef = AE64E0E1210745BA003A3AD7 /* UIResponder+Orientation.h */; };
+		AE64E0E4210745BA003A3AD7 /* UIResponder+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64E0E2210745BA003A3AD7 /* UIResponder+Orientation.m */; };
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B387A0E4F0088F7A949E733A738ACF5 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEACE46764F1D47FE703A843457C751D /* UIButton+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 258492861B1982FE1E6F07920B283646 /* UIButton+WebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEB6D732D71CCBF0ED643257538F4F40 /* HSYCustomWindows.h in Headers */ = {isa = PBXBuildFile; fileRef = D82E188B65B94D777257140FC54969CE /* HSYCustomWindows.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1688,6 +1690,8 @@
 		AE14E262281CD7AD6F2BF5A3406AA4B4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE64E0DB2100205D003A3AD7 /* NSData+Encrypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+Encrypt.h"; sourceTree = "<group>"; };
 		AE64E0DC2100205D003A3AD7 /* NSData+Encrypt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+Encrypt.m"; sourceTree = "<group>"; };
+		AE64E0E1210745BA003A3AD7 /* UIResponder+Orientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIResponder+Orientation.h"; sourceTree = "<group>"; };
+		AE64E0E2210745BA003A3AD7 /* UIResponder+Orientation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+Orientation.m"; sourceTree = "<group>"; };
 		AE9F7064BD0DDD8D628A336D524B3B42 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF226BD5982A4F53BA32707A28802CB2 /* CocoaAsyncSocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaAsyncSocket.xcconfig; sourceTree = "<group>"; };
 		AF2A668E33AAF24B6237190FFAAB20BB /* HSYNetWorkingManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HSYNetWorkingManager.h; sourceTree = "<group>"; };
@@ -3397,6 +3401,15 @@
 			path = NSData;
 			sourceTree = "<group>";
 		};
+		AE64E0E021074598003A3AD7 /* UIResponder */ = {
+			isa = PBXGroup;
+			children = (
+				AE64E0E1210745BA003A3AD7 /* UIResponder+Orientation.h */,
+				AE64E0E2210745BA003A3AD7 /* UIResponder+Orientation.m */,
+			);
+			path = UIResponder;
+			sourceTree = "<group>";
+		};
 		AFBE59A97ED371D76A630C08436E7055 /* BaseCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -4021,6 +4034,7 @@
 		EE8BF13A2503FCD9D31F8FD9520485EA /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				AE64E0E021074598003A3AD7 /* UIResponder */,
 				AE64E0DA21001FF8003A3AD7 /* NSData */,
 				4F86E895BC132A394551431F15E06135 /* CABasicAnimation */,
 				431F5E7CEACC8A062CF2F6F966CA3AA2 /* CIDetector */,
@@ -4290,6 +4304,7 @@
 				F71620742A7A94972D7D6F6909F88C87 /* NSBundle+CFBundle.h in Headers */,
 				D34C10F1FB7B17DE9A73DB62A6F87CB2 /* NSBundle+PrivateFileResource.h in Headers */,
 				24A4CAC400682AF31F0FEA75E1ABA558 /* NSData+RACSupport.h in Headers */,
+				AE64E0E3210745BA003A3AD7 /* UIResponder+Orientation.h in Headers */,
 				BB83864D9707AB9C1B59286A9905D7FC /* NSDate+Timestamp.h in Headers */,
 				ACF6B0BBE4CBF52549D6DD87B89ED719 /* NSDictionary+RACSequenceAdditions.h in Headers */,
 				E8FBCF61E0DB5362C6D2770072840D15 /* NSDictionary+RACSignal.h in Headers */,
@@ -5310,6 +5325,7 @@
 				8DE92DB866ECD0B96F3BA4249B751A3F /* UIColor+Hex.m in Sources */,
 				9B0DB2D1D9A0517E04376B70388EF927 /* UIControl+RACSignalSupport.m in Sources */,
 				F7D5FA62E48A3F912948CDB06F2A38D6 /* UIControl+RACSignalSupportPrivate.m in Sources */,
+				AE64E0E4210745BA003A3AD7 /* UIResponder+Orientation.m in Sources */,
 				DED500526F76C99E113F39BD9237B876 /* UIDatePicker+RACSignalSupport.m in Sources */,
 				0781A26801E8269E2C722EA7171E371D /* UIGestureRecognizer+RACSignalSupport.m in Sources */,
 				34FDBB7F100F6C169FF3EC45E5C52DC9 /* UIImage+Canvas.m in Sources */,
