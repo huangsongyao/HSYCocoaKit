@@ -19,7 +19,7 @@
 + (CGFloat)hsy_scaleHeight:(CGFloat)displayWidth image:(UIImage *)image;
 
 /**
- 根据要显示在屏幕上的宽度displayHeight和图片image的原始size，动态放缩要显示在屏幕上的图片的width
+ 根据要显示在屏幕上的高度displayHeight和图片image的原始size，动态放缩要显示在屏幕上的图片的width
  
  @param displayHeight 要固定显示在屏幕上的高度
  @param image image图片

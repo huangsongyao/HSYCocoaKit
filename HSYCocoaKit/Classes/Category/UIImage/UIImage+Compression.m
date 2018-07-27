@@ -16,7 +16,7 @@
         CGFloat bytes = (data.length / 1024.0f);
         CGFloat maxQuality = 0.99f;
         CGFloat lastData = bytes;
-        while ((bytes > maxSize && maxQuality > 0.01f)) {
+        while ((data.length > maxSize && maxQuality > 0.01f)) {
             maxQuality -= 0.01f;
             data = UIImageJPEGRepresentation(self, maxQuality);
             bytes = (data.length / 1024.0f);

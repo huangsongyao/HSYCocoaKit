@@ -171,8 +171,8 @@
     }
     _testBanners = [banners mutableCopy];
     
-//    HSYCustomBannerView *banner = [[HSYCustomBannerView alloc] initWithFrame:CGRectMake(30, 0, self.view.width - 60, 300) pages:self.testBanners delegate:self dataSource:self];
-//    [self.view addSubview:banner];
+    HSYCustomBannerView *banner = [[HSYCustomBannerView alloc] initWithFrame:CGRectMake(30, self.customNavigationBar.bottom+100, self.view.width - 60, 300) pages:self.testBanners delegate:self dataSource:self];
+    [self.view addSubview:banner];
     // Do any additional setup after loading the view.
 }
 

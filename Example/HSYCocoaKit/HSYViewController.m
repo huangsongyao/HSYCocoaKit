@@ -116,12 +116,12 @@
     [self.view addSubview:button1];
     
     UIButton *button2 = [NSObject createButtonByParam:@{} clickedOnSubscribeNext:^(UIButton *button) {
-//        @strongify(self);
-        HSYAppDelegate *appDelegate = (HSYAppDelegate *)[UIApplication appDelegate];
-        [appDelegate landscapeDirection:YES];
+        @strongify(self);
+//        HSYAppDelegate *appDelegate = (HSYAppDelegate *)[UIApplication appDelegate];
+//        [appDelegate landscapeDirection:YES];
         
-//        HSYBViewController *vc = [[HSYBViewController alloc] init];
-//        [self.navigationController pushViewController:vc animated:YES];
+        HSYBViewController *vc = [[HSYBViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
     button2.backgroundColor = [UIColor yellowColor];
     button2.frame = CGRectMake(button.right, button.bottom + 50, 60, 56);
