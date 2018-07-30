@@ -10,10 +10,14 @@
 #import "FMDB.h"
 
 @class HSYFMDBOperationFieldInfo;
+@class RACSignal;
 @interface HSYFMDBOperation : NSObject
 
 @property (nonatomic, strong, readonly) FMDatabase *dateBase;               //FMDB数据库，只读
 @property (nonatomic, copy, readonly) NSString *dateBasePath;               //数据库所在的路径，只读
+@property (nonatomic, strong, readonly) FMDatabaseQueue *databaseQueue;     //FMDB读取穿行操作队列，保证多线程访问时不会出现数据竞争
+
+#pragma mark - Un Queue
 
 /**
  *  初始化方法
@@ -41,8 +45,7 @@
  *  @param operationInfos 数据库操作抽象类
  *  @param completed      插入完成后的回调
  */
-- (void)hsy_fmdb_beginTransactionInsertDataForOperationInfos:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)operationInfos
-                                                   completed:(void(^)(BOOL result))completed;
+- (void)hsy_fmdb_beginTransactionInsertDataForOperationInfos:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)operationInfos completed:(void(^)(BOOL result))completed;
 
 /**
  *  索引数据库表，索引结果为某个表单里所有的数据集合
@@ -105,5 +108,78 @@
 - (void)hsy_fmdb_clearDataToTableName:(NSString *)tableName
                             completed:(void(^)(BOOL result))completed;
 
+#pragma mark - Queue
+
+/**
+ “队列操作格式”的单次数据插入
+
+ @param operationInfo 数据库操作抽象类
+ @return RACSignal
+ */
+- (RACSignal *)hsy_fmdb_insertDataQueueForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo;
+
+/**
+ “队列操作格式”的事务多次数据插入
+
+ @param operationInfos 数据库操作抽象类
+ @return RACSignal
+ */
+- (RACSignal *)hsy_fmdb_beginTransactionInsertDataQueueForOperationInfos:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)operationInfos;
+
+/**
+ “队列操作格式”的查询表单中的所有数据
+
+ @param operationInfo 数据库操作抽象类
+ @return RACSignal
+ */
+- (RACSignal *)hsy_fmdb_queryAllDataQueueForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo;
+
+/**
+ “队列操作格式”的查询满足 field = content 条件的数据
+
+ @param operationInfo 数据库操作抽象类
+ @param field 索引条件的表字段
+ @param content 索引条件的表字段的内容
+ @return RACSignal
+ */
+- (RACSignal *)hsy_fmdb_queryDataForQueueOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
+                                            whereField:(NSString *)field
+                                          whereContent:(NSString *)content;
+
+/**
+ “队列操作格式”的删除满足 field = value 条件的数据
+
+ @param tableName 数据库表单名称
+ @param value 删除条件的字段内容
+ @param field 删除条件的字段名
+ @return RACSignal
+ */
+- (RACSignal *)hsy_fmdb_deleteRowDataQueueForTableName:(NSString *)tableName
+                                           deleteValue:(NSString *)value
+                                            whereField:(NSString *)field;
+
+/**
+ “队列操作格式”的修改满足 whereField = whereContent 条件下的表的内容，更新的内容为 updateField更新为updateContent
+
+ @param tableName 数据表名
+ @param updateField 要更新数据的表字段
+ @param updateContent 要更新数据的表字段的更新内容
+ @param whereField 修改条件的字段名
+ @param whereContent 修改条件的字段名的内容
+ @return RACSignal
+ */
+- (RACSignal *)hsy_fmdb_modifyDataQueueForTableName:(NSString *)tableName
+                                        updateField:(NSString *)updateField
+                                      updateContent:(NSString *)updateContent
+                                         whereField:(NSString *)whereField
+                                       whereContent:(NSString *)whereContent;
+
+/**
+ “队列操作格式”的删除表中所有数据
+
+ @param tableName 表名称
+ @return RACSignal
+ */
+- (RACSignal *)hsy_fmdb_clearDataQueueToTableName:(NSString *)tableName;
 
 @end

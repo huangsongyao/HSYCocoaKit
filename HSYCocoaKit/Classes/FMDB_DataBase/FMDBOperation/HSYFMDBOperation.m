@@ -11,6 +11,7 @@
 #import "ReactiveCocoa.h"
 #import "FMResultSet+Model.h"
 #import "APPPathMacroFile.h"
+#import "PublicMacroFile.h"
 
 @interface HSYFMDBOperation ()
 
@@ -27,6 +28,7 @@
         _databaseTables = tables;                               //数据表名，集合
         _databaseName = name;                                   //数据库名称
         [self hsy_initDB];
+        _databaseQueue = [FMDatabaseQueue databaseQueueWithPath:[self hsy_dataBasePath]];
     }
     return self;
 }
@@ -73,6 +75,30 @@
     }
 }
 
+//********************************************串行队列*************************************************//
+
+- (void)hsy_fmdb_synchronouslyQueueInDatabase:(RACSignal *(^)(FMDatabase *db))database
+{
+    [self.databaseQueue inDatabase:^(FMDatabase * _Nonnull db) {
+        if (database) {
+            [[database(db) deliverOn:[RACScheduler mainThreadScheduler]] subscribeCompleted:^{
+                [db close];
+            }];
+        }
+    }];
+}
+
+- (void)hsy_fmdb_synchronouslyQueueTransactionInDatabase:(RACSignal *(^)(FMDatabase *db, BOOL *rollback))database
+{
+    [self.databaseQueue inTransaction:^(FMDatabase * _Nonnull db, BOOL * _Nonnull rollback) {
+        if (database) {
+            [[database(db, rollback) deliverOn:[RACScheduler mainThreadScheduler]] subscribeCompleted:^{
+                
+            }];
+        }
+    }];
+}
+
 //********************************************数据库操作*************************************************//
 
 #pragma mark - Insert Data
@@ -92,8 +118,7 @@
     }];
 }
 
-- (void)hsy_fmdb_beginTransactionInsertDataForOperationInfos:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)operationInfos
-                                                   completed:(void(^)(BOOL result))completed
+- (void)hsy_fmdb_beginTransactionInsertDataForOperationInfos:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)operationInfos completed:(void(^)(BOOL result))completed
 {
     if (![self.dateBase open]) {
         return;
@@ -131,6 +156,45 @@
         NSLog(@"Insert %@ Failure!", [operationInfo hsy_toDataBaseTableInsertStatements]);
     }
     return result;
+}
+
+- (RACSignal *)hsy_fmdb_insertDataQueueForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
+{
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self hsy_fmdb_synchronouslyQueueInDatabase:^RACSignal *(FMDatabase *db) {
+            @strongify(self);
+            [self hsy_fmdb_insertDataForOperationInfo:operationInfo completed:^(BOOL result, HSYFMDBOperationFieldInfo *info) {
+                RACTuple *tuple = RACTuplePack(@(result), info);
+                [subscriber sendNext:tuple];
+                [subscriber sendCompleted];
+            }];
+            return [RACSignal empty];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_fmdb_insertDataQueueForOperationInfo:” class is %@", NSStringFromClass(self.class));
+        }];
+    }];
+}
+
+- (RACSignal *)hsy_fmdb_beginTransactionInsertDataQueueForOperationInfos:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)operationInfos
+{
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self hsy_fmdb_synchronouslyQueueInDatabase:^RACSignal *(FMDatabase *db) {
+            [self hsy_fmdb_beginTransactionInsertDataForOperationInfos:operationInfos completed:^(BOOL result) {
+                RACTuple *tuple = RACTuplePack(@(result));
+                [subscriber sendNext:tuple];
+                [subscriber sendCompleted];
+            }];
+            return [RACSignal empty];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_fmdb_beginTransactionInsertDataQueueForOperationInfos:” class is %@", NSStringFromClass(self.class));
+        }];
+    }];
 }
 
 #pragma mark - Query Data
@@ -177,6 +241,48 @@
     }];
 }
 
+- (RACSignal *)hsy_fmdb_queryAllDataQueueForOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
+{
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self hsy_fmdb_synchronouslyQueueInDatabase:^RACSignal *(FMDatabase *db) {
+            @strongify(self);
+            [self hsy_fmdb_queryAllDataForOperationInfo:operationInfo completed:^(NSMutableArray *result) {
+                RACTuple *tuple = RACTuplePack(result);
+                [subscriber sendNext:tuple];
+                [subscriber sendCompleted];
+            }];
+            return [RACSignal empty];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_fmdb_queryAllDataQueueForOperationInfo:” class is %@", NSStringFromClass(self.class));
+        }];
+    }];
+}
+
+- (RACSignal *)hsy_fmdb_queryDataForQueueOperationInfo:(HSYFMDBOperationFieldInfo *)operationInfo
+                                            whereField:(NSString *)field
+                                          whereContent:(NSString *)content
+{
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self hsy_fmdb_synchronouslyQueueInDatabase:^RACSignal *(FMDatabase *db) {
+            @strongify(self);
+            [self hsy_fmdb_queryDataForOperationInfo:operationInfo whereField:field whereContent:content completed:^(NSMutableArray *result) {
+                RACTuple *tuple = RACTuplePack(result);
+                [subscriber sendNext:tuple];
+                [subscriber sendCompleted];
+            }];
+            return [RACSignal empty];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_fmdb_queryDataForQueueOperationInfo:whereField:whereContent:” class is %@", NSStringFromClass(self.class));
+        }];
+    }];
+}
+
 #pragma mark - Delete Data
 
 - (void)hsy_fmdb_deleteRowDataForTableName:(NSString *)tableName
@@ -196,6 +302,28 @@
         if (completed) {
             completed([x boolValue]);
         }
+    }];
+}
+
+- (RACSignal *)hsy_fmdb_deleteRowDataQueueForTableName:(NSString *)tableName
+                                           deleteValue:(NSString *)value
+                                            whereField:(NSString *)field
+{
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self hsy_fmdb_synchronouslyQueueInDatabase:^RACSignal *(FMDatabase *db) {
+            @strongify(self);
+            [self hsy_fmdb_deleteRowDataForTableName:tableName deleteValue:value whereField:field completed:^(BOOL result) {
+                RACTuple *tuple = RACTuplePack(@(result));
+                [subscriber sendNext:tuple];
+                [subscriber sendCompleted];
+            }];
+            return [RACSignal empty];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_fmdb_deleteRowDataQueueForTableName:deleteValue:whereField:” class is %@", NSStringFromClass(self.class));
+        }];
     }];
 }
 
@@ -224,6 +352,30 @@
     }];
 }
 
+- (RACSignal *)hsy_fmdb_modifyDataQueueForTableName:(NSString *)tableName
+                                        updateField:(NSString *)updateField
+                                      updateContent:(NSString *)updateContent
+                                         whereField:(NSString *)whereField
+                                       whereContent:(NSString *)whereContent
+{
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self hsy_fmdb_synchronouslyQueueInDatabase:^RACSignal *(FMDatabase *db) {
+            @strongify(self);
+            [self hsy_fmdb_modifyDataForTableName:tableName updateField:updateField updateContent:updateContent whereField:whereField whereContent:whereContent completed:^(BOOL result) {
+                RACTuple *tuple = RACTuplePack(@(result));
+                [subscriber sendNext:tuple];
+                [subscriber sendCompleted];
+            }];
+            return [RACSignal empty];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_fmdb_modifyDataQueueForTableName:updateField:updateContent:whereField:whereContent” class is %@", NSStringFromClass(self.class));
+        }];
+    }];
+}
+
 #pragma mark - Clean Table
 
 - (void)hsy_fmdb_clearDataToTableName:(NSString *)tableName completed:(void(^)(BOOL result))completed
@@ -231,7 +383,7 @@
     @weakify(self);
     [self hsy_fmdb_operationForExecuteUpdateBlock:^id{
         @strongify(self);
-        BOOL result =[self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"DELETE FROM %@", tableName], nil];
+        BOOL result = [self.dateBase executeUpdateWithFormat:[NSString stringWithFormat:@"DELETE FROM %@", tableName], nil];
         if (!result) {
             NSLog(@"clear %@ failure", tableName);
         }
@@ -243,6 +395,26 @@
     }];
 }
 
+- (RACSignal *)hsy_fmdb_clearDataQueueToTableName:(NSString *)tableName
+{
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self hsy_fmdb_synchronouslyQueueInDatabase:^RACSignal *(FMDatabase *db) {
+            @strongify(self);
+            [self hsy_fmdb_clearDataToTableName:tableName completed:^(BOOL result) {
+                RACTuple *tuple = RACTuplePack(@(result));
+                [subscriber sendNext:tuple];
+                [subscriber sendCompleted];
+            }];
+            return [RACSignal empty];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_fmdb_clearDataQueueToTableName” class is %@", NSStringFromClass(self.class));
+        }];
+    }];
+}
+
 //***********************************************创建数据库**********************************************//
 
 #pragma mark - Create DataBase
@@ -250,6 +422,7 @@
 - (FMDatabase *)hsy_inits
 {
     NSString *databasePath = [self hsy_dataBasePath];
+    NSLog(@"databasePath = %@", databasePath);
     //创建数据库
     FMDatabase *db = [[FMDatabase alloc] initWithPath:databasePath];
     return db;

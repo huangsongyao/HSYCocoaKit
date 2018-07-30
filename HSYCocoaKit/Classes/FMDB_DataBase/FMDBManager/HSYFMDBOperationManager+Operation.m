@@ -9,11 +9,11 @@
 #import "HSYFMDBOperationManager+Operation.h"
 #import "HSYFMDBOperationFieldInfo.h"
 #import "HSYFMDBOperation.h"
+#import "ReactiveCocoa.h"
 
 @implementation HSYFMDBOperationManager (Operation)
 
 #pragma mark - Insert
-
 
 - (void)hsy_insertDataToTableName:(NSString *)tableName
                       fieldParams:(NSMutableArray <NSDictionary *>*)params
@@ -21,19 +21,18 @@
                         completed:(void(^)(BOOL result, HSYFMDBOperationFieldInfo *info))completed
 {
     HSYFMDBOperationFieldInfo *operation = [HSYFMDBOperationManager hsy_createDatabaseOperationInfoForTableName:tableName fieldParams:params insertDatas:datas];
-    [[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_insertDataForOperationInfo:operation completed:^(BOOL result, HSYFMDBOperationFieldInfo *info) {
+    [[[[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_insertDataQueueForOperationInfo:operation] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
         if (completed) {
-            completed(result, info);
+            completed([tuple.first boolValue], tuple.second);
         }
     }];
 }
 
-- (void)hsy_beginTransactionInsertDataForOperationInfos:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)operationInfos
-                                              completed:(void(^)(BOOL result))completed
+- (void)hsy_beginTransactionInsertDataForOperationInfos:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)operationInfos completed:(void(^)(BOOL result))completed
 {
-    [[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_beginTransactionInsertDataForOperationInfos:operationInfos completed:^(BOOL result) {
+    [[[[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_beginTransactionInsertDataQueueForOperationInfos:operationInfos] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
         if (completed) {
-            completed(result);
+            completed([tuple.first boolValue]);
         }
     }];
 }
@@ -45,9 +44,9 @@
                        whereField:(NSString *)field
                         completed:(void(^)(BOOL result))completed
 {
-    [[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_deleteRowDataForTableName:tableName deleteValue:value whereField:field completed:^(BOOL result) {
+    [[[[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_deleteRowDataQueueForTableName:tableName deleteValue:value whereField:field] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
         if (completed) {
-            completed(result);
+            completed([tuple.first boolValue]);
         }
     }];
 }
@@ -56,9 +55,9 @@
 
 - (void)hsy_cleanTableName:(NSString *)tableName completed:(void(^)(BOOL result))completed
 {
-    [[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_clearDataToTableName:tableName completed:^(BOOL result) {
+    [[[[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_clearDataQueueToTableName:tableName] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
         if (completed) {
-            completed(result);
+            completed([tuple.first boolValue]);
         }
     }];
 }
@@ -85,12 +84,13 @@
 }
 
 #pragma mark - Query
+
 - (void)hsy_queryAllDataForTableName:(NSString *)tableName fieldParams:(NSMutableArray<NSDictionary *> *)params hsy_completed:(void (^)(NSMutableArray *))completed
 {
     HSYFMDBOperationFieldInfo *operation = [HSYFMDBOperationManager hsy_createDatabaseOperationInfoForTableName:tableName fieldParams:params];
-    [[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_queryAllDataForOperationInfo:operation completed:^(NSMutableArray *result) {
+    [[[[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_queryAllDataQueueForOperationInfo:operation] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
         if (completed) {
-            completed(result);
+            completed(tuple.first);
         }
     }];
 }
@@ -102,9 +102,9 @@
                         completed:(void(^)(NSMutableArray *result))completed
 {
     HSYFMDBOperationFieldInfo *operation = [HSYFMDBOperationManager hsy_createDatabaseOperationInfoForTableName:tableName fieldParams:params];
-    [[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_queryDataForOperationInfo:operation whereField:whereField whereContent:whereContent completed:^(NSMutableArray *result) {
+    [[[[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_queryDataForQueueOperationInfo:operation whereField:whereField whereContent:whereContent] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
         if (completed) {
-            completed(result);
+            completed(tuple.first);
         }
     }];
 }
@@ -118,9 +118,9 @@
                       whereContent:(NSString *)whereContent
                          completed:(void(^)(BOOL result))completed
 {
-    [[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_modifyDataForTableName:tableName updateField:updateField updateContent:updateContent whereField:whereField whereContent:whereContent completed:^(BOOL result) {
+    [[[[HSYFMDBOperationManager shareInstance].fmdbOperation hsy_fmdb_modifyDataQueueForTableName:tableName updateField:updateField updateContent:updateContent whereField:whereField whereContent:whereContent] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
         if (completed) {
-            completed(result);
+            completed([tuple.first boolValue]);
         }
     }];
 }

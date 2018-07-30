@@ -37,7 +37,7 @@ static HSYFMDBOperationManager *fmdbOperationManager = nil;
     }
     //添加到数据库中
     _fmdbOperation = [[HSYFMDBOperation alloc] initWithDatabaseTables:tableFieldInfos
-                                                         databaseName:nil];
+                                                         databaseName:dbName];
 }
 
 /**

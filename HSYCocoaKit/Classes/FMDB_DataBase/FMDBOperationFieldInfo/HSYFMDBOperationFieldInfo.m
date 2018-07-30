@@ -19,13 +19,13 @@
     return self;
 }
 
-+ (NSMutableArray *)hsy_toOperationFields:(NSMutableArray *)fieldsInfo
++ (NSMutableArray<HSYFMDBOperationFields *> *)hsy_toOperationFields:(NSMutableArray *)fieldsInfos
 {
-    if (fieldsInfo.count == 0) {
+    if (fieldsInfos.count == 0) {
         return nil;
     }
-    NSMutableArray *newFields = [NSMutableArray arrayWithCapacity:fieldsInfo.count];
-    for (NSDictionary *dic in fieldsInfo) {
+    NSMutableArray *newFields = [NSMutableArray arrayWithCapacity:fieldsInfos.count];
+    for (NSDictionary *dic in fieldsInfos) {
         HSYFMDBOperationFields *info = [[HSYFMDBOperationFields alloc] initWithFieldName:dic.allKeys.firstObject fieldType:dic.allValues.firstObject];
         [newFields addObject:info];
     }

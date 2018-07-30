@@ -19,7 +19,13 @@
 - (instancetype)initWithFieldName:(NSString *)name
                         fieldType:(NSString *)type;
 
-+ (NSMutableArray *)hsy_toOperationFields:(NSMutableArray *)fieldsInfo;
+/**
+ 数据行集合快速创建方法
+
+ @param fieldsInfos 格式为：@[@[@{@"字段名1" : @"字段名1对应的类型"}, @{@"字段名2" : @"字段名2对应的类型"}, ...] copy]
+ @return NSMutableArray<HSYFMDBOperationFields *> *
+ */
++ (NSMutableArray<HSYFMDBOperationFields *> *)hsy_toOperationFields:(NSMutableArray *)fieldsInfos;
 
 @end
 

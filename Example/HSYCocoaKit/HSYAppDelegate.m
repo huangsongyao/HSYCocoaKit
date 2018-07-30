@@ -12,6 +12,7 @@
 #import "HSYNetWorkingManager.h"
 #import "JSONModel.h"
 #import "NSObject+JSONModelForRuntime.h"
+#import "HSYFMDBMacro.h"
 
 @interface dddMidel : JSONModel
 
@@ -50,6 +51,28 @@
 
 @end
 
+@interface HSYFMDBOperationManager (test)
+
+
+@end
+
+@implementation HSYFMDBOperationManager (test)
+
++ (NSMutableArray<NSDictionary *> *)hsy_testTableByFields
+{
+    NSMutableArray *params = [@[
+                                @{
+                                    @"User"      : FIELE_TYPE,
+                                    },
+                                @{
+                                    @"UserId"    : FIELE_TYPE,
+                                    },
+                                ] mutableCopy];
+    return params;
+}
+
+@end
+
 
 @implementation HSYAppDelegate
 
@@ -76,8 +99,48 @@
     self.window.rootViewController = launchScreenViewController;
     [self.window makeKeyAndVisible];
     
+    //test Database
     
-    //test
+    NSMutableArray *fields = [[HSYFMDBOperationManager hsy_createDatabaseOpeartionFieldInfoForFieldParams:[HSYFMDBOperationManager hsy_testTableByFields]] mutableCopy];
+    HSYFMDBOperationFieldInfo *testTable = [HSYFMDBOperationFieldInfo hsy_createDataBaseTableForName:@"testDatabaseTable" fields:fields];
+    NSMutableArray *infos = [@[
+                               testTable
+                               ] mutableCopy];
+    [[HSYFMDBOperationManager shareInstance] createDatabase:@"databases" tableFieldInfos:infos];
+    
+    
+//    [[HSYFMDBOperationManager shareInstance] hsy_insertDataToTableName:@"testDatabaseTable" fieldParams:[HSYFMDBOperationManager hsy_testTableByFields] insertDatas:[@[@"user", @"userId"] mutableCopy] completed:^(BOOL result, HSYFMDBOperationFieldInfo *info) {
+//        NSLog(@"tested success");
+//    }];
+    
+    
+//    HSYFMDBOperationFieldInfo *f1 = [HSYFMDBOperationFieldInfo hsy_createDataBaseTableForName:@"testDatabaseTable" fields:[HSYFMDBOperationFields hsy_toOperationFields:[HSYFMDBOperationManager hsy_testTableByFields]] insertDatas:[@[@"user1", @"userId1", ] mutableCopy]];
+//    HSYFMDBOperationFieldInfo *f2 = [HSYFMDBOperationFieldInfo hsy_createDataBaseTableForName:@"testDatabaseTable" fields:[HSYFMDBOperationFields hsy_toOperationFields:[HSYFMDBOperationManager hsy_testTableByFields]] insertDatas:[@[@"user2", @"userId2", ] mutableCopy]];
+//    [[HSYFMDBOperationManager shareInstance] hsy_beginTransactionInsertDataForOperationInfos:[@[f1, f2] mutableCopy] completed:^(BOOL result) {
+//        NSLog(@"");
+//    }];
+    
+//    [[HSYFMDBOperationManager shareInstance] hsy_deleteDataToTableName:@"testDatabaseTable" deleteValue:@"user1" whereField:@"User" completed:^(BOOL result) {
+//        NSLog(@"");
+//    }];
+    
+//    [[HSYFMDBOperationManager shareInstance] hsy_queryAllDataForTableName:@"testDatabaseTable" fieldParams:[HSYFMDBOperationManager hsy_testTableByFields] hsy_completed:^(NSMutableArray *result) {
+//        NSLog(@"");
+//    }];
+//    
+//    [[HSYFMDBOperationManager shareInstance] hsy_queryDataForTableName:@"testDatabaseTable" fieldParams:[HSYFMDBOperationManager hsy_testTableByFields] whereField:@"user" whereContent:@"user2" completed:^(NSMutableArray *result) {
+//        NSLog(@"");
+//    }];
+    
+//    [[HSYFMDBOperationManager shareInstance] hsy_modifyDataForTableName:@"testDatabaseTable" updateField:@"user" updateContent:@"测试一下" whereField:@"user" whereContent:@"user2" completed:^(BOOL result) {
+//        NSLog(@"");
+//    }];
+    
+//    [[HSYFMDBOperationManager shareInstance] hsy_cleanTableName:@"testDatabaseTable" completed:^(BOOL result) {
+//        NSLog(@"");
+//    }];
+    
+    //test JSONModel Rumtime
     tttttttMidel *tes = [[tttttttMidel alloc] init];
     [tes setJSONModelRuntimeNullValue];
     NSLog(@"");

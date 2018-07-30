@@ -30,8 +30,7 @@
  *  @param operationInfos 表单映射的集合
  *  @param completed      操作完成后的回调
  */
-- (void)hsy_beginTransactionInsertDataForOperationInfos:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)operationInfos
-                                              completed:(void(^)(BOOL result))completed;
+- (void)hsy_beginTransactionInsertDataForOperationInfos:(NSMutableArray <HSYFMDBOperationFieldInfo *>*)operationInfos completed:(void(^)(BOOL result))completed;
 
 /**
  *  删除数据

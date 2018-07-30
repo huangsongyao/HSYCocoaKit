@@ -41,7 +41,7 @@
     <2.使用范畴总的表字段映射
         //    //这是一个测试的数据表
         //    //如果需要添加其他表，只需要按照这个格式进行添加，并且在HSYFMDBOperationManager(Fields)中添加静态方法标识数据格式，格式请模仿+ (NSMutableArray <NSDictionary *>*)testTableByFields
-        //    NSMutableArray *fields = [[self.class hsy_createDatabaseOpeartionFieldInfoForFieldParams:[self.class hsy_testTableByFields]] mutableCopy];
+        //    NSMutableArray *fields = [[HSYFMDBOperationManager hsy_createDatabaseOpeartionFieldInfoForFieldParams:[HSYFMDBOperationManager hsy_testTableByFields]] mutableCopy];
         //    HSYFMDBOperationFieldInfo *testTable = [HSYFMDBOperationFieldInfo hsy_createDataBaseTableForName:FMDB_DATABASE_TEST_LIST_NAME fields:fields];
         //  NSMutableArray *infos = [@[
                                         testTable
