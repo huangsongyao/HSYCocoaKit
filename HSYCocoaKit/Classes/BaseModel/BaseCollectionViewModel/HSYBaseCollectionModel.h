@@ -33,19 +33,28 @@
              subscriberNext:(void(^)(id x))next;;
 
 /**
- 下拉刷新，必须实现“- hsy_rac_pullDownMethod”方法
+ 下拉刷新
  
+ @param network 下拉请求方法
  @param map 结果映射
- @param next 结果回调
  */
-- (void)hsy_refreshToPullDown:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next;
+- (void)hsy_refreshCollectionToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map;
 
 /**
- 上拉加载更多，必须实现“- hsy_rac_pullUpMethod”方法
+ 上拉加载更多
  
+ @param network 上拉请求方法
  @param map 结果映射
- @param next 结果回调
  */
-- (void)hsy_refreshToPullUp:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next;
+- (void)hsy_refreshCollectionToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map;
+
+/**
+ 上拉或者下拉方法
+ 
+ @param type kHSYReflesStatusType枚举
+ @param network 上拉或者下拉的请求方法
+ @param map 结果映射
+ */
+- (void)hsy_refreshCollection:(kHSYReflesStatusType)type requestNetwork:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map;
 
 @end

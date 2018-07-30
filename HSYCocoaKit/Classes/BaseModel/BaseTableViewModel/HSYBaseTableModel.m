@@ -20,22 +20,27 @@
     [self hsy_pullRefresh:kHSYReflesStatusTypePullUp updateNext:network toMap:map subscriberNext:next];
 }
 
-- (void)hsy_refreshToPullDown:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next
+- (void)hsy_refreshTableToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
 {
-    @weakify(self);
-    [self hsy_refreshToPullDown:^RACSignal *{
-        @strongify(self);
-        return [self hsy_rac_pullDownMethod];
-    } toMap:map subscriberNext:next];
+    [self hsy_refreshToPullDown:network toMap:map subscriberNext:^(id x) {
+        NSLog(@"refresh To Down Result : %@", x);
+    }];
 }
 
-- (void)hsy_refreshToPullUp:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next
+- (void)hsy_refreshTableToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
 {
-    @weakify(self);
-    [self hsy_refreshToPullUp:^RACSignal *{
-        @strongify(self);
-        return [self hsy_rac_pullUpMethod];
-    } toMap:map subscriberNext:next];
+    [self hsy_refreshToPullUp:network toMap:map subscriberNext:^(id x) {
+        NSLog(@"refresh To Down Result : %@", x);
+    }];
+}
+
+- (void)hsy_refreshTable:(kHSYReflesStatusType)type requestNetwork:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
+{
+    if (type == kHSYReflesStatusTypePullUp) {
+        [self hsy_refreshTableToPullUp:network toMap:map];
+    } else {
+        [self hsy_refreshTableToPullDown:network toMap:map];
+    }
 }
 
 @end
