@@ -32,5 +32,20 @@
                       toMap:(NSMutableArray *(^)(RACTuple *tuple))map
              subscriberNext:(void(^)(id x))next;
 
+/**
+ 下拉刷新，必须实现“- hsy_rac_pullDownMethod”方法
+
+ @param map 结果映射
+ @param next 结果回调
+ */
+- (void)hsy_refreshToPullDown:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next;
+
+/**
+ 上拉加载更多，必须实现“- hsy_rac_pullUpMethod”方法
+
+ @param map 结果映射
+ @param next 结果回调
+ */
+- (void)hsy_refreshToPullUp:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next;
 
 @end
