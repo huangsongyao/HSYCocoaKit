@@ -13,6 +13,7 @@
 #import "JSONModel.h"
 #import "NSObject+JSONModelForRuntime.h"
 #import "HSYFMDBMacro.h"
+#import "NSData+Encrypt.h"
 
 @interface dddMidel : JSONModel
 
@@ -139,6 +140,10 @@
 //    [[HSYFMDBOperationManager shareInstance] hsy_cleanTableName:@"testDatabaseTable" completed:^(BOOL result) {
 //        NSLog(@"");
 //    }];
+    
+    NSString *jia = [NSData AES128EncryptString:@"zy1047539560" forKey:@"TESTPASSWORD" offsetIv:@"AES00IVPARAMETER"];
+    NSString *jie = [NSData AES128DecryptString:jia forKey:@"TESTPASSWORD" offsetIv:@"AES00IVPARAMETER"];
+    NSLog(@"jia = %@, jie = %@", jia, jie);
     
     //test JSONModel Rumtime
     tttttttMidel *tes = [[tttttttMidel alloc] init];

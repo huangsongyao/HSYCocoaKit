@@ -47,7 +47,7 @@
 #define VERSION_GTR_IOS11                                               (IPHONE_SYSTEM_VERSION > 11.0 ? YES : NO)
 
 
-// statusBar高度
+//statusBar高度
 #define IPHONE_STATUS_BAR_HEIGHT                                        ([UIApplication statusBarHeight])
 
 
@@ -60,6 +60,10 @@
 
 //TabBar高度
 #define IPHONE_TABBAR_HEIGHT                                            ([HSYBaseLaunchScreenViewController iPhoneXDevice] ? 83.0f : 49.0f)
+
+
+//iPhoneX设备底部偏移量
+#define IPHONE_X_BOTTOM_HEIGHT                                          ([HSYBaseLaunchScreenViewController iPhoneXDevice] ? (83.0f - 49.0f) : 0.0f)
 
 
 //设备分辨率

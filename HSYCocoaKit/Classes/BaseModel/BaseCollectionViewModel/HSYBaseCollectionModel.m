@@ -37,9 +37,9 @@
 - (void)hsy_refreshCollection:(kHSYReflesStatusType)type requestNetwork:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
 {
     if (type == kHSYReflesStatusTypePullUp) {
-        [self hsy_refreshTableToPullUp:network toMap:map];
+        [self hsy_refreshCollectionToPullUp:network toMap:map];
     } else {
-        [self hsy_refreshTableToPullDown:network toMap:map];
+        [self hsy_refreshCollectionToPullDown:network toMap:map];
     }
 }
 
