@@ -8,6 +8,7 @@
 #import "NSData+Encrypt.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
+#import "PublicMacroFile.h"
 
 @implementation NSData (Encrypt)
 

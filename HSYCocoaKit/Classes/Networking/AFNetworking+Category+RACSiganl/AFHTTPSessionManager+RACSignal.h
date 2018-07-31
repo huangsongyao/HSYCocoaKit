@@ -10,6 +10,8 @@
 #import "ReactiveCocoa.h"
 #import "PublicMacroFile.h"
 
+FOUNDATION_EXPORT NSString *const kHSYCocoaKitAFHTTPSessionRequestAllHeaders;   //每次请求成功后通过通知手段返回请求头
+
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
     
     kHSYCocoaKitNetworkingRequestModel_default  = 0,    //默认占位

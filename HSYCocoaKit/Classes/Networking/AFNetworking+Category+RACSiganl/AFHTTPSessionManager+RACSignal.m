@@ -9,6 +9,8 @@
 #import "AFHTTPSessionManager+RACSignal.h"
 #import "HSYNetWorkingManager.h"
 
+NSString *const kHSYCocoaKitAFHTTPSessionRequestAllHeaders    = @"0awfjsfjaweofjw09fwefsd";
+
 @implementation AFHTTPSessionManager (RACSignal)
 
 #pragma mark - Get & Post Request
@@ -156,12 +158,12 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
 
 + (void)hsy_logRequestHeaders:(NSURLSessionDataTask *)task
 {
+    NSLog(@"\n request task : %@ \n", task);
     if ([task.response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         NSDictionary *allHeaders = response.allHeaderFields;
+        [[NSNotificationCenter defaultCenter] postNotificationName:kHSYCocoaKitAFHTTPSessionRequestAllHeaders object:allHeaders];
         NSLog(@"\n request headers are : %@ \n", allHeaders);
-    } else {
-        NSLog(@"\n request task : %@ \n", task);
     }
 }
 
