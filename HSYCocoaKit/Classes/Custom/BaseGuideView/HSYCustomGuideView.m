@@ -21,7 +21,7 @@
 
 @implementation HSYCustomGuideView
 
-- (instancetype)initWithGuides:(NSArray<NSString *> *)guides rootViewController:(UIViewController *)rootViewController
+- (instancetype)initWithGuides:(NSArray<UIImage *> *)guides rootViewController:(UIViewController *)rootViewController
 {
     UIWindow *window = [[UIWindow alloc] initWithFrame:[UIApplication keyWindows].bounds];
     window.windowLevel = 1000;
@@ -35,8 +35,7 @@
         self.backgroundColor = WHITE_COLOR;
         
         CGFloat x = 0.0f;
-        for (NSString *imageName in guides) {
-            UIImage *image = [UIImage imageNamed:imageName];
+        for (UIImage *image in guides) {
             UIImageView *imageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image, }];
             imageView.frame = CGRectMake(x, 0.0f, self.hsy_scrollView.width, self.hsy_scrollView.height);
             [self.hsy_scrollView addSubview:imageView];
@@ -95,7 +94,7 @@
 
 @implementation HSYCustomGuideView (Show)
 
-+ (HSYCustomGuideView *)hsy_appGuides:(NSArray<NSString *> *)guides
++ (HSYCustomGuideView *)hsy_appGuides:(NSArray<UIImage *> *)guides
                    rootViewController:(UIViewController *)rootViewController
                            scrollPage:(void(^)(HSYCustomGuideView *guide, NSInteger currentPage))page
                             completed:(void(^)(HSYCustomGuideView *guide, BOOL finished))completed
@@ -107,7 +106,7 @@
                                    completed:completed];
 }
 
-+ (HSYCustomGuideView *)hsy_appGuides:(NSArray<NSString *> *)guides
++ (HSYCustomGuideView *)hsy_appGuides:(NSArray<UIImage *> *)guides
                    rootViewController:(UIViewController *)rootViewController
                  immediatelyCompleted:(BOOL)immediately
                            scrollPage:(void (^)(HSYCustomGuideView *, NSInteger))page

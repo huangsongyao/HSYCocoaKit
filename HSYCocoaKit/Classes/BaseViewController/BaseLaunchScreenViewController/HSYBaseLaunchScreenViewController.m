@@ -68,7 +68,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    kHSYCocoaKitLaunchScreenSize launchScreenSize = (kHSYCocoaKitLaunchScreenSize)IPHONE_HEIGHT;
+    kHSYCocoaKitLaunchScreenSize launchScreenSize = [self.class iPhoneDeviceScreen];
     UIImage *image = [UIImage imageNamed:self.launchScreens[@(launchScreenSize)]];
     self.launchScreenImageView = [[UIImageView alloc] initWithImage:image highlightedImage:image];
     self.launchScreenImageView.frame = self.view.bounds;
@@ -89,6 +89,12 @@
 + (BOOL)iPhoneXDevice
 {
     return (IPHONE_HEIGHT == ((CGFloat)kHSYCocoaKitLaunchScreenSize_5_8_Inch));
+}
+
++ (kHSYCocoaKitLaunchScreenSize)iPhoneDeviceScreen
+{
+    kHSYCocoaKitLaunchScreenSize launchScreenSize = (kHSYCocoaKitLaunchScreenSize)IPHONE_HEIGHT;
+    return launchScreenSize;
 }
 
 - (void)didReceiveMemoryWarning {

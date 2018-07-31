@@ -18,7 +18,7 @@
 + (void)test
 {
     HSYGuideViewController *vc = [[HSYGuideViewController alloc] init];
-    HSYCustomGuideView *view = [HSYCustomGuideView hsy_appGuides:@[@"i4_sp", @"i5_sp", @"i6_sp", @"iX_sp", ] rootViewController:vc scrollPage:^(HSYCustomGuideView *guide, NSInteger currentPage) {
+    HSYCustomGuideView *view = [HSYCustomGuideView hsy_appGuides:@[[UIImage imageNamed:@"i4_sp"], [UIImage imageNamed:@"i5_sp"], [UIImage imageNamed:@"i6_sp"], [UIImage imageNamed:@"iX_sp"], ] rootViewController:vc scrollPage:^(HSYCustomGuideView *guide, NSInteger currentPage) {
         NSLog(@"page = %@", @(currentPage));
     } completed:^(HSYCustomGuideView *guide, BOOL finished) {
         

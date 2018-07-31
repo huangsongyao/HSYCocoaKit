@@ -43,7 +43,7 @@
  @param completed 滚动结束后移除时的监听回调
  @return HSYCustomGuideView
  */
-+ (HSYCustomGuideView *)hsy_appGuides:(NSArray<NSString *> *)guides
++ (HSYCustomGuideView *)hsy_appGuides:(NSArray<UIImage *> *)guides
                    rootViewController:(UIViewController *)rootViewController
                            scrollPage:(void(^)(HSYCustomGuideView *guide, NSInteger currentPage))page
                             completed:(void(^)(HSYCustomGuideView *guide, BOOL finished))completed;
@@ -58,7 +58,7 @@
  @param completed 滚动结束后移除时的监听回调
  @return HSYCustomGuideView
  */
-+ (HSYCustomGuideView *)hsy_appGuides:(NSArray<NSString *> *)guides
++ (HSYCustomGuideView *)hsy_appGuides:(NSArray<UIImage *> *)guides
                    rootViewController:(UIViewController *)rootViewController
                  immediatelyCompleted:(BOOL)immediately
                            scrollPage:(void(^)(HSYCustomGuideView *guide, NSInteger currentPage))page

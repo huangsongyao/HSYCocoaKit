@@ -60,4 +60,11 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitLaunchScreenSize) {
  */
 + (BOOL)iPhoneXDevice;
 
+/**
+ 返回当前设备的尺寸枚举类型
+
+ @return 当前设备的尺寸枚举类型
+ */
++ (kHSYCocoaKitLaunchScreenSize)iPhoneDeviceScreen;
+
 @end
