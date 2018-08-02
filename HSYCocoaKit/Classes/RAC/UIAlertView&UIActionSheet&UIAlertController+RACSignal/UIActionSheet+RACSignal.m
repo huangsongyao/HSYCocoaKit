@@ -24,12 +24,13 @@
     }
     [sheet showInView:view];
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        
         [[[sheet rac_buttonClickedSignal] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
             [subscriber sendNext:x];
             [subscriber sendCompleted];
         }];
-        return nil;
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_rac_showSheetInView:withTitle:delegate:cancelButtonTitle:destructiveButtonTitle:otherButtonTitles:” file is “UIActionSheet+RACSignal.h”");
+        }];
     }];
 }
 

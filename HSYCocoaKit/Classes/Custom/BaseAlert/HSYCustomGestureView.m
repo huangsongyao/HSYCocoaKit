@@ -38,7 +38,7 @@ NSInteger const kHSYCocoaKitSingleGestureDefaultTags        = 756;
             }
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release method “- hsy_keyboardObserver”");
+            NSLog(@"release methods “- hsy_keyboardObserver:” class is %@", NSStringFromClass(self.class));
         }];
     }];
 }
@@ -62,7 +62,7 @@ NSInteger const kHSYCocoaKitSingleGestureDefaultTags        = 756;
             }
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release method “- hsy_addSingleGesture”");
+            NSLog(@"release methods “- hsy_addSingleGesture:” class is %@", NSStringFromClass(self.class));
         }];
     }];
 }
@@ -84,7 +84,7 @@ NSInteger const kHSYCocoaKitSingleGestureDefaultTags        = 756;
             }
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release method “- hsy_addDoubleGesture”");
+            NSLog(@"release methods “- hsy_addDoubleGesture:” class is %@", NSStringFromClass(self.class));
         }];
     }];
 }

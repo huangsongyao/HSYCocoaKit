@@ -14,21 +14,17 @@
 {
     @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        
         @strongify(self);
         [self rac_traverseDictionaryForSubscribeNext:^(id key, id value) {
-            
             [subscriber sendNext:@{
                                    key : value,
                                    }];
-            
         } traverseCompleted:^{
-            
             [subscriber sendCompleted];
-            
         }];
-        
-        return nil;
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- rac_traverseDictionary” file is “NSDictionary+RACSignal.h”");
+        }];
     }];
 }
 

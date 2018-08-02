@@ -91,7 +91,9 @@
             [UIViewController hsy_hudWithMessage:HSYLOCALIZED(@"不支持或无法调用系统设备！")];
             NSLog(@"imagePickerController is %@, don't call system device", imagePickerController);
         }
-        return [RACDisposable disposableWithBlock:^{}];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- rac_openSystemResourcesForDeviceType:canAllowsEditing:” file is “UIViewController+Device.h”");
+        }];
     }];
 }
 
@@ -105,7 +107,7 @@
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release method “- hsy_rac_openEditingSystemPhoto”");
+            NSLog(@"release methods “- hsy_rac_openEditingSystemPhoto” file is “UIViewController+Device.h”");
         }];
     }];
 }
@@ -120,7 +122,7 @@
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release method “- hsy_rac_openSystemPhoto”");
+            NSLog(@"release methods “- hsy_rac_openSystemPhoto” file is “UIViewController+Device.h”");
         }];
     }];
 }
@@ -135,7 +137,7 @@
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release method “- hsy_rac_openEditingSystemCamera”");
+            NSLog(@"release methods “- hsy_rac_openEditingSystemCamera” file is “UIViewController+Device.h”");
         }];
     }];
 }
@@ -150,7 +152,7 @@
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release method “- hsy_rac_openSystemCamera”");
+            NSLog(@"release methods “- hsy_rac_openSystemCamera” file is “UIViewController+Device.h”");
         }];
     }];
 }
@@ -165,7 +167,7 @@
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release method “- hsy_rac_openSystemCamera”");
+            NSLog(@"release methods “- hsy_rac_openEditingSystemVideos” file is “UIViewController+Device.h”");
         }];
     }];
 }
@@ -180,7 +182,7 @@
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release method “- hsy_rac_openSystemCamera”");
+            NSLog(@"release methods “- hsy_rac_openSystemVideos” file is “UIViewController+Device.h”");
         }];
     }];
 }

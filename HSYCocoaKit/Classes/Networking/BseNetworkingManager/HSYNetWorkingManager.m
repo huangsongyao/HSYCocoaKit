@@ -113,7 +113,9 @@ static HSYNetWorkingManager *networkingManager;
             }
         }];
         [networkStatusManager startMonitoring];
-        return [RACDisposable disposableWithBlock:^{}];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_networking_3x_Reachability” class is %@", NSStringFromClass(self.class));
+        }];
     }];
 }
 

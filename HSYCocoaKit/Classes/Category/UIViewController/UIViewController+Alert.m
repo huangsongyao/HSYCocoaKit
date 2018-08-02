@@ -33,7 +33,7 @@
         }];
 #endif
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release method “- hsy_rac_showAlertView:message:alertActionTitles:”");
+            NSLog(@"release method “- hsy_rac_showAlertView:message:alertActionTitles:” file is “UIViewController+Alert.h”");
         }];
     }];
 }
@@ -58,7 +58,7 @@
         }];
 #endif
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release method “- hsy_rac_showSheetView:message:sheetActionTitles:”");
+            NSLog(@"release method “- hsy_rac_showSheetView:message:sheetActionTitles:” file is “UIViewController+Alert.h”");
         }];
     }];
 }

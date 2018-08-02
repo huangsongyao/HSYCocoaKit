@@ -85,7 +85,7 @@ static NSString *const kHSYUIKeyboardBoundsUserInfoKey = @"UIKeyboardBoundsUserI
             [subscriber sendNext:notification];
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release methods “+ rac_kvoToKeyboardWillShowByObject”");
+            NSLog(@"release methods “- rac_kvoToKeyboardWillShowByObject” file is “UIViewController+Keyboard.h”");
         }];
     }];
 }
@@ -98,7 +98,7 @@ static NSString *const kHSYUIKeyboardBoundsUserInfoKey = @"UIKeyboardBoundsUserI
             [subscriber sendNext:notification];
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release methods “+ rac_kvoToKeyboardDidShowByObject”");
+            NSLog(@"release methods “- rac_kvoToKeyboardDidShowByObject:” file is “UIViewController+Keyboard.h”");
         }];
     }];
 }
@@ -111,7 +111,7 @@ static NSString *const kHSYUIKeyboardBoundsUserInfoKey = @"UIKeyboardBoundsUserI
             [subscriber sendNext:notification];
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release methods “+ rac_kvoToKeyboardDidHideByObject”");
+            NSLog(@"release methods “- rac_kvoToKeyboardDidHideByObject:” file is “UIViewController+Keyboard.h”");
         }];
     }];
 }
@@ -124,7 +124,7 @@ static NSString *const kHSYUIKeyboardBoundsUserInfoKey = @"UIKeyboardBoundsUserI
              [subscriber sendNext:notification];
          }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release methods “+ rac_kvoToKeyboardDidChangeByObject”");
+            NSLog(@"release methods “- rac_kvoToKeyboardDidChangeByObject:” file is “UIViewController+Keyboard.h”");
         }];
     }];
 }
@@ -137,7 +137,7 @@ static NSString *const kHSYUIKeyboardBoundsUserInfoKey = @"UIKeyboardBoundsUserI
              [subscriber sendNext:notification];
          }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release methods “+ rac_kvoToKeyboardWillChangedByObject”");
+            NSLog(@"release methods “- rac_kvoToKeyboardWillChangedByObject:” file is “UIViewController+Keyboard.h”");
         }];
     }];
 }

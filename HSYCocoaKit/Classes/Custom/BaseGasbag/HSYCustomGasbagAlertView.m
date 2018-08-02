@@ -209,7 +209,7 @@
                 }
             }];
             return [RACDisposable disposableWithBlock:^{
-                NSLog(@"“- hsy_removeGasbag”” methods completed");
+                NSLog(@"release methods “- hsy_removeGasbag” class is %@", NSStringFromClass(self.class));
             }];
         }];
     }];

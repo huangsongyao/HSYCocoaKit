@@ -59,7 +59,9 @@
                 [subscriber sendCompleted];
             }
         }];
-        return [RACDisposable disposableWithBlock:^{}];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_nativeRunJavaScriptFunction:” class is %@", NSStringFromClass(self.class));
+        }];
     }];
 }
 

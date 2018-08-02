@@ -48,6 +48,7 @@
             }];
             [downloadTask resume];
             return [RACDisposable disposableWithBlock:^{
+                NSLog(@"release methods “- hsy_downloadFileRequestUrl:fileCachePath:setHTTPMethod:completionProgress:cancelByResumeData:” file is “AFURLSessionManager+RACSignal.h”");
                 [downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
                     if (cancel) {
                         cancel(resumeData);
@@ -103,6 +104,7 @@
             }];
             [uploadTask resume];
             return [RACDisposable disposableWithBlock:^{
+                NSLog(@"release methods “- hsy_uploadFileRequestUrl:filePath:completionProgress:” file is “AFURLSessionManager+RACSignal.h”");
                 [uploadTask cancel];
             }];
         }];

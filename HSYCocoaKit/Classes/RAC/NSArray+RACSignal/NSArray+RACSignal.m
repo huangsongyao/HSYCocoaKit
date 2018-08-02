@@ -29,7 +29,7 @@
             }];
         }
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"“- rac_traverseArray”方法信号释放");
+            NSLog(@"release methods “- rac_traverseArray” file is “NSArray+RACSignal.h”");
         }];
     }];
 }
@@ -72,7 +72,7 @@
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"“- rac_filterUntilCompleted:toMap:”方法信号释放");
+            NSLog(@"release methods “- rac_filterUntilCompleted:toMap:” file is “NSArray+RACSignal.h”");
         }];
     }];
 }

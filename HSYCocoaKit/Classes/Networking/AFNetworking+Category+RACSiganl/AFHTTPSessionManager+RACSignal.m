@@ -70,7 +70,9 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
         } error:^(NSError *error) {
             [subscriber sendError:error];
         }];
-        return [RACDisposable disposableWithBlock:^{}];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_rac_request:setHeaders:url:parameters:” file is “AFHTTPSessionManager+RACSignal.h”");
+        }];
     }];
 }
 
@@ -108,6 +110,7 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
                 [subscriber sendError:error];
             }];
             return [RACDisposable disposableWithBlock:^{
+                NSLog(@"release methods “- hsy_getModel_3x_Request:parameters:taskProgress:” file is “AFHTTPSessionManager+RACSignal.h”");
                 [getTask cancel];
             }];
         }];
@@ -141,6 +144,7 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
                 [subscriber sendError:error];
             }];
             return [RACDisposable disposableWithBlock:^{
+                NSLog(@"release methods “- hsy_postModel_3x_Request:parameters:taskProgress:” file is “AFHTTPSessionManager+RACSignal.h”");
                 [postTask cancel];
             }];
         }];

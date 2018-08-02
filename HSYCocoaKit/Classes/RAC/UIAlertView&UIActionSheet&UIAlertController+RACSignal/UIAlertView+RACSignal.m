@@ -28,7 +28,9 @@
             [subscriber sendNext:x];
             [subscriber sendCompleted];
         }];
-        return nil;
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_rac_showAlertViewWithTitle:message:delegate:cancelButtonTitle:otherButtonTitles:” file is “UIAlertView+RACSignal.h”");
+        }];
     }];
 }
 

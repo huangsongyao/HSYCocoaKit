@@ -258,7 +258,9 @@ static CGFloat imgBottom = 11.0f;
         } subscriberNext:^(id x) {
             [subscriber sendCompleted];
         }];
-        return [RACDisposable disposableWithBlock:^{}];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_rac_pullDownMethod” class is %@", NSStringFromClass(self.class));
+        }];
     }];
 }
 
@@ -277,7 +279,9 @@ static CGFloat imgBottom = 11.0f;
         } subscriberNext:^(id x) {
             [subscriber sendCompleted];
         }];
-        return [RACDisposable disposableWithBlock:^{}];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_rac_pullUpMethod” class is %@", NSStringFromClass(self.class));
+        }];
     }];
 }
 
