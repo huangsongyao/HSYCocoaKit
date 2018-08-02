@@ -13,7 +13,7 @@
 /**
  根据文件名+后缀类型的key-value进行文件索引，调用“- finderFileFromName:fileType:”方法
 
- @param resources key-value的集合，格式为:@[@{@"文件A的名称" : @"文件A的后缀类型"}, @{@"文件B的名称" : @"文件B的后缀类型"}, ...]
+ @param resources key-value的集合，格式为:@[@{@"文件A的后缀类型" : @"文件A的名称"}, @{@"文件B的后缀类型" : @"文件B的名称"}, ...]
  @return 文件路径，如果不存在，则返回空字符串
  */
 + (NSString *)finderFileFromResources:(NSArray<NSDictionary *> *)resources;

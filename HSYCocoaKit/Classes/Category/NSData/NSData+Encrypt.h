@@ -59,4 +59,24 @@
  */
 + (NSString *)AES128DecryptString:(NSString *)string forKey:(NSString *)key offsetIv:(NSString *)iv;
 
+#pragma mark - HMAC-SHA1
+
+/**
+ HMAC_SHA1加密，结果“=不进行=”base64编码
+ 
+ @param string 加密消息體
+ @param key 密匙
+ @return HMAC_SHA1加密結果的字符串
+ */
++ (NSString *)HMAC_SHA1EncryptString:(NSString *)string forKey:(NSString *)key;
+
+/**
+ HMAC_SHA1加密，结果“=进行=”base64编码
+ 
+ @param string 加密消息體
+ @param key 密匙
+ @return HMAC_SHA1加密結果的字符串并执行了base64编码后的结果
+ */
++ (NSString *)HMAC_SHA1Base64EncryptString:(NSString *)string forKey:(NSString *)key;
+
 @end

@@ -8,6 +8,7 @@
 #import "NSData+Encrypt.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
+#import <CommonCrypto/CommonHMAC.h>
 #import "PublicMacroFile.h"
 
 @implementation NSData (Encrypt)
@@ -103,6 +104,40 @@
     NSString *aes128DecryptString = [[NSString alloc] initWithData:aes128DecryptData encoding:NSUTF8StringEncoding];
     NSLog(@"\n AES-128-CBC Decrypt : %@ \n", aes128DecryptString);
     return aes128DecryptString;
+}
+
+#pragma mark - HMAC-SHA1
+
+#pragma mark - HMAC-SHA1
+
++ (NSString *)HMAC_SHA1Base64EncryptString:(NSString *)string forKey:(NSString *)key
+{
+    const char *cString = [string cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *cKey = [key cStringUsingEncoding:NSASCIIStringEncoding];
+    unsigned char cHMAC[CC_SHA1_DIGEST_LENGTH];
+    
+    CCHmac(kCCHmacAlgSHA1, cKey, strlen(cKey), cString, strlen(cString), cHMAC);
+    NSData *SHA1EncryptData = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
+    
+    NSString *SHA1EncryptString = [SHA1EncryptData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSLog(@"\n SHA1EncryptString is %@ \n", SHA1EncryptString);
+    return SHA1EncryptString;
+}
+
++ (NSString *)HMAC_SHA1EncryptString:(NSString *)string forKey:(NSString *)key
+{
+    const char *cString = [string cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *cKey = [key cStringUsingEncoding:NSASCIIStringEncoding];
+    unsigned char cHMAC[CC_SHA1_DIGEST_LENGTH];
+    
+    CCHmac(kCCHmacAlgSHA1, cKey, strlen(cKey), cString, strlen(cString), cHMAC);
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH];
+    for (NSInteger i = 0; i < CC_SHA1_DIGEST_LENGTH; i ++) {
+        [output appendFormat:@"%02x", cHMAC[i]];
+    }
+    NSString *SHA1EncryptString = output;
+    NSLog(@"\n SHA1EncryptString is %@ \n", SHA1EncryptString);
+    return SHA1EncryptString;
 }
 
 @end
