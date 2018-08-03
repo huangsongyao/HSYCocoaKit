@@ -23,6 +23,8 @@ typedef NS_ENUM(NSUInteger, kHSYReflesStatusType) {
 @property (nonatomic, strong) id hsy_pullDownStateCode;                     //下拉刷新的状态
 @property (nonatomic, strong) id hsy_pullUpStateCode;                       //上拉刷新的状态
 
+@property (nonatomic, assign) BOOL hsy_showPromptContent;                   //额外提供一个标识位，用于处理是否支持直接提示默认的提示语
+
 /**
  *  设置每次记载的条数
  *

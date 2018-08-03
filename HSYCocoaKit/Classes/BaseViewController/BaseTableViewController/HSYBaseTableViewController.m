@@ -70,7 +70,11 @@
             if (signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess && [signal.subscribeContents.firstObject isKindOfClass:[HSYHUDModel class]]) {
                 HSYHUDModel *hudModel = signal.subscribeContents.firstObject;
                 if (hudModel.pullUpSize < self.hsy_viewModel.size) {
-                    [self hsy_closePullUp:self.tableView];
+                    if (self.pullUpStatus == kHSYCocoaKitRefreshForPullUpCompletedStatusClose) {
+                        [self hsy_closePullUp:self.tableView];
+                    } else {
+                        [self hsy_notMorePullUp:self.tableView];
+                    }
                 }
             }
             //下拉刷新成功//上拉加载更多成功

@@ -55,6 +55,22 @@
  */
 - (void)hsy_stop;
 
+/**
+ 加载中会调用本方法
+
+ @param isPullDown YES表示下拉，NO表示上拉
+ */
+- (void)hsy_loadingRefresh:(BOOL)isPullDown;
+
+/**
+ 显示无更多数据时的上拉ui
+ */
+- (void)hsy_notMore;
+
+/**
+ 重置可以加载更多数据的上拉ui
+ */
+- (void)hsy_hasMore;
 
 @end
 

@@ -54,9 +54,6 @@
     }
     @weakify(self);
     [self hsy_requestNetwork:network toMap:map subscriberNext:^BOOL(NSMutableArray *result) {
-        if (result.count == 0) {
-            return NO;
-        }
         @strongify(self);
         //加载成功后动态更新数据源信息，并设置当前的statusCode状态
         if (status == kHSYReflesStatusTypePullDown) {
@@ -67,11 +64,13 @@
             for (id obj in result) {
                 [self.hsy_datas addObject:obj];
             }
-            HSYHUDModel *hunModel = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullUpSuccess];
-            hunModel.pullUpSize = result.count;
-            self.hsy_pullUpStateCode = hunModel;
+            HSYHUDModel *hudModel = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullUpSuccess];
+            if (!self.hsy_showPromptContent) {
+                hudModel.hsy_showPromptContent = self.hsy_showPromptContent;
+            }
+            hudModel.pullUpSize = result.count;
+            self.hsy_pullUpStateCode = hudModel;
         }
-        
         if (next) {
             next(result);
         }

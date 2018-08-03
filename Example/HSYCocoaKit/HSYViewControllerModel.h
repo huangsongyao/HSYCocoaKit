@@ -35,7 +35,7 @@
 
 @end
 
-@interface HSYViewControllerModel : HSYBaseRefleshModel
+@interface HSYViewControllerModel : HSYBaseTableModel
 
 @property (nonatomic, strong, readonly) TestJ_Model *j_model;
 

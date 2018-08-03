@@ -113,7 +113,7 @@
     [super viewDidLoad];
     
     
-    self.tableView.hidden = YES;
+//    self.tableView.hidden = YES;
     self.tableHeaderView = [self header];
     self.tableView.tableHeaderView = self.tableHeaderView;
     
@@ -171,8 +171,19 @@
     }
     _testBanners = [banners mutableCopy];
     
-    HSYCustomBannerView *banner = [[HSYCustomBannerView alloc] initWithFrame:CGRectMake(30, self.customNavigationBar.bottom+100, self.view.width - 60, 300) pages:self.testBanners delegate:self dataSource:self];
-    [self.view addSubview:banner];
+    self.hsy_viewModel.hsy_showPromptContent = YES;
+    self.pullUpStatus = kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore;
+//    [[self.hsy_viewModel.subject deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitRACSubscribeNotification *x) {
+//        if (x.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
+//            HSYHUDModel *hudModel = x.subscribeContents.firstObject;
+//            if (hudModel.pullUpSize == 0) {
+//                [self hsy_notMorePullUp:self.tableView];
+//            }
+//        }
+//    }];
+    
+//    HSYCustomBannerView *banner = [[HSYCustomBannerView alloc] initWithFrame:CGRectMake(30, self.customNavigationBar.bottom+100, self.view.width - 60, 300) pages:self.testBanners delegate:self dataSource:self];
+//    [self.view addSubview:banner];
     // Do any additional setup after loading the view.
 }
 

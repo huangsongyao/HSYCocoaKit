@@ -106,17 +106,24 @@
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
-        [self hsy_pullRefresh:kHSYReflesStatusTypePullUp updateNext:^RACSignal *{
+        [self hsy_refreshToPullUp:^RACSignal *{
             return [[HSYNetWorkingManager shareInstance] test:urlStr];
         } toMap:^NSMutableArray *(RACTuple *tuple) {
-            NSMutableArray *array = [[NSMutableArray alloc] init];
-            for (NSInteger i = 0; i < 100; i ++) {
-                [array addObject:[NSString stringWithFormat:@"%d", arc4random()%100]];
-            }
-            return array;
-        } subscriberNext:^(id x) {
+            return [@[] mutableCopy];
+        } subscriberNext:^(NSMutableArray *x) {
             [subscriber sendCompleted];
         }];
+//        [self hsy_pullRefresh:kHSYReflesStatusTypePullUp updateNext:^RACSignal *{
+//            return [[HSYNetWorkingManager shareInstance] test:urlStr];
+//        } toMap:^NSMutableArray *(RACTuple *tuple) {
+//            NSMutableArray *array = [[NSMutableArray alloc] init];
+////            for (NSInteger i = 0; i < 100; i ++) {
+////                [array addObject:[NSString stringWithFormat:@"%d", arc4random()%100]];
+////            }
+//            return array;
+//        } subscriberNext:^(id x) {
+//            [subscriber sendCompleted];
+//        }];
         return [RACDisposable disposableWithBlock:^{}];
     }];
 }

@@ -12,7 +12,16 @@
 
 #define HUD_SUCCESS_TEXT                    @"加载成功"
 #define HUD_FAILURE                         @"加载失败"
-#define HUD_WAIT_TEXT                       @"加载中..."
+
+#define HUD_REQUEST_FAILURE                 @"请求失败！"
+#define HUD_REQUEST_SUCCESS                 @"请求成功！"
+
+#define HUD_SAVE_FAILURE                    @"保存失败！"
+#define HUD_SAVE_SUCCESS                    @"保存成功！"
+
+#define HUD_LOADING_DATA                    @"数据更新中..."
+#define HUD_LOADING_FILE                    @"文件保存中..."
+
 #define HUD_PULL_DOWN_SUCCESS_TEXT          @"已为您更新了信息！"
 #define HUD_PULL_UP_SUCCESS_TEXT            @"加载下一页的数据成功！"         
 

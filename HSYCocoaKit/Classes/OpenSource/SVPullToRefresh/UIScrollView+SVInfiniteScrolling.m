@@ -11,6 +11,7 @@
 #import "UIScrollView+SVInfiniteScrolling.h"
 #import "UIView+Frame.h"
 #import "HSYCustomRefreshView.h"
+#import "ReactiveCocoa.h"
 
 @interface SVInfiniteScrollingView ()
 
@@ -69,6 +70,32 @@ UIEdgeInsets scrollViewOriginalContentInsets;
     [self didChangeValueForKey:@"UIScrollViewInfiniteScrollingView"];
 }
 
+#pragma mark - Close && NotMore
+
+- (void)hsy_reloadDataInfiniteScrolling:(BOOL)shows resetInfiniteScrollingViewHeight:(void(^)(void))reset
+{
+    if(!shows) {
+        if (self.infiniteScrollingView.isObserving) {
+            [self removeObserver:self.infiniteScrollingView forKeyPath:@"contentOffset"];
+            [self removeObserver:self.infiniteScrollingView forKeyPath:@"contentSize"];
+            self.infiniteScrollingView.isObserving = NO;
+            if (reset) {
+                reset();
+            }
+        }
+    } else {
+        if (!self.infiniteScrollingView.isObserving) {
+            [self addObserver:self.infiniteScrollingView forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+            [self addObserver:self.infiniteScrollingView forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+            self.infiniteScrollingView.isObserving = YES;
+            
+            [self.infiniteScrollingView setScrollViewContentInsetForInfiniteScrolling];
+            [self.infiniteScrollingView setNeedsLayout];
+            self.infiniteScrollingView.frame = CGRectMake(0, self.contentSize.height, self.infiniteScrollingView.bounds.size.width, SVInfiniteScrollingViewHeight);
+        }
+    }
+}
+
 - (SVInfiniteScrollingView *)infiniteScrollingView
 {
     return objc_getAssociatedObject(self, &UIScrollViewInfiniteScrollingView);
@@ -77,28 +104,13 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 - (void)setShowsInfiniteScrolling:(BOOL)showsInfiniteScrolling
 {
     self.infiniteScrollingView.hidden = !showsInfiniteScrolling;
-    
-    if(!showsInfiniteScrolling) {
-      if (self.infiniteScrollingView.isObserving) {
-          [self removeObserver:self.infiniteScrollingView forKeyPath:@"contentOffset"];
-          [self removeObserver:self.infiniteScrollingView forKeyPath:@"contentSize"];
-          [self.infiniteScrollingView resetScrollViewContentInset];
-          self.infiniteScrollingView.isObserving = NO;
-        
-          //后来添加的，当不再显示上拉时，把上拉的view高度重置为0，这样界面上就不会在底部很奇怪的空出一块东西出来
-          self.infiniteScrollingView.height = 0;
-      }
-    } else {
-      if (!self.infiniteScrollingView.isObserving) {
-          [self addObserver:self.infiniteScrollingView forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
-          [self addObserver:self.infiniteScrollingView forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-          [self.infiniteScrollingView setScrollViewContentInsetForInfiniteScrolling];
-          self.infiniteScrollingView.isObserving = YES;
-          
-          [self.infiniteScrollingView setNeedsLayout];
-          self.infiniteScrollingView.frame = CGRectMake(0, self.contentSize.height, self.infiniteScrollingView.bounds.size.width, SVInfiniteScrollingViewHeight);
-      }
-    }
+    @weakify(self);
+    [self hsy_reloadDataInfiniteScrolling:showsInfiniteScrolling resetInfiniteScrollingViewHeight:^{
+        //后来添加的，当不再显示上拉时，把上拉的view高度重置为0，这样界面上就不会在底部很奇怪的空出一块东西出来
+        @strongify(self);
+        [self.infiniteScrollingView resetScrollViewContentInset];
+        self.infiniteScrollingView.height = 0;
+    }];
 }
 
 - (BOOL)showsInfiniteScrolling
@@ -109,12 +121,8 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 - (void)setShowsNoMoreDataView:(BOOL)showsNoMoreDataView
 {
     self.infiniteScrollingView.hasMoreData = !showsNoMoreDataView;
-    if (showsNoMoreDataView) {
-        self.infiniteScrollingView.hidden = NO;
-        [self.infiniteScrollingView setScrollViewContentInsetForInfiniteScrolling];
-        [self.infiniteScrollingView setNeedsLayout];
-        self.infiniteScrollingView.frame = CGRectMake(0, self.contentSize.height, self.infiniteScrollingView.bounds.size.width, SVInfiniteScrollingViewHeight);
-    }
+    [self hsy_reloadDataInfiniteScrolling:!showsNoMoreDataView resetInfiniteScrollingViewHeight:^{
+    }];
 }
 
 - (BOOL)showsNoMoreDataView
@@ -159,7 +167,12 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 - (void)setHasMoreData:(BOOL)hasMoreData
 {
     _hasMoreData = hasMoreData;
-    self.loadingView.hidden = !hasMoreData;
+    self.loadingView.hidden = NO;
+    if (!self.hasMoreData) {
+        [self.loadingView hsy_notMore];
+    } else {
+        [self.loadingView hsy_hasMore];
+    }
 }
 
 #pragma mark - Scroll View
@@ -250,6 +263,11 @@ UIEdgeInsets scrollViewOriginalContentInsets;
     switch (newState) {
         case SVInfiniteScrollingStateStopped: {
             [self.loadingView hsy_stop];
+            if (!self.hasMoreData) {
+                [self.loadingView hsy_notMore];
+            } else {
+                [self.loadingView hsy_hasMore];
+            }
         }
             break;
                 
@@ -258,7 +276,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
                 
         case SVInfiniteScrollingStateLoading: {
             if (self.scrollView.contentOffset.y > 0) {
-                [self.loadingView hsy_start];
+                [self.loadingView hsy_loadingRefresh:YES];
             }
         }
             break;

@@ -279,7 +279,7 @@ static char UIScrollViewPullToRefreshView;
             break;
             
         case SVPullToRefreshStateLoading: {
-            [self.loadingView hsy_start];
+            [self.loadingView hsy_loadingRefresh:YES];
             [self setScrollViewContentInsetForLoading];
             if(previousState == SVPullToRefreshStateTriggered && _pullToRefreshActionHandler) {
                 _pullToRefreshActionHandler();

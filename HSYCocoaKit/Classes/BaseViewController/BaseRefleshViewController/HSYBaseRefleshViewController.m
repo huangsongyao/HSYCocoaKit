@@ -25,6 +25,7 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
         _showAllReflesh = NO;
         _showPullDown = NO;
         _showPullUp = NO;
+        _pullUpStatus = kHSYCocoaKitRefreshForPullUpCompletedStatusClose;
     }
     return self;
 }
@@ -139,15 +140,14 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
 - (void)subjectSendNext:(BOOL)pullDown refreshScrollView:(UIScrollView *)scrollView
 {
     kHSYCocoaKitRACSubjectOfNextType type = (pullDown ? kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess : kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess);
-    HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:type subscribeContents:self.hsy_viewModel.hsy_datas];
-    [self.hsy_viewModel.subject sendNext:object];
     @weakify(scrollView);
     @weakify(self);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         @strongify(scrollView);
         @strongify(self);
         if (type == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess) {
             [scrollView.pullToRefreshView stopAnimating];
+            [self hsy_hasMorePullUp:scrollView];
             [self hsy_openPullUp:scrollView];
         } else {
             [scrollView.infiniteScrollingView stopAnimating];
@@ -159,6 +159,20 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
 {
     if (self.showPullUp || self.showAllReflesh) {
         scrollView.showsInfiniteScrolling = NO;
+    }
+}
+
+- (void)hsy_notMorePullUp:(UIScrollView *)scrollView
+{
+    if (self.showPullUp || self.showAllReflesh) {
+        scrollView.showsNoMoreDataView = YES;
+    }
+}
+
+- (void)hsy_hasMorePullUp:(UIScrollView *)scrollView
+{
+    if (self.showPullUp || self.showAllReflesh) {
+        scrollView.showsNoMoreDataView = NO;
     }
 }
 

@@ -9,7 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
-static CGFloat const SVInfiniteScrollingViewHeight = 60;
+static CGFloat const SVInfiniteScrollingViewHeight = 77.0f;
 
 @class SVInfiniteScrollingView;
 @class HSYCustomRefreshView;

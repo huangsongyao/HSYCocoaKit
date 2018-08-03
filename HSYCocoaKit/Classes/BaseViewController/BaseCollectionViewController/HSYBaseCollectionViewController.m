@@ -82,7 +82,11 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
             if (signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess && [signal.subscribeContents.firstObject isKindOfClass:[HSYHUDModel class]]) {
                 HSYHUDModel *hudModel = signal.subscribeContents.firstObject;
                 if (hudModel.pullUpSize < self.hsy_viewModel.size) {
-                    [self hsy_closePullUp:self.collectionView];
+                    if (self.pullUpStatus == kHSYCocoaKitRefreshForPullUpCompletedStatusClose) {
+                        [self hsy_closePullUp:self.collectionView];
+                    } else {
+                        [self hsy_notMorePullUp:self.collectionView];
+                    }
                 }
             }
             //下拉刷新成功//上拉加载更多成功

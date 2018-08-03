@@ -13,18 +13,23 @@
 #import "Masonry.h"
 #import "PublicMacroFile.h"
 #import "SVPullToRefresh.h"
+#import "UIScrollView+SVInfiniteScrolling.h"
+#import "UIScrollView+SVPullToRefresh.h"
+#import "NSString+Size.h"
+#import "NSBundle+PrivateFileResource.h"
 
 #define REFRESH_WILL_START_TITLE            @"下拉刷新"
-#define REFRESH_WILL_START_UP_TITLE         @"上拉加载更多数据"
-#define REFRESH_RELEASE_START_TITLE         @"放开后立即更新"
-#define REFRESH_RELEASE_START_UP_TITLE      @"放开后立即加载更多数据"
+#define REFRESH_WILL_START_UP_TITLE         @"上拉加载"
+#define REFRESH_RELEASE_START_TITLE         @"松开立即更新"
 #define REFRESH_LOADING_TITLE               @"正在刷新..."
-#define REFRESH_UPDATE_OVER_TITLE           @"刷新完毕"
+#define REFRESH_UP_LOADING_TITLE            @"正在加载..."
+#define REFRESH_UPDATE_NOT_MORE             @"已经到底了~"
 
 @interface HSYCustomRefreshView ()
 
 @property (nonatomic, strong) UILabel *hsy_refreshTitleLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *hsy_indicatorView;
+@property (nonatomic, strong) UIImageView *hsy_iconImageView;
 @property (nonatomic, strong) UIView *hsy_backgroundView;
 @property (nonatomic, assign, readonly) BOOL isPullDown;
 
@@ -34,7 +39,8 @@
 
 - (instancetype)initWithRefreshDown:(BOOL)down
 {
-    if (self = [super initWithFrame:CGRectZero]) {
+    NSDictionary *heightDictionary = @{@(NO) : @(SVInfiniteScrollingViewHeight), @(YES) : @(SVPullToRefreshViewHeight), };
+    if (self = [super initWithSize:CGSizeMake(IPHONE_WIDTH, [heightDictionary[@(down)] floatValue])]) {
         _isPullDown = down;
         self.backgroundColor = CLEAR_COLOR;
         //上拉或者下拉的无限背景
@@ -53,23 +59,37 @@
             }
         }];
         
-        //提示说明文字
-        UIFont *font = UI_SYSTEM_FONT_15;
-        CGFloat width = 200.0f;
-        NSDictionary *dic = @{
-                              @(kHSYCocoaKitOfLabelPropretyTypeText) : (down ? REFRESH_WILL_START_TITLE : REFRESH_WILL_START_UP_TITLE),
-                              @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : font,
-                              @(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake((IPHONE_WIDTH - width)/2, 0, width, SVInfiniteScrollingViewHeight)],
-                              @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentCenter),
-                              };
-        self.hsy_refreshTitleLabel = [NSObject createLabelByParam:dic];
-        [self addSubview:self.hsy_refreshTitleLabel];
-        
         //加载的菊花
         self.hsy_indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.hsy_indicatorView.center = self.hsy_refreshTitleLabel.center;
         [self addSubview:self.hsy_indicatorView];
         [self bringSubviewToFront:self.hsy_indicatorView];
+        [self.hsy_indicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.mas_left).offset((IPHONE_WIDTH / 375.0f * [self.class hsy_refreshAllowOffsetLeft]));
+            make.centerY.equalTo(self.mas_centerY);
+            make.size.mas_equalTo(self.hsy_indicatorView.size);
+        }];
+        
+        //箭头
+        UIImage *image = [NSBundle imageForBundle:@"ic_up"];
+        self.hsy_iconImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image, }];
+        [self addSubview:self.hsy_iconImageView];
+        if (down) {
+            self.hsy_iconImageView.transform = CGAffineTransformMakeRotation(M_PI);
+        }
+        [self.hsy_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.hsy_indicatorView);
+        }];
+        
+        //提示说明文字
+        NSDictionary *dic = @{ @(kHSYCocoaKitOfLabelPropretyTypeText) : (down ? [self.class hsy_refreshWillDownTitle] : [self.class hsy_refreshWillUpTitle]), @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : UI_SYSTEM_FONT_14,  @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentLeft), @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : RGB(142, 142, 147), };
+        self.hsy_refreshTitleLabel = [NSObject createLabelByParam:dic];
+        [self addSubview:self.hsy_refreshTitleLabel];
+        [self.hsy_refreshTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.hsy_iconImageView.mas_right).offset(10.0f);
+            make.right.equalTo(self.mas_right).offset(-25.0f);
+            make.centerY.equalTo(self.hsy_iconImageView.mas_centerY);
+            make.height.equalTo(@(UI_SYSTEM_FONT_14.pointSize + 10.0f));
+        }];
     }
     return self;
 }
@@ -83,48 +103,108 @@
 
 #pragma mark - Observer Scroll Percent
 
+- (void)hsy_notMore
+{
+    [self hsy_stop];
+    UIImage *image = [NSBundle imageForBundle:@"ic_end"];
+    self.hsy_iconImageView.image = image;
+    self.hsy_iconImageView.highlightedImage = image;
+    self.hsy_refreshTitleLabel.text = [self.class hsy_refreshDidUpedCompleted];
+}
+
+- (void)hsy_hasMore
+{
+    [self hsy_hiddenAllowImageView:NO];
+    self.hsy_refreshTitleLabel.text = [self.class hsy_refreshWillUpTitle];
+}
+
+- (void)hsy_loadingRefresh:(BOOL)isPullDown
+{
+    [self hsy_start];
+    NSString *title = (isPullDown ? [self.class hsy_refreshDowningTitle] : [self.class hsy_refreshUpingTitle]);
+    self.hsy_refreshTitleLabel.text = title;
+}
+
 - (void)hsy_updatePullDownTriggerForPercent:(CGFloat)percent
 {
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    if (percent >= MID_TRIGGER_PERCENT) {
-        self.hsy_refreshTitleLabel.text = REFRESH_RELEASE_START_TITLE;
-    } else {
-        self.hsy_refreshTitleLabel.text = REFRESH_WILL_START_TITLE;
-    }
+    BOOL isOverPercent = (percent >= MID_TRIGGER_PERCENT);
+    NSString *title = (isOverPercent ? [self.class hsy_refreshDidDownedTitle] : [self.class hsy_refreshWillDownTitle]);
+    self.hsy_refreshTitleLabel.text = title;
     [CATransaction commit];
+    CGFloat toAngle = MIN(((M_PI) * percent), (M_PI)) + M_PI;
+    self.hsy_iconImageView.transform = CGAffineTransformMakeRotation(toAngle);
 }
 
 - (void)hsy_updatePullUpTriggerForPercent:(CGFloat)percent
 {
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    if (percent > MAX_TRIGGER_UP_PERCENT) {
-        self.hsy_refreshTitleLabel.text = REFRESH_RELEASE_START_UP_TITLE;
-    } else {
-        self.hsy_refreshTitleLabel.text = REFRESH_WILL_START_UP_TITLE;
-    }
     [CATransaction commit];
 }
 
-#pragma mark - Start Loading Animation
+#pragma mark - Animation
 
 - (void)hsy_start
 {
-    self.hsy_refreshTitleLabel.hidden = YES;
+    [self hsy_hiddenAllowImageView:YES];
     if (!self.hsy_indicatorView.isAnimating) {
         [self.hsy_indicatorView startAnimating];
     }
 }
 
-#pragma mark - Stop Loading Animation
-
 - (void)hsy_stop
 {
-    self.hsy_refreshTitleLabel.hidden = NO;
+    [self hsy_hiddenAllowImageView:NO];
     if (self.hsy_indicatorView.isAnimating) {
         [self.hsy_indicatorView stopAnimating];
     }
+}
+
+- (void)hsy_hiddenAllowImageView:(BOOL)hidden
+{
+    UIImage *image = [NSBundle imageForBundle:@"ic_up"];
+    self.hsy_iconImageView.hidden = hidden;
+    self.hsy_iconImageView.image = image;
+    self.hsy_iconImageView.highlightedImage = image;
+}
+
+#pragma mark - Load
+
++ (NSString *)hsy_refreshWillDownTitle
+{
+    return REFRESH_WILL_START_TITLE;
+}
+
++ (NSString *)hsy_refreshDowningTitle
+{
+    return REFRESH_LOADING_TITLE;
+}
+
++ (NSString *)hsy_refreshDidDownedTitle
+{
+    return REFRESH_RELEASE_START_TITLE;
+}
+
++ (NSString *)hsy_refreshWillUpTitle
+{
+    return REFRESH_WILL_START_UP_TITLE;
+}
+
++ (NSString *)hsy_refreshUpingTitle
+{
+    return REFRESH_UP_LOADING_TITLE;
+}
+
++ (NSString *)hsy_refreshDidUpedCompleted
+{
+    return REFRESH_UPDATE_NOT_MORE;
+}
+
++ (CGFloat)hsy_refreshAllowOffsetLeft
+{
+    return 134.0f;
 }
 
 /*
