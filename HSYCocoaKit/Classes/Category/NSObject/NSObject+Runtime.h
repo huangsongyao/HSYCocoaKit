@@ -58,4 +58,12 @@
  */
 + (NSString *)objectRuntimeName:(Ivar)ivar;
 
+/**
+ 获取对象object的所有属性成员的名称，并返回一个包含所有属性成员名称的数组
+
+ @param object object
+ @return 包含object所有属性成员名称的数组
+ */
++ (NSArray<NSString *> *)objectRumtimeNames:(id)object;
+
 @end

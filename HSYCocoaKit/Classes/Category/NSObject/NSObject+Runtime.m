@@ -106,19 +106,6 @@
     return objectType;
 }
 
-#pragma mark - Get Property Name
-
-+ (NSString *)objectRuntimeName:(Ivar)ivar
-{
-    if (!ivar) {
-        return nil;
-    }
-    const char *name = ivar_getName(ivar);
-    NSString *objectName = [NSString stringWithUTF8String:name];
-    objectName = [objectName substringWithRange:NSMakeRange(1, (objectName.length - 1))];
-    return objectName;
-}
-
 + (id)ivarRuntimeValue:(NSString *)typeName
 {
     if ([typeName isEqualToString:@"@\"NSString\""]) {
@@ -139,6 +126,35 @@
         return [NSData data];
     }
     return nil;
+}
+
+#pragma mark - Get Property Name
+
++ (NSString *)objectRuntimeName:(Ivar)ivar
+{
+    if (!ivar) {
+        return nil;
+    }
+    const char *name = ivar_getName(ivar);
+    NSString *objectName = [NSString stringWithUTF8String:name];
+    objectName = [objectName substringWithRange:NSMakeRange(1, (objectName.length - 1))];
+    return objectName;
+}
+
+#pragma mark - Get All Property Names
+
++ (NSArray<NSString *> *)objectRumtimeNames:(id)object
+{
+    unsigned int count = 0;
+    Class classes = [object objectRuntimeClass];
+    Ivar *ivars = class_copyIvarList(classes, &count);
+    NSMutableArray *results = [NSMutableArray arrayWithCapacity:count];
+    for (NSInteger i = 0; i < count; i++) {
+        Ivar ivar = ivars[i];
+        NSString *propertyName = [NSObject objectRuntimeName:ivar];
+        [results addObject:propertyName];
+    }
+    return [results mutableCopy];
 }
 
 @end

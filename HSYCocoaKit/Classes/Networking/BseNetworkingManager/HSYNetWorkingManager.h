@@ -43,6 +43,11 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitHTTPStatementSerializer) {
 + (instancetype)shareInstance;
 
 /**
+ 重新对“httpSessionManager”和“fileSessionManager”两个指针执行alloc操作，让它们指向一个新的内存地址
+ */
+- (void)hsy_reset;
+
+/**
  设置默认的请求地址域名，如果没有执行本方法，则默认域名为nil，详细可见建言断点
 
  @param baseUrl 域名地址

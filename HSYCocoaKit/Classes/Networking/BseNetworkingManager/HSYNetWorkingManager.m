@@ -30,10 +30,15 @@ static HSYNetWorkingManager *networkingManager;
 - (instancetype)init
 {
     if (self = [super init]) {
-        _httpSessionManager = [self hsy_defaultHTTPSessionManager:YES];
-        _fileSessionManager = [self hsy_defaultURLSessionManager];
+        [self hsy_reset];
     }
     return self;
+}
+
+- (void)hsy_reset
+{
+    _httpSessionManager = [self hsy_defaultHTTPSessionManager:YES];
+    _fileSessionManager = [self hsy_defaultURLSessionManager];
 }
 
 #pragma mark - Address
