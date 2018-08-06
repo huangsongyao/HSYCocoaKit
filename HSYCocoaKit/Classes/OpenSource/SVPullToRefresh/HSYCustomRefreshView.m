@@ -17,6 +17,7 @@
 #import "UIScrollView+SVPullToRefresh.h"
 #import "NSString+Size.h"
 #import "NSBundle+PrivateFileResource.h"
+#import "UIView+RotationAnimated.h"
 
 #define REFRESH_WILL_START_TITLE            @"下拉刷新"
 #define REFRESH_WILL_START_UP_TITLE         @"上拉加载"
@@ -24,6 +25,7 @@
 #define REFRESH_LOADING_TITLE               @"正在刷新..."
 #define REFRESH_UP_LOADING_TITLE            @"正在加载..."
 #define REFRESH_UPDATE_NOT_MORE             @"已经到底了~"
+#define MID_TRIGGER_PERCENT                 1.0f
 
 @interface HSYCustomRefreshView ()
 
@@ -32,6 +34,7 @@
 @property (nonatomic, strong) UIImageView *hsy_iconImageView;
 @property (nonatomic, strong) UIView *hsy_backgroundView;
 @property (nonatomic, assign, readonly) BOOL isPullDown;
+@property (nonatomic, assign, readonly) BOOL allowIsDown;
 
 @end
 
@@ -42,6 +45,8 @@
     NSDictionary *heightDictionary = @{@(NO) : @(SVInfiniteScrollingViewHeight), @(YES) : @(SVPullToRefreshViewHeight), };
     if (self = [super initWithSize:CGSizeMake(IPHONE_WIDTH, [heightDictionary[@(down)] floatValue])]) {
         _isPullDown = down;
+        _allowIsDown = YES;
+        _hsy_pullDownRotation = NO;
         self.backgroundColor = CLEAR_COLOR;
         //上拉或者下拉的无限背景
         self.hsy_backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -127,21 +132,26 @@
 
 - (void)hsy_updatePullDownTriggerForPercent:(CGFloat)percent
 {
-    [CATransaction begin];
-    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    BOOL isOverPercent = (percent >= MID_TRIGGER_PERCENT);
+    BOOL isOverPercent = (percent >= [self.class hsy_triggerPercent]);
     NSString *title = (isOverPercent ? [self.class hsy_refreshDidDownedTitle] : [self.class hsy_refreshWillDownTitle]);
     self.hsy_refreshTitleLabel.text = title;
-    [CATransaction commit];
-    CGFloat toAngle = MIN(((M_PI) * percent), (M_PI)) + M_PI;
-    self.hsy_iconImageView.transform = CGAffineTransformMakeRotation(toAngle);
+    if (self.hsy_pullDownRotation) {
+        CGFloat toAngle = MIN(((M_PI) * percent), (M_PI)) + M_PI;
+        self.hsy_iconImageView.transform = CGAffineTransformMakeRotation(toAngle);
+    } else {
+        if (isOverPercent && self.allowIsDown) {
+            _allowIsDown = NO;
+            [self.hsy_iconImageView hsy_singleRotatingFromValue:M_PI toValue:0.0f];
+        } else if (!isOverPercent && !self.allowIsDown) {
+            _allowIsDown = YES;
+            [self.hsy_iconImageView hsy_singleRotatingFromValue:0.0f toValue:M_PI];
+        }
+    }
 }
 
 - (void)hsy_updatePullUpTriggerForPercent:(CGFloat)percent
 {
-    [CATransaction begin];
-    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    [CATransaction commit];
+    //load 
 }
 
 #pragma mark - Animation
@@ -225,6 +235,11 @@
 + (UIImage *)hsy_completedImage
 {
     return [NSBundle imageForBundle:@"ic_end"];
+}
+
++ (CGFloat)hsy_triggerPercent
+{
+    return MID_TRIGGER_PERCENT;
 }
 
 /*

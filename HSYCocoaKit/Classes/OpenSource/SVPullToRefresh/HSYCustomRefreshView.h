@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "UIScrollView+SVPullToRefresh.h"
 
-#define MAX_TRIGGER_PERCENT             1.0f
-#define MID_TRIGGER_PERCENT             0.9f
-#define MIN_TRIGGER_PERCENT             0.0f
-#define MAX_TRIGGER_UP_PERCENT          1.01f
-
 @interface HSYCustomRefreshView : UIView
+
+//YES表示使用根据下拉位移映射至[0, 1]的动态过度旋转，NO表示使用根据过度点做正向和反向的旋转动画过度，默认为NO
+@property (nonatomic, assign) BOOL hsy_pullDownRotation;
 
 /**
  入口方法预留的入参，YES表示下拉视图，NO表示上拉视图
@@ -150,6 +148,13 @@
  @return 上拉无更多数据图标
  */
 + (UIImage *)hsy_completedImage;
+
+/**
+ 返回一个默认的下拉偏转角度，允许子类重写本方法返回一个定制的下拉偏转角度
+
+ @return 下拉偏转角度
+ */
++ (CGFloat)hsy_triggerPercent;
 
 @end
 
