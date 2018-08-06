@@ -70,7 +70,7 @@
         }];
         
         //箭头
-        UIImage *image = [NSBundle imageForBundle:@"ic_up"];
+        UIImage *image = [self.class hsy_allowImage];
         self.hsy_iconImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image, }];
         [self addSubview:self.hsy_iconImageView];
         if (down) {
@@ -81,7 +81,7 @@
         }];
         
         //提示说明文字
-        NSDictionary *dic = @{ @(kHSYCocoaKitOfLabelPropretyTypeText) : (down ? [self.class hsy_refreshWillDownTitle] : [self.class hsy_refreshWillUpTitle]), @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : UI_SYSTEM_FONT_14,  @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentLeft), @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : RGB(142, 142, 147), };
+        NSDictionary *dic = @{ @(kHSYCocoaKitOfLabelPropretyTypeText) : (down ? [self.class hsy_refreshWillDownTitle] : [self.class hsy_refreshWillUpTitle]), @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : [self.class hsy_titleFont],  @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentLeft), @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : [self.class hsy_titleColor], };
         self.hsy_refreshTitleLabel = [NSObject createLabelByParam:dic];
         [self addSubview:self.hsy_refreshTitleLabel];
         [self.hsy_refreshTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -106,7 +106,7 @@
 - (void)hsy_notMore
 {
     [self hsy_stop];
-    UIImage *image = [NSBundle imageForBundle:@"ic_end"];
+    UIImage *image = [self.class hsy_completedImage];
     self.hsy_iconImageView.image = image;
     self.hsy_iconImageView.highlightedImage = image;
     self.hsy_refreshTitleLabel.text = [self.class hsy_refreshDidUpedCompleted];
@@ -164,7 +164,7 @@
 
 - (void)hsy_hiddenAllowImageView:(BOOL)hidden
 {
-    UIImage *image = [NSBundle imageForBundle:@"ic_up"];
+    UIImage *image = [self.class hsy_allowImage];
     self.hsy_iconImageView.hidden = hidden;
     self.hsy_iconImageView.image = image;
     self.hsy_iconImageView.highlightedImage = image;
@@ -205,6 +205,26 @@
 + (CGFloat)hsy_refreshAllowOffsetLeft
 {
     return 134.0f;
+}
+
++ (UIColor *)hsy_titleColor
+{
+    return RGB(142, 142, 147);
+}
+
++ (UIFont *)hsy_titleFont
+{
+    return UI_SYSTEM_FONT_14;
+}
+
++ (UIImage *)hsy_allowImage
+{
+    return [NSBundle imageForBundle:@"ic_up"];
+}
+
++ (UIImage *)hsy_completedImage
+{
+    return [NSBundle imageForBundle:@"ic_end"];
 }
 
 /*

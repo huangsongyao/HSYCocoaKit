@@ -72,5 +72,84 @@
  */
 - (void)hsy_hasMore;
 
+#pragma mark - Load
+
+/**
+ 返回一个默认的即将下拉的title内容，允许子类可以重写本方法返回一个定制的title
+
+ @return will title
+ */
++ (NSString *)hsy_refreshWillDownTitle;
+
+/**
+ 返回一个默认的下拉刷新中的title内容，允许子类可以重写本方法返回一个定制的下拉刷新中的title
+
+ @return loading title
+ */
++ (NSString *)hsy_refreshDowningTitle;
+
+/**
+ 返回一个默认的下拉松开后的title内容，允许子类可以重写本方法返回一个定制的下拉松开后的title
+
+ @return downed title
+ */
++ (NSString *)hsy_refreshDidDownedTitle;
+
+/**
+ 返回一个默认的即将上拉的title内容，允许子类可以重写本方法返回一个定制的title
+
+ @return will title
+ */
++ (NSString *)hsy_refreshWillUpTitle;
+
+/**
+ 返回一个默认的上拉刷新中的title内容，允许子类可以重写本方法返回一个定制的上拉刷新中的title
+
+ @return loading title
+ */
++ (NSString *)hsy_refreshUpingTitle;
+
+/**
+ 返回一个默认的上拉松开后的title内容，允许子类可以重写本方法返回一个定制的上拉松开后的title
+
+ @return downed title
+ */
++ (NSString *)hsy_refreshDidUpedCompleted;
+
+/**
+ 返回一个默认的箭头图标左对齐的偏移量，允许子类重写本方法返回一个定制的偏移量
+
+ @return allow offset left
+ */
++ (CGFloat)hsy_refreshAllowOffsetLeft;
+
+/**
+ 返回一个上拉或者下拉的title的文字颜色，允许子类重写本方法返回一个定制的文字颜色
+
+ @return title的文字颜色
+ */
++ (UIColor *)hsy_titleColor;
+
+/**
+ 返回一个上拉或者下拉的title的字号，允许子类重写本方法返回一个定制的字号
+
+ @return title的字号
+ */
++ (UIFont *)hsy_titleFont;
+
+/**
+ 返回一个上拉或者下拉的箭头图标，允许子类重写本方法返回一个定制的箭头图标
+
+ @return 上拉或者下拉的箭头图标
+ */
++ (UIImage *)hsy_allowImage;
+
+/**
+ 返回一个上拉无更多数据图标，允许子类重写本方法返回一个定制的无更多数据图标
+
+ @return 上拉无更多数据图标
+ */
++ (UIImage *)hsy_completedImage;
+
 @end
 
