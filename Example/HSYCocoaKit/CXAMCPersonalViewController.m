@@ -133,7 +133,9 @@
         CGFloat top = 67.0f;
         CGFloat size = 86.0f;
         
-        UIImage *bgImage = [UIImage imageNamed:@"mine_bg_jf"];
+        UIImage *bgImage = [UIImage imageNamed:@"user_logo"];
+        UIImage *realTextImage = [bgImage cutOriginImage:CGSizeMake(100, 400)];
+        NSLog(@"%@", realTextImage);
         UIImageView *backgroundImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : bgImage, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : bgImage}];
         backgroundImageView.frame = self.bounds;
         [self addSubview:backgroundImageView];

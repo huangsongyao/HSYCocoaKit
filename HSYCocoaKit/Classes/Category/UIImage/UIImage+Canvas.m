@@ -12,6 +12,8 @@
 
 @implementation UIImage (Canvas)
 
+#pragma mark - Draw
+
 static UIImage *createImageWithColor(UIColor *color, CGRect rect)
 {
     UIGraphicsBeginImageContext(rect.size);//规定一个画布size
@@ -52,9 +54,7 @@ static UIImage *createImageWithColor(UIColor *color, CGRect rect)
 
 #pragma mark - QRCode
 
-+ (UIImage *)imageWithQRCode:(CGRect)referenceRect
-                    cropRect:(CGRect)cropRect
-             backgroundColor:(UIColor *)color
++ (UIImage *)imageWithQRCode:(CGRect)referenceRect cropRect:(CGRect)cropRect backgroundColor:(UIColor *)color
 {
     CGSize referenceSize = CGSizeMake(CGRectGetWidth(referenceRect), CGRectGetHeight(referenceRect));
     //获取图片颜色的RGB
@@ -102,6 +102,47 @@ static UIImage *createImageWithColor(UIColor *color, CGRect rect)
     
     UIImage *image = [UIImage imageWithCGImage:resultImageRef];
     return image;
+}
+
+#pragma mark - Cut
+
+- (UIImage *)cutOriginImage:(CGSize)size
+{
+    CGFloat width = self.size.width;
+    CGFloat height = self.size.height;
+    CGFloat targetWidth = size.width;
+    CGFloat targetHeight = size.height;
+    CGFloat scaleFactor = 0.0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    CGPoint thumbnailPoint = CGPointZero;
+    
+    if (!CGSizeEqualToSize(self.size, size)) {
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        if (widthFactor < heightFactor) {
+            scaleFactor = widthFactor;
+        } else {
+            scaleFactor = heightFactor;
+        }
+        scaledWidth  = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        if (widthFactor < heightFactor) {
+            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
+        } else if (widthFactor > heightFactor) {
+            thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
+        }
+    }
+    UIGraphicsBeginImageContext(size);
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width  = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    [self drawInRect:thumbnailRect];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage ;
 }
 
 @end

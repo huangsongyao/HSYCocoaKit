@@ -6,6 +6,7 @@
 //
 
 #import "UIImage+Compression.h"
+#import "UIImage+Canvas.h"
 
 @implementation UIImage (Compression)
 
@@ -45,10 +46,7 @@
         realImage = [UIImage imageWithData:data];
     } else {
         //压缩图片尺寸
-        UIGraphicsBeginImageContext(size);
-        [self drawInRect:(CGRect){0.0f, 0.0f, size}];
-        realImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        realImage = [self cutOriginImage:size];
     }
     return realImage;
 }

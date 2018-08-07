@@ -57,4 +57,12 @@
  */
 + (UIImage *)imageWithQrCodeSize:(CGFloat)size withCIImage:(CIImage *)ciImage NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
+/**
+ 在原图的基础上裁剪一张指定尺寸的新图，保证图片不会因为压缩而变形，超出部分则使用透明填充色
+
+ @param size 新图片的尺寸
+ @return 指定尺寸的新图
+ */
+- (UIImage *)cutOriginImage:(CGSize)size NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
+
 @end
