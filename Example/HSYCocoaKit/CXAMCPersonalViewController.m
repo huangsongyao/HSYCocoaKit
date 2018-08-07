@@ -135,6 +135,7 @@
         
         UIImage *bgImage = [UIImage imageNamed:@"user_logo"];
         UIImage *realTextImage = [bgImage cutOriginImage:CGSizeMake(100, 400)];
+        realTextImage = [realTextImage combinationOriginImage:[UIColor greenColor]];
         NSLog(@"%@", realTextImage);
         UIImageView *backgroundImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : bgImage, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : bgImage}];
         backgroundImageView.frame = self.bounds;

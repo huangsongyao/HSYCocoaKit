@@ -142,7 +142,22 @@ static UIImage *createImageWithColor(UIColor *color, CGRect rect)
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    return newImage ;
+    return newImage;
+}
+
+#pragma mark - Combination
+
+- (UIImage *)combinationOriginImage:(UIColor *)backgroundColor
+{
+    UIImage *backgroundImageView = [UIImage imageWithFillColor:backgroundColor rect:(CGRect){CGPointZero, self.size}];
+    
+    UIGraphicsBeginImageContext(self.size);
+    [backgroundImageView drawInRect:(CGRect){CGPointZero, self.size}];
+    [self drawInRect:(CGRect){CGPointZero, self.size}];
+    UIImage *combinationImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return combinationImage;
 }
 
 @end

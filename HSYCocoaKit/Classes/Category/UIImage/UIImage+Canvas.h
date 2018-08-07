@@ -44,9 +44,7 @@
  @param color 图的颜色
  @return UIImage
  */
-+ (UIImage *)imageWithQRCode:(CGRect)referenceRect
-                    cropRect:(CGRect)cropRect
-             backgroundColor:(UIColor *)color;
++ (UIImage *)imageWithQRCode:(CGRect)referenceRect cropRect:(CGRect)cropRect backgroundColor:(UIColor *)color;
 
 /**
  CIImage转UIImage，同时内部转换
@@ -64,5 +62,13 @@
  @return 指定尺寸的新图
  */
 - (UIImage *)cutOriginImage:(CGSize)size NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
+
+/**
+ 根据给定的背景色，绘制一张作为背景的图片，并将这张背景图和本身图片重叠组成新的带背景图的图片
+
+ @param backgroundColor 背景的图片的颜色
+ @return 重叠组成新的带背景图的图片
+ */
+- (UIImage *)combinationOriginImage:(UIColor *)backgroundColor NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 @end
