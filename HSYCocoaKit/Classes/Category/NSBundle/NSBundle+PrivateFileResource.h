@@ -18,4 +18,11 @@
  */
 + (UIImage *)imageForBundle:(NSString *)imageName;
 
+/**
+ 根据CFBundleName作为可以寻址，如果无法找到对应的NSBundle，则返回HSYCocoaKit的NSBundle
+
+ @return NSBundle
+ */
++ (NSBundle *)resourceBundle;
+
 @end

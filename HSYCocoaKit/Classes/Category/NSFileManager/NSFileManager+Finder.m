@@ -8,6 +8,7 @@
 
 #import "NSFileManager+Finder.h"
 #import "APPPathMacroFile.h"
+#import "NSBundle+PrivateFileResource.h"
 
 @implementation NSFileManager (Finder)
 
@@ -93,7 +94,10 @@
 {
     NSString *pathResource = [[NSBundle mainBundle] pathForResource:name ofType:type];
     if (!pathResource) {
-        pathResource = @"";
+        pathResource = [[NSBundle resourceBundle] pathForResource:name ofType:type];
+        if (!pathResource) {
+            pathResource = @"";
+        }
     }
     return pathResource;
 }

@@ -10,6 +10,37 @@
 #import "UIView+Frame.h"
 #import "PublicMacroFile.h"
 #import "NSObject+Runtime.h"
+#import "NSFileManager+Finder.h"
+#import "NSBundle+PrivateFileResource.h"
+
+//********************************************************************************************************
+
+static NSDictionary *hsy_simplified = nil;
+static NSDictionary *hsy_emoji = nil;
+
+@implementation NSDictionary (Emoji)
+
++ (NSDictionary *)toSimplified
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *path = [NSFileManager finderFileFromName:@"simplified_emoji" fileType:@"plist"];
+        hsy_simplified =  [NSDictionary dictionaryWithContentsOfFile:path];
+    });
+    return hsy_simplified;
+}
+
++ (NSDictionary *)toEmoji
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *path = [NSFileManager finderFileFromName:@"emoji_simplified" fileType:@"plist"];
+        hsy_emoji =  [NSDictionary dictionaryWithContentsOfFile:path];
+    });
+    return hsy_emoji;
+}
+
+@end
 
 //********************************************************************************************************
 
@@ -39,15 +70,13 @@
 {
     NSMutableDictionary *textContainerParamter = [self reloadAttributed:newAttributed];
     TYTextContainer *newTextContainer = [HSYCocoaKitAttributedLabelManager hsy_baseTextContainer:textContainerParamter locationSymbolParamter:symbolParamter displayWidth:self.textContainer.textWidth];
-    
     [self reloadNewTextContainer:newTextContainer];
 }
 
-- (void)reloadAttributed:(id)newAttributed locationSymbolParamters:(NSArray<NSDictionary<NSString *, UIView *> *> *)symbolParamters
+- (void)reloadEmojisAttributed:(id)newAttributed
 {
     NSMutableDictionary *textContainerParamter = [self reloadAttributed:newAttributed];
-    TYTextContainer *newTextContainer = [HSYCocoaKitAttributedLabelManager hsy_baseTextContainer:textContainerParamter locationSymbolParamters:symbolParamters displayWidth:self.textContainer.textWidth];
-    
+    TYTextContainer *newTextContainer = [HSYCocoaKitAttributedLabelManager hsy_emojisTextContainer:textContainerParamter displayWidth:self.textContainer.textWidth];
     [self reloadNewTextContainer:newTextContainer];
 }
 
@@ -65,11 +94,9 @@
 - (void)resetSymbolParamter:(NSDictionary<NSString *, NSArray<UIView *> *> *)symbolParamter;
 
 /**
- 将特殊字符串动态替换为指定的UIView，实现文字+UIView的动态混排，支持多种特殊占位符
-
- @param symbolParamters 格式：@[@{@"特殊占位符_1" : UIView_1}, @{@"特殊占位符_2" : UIView_2}, @{@"特殊占位符_3" : UIView_3},...]
+ 定制用于通用的001-125号emoji表情符和text的混排
  */
-- (void)resetSymbolParamters:(NSArray<NSDictionary<NSString *, UIView *> *> *)symbolParamters;
+- (void)resetSymbolParamterEmojis;
 
 @end
 
@@ -88,16 +115,17 @@
     }
 }
 
-- (void)resetSymbolParamters:(NSArray<NSDictionary<NSString *, UIView *> *> *)symbolParamters
+- (void)resetSymbolParamterEmojis
 {
-    //遍历并获取字符串中所有用于占位的特殊符号，并将其替换为对应的view，用于混排存在多种特殊占位符
-    for (NSDictionary<NSString *, UIView *> *dic in symbolParamters) {
-        NSString *symbol = dic.allKeys.firstObject;
-        UIView *view = dic.allValues.firstObject;
+    NSDictionary *simplified = NSDictionary.toSimplified;
+    NSDictionary *emojis = NSDictionary.toEmoji;
+    for (NSString *symbol in simplified.allValues) {
         NSArray<NSValue *> *locations = [self.text allSymbolLocations:symbol];
         if (locations.count > 0) {
-            NSValue *value = locations.firstObject;
-            [self addView:view range:value.rangeValue];
+            UIImage *image = [NSBundle imageForBundle:emojis[symbol]];
+            for (NSValue *value in locations) {
+                [self addImage:image range:value.rangeValue size:image.size alignment:TYDrawAlignmentCenter];
+            }
         }
     }
 }
@@ -130,11 +158,15 @@
     return textContainer;
 }
 
-+ (TYTextContainer *)hsy_baseTextContainer:(NSDictionary *)textContainerParamter locationSymbolParamters:(NSArray<NSDictionary<NSString *, UIView *> *> *)symbolParamters displayWidth:(CGFloat)width
++ (TYTextContainer *)hsy_emojisTextContainer:(NSDictionary *)textContainerParamter displayWidth:(CGFloat)width
 {
-    TYTextContainer *textContainer = [self.class hsy_baseTextContainer:textContainerParamter displayWidth:width];
-    //遍历并获取字符串中所有用于占位的特殊符号，并将其替换为对应的view
-    [textContainer resetSymbolParamters:symbolParamters];
+    NSMutableDictionary *realTextContainerParamter = [NSMutableDictionary dictionaryWithDictionary:textContainerParamter];
+    if (!textContainerParamter[@"font"]) {
+        //如果不设置，则给一个默认适合的文本字号，用于搭配TYDrawAlignmentCenter模式
+        realTextContainerParamter[@"font"] = UI_SYSTEM_FONT_16;
+    }
+    TYTextContainer *textContainer = [self.class hsy_baseTextContainer:realTextContainerParamter displayWidth:width];
+    [textContainer resetSymbolParamterEmojis];
     return textContainer;
 }
 

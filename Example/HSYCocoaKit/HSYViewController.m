@@ -173,7 +173,7 @@
         imageView.size = img.size;
         [arrays addObject:imageView];
     }
-    TYAttributedLabel *testLabel = [HSYCocoaKitAttributedLabelManager hsy_baseAttributedLabel:@{@"text" : @"哦【222】啊额IE附近偶【222】尔设计费我偶尔接佛奥【222】杰佛我激将法，奇偶飞机饿哦附近解耦我奇偶诶积分，奇偶覅杰【222】佛金额，，空间丰富", @"linesSpacing" : @(1), } locationSymbolParamter:@{@"【222】" : [arrays mutableCopy]} displayWidth:IPHONE_WIDTH];
+    TYAttributedLabel *testLabel = [HSYCocoaKitAttributedLabelManager hsy_baseAttributedLabel:@{@"text" : @"哦【222】啊额IE附近偶【222】尔设计费我偶尔接佛奥【222】杰佛我激将法，奇偶飞机饿哦附近解耦我奇偶诶积分，奇偶覅杰【222】佛金额，，空间丰富", @"linesSpacing" : @(1), @"font" : UI_SYSTEM_FONT_16, } locationSymbolParamter:@{@"【222】" : [arrays mutableCopy]} displayWidth:IPHONE_WIDTH];
     testLabel.origin = CGPointMake(0.0f, 400);
     [self.view addSubview:testLabel];
     
@@ -181,9 +181,10 @@
     [[RACScheduler mainThreadScheduler] afterDelay:2.0f schedule:^{
         @strongify(testLabel);
         
-        [testLabel reloadAttributed:@"哦【222】啊额【333】尔设【444】杰杰【555】佛间丰富" locationSymbolParamters:@[@{@"【222】" : arrays.firstObject}, @{@"【333】" : arrays[1]}, @{@"【444】" : arrays[2]}, @{@"【555】" : arrays.lastObject}, ]];
+        [testLabel reloadEmojisAttributed:@"呵呵呵法尔范后IEof[微笑]就，奇偶覅额外金佛文件而非，奇偶纪委负欧文，肥胖纹佛而非。叫哦我IE金佛我几分，佛[调皮]文件佛寺杰尔夫，解耦[抓狂]我降温哦附件为。"];
 //        [testLabel reloadAttributed:@"哦【222】啊额【222】尔设【222】杰杰【222】佛间丰富" locationSymbolParamter:@{@"【222】" : [arrays mutableCopy]}];
     }];
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 

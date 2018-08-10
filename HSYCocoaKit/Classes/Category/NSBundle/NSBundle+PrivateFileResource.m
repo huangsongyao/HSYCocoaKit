@@ -12,6 +12,16 @@
 
 + (UIImage *)imageForBundle:(NSString *)imageName
 {
+    NSBundle *resourceBundle = [NSBundle resourceBundle];
+    UIImage *image = [UIImage imageNamed:imageName
+                                inBundle:resourceBundle
+           compatibleWithTraitCollection:nil];
+    
+    return image;
+}
+
++ (NSBundle *)resourceBundle
+{
     NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"HSYBaseViewController")];
     NSString *bundleName = bundle.infoDictionary[@"CFBundleName"];
     NSURL *bundleURL = [bundle URLForResource:bundleName withExtension:@"bundle"];
@@ -20,12 +30,7 @@
         bundleURL = [bundle URLForResource:bundleName withExtension:@"bundle"];
     }
     NSBundle *resourceBundle = [NSBundle bundleWithURL:bundleURL];
-    UIImage *image = [UIImage imageNamed:imageName
-                                inBundle:resourceBundle
-           compatibleWithTraitCollection:nil];
-    
-    return image;
+    return resourceBundle;
 }
-
 
 @end
