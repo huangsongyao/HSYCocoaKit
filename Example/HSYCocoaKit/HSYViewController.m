@@ -129,9 +129,9 @@
     button2.frame = CGRectMake(button.right, button.bottom + 50, 60, 56);
     [self.view addSubview:button2];
     
-//    HSYBaseSegmentedPageControl *control = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:CGRectMake(0, button.bottom + 100, IPHONE_WIDTH, 64) paramters:@{@(kHSYCocoaKitCustomSegmentedTypeButtonSize) : [NSValue valueWithCGSize:CGSizeMake(75, 64)]} pageControls:@[@"123", @"456", @"789", @"101112", @"444", @"5555", @"66666", @"7777777"] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
-//    }];
-//    [self.view addSubview:control];
+    HSYBaseSegmentedPageControl *control = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:CGRectMake(0, button.bottom + 100, IPHONE_WIDTH, 64) paramters:@{@(kHSYCocoaKitCustomSegmentedTypeButtonSize) : [NSValue valueWithCGSize:CGSizeMake(75, 64)]} pageControls:@[@"123", @"456", @"789", @"101112", @"444", @"5555", @"66666", @"7777777"] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
+    }];
+    [self.view addSubview:control];
     
     UIImage *image = [CIDetector filterHighQrCodeImage:@"8iiiifff" withImageSize:100];
     NSLog(@"image = %@", image);
@@ -174,15 +174,13 @@
         [arrays addObject:imageView];
     }
     TYAttributedLabel *testLabel = [HSYCocoaKitAttributedLabelManager hsy_baseAttributedLabel:@{@"text" : @"哦【222】啊额IE附近偶【222】尔设计费我偶尔接佛奥【222】杰佛我激将法，奇偶飞机饿哦附近解耦我奇偶诶积分，奇偶覅杰【222】佛金额，，空间丰富", @"linesSpacing" : @(1), @"font" : UI_SYSTEM_FONT_16, } locationSymbolParamter:@{@"【222】" : [arrays mutableCopy]} displayWidth:IPHONE_WIDTH];
-    testLabel.origin = CGPointMake(0.0f, 400);
+    testLabel.origin = CGPointMake(0.0f, self.customNavigationBar.bottom + 20);
     [self.view addSubview:testLabel];
     
     @weakify(testLabel);
-    [[RACScheduler mainThreadScheduler] afterDelay:2.0f schedule:^{
+    [[RACScheduler mainThreadScheduler] afterDelay:10.0f schedule:^{
         @strongify(testLabel);
-        
         [testLabel reloadEmojisAttributed:@"呵呵呵法尔范后IEof[微笑]就，奇偶覅额外金佛文件而非，奇偶纪委负欧文，肥胖纹佛而非。叫哦我IE金佛我几分，佛[调皮]文件佛寺杰尔夫，解耦[抓狂]我降温哦附件为。"];
-//        [testLabel reloadAttributed:@"哦【222】啊额【222】尔设【222】杰杰【222】佛间丰富" locationSymbolParamter:@{@"【222】" : [arrays mutableCopy]}];
     }];
     
     // Do any additional setup after loading the view, typically from a nib.

@@ -1051,7 +1051,7 @@
 				GCC_PREFIX_HEADER = "HSYCocoaKit/HSYCocoaKit-Prefix.pch";
 				INFOPLIST_FILE = "HSYCocoaKit/HSYCocoaKit-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dobibtm.btm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HSYCocoaKit.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1076,7 +1076,7 @@
 				GCC_PREFIX_HEADER = "HSYCocoaKit/HSYCocoaKit-Prefix.pch";
 				INFOPLIST_FILE = "HSYCocoaKit/HSYCocoaKit-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dobibtm.btm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HSYCocoaKit.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
