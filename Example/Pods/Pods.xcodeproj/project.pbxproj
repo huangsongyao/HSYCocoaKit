@@ -2980,16 +2980,6 @@
 			path = "RACSignal+Timer";
 			sourceTree = "<group>";
 		};
-		471242664848DE314F69BDB2436A09D7 /* ProjectManager */ = {
-			isa = PBXGroup;
-			children = (
-				D150022A62F55DB1CEC67132B5D6C677 /* HSYCocoaKitManager.h */,
-				9473F735631FD6884BFDC40BA6695C3B /* HSYCocoaKitManager.m */,
-			);
-			name = ProjectManager;
-			path = HSYCocoaKit/Classes/ProjectManager;
-			sourceTree = "<group>";
-		};
 		49D1FB91D76078D86BF36D046D47D1F9 /* BaseCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3629,6 +3619,8 @@
 		919B00684BF9DED294EF13614161AEF7 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				D150022A62F55DB1CEC67132B5D6C677 /* HSYCocoaKitManager.h */,
+				9473F735631FD6884BFDC40BA6695C3B /* HSYCocoaKitManager.m */,
 				FF1276366FAFC585662AAB5ED4384444 /* HSYCocoaKitAttributedLabelManager.h */,
 				C6404DC129BB45C6594FCD7940A605E3 /* HSYCocoaKitAttributedLabelManager.m */,
 			);
@@ -4255,7 +4247,6 @@
 				09E080A03221CB8E367F51B3046E24BD /* Networking */,
 				F4A066A4E5C77A0FBDD83B68638F4084 /* OpenSource */,
 				4B3D669A502EE06CF556EBD6E435F12D /* Pod */,
-				471242664848DE314F69BDB2436A09D7 /* ProjectManager */,
 				A206999F397FEF846C3975D2D8229272 /* RAC */,
 				805B3DAD2D0B1AF4AAF012BB712B0A5C /* Resources */,
 				F636628B3AA999E3F1294338777A825C /* Socket */,

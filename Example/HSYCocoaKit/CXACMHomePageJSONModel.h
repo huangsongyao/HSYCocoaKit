@@ -6,7 +6,7 @@
 //  Copyright © 2018年 huangsongyao. All rights reserved.
 //
 
-#import <JSONModel/JSONModel.h>
+#import "JSONModel.h"
 
 @interface CXACMHomePageItemJSONModel : JSONModel
 
