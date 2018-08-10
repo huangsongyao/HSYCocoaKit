@@ -31,11 +31,27 @@
 - (void)setY:(CGFloat)y;                                //设置y坐标
 
 /**
- origin为CGRectZero的初始化
+ origin为CGPointZero的初始化
 
  @param size size
  @return self
  */
 - (instancetype)initWithSize:(CGSize)size;
+
+/**
+ origin为CGPointZero，height为0.0f的初始化
+
+ @param width 宽度
+ @return self
+ */
+- (instancetype)initWithWidth:(CGFloat)width;
+
+/**
+ origin为CGPointZero，width为0.0f的初始化
+
+ @param height 高度
+ @return self
+ */
+- (instancetype)initWithHeight:(CGFloat)height;
 
 @end

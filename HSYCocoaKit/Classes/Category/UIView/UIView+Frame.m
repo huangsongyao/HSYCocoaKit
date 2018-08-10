@@ -18,6 +18,18 @@
     return [self initWithFrame:rect];
 }
 
+- (instancetype)initWithWidth:(CGFloat)width
+{
+    CGRect rect = (CGRect){CGPointZero, width, 0.0f};
+    return [self initWithFrame:rect];
+}
+
+- (instancetype)initWithHeight:(CGFloat)height
+{
+    CGRect rect = (CGRect){CGPointZero, 0.0f, height};
+    return [self initWithFrame:rect];
+}
+
 #pragma mark - Get Property
 
 - (CGPoint)origin

@@ -17,21 +17,25 @@
     unsigned int outCount = 0;
     objc_property_t *propertyList = class_copyPropertyList([self class], &outCount);
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    for (int i = 0; i < outCount; i ++) {
+    
+    for (NSInteger i = 0; i < outCount; i ++) {
         objc_property_t property = propertyList[i];
-        const char *propertyName = property_getName(property);
-        SEL getter = sel_registerName(propertyName);
-        if ([self respondsToSelector:getter]) {
-            id value = ((id(*)(id, SEL)) objc_msgSend)(self, getter);
-            if (value) {
-                if ([value isKindOfClass:[self class]]) {
-                    value = [value toRuntimeMutableDictionary];
+        NSString *property_attr = [[NSString alloc] initWithUTF8String:property_getAttributes(property)];
+        if (![property_attr hasPrefix:@"T^{"]) {
+            const char *propertyName = property_getName(property);
+            SEL getter = sel_registerName(propertyName);
+            if ([self respondsToSelector:getter]) {
+                NSString *propertyString = [[NSString alloc] initWithUTF8String:propertyName];
+                id value = [self valueForKey:propertyString];
+                if (value) {
+                    if ([value isKindOfClass:[self class]]) {
+                        value = [value toRuntimeMutableDictionary];
+                    }
+                    NSString *key = [NSString stringWithUTF8String:propertyName];
+                    [dict setObject:value forKey:key];
                 }
-                NSString *key = [NSString stringWithUTF8String:propertyName];
-                [dict setObject:value forKey:key];
             }
         }
-        
     }
     free(propertyList);
     return dict;

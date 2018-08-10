@@ -20,6 +20,8 @@
 #import "CIDetector+QRCode.h"
 #import "HSYAppDelegate.h"
 #import "UIApplication+Device.h"
+#import "HSYCocoaKitAttributedLabelManager.h"
+#import "TYAttributedLabel.h"
 
 @interface TestModel : NSObject
 
@@ -127,10 +129,9 @@
     button2.frame = CGRectMake(button.right, button.bottom + 50, 60, 56);
     [self.view addSubview:button2];
     
-    HSYBaseSegmentedPageControl *control = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:CGRectMake(0, button.bottom + 100, IPHONE_WIDTH, 64) paramters:@{@(kHSYCocoaKitCustomSegmentedTypeButtonSize) : [NSValue valueWithCGSize:CGSizeMake(75, 64)]} pageControls:@[@"123", @"456", @"789", @"101112", @"444", @"5555", @"66666", @"7777777"] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
-        
-    }];
-    [self.view addSubview:control];
+//    HSYBaseSegmentedPageControl *control = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:CGRectMake(0, button.bottom + 100, IPHONE_WIDTH, 64) paramters:@{@(kHSYCocoaKitCustomSegmentedTypeButtonSize) : [NSValue valueWithCGSize:CGSizeMake(75, 64)]} pageControls:@[@"123", @"456", @"789", @"101112", @"444", @"5555", @"66666", @"7777777"] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
+//    }];
+//    [self.view addSubview:control];
     
     UIImage *image = [CIDetector filterHighQrCodeImage:@"8iiiifff" withImageSize:100];
     NSLog(@"image = %@", image);
@@ -164,6 +165,25 @@
 //        return (count >= 10.0f);
 //    }];
     
+    NSMutableArray *arrays = [[NSMutableArray alloc] init];
+    NSArray *imgs = @[@"user_logo", @"mine_icon_safe", @"mine_icon_personal", @"tab_icon_invest_new_selected", ];
+    for (NSInteger i = 0; i < imgs.count; i ++) {
+        UIImage *img = [UIImage imageNamed:imgs[i]];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
+        imageView.size = img.size;
+        [arrays addObject:imageView];
+    }
+    TYAttributedLabel *testLabel = [HSYCocoaKitAttributedLabelManager hsy_baseAttributedLabel:@{@"text" : @"哦【222】啊额IE附近偶【222】尔设计费我偶尔接佛奥【222】杰佛我激将法，奇偶飞机饿哦附近解耦我奇偶诶积分，奇偶覅杰【222】佛金额，，空间丰富", @"linesSpacing" : @(1), } locationSymbolParamter:@{@"【222】" : [arrays mutableCopy]} displayWidth:IPHONE_WIDTH];
+    testLabel.origin = CGPointMake(0.0f, 400);
+    [self.view addSubview:testLabel];
+    
+    @weakify(testLabel);
+    [[RACScheduler mainThreadScheduler] afterDelay:2.0f schedule:^{
+        @strongify(testLabel);
+        
+        [testLabel reloadAttributed:@"哦【222】啊额【333】尔设【444】杰杰【555】佛间丰富" locationSymbolParamters:@[@{@"【222】" : arrays.firstObject}, @{@"【333】" : arrays[1]}, @{@"【444】" : arrays[2]}, @{@"【555】" : arrays.lastObject}, ]];
+//        [testLabel reloadAttributed:@"哦【222】啊额【222】尔设【222】杰杰【222】佛间丰富" locationSymbolParamter:@{@"【222】" : [arrays mutableCopy]}];
+    }];
     // Do any additional setup after loading the view, typically from a nib.
 }
 

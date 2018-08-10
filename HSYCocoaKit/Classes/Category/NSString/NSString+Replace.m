@@ -12,17 +12,17 @@
 
 - (NSMutableArray<NSValue *> *)allSymbolLocations:(NSString *)symbol
 {
-    if (!symbol || symbol.length == 0 || self.length == 0) {
+    if (symbol.length == 0 || self.length == 0) {
         return nil;
     }
+    NSMutableArray *arrayRanges = [[NSMutableArray alloc] init];
     NSRange rang = [self rangeOfString:symbol];
     if (rang.location != NSNotFound && rang.length != 0) {
-        NSMutableArray *arrayRanges = [[NSMutableArray alloc] init];
-        [arrayRanges addObject:@(rang.location)];
+        [arrayRanges addObject:[NSValue valueWithRange:NSMakeRange(rang.location, symbol.length)]];
         NSRange locationRang = {0, 0};
         NSInteger location = 0;
         NSInteger length = 0;
-        for (int i = 0;; i++) {
+        for (NSInteger i = 0;; i++) {
             if (0 == i) {
                 location = rang.location + rang.length;
                 length = self.length - rang.location - rang.length;
