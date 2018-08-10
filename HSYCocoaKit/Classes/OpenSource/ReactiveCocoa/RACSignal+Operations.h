@@ -173,6 +173,8 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// `error` events, and completes when all input signals complete.
 + (RACSignal *)combineLatest:(id<NSFastEnumeration>)signals;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
 /// Combines signals using +combineLatest:, then reduces the resulting tuples
 /// into a single value using -reduceEach:.
 ///
@@ -193,6 +195,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// Returns a signal which sends the results from each invocation of
 /// `reduceBlock`.
 + (RACSignal *)combineLatest:(id<NSFastEnumeration>)signals reduce:(id (^)())reduceBlock;
+#pragma clang diagnostic pop
 
 /// Merges the receiver and the given signal with `+merge:` and returns the
 /// resulting signal.

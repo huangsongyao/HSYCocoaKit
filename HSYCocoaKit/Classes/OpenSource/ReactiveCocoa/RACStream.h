@@ -160,6 +160,8 @@ typedef RACStream * (^RACStreamBindBlock)(id value, BOOL *stop);
 /// to `value`.
 - (instancetype)ignore:(id)value;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
 /// Unpacks each RACTuple in the receiver and maps the values to a new value.
 ///
 /// reduceBlock - The block which reduces each RACTuple's values into one value.
@@ -169,6 +171,7 @@ typedef RACStream * (^RACStreamBindBlock)(id value, BOOL *stop);
 ///
 /// Returns a new stream of reduced tuple values.
 - (instancetype)reduceEach:(id (^)())reduceBlock;
+#pragma clang diagnostic pop
 
 /// Returns a stream consisting of `value`, followed by the values in the
 /// receiver.
