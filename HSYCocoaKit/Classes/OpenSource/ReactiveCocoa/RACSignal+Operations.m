@@ -445,6 +445,8 @@ static RACDisposable *subscribeForever (RACSignal *signal, void (^next)(id), voi
 	}] setNameWithFormat:@"+combineLatest: %@", signals];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
 + (RACSignal *)combineLatest:(id<NSFastEnumeration>)signals reduce:(id (^)())reduceBlock {
 	NSCParameterAssert(reduceBlock != nil);
 
@@ -457,6 +459,7 @@ static RACDisposable *subscribeForever (RACSignal *signal, void (^next)(id), voi
 
 	return [result setNameWithFormat:@"+combineLatest: %@ reduce:", signals];
 }
+#pragma clang diagnostic pop
 
 - (RACSignal *)merge:(RACSignal *)signal {
 	return [[RACSignal

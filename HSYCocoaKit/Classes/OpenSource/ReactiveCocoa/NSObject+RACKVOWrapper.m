@@ -18,6 +18,8 @@
 
 @implementation NSObject (RACKVOWrapper)
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
 - (RACDisposable *)rac_observeKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options observer:(__weak NSObject *)weakObserver block:(void (^)(id, NSDictionary *, BOOL, BOOL))block {
 	NSCParameterAssert(block != nil);
 	NSCParameterAssert(keyPath.rac_keyPathComponents.count > 0);
@@ -196,6 +198,7 @@
 		[selfDisposable removeDisposable:disposable];
 	}];
 }
+#pragma clang diagnostic pop
 
 @end
 

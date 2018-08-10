@@ -9,6 +9,12 @@
 #ifndef PublicMacroFile_h
 #define PublicMacroFile_h
 
+//"-Wmismatched-parameter-types"去除类型警告；"-Wstrict-prototypes"去除block的This block declaration is not a prototype警告
+//#pragma clang diagnostic push
+//#pragma clang diagnostic ignored "-Wmismatched-parameter-types"
+//#pragma clang diagnostic ignored "-Wstrict-prototypes"
+//#pragma clang diagnostic pop
+
 #import "UIApplication+Device.h"
 #import "HSYBaseLaunchScreenViewController.h"
 #import "NSBundle+CFBundle.h"
