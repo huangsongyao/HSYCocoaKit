@@ -697,8 +697,10 @@
 		AE03E06A211D6D32009EDEAA /* emoji_029@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE03DFEB211D6D30009EDEAA /* emoji_029@2x.png */; };
 		AE03E06B211D6D32009EDEAA /* emoji_041@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE03DFEC211D6D30009EDEAA /* emoji_041@2x.png */; };
 		AE03E06C211D6D32009EDEAA /* emoji_068@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE03DFED211D6D31009EDEAA /* emoji_068@2x.png */; };
-		AE03E06F211D6EC5009EDEAA /* emoji_simplified.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE03E06D211D6EC4009EDEAA /* emoji_simplified.plist */; };
-		AE03E070211D6EC5009EDEAA /* simplified_emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE03E06E211D6EC4009EDEAA /* simplified_emoji.plist */; };
+		AE03E0B4212120BC009EDEAA /* emoji_simplified.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE03E0B2212120BC009EDEAA /* emoji_simplified.plist */; };
+		AE03E0B5212120BC009EDEAA /* emoji_simplified.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE03E0B2212120BC009EDEAA /* emoji_simplified.plist */; };
+		AE03E0B6212120BC009EDEAA /* simplified_emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE03E0B3212120BC009EDEAA /* simplified_emoji.plist */; };
+		AE03E0B7212120BC009EDEAA /* simplified_emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE03E0B3212120BC009EDEAA /* simplified_emoji.plist */; };
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B387A0E4F0088F7A949E733A738ACF5 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEE9644DA0EFCF945438E125BA4F0724 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3E9081AC654E8DFC6421F731BD77BB /* GCDAsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		AF36352D85045D351D1C147BF8703340 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 653F43C5CB2D6A391C43856B9BA61230 /* MASConstraint.m */; };
@@ -1941,8 +1943,8 @@
 		AE03DFEB211D6D30009EDEAA /* emoji_029@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoji_029@2x.png"; sourceTree = "<group>"; };
 		AE03DFEC211D6D30009EDEAA /* emoji_041@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoji_041@2x.png"; sourceTree = "<group>"; };
 		AE03DFED211D6D31009EDEAA /* emoji_068@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoji_068@2x.png"; sourceTree = "<group>"; };
-		AE03E06D211D6EC4009EDEAA /* emoji_simplified.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emoji_simplified.plist; sourceTree = "<group>"; };
-		AE03E06E211D6EC4009EDEAA /* simplified_emoji.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = simplified_emoji.plist; sourceTree = "<group>"; };
+		AE03E0B2212120BC009EDEAA /* emoji_simplified.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = emoji_simplified.plist; path = HSYCocoaKit/Classes/emoji_simplified.plist; sourceTree = "<group>"; };
+		AE03E0B3212120BC009EDEAA /* simplified_emoji.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = simplified_emoji.plist; path = HSYCocoaKit/Classes/simplified_emoji.plist; sourceTree = "<group>"; };
 		AE07AC691948522F6164C2FC5AB138CF /* RACErrorSignal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RACErrorSignal.m; sourceTree = "<group>"; };
 		AE14E262281CD7AD6F2BF5A3406AA4B4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE9F7064BD0DDD8D628A336D524B3B42 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3894,8 +3896,6 @@
 		AE03DF6E211D6C9A009EDEAA /* emoji */ = {
 			isa = PBXGroup;
 			children = (
-				AE03E06D211D6EC4009EDEAA /* emoji_simplified.plist */,
-				AE03E06E211D6EC4009EDEAA /* simplified_emoji.plist */,
 				AE03DF79211D6D11009EDEAA /* emoji_001@2x.png */,
 				AE03DFD6211D6D29009EDEAA /* emoji_002@2x.png */,
 				AE03DFE2211D6D2C009EDEAA /* emoji_003@2x.png */,
@@ -4231,6 +4231,8 @@
 		C5FCE2375C3CC306BBFB08799CBC4E55 /* HSYCocoaKit */ = {
 			isa = PBXGroup;
 			children = (
+				AE03E0B2212120BC009EDEAA /* emoji_simplified.plist */,
+				AE03E0B3212120BC009EDEAA /* simplified_emoji.plist */,
 				A50D28B5AC9A52E29A46D1F1FFAF5C7F /* BaseCell */,
 				C5A73AC2401F046A339D3A073CDD0A63 /* BaseModel */,
 				C4631A33130821A208991AA744EE9939 /* BaseViewController */,
@@ -5573,6 +5575,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				63A6F8C18B22608EAD49F1D5D8C8A129 /* HSYCocoaKit.bundle in Resources */,
+				AE03E0B6212120BC009EDEAA /* simplified_emoji.plist in Resources */,
+				AE03E0B4212120BC009EDEAA /* emoji_simplified.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5581,7 +5585,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE03E055211D6D32009EDEAA /* emoji_002@2x.png in Resources */,
-				AE03E06F211D6EC5009EDEAA /* emoji_simplified.plist in Resources */,
+				AE03E0B5212120BC009EDEAA /* emoji_simplified.plist in Resources */,
 				E6ECEF2678E63C8BF320A3E17AFEC805 /* class_scanning_bg@2x.png in Resources */,
 				3C31996AD100E334175F2A8BD2AD1041 /* class_scanning_bg@3x.png in Resources */,
 				AE03DFF7211D6D31009EDEAA /* emoji_064@2x.png in Resources */,
@@ -5652,7 +5656,7 @@
 				AE03E023211D6D32009EDEAA /* emoji_090@2x.png in Resources */,
 				AE03DFFD211D6D31009EDEAA /* emoji_004@2x.png in Resources */,
 				AE03E03C211D6D32009EDEAA /* emoji_036@2x.png in Resources */,
-				AE03E070211D6EC5009EDEAA /* simplified_emoji.plist in Resources */,
+				AE03E0B7212120BC009EDEAA /* simplified_emoji.plist in Resources */,
 				AE03E056211D6D32009EDEAA /* emoji_092@2x.png in Resources */,
 				AE03E060211D6D32009EDEAA /* emoji_078@2x.png in Resources */,
 				AE03E029211D6D32009EDEAA /* emoji_104@2x.png in Resources */,
