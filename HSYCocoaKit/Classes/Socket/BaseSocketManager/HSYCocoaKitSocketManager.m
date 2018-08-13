@@ -37,7 +37,7 @@ static HSYCocoaKitSocketManager *socketManager;
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        socketManager = [HSYCocoaKitSocketManager new];
+        socketManager = [[HSYCocoaKitSocketManager alloc] init];
     });
     return socketManager;
 }
