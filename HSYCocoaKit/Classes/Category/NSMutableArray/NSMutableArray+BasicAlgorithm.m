@@ -31,7 +31,7 @@
 {
     for (NSInteger i = 0; i < self.count; i ++) {
         for (NSInteger j = 0; j < (self.count - 1 - i); j ++) {
-            if ([self[j] integerValue] > [self[j + 1]integerValue]) {
+            if ([self[j] integerValue] > [self[j + 1] integerValue]) {
                 NSInteger temp = [self[j] integerValue];
                 self[j] = self[(j + 1)];
                 self[j + 1] = @(temp);

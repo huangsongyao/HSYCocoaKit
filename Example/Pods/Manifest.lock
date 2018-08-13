@@ -80,7 +80,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
-  HSYCocoaKit: 61591df82078046456ee20d5a72ea1c3ecd48ed0
+  HSYCocoaKit: 82a02c94ba78bb31ed106a137f535e3ae54466f3
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201

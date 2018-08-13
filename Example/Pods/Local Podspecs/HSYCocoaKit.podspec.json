@@ -21,7 +21,7 @@
   "source_files": "HSYCocoaKit/Classes/**/*",
   "resource_bundles": {
     "HSYCocoaKit": [
-      "HSYCocoaKit/Assets/*.png"
+      "HSYCocoaKit/Assets/**/*.png"
     ]
   },
   "frameworks": [

@@ -178,7 +178,7 @@
     [self.view addSubview:testLabel];
     
     @weakify(testLabel);
-    [[RACScheduler mainThreadScheduler] afterDelay:10.0f schedule:^{
+    [[RACScheduler mainThreadScheduler] afterDelay:1.0f schedule:^{
         @strongify(testLabel);
         [testLabel reloadEmojisAttributed:@"呵呵呵法尔范后IEof[微笑]就，奇偶覅额外金佛文件而非，奇偶纪委负欧文，肥胖纹佛而非。叫哦我IE金佛我几分，佛[调皮]文件佛寺杰尔夫，解耦[抓狂]我降温哦附件为。"];
     }];

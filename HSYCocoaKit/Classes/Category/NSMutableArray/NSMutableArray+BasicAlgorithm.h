@@ -11,12 +11,12 @@
 @interface NSMutableArray (BasicAlgorithm)
 
 /**
- 冒泡排序---降序
+ 冒泡排序---降序，适用于NSNumber
  */
 - (void)bubbleDescendingOrderSort;
 
 /**
- 冒泡排序---升序
+ 冒泡排序---升序，适用于NSNumber
  */
 - (void)bubbleAscendingOrderSort;
 
