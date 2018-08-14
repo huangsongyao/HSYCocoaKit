@@ -18,13 +18,30 @@
 
 - (instancetype)initWithClassName:(NSString *)className title:(NSString *)title paramters:(NSDictionary<NSString *, NSString *> *)paramters
 {
+    return [self initWithIsHSYBaseModel:NO className:className title:title paramters:paramters];
+}
+
+- (instancetype)initWithBaseViewModelClassName:(NSString *)className title:(NSString *)title paramters:(NSDictionary<NSString *,NSString *> *)paramters
+{
+    return [self initWithIsHSYBaseModel:YES className:className title:title paramters:paramters];
+}
+
+- (instancetype)initWithIsHSYBaseModel:(BOOL)isModel className:(NSString *)className title:(NSString *)title paramters:(NSDictionary<NSString *, NSString *> *)paramters
+{
     if (self = [super init]) {
         _hsy_viewController = [[NSClassFromString(className) alloc] init];
         _hsy_title = title;
         self.showNavigationBar = NO;
         for (NSString *key in paramters.allKeys) {
-            if ([self.hsy_viewController respondsToSelector:NSSelectorFromString(key)]) {
-                [self.hsy_viewController setValue:paramters[key] forKey:key];
+            if (isModel) {
+                HSYBaseViewController *baseViewController = (HSYBaseViewController *)self.hsy_viewController;
+                if ([baseViewController.hsy_viewModel respondsToSelector:NSSelectorFromString(key)]) {
+                    [baseViewController.hsy_viewModel setValue:paramters[key] forKey:key];
+                }
+            } else {
+                if ([self.hsy_viewController respondsToSelector:NSSelectorFromString(key)]) {
+                    [self.hsy_viewController setValue:paramters[key] forKey:key];
+                }
             }
         }
     }
