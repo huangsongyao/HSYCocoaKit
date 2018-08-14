@@ -231,7 +231,7 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
 
 - (UIImageView *)hsy_createScaningLine
 {
-    UIImage *image = [UIImage imageNamed:self.hsy_boxScaningLineImageName];
+    UIImage *image = CREATE_IMG(self.hsy_boxScaningLineImageName);
     if (!image) {
         image = [NSBundle imageForBundle:self.hsy_boxScaningLineImageName];
     }
@@ -243,7 +243,7 @@ static NSString *const kHSYCocoaKitScaningAnimatedKey = @"HSYCocoaKitScaningAnim
 - (UIView *)hsy_createBoxView
 {
     UIView *boxView = [[UIView alloc] initWithFrame:self.hsy_boxCGRect];
-    UIImage *image = [UIImage imageNamed:self.hsy_boxBackgroundImageName];
+    UIImage *image = CREATE_IMG(self.hsy_boxBackgroundImageName);
     if (!image) {
         image = [NSBundle imageForBundle:self.hsy_boxBackgroundImageName];
     }

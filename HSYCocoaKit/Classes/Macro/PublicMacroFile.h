@@ -18,6 +18,7 @@
 #import "UIApplication+Device.h"
 #import "HSYBaseLaunchScreenViewController.h"
 #import "NSBundle+CFBundle.h"
+#import "NSFileManager+Finder.h"
 
 //debug模式下的NSLog
 #ifdef DEBUG
@@ -31,6 +32,13 @@
 #define debugMethod()
 
 #endif
+
+
+//简化CGPoint、CGSize、CGRect的NSLog
+#define NSLogPoint(point)           NSLog(@"{\n x=%f, y=%f}", point.x, point.y)
+#define NSLogSize(size)             NSLog(@"{\n width=%f, height=%f}", size.width, size.height)
+#define NSLogRect(rect)             NSLog(@"{\n x=%f, y=%f, width=%f, height=%f}", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)
+
 
 //国际化使用的文字赋值
 #define HSYLOCALIZED(ver)                                               NSLocalizedString(ver, nil)
@@ -57,10 +65,13 @@
 #define IPHONE_STATUS_BAR_HEIGHT                                        ([UIApplication statusBarHeight])
 
 
-//导航栏高度
+//statusBar高度
 #define IPHONE_STATE_BAR_HEIGHT                                         IPHONE_STATUS_BAR_HEIGHT
+//导航栏的header高度
 #define IPHONE_NAVIGATION_BAR_HEIGHT                                    (44.0f)
+//导航栏高度
 #define IPHONE_BAR_HEIGHT                                               (IPHONE_STATE_BAR_HEIGHT + IPHONE_NAVIGATION_BAR_HEIGHT)
+//tableView扣除导航栏后的高度
 #define TABLE_VIEW_HEIGHT                                               (IPHONE_HEIGHT - IPHONE_BAR_HEIGHT)
 
 
@@ -102,7 +113,7 @@
 
 
 //获取文件路径
-#define GET_FILES_PATH(name, type)                                      [UIScreen getMainBundleForPathForResource:name ofType:type]
+#define GET_FILES_PATH(name, type)                                      [NSFileManager finderFileFromName:name fileType:type]
 
 
 //加载图片
@@ -194,6 +205,23 @@
 #define APP_INFO_VERSIONS                               [NSBundle hsy_appVersions]
 #define APP_INFO_BUNDLE_ID                              [NSBundle hsy_appBundleID]
 #define APP_INFO_BUILDS                                 [NSBundle hsy_appBuilds]
+
+
+//角度转弧度
+#define DEGREES_TO_RADIANS(angle)                       (angle * M_PI / 180.0f)
+//弧度转角度
+#define RADIANS_TO_DEGREES(radian)                      ((radian * 180.0f) / M_PI)
+
+
+//设备类型，真机或者模拟器
+#ifndef TARGET_DEVICE_IS_OS_IPHONE
+#if TARGET_IPHONE_SIMULATOR
+#define TARGET_DEVICE_IS_OS_IPHONE  NO
+#elif TARGET_OS_IPHONE
+#define TARGET_DEVICE_IS_OS_IPHONE  YES
+#endif
+#endif
+
 
 
 

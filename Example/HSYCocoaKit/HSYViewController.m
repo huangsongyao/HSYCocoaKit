@@ -168,7 +168,7 @@
     NSMutableArray *arrays = [[NSMutableArray alloc] init];
     NSArray *imgs = @[@"user_logo", @"mine_icon_safe", @"mine_icon_personal", @"tab_icon_invest_new_selected", ];
     for (NSInteger i = 0; i < imgs.count; i ++) {
-        UIImage *img = [UIImage imageNamed:imgs[i]];
+        UIImage *img = CREATE_IMG(imgs[i]);
         UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
         imageView.size = img.size;
         [arrays addObject:imageView];

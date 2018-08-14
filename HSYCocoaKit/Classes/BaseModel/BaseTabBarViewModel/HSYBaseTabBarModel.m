@@ -18,11 +18,11 @@
     if (self = [super init]) {
         _title = title;
         NSString *nor = norParamter[@"normalImage"];
-        _normalImage = [UIImage imageNamed:nor];
+        _normalImage = CREATE_IMG(nor);
         _normalColor = norParamter[@"normalColor"];
         _normalFont = norParamter[@"normalFont"];
         NSString *sel = selParamter[@"selectedImage"];
-        _selectedImage = [UIImage imageNamed:sel];
+        _selectedImage = CREATE_IMG(sel);
         _selectedColor = selParamter[@"selectedColor"];
         _selectedFont = selParamter[@"selectedFont"];
     }

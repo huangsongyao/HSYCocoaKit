@@ -69,7 +69,7 @@
     [super viewDidLoad];
 
     kHSYCocoaKitLaunchScreenSize launchScreenSize = [self.class iPhoneDeviceScreen];
-    UIImage *image = [UIImage imageNamed:self.launchScreens[@(launchScreenSize)]];
+    UIImage *image = CREATE_IMG(self.launchScreens[@(launchScreenSize)]);
     self.launchScreenImageView = [[UIImageView alloc] initWithImage:image highlightedImage:image];
     self.launchScreenImageView.frame = self.view.bounds;
     if (!image) {

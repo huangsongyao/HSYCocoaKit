@@ -36,8 +36,8 @@ NSInteger const kHSYCocoaKitDefaultCustomBarItemTag     = 10923;
     for (NSDictionary *dic in images) {
         NSString *normal = dic.allValues.firstObject;
         NSString *press = [highImages[[images indexOfObject:dic]] allValues].firstObject;
-        UIImage *image = [UIImage imageNamed:normal];
-        UIImage *highImage = [UIImage imageNamed:press];
+        UIImage *image = CREATE_IMG(normal);
+        UIImage *highImage = CREATE_IMG(press);
         if (!image) {
             image = [NSBundle imageForBundle:normal];
         }
