@@ -79,7 +79,7 @@
         self.hsy_iconImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image, }];
         [self addSubview:self.hsy_iconImageView];
         if (down) {
-            self.hsy_iconImageView.transform = CGAffineTransformMakeRotation(M_PI);
+            self.hsy_iconImageView.transform = HSYCOCOAKIT_GGA_ROTATION(M_PI);
         }
         [self.hsy_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.hsy_indicatorView);
@@ -137,7 +137,7 @@
     self.hsy_refreshTitleLabel.text = title;
     if (self.hsy_pullDownRotation) {
         CGFloat toAngle = MIN(((M_PI) * percent), (M_PI)) + M_PI;
-        self.hsy_iconImageView.transform = CGAffineTransformMakeRotation(toAngle);
+        self.hsy_iconImageView.transform = HSYCOCOAKIT_GGA_ROTATION(toAngle);
     } else {
         if (isOverPercent && self.allowIsDown) {
             _allowIsDown = NO;

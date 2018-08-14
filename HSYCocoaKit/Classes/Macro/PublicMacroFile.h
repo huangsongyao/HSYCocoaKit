@@ -226,6 +226,8 @@
 //CGAffineTransformIdentity格式的放缩
 #define HSYCOCOAKIT_GGA_TRANSFORM_SCALES(scale1, scale2)                            (CGAffineTransformScale(CGAffineTransformIdentity, scale1, scale2))
 #define HSYCOCOAKIT_GGA_TRANSFORM_SCALE(scale)      HSYCOCOAKIT_GGA_TRANSFORM_SCALES(scale, scale)
+//绕圆心的旋转动画
+#define HSYCOCOAKIT_GGA_ROTATION(angle)             (CGAffineTransformMakeRotation(angle))
 
 
 #endif /* PublicMacroFile_h */
