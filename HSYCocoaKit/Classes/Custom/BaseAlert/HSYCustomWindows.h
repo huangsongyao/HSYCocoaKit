@@ -12,8 +12,6 @@
 static CGFloat kHSYCocoaKitMaxScale                 = 1.0f;
 static CGFloat kHSYCocoaKitMinScale                 = 0.0f;
 
-#define HSYCOCOAKIT_GGA_TRANSFORM_SCALE(scale)      (CGAffineTransformScale(CGAffineTransformIdentity, scale, scale))
-
 @interface HSYCustomWindowsComponent : UIView
 
 @property (nonatomic, strong, readonly) UIImageView *hsy_backgroundImageView;           //背景图

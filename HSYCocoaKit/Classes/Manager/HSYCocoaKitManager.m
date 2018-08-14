@@ -133,7 +133,7 @@ static HSYCocoaKitManager *cocoaKitManager;
 
 + (NSDictionary *)hsy_dictionaryWithPlist:(NSString *)name
 {
-    NSString *filePath = [NSFileManager finderFileFromName:name fileType:@"plist"];
+    NSString *filePath = GET_FILES_PATH(name, @"plist");
     if (filePath.length == 0) {
         NSLog(@"%@ file not finder path！", name);
         return nil;

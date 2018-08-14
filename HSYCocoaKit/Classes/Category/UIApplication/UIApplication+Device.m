@@ -20,7 +20,7 @@
 
 + (NSString *)mainBundleForPathResource:(NSString *)name ofType:(NSString *)type
 {
-    return [NSFileManager finderFileFromName:name fileType:type];
+    return GET_FILES_PATH(name, type);
 }
 
 + (CGSize)iPhoneStatusBarSize

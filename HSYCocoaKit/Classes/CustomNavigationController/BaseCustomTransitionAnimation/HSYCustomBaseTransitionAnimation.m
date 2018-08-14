@@ -103,8 +103,8 @@
     } completion:^(BOOL finished) {
         @strongify(self);
         if (@available(iOS 11.0, *)) {
-            self.fromViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f, 1.0f);
-            self.toViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0f, 1.0f);
+            self.fromViewController.view.transform = HSYCOCOAKIT_GGA_TRANSFORM_SCALE(1.0f);
+            self.toViewController.view.transform = HSYCOCOAKIT_GGA_TRANSFORM_SCALE(1.0f);
         }
         [self hsy_removeShadow];
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
