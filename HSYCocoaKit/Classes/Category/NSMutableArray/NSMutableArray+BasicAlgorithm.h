@@ -48,4 +48,12 @@
  */
 - (NSArray<NSArray *> *)numberElementClassify;
 
+/**
+ 将可变数组按顺序，拆分为一个二维数组，每个子数组的元素个数为[1, forCount]闭区间
+
+ @param forCount 每个子数组的最大存储元素个数
+ @return 按顺序拆分的二维数组
+ */
+- (NSMutableArray *)elementClassify:(NSInteger)forCount;
+
 @end

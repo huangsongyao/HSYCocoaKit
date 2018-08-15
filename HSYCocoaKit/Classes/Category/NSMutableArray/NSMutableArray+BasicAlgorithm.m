@@ -102,4 +102,27 @@
     return [dataSources mutableCopy];
 }
 
+- (NSMutableArray *)elementClassify:(NSInteger)forCount
+{
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    NSMutableArray *copys = [self mutableCopy];
+    NSInteger count = (self.count / forCount) + 1;
+    if ((self.count % forCount) == 0) {
+        count --;
+    }
+    for (NSInteger i = 0; i < count; i ++) {
+        NSMutableArray *subResults = [NSMutableArray arrayWithCapacity:forCount];
+        for (NSInteger j = 0; j < copys.count; j ++) {
+            [subResults addObject:copys[j]];
+            [copys removeObjectAtIndex:j];
+            j -= 1;
+            if (subResults.count % forCount == 0) {
+                break;
+            }
+        }
+        [results addObject:subResults];
+    }
+    return results;
+}
+
 @end

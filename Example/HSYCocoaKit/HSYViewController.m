@@ -52,6 +52,10 @@
 //    [UIViewController hsy_rac_showAlertViewController:self title:@"tttt" message:@"77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777" alertActionTitles:@[]]
     
     NSMutableArray *array = [@[@"10", @"2", @"13", @"48", @"5"] mutableCopy];
+    
+    NSMutableArray *art = [@[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8"] mutableCopy];
+    NSLog(@"%@", [art elementClassify:5]);
+    
     NSLog(@"%@ \n %@", array.stringAscendingOrderSort, array.stringDescendingOrderSort);
     
     @weakify(self);
