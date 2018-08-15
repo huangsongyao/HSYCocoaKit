@@ -25,17 +25,7 @@
  @param paramters UIViewController的属性集合，格式为：@{@"属性名称" : @"属性名称对应的值", ...}
  @return HSYBaseSegmentedPageConfig
  */
-+ (instancetype)initWithViewControllerClassName:(NSString *)className viewControllerTitle:(NSString *)title paramters:(NSDictionary<NSString *, NSString *> *)paramters;
-
-/**
- 適用於HSYBaseViewController類族，根据paramters入参使用kvc方式，将paramters中的allValue设置到UIViewController的ViewModel中，paramters的key-value對應了ViewModel
- 
- @param className UIViewController的类名
- @param title title
- @param paramters UIViewController的属性集合，格式为：@{@"属性名称" : @"属性名称对应的值", ...}
- @return HSYBaseSegmentedPageConfig
- */
-- (instancetype)initWithBaseViewModelClassName:(NSString *)className title:(NSString *)title paramters:(NSDictionary<NSString *,NSString *> *)paramters;
++ (instancetype)initWithViewControllerClassName:(NSString *)className viewControllerTitle:(NSString *)title paramters:(NSDictionary<NSString *, id> *)paramters;
 
 
 @end
