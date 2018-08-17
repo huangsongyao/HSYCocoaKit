@@ -33,6 +33,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRACSubjectOfNextType) {
 
 @property (nonatomic, assign) kHSYCocoaKitRACSubjectOfNextType subscribeType;
 @property (nonatomic, strong) NSArray<id> *subscribeContents;
+@property (nonatomic, assign) BOOL hsy_isFirstRequest;
 
 - (instancetype)initWithSubscribeNotificationType:(kHSYCocoaKitRACSubjectOfNextType)type subscribeContents:(NSArray<id> *)contents;
 

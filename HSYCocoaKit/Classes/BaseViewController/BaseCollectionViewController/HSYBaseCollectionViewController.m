@@ -8,6 +8,7 @@
 
 #import "HSYBaseCollectionViewController.h"
 #import "NSObject+UIKit.h"
+#import "HSYBaseCollectionModel.h"
 
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
     
@@ -151,6 +152,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
 
 - (void)firstRequest
 {
+    self.hsy_viewModel.hsy_isFirstTimes = YES;
     [self.collectionView.pullToRefreshView startAnimating];
 }
 

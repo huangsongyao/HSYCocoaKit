@@ -24,6 +24,7 @@ typedef NS_ENUM(NSUInteger, kHSYReflesStatusType) {
 @property (nonatomic, strong) id hsy_pullUpStateCode;                       //上拉刷新的状态
 
 @property (nonatomic, assign) BOOL hsy_showPromptContent;                   //额外提供一个标识位，用于处理是否支持直接提示默认的提示语
+@property (nonatomic, assign) BOOL hsy_isFirstTimes;                        //当调用“HSYBaseTableViewController”类或者“类”的“- firstRequest”方法时，会将本标志位设置为YES，用于区分某些情况下的firstRequest状态
 
 /**
  *  设置每次记载的条数

@@ -15,6 +15,7 @@
     if (self = [super init]) {
         _subscribeType = type;
         _subscribeContents = contents;
+        _hsy_isFirstRequest = NO;
     }
     return self;
 }

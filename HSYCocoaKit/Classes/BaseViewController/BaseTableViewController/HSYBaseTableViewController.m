@@ -118,6 +118,7 @@
 
 - (void)firstRequest
 {
+    self.hsy_viewModel.hsy_isFirstTimes = YES;
     [self.tableView.pullToRefreshView startAnimating];
 }
 

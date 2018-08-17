@@ -80,6 +80,10 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
         if ([self hsy_requestStateCodeWithStateCode:x] == kHSYHUDModelCodeTypeRequestPullDownSuccess) {
             //监听到statusCode下拉状态变更后，发送一个信后，让table格式或者collection格式的两个子类进行reloadData动作
             HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess subscribeContents:@[x]];
+            if (self.hsy_viewModel.hsy_isFirstTimes) {
+                object.hsy_isFirstRequest = self.hsy_viewModel.hsy_isFirstTimes;
+                self.hsy_viewModel.hsy_isFirstTimes = !self.hsy_viewModel.hsy_isFirstTimes;
+            }
             [self.hsy_viewModel.subject sendNext:object];
         }
     }];
