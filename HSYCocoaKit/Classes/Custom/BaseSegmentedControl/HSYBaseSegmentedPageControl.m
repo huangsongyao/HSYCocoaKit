@@ -113,6 +113,9 @@
 
 - (void)hsy_line
 {
+    if (self.segmentedButton.count == 0) {
+        return;
+    }
     UIImage *image = [UIImage imageWithFillColor:SEGMENTED_CONTROL_DEFAULT_SELECTED_COLOR];
     if (self.paramters[@(kHSYCocoaKitCustomSegmentedTypeLineColor)]) {
         image = [UIImage imageWithFillColor:self.paramters[@(kHSYCocoaKitCustomSegmentedTypeLineColor)]];
