@@ -23,6 +23,22 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitHTTPStatementSerializer) {
     kHSYCocoaKitHTTPStatementSerializerJSONRequestSerializerAndJSONResponseSerializer,
 };
 
+//***********************************************************************************************
+
+@interface AFHTTPSessionManager (SetTimeout)
+
+/**
+ 设置AFHTTPSessionManager的请求超时时间。
+ 如果HSYNetWorkingManager类族[HSYNetWorkingManager类或者HSYNetWorkingManager子类]对象重置了“requestSerializer”或“responseSerializer”，则需要在HSYNetWorkingManager类族[HSYNetWorkingManager类或者HSYNetWorkingManager子类]对象中重置。
+ 
+ @param timeout 超时时间
+ */
+- (void)hsy_setHTTPSessionManagerTimeoutInterval:(NSTimeInterval)timeout;
+
+@end
+
+//***********************************************************************************************
+
 @interface HSYNetWorkingManager : NSObject
 
 /**
@@ -46,6 +62,13 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitHTTPStatementSerializer) {
  重新对“httpSessionManager”和“fileSessionManager”两个指针执行alloc操作，让它们指向一个新的内存地址
  */
 - (void)hsy_reset;
+
+/**
+ 初始化请求超时时间
+
+ @return 返回请求超时时间
+ */
++ (NSTimeInterval)hsy_requestSerializerTimeout;
 
 /**
  设置默认的请求地址域名，如果没有执行本方法，则默认域名为nil，详细可见建言断点

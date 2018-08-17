@@ -12,6 +12,25 @@
 static NSString *kHSYCocoaKitDefaultBaseUrlAddress  = @"";
 static HSYNetWorkingManager *networkingManager;
 
+//***********************************************************************************************
+
+@implementation AFHTTPSessionManager (SetTimeout)
+
+- (void)hsy_setHTTPSessionManagerTimeoutInterval:(NSTimeInterval)timeout
+{
+    NSTimeInterval realTimeInterval = timeout;
+    if (realTimeInterval < 0.0f) {
+        realTimeInterval = 60.0f;
+    }
+    [self.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    self.requestSerializer.timeoutInterval = realTimeInterval;
+    [self.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+}
+
+@end
+
+//***********************************************************************************************
+
 @interface HSYNetWorkingManager ()
 
 @end
@@ -35,9 +54,16 @@ static HSYNetWorkingManager *networkingManager;
     return self;
 }
 
+#pragma mark - Load
+
++ (NSTimeInterval)hsy_requestSerializerTimeout
+{
+    return 60.0f;
+}
+
 - (void)hsy_reset
 {
-    _httpSessionManager = [self hsy_defaultHTTPSessionManager:YES];
+    _httpSessionManager = [self hsy_defaultHTTPSessionManager];
     _fileSessionManager = [self hsy_defaultURLSessionManager];
 }
 
@@ -141,16 +167,16 @@ static HSYNetWorkingManager *networkingManager;
     [networkStatusManager startMonitoring];
 }
 
-- (AFHTTPSessionManager *)hsy_defaultHTTPSessionManager:(BOOL)needTimeoutInterval
+#pragma mark - Session Manager
+
+- (AFHTTPSessionManager *)hsy_defaultHTTPSessionManager
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [self hsy_statementHTTPSerializer:kHSYCocoaKitHTTPStatementSerializerJSONRequestSerializerAndJSONResponseSerializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"image/jpeg", @"text/plain", nil];
-    if (needTimeoutInterval) {
-        [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-        manager.requestSerializer.timeoutInterval = 60;
-        [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    }
+    //设置请求超时时间，如果本类的类族[本类或者子类]对象重置了“requestSerializer”或“responseSerializer”，则需要在本类的类族[本类或者子类]对象对象中重置
+    [manager hsy_setHTTPSessionManagerTimeoutInterval:[self.class hsy_requestSerializerTimeout]];
+    
     return manager;
 }
 
@@ -161,5 +187,6 @@ static HSYNetWorkingManager *networkingManager;
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     return manager;
 }
+
 
 @end
