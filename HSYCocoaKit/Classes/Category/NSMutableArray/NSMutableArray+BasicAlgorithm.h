@@ -11,28 +11,31 @@
 @interface NSMutableArray (BasicAlgorithm)
 
 /**
- 冒泡排序---降序，适用于NSNumber
+ NSSortDescriptor排序，通过排序依据keys进行排序，最后返回一个排序结果数组
+
+ @param isAscending 升序或者降序，YES表示升序，NO表示降序
+ @param keys 排序依据，例如，NSString按照数值大小排序，则keys就为：@[@"integerValue"]，即，keys为排序依据的属性名称
+ @return 排序结果
+ */
+- (NSArray *)sortDescriptor:(BOOL)isAscending forKeys:(NSArray *)keys;
+
+/**
+ NSSortDescriptor排序，通过排序依据keys进行排序，最后会通过“- replaceObjectAtIndex:withObject:”方法，将排序结果替换至self中
+
+ @param isAscending 升序或者降序，YES表示升序，NO表示降序
+ @param keys 排序依据，例如，NSString按照数值大小排序，则keys就为：@[@"integerValue"]，即，keys为排序依据的属性名称
+ */
+- (void)sortUsingDescriptor:(BOOL)isAscending forKeys:(NSArray *)keys;
+
+/**
+ NSSortDescriptor降序排序，用于NSString和NSNumber
  */
 - (void)bubbleDescendingOrderSort;
 
 /**
- 冒泡排序---升序，适用于NSNumber
+ NSSortDescriptor升序排序，用于NSString和NSNumber
  */
 - (void)bubbleAscendingOrderSort;
-
-/**
- 对字符串进行升序排序
-
- @return 升序排序后的结果
- */
-- (NSArray *)stringAscendingOrderSort;
-
-/**
- 对字符串进行降序排序
-
- @return 降序排序后的结果
- */
-- (NSArray *)stringDescendingOrderSort;
 
 /**
  只试用于纯NSString的数组，用于对相同字符串进行分类，返回一个分类后的纯NSString二维数组

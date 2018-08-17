@@ -51,12 +51,16 @@
     
 //    [UIViewController hsy_rac_showAlertViewController:self title:@"tttt" message:@"77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777" alertActionTitles:@[]]
     
-    NSMutableArray *array = [@[@"10", @"2", @"13", @"48", @"5"] mutableCopy];
+    NSMutableArray *array = [@[@10, @2, @13, @48, @5] mutableCopy];
     
     NSMutableArray *art = [@[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8"] mutableCopy];
     NSLog(@"%@", [art elementClassify:5]);
     
-    NSLog(@"%@ \n %@", array.stringAscendingOrderSort, array.stringDescendingOrderSort);
+    [array bubbleAscendingOrderSort];
+    NSLog(@"\n %@", array);
+    
+    [array bubbleDescendingOrderSort];
+    NSLog(@"\n %@", array);
     
     @weakify(self);
 //    [self.viewModel.subject subscribeNext:^(HSYCocoaKitRACSubscribeNotification *notification) {
@@ -83,7 +87,7 @@
 //            NSLog(@"00000");
 //        }];
     }];
-    button.backgroundColor = [UIColor redColor];
+    button.backgroundColor = RANDOM_RGB;
     button.frame = CGRectMake(100, 300, 60, 56);
     [self.view addSubview:button];
     
@@ -117,7 +121,7 @@
         //            NSLog(@"00000");
         //        }];
     }];
-    button1.backgroundColor = [UIColor greenColor];
+    button1.backgroundColor = RANDOM_RGB;
     button1.frame = CGRectMake(button.right + 50, 300, 60, 56);
     [self.view addSubview:button1];
     
@@ -129,7 +133,7 @@
         HSYBViewController *vc = [[HSYBViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
-    button2.backgroundColor = [UIColor yellowColor];
+    button2.backgroundColor = RANDOM_RGB;
     button2.frame = CGRectMake(button.right, button.bottom + 50, 60, 56);
     [self.view addSubview:button2];
     

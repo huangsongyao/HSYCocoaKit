@@ -42,7 +42,7 @@
 - (CGSize)contentOfSize:(UIFont *)font maxWidth:(CGFloat)width;
 
 /**
- 计算文字显示区域,限制设备高度，计算宽度
+ 计算文字显示区域,限制最大高度，计算宽度
 
  @param font font
  @param height 最大显示高度

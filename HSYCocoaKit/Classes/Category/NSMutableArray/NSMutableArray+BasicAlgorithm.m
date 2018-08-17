@@ -4,58 +4,78 @@
 //
 //  Created by huangsongyao on 2018/4/26.
 //
-//
+//  冒泡排序：升序条件为“[self[j] integerValue] > [self[j + 1] integerValue]”，降序条件为“[self[j] integerValue] < [self[j + 1] integerValue]”
+/*
+ for (NSInteger i = 0; i < self.count; i ++) {
+    for (NSInteger j = 0; j < (self.count - 1 - i); j ++) {
+        if ([self[j] integerValue] > [self[j + 1] integerValue]) {
+            id temp = self[j];
+            self[j] = self[(j + 1)];
+            self[j + 1] = temp;
+        }
+    }
+ }
+ */
 
 #import "NSMutableArray+BasicAlgorithm.h"
 
 @implementation NSMutableArray (BasicAlgorithm)
 
-#pragma mark - Bubbling Down
+#pragma mark - NSSortDescriptor
 
-- (void)bubbleDescendingOrderSort
+- (NSArray *)sortDescriptor:(BOOL)isAscending forKeys:(NSArray *)keys
 {
-    for (NSInteger i = 0; i < self.count; i ++) {
-        for (NSInteger j = 0; j < (self.count - 1 - i); j ++) {
-            if ([self[j] integerValue] < [self[(j + 1)] integerValue]) {
-                NSInteger temp = [self[j] integerValue];
-                self[j] = self[(j + 1)];
-                self[(j + 1)] = @(temp);
-            }
+    NSMutableArray *descriptors = [NSMutableArray arrayWithCapacity:keys.count];
+    for (id key in keys) {
+        id realKey = key;
+        if (![realKey isKindOfClass:[NSString class]]) {
+            realKey = @"integerValue";
         }
+        NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:realKey ascending:isAscending];
+        [descriptors addObject:descriptor];
+    }
+    NSArray *sortResults = [self sortedArrayUsingDescriptors:[descriptors mutableCopy]];
+    return sortResults;
+}
+
+- (void)sortUsingDescriptor:(BOOL)isAscending forKeys:(NSArray *)keys
+{
+    NSArray *sortResults = [self sortDescriptor:isAscending forKeys:keys];
+    for (id object in sortResults) {
+        [self replaceObjectAtIndex:[sortResults indexOfObject:object] withObject:object];
     }
 }
 
-#pragma mark - Bubbling Up
+#pragma mark - NSSortDescriptor Number Up
+
+- (NSArray *)ascendingOrderSort
+{
+    NSArray *sortArray = [self sortDescriptor:YES forKeys:@[[NSNull null]]];
+    return sortArray;
+}
 
 - (void)bubbleAscendingOrderSort
 {
-    for (NSInteger i = 0; i < self.count; i ++) {
-        for (NSInteger j = 0; j < (self.count - 1 - i); j ++) {
-            if ([self[j] integerValue] > [self[j + 1] integerValue]) {
-                NSInteger temp = [self[j] integerValue];
-                self[j] = self[(j + 1)];
-                self[j + 1] = @(temp);
-            }
-        }
+    NSArray *ascendings = self.ascendingOrderSort;
+    for (id object in ascendings) {
+        [self replaceObjectAtIndex:[ascendings indexOfObject:object] withObject:object];
     }
 }
 
-#pragma mark - NSSortDescriptor String Up
+#pragma mark - NSSortDescriptor Number Down
 
-- (NSArray *)stringAscendingOrderSort
+- (NSArray *)descendingOrderSort
 {
-    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES];
-    NSArray *sortArray = [self sortedArrayUsingDescriptors:@[descriptor]];;
+    NSArray *sortArray = [self sortDescriptor:NO forKeys:@[[NSNull null]]];
     return sortArray;
 }
 
-#pragma mark - NSSortDescriptor String Down
-
-- (NSArray *)stringDescendingOrderSort
+- (void)bubbleDescendingOrderSort
 {
-    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:NO];
-    NSArray *sortArray = [self sortedArrayUsingDescriptors:@[descriptor]];;
-    return sortArray;
+    NSArray *ascendings = self.descendingOrderSort;
+    for (id object in ascendings) {
+        [self replaceObjectAtIndex:[ascendings indexOfObject:object] withObject:object];
+    }
 }
 
 #pragma mark - Classify
