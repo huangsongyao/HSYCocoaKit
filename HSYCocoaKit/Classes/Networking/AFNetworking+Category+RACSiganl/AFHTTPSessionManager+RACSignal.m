@@ -59,21 +59,11 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
         [self.requestSerializer setValue:header.allValues.firstObject forHTTPHeaderField:header.allKeys.firstObject];
     }
     NSParameterAssert(url);
-    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        RACSignal *signal = [self hsy_getModel_3x_Request:url parameters:parameters];
-        if (type == kHSYCocoaKitNetworkingRequestModel_post) {
-            signal = [self hsy_postModel_3x_Request:url parameters:parameters];
-        }
-        [signal subscribeNext:^(RACTuple *tuple) {
-            [subscriber sendNext:tuple];
-            [subscriber sendCompleted];
-        } error:^(NSError *error) {
-            [subscriber sendError:error];
-        }];
-        return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release methods “- hsy_rac_request:setHeaders:url:parameters:” file is “AFHTTPSessionManager+RACSignal.h”");
-        }];
-    }];
+    RACSignal *signal = [self hsy_getModel_3x_Request:url parameters:parameters];
+    if (type == kHSYCocoaKitNetworkingRequestModel_post) {
+        signal = [self hsy_postModel_3x_Request:url parameters:parameters];
+    }
+    return signal;
 }
 
 #pragma mark - Get Model
