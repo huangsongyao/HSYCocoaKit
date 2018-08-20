@@ -78,13 +78,6 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitHTTPStatementSerializer) {
 - (void)hsy_setNetworkBaseUrl:(NSString *)baseUrl;
 
 /**
- *  监听当前网络状态，检测结果为有网时发送completed信号，并结束，不会返回当前网络状态，如果需要获取具体网络状态，请使用“- observer_3x_NetworkReachabilityOfNext:”方法
- *
- *  @return 网络状态的信号，有网络返回completed信号，无则返回error信号
- */
-- (RACSignal *)hsy_networking_3x_Reachability NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
-
-/**
  通过字段拼接完整的url，若字段中含有http开头字眼，则默认为是一个完整的链接
  
  @param path 字段

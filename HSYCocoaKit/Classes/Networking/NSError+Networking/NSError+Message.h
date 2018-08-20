@@ -12,7 +12,7 @@ FOUNDATION_EXPORT NSString *const kErrorForNotNetworkKey;
 
 typedef NS_ENUM(NSUInteger, kAFNetworkingStatusErrorType) {
     
-    kAFNetworkingStatusErrorTypeNone    = 0,        //无网络状态
+    kAFNetworkingStatusErrorTypeNone    = NSURLErrorNotConnectedToInternet,        //无网络状态
 };
 
 @interface NSError (Message)

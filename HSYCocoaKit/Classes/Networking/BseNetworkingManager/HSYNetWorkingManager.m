@@ -130,24 +130,7 @@ static HSYNetWorkingManager *networkingManager;
     }
 }
 
-#pragma mark - >=3.0f version
-
-- (RACSignal *)hsy_networking_3x_Reachability
-{
-    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        [HSYNetWorkingManager hsy_observer_3x_network_startMonitoring:^BOOL(AFNetworkReachabilityStatus status, BOOL hasNetwork) {
-            if (hasNetwork) {
-                [subscriber sendCompleted];
-            } else {
-                [subscriber sendError:[NSError hsy_errorWithErrorType:kAFNetworkingStatusErrorTypeNone]];
-            }
-            return YES;
-        }];
-        return [RACDisposable disposableWithBlock:^{
-            NSLog(@"release methods “- hsy_networking_3x_Reachability” class is %@", NSStringFromClass(self.class));
-        }];
-    }];
-}
+#pragma mark - Observer Network
 
 - (void)hsy_observer_3x_NetworkReachabilityOfNext:(BOOL(^)(AFNetworkReachabilityStatus status, BOOL hasNetwork))next
 {
@@ -166,7 +149,7 @@ static HSYNetWorkingManager *networkingManager;
     [networkStatusManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         @strongify(networkStatusManager);
         if (start) {
-            BOOL hasNetwork = !AFNetworkReachabilityStatusNotReachable;
+            BOOL hasNetwork = (status != AFNetworkReachabilityStatusNotReachable);
             BOOL stopMonintoring = start(status, hasNetwork);
             if (stopMonintoring) {
                 [networkStatusManager stopMonitoring];

@@ -90,7 +90,7 @@
                           @(kHSYCocoaKitLaunchScreenSize_5_5_Inch) : @"i6p_sp",
                           @(kHSYCocoaKitLaunchScreenSize_5_8_Inch) : @"iX_sp",
                           };
-    NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
+    NSString *urlStr = @"http://mobile.zhubaodai.com/zbd-app/News/newsList?PAGENO=1&PRT_BLNTYP=04&RECNUM=15";
     HSYBaseLaunchScreenViewController *launchScreenViewController = [HSYBaseLaunchScreenViewController initWithLaunchScreens:dic networkSiganl:[[HSYNetWorkingManager shareInstance] test:urlStr] subscriberNext:^(id sendNext, id<UIApplicationDelegate> appDelegate, NSError *sendError) {
         @strongify(self);
         HSYViewController *vc = [[HSYViewController alloc] init];

@@ -208,7 +208,7 @@ static CGFloat imgBottom = 11.0f;
 
 - (RACSignal *)rac_newsCent:(NSString *)PRT_BLNTYP page:(NSString *)PAGENO size:(NSString *)RECNUM
 {
-    [[HSYNetWorkingManager shareInstance] hsy_setNetworkBaseUrl:@"https://mobile.zhubaodai.com/zbd-app/"];
+    [[HSYNetWorkingManager shareInstance] hsy_setNetworkBaseUrl:@"http://mobile.zhubaodai.com/zbd-app/"];
     NSDictionary *paramter = @{
                                @"PRT_BLNTYP" : PRT_BLNTYP,
                                @"PAGENO"     : PAGENO,
