@@ -135,15 +135,14 @@ static HSYNetWorkingManager *networkingManager;
 - (RACSignal *)hsy_networking_3x_Reachability
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        AFNetworkReachabilityManager *networkStatusManager = [AFNetworkReachabilityManager sharedManager];
-        [networkStatusManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-            if (status != AFNetworkReachabilityStatusNotReachable) {
+        [HSYNetWorkingManager hsy_observer_3x_network_startMonitoring:^BOOL(AFNetworkReachabilityStatus status, BOOL hasNetwork) {
+            if (hasNetwork) {
                 [subscriber sendCompleted];
             } else {
                 [subscriber sendError:[NSError hsy_errorWithErrorType:kAFNetworkingStatusErrorTypeNone]];
             }
+            return YES;
         }];
-        [networkStatusManager startMonitoring];
         return [RACDisposable disposableWithBlock:^{
             NSLog(@"release methods “- hsy_networking_3x_Reachability” class is %@", NSStringFromClass(self.class));
         }];
@@ -152,13 +151,23 @@ static HSYNetWorkingManager *networkingManager;
 
 - (void)hsy_observer_3x_NetworkReachabilityOfNext:(BOOL(^)(AFNetworkReachabilityStatus status, BOOL hasNetwork))next
 {
+    [HSYNetWorkingManager hsy_observer_3x_network_startMonitoring:^BOOL(AFNetworkReachabilityStatus status, BOOL hasNetwork) {
+        if (next) {
+            return next(status, hasNetwork);
+        }
+        return YES;
+    }];
+}
+
++ (void)hsy_observer_3x_network_startMonitoring:(BOOL(^)(AFNetworkReachabilityStatus status, BOOL hasNetwork))start
+{
     AFNetworkReachabilityManager *networkStatusManager = [AFNetworkReachabilityManager sharedManager];
     @weakify(networkStatusManager);
     [networkStatusManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        if (next) {
-            @strongify(networkStatusManager);
+        @strongify(networkStatusManager);
+        if (start) {
             BOOL hasNetwork = !AFNetworkReachabilityStatusNotReachable;
-            BOOL stopMonintoring = next(status, hasNetwork);
+            BOOL stopMonintoring = start(status, hasNetwork);
             if (stopMonintoring) {
                 [networkStatusManager stopMonitoring];
             }

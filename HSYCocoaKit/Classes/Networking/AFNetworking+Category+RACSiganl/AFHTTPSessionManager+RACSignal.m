@@ -59,6 +59,11 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
         [self.requestSerializer setValue:header.allValues.firstObject forHTTPHeaderField:header.allKeys.firstObject];
     }
     NSParameterAssert(url);
+    [[[HSYNetWorkingManager shareInstance] hsy_networking_3x_Reachability] subscribeError:^(NSError *error) {
+        NSLog(@"++++++++++++++++++++++++++++error = %@++++++++++++++++++++++++++++", error);
+    } completed:^{
+        NSLog(@"++++++++++++++++++++++++++++completed+++++++++++++++++++++++++++++++");
+    }];
     RACSignal *signal = [self hsy_getModel_3x_Request:url parameters:parameters];
     if (type == kHSYCocoaKitNetworkingRequestModel_post) {
         signal = [self hsy_postModel_3x_Request:url parameters:parameters];
