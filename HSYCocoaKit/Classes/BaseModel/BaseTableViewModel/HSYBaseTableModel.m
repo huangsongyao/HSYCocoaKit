@@ -7,6 +7,7 @@
 //
 
 #import "HSYBaseTableModel.h"
+#import "PublicMacroFile.h"
 
 @implementation HSYBaseTableModel
 
@@ -20,26 +21,42 @@
     [self hsy_pullRefresh:kHSYReflesStatusTypePullUp updateNext:network toMap:map subscriberNext:next];
 }
 
-- (void)hsy_refreshTableToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
+- (RACSignal *)hsy_refreshTableToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
 {
-    [self hsy_refreshToPullDown:network toMap:map subscriberNext:^(id x) {
-        NSLog(@"refresh To Down Result : %@", x);
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self hsy_refreshToPullDown:network toMap:map subscriberNext:^(id x) {
+            [subscriber sendNext:x];
+            [subscriber sendCompleted];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- (RACSignal *)hsy_refreshTableToPullDown:toMap:”");
+        }];
     }];
 }
 
-- (void)hsy_refreshTableToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
+- (RACSignal *)hsy_refreshTableToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
 {
-    [self hsy_refreshToPullUp:network toMap:map subscriberNext:^(id x) {
-        NSLog(@"refresh To Down Result : %@", x);
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self hsy_refreshToPullUp:network toMap:map subscriberNext:^(id x) {
+            [subscriber sendNext:x];
+            [subscriber sendCompleted];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- (RACSignal *)hsy_refreshTableToPullUp:toMap:”");
+        }];
     }];
 }
 
-- (void)hsy_refreshTable:(kHSYReflesStatusType)type requestNetwork:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
+- (RACSignal *)hsy_refreshTable:(kHSYReflesStatusType)type requestNetwork:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
 {
     if (type == kHSYReflesStatusTypePullUp) {
-        [self hsy_refreshTableToPullUp:network toMap:map];
+        return [self hsy_refreshTableToPullUp:network toMap:map];
     } else {
-        [self hsy_refreshTableToPullDown:network toMap:map];
+        return [self hsy_refreshTableToPullDown:network toMap:map];
     }
 }
 
