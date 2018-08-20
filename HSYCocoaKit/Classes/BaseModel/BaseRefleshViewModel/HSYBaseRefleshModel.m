@@ -59,17 +59,12 @@
         if (status == kHSYReflesStatusTypePullDown) {
             [self.hsy_datas removeAllObjects];
             self.hsy_datas = [result mutableCopy];
-            self.hsy_pullDownStateCode = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullDownSuccess];
+            self.hsy_pullDownStateCode = [self hsy_defaultHUDModel:result.count type:kHSYHUDModelCodeTypeRequestPullDownSuccess];
         } else {
             for (id obj in result) {
                 [self.hsy_datas addObject:obj];
             }
-            HSYHUDModel *hudModel = [HSYHUDModel initWithCodeType:kHSYHUDModelCodeTypeRequestPullUpSuccess];
-            if (!self.hsy_showPromptContent) {
-                hudModel.hsy_showPromptContent = self.hsy_showPromptContent;
-            }
-            hudModel.pullUpSize = result.count;
-            self.hsy_pullUpStateCode = hudModel;
+            self.hsy_pullUpStateCode = [self hsy_defaultHUDModel:result.count type:kHSYHUDModelCodeTypeRequestPullUpSuccess];
         }
         if (next) {
             next(result);
@@ -82,6 +77,18 @@
             next(error);
         }
     }];
+}
+
+- (HSYHUDModel *)hsy_defaultHUDModel:(NSInteger)count type:(kHSYHUDModelCodeType)type
+{
+    HSYHUDModel *hudModel = [HSYHUDModel initWithCodeType:type];
+    if (!self.hsy_showPromptContent) {
+        hudModel.hsy_showPromptContent = self.hsy_showPromptContent;
+    }
+    if (count > 0) {
+        hudModel.pullUpSize = count;
+    }
+    return hudModel;
 }
 
 //范例

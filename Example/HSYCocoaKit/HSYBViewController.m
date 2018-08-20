@@ -171,7 +171,7 @@
     }
     _testBanners = [banners mutableCopy];
     
-    self.hsy_viewModel.hsy_showPromptContent = YES;
+    self.hsy_viewModel.hsy_showPromptContent = NO;
     self.pullUpStatus = kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore;
 //    [[self.hsy_viewModel.subject deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitRACSubscribeNotification *x) {
 //        if (x.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {

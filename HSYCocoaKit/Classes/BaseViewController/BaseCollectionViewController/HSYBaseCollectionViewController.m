@@ -91,7 +91,10 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
                 }
             }
             //下拉刷新成功//上拉加载更多成功
-            [self.collectionView reloadData];
+            [[RACScheduler mainThreadScheduler] afterDelay:0.3 schedule:^{
+                @strongify(self);
+                [self.collectionView reloadData];
+            }];
         } 
     }];
 }
