@@ -16,7 +16,7 @@
 - (RACSignal *)hsy_downloadFileRequestUrl:(NSURL *)url
                             fileCachePath:(NSString *)filePath
                             setHTTPMethod:(kHSYCocoaKitNetworkingRequestModel)type
-                       completionProgress:(void(^)(NSProgress *progress, CGFloat downloadProgress, NSURLSessionDownloadTask *downloadTask))progress
+                       completionProgress:(void(^)(NSProgress *progress, CGFloat downloadProgress))progress
                        cancelByResumeData:(void(^)(NSData *resumeData))cancel
 {
     NSParameterAssert(url);
@@ -31,14 +31,19 @@
             __block NSURLSessionDownloadTask *downloadTask = [self downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
                 if (progress) {
                     CGFloat fractionCompleted = MIN((downloadProgress.fractionCompleted * 100), 1.0f);
-                    progress(downloadProgress, fractionCompleted, downloadTask);
+                    progress(downloadProgress, fractionCompleted);
                 }
             } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
                 NSURL *fileURL = [NSURL fileURLWithPath:filePath];
                 return fileURL;
             } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-                if (!error) {
+                if (error) {
                     [AFHTTPSessionManager hsy_logRequestError:error];
+                    [downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
+                        if (cancel) {
+                            cancel(resumeData);
+                        }
+                    }];
                     [subscriber sendError:error];
                 } else {
                     RACTuple *tuple = RACTuplePack(response, filePath);
@@ -49,11 +54,6 @@
             [downloadTask resume];
             return [RACDisposable disposableWithBlock:^{
                 NSLog(@"release methods “- hsy_downloadFileRequestUrl:fileCachePath:setHTTPMethod:completionProgress:cancelByResumeData:” file is “AFURLSessionManager+RACSignal.h”");
-                [downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
-                    if (cancel) {
-                        cancel(resumeData);
-                    }
-                }];
             }];
         }];
     }];
@@ -61,7 +61,7 @@
 
 - (RACSignal *)hsy_downloadFileRequestUrl:(NSURL *)url
                             fileCachePath:(NSString *)filePath
-                       completionProgress:(void(^)(NSProgress *progress, CGFloat downloadProgress, NSURLSessionDownloadTask *downloadTask))progress
+                       completionProgress:(void(^)(NSProgress *progress, CGFloat downloadProgress))progress
                        cancelByResumeData:(void(^)(NSData *resumeData))cancel
 {
     return [self hsy_downloadFileRequestUrl:url
@@ -76,7 +76,7 @@
 - (RACSignal *)hsy_uploadFileRequestUrl:(NSURL *)url
                                filePath:(NSString *)path
                           setHTTPMethod:(kHSYCocoaKitNetworkingRequestModel)type
-                     completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress, NSURLSessionUploadTask *uploadTask))progress
+                     completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress))progress
 {
     NSParameterAssert(url);
     NSParameterAssert(path);
@@ -88,13 +88,14 @@
                 [request setHTTPMethod:[AFHTTPSessionManager hsy_methodFromNetworkingRequestModel:type]];
             }
             NSURL *pathURL = [NSURL fileURLWithPath:path];
-            __block NSURLSessionUploadTask *uploadTask = [self uploadTaskWithRequest:request fromFile:pathURL progress:^(NSProgress * _Nonnull uploadProgress) {
+            NSURLSessionUploadTask *uploadTask = [self uploadTaskWithRequest:request fromFile:pathURL progress:^(NSProgress * _Nonnull uploadProgress) {
                 if (progress) {
                     CGFloat fractionCompleted = MIN((uploadProgress.fractionCompleted * 100), 1.0f);
-                    progress(uploadProgress, fractionCompleted, uploadTask);
+                    progress(uploadProgress, fractionCompleted);
                 }
             } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                 if (error) {
+                    [AFHTTPSessionManager hsy_logRequestError:error];
                     [subscriber sendError:error];
                 } else {
                     RACTuple *tuple = RACTuplePack(response, responseObject);
@@ -105,7 +106,6 @@
             [uploadTask resume];
             return [RACDisposable disposableWithBlock:^{
                 NSLog(@"release methods “- hsy_uploadFileRequestUrl:filePath:completionProgress:” file is “AFURLSessionManager+RACSignal.h”");
-                [uploadTask cancel];
             }];
         }];
     }];
@@ -113,7 +113,7 @@
 
 - (RACSignal *)hsy_uploadFileRequestUrl:(NSURL *)url
                                filePath:(NSString *)path
-                     completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress, NSURLSessionUploadTask *uploadTask))progress
+                     completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress))progress
 {
     return [self hsy_uploadFileRequestUrl:url
                                  filePath:path

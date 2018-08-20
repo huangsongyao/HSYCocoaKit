@@ -23,11 +23,11 @@
  */
 - (RACSignal *)hsy_downloadFileRequestUrl:(NSURL *)url
                             fileCachePath:(NSString *)filePath
-                       completionProgress:(void(^)(NSProgress *progress, CGFloat downloadProgress, NSURLSessionDownloadTask *downloadTask))progress
+                       completionProgress:(void(^)(NSProgress *progress, CGFloat downloadProgress))progress
                        cancelByResumeData:(void(^)(NSData *resumeData))cancel NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 /**
- 文件下载，
+ 文件下载
 
  @param url 下载的远端地址
  @param filePath 存入本地的一个绝对路径
@@ -39,7 +39,7 @@
 - (RACSignal *)hsy_downloadFileRequestUrl:(NSURL *)url
                             fileCachePath:(NSString *)filePath
                             setHTTPMethod:(kHSYCocoaKitNetworkingRequestModel)type
-                       completionProgress:(void(^)(NSProgress *progress, CGFloat downloadProgress, NSURLSessionDownloadTask *downloadTask))progress
+                       completionProgress:(void(^)(NSProgress *progress, CGFloat downloadProgress))progress
                        cancelByResumeData:(void(^)(NSData *resumeData))cancel NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 #pragma mark - Upload File
@@ -54,7 +54,7 @@
  */
 - (RACSignal *)hsy_uploadFileRequestUrl:(NSURL *)url
                                filePath:(NSString *)path
-                     completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress, NSURLSessionUploadTask *uploadTask))progress NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
+                     completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress))progress NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
 /**
  文件上传，默认不设置method
@@ -68,5 +68,5 @@
 - (RACSignal *)hsy_uploadFileRequestUrl:(NSURL *)url
                                filePath:(NSString *)path
                           setHTTPMethod:(kHSYCocoaKitNetworkingRequestModel)type
-                     completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress, NSURLSessionUploadTask *uploadTask))progress NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
+                     completionProgress:(void(^)(NSProgress *progress, CGFloat uploadProgress))progress NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 @end

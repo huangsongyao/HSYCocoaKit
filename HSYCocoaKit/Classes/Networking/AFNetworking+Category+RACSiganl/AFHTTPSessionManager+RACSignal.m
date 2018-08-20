@@ -76,13 +76,6 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
     }];
 }
 
-- (RACSignal *)hsy_rac_request:(kHSYCocoaKitNetworkingRequestModel)type
-                           url:(NSString *)url
-                    parameters:(id)parameters
-{
-    return [self hsy_rac_request:type setHeaders:@[] url:url parameters:parameters];
-}
-
 #pragma mark - Get Model
 
 - (RACSignal *)hsy_getModel_3x_Request:(NSString *)url parameters:(id)parameters
@@ -97,22 +90,19 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
                             parameters:(id)parameters
                           taskProgress:(void(^)(NSProgress *downloadProgress))progress
 {
-    return [[[HSYNetWorkingManager shareInstance] hsy_networking_3x_Reachability] then:^RACSignal *{
-        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-            __block NSURLSessionDataTask *getTask = [self GET:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                [self.class hsy_logRequestHeaders:task];
-                RACTuple *tuple = RACTuplePack(task, responseObject);
-                [subscriber sendNext:tuple];
-                [subscriber sendCompleted];
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                [self.class hsy_logRequestHeaders:task];
-                [self.class hsy_logRequestError:error];
-                [subscriber sendError:error];
-            }];
-            return [RACDisposable disposableWithBlock:^{
-                NSLog(@"release methods “- hsy_getModel_3x_Request:parameters:taskProgress:” file is “AFHTTPSessionManager+RACSignal.h”");
-                [getTask cancel];
-            }];
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [self GET:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [self.class hsy_logRequestHeaders:task];
+            RACTuple *tuple = RACTuplePack(task, responseObject);
+            [subscriber sendNext:tuple];
+            [subscriber sendCompleted];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self.class hsy_logRequestHeaders:task];
+            [self.class hsy_logRequestError:error];
+            [subscriber sendError:error];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_getModel_3x_Request:parameters:taskProgress:” file is “AFHTTPSessionManager+RACSignal.h”");
         }];
     }];
 }
@@ -131,22 +121,19 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
                              parameters:(id)parameters
                            taskProgress:(void(^)(NSProgress *downloadProgress))progress
 {
-    return [[[HSYNetWorkingManager shareInstance] hsy_networking_3x_Reachability] then:^RACSignal *{
-        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-            __block NSURLSessionDataTask *postTask = [self POST:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                [self.class hsy_logRequestHeaders:task];
-                RACTuple *tuple = RACTuplePack(task, responseObject);
-                [subscriber sendNext:tuple];
-                [subscriber sendCompleted];
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                [self.class hsy_logRequestHeaders:task];
-                [self.class hsy_logRequestError:error];
-                [subscriber sendError:error];
-            }];
-            return [RACDisposable disposableWithBlock:^{
-                NSLog(@"release methods “- hsy_postModel_3x_Request:parameters:taskProgress:” file is “AFHTTPSessionManager+RACSignal.h”");
-                [postTask cancel];
-            }];
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [self POST:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [self.class hsy_logRequestHeaders:task];
+            RACTuple *tuple = RACTuplePack(task, responseObject);
+            [subscriber sendNext:tuple];
+            [subscriber sendCompleted];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self.class hsy_logRequestHeaders:task];
+            [self.class hsy_logRequestError:error];
+            [subscriber sendError:error];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_postModel_3x_Request:parameters:taskProgress:” file is “AFHTTPSessionManager+RACSignal.h”");
         }];
     }];
 }
