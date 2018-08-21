@@ -23,6 +23,8 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		AE03E264212BF589009EDEAA /* HSYWebTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE03E263212BF589009EDEAA /* HSYWebTestViewController.m */; };
+		AE03E266212C002D009EDEAA /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = AE03E265212C002D009EDEAA /* index.html */; };
 		AE07ED54209AFF3700542DBB /* tab_icon_home_default.png in Resources */ = {isa = PBXBuildFile; fileRef = AE07ED51209AFF3700542DBB /* tab_icon_home_default.png */; };
 		AE07ED55209AFF3700542DBB /* tab_icon_home_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE07ED52209AFF3700542DBB /* tab_icon_home_default@2x.png */; };
 		AE07ED56209AFF3700542DBB /* tab_icon_home_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE07ED53209AFF3700542DBB /* tab_icon_home_default@3x.png */; };
@@ -177,6 +179,9 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9C741A67EF37DC3880AC3E66 /* Pods_HSYCocoaKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSYCocoaKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EA3FE729B1FBBDC37CC1A7 /* Pods_HSYCocoaKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSYCocoaKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE03E262212BF589009EDEAA /* HSYWebTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSYWebTestViewController.h; sourceTree = "<group>"; };
+		AE03E263212BF589009EDEAA /* HSYWebTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSYWebTestViewController.m; sourceTree = "<group>"; };
+		AE03E265212C002D009EDEAA /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		AE07ED51209AFF3700542DBB /* tab_icon_home_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_icon_home_default.png; sourceTree = "<group>"; };
 		AE07ED52209AFF3700542DBB /* tab_icon_home_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_icon_home_default@2x.png"; sourceTree = "<group>"; };
 		AE07ED53209AFF3700542DBB /* tab_icon_home_default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_icon_home_default@3x.png"; sourceTree = "<group>"; };
@@ -392,6 +397,9 @@
 				AEAA99F62090858F00E0DCBB /* HSYCSegmentedViewController.m */,
 				AEECCA952071D2100041BA52 /* HSYViewControllerModel.h */,
 				AEECCA962071D2100041BA52 /* HSYViewControllerModel.m */,
+				AE03E265212C002D009EDEAA /* index.html */,
+				AE03E262212BF589009EDEAA /* HSYWebTestViewController.h */,
+				AE03E263212BF589009EDEAA /* HSYWebTestViewController.m */,
 				AE07EDAB20A0372A00542DBB /* image */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
@@ -706,6 +714,7 @@
 				AE07ED54209AFF3700542DBB /* tab_icon_home_default.png in Resources */,
 				AE07EDF120A0375A00542DBB /* v7.png in Resources */,
 				AE07EE0920A0375A00542DBB /* v15.png in Resources */,
+				AE03E266212C002D009EDEAA /* index.html in Resources */,
 				AE07EDF520A0375A00542DBB /* v8@2x.png in Resources */,
 				AE07ED7A209AFFB800542DBB /* tab_icon_search_default@3x.png in Resources */,
 				AE07ED56209AFF3700542DBB /* tab_icon_home_default@3x.png in Resources */,
@@ -877,6 +886,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE03E264212BF589009EDEAA /* HSYWebTestViewController.m in Sources */,
 				AE64DF5420B40331003A3AD7 /* HSYTestsViewController.m in Sources */,
 				6003F59E195388D20070C39A /* HSYAppDelegate.m in Sources */,
 				AE07ED9E20A02B8000542DBB /* CXAMCPersonalViewController.m in Sources */,

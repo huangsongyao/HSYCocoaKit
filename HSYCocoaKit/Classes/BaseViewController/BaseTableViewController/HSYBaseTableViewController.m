@@ -106,8 +106,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeTableViewDidSelectRow subscribeContents:@[indexPath]];
-    [self.hsy_viewModel.subject sendNext:object];
+    [self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypeTableViewDidSelectRow subscribeContents:@[indexPath]];
 }
 
 - (CGFloat)hsy_heightForCellWithCacheByIndexPath:(NSIndexPath *)indexPath configuration:(void(^)(UITableViewCell *cell))configuration

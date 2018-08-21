@@ -48,9 +48,9 @@
 - (RACCommand *)hsy_createCommandWithSignal:(RACSignal *)signal;
 
 /**
- *  创建button的command信号对应的RACSignal
+ *  将signal是组合成一个组合信号
  *
- *  @param signals     监听集合: @[RACObserve(self, tream)]
+ *  @param signals     监听集合: @[RACObserve(self, RACSignal_A), RACObserve(self, RACSignal_B), ...]
  *  @param reduceBlock 结果回调
  *
  *  @return RACSignal
@@ -58,9 +58,9 @@
 - (RACSignal *)hsy_createRACSignals:(id<NSFastEnumeration>)signals reduce:(id(^)(void))reduceBlock;
 
 /**
- *  创建button的command信号
+ *  将signal是组合成一个组合信号，并将组合信号转为RACCommand管理信号
  *
- *  @param signals 监听集合: @[RACObserve(self, tream)]
+ *  @param signals 监听集合: @[RACObserve(self, RACSignal_A), RACObserve(self, RACSignal_B), ...]
  *  @param next    结果回调
  *
  *  @return RACCommand对象
@@ -111,6 +111,7 @@
  
  */
 - (void)hsy_requestNetwork:(RACSignal *(^)(void))network subscriberNext:(BOOL(^)(id x))next;
+
 
 @end
 

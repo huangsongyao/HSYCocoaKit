@@ -25,6 +25,19 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitHTTPStatementSerializer) {
 
 //***********************************************************************************************
 
+@interface AFNetworkReachabilityManager (HasNetwork)
+
+/**
+ 通过AFNetworkReachabilityManager的方法验证和监听当前网络状态
+
+ @param start 网络状态监听回调，返回一个BOOL值，YES表示当验证到网络状态后，立即关闭监听，NO表示一直维持监听
+ */
++ (void)hsy_observer_3x_network_startMonitoring:(BOOL(^)(AFNetworkReachabilityStatus status, BOOL hasNetwork))start;
+
+@end
+
+//***********************************************************************************************
+
 @interface AFHTTPSessionManager (SetTimeout)
 
 /**

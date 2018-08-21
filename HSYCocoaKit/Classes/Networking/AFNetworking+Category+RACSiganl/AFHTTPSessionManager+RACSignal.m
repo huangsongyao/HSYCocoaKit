@@ -8,6 +8,7 @@
 
 #import "AFHTTPSessionManager+RACSignal.h"
 #import "HSYNetWorkingManager.h"
+#import "NSError+Message.h"
 
 NSString *const kHSYCocoaKitAFHTTPSessionRequestAllHeaders    = @"0awfjsfjaweofjw09fwefsd";
 
@@ -59,11 +60,9 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
         [self.requestSerializer setValue:header.allValues.firstObject forHTTPHeaderField:header.allKeys.firstObject];
     }
     NSParameterAssert(url);
-    RACSignal *signal = nil;
+    RACSignal *signal = [self hsy_getModel_3x_Request:url parameters:parameters];
     if (type == kHSYCocoaKitNetworkingRequestModel_post) {
         signal = [self hsy_postModel_3x_Request:url parameters:parameters];
-    } else {
-        signal = [self hsy_getModel_3x_Request:url parameters:parameters];
     }
     return signal;
 }
@@ -82,15 +81,17 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
                             parameters:(id)parameters
                           taskProgress:(void(^)(NSProgress *downloadProgress))progress
 {
+    @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
         [self GET:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            [self.class hsy_logRequestHeaders:task];
+            [AFHTTPSessionManager hsy_logRequestHeaders:task];
             RACTuple *tuple = RACTuplePack(task, responseObject);
             [subscriber sendNext:tuple];
             [subscriber sendCompleted];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self.class hsy_logRequestHeaders:task];
-            [self.class hsy_logRequestError:error];
+            [AFHTTPSessionManager hsy_logRequestHeaders:task];
+            [AFHTTPSessionManager hsy_logRequestError:error];
             [subscriber sendError:error];
         }];
         return [RACDisposable disposableWithBlock:^{
@@ -113,15 +114,17 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
                              parameters:(id)parameters
                            taskProgress:(void(^)(NSProgress *downloadProgress))progress
 {
+    @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
         [self POST:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            [self.class hsy_logRequestHeaders:task];
+            [AFHTTPSessionManager hsy_logRequestHeaders:task];
             RACTuple *tuple = RACTuplePack(task, responseObject);
             [subscriber sendNext:tuple];
             [subscriber sendCompleted];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self.class hsy_logRequestHeaders:task];
-            [self.class hsy_logRequestError:error];
+            [AFHTTPSessionManager hsy_logRequestHeaders:task];
+            [AFHTTPSessionManager hsy_logRequestError:error];
             [subscriber sendError:error];
         }];
         return [RACDisposable disposableWithBlock:^{

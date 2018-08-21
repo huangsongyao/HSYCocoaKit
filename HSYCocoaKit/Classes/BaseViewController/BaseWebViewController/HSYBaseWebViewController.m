@@ -15,17 +15,6 @@
 
 @implementation HSYBaseWebViewController
 
-+ (WKWebViewConfiguration *)hsy_webViewConfiguration:(NSString *)runNativeName delegate:(id<WKScriptMessageHandler>)delegate
-{
-    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-    if (runNativeName.length > 0) {
-        WKUserContentController *userContent = [[WKUserContentController alloc] init];
-        [userContent addScriptMessageHandler:delegate name:runNativeName];
-        config.userContentController = userContent;
-    }
-    return config;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -33,12 +22,15 @@
     if (self.customNavigationBar && !self.customNavigationBar.hidden) {
         rect = CGRectMake(rect.origin.x, self.customNavigationBar.bottom, rect.size.width, (IPHONE_HEIGHT - self.customNavigationBar.bottom));
     }
-    _webView = [[WKWebView alloc] initWithFrame:rect configuration:[HSYBaseWebViewController hsy_webViewConfiguration:[(HSYBaseWebModel *)self.hsy_viewModel hsy_runNativeName] delegate:self]];
-    if ([(HSYBaseWebModel *)self.hsy_viewModel hsy_url]) {
-        NSURLRequest *request = [NSURLRequest requestWithURL:[(HSYBaseWebModel *)self.hsy_viewModel hsy_url]];
-        [self.webView loadRequest:request];
-    } else {
-        [self.webView loadHTMLString:[(HSYBaseWebModel *)self.hsy_viewModel hsy_htmlString] baseURL:nil];
+    WKWebViewConfiguration *webViewConfiguration = [(HSYBaseWebModel *)self.hsy_viewModel hsy_webViewConfigurations:self];
+    _webView = [[WKWebView alloc] initWithFrame:rect configuration:webViewConfiguration];
+    
+    NSDictionary *methods = @{@(kHSYCocoaKitWKWebViewLoadTypeRequest) : NSStringFromSelector(@selector(loadRequest:)), @(kHSYCocoaKitWKWebViewLoadTypeHTMLString) : NSStringFromSelector(@selector(loadHTMLString:baseURL:)), @(kHSYCocoaKitWKWebViewLoadTypeFilePath) : NSStringFromSelector(@selector(loadFileURL:allowingReadAccessToURL:))};
+    NSString *method = methods[@([(HSYBaseWebModel *)self.hsy_viewModel hsy_loadType])];
+    if (method.length > 0) {
+        HSYCOCOAKIT_IGNORED_SUPPRESS_PERFORM_SELECTOR_LEAK_WARNING (
+            [self.webView performSelector:NSSelectorFromString(method) withObject:[(HSYBaseWebModel *)self.hsy_viewModel hsy_requestContent]]
+        );
     }
     self.webView.UIDelegate = self;
     self.webView.navigationDelegate = self;
@@ -50,9 +42,12 @@
 - (RACSignal *)hsy_nativeRunJavaScriptFunction:(NSString *)function
 {
     //native调用js
+    @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
         [self.webView evaluateJavaScript:function completionHandler:^(id _Nullable object, NSError * _Nullable error) {
             if (error) {
+                NSLog(@"methods “- hsy_nativeRunJavaScriptFunction:” error is %@", error);
                 [subscriber sendError:error];
             } else {
                 [subscriber sendNext:object];
@@ -71,23 +66,36 @@
 {
     //js调用native
     NSString *messageName = message.name;
-    if ([messageName isEqualToString:[(HSYBaseWebModel *)self.hsy_viewModel hsy_runNativeName]]) {
-        if (message.body) {
-            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNative subscribeContents:@[message.body]];
-            [self.hsy_viewModel.subject sendNext:object];
+    if ([[(HSYBaseWebModel *)self.hsy_viewModel hsy_runNativeNames] containsObject:messageName]) {
+        if (message) {
+            [(HSYBaseWebModel *)self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNative subscribeContents:@[message]];
+            
         }
     }
 }
 
 #pragma mark - WKUIDelegate
 
-- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(nonnull void (^)(void))completionHandler
+{
+    [self hsy_runJavaScriptAlertOrConfirm:message];
+    completionHandler();
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(nonnull void (^)(BOOL))completionHandler
+{
+    [self hsy_runJavaScriptAlertOrConfirm:message];
+    completionHandler(YES);
+}
+
+- (void)hsy_runJavaScriptAlertOrConfirm:(NSString *)message
 {
     //HTML或者js的alert、confirm、prompt方法调用时，直接触发此回调
-    if (message) {
-        HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNativeForAlert subscribeContents:@[message]];
-        [self.hsy_viewModel.subject sendNext:object];
+    NSString *resultMessage = message;
+    if (resultMessage.length == 0) {
+        resultMessage = @"";
     }
+    [self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNativeForAlert subscribeContents:@[resultMessage]];
 }
 
 #pragma mark - WKNavigationDelegate
@@ -98,10 +106,11 @@
     if (self.hsy_showLoading) {
         [self hsy_endSystemLoading];
     }
+    NSMutableArray *contents = [[NSMutableArray alloc] init];
     if (navigation) {
-        HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeDidFinished subscribeContents:@[navigation]];
-        [self.hsy_viewModel.subject sendNext:object];
+        [contents addObject:navigation];
     }
+    [self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypeDidFinished subscribeContents:contents];
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
@@ -110,13 +119,13 @@
     if (self.hsy_showLoading) {
         [self hsy_endSystemLoading];
     }
+    NSLog(@"\n web load failure, error is %@", error);
+    NSMutableArray *contents = [@[error] mutableCopy];
     if (navigation) {
-        HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeDidFailed subscribeContents:@[navigation]];
-        [self.hsy_viewModel.subject sendNext:object];
+        [contents addObject:navigation];
     }
-    if (error) {
-        [self.hsy_viewModel.subject sendError:error];
-    }
+    [self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypeDidFailed subscribeContents:contents];
 }
+
 
 @end

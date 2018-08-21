@@ -19,6 +19,8 @@
     return self;
 }
 
+#pragma mark - Pages
+
 - (void)hsy_nextPage
 {
     _page ++;
@@ -36,6 +38,8 @@
     }
     _size = size;
 }
+
+#pragma mark - Request
 
 - (void)hsy_pullRefresh:(kHSYReflesStatusType)status
              updateNext:(RACSignal *(^)(void))network
@@ -91,6 +95,8 @@
     return hudModel;
 }
 
+#pragma mark - Load
+
 //范例
 //- (RACSignal *)test:(NSString *)path
 //{
@@ -134,6 +140,15 @@
 //        return [RACDisposable disposableWithBlock:^{}];
 //    }];
     return [RACSignal empty];
+}
+
+#pragma mark - Send Message
+
+- (void)hsy_sendNext:(kHSYCocoaKitRACSubjectOfNextType)type subscribeContents:(NSArray<id> *)contents
+{
+    HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:type subscribeContents:contents];
+    object.hsy_isFirstRequest = self.hsy_isFirstTimes;
+    [self.subject sendNext:object];
 }
 
 @end

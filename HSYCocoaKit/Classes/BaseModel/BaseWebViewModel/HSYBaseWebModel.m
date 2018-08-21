@@ -10,24 +10,34 @@
 
 @implementation HSYBaseWebModel
 
-- (instancetype)initWithUrlString:(NSString *)urlString runNativeName:(NSString *)name
+- (instancetype)initWithContent:(NSString *)content loadType:(kHSYCocoaKitWKWebViewLoadType)type runNativeNames:(NSArray<NSString *> *)names
 {
     if (self = [super init]) {
-        BOOL canOpen = [urlString hasPrefix:@"http"];
-        NSAssert(canOpen != NO, @"warning！！通常链接必须含有http协议");
-        _hsy_url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        _hsy_runNativeName = name;
+        NSDictionary *dic = @{@(kHSYCocoaKitWKWebViewLoadTypeRequest) : [NSURLRequest requestWithURL:[NSURL URLWithString:content]], @(kHSYCocoaKitWKWebViewLoadTypeHTMLString) : content, @(kHSYCocoaKitWKWebViewLoadTypeFilePath) : [NSURL fileURLWithPath:content], };
+        _hsy_requestContent = dic[@(type)];
+        _hsy_loadType = type;
+        _hsy_runNativeNames = names;
     }
     return self;
 }
 
-- (instancetype)initWithHtmlString:(NSString *)htmlString runNativeName:(NSString *)name
+#pragma mark - WKWebViewConfiguration
+
++ (WKWebViewConfiguration *)hsy_webViewConfigurations:(NSArray<NSString *> *)runNativeNames delegate:(id<WKScriptMessageHandler>)delegate
 {
-    if (self = [super init]) {
-        _hsy_htmlString = htmlString;
-        _hsy_runNativeName = name;
+    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    WKUserContentController *userContent = [[WKUserContentController alloc] init];
+    for (NSString *runNativeName in runNativeNames) {
+        [userContent addScriptMessageHandler:delegate name:runNativeName];
     }
-    return self;
+    config.userContentController = userContent;
+    return config;
+}
+
+- (WKWebViewConfiguration *)hsy_webViewConfigurations:(id<WKScriptMessageHandler>)delegate
+{
+    WKWebViewConfiguration *config = [self.class hsy_webViewConfigurations:self.hsy_runNativeNames delegate:delegate];
+    return config;
 }
 
 @end

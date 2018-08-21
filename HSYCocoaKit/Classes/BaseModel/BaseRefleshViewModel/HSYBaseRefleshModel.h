@@ -60,4 +60,12 @@ typedef NS_ENUM(NSUInteger, kHSYReflesStatusType) {
  */
 - (RACSignal *)hsy_rac_pullUpMethod;
 
+/**
+ base类中调用热信号sendNext消息体
+ 
+ @param type 消息体类型
+ @param contents 内容
+ */
+- (void)hsy_sendNext:(kHSYCocoaKitRACSubjectOfNextType)type subscribeContents:(NSArray<id> *)contents;
+
 @end

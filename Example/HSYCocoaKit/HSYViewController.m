@@ -22,6 +22,7 @@
 #import "UIApplication+Device.h"
 #import "HSYCocoaKitAttributedLabelManager.h"
 #import "TYAttributedLabel.h"
+#import "HSYWebTestViewController.h"
 
 @interface TestModel : NSObject
 
@@ -130,7 +131,8 @@
 //        HSYAppDelegate *appDelegate = (HSYAppDelegate *)[UIApplication appDelegate];
 //        [appDelegate landscapeDirection:YES];
         
-        HSYBViewController *vc = [[HSYBViewController alloc] init];
+//        HSYBViewController *vc = [[HSYBViewController alloc] init];
+        HSYWebTestViewController *vc = [[HSYWebTestViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     button2.backgroundColor = RANDOM_RGB;

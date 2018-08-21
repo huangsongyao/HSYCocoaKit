@@ -232,4 +232,14 @@
 #define HSYCOCOAKIT_GGA_ROTATION(angle)             (CGAffineTransformMakeRotation(angle))
 
 
+//忽略"-Warc-performSelector-leaks"警告，“- performSelector:”类型的方法请不加“;”作为“stuff”参数写在“()”中
+#define HSYCOCOAKIT_IGNORED_SUPPRESS_PERFORM_SELECTOR_LEAK_WARNING(stuff) \
+do { \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+stuff; \
+_Pragma("clang diagnostic pop") \
+} while (0)
+
+
 #endif /* PublicMacroFile_h */

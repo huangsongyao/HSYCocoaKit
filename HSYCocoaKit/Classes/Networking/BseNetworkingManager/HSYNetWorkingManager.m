@@ -14,6 +14,29 @@ static HSYNetWorkingManager *networkingManager;
 
 //***********************************************************************************************
 
+@implementation AFNetworkReachabilityManager (HasNetwork)
+
++ (void)hsy_observer_3x_network_startMonitoring:(BOOL(^)(AFNetworkReachabilityStatus status, BOOL hasNetwork))start
+{
+    AFNetworkReachabilityManager *networkStatusManager = [AFNetworkReachabilityManager sharedManager];
+    @weakify(networkStatusManager);
+    [networkStatusManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        @strongify(networkStatusManager);
+        if (start) {
+            BOOL hasNetwork = (status != AFNetworkReachabilityStatusNotReachable);
+            BOOL stopMonintoring = start(status, hasNetwork);
+            if (stopMonintoring) {
+                [networkStatusManager stopMonitoring];
+            }
+        }
+    }];
+    [networkStatusManager startMonitoring];
+}
+
+@end
+
+//***********************************************************************************************
+
 @implementation AFHTTPSessionManager (SetTimeout)
 
 - (void)hsy_setHTTPSessionManagerTimeoutInterval:(NSTimeInterval)timeout
@@ -130,33 +153,16 @@ static HSYNetWorkingManager *networkingManager;
     }
 }
 
-#pragma mark - Observer Network
+#pragma mark - Obverser Network
 
 - (void)hsy_observer_3x_NetworkReachabilityOfNext:(BOOL(^)(AFNetworkReachabilityStatus status, BOOL hasNetwork))next
 {
-    [HSYNetWorkingManager hsy_observer_3x_network_startMonitoring:^BOOL(AFNetworkReachabilityStatus status, BOOL hasNetwork) {
+    [AFNetworkReachabilityManager hsy_observer_3x_network_startMonitoring:^BOOL(AFNetworkReachabilityStatus status, BOOL hasNetwork) {
         if (next) {
             return next(status, hasNetwork);
         }
         return YES;
     }];
-}
-
-+ (void)hsy_observer_3x_network_startMonitoring:(BOOL(^)(AFNetworkReachabilityStatus status, BOOL hasNetwork))start
-{
-    AFNetworkReachabilityManager *networkStatusManager = [AFNetworkReachabilityManager sharedManager];
-    @weakify(networkStatusManager);
-    [networkStatusManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        @strongify(networkStatusManager);
-        if (start) {
-            BOOL hasNetwork = (status != AFNetworkReachabilityStatusNotReachable);
-            BOOL stopMonintoring = start(status, hasNetwork);
-            if (stopMonintoring) {
-                [networkStatusManager stopMonitoring];
-            }
-        }
-    }];
-    [networkStatusManager startMonitoring];
 }
 
 #pragma mark - Session Manager

@@ -51,24 +51,21 @@
     [[RACObserve(self, self.hsy_viewModel.hsy_successStatusCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
         @strongify(self);
         if (x) {
-            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeRequestSuccess subscribeContents:@[x]];
-            [self.hsy_viewModel.subject sendNext:object];
+            [self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypeRequestSuccess subscribeContents:@[x]];
         }
     }];
     //监听一般网络请求失败
     [[RACObserve(self, self.hsy_viewModel.hsy_errorStatusCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
         @strongify(self);
         if (x) {
-            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeRequestFailure subscribeContents:@[x]];
-            [self.hsy_viewModel.subject sendNext:object];
+            [self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypeRequestFailure subscribeContents:@[x]];
         }
     }];
     if (self.hsy_addKeyboardObserver) {
         //键盘监听
         [self observerToKeyboardWillChanged:self.hsy_keyboardObserObject subscribeCompleted:^(CGRect frameBegin, CGRect frameEnd) {
             @strongify(self);
-            HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:kHSYCocoaKitRACSubjectOfNextTypeObserverKeyboard subscribeContents:@[[NSValue valueWithCGRect:frameBegin], [NSValue valueWithCGRect:frameEnd]]];
-            [self.hsy_viewModel.subject sendNext:object];
+            [self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypeObserverKeyboard subscribeContents:@[[NSValue valueWithCGRect:frameBegin], [NSValue valueWithCGRect:frameEnd]]];
         }];
     }
     if (self.hsy_addEndEditedKeyboard) {
