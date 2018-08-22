@@ -113,7 +113,7 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
     @weakify(scrollView);
     [scrollView addPullToRefreshWithLoadingView:self.pullDownView subscribeActionHandler:^{
         @strongify(self);
-        @weakify(scrollView);
+        @strongify(scrollView);
         [self hsy_refreshResult:scrollView isPullDown:YES];
     }];
 }
@@ -147,12 +147,12 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
 
 - (void)subjectSendNext:(BOOL)pullDown refreshScrollView:(UIScrollView *)scrollView
 {
-    kHSYCocoaKitRACSubjectOfNextType type = (pullDown ? kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess : kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess);
     @weakify(scrollView);
     @weakify(self);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         @strongify(scrollView);
         @strongify(self);
+        kHSYCocoaKitRACSubjectOfNextType type = (pullDown ? kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess : kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess);
         if (type == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess) {
             [scrollView.pullToRefreshView stopAnimating];
             [self hsy_hasMorePullUp:scrollView];

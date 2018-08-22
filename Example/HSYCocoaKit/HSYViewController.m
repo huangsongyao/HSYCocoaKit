@@ -128,8 +128,8 @@
     UIButton *button2 = [NSObject createButtonByParam:@{} clickedOnSubscribeNext:^(UIButton *button) {
         @strongify(self);
         
-//        HSYBViewController *vc = [[HSYBViewController alloc] init];
-        HSYWebTestViewController *vc = [[HSYWebTestViewController alloc] init];
+        HSYBViewController *vc = [[HSYBViewController alloc] init];
+//        HSYWebTestViewController *vc = [[HSYWebTestViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
     button2.backgroundColor = RANDOM_RGB;
