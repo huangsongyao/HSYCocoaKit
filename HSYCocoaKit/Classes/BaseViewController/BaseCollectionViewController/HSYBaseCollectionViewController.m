@@ -80,6 +80,9 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
         @strongify(self);
         if (signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess ||
             signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
+            if (self.hsy_viewModel.hsy_isFirstTimes) {
+                self.hsy_viewModel.hsy_isFirstTimes = !self.hsy_viewModel.hsy_isFirstTimes;
+            }
             if (signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess && [signal.subscribeContents.firstObject isKindOfClass:[HSYHUDModel class]]) {
                 HSYHUDModel *hudModel = signal.subscribeContents.firstObject;
                 if (hudModel.pullUpSize < self.hsy_viewModel.size) {
