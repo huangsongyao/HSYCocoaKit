@@ -18,7 +18,6 @@
 #import "CXAMCPersonalViewController.h"
 #import "UIViewController+Alert.h"
 #import "CIDetector+QRCode.h"
-#import "HSYAppDelegate.h"
 #import "UIApplication+Device.h"
 #import "HSYCocoaKitAttributedLabelManager.h"
 #import "TYAttributedLabel.h"
@@ -128,8 +127,6 @@
     
     UIButton *button2 = [NSObject createButtonByParam:@{} clickedOnSubscribeNext:^(UIButton *button) {
         @strongify(self);
-//        HSYAppDelegate *appDelegate = (HSYAppDelegate *)[UIApplication appDelegate];
-//        [appDelegate landscapeDirection:YES];
         
 //        HSYBViewController *vc = [[HSYBViewController alloc] init];
         HSYWebTestViewController *vc = [[HSYWebTestViewController alloc] init];

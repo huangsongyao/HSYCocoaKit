@@ -10,6 +10,9 @@
 #import "HSYWebTestViewController.h"
 #import "HSYBaseWebModel.h"
 #import "NSFileManager+Finder.h"
+#import "HSYBaseViewController+CustomNavigationItem.h"
+#import "HSYAppDelegate.h"
+#import "UIViewController+Alert.h"
 
 @interface HSYWebTestViewController ()
 
@@ -19,20 +22,30 @@
 
 - (void)viewDidLoad {
     
-    NSString *path = [NSFileManager finderFileFromName:@"index" fileType:@"html"];
-    self.hsy_viewModel = [[HSYBaseWebModel alloc] initWithContent:path loadType:kHSYCocoaKitWKWebViewLoadTypeFilePath runNativeNames:@[@"Location"]];
+//    NSString *path = [NSFileManager finderFileFromName:@"index" fileType:@"html"];
+    self.hsy_viewModel = [[HSYBaseWebModel alloc] initWithContent:@"http://192.168.20.24:3000" loadType:kHSYCocoaKitWKWebViewLoadTypeRequest runNativeNames:@[]];
     [super viewDidLoad];
     
     @weakify(self);
     [self.hsy_viewModel.subject subscribeNext:^(HSYCocoaKitRACSubscribeNotification *notification) {
+        @strongify(self);
         if (notification.subscribeType == kHSYCocoaKitRACSubjectOfNextTypeDidFinished) {
-            @strongify(self);
-            NSString *jsStr = @"alert('1111')"; //[NSString stringWithFormat:@"store.fullScreen('%@')", @"测试一下native调用JavaScript"];
-            [[[self hsy_nativeRunJavaScriptFunction:jsStr] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
-                NSLog(@"\n result = %@", x);
+            [self hsy_rightItemsImages:@[@{@(kHSYCocoaKitDefaultCustomBarItemTag) : @"nav_back@2x"}] subscribeNext:^(UIButton *button, NSInteger tag) {
+                NSString *jsStr = [NSString stringWithFormat:@"store.fullScreen('%@')", @"测试一下native调用JavaScript"];
+                [[[self hsy_nativeRunJavaScriptFunction:jsStr] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+                    NSLog(@"\n result = %@", x);
+                }];
+                HSYAppDelegate *appDelegate = (HSYAppDelegate *)[UIApplication appDelegate];
+                button.selected = !button.selected;
+                [appDelegate landscapeDirection:button.selected];
+                self.customNavigationBar.width = IPHONE_WIDTH;
+                CGRect rect = CGRectMake(0, self.customNavigationBar.bottom, IPHONE_WIDTH, IPHONE_HEIGHT - self.customNavigationBar.bottom);
+                self.webView.frame = rect;
             }];
-        } else if (notification.subscribeType == kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNativeForAlert) {
             
+        } else if (notification.subscribeType == kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNativeForAlert) {
+            [[[UIViewController hsy_rac_showAlertViewController:self title:@"测试" message:notification.subscribeContents.firstObject alertActionTitles:@[@"确定"]] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+            }];
         }
     }];
     

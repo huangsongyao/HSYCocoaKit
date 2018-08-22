@@ -113,11 +113,8 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
     @weakify(scrollView);
     [scrollView addPullToRefreshWithLoadingView:self.pullDownView subscribeActionHandler:^{
         @strongify(self);
-        [[[self.hsy_viewModel hsy_rac_pullDownMethod] deliverOn:[RACScheduler mainThreadScheduler]] subscribeCompleted:^{
-            @strongify(self);
-            @strongify(scrollView);
-            [self subjectSendNext:YES refreshScrollView:scrollView];
-        }];
+        @weakify(scrollView);
+        [self hsy_refreshResult:scrollView isPullDown:YES];
     }];
 }
 
@@ -128,11 +125,23 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
     @weakify(scrollView);
     [scrollView addInfiniteScrollingWithLoadingView:self.pullUpView subscribeActionHandler:^{
         @strongify(self);
-        [[[self.hsy_viewModel hsy_rac_pullUpMethod] deliverOn:[RACScheduler mainThreadScheduler]] subscribeCompleted:^{
-            @strongify(self);
-            @strongify(scrollView);
-            [self subjectSendNext:NO refreshScrollView:scrollView];
-        }];
+        @strongify(scrollView);
+        [self hsy_refreshResult:scrollView isPullDown:NO];
+    }];
+}
+
+- (void)hsy_refreshResult:(UIScrollView *)scrollView isPullDown:(BOOL)pullDown
+{
+    @weakify(self);
+    @weakify(scrollView);
+    RACSignal *signal = [self.hsy_viewModel hsy_rac_pullUpMethod];
+    if (pullDown) {
+        signal = [self.hsy_viewModel hsy_rac_pullDownMethod];
+    }
+    [[signal deliverOn:[RACScheduler mainThreadScheduler]] subscribeCompleted:^{
+        @strongify(self);
+        @strongify(scrollView);
+        [self subjectSendNext:pullDown refreshScrollView:scrollView];
     }];
 }
 
@@ -153,6 +162,8 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
         }
     });
 }
+
+#pragma mark - Close Or Open
 
 - (void)hsy_closePullUp:(UIScrollView *)scrollView
 {

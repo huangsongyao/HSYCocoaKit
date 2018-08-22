@@ -69,7 +69,6 @@
     if ([[(HSYBaseWebModel *)self.hsy_viewModel hsy_runNativeNames] containsObject:messageName]) {
         if (message) {
             [(HSYBaseWebModel *)self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNative subscribeContents:@[message]];
-            
         }
     }
 }
