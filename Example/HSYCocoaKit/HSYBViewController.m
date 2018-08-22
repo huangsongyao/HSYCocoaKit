@@ -171,8 +171,16 @@
     }
     _testBanners = [banners mutableCopy];
     
+    
+    [self firstRequest];
+    [[self.hsy_viewModel.subject deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+        NSLog(@"");
+    }];
+    
     self.hsy_viewModel.hsy_showPromptContent = NO;
     self.pullUpStatus = kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore;
+    
+    
 //    [[self.hsy_viewModel.subject deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitRACSubscribeNotification *x) {
 //        if (x.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
 //            HSYHUDModel *hudModel = x.subscribeContents.firstObject;

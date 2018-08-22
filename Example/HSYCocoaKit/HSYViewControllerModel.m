@@ -36,7 +36,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.hsy_datas = [self datas];
+        
 //        @weakify(self);
 //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //            @strongify(self);
@@ -54,28 +54,28 @@
 //        });
         
         
-        NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
-        [self hsy_requestNetwork:^RACSignal *{
-            return [[HSYNetWorkingManager shareInstance] test:urlStr];
-        } toMap:^id(RACTuple *tuple) {
-            id json = tuple.second;
-            return [NSObject hsy_resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json];
-        } subscriberNext:^BOOL(id x) {
-            NSLog(@"\n x1 = %@", x);
-            return YES;
-        }];
-
-
-
-        [self hsy_requestNetwork:^RACSignal *{
-            return [[HSYNetWorkingManager shareInstance] test:urlStr];
-        } toMap:^id(RACTuple *tuple) {
-            id json = tuple.second;
-            return [NSObject hsy_resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json];
-        } subscriberNext:^BOOL(id x) {
-            NSLog(@"\n x2 = %@", x);
-            return YES;
-        }];
+//        NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
+//        [self hsy_requestNetwork:^RACSignal *{
+//            return [[HSYNetWorkingManager shareInstance] test:urlStr];
+//        } toMap:^id(RACTuple *tuple) {
+//            id json = tuple.second;
+//            return [NSObject hsy_resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json];
+//        } subscriberNext:^BOOL(id x) {
+//            NSLog(@"\n x1 = %@", x);
+//            return YES;
+//        }];
+//
+//
+//
+//        [self hsy_requestNetwork:^RACSignal *{
+//            return [[HSYNetWorkingManager shareInstance] test:urlStr];
+//        } toMap:^id(RACTuple *tuple) {
+//            id json = tuple.second;
+//            return [NSObject hsy_resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json];
+//        } subscriberNext:^BOOL(id x) {
+//            NSLog(@"\n x2 = %@", x);
+//            return YES;
+//        }];
         
         
     
@@ -151,24 +151,17 @@
         [self hsy_refreshToPullUp:^RACSignal *{
             return [[HSYNetWorkingManager shareInstance] test:urlStr];
         } toMap:^NSMutableArray *(RACTuple *tuple) {
-            return [@[] mutableCopy];
+            if (self.hsy_datas.count > 0) {
+                return [@[] mutableCopy];
+            }
+            return [self datas];
         } subscriberNext:^(NSMutableArray *x) {
             [subscriber sendCompleted];
         }];
-//        [self hsy_pullRefresh:kHSYReflesStatusTypePullUp updateNext:^RACSignal *{
-//            return [[HSYNetWorkingManager shareInstance] test:urlStr];
-//        } toMap:^NSMutableArray *(RACTuple *tuple) {
-//            NSMutableArray *array = [[NSMutableArray alloc] init];
-////            for (NSInteger i = 0; i < 100; i ++) {
-////                [array addObject:[NSString stringWithFormat:@"%d", arc4random()%100]];
-////            }
-//            return array;
-//        } subscriberNext:^(id x) {
-//            [subscriber sendCompleted];
-//        }];
         return [RACDisposable disposableWithBlock:^{}];
     }];
 }
+
 
 - (NSMutableArray *)datas
 {

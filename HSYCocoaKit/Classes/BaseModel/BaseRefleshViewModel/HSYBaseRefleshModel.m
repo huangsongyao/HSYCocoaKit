@@ -60,15 +60,16 @@
     [self hsy_requestNetwork:network toMap:map subscriberNext:^BOOL(NSMutableArray *result) {
         @strongify(self);
         //加载成功后动态更新数据源信息，并设置当前的statusCode状态
+        kHSYHUDModelCodeType codeType = (kHSYHUDModelCodeType)[@{@(kHSYReflesStatusTypePullDown) : @(kHSYHUDModelCodeTypeRequestPullDownSuccess), @(kHSYReflesStatusTypePullUp) : @(kHSYHUDModelCodeTypeRequestPullUpSuccess), }[@(status)] integerValue];
         if (status == kHSYReflesStatusTypePullDown) {
             [self.hsy_datas removeAllObjects];
             self.hsy_datas = [result mutableCopy];
-            self.hsy_pullDownStateCode = [self hsy_defaultHUDModel:result.count type:kHSYHUDModelCodeTypeRequestPullDownSuccess];
+            self.hsy_pullDownStateCode = [self hsy_defaultHUDModel:result.count type:codeType];
         } else {
             for (id obj in result) {
                 [self.hsy_datas addObject:obj];
             }
-            self.hsy_pullUpStateCode = [self hsy_defaultHUDModel:result.count type:kHSYHUDModelCodeTypeRequestPullUpSuccess];
+            self.hsy_pullUpStateCode = [self hsy_defaultHUDModel:result.count type:codeType];
         }
         if (next) {
             next(result);
