@@ -49,4 +49,12 @@
  */
 - (NSString *)stringByReplacingOccurrencesOfSymbol:(NSString *)symbol fillContent:(NSString *)content;
 
+/**
+ 将小数点后保留的位数转为精度位数的单位，例如：decimal = 5，则结果为：0.00001
+
+ @param decimal 小数点后保留的位数
+ @return 例如：decimal = 5，则结果为：0.00001
+ */
++ (NSString *)unitFromDecimal:(NSInteger)decimal;
+
 @end

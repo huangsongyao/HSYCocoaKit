@@ -10,6 +10,8 @@
 
 @implementation NSString (Replace)
 
+#pragma mark - Location For String
+
 - (NSMutableArray<NSValue *> *)allSymbolLocations:(NSString *)symbol
 {
     if (symbol.length == 0 || self.length == 0) {
@@ -45,6 +47,8 @@
     return nil;
 }
 
+#pragma mark - Replace Crashed Unicode
+
 - (NSString *)stringByReplaceSomeCrashedUnicode
 {
     NSString *string = nil;
@@ -54,6 +58,8 @@
     }
     return string;
 }
+
+#pragma mark - Replacing
 
 - (NSString *)stringByReplacingOccurrences
 {
@@ -68,6 +74,18 @@
 - (NSString *)stringByReplacingOccurrencesOfSymbol:(NSString *)symbol fillContent:(NSString *)content
 {
     return [self stringByReplacingOccurrencesOfString:symbol withString:content];
+}
+
+#pragma mark - TecimalPlace Change To unit
+
++ (NSString *)unitFromDecimal:(NSInteger)decimal
+{
+    NSString *prefix = @"0.";
+    for (NSInteger i = 0; i < (decimal - 1); i ++) {
+        prefix = [NSString stringWithFormat:@"%@0", prefix];
+    }
+    prefix = [prefix stringByAppendingString:@"1"];
+    return prefix;
 }
 
 @end
