@@ -21,6 +21,22 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRegularResult) {
 #pragma mark - Number
 
 /**
+ 正则过滤字符串必须为正整数或者0-decimals位的小数，并且如果字符串格式为@"xxx."或者@".xxx"均不通过，返回kHSYCocoaKitRegularResult结果
+
+ @param decimals 小数点后的位数
+ @return 满足条件的kHSYCocoaKitRegularResult枚举类型
+ */
+- (kHSYCocoaKitRegularResult)hsy_isPointNumber:(NSString *)decimals;
+
+/**
+ 正则过滤字符串必须为正整数或者0-decimals位的小数，并且如果字符串格式为@"xxx."或者@".xxx"均不通过
+
+ @param decimals 小数点后的位数
+ @return YES表示字符串为正整数或者小数
+ */
+- (BOOL)isPointNumber:(NSString *)decimals;
+
+/**
  正则过滤字符串必须为纯数字
 
  @return YES表示字符串为纯数字
@@ -30,7 +46,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRegularResult) {
 /**
  正则过滤字符串必须为纯数字，返回kHSYCocoaKitRegularResult结果
 
- @return YES表示字符串为纯数字，kHSYCocoaKitRegularResult类型
+ @return 满足条件的kHSYCocoaKitRegularResult枚举类型
  */
 - (kHSYCocoaKitRegularResult)hsy_isPureNumber;
 

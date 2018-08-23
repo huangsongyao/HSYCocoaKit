@@ -18,6 +18,32 @@
 
 #pragma mark - Number For Regex
 
+- (kHSYCocoaKitRegularResult)hsy_isPointNumber:(NSString *)decimals
+{
+    if (self.length == 0) {
+        return kHSYCocoaKitRegularResultLengthIsZero;
+    }
+    if ([self containsString:@"."]) {
+        NSArray *selfs = [self componentsSeparatedByString:@"."];
+        if (![selfs.firstObject isPureNumber] || ![selfs.lastObject isPureNumber]) {
+            return kHSYCocoaKitRegularResultUnconform;
+        }
+    }
+    //正整数或者0-decimals位的小数
+    NSString *pointNumberRegex = [NSString stringWithFormat:@"^[1-9]+(.[0-9]{0,%@})?$", decimals];
+    kHSYCocoaKitRegularResult result = ([self isValidateByRegex:pointNumberRegex] ? kHSYCocoaKitRegularResultConform : kHSYCocoaKitRegularResultUnconform);
+    return result;
+}
+
+- (BOOL)isPointNumber:(NSString *)decimals
+{
+    kHSYCocoaKitRegularResult result = [self hsy_isPointNumber:decimals];
+    if (result == kHSYCocoaKitRegularResultConform) {
+        return YES;
+    }
+    return NO;
+}
+
 - (kHSYCocoaKitRegularResult)hsy_isPureNumber
 {
     if (self.length == 0) {

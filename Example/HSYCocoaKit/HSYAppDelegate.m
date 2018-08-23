@@ -14,6 +14,8 @@
 #import "NSObject+JSONModelForRuntime.h"
 #import "HSYFMDBMacro.h"
 #import "NSData+Encrypt.h"
+#import "NSString+Regular.h"
+#import "NSDecimalNumber+Computer.h"
 
 @interface dddMidel : JSONModel
 
@@ -108,6 +110,18 @@
                                testTable
                                ] mutableCopy];
     [[HSYFMDBOperationManager shareInstance] createDatabase:@"databases" tableFieldInfos:infos];
+    
+    NSString *left = @"0.2222";
+    NSString *right = @"0.0000001";
+    
+    NSLog(@"\n add = %@, \n subtract = %@, \n multiply = %@, \n divid = %@", [NSDecimalNumber addingDecimalNumber:@{left : right}].stringValue, [NSDecimalNumber subtractingDecimalNumber:@{left : right}], [NSDecimalNumber multiplyingDecimalNumber:@{left : right}], [NSDecimalNumber dividingDecimalNumber:@{left : right}]);
+    NSLog(@"\n power = %@, powerOf10 = %@", [NSDecimalNumber powerDecimalNumber:@{@"3" : @"3"}], [NSDecimalNumber powerOf10DecimalNumber:@{@"2" : @"3"}]);
+    
+    
+    NSString *ttttt = @"043";
+    BOOL isttt = [ttttt isPointNumber:@"5"];
+    NSLog(@"isttt = %d", isttt);
+    
     
     
 //    [[HSYFMDBOperationManager shareInstance] hsy_insertDataToTableName:@"testDatabaseTable" fieldParams:[HSYFMDBOperationManager hsy_testTableByFields] insertDatas:[@[@"user", @"userId"] mutableCopy] completed:^(BOOL result, HSYFMDBOperationFieldInfo *info) {
