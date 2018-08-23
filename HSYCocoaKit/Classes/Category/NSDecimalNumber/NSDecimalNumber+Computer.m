@@ -49,9 +49,9 @@
     NSDictionary *dictionaryDecimal = [NSDecimalNumber hsy_decimalNumber:subtractingDictionary];
     NSDecimalNumber *dividingDecimal = nil;
     if (handler) {
-        dividingDecimal = dividingDecimal = [dictionaryDecimal.allKeys.firstObject decimalNumberBySubtracting:dictionaryDecimal.allValues.firstObject withBehavior:handler];
+        dividingDecimal = [dictionaryDecimal.allKeys.firstObject decimalNumberBySubtracting:dictionaryDecimal.allValues.firstObject withBehavior:handler];
     } else {
-        dividingDecimal = dividingDecimal = [dictionaryDecimal.allKeys.firstObject decimalNumberBySubtracting:dictionaryDecimal.allValues.firstObject];
+        dividingDecimal = [dictionaryDecimal.allKeys.firstObject decimalNumberBySubtracting:dictionaryDecimal.allValues.firstObject];
     }
     return dividingDecimal;
 }
