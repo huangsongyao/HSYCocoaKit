@@ -114,7 +114,7 @@
     
 //    self.hsy_showLoading = YES;
 //    self.tableView.hidden = YES;
-    @weakify(self);
+//    @weakify(self);
     [self hsy_rightItemsImages:@[@{@(kHSYCocoaKitDefaultCustomBarItemTag) : @"nav_back@2x"}] subscribeNext:^(UIButton *button, NSInteger tag) {
 //        @strongify(self);
         NSLog(@"x1=%@", [NSDate date]);
