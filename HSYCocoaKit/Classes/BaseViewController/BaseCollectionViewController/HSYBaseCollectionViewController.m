@@ -74,34 +74,33 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
         }
     }
     
-    //监听上下拉
+    //监听上下拉刷新
     @weakify(self);
-    [self.hsy_viewModel.subject subscribeNext:^(HSYCocoaKitRACSubscribeNotification *signal) {
+    self.hsy_refreshRequestSuccess = ^RACSignal *(BOOL isPullDown, HSYCocoaKitRACSubscribeNotification *signal) {
         @strongify(self);
+        RACSignal *refreshRequestSignal = [RACSignal empty];
         if (self.hsy_refreshResult) {
-            RACSignal *refreshSignal = self.hsy_refreshResult(signal);
-            [[refreshSignal deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitRACSubscribeNotification *notification) {
-                if (notification.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess ||
-                    notification.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
-                    if (self.hsy_viewModel.hsy_isFirstTimes) {
-                        self.hsy_viewModel.hsy_isFirstTimes = !self.hsy_viewModel.hsy_isFirstTimes;
-                    }
-                    if (notification.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess && [notification.subscribeContents.firstObject isKindOfClass:[HSYHUDModel class]]) {
-                        HSYHUDModel *hudModel = notification.subscribeContents.firstObject;
-                        if (hudModel.pullUpSize < self.hsy_viewModel.size) {
-                            if (self.pullUpStatus == kHSYCocoaKitRefreshForPullUpCompletedStatusClose) {
-                                [self hsy_closePullUp:self.collectionView];
-                            } else {
-                                [self hsy_notMorePullUp:self.collectionView];
-                            }
+            refreshRequestSignal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                RACSignal *refreshSignal = self.hsy_refreshResult(signal);
+                [[refreshSignal deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitRACSubscribeNotification *notification) {
+                    if (notification.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess ||
+                        notification.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
+                        if (self.hsy_viewModel.hsy_isFirstTimes) {
+                            self.hsy_viewModel.hsy_isFirstTimes = !self.hsy_viewModel.hsy_isFirstTimes;
                         }
+                        //下拉刷新成功//上拉加载更多成功
+                        [self.collectionView reloadData];
                     }
-                    //下拉刷新成功//上拉加载更多成功
-                    [self.collectionView reloadData];
-                }
+                    [subscriber sendNext:signal];
+                    [subscriber sendCompleted];
+                }];
+                return [RACDisposable disposableWithBlock:^{
+                    NSLog(@"release cool signal “self.hsy_refreshRequestSuccess = ^RACSignal *(BOOL isPullDown, HSYCocoaKitRACSubscribeNotification *signal)” in %@ class", NSStringFromClass(self.class));
+                }];
             }];
         }
-    }];
+        return refreshRequestSignal;
+    };
 }
 
 #pragma mark - UICollectionViewDelegate && UICollectionViewDataSource

@@ -112,7 +112,7 @@
     self.registerClasses = @{@"TestBaseTableViewCell" : @"uuuufffff"};
     [super viewDidLoad];
     
-    self.hsy_showLoading = YES;
+//    self.hsy_showLoading = YES;
 //    self.tableView.hidden = YES;
     @weakify(self);
     [self hsy_rightItemsImages:@[@{@(kHSYCocoaKitDefaultCustomBarItemTag) : @"nav_back@2x"}] subscribeNext:^(UIButton *button, NSInteger tag) {
@@ -157,30 +157,15 @@
     
     
     [self firstRequest];
-    [[self.hsy_viewModel.subject deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
-        @strongify(self);
-        [self.tableView reloadData];
-        [self hsy_endSystemLoading];
-//        self.tableHeaderView = [self header];
-//        self.tableView.tableHeaderView = self.tableHeaderView;
-//        
-//        
-//        UIButton *btn = [NSObject createButtonByParam:@{@(kHSYCocoaKitOfButtonPropretyTypeNorTitle) : @"返回"} clickedOnSubscribeNext:^(UIButton *button) {
-//            @strongify(self);
-//            [self update:NO];
-//        }];
-//        btn.frame = CGRectMake(0, 0, 50, 35);
-//        self.headerView = [[UIView alloc] initWithSize:CGSizeMake(IPHONE_WIDTH, 35)];
-//        self.headerView.y = self.customNavigationBar.bottom;
-//        self.headerView.backgroundColor = [UIColor redColor];
-//        [self.view addSubview:self.headerView];
-//        [self.view bringSubviewToFront:self.headerView];
-//        self.headerView.hidden = YES;
-//        [self.headerView addSubview:btn];
-    }];
-    
+    self.hsy_refreshResult = ^RACSignal *(HSYCocoaKitRACSubscribeNotification *signal) {
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            [subscriber sendNext:signal];
+            [subscriber sendCompleted];
+            return [RACDisposable disposableWithBlock:^{}];
+        }];
+    };
     self.hsy_viewModel.hsy_showPromptContent = NO;
-    self.pullUpStatus = kHSYCocoaKitRefreshForPullUpCompletedStatusClose;
+    self.pullUpStatus = kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore;
     
     
 //    [[self.hsy_viewModel.subject deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitRACSubscribeNotification *x) {

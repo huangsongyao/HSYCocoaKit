@@ -29,6 +29,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRefreshForPullUpCompletedStatus) {
 @property (nonatomic, strong) HSYCustomRefreshView *pullUpView;     //上拉加载更多的尾部视图定制，默认为nil，如果添加了上拉，此视图必须设置
 //上拉获取到的数据条数小于既定的“self.hsy_viewModel.size”的个数，根据此枚举类型处理上拉功能，默认为kHSYCocoaKitRefreshForPullUpCompletedStatusClose
 @property (nonatomic, assign) kHSYCocoaKitRefreshForPullUpCompletedStatus pullUpStatus;
+//上拉或下拉加载完成功后的回调内容
+@property (nonatomic, copy) RACSignal *(^hsy_refreshRequestSuccess)(BOOL isPullDown, HSYCocoaKitRACSubscribeNotification *signal);
 
 /**
  同时添加上拉和下拉

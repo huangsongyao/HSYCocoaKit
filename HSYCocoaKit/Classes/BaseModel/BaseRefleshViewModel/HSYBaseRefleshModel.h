@@ -20,9 +20,7 @@ typedef NS_ENUM(NSUInteger, kHSYReflesStatusType) {
 @property (nonatomic, assign, readonly) NSInteger page;                     //翻页页码，默认为1
 @property (nonatomic, assign, readonly) NSInteger size;                     //每页的数据条数，默认为100
 
-@property (nonatomic, strong) id hsy_pullDownStateCode;                     //下拉刷新的状态
-@property (nonatomic, strong) id hsy_pullUpStateCode;                       //上拉刷新的状态
-
+@property (nonatomic, strong) id hsy_refreshStateCode;                      //监听上拉下拉内容
 @property (nonatomic, assign) BOOL hsy_showPromptContent;                   //额外提供一个标识位，用于处理是否支持直接提示默认的提示语
 @property (nonatomic, assign) BOOL hsy_isFirstTimes;                        //当调用“HSYBaseTableViewController”类或者“类”的“- firstRequest”方法时，会将本标志位设置为YES，用于区分某些情况下的firstRequest状态
 
@@ -67,5 +65,14 @@ typedef NS_ENUM(NSUInteger, kHSYReflesStatusType) {
  @param contents 内容
  */
 - (void)hsy_sendNext:(kHSYCocoaKitRACSubjectOfNextType)type subscribeContents:(NSArray<id> *)contents;
+
+/**
+ 生成默认的HSYCocoaKitRACSubscribeNotification对象
+
+ @param type type
+ @param contents 数据体
+ @return HSYCocoaKitRACSubscribeNotification
+ */
+- (HSYCocoaKitRACSubscribeNotification *)hsy_defaultSubscribeNotification:(kHSYCocoaKitRACSubjectOfNextType)type subscribeContents:(NSArray<id> *)contents;
 
 @end

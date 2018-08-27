@@ -64,13 +64,12 @@
         if (status == kHSYReflesStatusTypePullDown) {
             [self.hsy_datas removeAllObjects];
             self.hsy_datas = [result mutableCopy];
-            self.hsy_pullDownStateCode = [self hsy_defaultHUDModel:result.count type:codeType];
         } else {
             for (id obj in result) {
                 [self.hsy_datas addObject:obj];
             }
-            self.hsy_pullUpStateCode = [self hsy_defaultHUDModel:result.count type:codeType];
         }
+        self.hsy_refreshStateCode = [self hsy_defaultHUDModel:result.count type:codeType];
         if (next) {
             next(result);
         }
@@ -147,9 +146,15 @@
 
 - (void)hsy_sendNext:(kHSYCocoaKitRACSubjectOfNextType)type subscribeContents:(NSArray<id> *)contents
 {
+    HSYCocoaKitRACSubscribeNotification *object = [self hsy_defaultSubscribeNotification:type subscribeContents:contents];
+    [self.subject sendNext:object];
+}
+
+- (HSYCocoaKitRACSubscribeNotification *)hsy_defaultSubscribeNotification:(kHSYCocoaKitRACSubjectOfNextType)type subscribeContents:(NSArray<id> *)contents
+{
     HSYCocoaKitRACSubscribeNotification *object = [[HSYCocoaKitRACSubscribeNotification alloc] initWithSubscribeNotificationType:type subscribeContents:contents];
     object.hsy_isFirstRequest = self.hsy_isFirstTimes;
-    [self.subject sendNext:object];
+    return object;
 }
 
 @end

@@ -305,6 +305,13 @@ static CGFloat imgBottom = 11.0f;
     self.view.backgroundColor = [UIColor yellowColor];
     self.tableView.tableHeaderView = [[CXAMCHomePageTableHeaderView alloc] initWithInfo:[(CXAMCHomePageModel *)self.hsy_viewModel headerInfo]];
     [self firstRequest];
+    self.hsy_refreshResult = ^RACSignal *(HSYCocoaKitRACSubscribeNotification *signal) {
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            [subscriber sendNext:signal];
+            [subscriber sendCompleted];
+            return [RACDisposable disposableWithBlock:^{}];
+        }];
+    };
     // Do any additional setup after loading the view.
 }
 

@@ -33,22 +33,6 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //上拉刷新和下拉刷新是否添加 && 以及添加上拉和下拉的监听
-    if (self.showAllReflesh) {
-        NSParameterAssert(self.pullUpView);
-        NSParameterAssert(self.pullDownView);
-        [self hsy_observePullDown];
-        [self hsy_observePullUp];
-    } else {
-        if (self.showPullDown) {
-            NSParameterAssert(self.pullDownView);
-            [self hsy_observePullDown];
-        }
-        if (self.showPullUp) {
-            NSParameterAssert(self.pullUpView);
-            [self hsy_observePullUp];
-        }
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -67,34 +51,6 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
     if (!self.customNavigationBar && self.hsy_sendNavigationBarToBack) {
         [self.navigationController.view bringSubviewToFront:self.navigationController.navigationBar];
     }
-}
-
-#pragma mark - Observer
-
-- (void)hsy_observePullDown
-{
-    @weakify(self);
-    [[RACObserve(self, self.hsy_viewModel.hsy_pullDownStateCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
-        //监听下拉刷新
-        @strongify(self);
-        if ([self hsy_requestStateCodeWithStateCode:x] == kHSYHUDModelCodeTypeRequestPullDownSuccess) {
-            //监听到statusCode下拉状态变更后，发送一个信后，让table格式或者collection格式的两个子类进行reloadData动作
-            [self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess subscribeContents:@[x]];
-        }
-    }];
-}
-
-- (void)hsy_observePullUp
-{
-    @weakify(self);
-    [[RACObserve(self, self.hsy_viewModel.hsy_pullUpStateCode) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
-        //监听上拉刷新
-        @strongify(self);
-        if ([self hsy_requestStateCodeWithStateCode:x] == kHSYHUDModelCodeTypeRequestPullUpSuccess) {
-            //监听到statusCode上拉状态变更后，发送一个信后，让table格式或者collection格式的两个子类进行reloadData动作
-            [self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess subscribeContents:@[x]];
-        }
-    }];
 }
 
 #pragma mark - Set Pull Down && Pull Up
@@ -146,20 +102,26 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
 
 - (void)subjectSendNext:(BOOL)pullDown refreshScrollView:(UIScrollView *)scrollView
 {
-    @weakify(scrollView);
-    @weakify(self);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        @strongify(scrollView);
-        @strongify(self);
+    if (self.hsy_refreshRequestSuccess) {
+        @weakify(self);
         kHSYCocoaKitRACSubjectOfNextType type = (pullDown ? kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess : kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess);
-        if (type == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess) {
-            [scrollView.pullToRefreshView stopAnimating];
-            [self hsy_hasMorePullUp:scrollView];
+        HSYCocoaKitRACSubscribeNotification *notification = [self.hsy_viewModel hsy_defaultSubscribeNotification:type subscribeContents:@[self.hsy_viewModel.hsy_refreshStateCode]];
+        [[self.hsy_refreshRequestSuccess(pullDown, notification) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+            @strongify(self);
+            NSDictionary *stopSelector = @{@(kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess) : scrollView.pullToRefreshView, @(kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) : scrollView.infiniteScrollingView,};
+            [stopSelector[@(type)] performSelector:@selector(stopAnimating)];
             [self hsy_openPullUp:scrollView];
-        } else {
-            [scrollView.infiniteScrollingView stopAnimating];
-        }
-    });
+            BOOL hasDatas = (self.hsy_viewModel.hsy_datas.count > 0 && self.hsy_viewModel.hsy_datas.count % self.hsy_viewModel.size == 0);
+            NSDictionary *selector = @{@(NO) : @{ @(kHSYCocoaKitRefreshForPullUpCompletedStatusClose) : @[NSStringFromSelector(@selector(hsy_closePullUp:))], @(kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore) : @[NSStringFromSelector(@selector(hsy_notMorePullUp:))], }, @(YES) : @{ @(kHSYCocoaKitRefreshForPullUpCompletedStatusClose) : @[NSStringFromSelector(@selector(hsy_openPullUp:)), NSStringFromSelector(@selector(hsy_hasMorePullUp:))], @(kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore) : @[NSStringFromSelector(@selector(hsy_openPullUp:)), NSStringFromSelector(@selector(hsy_hasMorePullUp:))], },
+                                       }[@(hasDatas)];
+            NSArray *selectors = selector[@(self.pullUpStatus)];
+            for (NSString *sel in selectors) {
+                HSYCOCOAKIT_IGNORED_SUPPRESS_PERFORM_SELECTOR_LEAK_WARNING(
+                    [self performSelector:NSSelectorFromString(sel) withObject:scrollView]
+                );
+            }
+        }];
+    }
 }
 
 #pragma mark - Close Or Open
