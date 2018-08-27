@@ -105,7 +105,8 @@
 @implementation HSYBViewController
 
 - (void)viewDidLoad {
-    self.showAllReflesh = YES;
+//    self.showAllReflesh = YES;
+    self.showPullDown = YES;
     self.pullDownView = [[HSYCustomRefreshView alloc] initWithRefreshDown:YES];
     self.pullUpView = [[HSYCustomRefreshView alloc] initWithRefreshDown:NO];
     self.hsy_viewModel = [[HSYViewControllerModel alloc] init];
