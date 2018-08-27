@@ -238,7 +238,7 @@ static CGFloat imgBottom = 11.0f;
         self.headerInfo.aUTHOR = @"马文静";
         self.headerInfo.sHOW_TIME = [NSDate date].stringyyyyMMddHHmmss;
         self.headerInfo.nEWS_IMG_URL = @"";
-        [self hsy_updateSize:15];
+        [self hsy_updateSize:10];
     }
     return self;
 }

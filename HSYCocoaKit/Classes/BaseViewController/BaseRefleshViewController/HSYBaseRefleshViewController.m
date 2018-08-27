@@ -112,7 +112,7 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
             [stopSelector[@(type)] performSelector:@selector(stopAnimating)];
             [self hsy_openPullUp:scrollView];
             BOOL hasDatas = (self.hsy_viewModel.hsy_datas.count > 0 && self.hsy_viewModel.hsy_datas.count % self.hsy_viewModel.size == 0);
-            NSDictionary *selector = @{@(NO) : @{ @(kHSYCocoaKitRefreshForPullUpCompletedStatusClose) : @[NSStringFromSelector(@selector(hsy_closePullUp:))], @(kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore) : @[NSStringFromSelector(@selector(hsy_notMorePullUp:))], }, @(YES) : @{ @(kHSYCocoaKitRefreshForPullUpCompletedStatusClose) : @[NSStringFromSelector(@selector(hsy_openPullUp:)), NSStringFromSelector(@selector(hsy_hasMorePullUp:))], @(kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore) : @[NSStringFromSelector(@selector(hsy_openPullUp:)), NSStringFromSelector(@selector(hsy_hasMorePullUp:))], },
+            NSDictionary *selector = @{@(NO) : @{@(kHSYCocoaKitRefreshForPullUpCompletedStatusClose) : @[NSStringFromSelector(@selector(hsy_closePullUp:))], @(kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore) : @[NSStringFromSelector(@selector(hsy_notMorePullUp:))], }, @(YES) : @{@(kHSYCocoaKitRefreshForPullUpCompletedStatusClose) : @[NSStringFromSelector(@selector(hsy_hasMorePullUp:))], @(kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore) : @[NSStringFromSelector(@selector(hsy_hasMorePullUp:))], },
                                        }[@(hasDatas)];
             NSArray *selectors = selector[@(self.pullUpStatus)];
             for (NSString *sel in selectors) {
