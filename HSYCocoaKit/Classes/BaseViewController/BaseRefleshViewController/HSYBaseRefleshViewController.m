@@ -10,6 +10,15 @@
 #import "HSYHUDModel.h"
 #import "PublicMacroFile.h"
 
+//私有枚举，用于内部逻辑处理
+typedef NS_ENUM(NSUInteger, kHSYCocoaKitRegisterRefresh) {
+    
+    kHSYCocoaKitRegisterRefreshAll,             //下拉+上拉
+    kHSYCocoaKitRegisterRefreshDown,            //只有下拉
+    kHSYCocoaKitRegisterRefreshUp,              //只有上拉
+    
+};
+
 NSString *const kHSYCocoaKitRefreshPullDownStatusKey = @"HSYCocoaKitRefreshPullDownStatusKey";
 NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusPullUpKey";
 
@@ -108,20 +117,32 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
         HSYCocoaKitRACSubscribeNotification *notification = [self.hsy_viewModel hsy_defaultSubscribeNotification:type subscribeContents:@[self.hsy_viewModel.hsy_refreshStateCode]];
         [[self.hsy_refreshRequestSuccess(pullDown, notification) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
             @strongify(self);
-            NSDictionary *stopSelector = @{@(kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess) : scrollView.pullToRefreshView, @(kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) : scrollView.infiniteScrollingView,};
+            NSDictionary *stopSelector = @{@(kHSYCocoaKitRegisterRefreshAll) : @{@(kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess) : scrollView.pullToRefreshView, @(kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) : scrollView.infiniteScrollingView, }, @(kHSYCocoaKitRegisterRefreshDown) : @{@(kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess) : scrollView.pullToRefreshView, }, @(kHSYCocoaKitRegisterRefreshUp) : @{@(kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) : scrollView.infiniteScrollingView, }, }[@(self.hsy_developerRegisterRefresh)];
             [stopSelector[@(type)] performSelector:@selector(stopAnimating)];
             [self hsy_openPullUp:scrollView];
-            BOOL hasDatas = (self.hsy_viewModel.hsy_datas.count > 0 && self.hsy_viewModel.hsy_datas.count % self.hsy_viewModel.size == 0);
-            NSDictionary *selector = @{@(NO) : @{@(kHSYCocoaKitRefreshForPullUpCompletedStatusClose) : @[NSStringFromSelector(@selector(hsy_closePullUp:))], @(kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore) : @[NSStringFromSelector(@selector(hsy_notMorePullUp:))], }, @(YES) : @{@(kHSYCocoaKitRefreshForPullUpCompletedStatusClose) : @[NSStringFromSelector(@selector(hsy_hasMorePullUp:))], @(kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore) : @[NSStringFromSelector(@selector(hsy_hasMorePullUp:))], },
-                                       }[@(hasDatas)];
-            NSArray *selectors = selector[@(self.pullUpStatus)];
-            for (NSString *sel in selectors) {
-                HSYCOCOAKIT_IGNORED_SUPPRESS_PERFORM_SELECTOR_LEAK_WARNING(
-                    [self performSelector:NSSelectorFromString(sel) withObject:scrollView]
-                );
+            if (self.showAllReflesh || self.showPullUp) {
+                BOOL hasDatas = (self.hsy_viewModel.hsy_datas.count > 0 && self.hsy_viewModel.hsy_datas.count % self.hsy_viewModel.size == 0);
+                NSDictionary *selector = @{@(NO) : @{@(kHSYCocoaKitRefreshForPullUpCompletedStatusClose) : @[NSStringFromSelector(@selector(hsy_closePullUp:))], @(kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore) : @[NSStringFromSelector(@selector(hsy_notMorePullUp:))], }, @(YES) : @{@(kHSYCocoaKitRefreshForPullUpCompletedStatusClose) : @[NSStringFromSelector(@selector(hsy_hasMorePullUp:))], @(kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore) : @[NSStringFromSelector(@selector(hsy_hasMorePullUp:))], },
+                                           }[@(hasDatas)];
+                NSArray *selectors = selector[@(self.pullUpStatus)];
+                for (NSString *sel in selectors) {
+                    HSYCOCOAKIT_IGNORED_SUPPRESS_PERFORM_SELECTOR_LEAK_WARNING(
+                        [self performSelector:NSSelectorFromString(sel) withObject:scrollView]
+                    );
+                }
             }
         }];
     }
+}
+
+- (kHSYCocoaKitRegisterRefresh)hsy_developerRegisterRefresh
+{
+    if (self.showAllReflesh || (self.showPullDown && self.showPullUp)) {
+        return kHSYCocoaKitRegisterRefreshAll;
+    } else if (self.showPullDown) {
+        return kHSYCocoaKitRegisterRefreshDown;
+    }
+    return kHSYCocoaKitRegisterRefreshUp;
 }
 
 #pragma mark - Close Or Open
