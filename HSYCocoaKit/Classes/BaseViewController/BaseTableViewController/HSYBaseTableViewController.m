@@ -65,25 +65,27 @@
     @weakify(self);
     [self.hsy_viewModel.subject subscribeNext:^(HSYCocoaKitRACSubscribeNotification *signal) {
         @strongify(self);
-        if (signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess ||
-            signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
-            if (self.hsy_viewModel.hsy_isFirstTimes) {
-                self.hsy_viewModel.hsy_isFirstTimes = !self.hsy_viewModel.hsy_isFirstTimes;
-            }
-            if (signal.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess && [signal.subscribeContents.firstObject isKindOfClass:[HSYHUDModel class]]) {
-                HSYHUDModel *hudModel = signal.subscribeContents.firstObject;
-                if (hudModel.pullUpSize < self.hsy_viewModel.size) {
-                    if (self.pullUpStatus == kHSYCocoaKitRefreshForPullUpCompletedStatusClose) {
-                        [self hsy_closePullUp:self.tableView];
-                    } else {
-                        [self hsy_notMorePullUp:self.tableView];
+        if (self.hsy_refreshResult) {
+            RACSignal *refreshSignal = self.hsy_refreshResult(signal);
+            [[refreshSignal deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitRACSubscribeNotification *notification) {
+                if (notification.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess ||
+                    notification.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess) {
+                    if (self.hsy_viewModel.hsy_isFirstTimes) {
+                        self.hsy_viewModel.hsy_isFirstTimes = !self.hsy_viewModel.hsy_isFirstTimes;
                     }
+                    if (notification.subscribeType == kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess && [notification.subscribeContents.firstObject isKindOfClass:[HSYHUDModel class]]) {
+                        HSYHUDModel *hudModel = notification.subscribeContents.firstObject;
+                        if (hudModel.pullUpSize < self.hsy_viewModel.size) {
+                            if (self.pullUpStatus == kHSYCocoaKitRefreshForPullUpCompletedStatusClose) {
+                                [self hsy_closePullUp:self.tableView];
+                            } else {
+                                [self hsy_notMorePullUp:self.tableView];
+                            }
+                        }
+                    }
+                    //下拉刷新成功//上拉加载更多成功
+                    [self.tableView reloadData];
                 }
-            }
-            //下拉刷新成功//上拉加载更多成功
-            [[RACScheduler mainThreadScheduler] afterDelay:0.3 schedule:^{
-                @strongify(self);
-                [self.tableView reloadData];
             }];
         }
     }];
@@ -125,6 +127,7 @@
 {
     self.hsy_viewModel.hsy_isFirstTimes = YES;
     [self.tableView.pullToRefreshView startAnimating];
+    [self hsy_closePullUp:self.tableView];
 }
 
 @end

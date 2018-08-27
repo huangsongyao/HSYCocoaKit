@@ -26,6 +26,8 @@
 
 //格式：@[@{@"类名" : @"重用标识",}, @{@"类名" : @"重用标识",}....]
 @property (nonatomic, strong, readwrite) NSArray<NSDictionary<NSString *, NSString *> *> *registerClasses;
+//上拉及下拉刷新监听
+@property (nonatomic, copy) RACSignal *(^hsy_refreshResult)(HSYCocoaKitRACSubscribeNotification *signal);
 
 /**
  首次请求

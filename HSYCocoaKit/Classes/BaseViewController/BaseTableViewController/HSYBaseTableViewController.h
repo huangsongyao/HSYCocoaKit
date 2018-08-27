@@ -17,6 +17,8 @@
 
 //格式：@{@"类名" : @"重用标识",}
 @property (nonatomic, strong, readwrite) NSDictionary<NSString *, NSString *> *registerClasses;
+//上拉及下拉刷新监听
+@property (nonatomic, copy) RACSignal *(^hsy_refreshResult)(HSYCocoaKitRACSubscribeNotification *signal);
 
 /**
  "UITableView+FDTemplateLayoutCell.h"库的“- hsy_heightForCellWithIdentifier:cacheByIndexPath:configuration:”方法
