@@ -7,6 +7,23 @@
 //
 
 #import "UIAlertController+RACSignal.h"
+#import "NSObject+Property.h"
+
+static NSString *kHSYCocoaKitTupleTagKey        = @"HSYCocoaKitTupleTagKey";
+
+@implementation UIAlertAction (Tag)
+
+- (RACTuple *)hsy_alertActionTuple
+{
+    return [self getPropertyForKey:kHSYCocoaKitTupleTagKey];
+}
+
+- (void)setHsy_alertActionTuple:(RACTuple *)hsy_alertActionTuple
+{
+    [self setProperty:hsy_alertActionTuple forKey:kHSYCocoaKitTupleTagKey nonatomic:OBJC_ASSOCIATION_RETAIN_NONATOMIC];
+}
+
+@end
 
 @implementation UIAlertController (RACSignal)
 
@@ -23,6 +40,7 @@
                 [subscriber sendNext:action];
                 [subscriber sendCompleted];
             }];
+            action.hsy_alertActionTuple = RACTuplePack(@([alertActions indexOfObject:dic]));
             [alertController addAction:action];
         }
         [viewController presentViewController:alertController animated:YES completion:^{}];
@@ -54,6 +72,7 @@
                 [subscriber sendNext:action];
                 [subscriber sendCompleted];
             }];
+            action.hsy_alertActionTuple = RACTuplePack(@([sheetActions indexOfObject:dic]));
             [sheetController addAction:action];
         }
         [viewController presentViewController:sheetController animated:YES completion:^{}];

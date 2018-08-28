@@ -10,6 +10,15 @@
 #import "ReactiveCocoa.h"
 #import "PublicMacroFile.h"
 
+@interface UIAlertAction (Tag)
+
+/**
+ 给UIAlertAction添加一个RACTuple属性成员，用于优化RAC格式下的一体式回调，developer可以直接根据“hsy_alertActionTuple”的first对象，获取到该UIAlertAction在list中的位置
+ */
+@property (nonatomic, strong) RACTuple *hsy_alertActionTuple;
+
+@end
+
 @interface UIAlertController (RACSignal)
 
 /**

@@ -16,6 +16,7 @@
 #import "NSData+Encrypt.h"
 #import "NSString+Regular.h"
 #import "NSDecimalNumber+Computer.h"
+#import "NSBundle+CFBundle.h"
 
 @interface dddMidel : JSONModel
 
@@ -122,8 +123,8 @@
     BOOL isttt = [ttttt isPointNumber:@"5"];
     NSLog(@"isttt = %d", isttt);
     
-    
-    
+    NSDictionary *bundleDictionary = [NSBundle hsy_appBundle];
+    NSLog(@"\n bundleDictionary = %@", bundleDictionary);
 //    [[HSYFMDBOperationManager shareInstance] hsy_insertDataToTableName:@"testDatabaseTable" fieldParams:[HSYFMDBOperationManager hsy_testTableByFields] insertDatas:[@[@"user", @"userId"] mutableCopy] completed:^(BOOL result, HSYFMDBOperationFieldInfo *info) {
 //        NSLog(@"tested success");
 //    }];

@@ -9,38 +9,81 @@
 
 @implementation NSBundle (CFBundle)
 
+#pragma mark - MainBundle InfoDictionary
+
 + (NSDictionary *)hsy_appBundle
 {
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     return infoDictionary;
 }
 
-+ (NSString *)hsy_appName
+#pragma mark - kHSYCocoaKitBundleContent Change To Key
+
++ (NSString *)toMainBundleKey:(kHSYCocoaKitBundleContent)type
+{
+    NSDictionary *dic = @{
+                          @(kHSYCocoaKitBundleContentOSBuild) : @"BuildMachineOSBuild",
+                          @(kHSYCocoaKitBundleContentDevelopmentRegion) : @"CFBundleDevelopmentRegion",
+                          @(kHSYCocoaKitBundleContentDisplayName) : @"CFBundleDisplayName",
+                          @(kHSYCocoaKitBundleContentExecutable) : @"CFBundleExecutable",
+                          @(kHSYCocoaKitBundleContentIdentifier) : @"CFBundleIdentifier",
+                          @(kHSYCocoaKitBundleContentInfoDictionaryVersion) : @"CFBundleInfoDictionaryVersion",
+                          @(kHSYCocoaKitBundleContentName) : @"CFBundleName",
+                          @(kHSYCocoaKitBundleContentNumericVersion) : @"CFBundleNumericVersion",
+                          @(kHSYCocoaKitBundleContentPackageType) : @"CFBundlePackageType",
+                          @(kHSYCocoaKitBundleContentShortVersionString) : @"CFBundleShortVersionString",
+                          @(kHSYCocoaKitBundleContentSupportedPlatforms) : @"CFBundleSupportedPlatforms",
+                          @(kHSYCocoaKitBundleContentVersion) : @"CFBundleVersion",
+                          @(kHSYCocoaKitBundleContentPlatformVersion) : @"DTPlatformVersion",
+                          };
+    return dic[@(type)];
+}
+
+#pragma mark - Get Value
+
++ (id)hsy_appBundleContentForType:(kHSYCocoaKitBundleContent)type
+{
+    return [NSBundle appBundleContentForKey:[NSBundle toMainBundleKey:type]];
+}
+
++ (id)appBundleContentForKey:(NSString *)key
 {
     NSDictionary *infoDictionary = [NSBundle hsy_appBundle];
-    NSString *appName = [infoDictionary objectForKey:@"CFBundleDisplayName"];
-    return appName;
+    id value = [infoDictionary objectForKey:key];
+    return value;
+}
+
+#pragma mark - Common Use
+
++ (NSString *)hsy_appName
+{
+    return [NSBundle hsy_appBundleContentForType:kHSYCocoaKitBundleContentDisplayName];
 }
 
 + (NSString *)hsy_appVersions
 {
-    NSDictionary *infoDictionary = [NSBundle hsy_appBundle];
-    NSString *appName = [infoDictionary objectForKey:@"CFBundleVersion"];
-    return appName;
+    return [NSBundle hsy_appBundleContentForType:kHSYCocoaKitBundleContentShortVersionString];
 }
 
 + (NSString *)hsy_appBundleID
 {
-    NSDictionary *infoDictionary = [NSBundle hsy_appBundle];
-    NSString *appName = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-    return appName;
+    return [NSBundle hsy_appBundleContentForType:kHSYCocoaKitBundleContentIdentifier];
 }
 
 + (NSString *)hsy_appBuilds
 {
-    NSDictionary *infoDictionary = [NSBundle hsy_appBundle];
-    NSString *appName = [infoDictionary objectForKey:@"CFBundleVersion"];
-    return appName;
+    return [NSBundle hsy_appBundleContentForType:kHSYCocoaKitBundleContentVersion];
+}
+
++ (NSString *)hsy_appBundleTargetName
+{
+    return [NSBundle hsy_appBundleContentForType:kHSYCocoaKitBundleContentExecutable];
+}
+
++ (NSString *)hsy_iPhoneSimulatorName
+{
+    NSArray *platforms = [NSBundle hsy_appBundleContentForType:kHSYCocoaKitBundleContentSupportedPlatforms];
+    return platforms.firstObject;
 }
 
 @end
