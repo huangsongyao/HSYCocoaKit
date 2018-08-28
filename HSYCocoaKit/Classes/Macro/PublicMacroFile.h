@@ -207,6 +207,7 @@
 #define APP_INFO_VERSIONS                               [NSBundle hsy_appVersions]
 #define APP_INFO_BUNDLE_ID                              [NSBundle hsy_appBundleID]
 #define APP_INFO_BUILDS                                 [NSBundle hsy_appBuilds]
+#define APP_INFO_TARGET_NAME                            [NSBundle hsy_appBundleTargetName]
 
 
 //角度转弧度
