@@ -26,7 +26,9 @@
             [alertController addAction:action];
         }
         [viewController presentViewController:alertController animated:YES completion:^{}];
-        return [RACDisposable disposableWithBlock:^{}];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_rac_showAlertController:title:message:alertActions:”");
+        }];
     }];
 }
 
@@ -53,9 +55,11 @@
                 [subscriber sendCompleted];
             }];
             [sheetController addAction:action];
-            [viewController presentViewController:sheetController animated:YES completion:^{}];
         }
-        return [RACDisposable disposableWithBlock:^{}];
+        [viewController presentViewController:sheetController animated:YES completion:^{}];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_rac_showSheetController:title:message:alertActions:”");
+        }];
     }];
 }
 
