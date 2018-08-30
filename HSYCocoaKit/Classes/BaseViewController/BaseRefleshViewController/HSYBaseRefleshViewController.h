@@ -33,6 +33,14 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRefreshForPullUpCompletedStatus) {
 @property (nonatomic, copy) RACSignal *(^hsy_refreshRequestSuccess)(BOOL isPullDown, HSYCocoaKitRACSubscribeNotification *signal);
 
 /**
+ 根据UIScrollView类族是否签订了上拉刷新功能，在网络请求成功后，提供接口允许子类动态更新上拉功能是否继续启用
+ 注意：某些特殊情况，例如控制器中执行了“- reloadData”方法后，发现contentSize的高度仍然存在问题，请在“- reloadData”方法后再执行“- (void)hsy_resetRefresh:(UIScrollView *)scrollView;”尝试重新更新真实的contentSize
+ 
+ @param scrollView UIScrollView
+ */
+- (void)hsy_resetRefresh:(UIScrollView *)scrollView;
+
+/**
  同时添加上拉和下拉
 
  @param scrollView scrollView及其子类
