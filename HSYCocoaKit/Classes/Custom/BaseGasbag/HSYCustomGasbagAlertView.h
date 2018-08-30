@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitGasbagAlertType) {
 @interface HSYCustomGasbagAlertView : HSYCustomWindows
 
 @property (nonatomic, copy) void(^hsy_didSelectedRow)(HSYCustomGasbagObject *x);
-@property (nonatomic, copy) void(^hsy_completedGasbag)(BOOL finished);
+@property (nonatomic, copy) void(^hsy_completedGasbag)(BOOL finished, HSYCustomGasbagObject *gasbagObject);
 
 /**
  初始化，默认为kHSYCocoaKitGasbagAlertTypeBottom格式
@@ -118,7 +118,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitGasbagAlertType) {
  @param completed remove完成后回调时间
  @return HSYCustomGasbagAlertView
  */
-+ (HSYCustomGasbagAlertView *)hsy_showGasbagAlert:(NSArray *)dataSources backgroundImage:(UIImage *)backgroundImage position:(CGPoint)position anchorType:(kHSYCocoaKitGasbagAlertType)type didSelectedRowBlock:(void(^)(HSYCustomGasbagObject *x))block completedGasbag:(void(^)(BOOL finished))completed;
++ (HSYCustomGasbagAlertView *)hsy_showGasbagAlert:(NSArray *)dataSources backgroundImage:(UIImage *)backgroundImage position:(CGPoint)position anchorType:(kHSYCocoaKitGasbagAlertType)type didSelectedRowBlock:(void(^)(HSYCustomGasbagObject *x))block completedGasbag:(void(^)(BOOL finished, HSYCustomGasbagObject *gasbagObject))completed;
 
 @end
 

@@ -191,7 +191,7 @@
     }];
 }
 
-- (void)hsy_removeGasbag
+- (void)hsy_removeGasbag:(HSYCustomGasbagObject *)object
 {
     @weakify(self);
     [self hsy_rac_removeAlert:^(UIView *view) {
@@ -205,7 +205,7 @@
                 @strongify(self);
                 [subscriber sendCompleted];
                 if (self.hsy_completedGasbag) {
-                    self.hsy_completedGasbag(finished);
+                    self.hsy_completedGasbag(finished, object);
                 }
             }];
             return [RACDisposable disposableWithBlock:^{
@@ -213,6 +213,11 @@
             }];
         }];
     }];
+}
+
+- (void)hsy_removeGasbag
+{
+    [self hsy_removeGasbag:nil];
 }
 
 #pragma mark - HSYCustomGasbagViewDelegate
@@ -247,10 +252,10 @@
 
 + (HSYCustomGasbagAlertView *)hsy_showGasbagAlert:(NSArray *)dataSources backgroundImage:(UIImage *)backgroundImage position:(CGPoint)position anchorType:(kHSYCocoaKitGasbagAlertType)type didSelectedRowBlock:(void(^)(HSYCustomGasbagObject *x))block
 {
-    return [self.class hsy_showGasbagAlert:dataSources backgroundImage:backgroundImage position:position anchorType:type didSelectedRowBlock:block completedGasbag:^(BOOL finished) {}];
+    return [self.class hsy_showGasbagAlert:dataSources backgroundImage:backgroundImage position:position anchorType:type didSelectedRowBlock:block completedGasbag:^(BOOL finished, HSYCustomGasbagObject *gasbagObject) {}];
 }
 
-+ (HSYCustomGasbagAlertView *)hsy_showGasbagAlert:(NSArray *)dataSources backgroundImage:(UIImage *)backgroundImage position:(CGPoint)position anchorType:(kHSYCocoaKitGasbagAlertType)type didSelectedRowBlock:(void(^)(HSYCustomGasbagObject *x))block completedGasbag:(void(^)(BOOL finished))completed
++ (HSYCustomGasbagAlertView *)hsy_showGasbagAlert:(NSArray *)dataSources backgroundImage:(UIImage *)backgroundImage position:(CGPoint)position anchorType:(kHSYCocoaKitGasbagAlertType)type didSelectedRowBlock:(void(^)(HSYCustomGasbagObject *x))block completedGasbag:(void(^)(BOOL finished, HSYCustomGasbagObject *gasbagObject))completed
 {
     if (!backgroundImage) {
         backgroundImage = [NSBundle imageForBundle:@"pop_xiala"];
@@ -263,7 +268,7 @@
         if (block) {
             block(x);
         }
-        [alertView hsy_removeGasbag];
+        [alertView hsy_removeGasbag:x];
     };
     alertView.hsy_completedGasbag = completed;
     return alertView;
