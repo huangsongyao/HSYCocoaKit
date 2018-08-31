@@ -41,6 +41,13 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRefreshForPullUpCompletedStatus) {
 - (void)hsy_resetRefresh:(UIScrollView *)scrollView;
 
 /**
+ 如果数据源数组当前的元素个数大于0，且数据源数组当前的元素个数%翻页每页最大size==0，则表示还有下一页数据
+
+ @return YES表示有下一页数据，NO表示没有
+ */
+- (BOOL)hsy_hasMoreDatas;
+
+/**
  同时添加上拉和下拉
 
  @param scrollView scrollView及其子类

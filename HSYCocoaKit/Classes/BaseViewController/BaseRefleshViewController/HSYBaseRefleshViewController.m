@@ -123,13 +123,18 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
     }
 }
 
+- (BOOL)hsy_hasMoreDatas
+{
+    BOOL hasDatas = (self.hsy_viewModel.hsy_datas.count > 0 && self.hsy_viewModel.hsy_datas.count % self.hsy_viewModel.size == 0);
+    return hasDatas;
+}
+
 - (void)hsy_resetRefresh:(UIScrollView *)scrollView
 {
     if (self.showAllReflesh || self.showPullUp) {
         [self hsy_openPullUp:scrollView];
-        BOOL hasDatas = (self.hsy_viewModel.hsy_datas.count > 0 && self.hsy_viewModel.hsy_datas.count % self.hsy_viewModel.size == 0);
         NSDictionary *selector = @{@(NO) : @{@(kHSYCocoaKitRefreshForPullUpCompletedStatusClose) : @[NSStringFromSelector(@selector(hsy_closePullUp:))], @(kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore) : @[NSStringFromSelector(@selector(hsy_notMorePullUp:))], }, @(YES) : @{@(kHSYCocoaKitRefreshForPullUpCompletedStatusClose) : @[NSStringFromSelector(@selector(hsy_hasMorePullUp:))], @(kHSYCocoaKitRefreshForPullUpCompletedStatusNorMore) : @[NSStringFromSelector(@selector(hsy_hasMorePullUp:))], },
-                                   }[@(hasDatas)];
+                                   }[@(self.hsy_hasMoreDatas)];
         NSArray *selectors = selector[@(self.pullUpStatus)];
         for (NSString *sel in selectors) {
             HSYCOCOAKIT_IGNORED_SUPPRESS_PERFORM_SELECTOR_LEAK_WARNING(
