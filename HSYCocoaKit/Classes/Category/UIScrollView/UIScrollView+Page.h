@@ -61,7 +61,18 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitScrollDirection) {
  */
 - (void)setXPage:(NSInteger)page animated:(BOOL)animated;
 
+/**
+ 滚动方向，水平方向
+
+ @return 返回水平方向的左或者右-----x轴
+ */
 - (kHSYCocoaKitScrollDirection)scrollHorizontalDirection;
+
+/**
+ 滚动方向，垂直方向
+
+ @return 返回垂直方向的上或者下-----y轴
+ */
 - (kHSYCocoaKitScrollDirection)scrollVerticalDirection;
 
 @end

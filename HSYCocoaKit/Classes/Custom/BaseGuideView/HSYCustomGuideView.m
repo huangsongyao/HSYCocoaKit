@@ -30,7 +30,7 @@
     if (self = [super initWithFrame:window.bounds]) {
         _hsy_guides = [NSMutableArray arrayWithArray:guides];
         _hsy_window = window;
-        _hsy_scrollView = [NSObject createScrollViewByParam:@{@(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled) : @(YES), @(kHSYCocoaKitOfScrollViewPropretyTypeScrollEnabled) : @(YES), @(kHSYCocoaKitOfScrollViewPropretyTypeDelegate) : self, @(kHSYCocoaKitOfScrollViewPropretyTypeFrame) : [NSValue valueWithCGRect:self.bounds], @(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator) : @(YES), }];
+        _hsy_scrollView = [NSObject createScrollViewByParam:@{@(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled) : @(YES), @(kHSYCocoaKitOfScrollViewPropretyTypeScrollEnabled) : @(YES), @(kHSYCocoaKitOfScrollViewPropretyTypeDelegate) : self, @(kHSYCocoaKitOfScrollViewPropretyTypeFrame) : [NSValue valueWithCGRect:self.bounds], @(kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator) : @(YES), @(kHSYCocoaKitOfScrollViewPropretyTypeBounces) : @(NO), }];
         [self addSubview:self.hsy_scrollView];
         self.backgroundColor = WHITE_COLOR;
         
@@ -76,9 +76,10 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat lastPageLeft = (self.hsy_guides.count - 1) * IPHONE_WIDTH;
-    if (self.hsy_immediately && (scrollView.contentOffset.x > (lastPageLeft + 50.0f))) {
+    BOOL canScroll = (self.hsy_immediately && (scrollView.contentOffset.x > (lastPageLeft + 5.0f)));
+    scrollView.bounces = (scrollView.scrollHorizontalDirection == kHSYCocoaKitScrollDirectionToRight);
+    if (canScroll) {
         scrollView.contentOffset = CGPointMake(lastPageLeft, 0);
-        scrollView.scrollEnabled = NO;
         [self hsy_guideFaceOut];
     }
 }
