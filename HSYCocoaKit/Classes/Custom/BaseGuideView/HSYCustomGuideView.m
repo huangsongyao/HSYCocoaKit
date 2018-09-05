@@ -77,7 +77,9 @@
 {
     CGFloat lastPageLeft = (self.hsy_guides.count - 1) * IPHONE_WIDTH;
     BOOL canScroll = (self.hsy_immediately && (scrollView.contentOffset.x > (lastPageLeft + 5.0f)));
-    scrollView.bounces = (scrollView.scrollHorizontalDirection == kHSYCocoaKitScrollDirectionToRight);
+    if (self.hsy_immediately) {
+        scrollView.bounces = (scrollView.scrollHorizontalDirection == kHSYCocoaKitScrollDirectionToRight);
+    }
     if (canScroll) {
         scrollView.contentOffset = CGPointMake(lastPageLeft, 0);
         [self hsy_guideFaceOut];
