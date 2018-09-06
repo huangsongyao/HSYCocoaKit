@@ -37,6 +37,9 @@
 {
     if (self = [super init]) {
         
+        [[[self testRequest] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+            
+        }];
 //        @weakify(self);
 //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //            @strongify(self);
@@ -53,37 +56,7 @@
 //            }];
 //        });
         
-        
-//        NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
-//        [self hsy_requestNetwork:^RACSignal *{
-//            return [[HSYNetWorkingManager shareInstance] test:urlStr];
-//        } toMap:^id(RACTuple *tuple) {
-//            id json = tuple.second;
-//            return [NSObject hsy_resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json];
-//        } subscriberNext:^BOOL(id x) {
-//            NSLog(@"\n x1 = %@", x);
-//            return YES;
-//        }];
-//
-//
-//
-//        [self hsy_requestNetwork:^RACSignal *{
-//            return [[HSYNetWorkingManager shareInstance] test:urlStr];
-//        } toMap:^id(RACTuple *tuple) {
-//            id json = tuple.second;
-//            return [NSObject hsy_resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json];
-//        } subscriberNext:^BOOL(id x) {
-//            NSLog(@"\n x2 = %@", x);
-//            return YES;
-//        }];
-        
-        
     
-        
-//        [self testRequest];
-//
-//        [self testRequest];
-        
 //        NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
 //        [self updateNext:^RACSignal *{
 //            return [[HSYNetWorkingManager shareInstance] test:urlStr];
@@ -110,16 +83,37 @@
     return self;
 }
 
-- (void)testRequest
+- (void)sendObjectComplted:(id)x
+{
+    
+}
+
+- (RACSignal *)testRequest
 {
     NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"image/jpeg", @"text/plain", nil];
-    [manager GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"responseObject = %@", responseObject);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error = %@", error);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [self hsy_requestNetwork:^RACSignal *{
+            RACSignal *signal = [[HSYNetWorkingManager shareInstance] test:urlStr];
+            return signal;
+        } toMap:^id(RACTuple *tuple) {
+            id json = tuple.second;
+            return [NSObject hsy_resultObjectToJSONModelWithClasses:[TestJ_Model class] json:json];
+        } subscriberNext:^BOOL(id x) {
+            NSLog(@"\n x1 = %@", x);
+            return YES;
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            
+        }];
     }];
+//    NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"image/jpeg", @"text/plain", nil];
+//    [manager GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        NSLog(@"responseObject = %@", responseObject);
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSLog(@"error = %@", error);
+//    }];
 }
 
 - (void)test

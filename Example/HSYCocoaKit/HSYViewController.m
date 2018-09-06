@@ -22,6 +22,7 @@
 #import "HSYCocoaKitAttributedLabelManager.h"
 #import "TYAttributedLabel.h"
 #import "HSYWebTestViewController.h"
+#import "UIApplication+OpenURL.h"
 
 @interface TestModel : NSObject
 
@@ -126,11 +127,13 @@
     [self.view addSubview:button1];
     
     UIButton *button2 = [NSObject createButtonByParam:@{} clickedOnSubscribeNext:^(UIButton *button) {
-        @strongify(self);
+//        @strongify(self);
         
-        HSYBViewController *vc = [[HSYBViewController alloc] init];
+//        HSYBViewController *vc = [[HSYBViewController alloc] init];
 //        HSYWebTestViewController *vc = [[HSYWebTestViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+//        [self.navigationController pushViewController:vc animated:YES];
+        [UIApplication openSafariServer:@"https://www.baidu.com/"];
+//        [UIApplication openSafari:@"https://www.baidu.com/"];
     }];
     button2.backgroundColor = RANDOM_RGB;
     button2.frame = CGRectMake(button.right, button.bottom + 50, 60, 56);
@@ -192,6 +195,7 @@
     
     // Do any additional setup after loading the view, typically from a nib.
 }
+
 
 - (void)viewWillAppear:(BOOL)animated
 {

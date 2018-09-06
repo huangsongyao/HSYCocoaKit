@@ -147,7 +147,7 @@
 
 #pragma mark - Get All Property Names
 
-+ (NSArray<NSString *> *)objectRumtimeNames:(id)object
++ (NSArray<NSString *> *)objectRuntimeNames:(id)object
 {
     unsigned int count = 0;
     Class classes = [object objectRuntimeClass];
@@ -160,5 +160,6 @@
     }
     return [results mutableCopy];
 }
+
 
 @end

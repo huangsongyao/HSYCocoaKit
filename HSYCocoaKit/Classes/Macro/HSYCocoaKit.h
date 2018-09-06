@@ -49,6 +49,7 @@
 #import "NSString+Replace.h"
 #import "NSString+Size.h"
 #import "UIApplication+Device.h"
+#import "UIApplication+OpenURL.h"
 #import "UIColor+Hex.h"
 #import "UIImage+Canvas.h"
 #import "UIImage+Compression.h"

@@ -156,6 +156,7 @@
 //        NSLog(@"");
 //    }];
     
+    
     NSString *jia = [NSData AES128EncryptString:@"zy1047539560" forKey:@"TESTPASSWORD" offsetIv:@"AES00IVPARAMETER"];
     NSString *jie = [NSData AES128DecryptString:jia forKey:@"TESTPASSWORD" offsetIv:@"AES00IVPARAMETER"];
     NSLog(@"jia = %@, jie = %@", jia, jie);
