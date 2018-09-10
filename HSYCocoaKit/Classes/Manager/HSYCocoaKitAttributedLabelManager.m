@@ -408,6 +408,7 @@ static NSDictionary *hsy_emoji = nil;
     attributedLabel.textContainer = textContainer;
     CGSize size = [attributedLabel getSizeWithWidth:width];
     attributedLabel.size = size;
+    attributedLabel.backgroundColor = CLEAR_COLOR;
     
     return attributedLabel;
 }

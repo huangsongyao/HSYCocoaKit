@@ -107,6 +107,7 @@
 #import "APPPathMacroFile.h"
 #import "PublicMacroFile.h"
 #import "HSYCocoaKitAttributedLabelManager.h"
+#import "HSYCocoaKitCoreGraphicsManager.h"
 #import "HSYCocoaKitLottieAnimationManager.h"
 #import "HSYCocoaKitManager.h"
 #import "AFHTTPSessionManager+RACSignal.h"

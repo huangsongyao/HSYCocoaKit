@@ -23,6 +23,22 @@
 #import "TYAttributedLabel.h"
 #import "HSYWebTestViewController.h"
 #import "UIApplication+OpenURL.h"
+#import "HSYCocoaKitCoreGraphicsManager.h"
+
+
+@interface HSYView : UIView
+
+@end
+
+@implementation HSYView
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    [HSYCocoaKitCoreGraphicsManager hsy_contextRefGraphicsCircular:[UIColor greenColor] circularCGRect:self.bounds];
+}
+
+@end
 
 @interface TestModel : NSObject
 
@@ -130,9 +146,9 @@
 //        @strongify(self);
         
 //        HSYBViewController *vc = [[HSYBViewController alloc] init];
-//        HSYWebTestViewController *vc = [[HSYWebTestViewController alloc] init];
-//        [self.navigationController pushViewController:vc animated:YES];
-        [UIApplication openSafariServer:@"https://www.baidu.com/"];
+        HSYWebTestViewController *vc = [[HSYWebTestViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+//        [UIApplication openSafariServer:@"https://www.baidu.com/"];
 //        [UIApplication openSafari:@"https://www.baidu.com/"];
     }];
     button2.backgroundColor = RANDOM_RGB;
@@ -193,6 +209,9 @@
         [testLabel reloadEmojisAttributed:@"呵呵呵法尔范后IEof[微笑]就，奇偶覅额外金佛文件而非，奇偶纪委负欧文，肥胖纹佛而非。叫哦我IE金佛我几分，佛[调皮]文件佛寺杰尔夫，解耦[抓狂]我降温哦附件为。"];
     }];
     
+//    HSYView *hsyView = [[HSYView alloc] initWithFrame:CGRectMake(100, 500, 100, 100)];
+//    hsyView.backgroundColor = CLEAR_COLOR;
+//    [self.view addSubview:hsyView];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
