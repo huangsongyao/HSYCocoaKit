@@ -47,11 +47,9 @@ static HSYCocoaKitSocketManager *socketManager;
         @weakify(self);
         [[self.hsy_subject deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
             @strongify(self);
-            GCDAsyncSocket *sock = (GCDAsyncSocket *)tuple.first;
-            NSDictionary *param = @{@(YES) : @{@(kHSYCocoaKitSocketRACDelegate_socketDidReadData) : kHSYCocoaKitSocketDidReadDataNotification, }, @(NO) : @{@(kHSYCocoaKitSocketRACDelegate_socketDisconnected) : kHSYCocoaKitSocketDisconnectedNotification, }, }[@(sock.isConnected)];
-            HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:(kHSYCocoaKitSocketRACDelegate)[param.allKeys.firstObject integerValue]];
+            HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_socketDidReadData];
             [self hsy_observerNotification:racSignal];
-            [[NSNotificationCenter defaultCenter] postNotificationName:param.allValues.firstObject object:tuple];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHSYCocoaKitSocketDidReadDataNotification object:tuple];
         }];
     }
     return self;
@@ -186,7 +184,9 @@ static HSYCocoaKitSocketManager *socketManager;
     NSLog(@"\n socket disconnected! error = %@", err);
     NSLog(@"\n========================================================");
     RACTuple *tuple = RACTuplePack(sock, err);
-    [self.hsy_subject sendNext:tuple];
+    HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_socketDisconnected];
+    [self hsy_observerNotification:racSignal];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kHSYCocoaKitSocketDisconnectedNotification object:tuple];
 }
 
 @end

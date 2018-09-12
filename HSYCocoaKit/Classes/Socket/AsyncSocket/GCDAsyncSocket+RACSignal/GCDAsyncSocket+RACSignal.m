@@ -46,7 +46,7 @@ static void RACUseDelegateProxy(GCDAsyncSocket *self)
                                NSLog(@"\n socket connected! host = %@, port = %@", host, port);
                                return racSignal;
     }] takeUntil:self.rac_willDeallocSignal]
-                         setNameWithFormat:@"%@ - rac_socketConnected", self.rac_description];
+                         setNameWithFormat:@"%@ - hsy_rac_socketConnected", self.rac_description];
     
     RACUseDelegateProxy(self);
     return signal;
@@ -62,7 +62,7 @@ static void RACUseDelegateProxy(GCDAsyncSocket *self)
                                NSLog(@"\n socket did write data! tag = %@", tag);
                                return racSignal;
                            }] takeUntil:self.rac_willDeallocSignal]
-                         setNameWithFormat:@"%@ - rac_socketDidWriteData", self.rac_description];
+                         setNameWithFormat:@"%@ - hsy_rac_socketDidWriteData", self.rac_description];
     
     RACUseDelegateProxy(self);
     return signal;

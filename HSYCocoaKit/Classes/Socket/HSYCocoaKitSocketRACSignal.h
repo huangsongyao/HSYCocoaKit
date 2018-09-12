@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitSocketRACDelegate) {
     kHSYCocoaKitSocketRACDelegate_socketDisconnected        = 1920,     //连接断开
     kHSYCocoaKitSocketRACDelegate_socketDidReadData         = 1930,     //读取数据
     kHSYCocoaKitSocketRACDelegate_socketDidWriteData        = 1940,     //发送数据成功
+    kHSYCocoaKitSocketRACDelegate_WebSocketConnectFailure   = 1950,     //webSocket链接失败
     
 };
 
