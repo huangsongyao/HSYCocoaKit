@@ -43,39 +43,10 @@ static void RACUseDelegateProxy(GCDAsyncSocket *self)
                            reduceEach:^(GCDAsyncSocket *socket, NSString *host, NSNumber *port){
                                RACTuple *tuple = RACTuplePack(socket, host, port);
                                HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_socketConnected];
+                               NSLog(@"\n socket connected! host = %@, port = %@", host, port);
                                return racSignal;
     }] takeUntil:self.rac_willDeallocSignal]
                          setNameWithFormat:@"%@ - rac_socketConnected", self.rac_description];
-    
-    RACUseDelegateProxy(self);
-    return signal;
-}
-
-- (RACSignal *)hsy_rac_socketDisconnected
-{
-    RACSignal *signal = [[[[self.rac_delegateProxy
-                            signalForSelector:@selector(socketDidDisconnect:withError:)]
-                           reduceEach:^(GCDAsyncSocket *socket, NSError *error){
-                               RACTuple *tuple = RACTuplePack(socket, error);
-                               HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_socketDisconnected];
-                               return racSignal;
-                           }] takeUntil:self.rac_willDeallocSignal]
-                         setNameWithFormat:@"%@ - rac_socketDisconnected", self.rac_description];
-    
-    RACUseDelegateProxy(self);
-    return signal;
-}
-
-- (RACSignal *)hsy_rac_socketDidReadData
-{
-    RACSignal *signal = [[[[self.rac_delegateProxy
-                            signalForSelector:@selector(socket:didReadData:withTag:)]
-                           reduceEach:^(GCDAsyncSocket *socket, NSData *data, NSNumber *tag){
-                               RACTuple *tuple = RACTuplePack(socket, data, tag);
-                               HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_socketDidReadData];
-                               return racSignal;
-                           }] takeUntil:self.rac_willDeallocSignal]
-                         setNameWithFormat:@"%@ - rac_socketDidReadData", self.rac_description];
     
     RACUseDelegateProxy(self);
     return signal;
@@ -88,6 +59,7 @@ static void RACUseDelegateProxy(GCDAsyncSocket *self)
                            reduceEach:^(GCDAsyncSocket *socket, NSNumber *tag){
                                RACTuple *tuple = RACTuplePack(socket, tag);
                                HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_socketDidWriteData];
+                               NSLog(@"\n socket did write data! tag = %@", tag);
                                return racSignal;
                            }] takeUntil:self.rac_willDeallocSignal]
                          setNameWithFormat:@"%@ - rac_socketDidWriteData", self.rac_description];
@@ -96,46 +68,6 @@ static void RACUseDelegateProxy(GCDAsyncSocket *self)
     return signal;
 }
 
-#pragma mark - All Signal
-
-- (RACSignal *)hsy_rac_allSocketDelegateSiganl
-{
-    NSArray *racs = @[
-                      self.hsy_rac_socketConnected,
-                      self.hsy_rac_socketDisconnected,
-                      self.hsy_rac_socketDidReadData,
-                      self.hsy_rac_socketDidWriteData,
-                      ];
-    RACSignal *signal = [RACSignal combineLatest:racs reduce:^id(HSYCocoaKitSocketRACSignal *connected, HSYCocoaKitSocketRACSignal *disconnect, HSYCocoaKitSocketRACSignal *readData, HSYCocoaKitSocketRACSignal *writeData){
-        HSYCocoaKitSocketRACSignal *notification = [self.class signalForReduce:connected
-                                                                    disconnect:disconnect
-                                                                      readData:readData
-                                                                     writeData:writeData];
-        return notification;
-    }];
-    
-    return signal;
-}
-
-+ (HSYCocoaKitSocketRACSignal *)signalForReduce:(HSYCocoaKitSocketRACSignal *)connected
-                                     disconnect:(HSYCocoaKitSocketRACSignal *)disconnect
-                                       readData:(HSYCocoaKitSocketRACSignal *)readData
-                                      writeData:(HSYCocoaKitSocketRACSignal *)writeData
-{
-    if (connected) {
-        return connected;
-    }
-    if (disconnect) {
-        return disconnect;
-    }
-    if (readData) {
-        return readData;
-    }
-    if (writeData) {
-        return writeData;
-    }
-    return nil;
-}
 
 @end
 

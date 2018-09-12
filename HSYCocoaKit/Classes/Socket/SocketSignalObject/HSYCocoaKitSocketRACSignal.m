@@ -7,6 +7,7 @@
 //
 
 #import "HSYCocoaKitSocketRACSignal.h"
+#import "NSObject+JSONObjc.h"
 
 @implementation HSYCocoaKitSocketRACSignal
 
@@ -34,6 +35,13 @@
         return json;
     }
     return nil;
+}
+
++ (NSData *)toJSONData:(NSDictionary *)dictionary
+{
+    NSString *jsonString = [NSString jsonToJSONString:dictionary];
+    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    return data;
 }
 
 @end

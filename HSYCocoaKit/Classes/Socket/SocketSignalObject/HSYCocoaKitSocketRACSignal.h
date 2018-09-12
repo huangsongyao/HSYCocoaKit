@@ -10,15 +10,6 @@
 #import "ReactiveCocoa.h"
 #import "NSObject+JSONObjc.h"
 
-typedef NS_ENUM(NSUInteger, kHSYCocoaKitSocketConnectStatus) {
-    
-    kHSYCocoaKitSocketConnectStatus_UnConnect               = 988,      //尚未连接
-    kHSYCocoaKitSocketConnectStatus_Connected               = 998,      //已连接
-    kHSYCocoaKitSocketConnectStatus_PassiveDisConnected     = 1098,     //被动断开
-    kHSYCocoaKitSocketConnectStatus_AccordDisConnected      = 1198,     //主动断开
-    kHSYCocoaKitSocketConnectStatus_ConnectAgain            = 1298,     //重连中
-};
-
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitSocketRACDelegate) {
     
     kHSYCocoaKitSocketRACDelegate_socketConnected           = 1910,     //连接成功
@@ -49,5 +40,12 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitSocketRACDelegate) {
  @return json
  */
 - (id)hsy_toJSONReponse;
+
+/**
+ 将字典转为json格式的data，用于socket丢包
+ 
+ @return json格式的data
+ */
++ (NSData *)toJSONData:(NSDictionary *)dictionary;
 
 @end

@@ -52,5 +52,6 @@ s.dependency 'TKRoundedView', '~> 0.5'
 s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.6'
 s.dependency 'CocoaAsyncSocket', '~> 7.6.3'
 s.dependency 'lottie-ios', '~> 2.5.0'
+s.dependency 'SocketRocket', '~> 0.5.1'
 
 end

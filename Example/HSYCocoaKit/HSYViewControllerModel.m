@@ -116,13 +116,6 @@
 //    }];
 }
 
-- (void)test
-{
-    [[[[HSYCocoaKitSocketManager shareInstance] hsy_connectServer:@"https://www.baidu.com"] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
-        NSLog(@"tuple.first = %@, tuple.second = %@", tuple.first, tuple.second);
-    }];
-}
-
 - (RACSignal *)hsy_rac_pullDownMethod
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {

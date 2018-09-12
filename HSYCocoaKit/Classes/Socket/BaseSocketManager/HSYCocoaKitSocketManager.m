@@ -10,22 +10,17 @@
 #import "HSYNetWorkingManager.h"
 #import "NSError+Message.h"
 #import "GCDAsyncSocket.h"
+#import "NSObject+JSONObjc.h"
 
-#define DEFAULT_SOCKET_CONNECTED_TIMEOUT        20.0f
-#define DEFAULT_SOCKET_WRITE_TIME               10.0f
-
-NSString *const HSYCocoaKitSocketConnectStatusNotification = @"HSYCocoaKitSocketConnectStatusNotification";
-
-static NSInteger connectAgainCount = 0;
+NSString *const kHSYCocoaKitSocketDidReadDataNotification   = @"HSYCocoaKitSocketDidReadDataNotification";
+NSString *const kHSYCocoaKitSocketDisconnectedNotification  = @"HSYCocoaKitSocketDisconnectedNotification";
 
 static HSYCocoaKitSocketManager *socketManager;
 
 @interface HSYCocoaKitSocketManager () <GCDAsyncSocketDelegate>
 
-@property (nonatomic, strong, readonly) GCDAsyncSocket *tcpSocket;
-@property (nonatomic, strong, readonly) RACSignal *socketDelegateSignal;
-@property (nonatomic, strong, readonly) RACSubject *delegateSubject;
-@property (nonatomic, strong) NSNumber *observerSockectConnect;
+@property (nonatomic, strong) GCDAsyncSocket *tcpSocket;
+@property (nonatomic, strong) RACSubject *hsy_subject;
 @property (nonatomic, assign) uint16_t hsy_connectPort;
 @property (nonatomic, copy) NSString *hsy_connectHost;
 
@@ -45,60 +40,19 @@ static HSYCocoaKitSocketManager *socketManager;
 - (instancetype)init
 {
     if (self = [super init]) {
-        _delegateSubject = [RACSubject subject];
-        _tcpSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:nil];
+        dispatch_queue_t mainQueue = dispatch_get_main_queue();
+        self.tcpSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+        self.hsy_subject = [RACSubject subject];
         
-        //rac下对GCDAsyncSocketDelegate监听
         @weakify(self);
-        [[[self.tcpSocket hsy_rac_allSocketDelegateSiganl] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitSocketRACSignal *notification) {
+        [[self.hsy_subject deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
             @strongify(self);
-            if (!notification) {
-                return;
-            }
-            GCDAsyncSocket *sock = notification.hsy_tuple.first;
-            switch (notification.hsy_rac_delegate) {
-                case kHSYCocoaKitSocketRACDelegate_socketConnected: {
-                    BOOL connect = [sock isConnected];
-                    if (connect) {
-                        [self hsy_setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_Connected];
-                    }
-                }
-                    break;
-                case kHSYCocoaKitSocketRACDelegate_socketDisconnected: {
-                    if (self.socketConnectStatus == kHSYCocoaKitSocketConnectStatus_AccordDisConnected) {
-                        return;
-                    }
-                    if (connectAgainCount <= 3) {
-                        connectAgainCount ++;
-                        [self hsy_connectServer:sock.connectedHost hsy_onPort:sock.connectedPort];
-                        [self hsy_setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_ConnectAgain];
-                    } else {
-                        connectAgainCount = 0;
-                        [self hsy_setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_PassiveDisConnected];
-                    }
-                }
-                    break;
-                case kHSYCocoaKitSocketRACDelegate_socketDidReadData: {
-                }
-                    break;
-                case kHSYCocoaKitSocketRACDelegate_socketDidWriteData: {
-                    long tag = (long)[notification.hsy_tuple.third longLongValue];
-                    //数据发送成功后需要重新设置一次数据的timeout时间
-                    [sock readDataToData:[GCDAsyncSocket CRLFData] withTimeout:DEFAULT_SOCKET_WRITE_TIME tag:tag];
-                }
-                    break;
-                default:
-                    break;
-            }
-            [self.delegateSubject sendNext:notification];
+            GCDAsyncSocket *sock = (GCDAsyncSocket *)tuple.first;
+            NSDictionary *param = @{@(YES) : @{@(kHSYCocoaKitSocketRACDelegate_socketDidReadData) : kHSYCocoaKitSocketDidReadDataNotification, }, @(NO) : @{@(kHSYCocoaKitSocketRACDelegate_socketDisconnected) : kHSYCocoaKitSocketDisconnectedNotification, }, }[@(sock.isConnected)];
+            HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:(kHSYCocoaKitSocketRACDelegate)[param.allKeys.firstObject integerValue]];
+            [self hsy_observerNotification:racSignal];
+            [[NSNotificationCenter defaultCenter] postNotificationName:param.allValues.firstObject object:tuple];
         }];
-        
-        //监听链接状态的改变，并发送一个外部通知
-        [[RACObserve(self, self.observerSockectConnect) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSNumber *connect) {
-            kHSYCocoaKitSocketConnectStatus status = (kHSYCocoaKitSocketConnectStatus)[connect integerValue];
-            [[NSNotificationCenter defaultCenter] postNotificationName:HSYCocoaKitSocketConnectStatusNotification object:@(status)];
-        }];
-        [self hsy_setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_UnConnect];
     }
     return self;
 }
@@ -127,92 +81,65 @@ static HSYCocoaKitSocketManager *socketManager;
         self.hsy_connectPort = url.port.longLongValue;
     }
     @weakify(self);
-    if (!self.socketDelegateSignal) {
-        _socketDelegateSignal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-            @strongify(self);
-            if (![self.tcpSocket isConnected]) {
-                [self hsy_connect:urlString hsy_host:host hsy_onPort:port hsy_errorBlock:^(NSError *error) {
-                    //为了保持订阅信号的活跃性，此处不能使用"- sendError:"，否则订阅信号会被release
-                    RACTuple *tuple = RACTuplePack(nil, error);
-                    [subscriber sendNext:tuple];
-                }];
-            }
-            [self.delegateSubject subscribeNext:^(id x) {
-                //为了保持订阅信号的活跃性，delegateSubject发送"- sendError:"，否则订阅信号会被release，并且delegateSubject只能"- sendNext:"，x返回类型为HSYCocoaKitSocketRACSignal和NSError
-                RACTuple *tuple = nil;
-                if ([x isKindOfClass:[HSYCocoaKitSocketRACSignal class]]) {
-                    HSYCocoaKitSocketRACSignal *notification = (HSYCocoaKitSocketRACSignal *)x;
-                    tuple = RACTuplePack(notification, nil);
-                } else {
-                    NSError *error = (NSError *)x;
-                    tuple = RACTuplePack(nil, error);
-                }
-                [subscriber sendNext:tuple];
-            }];
-            return [RACDisposable disposableWithBlock:^{
-                NSLog(@"必须保持订阅信号的活跃性，socket订阅信号已经被释放，请check订阅信号是否因其他问题被释放或者调用过“- sendError:”、“- sendCompleted”，方法：- connectServer:");
-            }];
-        }];
-    } else if (![self.tcpSocket isConnected]) {
-        [self hsy_connect:urlString hsy_host:host hsy_onPort:port hsy_errorBlock:^(NSError *error) {
-            @strongify(self);
-            [self.delegateSubject sendNext:error];
-        }];
-    }
-    return self.socketDelegateSignal;
-}
-
-- (void)hsy_connect:(NSString *)urlString
-           hsy_host:(NSString *)host
-         hsy_onPort:(uint16_t)port
-     hsy_errorBlock:(void(^)(NSError *error))block
-{
-    @weakify(self);
-    [[HSYNetWorkingManager shareInstance] hsy_observer_3x_NetworkReachabilityOfNext:^BOOL(AFNetworkReachabilityStatus status, BOOL hasNetwork) {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
-        if (!hasNetwork && block) {
-            block([NSError hsy_errorWithErrorType:kAFNetworkingStatusErrorTypeNone]);
-        } else {
-            NSError *error = nil;
-            BOOL connect = NO;
-            if (urlString.length > 0) {
-                connect = [self.tcpSocket connectToUrl:[NSURL URLWithString:urlString]
-                                           withTimeout:DEFAULT_SOCKET_CONNECTED_TIMEOUT
-                                                 error:&error];
-            } else {
-                connect = [self.tcpSocket connectToHost:self.hsy_connectHost
-                                                 onPort:self.hsy_connectPort
-                                            withTimeout:DEFAULT_SOCKET_CONNECTED_TIMEOUT
-                                                  error:&error];
-            }
-            if (error && block) {
-                NSLog(@"connect error = %@, connect = %d", error, connect);
-                block(error);
-            }
+        if (!self.tcpSocket.isConnected) {
+            [[HSYNetWorkingManager shareInstance] hsy_observer_3x_NetworkReachabilityOfNext:^BOOL(AFNetworkReachabilityStatus status, BOOL hasNetwork) {
+                if (!hasNetwork) {
+                    [subscriber sendError:[NSError hsy_errorWithErrorType:kAFNetworkingStatusErrorTypeNone]];
+                } else {
+                    NSError *error = nil;
+                    BOOL connect = [self.tcpSocket connectToHost:self.hsy_connectHost
+                                                          onPort:self.hsy_connectPort
+                                                     withTimeout:-1
+                                                           error:&error];
+                    if (error) {
+                        NSLog(@"\n connect error = %@, connect = %d", error, connect);
+                        [subscriber sendError:error];
+                    } else {
+                        NSLog(@"\n connected socket server result = %d, please hold seconds waiting for “HSYCocoaKitSocketConnectStatusNotification” notification !!", connect);
+                        [[[self.tcpSocket hsy_rac_socketConnected] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitSocketRACSignal *notification) {
+                            @strongify(self);
+                            [self hsy_observerNotification:notification];
+                            [subscriber sendNext:notification];
+                            [subscriber sendCompleted];
+                        }];
+                    }
+                }
+                return NO;
+            }];
         }
-        return YES;
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_connectServer:hsy_host:hsy_onPort:”");
+        }];
     }];
 }
 
 - (void)hsy_disConnect
 {
-    if (self.tcpSocket && [self.tcpSocket isConnected]) {
-        [self hsy_setCurrentSocketConnectStatus:kHSYCocoaKitSocketConnectStatus_AccordDisConnected];
-        [self.tcpSocket disconnect];
-    }
-}
-
-- (void)hsy_setCurrentSocketConnectStatus:(kHSYCocoaKitSocketConnectStatus)statuls
-{
-    _socketConnectStatus = statuls;
-    self.observerSockectConnect = @(self.socketConnectStatus);
+    [self.tcpSocket disconnect];
 }
 
 #pragma mark - Operation
 
-- (void)hsy_writeData:(NSData *)data hsy_tag:(long)tag
+- (RACSignal *)hsy_writeData:(NSData *)data hsy_tag:(long)tag
 {
-    [self.tcpSocket writeData:data withTimeout:DEFAULT_SOCKET_WRITE_TIME tag:tag];
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self.tcpSocket writeData:data withTimeout:-1 tag:tag];
+        [[[self.tcpSocket hsy_rac_socketDidWriteData] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitSocketRACSignal *notification) {
+            @strongify(self);
+            [self hsy_observerNotification:notification];
+            [[self.hsy_subject deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
+                [subscriber sendNext:tuple];
+                [subscriber sendCompleted];
+            }];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- hsy_writeData:hsy_tag:” in %@ class", NSStringFromClass(self.class));
+        }];
+    }];
 }
 
 #pragma mark - Host & Port
@@ -225,6 +152,41 @@ static HSYCocoaKitSocketManager *socketManager;
 - (uint16_t)hsy_serverPort
 {
     return self.hsy_connectPort;
+}
+
+#pragma mark - Cool Signal For GCDAsyncSocketDelegate
+
+- (void)hsy_observerNotification:(HSYCocoaKitSocketRACSignal *)notification
+{
+    GCDAsyncSocket *sock = notification.hsy_tuple.first;
+    kHSYCocoaKitSocketRACDelegate status = notification.hsy_rac_delegate;
+    _socketConnectStatus = status;
+    if (status == kHSYCocoaKitSocketRACDelegate_socketDidWriteData) {
+        //数据发送后要开始读取
+        long tag = (long)[notification.hsy_tuple.third longLongValue];
+        [sock readDataToData:[GCDAsyncSocket CRLFData] withTimeout:-1 tag:tag];
+    }
+}
+
+#pragma mark - GCDAsyncSocketDelegate
+
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
+{
+    NSDictionary *result = [NSString toJSONObject:data];
+    NSLog(@"\n========================================================");
+    NSLog(@"\n socket did read data! data = %@, tag = %@", result, @(tag));
+    NSLog(@"\n========================================================");
+    RACTuple *tuple = RACTuplePack(sock, result, data, @(tag));
+    [self.hsy_subject sendNext:tuple];
+}
+
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
+{
+    NSLog(@"\n========================================================");
+    NSLog(@"\n socket disconnected! error = %@", err);
+    NSLog(@"\n========================================================");
+    RACTuple *tuple = RACTuplePack(sock, err);
+    [self.hsy_subject sendNext:tuple];
 }
 
 @end
