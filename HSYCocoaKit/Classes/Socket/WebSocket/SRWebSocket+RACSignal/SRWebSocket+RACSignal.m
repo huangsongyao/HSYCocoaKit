@@ -42,7 +42,9 @@ static void RACUseDelegateProxy(SRWebSocket *self)
                            reduceEach:^(SRWebSocket *webSocket){
                                RACTuple *tuple = RACTuplePack(webSocket);
                                HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_socketConnected];
+                               NSLog(@"\n==============================================================");
                                NSLog(@"\n webSocket connected! webSocket = %@", webSocket);
+                               NSLog(@"=============================================================\n ");
                                return racSignal;
                            }] takeUntil:self.rac_willDeallocSignal]
                          setNameWithFormat:@"%@ - hsy_rac_webSocketDidOpen", self.rac_description];
@@ -58,7 +60,9 @@ static void RACUseDelegateProxy(SRWebSocket *self)
                            reduceEach:^(SRWebSocket *webSocket, NSError *error){
                                RACTuple *tuple = RACTuplePack(webSocket, error);
                                HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_WebSocketConnectFailure];
+                               NSLog(@"\n==============================================================");
                                NSLog(@"\n webSocket connect Failure! webSocket = %@, error = %@", webSocket, error);
+                               NSLog(@"=============================================================\n ");
                                return racSignal;
                            }] takeUntil:self.rac_willDeallocSignal]
                          setNameWithFormat:@"%@ - hsy_rac_webSocketOpenFail", self.rac_description];
@@ -79,7 +83,9 @@ static void RACUseDelegateProxy(SRWebSocket *self)
                            reduceEach:^(SRWebSocket *webSocket, NSData *pongPayload){
                                RACTuple *tuple = RACTuplePack(webSocket, pongPayload);
                                HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_socketDidWriteData];
+                               NSLog(@"\n==============================================================");
                                NSLog(@"\n webSocket did receive pong! webSocket = %@, pongPayload = %@", webSocket, pongPayload);
+                               NSLog(@"=============================================================\n ");
                                return racSignal;
                            }] takeUntil:self.rac_willDeallocSignal]
                          setNameWithFormat:@"%@ - hsy_rac_webSocketDidReceivePong", self.rac_description];

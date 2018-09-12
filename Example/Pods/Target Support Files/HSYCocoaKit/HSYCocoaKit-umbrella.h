@@ -230,6 +230,8 @@
 #import "HSYCocoaKitSocketManager.h"
 #import "GCDAsyncSocket+RACSignal.h"
 #import "HSYCocoaKitSocketRACSignal.h"
+#import "HSYCocoaKitWebSocketManager.h"
+#import "SRWebSocket+RACSignal.h"
 
 FOUNDATION_EXPORT double HSYCocoaKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char HSYCocoaKitVersionString[];

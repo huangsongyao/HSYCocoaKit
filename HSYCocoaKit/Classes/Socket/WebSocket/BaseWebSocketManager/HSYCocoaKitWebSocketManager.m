@@ -93,6 +93,7 @@ static HSYCocoaKitWebSocketManager *weSocketManager;
         }];
     }];
 }
+
 #pragma mark - SRWebSocketDelegate
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
@@ -108,7 +109,7 @@ static HSYCocoaKitWebSocketManager *weSocketManager;
     //webSocket链接断开
     NSLog(@"\n========================================================");
     NSLog(@"\n webSocket disconnected! errorCode = %@, reason = %@, wasClean = %@", @(code), reason, @(wasClean));
-    NSLog(@"\n========================================================");
+    NSLog(@"========================================================\n");
     _isConnected = NO;
     RACTuple *tuple = RACTuplePack(webSocket, @(code), reason, @(wasClean));
     [[NSNotificationCenter defaultCenter] postNotificationName:kHSYCocoaKitWebSocketDisconnectedNotification object:tuple];

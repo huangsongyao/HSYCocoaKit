@@ -228,5 +228,7 @@
 #import "HSYCocoaKitSocketManager.h"
 #import "GCDAsyncSocket+RACSignal.h"
 #import "HSYCocoaKitSocketRACSignal.h"
+#import "HSYCocoaKitWebSocketManager.h"
+#import "SRWebSocket+RACSignal.h"
 
 #endif /* HSYCocoaKit_h */

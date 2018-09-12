@@ -39,7 +39,7 @@
 
 + (NSData *)toJSONData:(NSDictionary *)dictionary
 {
-    NSString *jsonString = [NSString jsonToJSONString:dictionary];
+    NSString *jsonString = [[[NSString jsonToJSONString:dictionary] stringByReplacingOccurrencesOfString:@"\n" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     return data;
 }

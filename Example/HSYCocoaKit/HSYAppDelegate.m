@@ -17,6 +17,7 @@
 #import "NSString+Regular.h"
 #import "NSDecimalNumber+Computer.h"
 #import "NSBundle+CFBundle.h"
+#import "HSYCocoaKitWebSocketManager.h"
 
 @interface dddMidel : JSONModel
 
@@ -125,6 +126,12 @@
     
     NSDictionary *bundleDictionary = [NSBundle hsy_appBundle];
     NSLog(@"\n bundleDictionary = %@", bundleDictionary);
+    
+    [[[[HSYCocoaKitWebSocketManager shareInstance] hsy_webSocketConnect:@"http://dev.dobitrade.com:8001"] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitSocketRACSignal *notification) {
+        [[[[HSYCocoaKitWebSocketManager shareInstance] hsy_webSocketSendPing:[HSYCocoaKitSocketRACSignal toJSONData:@{@"token" : @"fk0soekf0aw3kfwofasfma", @"channel" : @"mcc_dob", }]] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitSocketRACSignal *signalObject) {
+            NSLog(@"");
+        }];
+    }];
 //    [[HSYFMDBOperationManager shareInstance] hsy_insertDataToTableName:@"testDatabaseTable" fieldParams:[HSYFMDBOperationManager hsy_testTableByFields] insertDatas:[@[@"user", @"userId"] mutableCopy] completed:^(BOOL result, HSYFMDBOperationFieldInfo *info) {
 //        NSLog(@"tested success");
 //    }];

@@ -92,7 +92,9 @@ static HSYCocoaKitSocketManager *socketManager;
                                                      withTimeout:-1
                                                            error:&error];
                     if (error) {
+                        NSLog(@"\n========================================================");
                         NSLog(@"\n connect error = %@, connect = %d", error, connect);
+                        NSLog(@"========================================================\n");
                         [subscriber sendError:error];
                     } else {
                         NSLog(@"\n connected socket server result = %d, please hold seconds waiting for “HSYCocoaKitSocketConnectStatusNotification” notification !!", connect);
@@ -173,7 +175,7 @@ static HSYCocoaKitSocketManager *socketManager;
     NSDictionary *result = [NSString toJSONObject:data];
     NSLog(@"\n========================================================");
     NSLog(@"\n socket did read data! data = %@, tag = %@", result, @(tag));
-    NSLog(@"\n========================================================");
+    NSLog(@"========================================================\n");
     RACTuple *tuple = RACTuplePack(sock, result, data, @(tag));
     [self.hsy_subject sendNext:tuple];
 }
@@ -182,7 +184,7 @@ static HSYCocoaKitSocketManager *socketManager;
 {
     NSLog(@"\n========================================================");
     NSLog(@"\n socket disconnected! error = %@", err);
-    NSLog(@"\n========================================================");
+    NSLog(@"========================================================\n");
     RACTuple *tuple = RACTuplePack(sock, err);
     HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_socketDisconnected];
     [self hsy_observerNotification:racSignal];

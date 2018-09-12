@@ -43,7 +43,9 @@ static void RACUseDelegateProxy(GCDAsyncSocket *self)
                            reduceEach:^(GCDAsyncSocket *socket, NSString *host, NSNumber *port){
                                RACTuple *tuple = RACTuplePack(socket, host, port);
                                HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_socketConnected];
+                               NSLog(@"\n========================================================");
                                NSLog(@"\n socket connected! host = %@, port = %@", host, port);
+                               NSLog(@"========================================================\n");
                                return racSignal;
     }] takeUntil:self.rac_willDeallocSignal]
                          setNameWithFormat:@"%@ - hsy_rac_socketConnected", self.rac_description];
@@ -59,7 +61,9 @@ static void RACUseDelegateProxy(GCDAsyncSocket *self)
                            reduceEach:^(GCDAsyncSocket *socket, NSNumber *tag){
                                RACTuple *tuple = RACTuplePack(socket, tag);
                                HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_socketDidWriteData];
+                               NSLog(@"\n========================================================");
                                NSLog(@"\n socket did write data! tag = %@", tag);
+                               NSLog(@"========================================================\n");
                                return racSignal;
                            }] takeUntil:self.rac_willDeallocSignal]
                          setNameWithFormat:@"%@ - hsy_rac_socketDidWriteData", self.rac_description];
