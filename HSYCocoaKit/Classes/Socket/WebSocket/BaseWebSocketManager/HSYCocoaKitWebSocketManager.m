@@ -100,7 +100,8 @@ static HSYCocoaKitWebSocketManager *weSocketManager;
 {
     //webSocket收到消息
     if (self.webSocketDidReceiveMessage) {
-        self.webSocketDidReceiveMessage(message);
+        RACTuple *tuple = RACTuplePack(message);
+        self.webSocketDidReceiveMessage(tuple);
     }
 }
 

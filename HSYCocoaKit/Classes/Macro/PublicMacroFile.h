@@ -227,11 +227,30 @@
 
 
 //CGAffineTransformIdentity格式的放缩
-#define HSYCOCOAKIT_GGA_TRANSFORM_SCALES(scale1, scale2)                            (CGAffineTransformScale(CGAffineTransformIdentity, scale1, scale2))
-#define HSYCOCOAKIT_GGA_TRANSFORM_SCALE(scale)      HSYCOCOAKIT_GGA_TRANSFORM_SCALES(scale, scale)
-//绕圆心的旋转动画
-#define HSYCOCOAKIT_GGA_ROTATION(angle)             (CGAffineTransformMakeRotation(angle))
+#define HSYCOCOAKIT_GGA_TRANSFORM_SCALES(scale1, scale2)                              (CGAffineTransformScale(CGAffineTransformIdentity, scale1, scale2))
+#define HSYCOCOAKIT_GGA_TRANSFORM_SCALE(scale)              HSYCOCOAKIT_GGA_TRANSFORM_SCALES(scale, scale)
 
+
+//绕圆心的旋转动画
+#define HSYCOCOAKIT_GGA_ROTATION(angle)                     (CGAffineTransformMakeRotation(angle))
+
+
+//3D平移，toX表示平面从设备左-->右的平移方向的值[正值表示向右平移，负值表示向左平移]，toY表示平面从设备顶部-->底部的平移方向的值[正值表示向下，负值表示向上]，toZ表示平面从设备面-->视觉面的平移方向的值[正值表示靠近视觉平面，负值表示远离视觉平面]
+#define HSYCOCOAKIT_GGA_3D_TRANSLATION(toX, toY, toZ)       (CATransform3DMakeTranslation(toX, toY, toZ))
+#define HSYCOCOAKIT_GGA_3D_TRANSLATION_TO_X_AXLE(toX)       (HSYCOCOAKIT_GGA_3D_TRANSLATION(toX, 0, 0))
+#define HSYCOCOAKIT_GGA_3D_TRANSLATION_TO_Y_AXLE(toY)       (HSYCOCOAKIT_GGA_3D_TRANSLATION(0, toY, 0))
+#define HSYCOCOAKIT_GGA_3D_TRANSLATION_TO_Z_AXLE(toZ)       (HSYCOCOAKIT_GGA_3D_TRANSLATION(0, 0, toZ))
+
+
+//3D旋转，CATransform3D_t表示传入一个CATransform3D的3D矩阵的结构体，angle表示旋转角度，宏会自动转为弧度，rotateX、rotateY和rotateZ的取值为0和1，0表示此轴不做旋转，1表示此轴做旋转，则三个参数分别表示“是否在x轴做旋转”、“是否在y轴做旋转”以及“是否在z轴做旋转”，并且旋转方式为绕中轴旋转
+#define HSYCOCOAKIT_GGA_3D_ROTATE(CATransform3D_t, angle, rotateX, rotateY, rotateZ)       (CATransform3DRotate(CATransform3D_t, DEGREES_TO_RADIANS(angle), rotateX, rotateY, rotateZ))
+#define HSYCOCOAKIT_GGA_3D_ROTATE_X_AXLE(CATransform3D_t, rotateX)      (HSYCOCOAKIT_GGA_3D_ROTATE(CATransform3D_t, rotateX, 0, 0))
+#define HSYCOCOAKIT_GGA_3D_ROTATE_Y_AXLE(CATransform3D_t, rotateY)      (HSYCOCOAKIT_GGA_3D_ROTATE(CATransform3D_t, 0, rotateY, 0))
+#define HSYCOCOAKIT_GGA_3D_ROTATE_Z_AXLE(CATransform3D_t, rotateZ)      (HSYCOCOAKIT_GGA_3D_ROTATE(CATransform3D_t, 0, 0, rotateZ))
+
+
+//3D放缩，CATransform3D_t表示传入一个CATransform3D的3D矩阵的结构体，scaleX表示在x轴上的放缩，scaleY表示在y轴上的放缩，scaleZ表示在z轴上的放缩
+#define HSYCOCOAKIT_GGA_3D_SCALE(CATransform3D_t, scaleX, scaleY, scaleZ)       (CATransform3DScale(CATransform3D_t, scaleX, scaleY, scaleZ))
 
 //忽略"-Warc-performSelector-leaks"警告，“- performSelector:”类型的方法请不加“;”作为“stuff”参数写在“()”中
 #define HSYCOCOAKIT_IGNORED_SUPPRESS_PERFORM_SELECTOR_LEAK_WARNING(stuff) \

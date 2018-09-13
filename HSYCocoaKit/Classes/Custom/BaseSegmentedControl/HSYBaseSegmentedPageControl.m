@@ -135,7 +135,9 @@
     }
     self.selectedImageView.y = (self.height - self.selectedImageView.height);
     NSNumber *index = @(self.selectedIndex);
-    [self hsy_scrollToSelected:self.segmentedButton[index.integerValue] animation:NO];
+    if (index.integerValue < self.segmentedButton.count) {
+        [self hsy_scrollToSelected:self.segmentedButton[index.integerValue] animation:NO];
+    }
     [self.scrollView addSubview:self.selectedImageView];
 }
 

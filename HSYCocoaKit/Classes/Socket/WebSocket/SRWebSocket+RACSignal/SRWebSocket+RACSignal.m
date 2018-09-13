@@ -83,9 +83,6 @@ static void RACUseDelegateProxy(SRWebSocket *self)
                            reduceEach:^(SRWebSocket *webSocket, NSData *pongPayload){
                                RACTuple *tuple = RACTuplePack(webSocket, pongPayload);
                                HSYCocoaKitSocketRACSignal *racSignal = [[HSYCocoaKitSocketRACSignal alloc] initWithTuple:tuple rac_delegateType:kHSYCocoaKitSocketRACDelegate_socketDidWriteData];
-                               NSLog(@"\n==============================================================");
-                               NSLog(@"\n webSocket did receive pong! webSocket = %@, pongPayload = %@", webSocket, pongPayload);
-                               NSLog(@"=============================================================\n ");
                                return racSignal;
                            }] takeUntil:self.rac_willDeallocSignal]
                          setNameWithFormat:@"%@ - hsy_rac_webSocketDidReceivePong", self.rac_description];

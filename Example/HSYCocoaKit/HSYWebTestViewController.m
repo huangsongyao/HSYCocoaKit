@@ -82,32 +82,34 @@
     
     CGFloat location = 50;
     //前
-    CATransform3D ct = CATransform3DMakeTranslation(0, 0, location);
+    CATransform3D ct = HSYCOCOAKIT_GGA_3D_TRANSLATION_TO_Z_AXLE(location);//CATransform3DMakeTranslation(0, 0, location);
 //    ct = CATransform3DRotate(ct, M_PI, 0, 1, 0);
     [cube addSublayer:[self faceWithTransform:ct color:[UIColor redColor]]];
     
     //右
-    ct = CATransform3DMakeTranslation(location, 0, 0);
-    ct = CATransform3DRotate(ct, M_PI_2, 0, 1, 0);
+    ct = HSYCOCOAKIT_GGA_3D_TRANSLATION_TO_X_AXLE(location);//CATransform3DMakeTranslation(location, 0, 0);
+    ct = CATransform3DRotate(ct, -M_PI_2, 0, 1, 0);
+    
     [cube addSublayer:[self faceWithTransform:ct color:[UIColor yellowColor]]];
     
     //上
-    ct = CATransform3DMakeTranslation(0, -location, 0);
-    ct = CATransform3DRotate(ct, M_PI_2, 1, 0, 0);
+    ct = HSYCOCOAKIT_GGA_3D_TRANSLATION_TO_Y_AXLE(-location);//CATransform3DMakeTranslation(0, -location, 0);
+    ct = CATransform3DRotate(ct, -M_PI_2, 1, 0, 0);
     [cube addSublayer:[self faceWithTransform:ct color:[UIColor blueColor]]];
     
     //下
-    ct = CATransform3DMakeTranslation(0, location, 0);
-    ct = CATransform3DRotate(ct, -M_PI_2, 1, 0, 0);
+    ct = HSYCOCOAKIT_GGA_3D_TRANSLATION_TO_Y_AXLE(location);//CATransform3DMakeTranslation(0, location, 0);
+    ct = CATransform3DRotate(ct, M_PI_2, 1, 0, 0);
     [cube addSublayer:[self faceWithTransform:ct color:[UIColor brownColor]]];
     
     //左
-    ct = CATransform3DMakeTranslation(-location, 0, 0);
-    ct = CATransform3DRotate(ct, -M_PI_2, 0, 1, 0);
+    ct = HSYCOCOAKIT_GGA_3D_TRANSLATION_TO_X_AXLE(-location);//CATransform3DMakeTranslation(-location, 0, 0);
+    ct = CATransform3DRotate(ct, M_PI_2, 0, 1, 0);
     [cube addSublayer:[self faceWithTransform:ct color:[UIColor greenColor]]];
     
     //后
-    ct = CATransform3DMakeTranslation(0, 0, -location);
+    ct = HSYCOCOAKIT_GGA_3D_TRANSLATION_TO_Z_AXLE(-location);//CATransform3DMakeTranslation(0, 0, -location);
+    ct = CATransform3DScale(ct, 1, 1, 1.5);
 //    ct = CATransform3DRotate(ct, M_PI, 0, 1, 0);
     [cube addSublayer:[self faceWithTransform:ct color:[UIColor orangeColor]]];
     
