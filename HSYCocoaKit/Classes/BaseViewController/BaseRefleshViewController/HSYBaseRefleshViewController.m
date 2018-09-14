@@ -104,6 +104,11 @@ NSString *const kHSYCocoaKitRefreshStatusPullUpKey = @"HSYCocoaKitRefreshStatusP
 {
     if (self.hsy_refreshRequestSuccess) {
         @weakify(self);
+        if (!self.hsy_viewModel.hsy_refreshStateCode) {
+            NSLog(@"\n \n \n \n \n self.hsy_viewModel.hsy_refreshStateCode = %@! please check on!!", self.hsy_viewModel.hsy_refreshStateCode);
+            [scrollView.pullToRefreshView stopAnimating];
+            return;
+        }
         kHSYCocoaKitRACSubjectOfNextType type = (pullDown ? kHSYCocoaKitRACSubjectOfNextTypePullDownSuccess : kHSYCocoaKitRACSubjectOfNextTypePullUpSuccess);
         HSYCocoaKitRACSubscribeNotification *notification = [self.hsy_viewModel hsy_defaultSubscribeNotification:type subscribeContents:@[self.hsy_viewModel.hsy_refreshStateCode]];
         [[self.hsy_refreshRequestSuccess(pullDown, notification) deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {

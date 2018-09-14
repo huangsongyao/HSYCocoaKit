@@ -26,7 +26,7 @@
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
         [self hsy_refreshToPullDown:network toMap:map subscriberNext:^(id x, NSError *error) {
-            [subscriber sendNext:x];
+            [subscriber sendNext:RACTuplePack(x, error)];
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{
@@ -41,7 +41,7 @@
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
         [self hsy_refreshToPullDown:network toMap:map subscriberNext:^(id x, NSError *error) {
-            [subscriber sendNext:x];
+            [subscriber sendNext:RACTuplePack(x, error)];
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{
