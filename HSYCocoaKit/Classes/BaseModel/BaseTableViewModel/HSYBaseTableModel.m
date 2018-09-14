@@ -11,12 +11,12 @@
 
 @implementation HSYBaseTableModel
 
-- (void)hsy_refreshToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next
+- (void)hsy_refreshToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x, NSError *error))next
 {
     [self hsy_pullRefresh:kHSYReflesStatusTypePullDown updateNext:network toMap:map subscriberNext:next];
 }
 
-- (void)hsy_refreshToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x))next
+- (void)hsy_refreshToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void(^)(id x, NSError *error))next
 {
     [self hsy_pullRefresh:kHSYReflesStatusTypePullUp updateNext:network toMap:map subscriberNext:next];
 }
@@ -26,7 +26,7 @@
     @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
-        [self hsy_refreshToPullDown:network toMap:map subscriberNext:^(id x) {
+        [self hsy_refreshToPullDown:network toMap:map subscriberNext:^(id x, NSError *error) {
             [subscriber sendNext:x];
             [subscriber sendCompleted];
         }];
@@ -41,7 +41,7 @@
     @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
-        [self hsy_refreshToPullUp:network toMap:map subscriberNext:^(id x) {
+        [self hsy_refreshToPullUp:network toMap:map subscriberNext:^(id x, NSError *error) {
             [subscriber sendNext:x];
             [subscriber sendCompleted];
         }];

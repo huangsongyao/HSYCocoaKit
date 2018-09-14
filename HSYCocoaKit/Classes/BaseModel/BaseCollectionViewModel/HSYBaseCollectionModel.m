@@ -10,37 +10,54 @@
 
 @implementation HSYBaseCollectionModel
 
-- (void)hsy_refreshToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void (^)(id))next
+- (void)hsy_refreshToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void (^)(id, NSError *error))next
 {
     [self hsy_pullRefresh:kHSYReflesStatusTypePullUp updateNext:network toMap:map subscriberNext:next];
 }
 
-- (void)hsy_refreshToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void (^)(id))next
+- (void)hsy_refreshToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map subscriberNext:(void (^)(id, NSError *error))next
 {
     [self hsy_pullRefresh:kHSYReflesStatusTypePullDown updateNext:network toMap:map subscriberNext:next];
 }
 
-- (void)hsy_refreshCollectionToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
+- (RACSignal *)hsy_refreshCollectionToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
 {
-    [self hsy_refreshToPullDown:network toMap:map subscriberNext:^(id x) {
-        NSLog(@"refresh To Down Result : %@", x);
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self hsy_refreshToPullDown:network toMap:map subscriberNext:^(id x, NSError *error) {
+            [subscriber sendNext:x];
+            [subscriber sendCompleted];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- (RACSignal *)hsy_refreshTableToPullDown:toMap:”");
+        }];
     }];
 }
 
-- (void)hsy_refreshCollectionToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
+- (RACSignal *)hsy_refreshCollectionToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
 {
-    [self hsy_refreshToPullUp:network toMap:map subscriberNext:^(id x) {
-        NSLog(@"refresh To Down Result : %@", x);
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        [self hsy_refreshToPullDown:network toMap:map subscriberNext:^(id x, NSError *error) {
+            [subscriber sendNext:x];
+            [subscriber sendCompleted];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release methods “- (RACSignal *)hsy_refreshCollectionToPullUp:toMap:”");
+        }];
     }];
 }
 
-- (void)hsy_refreshCollection:(kHSYReflesStatusType)type requestNetwork:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
+- (RACSignal *)hsy_refreshCollection:(kHSYReflesStatusType)type requestNetwork:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map
 {
     if (type == kHSYReflesStatusTypePullUp) {
-        [self hsy_refreshCollectionToPullUp:network toMap:map];
+        return [self hsy_refreshCollectionToPullUp:network toMap:map];
     } else {
-        [self hsy_refreshCollectionToPullDown:network toMap:map];
+        return [self hsy_refreshCollectionToPullDown:network toMap:map];
     }
 }
+
 
 @end

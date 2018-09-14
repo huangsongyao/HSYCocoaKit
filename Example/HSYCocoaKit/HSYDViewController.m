@@ -255,7 +255,7 @@ static CGFloat imgBottom = 11.0f;
                 [array addObject:obj];
             }
             return array;
-        } subscriberNext:^(id x) {
+        } subscriberNext:^(id x, NSError *error) {
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{
@@ -276,7 +276,7 @@ static CGFloat imgBottom = 11.0f;
                 [array addObject:obj];
             }
             return array;
-        } subscriberNext:^(id x) {
+        } subscriberNext:^(id x, NSError *error) {
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{

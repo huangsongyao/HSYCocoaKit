@@ -19,7 +19,7 @@
  */
 - (void)hsy_refreshToPullDown:(RACSignal *(^)(void))network
                         toMap:(NSMutableArray *(^)(RACTuple *tuple))map
-               subscriberNext:(void(^)(id x))next;
+               subscriberNext:(void(^)(id x, NSError *error))next;
 
 /**
  上拉加载更多
@@ -30,7 +30,7 @@
  */
 - (void)hsy_refreshToPullUp:(RACSignal *(^)(void))network
                       toMap:(NSMutableArray *(^)(RACTuple *tuple))map
-             subscriberNext:(void(^)(id x))next;
+             subscriberNext:(void(^)(id x, NSError *error))next;
 
 /**
  下拉刷新

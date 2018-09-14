@@ -19,7 +19,7 @@
  */
 - (void)hsy_refreshToPullDown:(RACSignal *(^)(void))network
                         toMap:(NSMutableArray *(^)(RACTuple *tuple))map
-               subscriberNext:(void(^)(id x))next;;
+               subscriberNext:(void(^)(id x, NSError *error))next;;
 
 /**
  上拉加载更多
@@ -30,23 +30,25 @@
  */
 - (void)hsy_refreshToPullUp:(RACSignal *(^)(void))network
                       toMap:(NSMutableArray *(^)(RACTuple *tuple))map
-             subscriberNext:(void(^)(id x))next;;
+             subscriberNext:(void(^)(id x, NSError *error))next;;
 
 /**
  下拉刷新
  
  @param network 下拉请求方法
  @param map 结果映射
+ @return RACSignal
  */
-- (void)hsy_refreshCollectionToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map;
+- (RACSignal *)hsy_refreshCollectionToPullDown:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map;
 
 /**
  上拉加载更多
  
  @param network 上拉请求方法
  @param map 结果映射
+ @return RACSignal
  */
-- (void)hsy_refreshCollectionToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map;
+- (RACSignal *)hsy_refreshCollectionToPullUp:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map;
 
 /**
  上拉或者下拉方法
@@ -54,7 +56,8 @@
  @param type kHSYReflesStatusType枚举
  @param network 上拉或者下拉的请求方法
  @param map 结果映射
+ @return RACSignal
  */
-- (void)hsy_refreshCollection:(kHSYReflesStatusType)type requestNetwork:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map;
+- (RACSignal *)hsy_refreshCollection:(kHSYReflesStatusType)type requestNetwork:(RACSignal *(^)(void))network toMap:(NSMutableArray *(^)(RACTuple *tuple))map;
 
 @end

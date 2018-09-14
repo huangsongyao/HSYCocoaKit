@@ -11,7 +11,7 @@
 #import "HSYNetWorkingManager.h"
 #import "NSError+Message.h"
 
-NSString *const kHSYCocoaKitWebSocketDidReceiveMessageNotification      = @"HSYCocoaKitWebSocketDisconnectedNotification";
+NSString *const kHSYCocoaKitWebSocketDidReceiveMessageNotification      = @"HSYCocoaKitWebSocketDidReceiveMessageNotification";
 NSString *const kHSYCocoaKitWebSocketDisconnectedNotification           = @"HSYCocoaKitWebSocketDisconnectedNotification";
 
 static HSYCocoaKitWebSocketManager *weSocketManager;

@@ -124,7 +124,7 @@
             return [[HSYNetWorkingManager shareInstance] test:urlStr];
         } toMap:^NSMutableArray *(RACTuple *tuple) {
             return [self datas];
-        } subscriberNext:^(id x) {
+        } subscriberNext:^(id x, NSError *error) {
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{}];
@@ -142,7 +142,7 @@
                 return [@[] mutableCopy];
             }
             return [self datas];
-        } subscriberNext:^(NSMutableArray *x) {
+        } subscriberNext:^(NSMutableArray *x, NSError *error) {
             [subscriber sendCompleted];
         }];
         return [RACDisposable disposableWithBlock:^{}];

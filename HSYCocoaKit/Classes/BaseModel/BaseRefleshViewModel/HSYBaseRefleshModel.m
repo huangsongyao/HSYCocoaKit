@@ -44,7 +44,7 @@
 - (void)hsy_pullRefresh:(kHSYReflesStatusType)status
              updateNext:(RACSignal *(^)(void))network
                   toMap:(NSMutableArray *(^)(RACTuple *tuple))map
-         subscriberNext:(void(^)(id x))next
+         subscriberNext:(void(^)(id x, NSError *error))next
 {
     switch (status) {
         case kHSYReflesStatusTypePullDown:
@@ -71,14 +71,14 @@
         }
         self.hsy_refreshStateCode = [self hsy_defaultHUDModel:result.count type:codeType];
         if (next) {
-            next(result);
+            next(result, nil);
         }
         return NO;
     } error:^(NSError *error) {
         @strongify(self);
         [self hsy_resultStatusCode:error];
         if (next) {
-            next(error);
+            next(nil, error);
         }
     }];
 }
