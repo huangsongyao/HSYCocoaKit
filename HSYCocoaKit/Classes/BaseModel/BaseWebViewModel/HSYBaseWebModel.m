@@ -40,4 +40,33 @@
     return config;
 }
 
+#pragma mark - Cookies
+
++ (void)hsy_deleteAllCookies:(NSString *)urlString
+{
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSArray<NSHTTPCookie *> *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:url];
+    for (NSHTTPCookie *cookie in cookies) {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
+}
+
++ (void)hsy_setCookies:(NSArray<NSDictionary *> *)cookies
+{
+    for (NSDictionary *cookieDictionary in cookies) {
+        NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieDictionary];
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+    }
+}
+
++ (NSDictionary *)hsy_setDefaultCookies:(NSString *)urlString defaultsCookie:(NSDictionary *)cookie
+{
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSString *host = url.host;
+    NSString *path = url.path;
+    NSNumber *port = url.port;
+    NSDictionary *cookies = @{NSHTTPCookieDomain : host, NSHTTPCookieName : cookie.allKeys.firstObject, NSHTTPCookiePath : path, NSHTTPCookiePort : port, NSHTTPCookieValue : cookie.allValues.firstObject, };
+    return cookies;
+}
+
 @end
