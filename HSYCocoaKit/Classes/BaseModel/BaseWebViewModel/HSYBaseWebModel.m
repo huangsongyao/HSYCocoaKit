@@ -65,7 +65,16 @@
     NSString *host = url.host;
     NSString *path = url.path;
     NSNumber *port = url.port;
-    NSDictionary *cookies = @{NSHTTPCookieDomain : host, NSHTTPCookieName : cookie.allKeys.firstObject, NSHTTPCookiePath : path, NSHTTPCookiePort : port, NSHTTPCookieValue : cookie.allValues.firstObject, };
+    NSMutableDictionary *cookies = [@{NSHTTPCookieName : cookie.allKeys.firstObject, NSHTTPCookieValue : cookie.allValues.firstObject, } mutableCopy];
+    if (host.length > 0) {
+        cookies[NSHTTPCookieDomain] = host;
+    }
+    if (path.length > 0) {
+        cookies[NSHTTPCookiePath] = path;
+    }
+    if (port) {
+        cookies[NSHTTPCookiePort] = port;
+    }
     return cookies;
 }
 
