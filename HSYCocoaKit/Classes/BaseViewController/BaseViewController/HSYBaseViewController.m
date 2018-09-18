@@ -124,17 +124,28 @@
 {
     _hsy_showLoading = hsy_showLoading;
     if (hsy_showLoading) {
-        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.activityIndicatorView.frame = self.view.bounds;
-        self.activityIndicatorView.backgroundColor = WHITE_COLOR;
-        if (self.customNavigationBar && !self.customNavigationBar.hidden) {
-            self.activityIndicatorView.frame = CGRectMake(0, self.customNavigationBar.bottom, IPHONE_WIDTH, (self.view.height - self.customNavigationBar.bottom));
+        if (!self.activityIndicatorView) {
+            self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            self.activityIndicatorView.frame = self.view.bounds;
+            self.activityIndicatorView.backgroundColor = WHITE_COLOR;
+            if (self.customNavigationBar && !self.customNavigationBar.hidden) {
+                self.activityIndicatorView.frame = CGRectMake(0, self.customNavigationBar.bottom, IPHONE_WIDTH, (self.view.height - self.customNavigationBar.bottom));
+            }
+            [self.view addSubview:self.activityIndicatorView];
+            [self.view bringSubviewToFront:self.activityIndicatorView];
         }
         if (![self.activityIndicatorView isAnimating]) {
             [self.activityIndicatorView startAnimating];
         }
-        [self.view addSubview:self.activityIndicatorView];
-        [self.view bringSubviewToFront:self.activityIndicatorView];
+    }
+}
+
+#pragma mark - Loading
+
+- (void)hsy_endSystemLoading
+{
+    if (self.activityIndicatorView && [self.activityIndicatorView isAnimating]) {
+        [self.activityIndicatorView stopAnimating];
     }
 }
 
@@ -241,15 +252,6 @@
 - (UINavigationItem *)hsy_customNavigationBarNavigationItem
 {
     return self.hsy_realCustomNativigation.customNavigationItem;
-}
-
-#pragma mark - Loading
-
-- (void)hsy_endSystemLoading
-{
-    if (self.activityIndicatorView && [self.activityIndicatorView isAnimating]) {
-        [self.activityIndicatorView stopAnimating];
-    }
 }
 
 #pragma mark - Set Custom NavigationBar BackgroundImage

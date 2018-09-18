@@ -21,4 +21,11 @@
  */
 - (RACSignal *)hsy_nativeRunJavaScriptFunction:(NSString *)function;
 
+/**
+ 重新刷新web地址
+ 
+ @param newContent 新地址内容，格式为：@{@(kHSYCocoaKitWKWebViewLoadType) : @"url、html、filePath"}
+ */
+- (void)hsy_resetRequest:(NSDictionary *)newContent;
+
 @end

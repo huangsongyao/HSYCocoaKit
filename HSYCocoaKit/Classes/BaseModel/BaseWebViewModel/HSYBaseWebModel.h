@@ -72,4 +72,12 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitWKWebViewLoadType) {
  */
 + (NSDictionary *)hsy_setDefaultCookies:(NSString *)urlString defaultsCookie:(NSDictionary *)cookie;
 
+/**
+ 重置请求地址
+ 
+ @param newContent 新地址内容，格式为：@{@(kHSYCocoaKitWKWebViewLoadType) : @"url、html、filePath"}
+ @return RACSignal RACSignal
+ */
+- (RACSignal *)hsy_resetRequestContent:(NSDictionary *)newContent;
+
 @end

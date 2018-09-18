@@ -78,4 +78,18 @@
     return cookies;
 }
 
+- (RACSignal *)hsy_resetRequestContent:(NSDictionary *)newContent
+{
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        NSDictionary *dic = @{@(kHSYCocoaKitWKWebViewLoadTypeRequest) : [NSURLRequest requestWithURL:[NSURL URLWithString:newContent.allValues.firstObject]], @(kHSYCocoaKitWKWebViewLoadTypeHTMLString) : newContent.allValues.firstObject, @(kHSYCocoaKitWKWebViewLoadTypeFilePath) : [NSURL fileURLWithPath:newContent.allValues.firstObject], };
+        self->_hsy_requestContent = dic[newContent.allKeys.firstObject];
+        self->_hsy_loadType = (kHSYCocoaKitWKWebViewLoadType)[newContent.allKeys.firstObject integerValue];
+        [subscriber sendNext:newContent];
+        [subscriber sendCompleted];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"release signal “- hsy_resetRequestContent:” in %@ class", NSStringFromClass(self.class));
+        }];
+    }];
+}
+
 @end

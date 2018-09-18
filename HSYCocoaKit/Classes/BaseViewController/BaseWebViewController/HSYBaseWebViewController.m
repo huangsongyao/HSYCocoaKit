@@ -24,17 +24,31 @@
     }
     WKWebViewConfiguration *webViewConfiguration = [(HSYBaseWebModel *)self.hsy_viewModel hsy_webViewConfigurations:self];
     _webView = [[WKWebView alloc] initWithFrame:rect configuration:webViewConfiguration];
-    
-    NSDictionary *methods = @{@(kHSYCocoaKitWKWebViewLoadTypeRequest) : NSStringFromSelector(@selector(loadRequest:)), @(kHSYCocoaKitWKWebViewLoadTypeHTMLString) : NSStringFromSelector(@selector(loadHTMLString:baseURL:)), @(kHSYCocoaKitWKWebViewLoadTypeFilePath) : NSStringFromSelector(@selector(loadFileURL:allowingReadAccessToURL:))};
-    NSString *method = methods[@([(HSYBaseWebModel *)self.hsy_viewModel hsy_loadType])];
-    if (method.length > 0) {
-        HSYCOCOAKIT_IGNORED_SUPPRESS_PERFORM_SELECTOR_LEAK_WARNING (
-            [self.webView performSelector:NSSelectorFromString(method) withObject:[(HSYBaseWebModel *)self.hsy_viewModel hsy_requestContent]]
-        );
-    }
+    [self hsy_resetPerformSelector];
     self.webView.UIDelegate = self;
     self.webView.navigationDelegate = self;
     [self.view addSubview:self.webView];
+}
+
+- (void)hsy_resetPerformSelector
+{
+    NSDictionary *methods = @{@(kHSYCocoaKitWKWebViewLoadTypeRequest) : NSStringFromSelector(@selector(loadRequest:)), @(kHSYCocoaKitWKWebViewLoadTypeHTMLString) : NSStringFromSelector(@selector(loadHTMLString:baseURL:)), @(kHSYCocoaKitWKWebViewLoadTypeFilePath) : NSStringFromSelector(@selector(loadFileURL:allowingReadAccessToURL:))};
+    NSString *method = methods[@([(HSYBaseWebModel *)self.hsy_viewModel hsy_loadType])];
+    if (method.length > 0) {
+        HSYCOCOAKIT_IGNORED_SUPPRESS_PERFORM_SELECTOR_LEAK_WARNING ([self.webView performSelector:NSSelectorFromString(method) withObject:[(HSYBaseWebModel *)self.hsy_viewModel hsy_requestContent]]);
+    }
+}
+
+#pragma mark - Reset
+
+- (void)hsy_resetRequest:(NSDictionary *)newContent
+{
+    @weakify(self);
+    [[[(HSYBaseWebModel *)self.hsy_viewModel hsy_resetRequestContent:newContent] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+        @strongify(self);
+        self.hsy_showLoading = YES;
+        [self hsy_resetPerformSelector];
+    }];
 }
 
 #pragma mark - Native Run JS
