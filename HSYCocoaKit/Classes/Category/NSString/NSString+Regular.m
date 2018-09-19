@@ -100,7 +100,8 @@
         return kHSYCocoaKitRegularResultLengthIsZero;
     }
     NSString *emailRegex = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    BOOL isPassRegex = [self isValidateByRegex:emailRegex];
+    NSString *realSelf = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    BOOL isPassRegex = [realSelf isValidateByRegex:emailRegex];
     if (isPassRegex) {
         return kHSYCocoaKitRegularResultConform;
     }
@@ -138,7 +139,8 @@
         return kHSYCocoaKitRegularResultLengthIsZero;
     }
     NSString *passwordRegex = [NSString stringWithFormat:@"^(?=.*[a-zA-Z0-9].*)(?=.*[a-zA-Z\\W].*)(?=.*[0-9\\W].*).{%@,%@}$", prefix, suffix];
-    kHSYCocoaKitRegularResult result = ([self isValidateByRegex:passwordRegex] ? kHSYCocoaKitRegularResultConform : kHSYCocoaKitRegularResultUnconform);
+    NSString *realSelf = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    kHSYCocoaKitRegularResult result = ([realSelf isValidateByRegex:passwordRegex] ? kHSYCocoaKitRegularResultConform : kHSYCocoaKitRegularResultUnconform);
     return result;
 }
 
