@@ -10,34 +10,49 @@
 
 @implementation HSYBaseWebModel
 
-- (instancetype)initWithContent:(NSString *)content loadType:(kHSYCocoaKitWKWebViewLoadType)type runNativeNames:(NSArray<NSString *> *)names
+- (instancetype)initWithRequestParam:(NSDictionary<NSNumber *, id> *)param addUserScripts:(NSArray<WKUserScript *> *)userScripts addScriptMessageHandlers:(NSDictionary<id, NSArray<NSString *> *> *)scriptMessageHandlers
 {
     if (self = [super init]) {
-        NSDictionary *dic = @{@(kHSYCocoaKitWKWebViewLoadTypeRequest) : [NSURLRequest requestWithURL:[NSURL URLWithString:content]], @(kHSYCocoaKitWKWebViewLoadTypeHTMLString) : content, @(kHSYCocoaKitWKWebViewLoadTypeFilePath) : [NSURL fileURLWithPath:content], };
-        _hsy_requestContent = dic[@(type)];
-        _hsy_loadType = type;
-        _hsy_runNativeNames = names;
+        NSDictionary *dic = @{@(kHSYCocoaKitWKWebViewLoadTypeRequest) : [NSURLRequest requestWithURL:[NSURL URLWithString:param.allValues.firstObject]], @(kHSYCocoaKitWKWebViewLoadTypeHTMLString) : param.allValues.firstObject, @(kHSYCocoaKitWKWebViewLoadTypeFilePath) : [NSURL fileURLWithPath:param.allValues.firstObject], };
+        _hsy_requestContent = dic[param.allKeys.firstObject];
+        _hsy_loadType = (kHSYCocoaKitWKWebViewLoadType)[param.allKeys.firstObject integerValue];
+        _hsy_userScripts = userScripts;
+        _hsy_scriptMessageHandlers = scriptMessageHandlers.allValues.firstObject;
+        
+        //WKWebView配置项
+        WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
+        WKUserContentController *userContent = [[WKUserContentController alloc] init];
+        if (userScripts.count > 0) {
+            for (WKUserScript *userScript in userScripts) {
+                [userContent addUserScript:userScript];
+            }
+        }
+        if (scriptMessageHandlers) {
+            id<WKScriptMessageHandler>delegate = scriptMessageHandlers.allKeys.firstObject;
+            NSArray<NSString *> *scriptHandlers = scriptMessageHandlers.allValues.firstObject;
+            for (NSString *script in scriptHandlers) {
+                [userContent addScriptMessageHandler:delegate name:script];
+            }
+        }
+        configuration.userContentController = userContent;
+        _hsy_webViewConfiguration = configuration;
     }
     return self;
 }
 
-#pragma mark - WKWebViewConfiguration
-
-+ (WKWebViewConfiguration *)hsy_webViewConfigurations:(NSArray<NSString *> *)runNativeNames delegate:(id<WKScriptMessageHandler>)delegate
+- (instancetype)initWithRequestParam:(NSDictionary<NSNumber *, id> *)param addUserScripts:(NSArray<WKUserScript *> *)userScripts
 {
-    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-    WKUserContentController *userContent = [[WKUserContentController alloc] init];
-    for (NSString *runNativeName in runNativeNames) {
-        [userContent addScriptMessageHandler:delegate name:runNativeName];
-    }
-    config.userContentController = userContent;
-    return config;
+    return [self initWithRequestParam:param addUserScripts:userScripts addScriptMessageHandlers:nil];
 }
 
-- (WKWebViewConfiguration *)hsy_webViewConfigurations:(id<WKScriptMessageHandler>)delegate
+- (instancetype)initWithRequestParam:(NSDictionary<NSNumber *, id> *)param addScriptMessageHandlers:(NSDictionary<id,NSArray<NSString *> *> *)scriptMessageHandlers
 {
-    WKWebViewConfiguration *config = [self.class hsy_webViewConfigurations:self.hsy_runNativeNames delegate:delegate];
-    return config;
+    return [self initWithRequestParam:param addUserScripts:nil addScriptMessageHandlers:scriptMessageHandlers];
+}
+
+- (instancetype)initWithRequestParam:(NSDictionary<NSNumber *,id> *)param
+{
+    return [self initWithRequestParam:param addUserScripts:nil addScriptMessageHandlers:nil];
 }
 
 #pragma mark - Cookies
@@ -77,6 +92,8 @@
     }
     return cookies;
 }
+
+#pragma mark - Reset Web
 
 - (RACSignal *)hsy_resetRequestContent:(NSDictionary *)newContent
 {

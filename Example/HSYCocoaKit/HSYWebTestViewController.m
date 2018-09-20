@@ -28,7 +28,8 @@
 - (void)viewDidLoad {
     
 //    NSString *path = [NSFileManager finderFileFromName:@"index" fileType:@"html"];
-    self.hsy_viewModel = [[HSYBaseWebModel alloc] initWithContent:@"http://192.168.20.24:3000" loadType:kHSYCocoaKitWKWebViewLoadTypeRequest runNativeNames:@[]];
+    //@"http://192.168.20.24:3000" kHSYCocoaKitWKWebViewLoadTypeRequest
+    self.hsy_viewModel = [[HSYBaseWebModel alloc] initWithRequestParam:@{@(kHSYCocoaKitWKWebViewLoadTypeRequest) : @"http://192.168.20.24:3000"}];
     [super viewDidLoad];
     
     self.webView.hidden = YES;

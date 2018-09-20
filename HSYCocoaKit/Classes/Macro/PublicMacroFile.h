@@ -47,6 +47,9 @@
 //屏幕尺寸
 #define IPHONE_WIDTH                                                    ([UIScreen mainScreen].bounds.size.width)
 #define IPHONE_HEIGHT                                                   ([UIScreen mainScreen].bounds.size.height)
+#define IPHONE_SCALE                                                    ([UIScreen mainScreen].scale)
+#define IPHONE_HEIGHT_RESOLUTION_RATIO                                  (IPHONE_HEIGHT * IPHONE_SCALE)
+#define IPHONE_WIDTH_RESOLUTION_RATIO                                   (IPHONE_WIDTH * IPHONE_SCALE)
 
 
 //设备系统
@@ -120,6 +123,7 @@
 
 //加载图片
 #define CREATE_IMG(imageName)                                           [UIImage imageNamed:imageName]
+#define CREATE_PATH_IMG(path)                                           [UIImage imageWithContentsOfFile:path]
 
 
 //系统文字的font

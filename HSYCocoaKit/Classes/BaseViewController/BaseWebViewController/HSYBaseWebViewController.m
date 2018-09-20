@@ -22,8 +22,7 @@
     if (self.customNavigationBar && !self.customNavigationBar.hidden) {
         rect = CGRectMake(rect.origin.x, self.customNavigationBar.bottom, rect.size.width, (IPHONE_HEIGHT - self.customNavigationBar.bottom));
     }
-    WKWebViewConfiguration *webViewConfiguration = [(HSYBaseWebModel *)self.hsy_viewModel hsy_webViewConfigurations:self];
-    _webView = [[WKWebView alloc] initWithFrame:rect configuration:webViewConfiguration];
+    _webView = [[WKWebView alloc] initWithFrame:rect configuration:[(HSYBaseWebModel *)self.hsy_viewModel hsy_webViewConfiguration]];
     [self hsy_resetPerformSelector];
     self.webView.UIDelegate = self;
     self.webView.navigationDelegate = self;
@@ -80,7 +79,7 @@
 {
     //js调用native
     NSString *messageName = message.name;
-    if ([[(HSYBaseWebModel *)self.hsy_viewModel hsy_runNativeNames] containsObject:messageName]) {
+    if ([[(HSYBaseWebModel *)self.hsy_viewModel hsy_scriptMessageHandlers] containsObject:messageName]) {
         if (message) {
             [(HSYBaseWebModel *)self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNative subscribeContents:@[message]];
         }

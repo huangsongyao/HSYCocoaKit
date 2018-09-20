@@ -68,7 +68,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    kHSYCocoaKitLaunchScreenSize launchScreenSize = [self.class iPhoneDeviceScreen];
+    NSUInteger launchScreenSize = (NSUInteger)[HSYBaseLaunchScreenViewController iPhoneDeviceScreen];
     UIImage *image = CREATE_IMG(self.launchScreens[@(launchScreenSize)]);
     self.launchScreenImageView = [[UIImageView alloc] initWithImage:image highlightedImage:image];
     self.launchScreenImageView.frame = self.view.bounds;
@@ -82,24 +82,20 @@
 
 - (BOOL)prefersStatusBarHidden
 {
-    kHSYCocoaKitLaunchScreenSize launchScreenSize = (kHSYCocoaKitLaunchScreenSize)IPHONE_HEIGHT;
-    return (launchScreenSize != kHSYCocoaKitLaunchScreenSize_5_8_Inch);
+    kHSYCocoaKitLaunchScreenSize launchScreenSize = (kHSYCocoaKitLaunchScreenSize)IPHONE_HEIGHT_RESOLUTION_RATIO;
+    NSArray *hiddens = @[@(kHSYCocoaKitLaunchScreenSize_5_8_Inch), @(kHSYCocoaKitLaunchScreenSize_6_1_Inch), @(kHSYCocoaKitLaunchScreenSize_6_5_Inch), ];
+    return (![hiddens containsObject:@(launchScreenSize)]);
 }
 
 + (BOOL)iPhoneXDevice
 {
-    return (IPHONE_HEIGHT == ((CGFloat)kHSYCocoaKitLaunchScreenSize_5_8_Inch));
+    return (IPHONE_HEIGHT_RESOLUTION_RATIO == ((NSUInteger)kHSYCocoaKitLaunchScreenSize_5_8_Inch));
 }
 
 + (kHSYCocoaKitLaunchScreenSize)iPhoneDeviceScreen
 {
-    kHSYCocoaKitLaunchScreenSize launchScreenSize = (kHSYCocoaKitLaunchScreenSize)IPHONE_HEIGHT;
+    kHSYCocoaKitLaunchScreenSize launchScreenSize = (kHSYCocoaKitLaunchScreenSize)IPHONE_HEIGHT_RESOLUTION_RATIO;
     return launchScreenSize;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

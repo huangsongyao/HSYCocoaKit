@@ -11,11 +11,13 @@
 
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitLaunchScreenSize) {
     
-    kHSYCocoaKitLaunchScreenSize_3_5_Inch   = 480,  //iPhone4、4s
-    kHSYCocoaKitLaunchScreenSize_4_0_Inch   = 568,  //iPhone5、5s
-    kHSYCocoaKitLaunchScreenSize_4_7_Inch   = 667,  //iPhone6、6s、7、7s、8
-    kHSYCocoaKitLaunchScreenSize_5_5_Inch   = 736,  //iPhone6 Plus、6s Plus
-    kHSYCocoaKitLaunchScreenSize_5_8_Inch   = 812,  //iPhoneX
+    kHSYCocoaKitLaunchScreenSize_3_5_Inch   = 960,      //iPhone4、4s
+    kHSYCocoaKitLaunchScreenSize_4_0_Inch   = 1136,     //iPhone5、5s
+    kHSYCocoaKitLaunchScreenSize_4_7_Inch   = 1334,     //iPhone6、6s、7、7s、8
+    kHSYCocoaKitLaunchScreenSize_5_5_Inch   = 2208,     //iPhone6 Plus、6s Plus
+    kHSYCocoaKitLaunchScreenSize_5_8_Inch   = 2436,     //iPhoneX、iPhoneXS
+    kHSYCocoaKitLaunchScreenSize_6_1_Inch   = 1792,     //iPhoneXR
+    kHSYCocoaKitLaunchScreenSize_6_5_Inch   = 2688,     //iPhoneXS Max
     
 };
 

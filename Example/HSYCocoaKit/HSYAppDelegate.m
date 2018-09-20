@@ -88,11 +88,13 @@
     [[HSYNetWorkingManager shareInstance] hsy_setNetworkBaseUrl:@"http://192.168.1.12:8087/zbd-app"];
     @weakify(self);
     NSDictionary *dic = @{
-                          @(kHSYCocoaKitLaunchScreenSize_3_5_Inch) : @"i4_sp",
-                          @(kHSYCocoaKitLaunchScreenSize_4_0_Inch) : @"i5_sp",
-                          @(kHSYCocoaKitLaunchScreenSize_4_7_Inch) : @"i6_sp",
-                          @(kHSYCocoaKitLaunchScreenSize_5_5_Inch) : @"i6p_sp",
-                          @(kHSYCocoaKitLaunchScreenSize_5_8_Inch) : @"iX_sp",
+                          @(kHSYCocoaKitLaunchScreenSize_3_5_Inch) : @"dobi_language_3_5",
+                          @(kHSYCocoaKitLaunchScreenSize_4_0_Inch) : @"dobi_language_4_0",
+                          @(kHSYCocoaKitLaunchScreenSize_4_7_Inch) : @"dobi_language_4_7",
+                          @(kHSYCocoaKitLaunchScreenSize_5_5_Inch) : @"dobi_language_5_5",
+                          @(kHSYCocoaKitLaunchScreenSize_5_8_Inch) : @"dobi_language_x",
+                          @(kHSYCocoaKitLaunchScreenSize_6_1_Inch) : @"dobi_language_xr",
+                          @(kHSYCocoaKitLaunchScreenSize_6_5_Inch) : @"dobi_language_xs_max",
                           };
     NSString *urlStr = @"http://mobile.zhubaodai.com/zbd-app/News/newsList?PAGENO=1&PRT_BLNTYP=04&RECNUM=15";
     HSYBaseLaunchScreenViewController *launchScreenViewController = [HSYBaseLaunchScreenViewController initWithLaunchScreens:dic networkSiganl:[[HSYNetWorkingManager shareInstance] test:urlStr] subscriberNext:^(id sendNext, id<UIApplicationDelegate> appDelegate, NSError *sendError) {

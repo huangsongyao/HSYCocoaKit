@@ -21,50 +21,63 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitWKWebViewLoadType) {
 
 @property (nonatomic, copy, readonly) id hsy_requestContent;
 @property (nonatomic, assign, readonly) kHSYCocoaKitWKWebViewLoadType hsy_loadType;
-@property (nonatomic, copy, readonly) NSArray<NSString *> *hsy_runNativeNames;
+
+@property (nonatomic, strong, readonly) NSArray<WKUserScript *> *hsy_userScripts;
+@property (nonatomic, strong, readonly) NSArray<NSString *> *hsy_scriptMessageHandlers;
+@property (nonatomic, strong, readonly) WKWebViewConfiguration *hsy_webViewConfiguration;
 
 /**
  初始化
 
- @param content 加载的内容，包括：完整的url链接地址、完整的HTML网页的string内容、完整的本地HTML文件地址
- @param names js调用native需要的触发postMessage方法的对象的名称的集合
+ @param param 加载的内容，包括：完整的url链接地址、完整的HTML网页的string内容、完整的本地HTML文件地址，格式为：@{@(kHSYCocoaKitWKWebViewLoadType枚举类型) : @"kHSYCocoaKitWKWebViewLoadType枚举对应的类型的链接"}
  @return HSYBaseWebModel
  */
-- (instancetype)initWithContent:(NSString *)content loadType:(kHSYCocoaKitWKWebViewLoadType)type runNativeNames:(NSArray<NSString *> *)names;
+- (instancetype)initWithRequestParam:(NSDictionary<NSNumber *, id> *)param;
 
 /**
- 创建一个WKWebViewConfiguration用于native和JavaScript的交互
+ 初始化，用于注入js到web中
 
- @param runNativeNames js调用native需要的触发postMessage方法的对象的名称的集合
- @param delegate 签订了WKScriptMessageHandler委托的协议
- @return WKWebViewConfiguration
+ @param param 加载的内容，包括：完整的url链接地址、完整的HTML网页的string内容、完整的本地HTML文件地址，格式为：@{@(kHSYCocoaKitWKWebViewLoadType枚举类型) : @"kHSYCocoaKitWKWebViewLoadType枚举对应的类型的链接"}
+ @param userScripts 向web中注入JavaScript，格式为：@[WKUserScript_A, WKUserScript_B, ...]
+ @return HSYBaseWebModel
  */
-+ (WKWebViewConfiguration *)hsy_webViewConfigurations:(NSArray<NSString *> *)runNativeNames delegate:(id<WKScriptMessageHandler>)delegate;
+- (instancetype)initWithRequestParam:(NSDictionary<NSNumber *, id> *)param addUserScripts:(NSArray<WKUserScript *> *)userScripts;
 
 /**
- 使用“hsy_runNativeNames”属性创建一个WKWebViewConfiguration用于native和JavaScript的交互
+ 初始化，用于添加好委托对象，便于js调用native
 
- @param delegate 签订了WKScriptMessageHandler委托的协议
- @return WKWebViewConfiguration
+ @param param 加载的内容，包括：完整的url链接地址、完整的HTML网页的string内容、完整的本地HTML文件地址，格式为：@{@(kHSYCocoaKitWKWebViewLoadType枚举类型) : @"kHSYCocoaKitWKWebViewLoadType枚举对应的类型的链接"}
+ @param scriptMessageHandlers 向web中添加监听，格式为：@{[添加过WKScriptMessageHandler委托的对像] : @[@"JavaScript方法A", @"JavaScript方法B", ...]}
+ @return HSYBaseWebModel
  */
-- (WKWebViewConfiguration *)hsy_webViewConfigurations:(id<WKScriptMessageHandler>)delegate;
+- (instancetype)initWithRequestParam:(NSDictionary<NSNumber *, id> *)param addScriptMessageHandlers:(NSDictionary<id, NSArray<NSString *> *> *)scriptMessageHandlers;
 
 /**
- 删除某个HTTP地址的cookies
+ 初始化，同时添加js对native的观察及注入js到web中
+
+ @param param 加载的内容，包括：完整的url链接地址、完整的HTML网页的string内容、完整的本地HTML文件地址，格式为：@{@(kHSYCocoaKitWKWebViewLoadType枚举类型) : @"kHSYCocoaKitWKWebViewLoadType枚举对应的类型的链接"}
+ @param userScripts 向web中注入JavaScript，格式为：@[WKUserScript_A, WKUserScript_B, ...]
+ @param scriptMessageHandlers 向web中添加监听，格式为：@{[添加过WKScriptMessageHandler委托的对像] : @[@"JavaScript方法A", @"JavaScript方法B", ...]}
+ @return HSYBaseWebModel
+ */
+- (instancetype)initWithRequestParam:(NSDictionary<NSNumber *, id> *)param addUserScripts:(NSArray<WKUserScript *> *)userScripts addScriptMessageHandlers:(NSDictionary<id, NSArray<NSString *> *> *)scriptMessageHandlers;
+
+/**
+ 删除某个HTTP地址的cookies，适用于UIWebView，WKWebView不支持
  
  @param urlString 完整的url地址
  */
 + (void)hsy_deleteAllCookies:(NSString *)urlString;
 
 /**
- 设置HTTP多个的cookies
+ 设置HTTP多个的cookies，适用于UIWebView，WKWebView不支持
  
  @param cookies cookies内容，格式为@[@{@"cookieA--key" : id}, @{@"cookieA--key" : id}, ...]，其中，cookie--key取值为：@[NSHTTPCookieName, NSHTTPCookieValue, NSHTTPCookieOriginURL, NSHTTPCookieVersion, NSHTTPCookieDomain, NSHTTPCookiePath, NSHTTPCookieSecure, NSHTTPCookieExpires, NSHTTPCookieComment, NSHTTPCookieCommentURL, NSHTTPCookieDiscard, NSHTTPCookieMaximumAge, NSHTTPCookiePort]
  */
 + (void)hsy_setCookies:(NSArray<NSDictionary *> *)cookies;
 
 /**
- 设置单个的HTTP的cookie
+ 设置单个的HTTP的cookie，适用于UIWebView，WKWebView不支持
  
  @param urlString 完整的url地址
  @param cookie 单个的cookie内容，只需要包含NSHTTPCookieName和NSHTTPCookieValue的内容
