@@ -104,8 +104,8 @@
 {
     //HTML或者js的alert、confirm、prompt方法调用时，直接触发此回调
     NSString *resultMessage = message;
-    if (resultMessage.length == 0) {
-        resultMessage = @"";
+    if (!resultMessage) {
+        resultMessage = @"HTML alert not content! please check again";
     }
     [self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypeJavaScriptRunNativeForAlert subscribeContents:@[resultMessage]];
 }
@@ -139,5 +139,20 @@
     [self.hsy_viewModel hsy_sendNext:kHSYCocoaKitRACSubjectOfNextTypeDidFailed subscribeContents:contents];
 }
 
+#pragma mark - Session Storage
+
+- (RACSignal *)hsy_sessionStorage:(NSArray<NSDictionary *> *)setItems
+{
+    NSString *javaScript = [NSString stringWithFormat:@"sessionStorage.setItem('%@','%@');", setItems.firstObject.allKeys.firstObject, setItems.firstObject.allValues.firstObject];
+    for (NSInteger i = 1; i < setItems.count; i ++) {
+        NSDictionary *item = setItems[i];
+        NSString *currentJavaScript = [NSString stringWithFormat:@"sessionStorage.setItem('%@','%@');", item.allKeys.firstObject, item.allValues.firstObject];
+        javaScript = [NSString stringWithFormat:@"%@%@", javaScript, currentJavaScript];
+    }
+    if (javaScript.length == 0) {
+        return [RACSignal empty];
+    }
+    return [self hsy_nativeRunJavaScriptFunction:javaScript];
+}
 
 @end

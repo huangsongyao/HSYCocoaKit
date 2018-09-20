@@ -28,4 +28,12 @@
  */
 - (void)hsy_resetRequest:(NSDictionary *)newContent;
 
+/**
+ 使用JavaScript的sessionStorage.setItem('key','value')函数设置注入js
+
+ @param setItems 输入js的语句的集合，格式为:@[@{@"key1" : @"value1"}, @{@"key2" : @"value2"},...]
+ @return RACSignal
+ */
+- (RACSignal *)hsy_sessionStorage:(NSArray<NSDictionary *> *)setItems;
+
 @end
