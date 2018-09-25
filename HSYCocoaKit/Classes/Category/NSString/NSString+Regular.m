@@ -153,4 +153,14 @@
     return NO;
 }
 
+#pragma mark - Chinese Characters
+
+- (BOOL)isChineseCharacters
+{
+    NSString *chineseCharactersRegex = @"[\u4e00-\u9fa5]+";
+    BOOL isChinese = [self isValidateByRegex:chineseCharactersRegex];
+    return isChinese;
+}
+
+
 @end

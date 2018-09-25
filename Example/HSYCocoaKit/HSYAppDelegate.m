@@ -134,6 +134,9 @@
             NSLog(@"");
         }];
     }];
+    
+    NSLog(@"%@", @([@"wo是" isChineseCharacters]));
+    
 //    [[HSYFMDBOperationManager shareInstance] hsy_insertDataToTableName:@"testDatabaseTable" fieldParams:[HSYFMDBOperationManager hsy_testTableByFields] insertDatas:[@[@"user", @"userId"] mutableCopy] completed:^(BOOL result, HSYFMDBOperationFieldInfo *info) {
 //        NSLog(@"tested success");
 //    }];

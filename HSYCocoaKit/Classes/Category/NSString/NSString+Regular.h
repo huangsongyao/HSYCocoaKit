@@ -118,4 +118,11 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRegularResult) {
  */
 - (kHSYCocoaKitRegularResult)hsy_isPasswordFromPrefix:(NSString *)prefix suffixNumber:(NSString *)suffix;
 
+/**
+ 判断字符串是否为纯中文
+
+ @return 是否为纯中文
+ */
+- (BOOL)isChineseCharacters;
+
 @end
