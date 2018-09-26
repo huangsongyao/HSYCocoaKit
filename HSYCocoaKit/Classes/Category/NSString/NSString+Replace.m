@@ -88,6 +88,8 @@
     return prefix;
 }
 
+#pragma mark - Replace Sections
+
 - (NSArray<NSString *> *)hsy_replaceSections:(NSInteger)index
 {
     if (self.length <= index) {

@@ -143,8 +143,9 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
     id responseObject = response.allKeys.firstObject;
     NSURLSessionDataTask *task = response.allValues.firstObject;
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
-        NSString *key = [HSYNetWorkingManager hsy_filterStatusCodes].allKeys.firstObject;
-        NSArray *filters = [HSYNetWorkingManager hsy_filterStatusCodes].allValues.firstObject;
+        NSDictionary *paramter = [HSYNetWorkingManager hsy_filterStatusCodes];
+        NSString *key = paramter.allKeys.firstObject;
+        NSArray *filters = paramter.allValues.firstObject;
         id value = responseObject[key];
         if ([filters containsObject:value]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kHSYCocoaKitAFHTTPSessionRequestFilters object:response];
