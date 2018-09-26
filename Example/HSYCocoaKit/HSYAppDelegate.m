@@ -18,6 +18,7 @@
 #import "NSDecimalNumber+Computer.h"
 #import "NSBundle+CFBundle.h"
 #import "HSYCocoaKitWebSocketManager.h"
+#import "NSData+Encrypt.h"
 
 @interface dddMidel : JSONModel
 
@@ -135,8 +136,7 @@
         }];
     }];
     
-    NSLog(@"%@", @([@"wo是" isChineseCharacters]));
-    
+
 //    [[HSYFMDBOperationManager shareInstance] hsy_insertDataToTableName:@"testDatabaseTable" fieldParams:[HSYFMDBOperationManager hsy_testTableByFields] insertDatas:[@[@"user", @"userId"] mutableCopy] completed:^(BOOL result, HSYFMDBOperationFieldInfo *info) {
 //        NSLog(@"tested success");
 //    }];

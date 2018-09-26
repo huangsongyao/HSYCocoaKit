@@ -216,6 +216,7 @@
 #import "UITextField+RACSignalSupport.h"
 #import "UITextView+RACSignalSupport.h"
 #import "RVMViewModel.h"
+#import "RSA.h"
 #import "HSYCustomRefreshView.h"
 #import "SVPullToRefresh.h"
 #import "UIScrollView+SVInfiniteScrolling.h"

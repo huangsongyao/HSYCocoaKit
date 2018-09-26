@@ -79,4 +79,20 @@
  */
 + (NSString *)HMAC_SHA1Base64EncryptString:(NSString *)string forKey:(NSString *)key;
 
+/**
+ 对字符串进行URLEncoded
+
+ @param string string
+ @return URLEncoded后的string
+ */
++ (NSString *)URL_encoded:(NSString *)string;
+
+/**
+ 对字符串进行URLDecoded
+
+ @param string string
+ @return URLDecoded后的string
+ */
++ (NSString *)URL_decodedString:(NSString *)string;
+
 @end

@@ -108,8 +108,6 @@
 
 #pragma mark - HMAC-SHA1
 
-#pragma mark - HMAC-SHA1
-
 + (NSString *)HMAC_SHA1Base64EncryptString:(NSString *)string forKey:(NSString *)key
 {
     const char *cString = [string cStringUsingEncoding:NSASCIIStringEncoding];
@@ -138,6 +136,20 @@
     NSString *SHA1EncryptString = output;
     NSLog(@"\n SHA1EncryptString is %@ \n", SHA1EncryptString);
     return SHA1EncryptString;
+}
+
+#pragma mark - URLEncoded && URLDecoded
+
++ (NSString *)URL_encoded:(NSString *)string
+{
+    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL, CFSTR("!*'();:@&=+$,/?%#[] "), kCFStringEncodingUTF8));
+    return result;
+}
+
++ (NSString *)URL_decodedString:(NSString *)string
+{
+    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault, (CFStringRef)string, CFSTR(""), kCFStringEncodingUTF8));
+    return result;
 }
 
 @end

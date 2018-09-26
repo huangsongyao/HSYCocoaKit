@@ -214,6 +214,7 @@
 #import "UITextField+RACSignalSupport.h"
 #import "UITextView+RACSignalSupport.h"
 #import "RVMViewModel.h"
+#import "RSA.h"
 #import "HSYCustomRefreshView.h"
 #import "SVPullToRefresh.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
@@ -230,5 +231,6 @@
 #import "HSYCocoaKitSocketRACSignal.h"
 #import "HSYCocoaKitWebSocketManager.h"
 #import "SRWebSocket+RACSignal.h"
+
 
 #endif /* HSYCocoaKit_h */
