@@ -11,6 +11,7 @@
 #import "NSError+Message.h"
 
 NSString *const kHSYCocoaKitAFHTTPSessionRequestAllHeaders    = @"0awfjsfjaweofjw09fwefsd";
+NSString *const kHSYCocoaKitAFHTTPSessionRequestFilters       = @"ofpiwe3fjiaweofij9w84fafas";
 
 @implementation AFHTTPSessionManager (RACSignal)
 
@@ -86,9 +87,10 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
         @strongify(self);
         [self GET:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             [AFHTTPSessionManager hsy_logRequestHeaders:task];
-            RACTuple *tuple = RACTuplePack(task, responseObject);
-            [subscriber sendNext:tuple];
-            [subscriber sendCompleted];
+            [self.class hsy_filter:@{responseObject : task} sendMessage:^(RACTuple *tuple) {
+                [subscriber sendNext:tuple];
+                [subscriber sendCompleted];
+            }];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [AFHTTPSessionManager hsy_logRequestHeaders:task];
             [AFHTTPSessionManager hsy_logRequestError:error];
@@ -119,9 +121,10 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
         @strongify(self);
         [self POST:url parameters:parameters progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             [AFHTTPSessionManager hsy_logRequestHeaders:task];
-            RACTuple *tuple = RACTuplePack(task, responseObject);
-            [subscriber sendNext:tuple];
-            [subscriber sendCompleted];
+            [self.class hsy_filter:@{responseObject : task} sendMessage:^(RACTuple *tuple) {
+                [subscriber sendNext:tuple];
+                [subscriber sendCompleted];
+            }];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [AFHTTPSessionManager hsy_logRequestHeaders:task];
             [AFHTTPSessionManager hsy_logRequestError:error];
@@ -131,6 +134,25 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
             NSLog(@"release methods “- hsy_postModel_3x_Request:parameters:taskProgress:” file is “AFHTTPSessionManager+RACSignal.h”");
         }];
     }];
+}
+
+#pragma mark - Filter
+
++ (void)hsy_filter:(NSDictionary *)response sendMessage:(void(^)(RACTuple *tuple))send
+{
+    id responseObject = response.allKeys.firstObject;
+    NSURLSessionDataTask *task = response.allValues.firstObject;
+    if ([responseObject isKindOfClass:[NSDictionary class]]) {
+        NSString *key = [HSYNetWorkingManager hsy_filterStatusCodes].allKeys.firstObject;
+        NSArray filters = [HSYNetWorkingManager hsy_filterStatusCodes].allValues.firstObject;
+        id value = responseObject[key];
+        if ([filters containsObject:value]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHSYCocoaKitAFHTTPSessionRequestFilters object:response];
+            return;
+        }
+    }
+    RACTuple *tuple = RACTuplePack(task, responseObject);
+    send(tuple);
 }
 
 #pragma mark - Logs

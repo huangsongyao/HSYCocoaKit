@@ -114,6 +114,13 @@ static HSYNetWorkingManager *networkingManager;
     return urlString;
 }
 
+#pragma mark - Filter
+
++ (NSDictionary<NSString *, NSArray *> *)hsy_filterStatusCodes
+{
+    return @{};
+}
+
 #pragma mark - All Headers
 
 - (void)hsy_setHTTPSessionHeaders:(NSArray<NSDictionary *> *)headers

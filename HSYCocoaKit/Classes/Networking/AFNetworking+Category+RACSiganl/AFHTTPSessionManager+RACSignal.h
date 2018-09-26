@@ -11,6 +11,7 @@
 #import "PublicMacroFile.h"
 
 FOUNDATION_EXPORT NSString *const kHSYCocoaKitAFHTTPSessionRequestAllHeaders;   //每次请求成功后通过通知手段返回请求头
+FOUNDATION_EXPORT NSString *const kHSYCocoaKitAFHTTPSessionRequestFilters;      //每次response过滤到特殊statusCode会通过通知告知外部，并且截断sendNext动作
 
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
     
