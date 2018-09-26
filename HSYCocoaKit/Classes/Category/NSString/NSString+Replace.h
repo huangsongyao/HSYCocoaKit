@@ -57,4 +57,12 @@
  */
 + (NSString *)unitFromDecimal:(NSInteger)decimal;
 
+/**
+ 通过index的位置，逐一截取，例如对字符串@"123456789"执行逐一截取，index为2，则返回@[@"12", @"34", @"56", @"78", @"9"]
+
+ @param index 逐一截取的位置
+ @return 逐一截取的集合
+ */
+- (NSArray<NSString *> *)hsy_replaceSections:(NSInteger)index;
+
 @end

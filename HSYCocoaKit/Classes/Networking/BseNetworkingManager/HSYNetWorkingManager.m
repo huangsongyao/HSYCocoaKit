@@ -10,6 +10,8 @@
 #import "NSError+Message.h"
 
 static NSString *kHSYCocoaKitDefaultBaseUrlAddress  = @"";
+static NSDictionary *kHSYCocoaKitDefaultFilterParam = nil;
+
 static HSYNetWorkingManager *networkingManager;
 
 //***********************************************************************************************
@@ -116,9 +118,14 @@ static HSYNetWorkingManager *networkingManager;
 
 #pragma mark - Filter
 
+- (void)hsy_setDefaultFilter:(NSDictionary *)filter
+{
+    kHSYCocoaKitDefaultFilterParam = filter;
+}
+
 + (NSDictionary<NSString *, NSArray *> *)hsy_filterStatusCodes
 {
-    return @{};
+    return kHSYCocoaKitDefaultFilterParam;
 }
 
 #pragma mark - All Headers

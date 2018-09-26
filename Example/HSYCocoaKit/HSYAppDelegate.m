@@ -18,7 +18,6 @@
 #import "NSDecimalNumber+Computer.h"
 #import "NSBundle+CFBundle.h"
 #import "HSYCocoaKitWebSocketManager.h"
-#import "NSData+Encrypt.h"
 
 @interface dddMidel : JSONModel
 

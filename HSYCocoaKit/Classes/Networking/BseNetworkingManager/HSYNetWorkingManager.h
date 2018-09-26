@@ -83,6 +83,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitHTTPStatementSerializer) {
  */
 + (NSTimeInterval)hsy_requestSerializerTimeout;
 
+#pragma mark - Setter
+
 /**
  设置默认的请求地址域名，如果没有执行本方法，则默认域名为nil，详细可见建言断点
 
@@ -99,11 +101,20 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitHTTPStatementSerializer) {
 + (NSString *)hsy_urlFromPath:(NSString *)path;
 
 /**
- 子类重载本方法，返回一个过滤集合，所有的网络请求会在中response中判断是否满足过滤条件，满足则会发送一条通知，而不执行sendNext操作，默认为nil
+ 返回一个过滤集合，所有的网络请求会在中response中判断是否满足过滤条件，满足则会发送一条通知，而不执行sendNext操作，默认为nil
 
  @return 过滤集合，格式为:@{@"解析的statusCode关键字段" : @[@(code1), @(code2), ...]}
  */
 + (NSDictionary<NSString *, NSArray *> *)hsy_filterStatusCodes;
+
+/**
+ 设置过滤集合，格式为:@{@"解析的statusCode关键字段" : @[@(code1), @(code2), ...]}
+
+ @param filter 过滤集合
+ */
+- (void)hsy_setDefaultFilter:(NSDictionary *)filter;
+
+#pragma mark - Net work
 
 /**
  网络监听，有无网络均会从next的block进行回调，并且，允许设置该网络监听是否持续存在

@@ -25,6 +25,7 @@
 #import "UIApplication+OpenURL.h"
 #import "HSYCocoaKitCoreGraphicsManager.h"
 
+#import "NSString+Replace.h"
 
 @interface HSYView : UIView
 
@@ -78,6 +79,10 @@
 //    
 //    [array bubbleDescendingOrderSort];
 //    NSLog(@"\n %@", array);
+    
+    NSString *testSTring = @"123456789";
+    NSArray *ttttts = [testSTring hsy_replaceSections:2];
+    NSLog(@"%@", ttttts);
     
     @weakify(self);
 //    [self.viewModel.subject subscribeNext:^(HSYCocoaKitRACSubscribeNotification *notification) {

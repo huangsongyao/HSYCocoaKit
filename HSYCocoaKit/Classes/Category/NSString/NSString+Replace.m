@@ -88,4 +88,24 @@
     return prefix;
 }
 
+- (NSArray<NSString *> *)hsy_replaceSections:(NSInteger)index
+{
+    if (self.length <= index) {
+        return @[self];
+    }
+    NSMutableArray *sections = [[NSMutableArray alloc] init];
+    NSInteger count = self.length / index;
+    NSInteger location = 0;
+    for (NSInteger i = 0; i < count; i ++) {
+        NSString *subString = [self substringWithRange:NSMakeRange(location, index)];
+        [sections addObject:subString];
+        location += index;
+    }
+    if (self.length % index > 0) {
+        NSString *lastSubString = [self substringFromIndex:location];
+        [sections addObject:lastSubString];
+    }
+    return [sections mutableCopy];
+}
+
 @end
