@@ -24,7 +24,6 @@
 #import "HSYWebTestViewController.h"
 #import "UIApplication+OpenURL.h"
 #import "HSYCocoaKitCoreGraphicsManager.h"
-
 #import "NSString+Replace.h"
 
 @interface HSYView : UIView
@@ -81,6 +80,7 @@
 //    NSLog(@"\n %@", array);
     
     NSString *testSTring = @"123456789";
+    
     NSArray *ttttts = [testSTring hsy_replaceSections:3];
     NSLog(@"%@", ttttts);
     

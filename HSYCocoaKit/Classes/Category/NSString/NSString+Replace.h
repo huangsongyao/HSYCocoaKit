@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSString (Replace)
 
 /**
@@ -66,3 +68,5 @@
 - (NSArray<NSString *> *)hsy_replaceSections:(NSInteger)index;
 
 @end
+
+NS_ASSUME_NONNULL_END
