@@ -75,12 +75,12 @@
         }];
         
         //箭头
-        UIImage *image = [self.class hsy_allowImage];
+        UIImage *image = [self hsy_allowImage];
         self.hsy_iconImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image, }];
-        [self addSubview:self.hsy_iconImageView];
-        if (down) {
+        if (!down) {
             self.hsy_iconImageView.transform = HSYCOCOAKIT_GGA_ROTATION(M_PI);
         }
+        [self addSubview:self.hsy_iconImageView];
         [self.hsy_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.hsy_indicatorView);
         }];
@@ -142,7 +142,7 @@
         if (isOverPercent && self.allowIsDown) {
             _allowIsDown = NO;
             [self.hsy_iconImageView hsy_singleRotatingFromValue:M_PI toValue:0.0f];
-        } else if (!isOverPercent && !self.allowIsDown) {
+        } else /*if (!isOverPercent && !self.allowIsDown) */{
             _allowIsDown = YES;
             [self.hsy_iconImageView hsy_singleRotatingFromValue:0.0f toValue:M_PI];
         }
@@ -174,7 +174,7 @@
 
 - (void)hsy_hiddenAllowImageView:(BOOL)hidden
 {
-    UIImage *image = [self.class hsy_allowImage];
+    UIImage *image = [self hsy_allowImage];
     self.hsy_iconImageView.hidden = hidden;
     self.hsy_iconImageView.image = image;
     self.hsy_iconImageView.highlightedImage = image;
@@ -227,9 +227,9 @@
     return UI_SYSTEM_FONT_14;
 }
 
-+ (UIImage *)hsy_allowImage
+- (UIImage *)hsy_allowImage
 {
-    return [NSBundle imageForBundle:@"ic_up"];
+    return [NSBundle imageForBundle:(self.isPullDown ? @"down_refresh" : @"ic_up")];
 }
 
 + (UIImage *)hsy_completedImage

@@ -79,11 +79,6 @@
 //    [array bubbleDescendingOrderSort];
 //    NSLog(@"\n %@", array);
     
-    NSString *testSTring = @"123456789";
-    
-    NSArray *ttttts = [testSTring hsy_replaceSections:3];
-    NSLog(@"%@", ttttts);
-    
     @weakify(self);
 //    [self.viewModel.subject subscribeNext:^(HSYCocoaKitRACSubscribeNotification *notification) {
 //        @strongify(self);

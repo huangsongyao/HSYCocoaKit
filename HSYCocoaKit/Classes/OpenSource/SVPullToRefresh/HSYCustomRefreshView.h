@@ -140,7 +140,7 @@
 
  @return 上拉或者下拉的箭头图标
  */
-+ (UIImage *)hsy_allowImage;
+- (UIImage *)hsy_allowImage;
 
 /**
  返回一个上拉无更多数据图标，允许子类重写本方法返回一个定制的无更多数据图标
