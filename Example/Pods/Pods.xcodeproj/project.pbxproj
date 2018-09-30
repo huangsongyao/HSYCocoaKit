@@ -694,6 +694,8 @@
 		ADC87725384A1E5DE8A0B9F30A411693 /* RACSignalProvider.d in Sources */ = {isa = PBXBuildFile; fileRef = 5222B748FCD063DDDD8F3BF7A5414932 /* RACSignalProvider.d */; };
 		AE034F49EC417A1DC86256B1A61EE94C /* emoji_043@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AC68134EEA48B3B38DBEE26380420B8 /* emoji_043@2x.png */; };
 		AE47E641F861B9B2A3D4BD815C60550B /* RACSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5181DFAF98A4D7D9A0C847E7F6481D2A /* RACSubject.m */; };
+		AE7795F92160D55900896BD1 /* down_refresh@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE7795F72160D55800896BD1 /* down_refresh@3x.png */; };
+		AE7795FA2160D55900896BD1 /* down_refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE7795F82160D55900896BD1 /* down_refresh@2x.png */; };
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4155C178A229A76306AAE1CB3EFED015 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEE9644DA0EFCF945438E125BA4F0724 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5E8650A10C3AA0675C9C99B3F56EA /* GCDAsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		B07D72275D34F0BAD3A9DE8EE49B0E3F /* RACCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = F927D149B804BE7E5C70B945B7B615FD /* RACCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1947,6 +1949,8 @@
 		AE09BE62574354146FF480BAFF3D6E98 /* RACDelegateProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RACDelegateProxy.h; sourceTree = "<group>"; };
 		AE526A6EBAF3C5A65F2CCEB1BED1354A /* HSYBaseTabBarItemCollectionViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HSYBaseTabBarItemCollectionViewCell.h; sourceTree = "<group>"; };
 		AE56AE23062A55ED1BDE0417EBBC4982 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableView+FDTemplateLayoutCell.h"; path = "Classes/UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
+		AE7795F72160D55800896BD1 /* down_refresh@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_refresh@3x.png"; sourceTree = "<group>"; };
+		AE7795F82160D55900896BD1 /* down_refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_refresh@2x.png"; sourceTree = "<group>"; };
 		AEDAD19DD60CC1AC59292ED861D1DEF2 /* HSYCocoaKitSocketRACSignal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HSYCocoaKitSocketRACSignal.m; sourceTree = "<group>"; };
 		AF317A56A329E188524B600EEA663119 /* HSYBaseCollectionViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HSYBaseCollectionViewCell.m; sourceTree = "<group>"; };
 		AF5B99EDA47A8000E4B544C84B75EB3B /* JSONModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONModel.m; path = JSONModel/JSONModel/JSONModel.m; sourceTree = "<group>"; };
@@ -4173,6 +4177,8 @@
 		A0341D9477B6F4467944DCB182A85A4E /* refresh */ = {
 			isa = PBXGroup;
 			children = (
+				AE7795F82160D55900896BD1 /* down_refresh@2x.png */,
+				AE7795F72160D55800896BD1 /* down_refresh@3x.png */,
 				355C9D1044D8A3F17D4DA571D197CB46 /* ic_end@2x.png */,
 				DCF55A848FC66C22920D236D67FE4507 /* ic_end@3x.png */,
 				8389820FBFE114BCDDFF864546828D45 /* ic_up@2x.png */,
@@ -5833,6 +5839,7 @@
 				BB80A3AFAD330F084B6F48D2167CD0BC /* emoji_087@2x.png in Resources */,
 				EB1CE741C768E195D4C3B4F6B8CFC306 /* emoji_088@2x.png in Resources */,
 				901FE60188800C3D29B9919F7E15DF05 /* emoji_089@2x.png in Resources */,
+				AE7795F92160D55900896BD1 /* down_refresh@3x.png in Resources */,
 				7E0D7D26357152DF0EBCA35A1A2437C2 /* emoji_090@2x.png in Resources */,
 				6A1FD33230FCDC23C942C8BAE3E405C8 /* emoji_091@2x.png in Resources */,
 				70233D603ACB70FF99C6A529D83F9A6C /* emoji_092@2x.png in Resources */,
@@ -5847,6 +5854,7 @@
 				FD46FA40BC54310958382F24A7901E7D /* emoji_101@2x.png in Resources */,
 				4BCD36AFDC4FE38DB6844578E0FE7580 /* emoji_102@2x.png in Resources */,
 				A28FBF8C0E1AEDABA4E4FCF8ECC8B79C /* emoji_103@2x.png in Resources */,
+				AE7795FA2160D55900896BD1 /* down_refresh@2x.png in Resources */,
 				F91644BBE596700B05C2E51593F2F392 /* emoji_104@2x.png in Resources */,
 				FD12C82CEF4063424696322525F47383 /* emoji_105@2x.png in Resources */,
 				B7194C422698E79E2C602C3DC315C939 /* emoji_106@2x.png in Resources */,
