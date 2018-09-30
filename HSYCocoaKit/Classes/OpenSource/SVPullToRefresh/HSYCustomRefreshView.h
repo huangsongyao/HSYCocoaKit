@@ -44,6 +44,13 @@
 - (void)hsy_updateLongTopBackgroundColor:(UIColor *)color;
 
 /**
+ 设置下拉背景图
+
+ @param image 下拉背景图
+ */
+- (void)hsy_updateLongTopBackgroundImage:(UIImage *)image;
+
+/**
  开始刷新
  */
 - (void)hsy_start;

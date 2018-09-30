@@ -18,6 +18,7 @@
 #import "NSString+Size.h"
 #import "NSBundle+PrivateFileResource.h"
 #import "UIView+RotationAnimated.h"
+#import "UIImageView+Scale.h"
 
 #define REFRESH_WILL_START_TITLE            @"下拉刷新"
 #define REFRESH_WILL_START_UP_TITLE         @"上拉加载"
@@ -99,11 +100,27 @@
     return self;
 }
 
-#pragma mark - Set Pull Down Background Color
+#pragma mark - Set Pull Down Background Color & Image
 
 - (void)hsy_updateLongTopBackgroundColor:(UIColor *)color
 {
     self.hsy_backgroundView.backgroundColor = color;
+}
+
+- (void)hsy_updateLongTopBackgroundImage:(UIImage *)image
+{
+    UIImageView *imageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image, }];
+    [self.hsy_backgroundView addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.hsy_backgroundView.mas_left);
+        make.right.equalTo(self.hsy_backgroundView.mas_right);
+        if (self.isPullDown) {
+            make.bottom.equalTo(self.hsy_backgroundView.mas_bottom);
+        } else {
+            make.top.equalTo(self.hsy_backgroundView.mas_top);
+        }
+        make.height.equalTo(@([UIImageView hsy_scaleHeight:self.width image:image]));
+    }];
 }
 
 #pragma mark - Observer Scroll Percent
