@@ -12,6 +12,7 @@
 
 NSString *const kHSYCocoaKitAFHTTPSessionRequestAllHeaders    = @"0awfjsfjaweofjw09fwefsd";
 NSString *const kHSYCocoaKitAFHTTPSessionRequestFilters       = @"ofpiwe3fjiaweofij9w84fafas";
+NSString *const kHSYCocoaKitAFHTTPSessionRequestFailure       = @"ifaweojf93fosfjeofjwefjwafas";
 
 @implementation AFHTTPSessionManager (RACSignal)
 
@@ -161,7 +162,8 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
 + (void)hsy_logRequestError:(NSError *)error
 {
     if (error) {
-        NSLog(@"request failure, error : %@", error);
+        NSLog(@"request failure, error : %@, url = %@", error, error.userInfo[NSURLErrorFailingURLStringErrorKey]);
+        [[NSNotificationCenter defaultCenter] postNotificationName:kHSYCocoaKitAFHTTPSessionRequestFailure object:error];
     }
 }
 
@@ -172,7 +174,7 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         NSDictionary *allHeaders = response.allHeaderFields;
         [[NSNotificationCenter defaultCenter] postNotificationName:kHSYCocoaKitAFHTTPSessionRequestAllHeaders object:allHeaders];
-        NSLog(@"\n request headers are : %@ \n", allHeaders);
+        NSLog(@"\n request headers are : %@ \n, url = %@", allHeaders, response.URL);
     }
 }
 

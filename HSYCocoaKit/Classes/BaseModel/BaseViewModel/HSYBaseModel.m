@@ -166,6 +166,7 @@
 {
     [self hsy_stop];
     [self.subject sendCompleted];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

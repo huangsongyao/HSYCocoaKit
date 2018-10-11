@@ -79,14 +79,14 @@ static HSYCocoaKitWebSocketManager *weSocketManager;
     @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
-        if (!self.isConnected) {
-            [subscriber sendError:[NSError hsy_errorWithErrorType:kAFNetworkingStatusErrorTypeNone]];
-        } else {
+        if (self.webSocket.readyState == SR_OPEN) {
             [self.webSocket sendPing:pingData];
             [[[self.webSocket hsy_rac_webSocketDidReceivePong] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYCocoaKitSocketRACSignal *notification) {
                 [subscriber sendNext:notification];
                 [subscriber sendCompleted];
             }];
+        } else {
+            [subscriber sendError:[NSError hsy_errorWithErrorType:kAFNetworkingStatusErrorTypeNone]];
         }
         return [RACDisposable disposableWithBlock:^{
             NSLog(@"release methods “- hsy_webSocketSendPing:” in %@ class", NSStringFromClass(self.class));

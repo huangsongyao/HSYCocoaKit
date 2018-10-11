@@ -23,7 +23,7 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - HSYCocoaKit (0.5.7):
+  - HSYCocoaKit (0.5.8):
     - AFNetworking (~> 3.1.0)
     - CocoaAsyncSocket (~> 7.6.3)
     - FMDB (~> 2.7.2)
@@ -83,7 +83,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  HSYCocoaKit: 4a35128dfe2a5c4494d99f8976a8a946ecfabd69
+  HSYCocoaKit: 5321226cd4ebf90029c1ec4efac4f16376d90c28
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201

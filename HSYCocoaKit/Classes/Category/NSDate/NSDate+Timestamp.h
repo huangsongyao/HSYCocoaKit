@@ -40,6 +40,8 @@ static const NSString *Saturday     = @"星期六";
 #define D_yyyy_MM_dd        @"yyyy-MM-dd"               //时间标准模式——4.年-月-日
 #define D_HHmm              @"HH:mm"                    //时间标准模式——5.小时:分钟
 #define D_MMdd              @"MM月dd日"                  //时间标准模式——6.月日
+#define D_HHmmss            @"HH:mm:ss"                 //时间标准模式——7.小时:分钟:秒
+#define D_MM_dd             @"MM-dd"                    //时间标准模式——8.月-日
 
 @interface NSDate (Timestamp)
 
@@ -134,6 +136,24 @@ static const NSString *Saturday     = @"星期六";
  */
 + (NSString *)stringMMddForDateByTimestamp:(NSNumber *)timestamp;
 - (NSString *)stringMMdd;
+
+/**
+ 时间戳转固定格式字符串，格式为：D_MM_dd
+
+ @param timestamp 时间戳（13位，即时：未除1000的时间戳）
+ @return 对应格式的时间显示字符串
+ */
++ (NSString *)stringMM_ddForDateByTimestamp:(NSNumber *)timestamp;
+- (NSString *)stringMM_dd;
+
+/**
+ 时间戳转固定格式字符串，格式为：D_HHmmss
+
+ @param timestamp 时间戳（13位，即时：未除1000的时间戳）
+ @return 对应格式的时间显示字符串
+ */
++ (NSString *)stringHHmmssForDateByTimestamp:(NSNumber *)timestamp;
+- (NSString *)stringHHmmss;
 
 #pragma mark - 上一天、下一天、下个月
 

@@ -80,6 +80,16 @@ static NSInteger _TimeSp = 1000;                    //时间戳倍数
     return [NSDate toStringFormat:D_MMdd timestamp:timestamp];
 }
 
++ (NSString *)stringHHmmssForDateByTimestamp:(NSNumber *)timestamp
+{
+    return [NSDate toStringFormat:D_HHmmss timestamp:timestamp];
+}
+
++ (NSString *)stringMM_ddForDateByTimestamp:(NSNumber *)timestamp
+{
+    return [NSDate toStringFormat:D_MM_dd timestamp:timestamp];
+}
+
 #pragma mark - New Date To Show Timestamp(Seconds)
 
 + (unsigned long long)timestampMillisecond
@@ -134,6 +144,16 @@ static NSInteger _TimeSp = 1000;                    //时间戳倍数
 - (NSString *)stringMMdd
 {
     return [[NSDate formatterWithString:D_MMdd] stringFromDate:self];
+}
+
+- (NSString *)stringMM_dd
+{
+    return [[NSDate formatterWithString:D_MM_dd] stringFromDate:self];
+}
+
+- (NSString *)stringHHmmss
+{
+    return [[NSDate formatterWithString:D_HHmmss] stringFromDate:self];
 }
 
 #pragma mark - String To Show NSDate
