@@ -133,6 +133,9 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
     UIView *view = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_reloadDatas:indexPath];
     [self.view addSubview:view];
     [self.collectionView reloadData];
+    if (self.selectedItem) {
+        self.selectedItem(indexPath, [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_viewControllers][indexPath.row]);
+    }
 }
 
 #pragma mark - Load

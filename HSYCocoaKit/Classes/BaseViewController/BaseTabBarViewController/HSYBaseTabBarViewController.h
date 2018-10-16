@@ -42,6 +42,8 @@
 
 //监听子控制器的UIViewControllerRuntimeDelegate委托响应，子类可通过这个block处理子控制器回调给tabBarController的信号
 @property (nonatomic, copy) RACSignal *(^hsy_responseRuntimeDelegate)(UIViewControllerRuntimeDelegateObject *object);
+//監聽父控制器切換通知
+@property (nonatomic, copy) void(^selectedItem)(NSIndexPath *indexPath, UIViewController *viewController);
 
 - (instancetype)initWithConfigs:(NSArray<HSYBaseTabBarControllerConfig *> *)configs;
 

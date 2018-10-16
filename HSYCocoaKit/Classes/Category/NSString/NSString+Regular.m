@@ -138,8 +138,11 @@
     if (self.length == 0) {
         return kHSYCocoaKitRegularResultLengthIsZero;
     }
-    NSString *passwordRegex = [NSString stringWithFormat:@"^(?=.*[a-zA-Z0-9].*)(?=.*[a-zA-Z\\W].*)(?=.*[0-9\\W].*).{%@,%@}$", prefix, suffix];
     NSString *realSelf = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if (realSelf.length < prefix.integerValue || realSelf.length > suffix.integerValue) {
+        return kHSYCocoaKitRegularResultUnconform;
+    }
+    NSString *passwordRegex = @"(?![0-9]+$)(?![^0-9]+$)(?![a-zA-Z]+$)(?![^a-zA-Z]+$)(?![a-zA-Z0-9]+$)[a-zA-Z0-9\\S]+$";
     kHSYCocoaKitRegularResult result = ([realSelf isValidateByRegex:passwordRegex] ? kHSYCocoaKitRegularResultConform : kHSYCocoaKitRegularResultUnconform);
     return result;
 }

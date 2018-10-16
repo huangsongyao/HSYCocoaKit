@@ -9,6 +9,18 @@
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
 
+typedef NSString *HSYCocoaKitUIKitButtonPropertyKey;
+FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonNorBackgroundImage;
+FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonPreBackgroundImage;
+FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonNorTitle;
+FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonHighTitle;
+FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonNorImage;
+FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonHighImage;
+FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonSelectedImage;
+FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonTitleColor;
+FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonTitleFont;
+FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonTextAlignment;
+
 //UIButton
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfButtonPropretyType) {
     
@@ -26,6 +38,11 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfButtonPropretyType) {
     
 };
 
+typedef NSString *HSYCocoaKitUIKitImagePropertyKey;
+FOUNDATION_EXPORT HSYCocoaKitUIKitImagePropertyKey const HSYCocoaKitImageNorImage;
+FOUNDATION_EXPORT HSYCocoaKitUIKitImagePropertyKey const HSYCocoaKitImagePreImage;
+FOUNDATION_EXPORT HSYCocoaKitUIKitImagePropertyKey const HSYCocoaKitImageContentMode;
+
 //UIImageView
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfImageViewPropretyType) {
     
@@ -33,6 +50,15 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfImageViewPropretyType) {
     kHSYCocoaKitOfImageViewPropretyTypePreImageViewName,                    //UIImage
     kHSYCocoaKitOfImageViewPropretyTypeViewContentMode,                     //NSNumber\(UIViewContentMode)
 };
+
+typedef NSString *HSYCocoaKitUIKitLabelPropertyKey;
+FOUNDATION_EXPORT HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelText;
+FOUNDATION_EXPORT HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelTextColor;
+FOUNDATION_EXPORT HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelFont;
+FOUNDATION_EXPORT HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelBackgroundColor;
+FOUNDATION_EXPORT HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelTextAlignment;
+FOUNDATION_EXPORT HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelUnline;
+FOUNDATION_EXPORT HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelComputeSize;
 
 //UILabel
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfLabelPropretyType) {
@@ -48,6 +74,17 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfLabelPropretyType) {
     
 };
 
+typedef NSString *HSYCocoaKitUIKitTextFieldPropertyKey;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledBorderWidth;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledBorderColor;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledTextAlignment;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledFont;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledReturnKeyType;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledTextColor;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledBackgroundColor;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledText;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledPlaceholder;
+
 //UITextField
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfTextFiledPropretyType) {
     
@@ -62,6 +99,18 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfTextFiledPropretyType) {
     kHSYCocoaKitOfTextFiledPropretyTypeText,                                //NSString
     kHSYCocoaKitOfTextFiledPropretyTypePlaceholderString,                   //NSString
 };
+
+typedef NSString *HSYCocoaKitUIKitTextViewPropertyKey;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewBorderWidth;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewBorderColor;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewTextAlignment;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewFont;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewReturnKeyType;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewKeyboardType;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewTextColor;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewBackgroundColor;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewText;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewPlaceholder;
 
 //UITextView
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfTextViewPropretyType) {
@@ -79,6 +128,15 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfTextViewPropretyType) {
     
 };
 
+typedef NSString *HSYCocoaKitUIKitTableViewPropertyKey;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewStyle;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewDelegate;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewDataSource;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewScrollEnabled;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewHiddenLine;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewFooterView;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewRegisterClass;
+
 //UITableView
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfTableViewPropretyType) {
     
@@ -91,6 +149,15 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfTableViewPropretyType) {
     kHSYCocoaKitOfTableViewPropretyTypeTableFooterView,                     //id\(UIView)
     kHSYCocoaKitOfTableViewPropretyTypeRegisterClass,                       //NSDictionary\(@{@"Class Name" : @"Identifier"})
 };
+
+typedef NSString *HSYCocoaKitUIKitScrollViewPropertyKey;
+FOUNDATION_EXPORT HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewDelegate;
+FOUNDATION_EXPORT HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewContentSize;
+FOUNDATION_EXPORT HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewContentOffset;
+FOUNDATION_EXPORT HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewPagingEnabled;
+FOUNDATION_EXPORT HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewScrollEnabled;
+FOUNDATION_EXPORT HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewBounces;
+FOUNDATION_EXPORT HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewHiddenScrollIndicator;
 
 //UIScrollView
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfScrollViewPropretyType) {
@@ -105,6 +172,15 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfScrollViewPropretyType) {
     kHSYCocoaKitOfScrollViewPropretyTypeHiddenScrollIndicator,              //NSNumber\(BOOL)
     
 };
+
+typedef NSString *HSYCocoaKitUIKitCollectionViewPropertyKey;
+FOUNDATION_EXPORT HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewFlowLayout;
+FOUNDATION_EXPORT HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewDelegate;
+FOUNDATION_EXPORT HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewDataSource;
+FOUNDATION_EXPORT HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewScrollEnabled;
+FOUNDATION_EXPORT HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewFlowLayout;
+FOUNDATION_EXPORT HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewFlowLayout;
+FOUNDATION_EXPORT HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewFlowLayout;
 
 //UICollectionView
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfCollectionViewPropretyType) {
