@@ -12,7 +12,6 @@
 
 FOUNDATION_EXPORT NSString *const kHSYCocoaKitAFHTTPSessionRequestAllHeaders;   //每次请求成功后通过通知手段返回请求头
 FOUNDATION_EXPORT NSString *const kHSYCocoaKitAFHTTPSessionRequestFilters;      //每次response过滤到特殊statusCode会通过通知告知外部，并且截断sendNext动作
-FOUNDATION_EXPORT NSString *const kHSYCocoaKitAFHTTPSessionRequestFailure;      //每次请求失败后，会发送一条通知，用于处理聚合信号截断或未添加subError时无法获取失败信号
 
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitNetworkingRequestModel) {
     

@@ -12,7 +12,6 @@
 
 NSString *const kHSYCocoaKitAFHTTPSessionRequestAllHeaders    = @"0awfjsfjaweofjw09fwefsd";
 NSString *const kHSYCocoaKitAFHTTPSessionRequestFilters       = @"ofpiwe3fjiaweofij9w84fafas";
-NSString *const kHSYCocoaKitAFHTTPSessionRequestFailure       = @"ifaweojf93fosfjeofjwefjwafas";
 
 @implementation AFHTTPSessionManager (RACSignal)
 
@@ -163,7 +162,6 @@ static NSString *重铸完整的请求连接(NSString *urlPath)
 {
     if (error) {
         NSLog(@"request failure, error : %@, url = %@", error, error.userInfo[NSURLErrorFailingURLStringErrorKey]);
-        [[NSNotificationCenter defaultCenter] postNotificationName:kHSYCocoaKitAFHTTPSessionRequestFailure object:error];
     }
 }
 
