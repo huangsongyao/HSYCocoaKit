@@ -82,14 +82,15 @@
 
 - (BOOL)prefersStatusBarHidden
 {
-    kHSYCocoaKitLaunchScreenSize launchScreenSize = (kHSYCocoaKitLaunchScreenSize)IPHONE_HEIGHT_RESOLUTION_RATIO;
-    NSArray *hiddens = @[@(kHSYCocoaKitLaunchScreenSize_5_8_Inch), @(kHSYCocoaKitLaunchScreenSize_6_1_Inch), @(kHSYCocoaKitLaunchScreenSize_6_5_Inch), ];
-    return (![hiddens containsObject:@(launchScreenSize)]);
+    return (![self.class iPhoneXDevice]);
 }
 
 + (BOOL)iPhoneXDevice
 {
-    return (IPHONE_HEIGHT_RESOLUTION_RATIO == ((NSUInteger)kHSYCocoaKitLaunchScreenSize_5_8_Inch));
+    NSArray *launchScreens = @[@(kHSYCocoaKitLaunchScreenSize_5_8_Inch), @(kHSYCocoaKitLaunchScreenSize_6_1_Inch), @(kHSYCocoaKitLaunchScreenSize_6_5_Inch), ];
+    kHSYCocoaKitLaunchScreenSize launchScreenSize = (kHSYCocoaKitLaunchScreenSize)IPHONE_HEIGHT_RESOLUTION_RATIO;
+    BOOL iPhoneXSeries = [launchScreens containsObject:launchScreenSize];
+    return iPhoneXSeries;
 }
 
 + (kHSYCocoaKitLaunchScreenSize)iPhoneDeviceScreen
