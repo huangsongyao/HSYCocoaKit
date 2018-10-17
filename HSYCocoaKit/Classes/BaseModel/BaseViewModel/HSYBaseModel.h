@@ -48,24 +48,12 @@
 - (RACCommand *)hsy_createCommandWithSignal:(RACSignal *)signal;
 
 /**
- *  将signal是组合成一个组合信号
- *
- *  @param signals     监听集合: @[RACObserve(self, RACSignal_A), RACObserve(self, RACSignal_B), ...]
- *  @param reduceBlock 结果回调
- *
- *  @return RACSignal
- */
-- (RACSignal *)hsy_createRACSignals:(id<NSFastEnumeration>)signals reduce:(id(^)(void))reduceBlock;
+ zip合并信号。当所有信号均返回sendNext，result回调会触发，并且result的messages是按照signals信号集合的顺序来排序的；当有一个信号返回sendError时，result回调也会触发，同时截断messages
 
-/**
- *  将signal是组合成一个组合信号，并将组合信号转为RACCommand管理信号
- *
- *  @param signals 监听集合: @[RACObserve(self, RACSignal_A), RACObserve(self, RACSignal_B), ...]
- *  @param next    结果回调
- *
- *  @return RACCommand对象
+ @param signals 信号集合，格式为：@[RACObserve(self, RACSignal_A), RACObserve(self, RACSignal_B), ...]或者@[RACSignal_A, RACSignal_B, ...]
+ @param result 信号触发回调，messages表示根据signals的顺序返回的结果集合，error表示signals中某个信号的报错
  */
-- (RACCommand *)hsy_commandWithSignals:(id<NSFastEnumeration>)signals reduce:(id(^)(void))next;
+- (void)hsy_zipSignals:(id<NSFastEnumeration>)signals subcriberResult:(void(^)(NSArray *messages, NSError *error))result;
 
 /**
  *  遍历self.datas数组

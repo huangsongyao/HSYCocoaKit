@@ -58,21 +58,17 @@
     return command;
 }
 
-- (RACSignal *)hsy_createRACSignals:(id<NSFastEnumeration>)signals
-                             reduce:(id(^)(void))reduceBlock
+- (void)hsy_zipSignals:(id<NSFastEnumeration>)signals subcriberResult:(void(^)(NSArray *messages, NSError *error))result
 {
-    return [RACSignal combineLatest:signals reduce:reduceBlock];
-}
-
-- (RACCommand *)hsy_commandWithSignals:(id<NSFastEnumeration>)signals reduce:(id(^)(void))next
-{
-    RACCommand *command = [self hsy_createCommandWithSignal:[self hsy_createRACSignals:signals reduce:^id{
-        if (next) {
-            return next();
+    [[[RACSignal zip:signals] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
+        if (result) {
+            result(tuple.allObjects, nil);
         }
-        return @(NO);
-    }]];
-    return command;
+    } error:^(NSError *error) {
+        if (result) {
+            result(nil, error);
+        }
+    }];
 }
 
 #pragma mark - Datas Operation
