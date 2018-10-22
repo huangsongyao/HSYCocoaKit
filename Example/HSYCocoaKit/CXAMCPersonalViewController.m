@@ -94,13 +94,13 @@
         UIImage *image = [UIImage imageNamed:state ? @"mine_icon_selected" : @"mine_icon_default"];
         self.iconImageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image}];
         [self addSubview:self.iconImageView];
-        self.iconImageView.size = CGSizeMake(UI_SYSTEM_FONT_13.pointSize, UI_SYSTEM_FONT_13.pointSize);
+        self.iconImageView.size = CGSizeMake(UI_SYSTEM_FONT_13.lineHeight, UI_SYSTEM_FONT_13.lineHeight);
         
         self.contentLabel = [NSObject createLabelByParam:@{
                                                            @(kHSYCocoaKitOfLabelPropretyTypeText) : title,
                                                            @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : (state ? WHITE_COLOR : [WHITE_COLOR colorWithAlphaComponent:0.6]),
                                                            @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : UI_SYSTEM_FONT_13,
-                                                           @(kHSYCocoaKitOfLabelPropretyTypeMaxSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH/2, UI_SYSTEM_FONT_13.pointSize)],
+                                                           @(kHSYCocoaKitOfLabelPropretyTypeMaxSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH/2, UI_SYSTEM_FONT_13.lineHeight)],
                                                            }];
         self.contentLabel.origin = CGPointMake(self.iconImageView.right + 5.0f, 0);
         self.iconImageView.center = CGPointMake(self.iconImageView.center.x, self.contentLabel.center.y);
@@ -164,7 +164,7 @@
         [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.userMemberImageView.mas_bottom).offset(12.0f);
             make.left.equalTo(self.mas_left);
-            make.size.mas_equalTo(CGSizeMake(self.width, UI_BOLD_SYSTEM_FONT_18.pointSize));
+            make.size.mas_equalTo(CGSizeMake(self.width, UI_BOLD_SYSTEM_FONT_18.lineHeight));
         }];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectZero];
@@ -173,7 +173,7 @@
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX);
             make.top.equalTo(self.userNameLabel.mas_bottom).offset(24.0f);
-            make.size.mas_equalTo(CGSizeMake(1.0f, UI_SYSTEM_FONT_13.pointSize));
+            make.size.mas_equalTo(CGSizeMake(1.0f, UI_SYSTEM_FONT_13.lineHeight));
         }];
         
         self.certification = [[CXAMCPersonalHeaderComponentView alloc] initWithComponentTitle:info.userCer componentState:info.userCerState.boolValue];

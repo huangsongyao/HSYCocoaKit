@@ -58,7 +58,7 @@ static CGFloat imgBottom = 11.0f;
                                                            @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : HexColorString(@"212121"),
                                                            @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : tagFont,
                                                            @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentLeft),
-                                                           @(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake(offsetLeft, top, (IPHONE_WIDTH - offsetLeft*2), tagFont.pointSize)],
+                                                           @(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake(offsetLeft, top, (IPHONE_WIDTH - offsetLeft*2), tagFont.lineHeight)],
                                                            }];
         [self addSubview:tagLabel];
         
@@ -72,7 +72,7 @@ static CGFloat imgBottom = 11.0f;
                                                          @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : HexColorString(@"212121"),
                                                          @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : titleFont,
                                                          @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentLeft),
-                                                         @(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake(tagLabel.x, self.headerImageView.bottom + headerOffsetBottom , self.headerImageView.width, titleFont.pointSize)],
+                                                         @(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake(tagLabel.x, self.headerImageView.bottom + headerOffsetBottom , self.headerImageView.width, titleFont.lineHeight)],
                                                          @(kHSYCocoaKitOfLabelPropretyTypeText) : info.tOPIC,
                                                          }];
         [self addSubview:self.titleLabel];
@@ -81,7 +81,7 @@ static CGFloat imgBottom = 11.0f;
                                                           @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : HexColorString(@"999999"),
                                                           @(kHSYCocoaKitOfLabelPropretyTypeTextFont) : sourceFont,
                                                           @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentLeft),
-                                                          @(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake(tagLabel.x, self.titleLabel.bottom + titleOffsetBottom , self.headerImageView.width / 2, sourceFont.pointSize)],
+                                                          @(kHSYCocoaKitOfLabelPropretyTypeFrame) : [NSValue valueWithCGRect:CGRectMake(tagLabel.x, self.titleLabel.bottom + titleOffsetBottom , self.headerImageView.width / 2, sourceFont.lineHeight)],
                                                           @(kHSYCocoaKitOfLabelPropretyTypeText) : [NSString stringWithFormat:@"来源:%@/%@", info.sOURCE, info.aUTHOR],
                                                           }];
         [self addSubview:self.sourceLabel];
@@ -157,7 +157,7 @@ static CGFloat imgBottom = 11.0f;
         [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView.mas_right).offset(-offsetLeft);
             make.top.equalTo(self.headerImageView.mas_bottom).offset(imgBottom);
-            make.size.mas_equalTo(CGSizeMake((IPHONE_WIDTH - offsetLeft*2)/2, UI_SYSTEM_FONT_11.pointSize));
+            make.size.mas_equalTo(CGSizeMake((IPHONE_WIDTH - offsetLeft*2)/2, UI_SYSTEM_FONT_11.lineHeight));
         }];
         
         self.sourceLabel = [NSObject createLabelByParam:@{
@@ -169,7 +169,7 @@ static CGFloat imgBottom = 11.0f;
         [self.sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.titleLabel.mas_left);
             make.top.equalTo(self.timeLabel.mas_top);
-            make.size.mas_equalTo(CGSizeMake((IPHONE_WIDTH - offsetLeft*2)/2-10.0f, UI_SYSTEM_FONT_11.pointSize));
+            make.size.mas_equalTo(CGSizeMake((IPHONE_WIDTH - offsetLeft*2)/2-10.0f, UI_SYSTEM_FONT_11.lineHeight));
         }];
         
     }
@@ -178,7 +178,7 @@ static CGFloat imgBottom = 11.0f;
 
 + (CGFloat)realHeight
 {
-    return (top + imgH + imgBottom + UI_SYSTEM_FONT_11.pointSize);
+    return (top + imgH + imgBottom + UI_SYSTEM_FONT_11.lineHeight);
 }
 
 - (void)setHomePageInfo:(CXACMHomePageItemJSONModel *)info
@@ -187,7 +187,7 @@ static CGFloat imgBottom = 11.0f;
     self.titleLabel.text = info.tOPIC;
     CGSize size = [self.titleLabel.text contentOfSize:self.titleLabel.font
                                              maxWidth:self.titleLabel.width
-                                            maxHeight:(self.titleLabel.font.pointSize * 2)];
+                                            maxHeight:(self.titleLabel.font.lineHeight * 2)];
     self.titleLabel.height = size.height * 2;
     self.sourceLabel.text = [NSString stringWithFormat:@"来源:%@/%@", info.sOURCE, info.aUTHOR];
     self.timeLabel.text = info.sHOW_TIME;

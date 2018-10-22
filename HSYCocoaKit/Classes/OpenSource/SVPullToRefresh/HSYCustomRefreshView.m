@@ -91,7 +91,7 @@
             make.left.equalTo(self.hsy_iconImageView.mas_right).offset(10.0f);
             make.right.equalTo(self.mas_right).offset(-25.0f);
             make.centerY.equalTo(self.hsy_iconImageView.mas_centerY);
-            make.height.equalTo(@(UI_SYSTEM_FONT_14.pointSize + 10.0f));
+            make.height.equalTo(@(UI_SYSTEM_FONT_14.lineHeight + 10.0f));
         }];
     }
     return self;

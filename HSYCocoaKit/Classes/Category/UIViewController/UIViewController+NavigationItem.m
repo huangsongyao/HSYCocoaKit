@@ -85,7 +85,7 @@ NSInteger const kHSYCocoaKitDefaultCustomBarItemTag     = 10923;
                 next(button, (button.tag));
             }
         }];
-        CGSize size = [button.titleLabel.text contentOfSize:button.titleLabel.font maxHeight:button.titleLabel.font.pointSize];
+        CGSize size = [button.titleLabel.text contentOfSize:button.titleLabel.font maxHeight:button.titleLabel.font.lineHeight];
         button.size = CGSizeMake((size.width + left), DEFAULT_BUTTOM_SIZE);
         button.contentEdgeInsets = UIEdgeInsetsMake(0, left, 0, 0);
         button.tag = [dic.allKeys.firstObject integerValue];

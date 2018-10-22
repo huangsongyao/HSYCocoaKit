@@ -189,7 +189,7 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
             make.left.equalTo(self.mas_left);
             make.right.equalTo(self.mas_right);
             make.top.equalTo(self.mas_top).offset(IPHONE_STATUS_BAR_HEIGHT*3/2);
-            make.height.equalTo(@(UI_BOLD_SYSTEM_FONT_18.pointSize));
+            make.height.equalTo(@(UI_BOLD_SYSTEM_FONT_18.lineHeight));
         }];
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
@@ -337,7 +337,7 @@ typedef NS_ENUM(NSUInteger, CXAMCCalculatorStateType) {
                                                          @(kHSYCocoaKitOfLabelPropretyTypeBackgroundColor) : WHITE_COLOR,
                                                          @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : HexColorString(@"212121"),
                                                          @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : @(NSTextAlignmentCenter),
-                                                         @(kHSYCocoaKitOfLabelPropretyTypeMaxSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH, UI_FONT_SIZE(17).pointSize)],
+                                                         @(kHSYCocoaKitOfLabelPropretyTypeMaxSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH, UI_FONT_SIZE(17).lineHeight)],
                                                          }];
         [self.contentView addSubview:self.titleLabel];
         self.titleLabel.backgroundColor = CLEAR_COLOR;
