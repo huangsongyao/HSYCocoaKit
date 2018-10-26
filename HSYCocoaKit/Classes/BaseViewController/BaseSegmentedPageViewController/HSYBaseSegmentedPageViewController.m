@@ -229,6 +229,13 @@
     return x;
 }
 
+- (void)hsy_setCurrentSelectedIndex:(NSNumber *)selectedIndex
+{
+    HSYBaseCustomButton *button = self.segmentedPageControl.segmentedButton[selectedIndex.integerValue];
+    [self.segmentedPageControl hsy_scrollToSelected:button animation:YES];
+    [self.scrollView setXPage:selectedIndex.integerValue animated:YES];
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

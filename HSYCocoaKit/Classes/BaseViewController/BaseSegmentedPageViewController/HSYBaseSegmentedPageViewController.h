@@ -67,6 +67,13 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitBaseSegmentedPageControl) {
 - (instancetype)initWithConfigs:(NSArray<HSYBaseSegmentedPageConfig *> *)configs;
 
 /**
+ 外部接口，设置翻页
+
+ @param selectedIndex 翻页页码
+ */
+- (void)hsy_setCurrentSelectedIndex:(NSNumber *)selectedIndex;
+
+/**
  静态方法设置自控制器
  
  @param hsy_viewControllers 控制器集合
