@@ -65,7 +65,8 @@
 {
     self.hsy_viewModel = [[HSYViewControllerModel alloc] init];
     [super viewDidLoad];
-    
+    NSString *tstring = HSYCocoaKitButtonNorBackgroundImage;
+    NSLog(@"");
 //    [UIViewController hsy_rac_showAlertViewController:self title:@"tttt" message:@"77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777" alertActionTitles:@[]]
     
 //    NSMutableArray *array = [@[@10, @2, @13, @48, @5] mutableCopy];
