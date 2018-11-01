@@ -121,11 +121,14 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
     button.clipsToBounds = YES;
     button.layer.masksToBounds = YES;
     
-    if (param[@(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName)]) {
-        [button setBackgroundImage:param[@(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName)] forState:UIControlStateNormal];
+    UIImage *norBackgroundImage = param[@(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName)] ? param[@(kHSYCocoaKitOfButtonPropretyTypeNorBackgroundImageViewName)] : param[HSYCocoaKitButtonNorBackgroundImage];
+    if (norBackgroundImage) {
+        [button setBackgroundImage:norBackgroundImage forState:UIControlStateNormal];
     }
-    if (param[@(kHSYCocoaKitOfButtonPropretyTypePreBackgroundImageViewName)]) {
-        [button setBackgroundImage:param[@(kHSYCocoaKitOfButtonPropretyTypePreBackgroundImageViewName)] forState:UIControlStateHighlighted];
+    
+    UIImage *preBackgroundImage = param[@(kHSYCocoaKitOfButtonPropretyTypePreBackgroundImageViewName)] ? param[@(kHSYCocoaKitOfButtonPropretyTypePreBackgroundImageViewName)] : param[HSYCocoaKitButtonPreBackgroundImage];
+    if (preBackgroundImage) {
+        [button setBackgroundImage:preBackgroundImage forState:UIControlStateHighlighted];
     }
     if (param[@(kHSYCocoaKitOfButtonPropretyTypeNorTitle)]) {
         [button setTitle:param[@(kHSYCocoaKitOfButtonPropretyTypeNorTitle)] forState:UIControlStateNormal];
