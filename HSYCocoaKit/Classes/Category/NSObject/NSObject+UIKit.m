@@ -13,6 +13,102 @@
 #import "PublicMacroFile.h"
 #import "UITextView+Placeholder.h"
 
+//UIButton Key
+HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonNorBackgroundImage = @"kHSYCocoaKitButtonNorBackgroundImage";
+HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonPreBackgroundImage = @"kHSYCocoaKitButtonPreBackgroundImage";
+HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonNorTitle = @"kHSYCocoaKitButtonNorTitle";
+HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonHighTitle = @"kHSYCocoaKitButtonHighTitle";
+HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonNorImage = @"kHSYCocoaKitButtonNorImage";
+HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonHighImage = @"kHSYCocoaKitButtonHighImage";
+HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonSelectedImage = @"kHSYCocoaKitButtonSelectedImage";
+HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonTitleColor = @"kHSYCocoaKitButtonTitleColor";
+HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonTitleFont = @"kHSYCocoaKitButtonTitleFont";
+HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonCornerRadius = @"kHSYCocoaKitButtonCornerRadius";
+HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonTextAlignment = @"kHSYCocoaKitButtonTextAlignment";
+
+//UIImageView Key
+HSYCocoaKitUIKitImagePropertyKey const HSYCocoaKitImageNorImage = @"kHSYCocoaKitImageNorImage";
+HSYCocoaKitUIKitImagePropertyKey const HSYCocoaKitImagePreImage = @"kHSYCocoaKitImagePreImage";
+HSYCocoaKitUIKitImagePropertyKey const HSYCocoaKitImageContentMode = @"kHSYCocoaKitImageContentMode";
+
+//UILabel Key
+HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelText = @"kHSYCocoaKitLabelText";
+HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelTextColor = @"kHSYCocoaKitLabelTextColor";
+HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelFont = @"kHSYCocoaKitLabelFont";
+HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelBackgroundColor = @"kHSYCocoaKitLabelBackgroundColor";
+HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelTextAlignment = @"kHSYCocoaKitLabelTextAlignment";
+HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelUnline = @"kHSYCocoaKitLabelUnline";
+HSYCocoaKitUIKitLabelPropertyKey const HSYCocoaKitLabelComputeSize = @"kHSYCocoaKitLabelComputeSize";
+
+//UITextField Key
+HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledBorderWidth = @"kHSYCocoaKitTextFiledBorderWidth";
+HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledBorderColor = @"kHSYCocoaKitTextFiledBorderColor";
+HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledTextAlignment = @"kHSYCocoaKitTextFiledTextAlignment";
+HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledFont = @"kHSYCocoaKitTextFiledFont";
+HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledReturnKeyType = @"kHSYCocoaKitTextFiledReturnKeyType";
+HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledKeyboardType = @"kHSYCocoaKitTextFiledKeyboardType";
+HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledTextColor = @"kHSYCocoaKitTextFiledTextColor";
+HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledBackgroundColor = @"kHSYCocoaKitTextFiledBackgroundColor";
+HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledText = @"kHSYCocoaKitTextFiledText";
+HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledPlaceholder = @"kHSYCocoaKitTextFiledPlaceholder";
+
+//UITextView Key
+HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewBorderWidth = @"kHSYCocoaKitTextViewBorderWidth";
+HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewBorderColor = @"kHSYCocoaKitTextViewBorderColor";
+HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewTextAlignment = @"kHSYCocoaKitTextViewTextAlignment";
+HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewFont = @"kHSYCocoaKitTextViewFont";
+HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewReturnKeyType = @"kHSYCocoaKitTextViewReturnKeyType";
+HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewKeyboardType = @"kHSYCocoaKitTextViewKeyboardType";
+HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewTextColor = @"kHSYCocoaKitTextViewTextColor";
+HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewBackgroundColor = @"kHSYCocoaKitTextViewBackgroundColor";
+HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewText = @"kHSYCocoaKitTextViewText";
+HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewPlaceholder = @"kHSYCocoaKitTextViewPlaceholder";
+
+//UITableView Key
+HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewStyle = @"kHSYCocoaKitTableViewStyle";
+HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewDelegate = @"kHSYCocoaKitTableViewDelegate";
+HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewDataSource = @"kHSYCocoaKitTableViewDataSource";
+HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewScrollEnabled = @"kHSYCocoaKitTableViewScrollEnabled";
+HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewHiddenLine = @"kHSYCocoaKitTableViewHiddenLine";
+HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewFooterView = @"kHSYCocoaKitTableViewFooterView";
+HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewRegisterClass = @"kHSYCocoaKitTableViewRegisterClass";
+
+//UIScrollView Key
+HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewDelegate = @"kHSYCocoaKitScrollViewDelegate";
+HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewContentSize = @"kHSYCocoaKitScrollViewContentSize";
+HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewContentOffset = @"kHSYCocoaKitScrollViewContentOffset";
+HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewPagingEnabled = @"kHSYCocoaKitScrollViewPagingEnabled";
+HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewScrollEnabled = @"kHSYCocoaKitScrollViewScrollEnabled";
+HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewBounces = @"kHSYCocoaKitScrollViewBounces";
+HSYCocoaKitUIKitScrollViewPropertyKey const HSYCocoaKitScrollViewHiddenScrollIndicator = @"kHSYCocoaKitScrollViewHiddenScrollIndicator";
+
+//UICollectionView Key
+HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewFlowLayout = @"kHSYCocoaKitCollectionViewFlowLayout";
+HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewDelegate = @"kHSYCocoaKitCollectionViewDelegate";
+HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewDataSource = @"kHSYCocoaKitCollectionViewDataSource";
+HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewScrollEnabled = @"kHSYCocoaKitCollectionViewScrollEnabled";
+HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewBounces = @"kHSYCocoaKitCollectionViewBounces";
+HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewHiddenScrollIndicator = @"kHSYCocoaKitCollectionViewHiddenScrollIndicator";
+HSYCocoaKitUIKitCollectionViewPropertyKey const HSYCocoaKitCollectionViewRegisterClass = @"kHSYCocoaKitCollectionViewRegisterClass";
+
+//UICollectionViewFlowLayout Key
+HSYCocoaKitUIKitCollectionViewFlowLayoutPropertyKey const HSYCocoaKitCollectionViewFlowLayoutDirection = @"kHSYCocoaKitCollectionViewFlowLayoutDirection";
+HSYCocoaKitUIKitCollectionViewFlowLayoutPropertyKey const HSYCocoaKitCollectionViewFlowLayoutSectionInset = @"kHSYCocoaKitCollectionViewFlowLayoutSectionInset";
+HSYCocoaKitUIKitCollectionViewFlowLayoutPropertyKey const HSYCocoaKitCollectionViewFlowLayoutItemSize = @"kHSYCocoaKitCollectionViewFlowLayoutItemSize";
+HSYCocoaKitUIKitCollectionViewFlowLayoutPropertyKey const HSYCocoaKitCollectionViewFlowLayoutLineSpacing = @"kHSYCocoaKitCollectionViewFlowLayoutLineSpacing";
+HSYCocoaKitUIKitCollectionViewFlowLayoutPropertyKey const HSYCocoaKitCollectionViewFlowLayoutInteritemSpacing = @"kHSYCocoaKitCollectionViewFlowLayoutInteritemSpacing";
+HSYCocoaKitUIKitCollectionViewFlowLayoutPropertyKey const HSYCocoaKitCollectionViewFlowLayoutHeaderReferenceSize = @"kHSYCocoaKitCollectionViewFlowLayoutHeaderReferenceSize";
+HSYCocoaKitUIKitCollectionViewFlowLayoutPropertyKey const HSYCocoaKitCollectionViewFlowLayoutFooterReferenceSize = @"kHSYCocoaKitCollectionViewFlowLayoutFooterReferenceSize";
+
+//UISlider Key
+HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderNorThumbImage = @"kHSYCocoaKitSliderNorThumbImage";
+HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderPreThumbImage = @"kHSYCocoaKitSliderPreThumbImage";
+HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderNorMinimumTrackTintColor = @"kHSYCocoaKitSliderNorMinimumTrackTintColor";
+HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderPreMinimumTrackTintColor = @"kHSYCocoaKitSliderPreMinimumTrackTintColor";
+HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderMaximumValue = @"kHSYCocoaKitSliderMaximumValue";
+HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderMinimumValue = @"kHSYCocoaKitSliderMinimumValue";
+HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitSliderValue";
+
 @implementation NSObject (UIKit)
 
 #pragma mark - Create Button
@@ -427,5 +523,4 @@
 }
 
 @end
-
 
