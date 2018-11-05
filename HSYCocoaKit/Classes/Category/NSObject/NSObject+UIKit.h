@@ -244,89 +244,89 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfSliderPropertyType) {
 @interface NSObject (UIKit)
 
 /**
- UIButton-------key:@(kHSYCocoaKitOfButtonPropretyType枚举)
+ UIButton-------key:@(kHSYCocoaKitOfButtonPropretyType枚举) --或HSYCocoaKitUIKitButtonPropertyKey
 
  @param param 入参属性
  @param next 点击回调时间
  @return UIButton
  */
-+ (UIButton *)createButtonByParam:(NSDictionary <NSNumber *, id>*)param clickedOnSubscribeNext:(void(^)(UIButton *button))next;
++ (UIButton *)createButtonByParam:(NSDictionary<id, id> *)param clickedOnSubscribeNext:(void(^)(UIButton *button))next;
 
 /**
- UIImageView-------key:@(kHSYCocoaKitOfImageViewPropretyType枚举)
+ UIImageView-------key:@(kHSYCocoaKitOfImageViewPropretyType枚举) --或HSYCocoaKitUIKitImagePropertyKey
 
  @param param 入参属性
  @return UIImageView
  */
-+ (UIImageView *)createImageViewByParam:(NSDictionary <NSNumber *, id>*)param;
++ (UIImageView *)createImageViewByParam:(NSDictionary<id, id> *)param;
 
 /**
- UILabel-------key:@(kHSYCocoaKitOfLabelPropretyType枚举)
+ UILabel-------key:@(kHSYCocoaKitOfLabelPropretyType枚举) --或HSYCocoaKitUIKitLabelPropertyKey
 
  @param param 入参属性
  @return UILabel
  */
-+ (UILabel *)createLabelByParam:(NSDictionary <NSNumber *, id>*)param;
++ (UILabel *)createLabelByParam:(NSDictionary<id, id> *)param;
 
 /**
- UITextField------key:@(kHSYCocoaKitOfTextFiledPropretyType枚举)
+ UITextField------key:@(kHSYCocoaKitOfTextFiledPropretyType枚举) --或HSYCocoaKitUIKitTextFieldPropertyKey
 
  @param param 入参属性
  @param next 单行输入框内容改变
  @return UITextField
  */
-+ (UITextField *)createTextFiledByParam:(NSDictionary <NSNumber *, id>*)param didChangeSubscribeNext:(void(^)(NSString *text))next;
-+ (UITextField *)createTextFiledByParam:(NSDictionary <NSNumber *, id>*)param;
++ (UITextField *)createTextFiledByParam:(NSDictionary<id, id> *)param didChangeSubscribeNext:(void(^)(NSString *text))next;
++ (UITextField *)createTextFiledByParam:(NSDictionary<id, id> *)param;
 
 /**
- UITextView------key:@(kHSYCocoaKitOfTextViewPropretyType枚举)
+ UITextView------key:@(kHSYCocoaKitOfTextViewPropretyType枚举) --或HSYCocoaKitUIKitTextViewPropertyKey
 
  @param param 入参属性
  @param next 多行输入框内容改变
  @return UITextView
  */
-+ (UITextView *)createTextViewByParam:(NSDictionary <NSNumber *, id>*)param didChangeSubscribeNext:(void(^)(NSString *text))next;
-+ (UITextView *)createTextViewByParam:(NSDictionary <NSNumber *, id>*)param;
++ (UITextView *)createTextViewByParam:(NSDictionary<id, id> *)param didChangeSubscribeNext:(void(^)(NSString *text))next;
++ (UITextView *)createTextViewByParam:(NSDictionary<id, id> *)param;
 
 /**
- UITableView-------key:@(kHSYCocoaKitOfTableViewPropretyType枚举)
+ UITableView-------key:@(kHSYCocoaKitOfTableViewPropretyType枚举) --或HSYCocoaKitUIKitTableViewPropertyKey
 
  @param param 入参属性
  @return UITableView
  */
-+ (UITableView *)createTabelViewByParam:(NSDictionary <NSNumber *, id>*)param;
++ (UITableView *)createTabelViewByParam:(NSDictionary<id, id> *)param;
 
 /**
- UIScrollView-----key:@(kHSYCocoaKitOfScrollViewPropretyType枚举)
+ UIScrollView-----key:@(kHSYCocoaKitOfScrollViewPropretyType枚举) --或HSYCocoaKitUIKitScrollViewPropertyKey
 
  @param param 入参属性
  @return UIScrollView
  */
-+ (UIScrollView *)createScrollViewByParam:(NSDictionary <NSNumber *, id>*)param;
++ (UIScrollView *)createScrollViewByParam:(NSDictionary<id, id> *)param;
 
 /**
- UICollectionView------key:@(kHSYCocoaKitOfCollectionViewPropretyType枚举)
+ UICollectionView------key:@(kHSYCocoaKitOfCollectionViewPropretyType枚举) --或HSYCocoaKitUIKitCollectionViewPropertyKey
 
  @param param 入参属性
  @return UICollectionView
  */
-+ (UICollectionView *)createCollectionViewByParam:(NSDictionary <NSNumber *, id>*)param;
++ (UICollectionView *)createCollectionViewByParam:(NSDictionary<id, id> *)param;
 
 /**
- UICollectionViewFlowLayout------key:@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyType枚举)
+ UICollectionViewFlowLayout------key:@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyType枚举) --或HSYCocoaKitUIKitCollectionViewFlowLayoutPropertyKey
 
  @param param 入参属性
  @return UICollectionViewFlowLayout
  */
-+ (UICollectionViewFlowLayout *)createFlowLayoutByParam:(NSDictionary <NSNumber *, id>*)param;
++ (UICollectionViewFlowLayout *)createFlowLayoutByParam:(NSDictionary<id, id> *)param;
 
 /**
- UISlider--------key:@(kHSYCocoaKitOfSliderPropertyType)
+ UISlider--------key:@(kHSYCocoaKitOfSliderPropertyType) --或HSYCocoaKitUIKitSliderPropertyKey
 
  @param param 入参属性
  @param newValue 触发changed后改变的值的回调事件
  @return UISlider
  */
-+ (UISlider *)createSliderByParam:(NSDictionary <NSNumber *, id>*)param changedValue:(void(^)(CGFloat news))newValue;
++ (UISlider *)createSliderByParam:(NSDictionary<id, id> *)param changedValue:(void(^)(CGFloat news))newValue;
 
 @end

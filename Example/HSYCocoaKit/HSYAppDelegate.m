@@ -18,6 +18,7 @@
 #import "NSDecimalNumber+Computer.h"
 #import "NSBundle+CFBundle.h"
 #import "HSYCocoaKitWebSocketManager.h"
+#import "HSYCustomScript.h"
 
 @interface dddMidel : JSONModel
 
@@ -85,6 +86,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
+    NSLog(@"%@", [HSYCustomScript customScript]);
+    
     [[HSYNetWorkingManager shareInstance] hsy_setNetworkBaseUrl:@"http://192.168.1.12:8087/zbd-app"];
     @weakify(self);
     NSDictionary *dic = @{

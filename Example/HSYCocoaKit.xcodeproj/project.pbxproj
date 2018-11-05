@@ -23,6 +23,7 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		AE0000D1218FD7A200B815ED /* HSYCustomScript.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0000D0218FD7A200B815ED /* HSYCustomScript.m */; };
 		AE03E264212BF589009EDEAA /* HSYWebTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE03E263212BF589009EDEAA /* HSYWebTestViewController.m */; };
 		AE03E266212C002D009EDEAA /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = AE03E265212C002D009EDEAA /* index.html */; };
 		AE07ED54209AFF3700542DBB /* tab_icon_home_default.png in Resources */ = {isa = PBXBuildFile; fileRef = AE07ED51209AFF3700542DBB /* tab_icon_home_default.png */; };
@@ -181,6 +182,8 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9C741A67EF37DC3880AC3E66 /* Pods_HSYCocoaKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSYCocoaKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EA3FE729B1FBBDC37CC1A7 /* Pods_HSYCocoaKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HSYCocoaKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE0000CF218FD7A200B815ED /* HSYCustomScript.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSYCustomScript.h; sourceTree = "<group>"; };
+		AE0000D0218FD7A200B815ED /* HSYCustomScript.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSYCustomScript.m; sourceTree = "<group>"; };
 		AE03E262212BF589009EDEAA /* HSYWebTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSYWebTestViewController.h; sourceTree = "<group>"; };
 		AE03E263212BF589009EDEAA /* HSYWebTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSYWebTestViewController.m; sourceTree = "<group>"; };
 		AE03E265212C002D009EDEAA /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
@@ -380,6 +383,8 @@
 			children = (
 				6003F59C195388D20070C39A /* HSYAppDelegate.h */,
 				6003F59D195388D20070C39A /* HSYAppDelegate.m */,
+				AE0000CF218FD7A200B815ED /* HSYCustomScript.h */,
+				AE0000D0218FD7A200B815ED /* HSYCustomScript.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* HSYViewController.h */,
 				6003F5A6195388D20070C39A /* HSYViewController.m */,
@@ -896,6 +901,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE0000D1218FD7A200B815ED /* HSYCustomScript.m in Sources */,
 				AE03E264212BF589009EDEAA /* HSYWebTestViewController.m in Sources */,
 				AE64DF5420B40331003A3AD7 /* HSYTestsViewController.m in Sources */,
 				6003F59E195388D20070C39A /* HSYAppDelegate.m in Sources */,

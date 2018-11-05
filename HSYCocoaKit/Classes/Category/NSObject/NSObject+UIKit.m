@@ -113,7 +113,7 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
 
 #pragma mark - Create Button
 
-+ (UIButton *)createButtonByParam:(NSDictionary <NSNumber *, id>*)param clickedOnSubscribeNext:(void(^)(UIButton *button))next
++ (UIButton *)createButtonByParam:(NSDictionary<id, id> *)param clickedOnSubscribeNext:(void(^)(UIButton *button))next
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -130,34 +130,51 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
     if (preBackgroundImage) {
         [button setBackgroundImage:preBackgroundImage forState:UIControlStateHighlighted];
     }
-    if (param[@(kHSYCocoaKitOfButtonPropretyTypeNorTitle)]) {
-        [button setTitle:param[@(kHSYCocoaKitOfButtonPropretyTypeNorTitle)] forState:UIControlStateNormal];
+    
+    NSString *norTitle = param[@(kHSYCocoaKitOfButtonPropretyTypeNorTitle)] ? param[@(kHSYCocoaKitOfButtonPropretyTypeNorTitle)] : param[HSYCocoaKitButtonNorTitle];
+    if (norTitle) {
+        [button setTitle:norTitle forState:UIControlStateNormal];
     }
-    if (param[@(kHSYCocoaKitOfButtonPropretyTypeHighTitle)]) {
-        [button setTitle:param[@(kHSYCocoaKitOfButtonPropretyTypeHighTitle)] forState:UIControlStateHighlighted];
+    
+    NSString *preTitle = param[@(kHSYCocoaKitOfButtonPropretyTypeHighTitle)] ? param[@(kHSYCocoaKitOfButtonPropretyTypeHighTitle)] : param[HSYCocoaKitButtonHighTitle];
+    if (preTitle) {
+        [button setTitle:preTitle forState:UIControlStateHighlighted];
     }
-    if (param[@(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName)]) {
-        [button setImage:param[@(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName)] forState:UIControlStateNormal];
+    
+    UIImage *norImage = param[@(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName)] ? param[@(kHSYCocoaKitOfButtonPropretyTypeNorImageViewName)] : param[HSYCocoaKitButtonNorImage];
+    if (norImage) {
+        [button setImage:norImage forState:UIControlStateNormal];
     }
-    if (param[@(kHSYCocoaKitOfButtonPropretyTypePreImageViewName)]) {
-        [button setImage:param[@(kHSYCocoaKitOfButtonPropretyTypePreImageViewName)] forState:UIControlStateHighlighted];
+    
+    UIImage *highImage = param[@(kHSYCocoaKitOfButtonPropretyTypePreImageViewName)] ? param[@(kHSYCocoaKitOfButtonPropretyTypePreImageViewName)] : param[HSYCocoaKitButtonHighImage];
+    if (highImage) {
+        [button setImage:highImage forState:UIControlStateHighlighted];
     }
-    if (param[@(kHSYCocoaKitOfButtonPropretyTypeSelectedImageViewName)]) {
-        [button setImage:param[@(kHSYCocoaKitOfButtonPropretyTypeSelectedImageViewName)] forState:UIControlStateSelected];
+    
+    UIImage *selImage = param[@(kHSYCocoaKitOfButtonPropretyTypeSelectedImageViewName)] ? param[@(kHSYCocoaKitOfButtonPropretyTypeSelectedImageViewName)] : param[HSYCocoaKitButtonSelectedImage];
+    if (selImage) {
+        [button setImage:selImage forState:UIControlStateSelected];
     }
+    
+    UIColor *titleColor = param[@(kHSYCocoaKitOfButtonPropretyTypeTitleColor)] ? param[@(kHSYCocoaKitOfButtonPropretyTypeTitleColor)] : param[HSYCocoaKitButtonTitleColor];
     if (param[@(kHSYCocoaKitOfButtonPropretyTypeTitleColor)]) {
-        [button setTitleColor:param[@(kHSYCocoaKitOfButtonPropretyTypeTitleColor)] forState:UIControlStateNormal];
-        [button setTitleColor:param[@(kHSYCocoaKitOfButtonPropretyTypeTitleColor)] forState:UIControlStateHighlighted];
+        [button setTitleColor:titleColor forState:UIControlStateNormal];
+        [button setTitleColor:titleColor forState:UIControlStateHighlighted];
     }
-    if (param[@(kHSYCocoaKitOfButtonPropretyTypeTitleFont)]) {
-        UIFont *font = param[@(kHSYCocoaKitOfButtonPropretyTypeTitleFont)];
+    
+    UIFont *font = param[@(kHSYCocoaKitOfButtonPropretyTypeTitleFont)] ? param[@(kHSYCocoaKitOfButtonPropretyTypeTitleFont)] : param[HSYCocoaKitButtonTitleFont];
+    if (font) {
         button.titleLabel.font = font;
     }
-    if (param[@(kHSYCocoaKitOfButtonPropretyTypeCornerRadius)]) {
-        button.layer.cornerRadius = [param[@(kHSYCocoaKitOfButtonPropretyTypeCornerRadius)] floatValue];
+    
+    NSNumber *radius = param[@(kHSYCocoaKitOfButtonPropretyTypeCornerRadius)] ? param[@(kHSYCocoaKitOfButtonPropretyTypeCornerRadius)] : param[HSYCocoaKitButtonCornerRadius];
+    if (radius) {
+        button.layer.cornerRadius = [radius floatValue];
     }
-    if (param[@(kHSYCocoaKitOfButtonPropretyTypeTextAlignment)]) {
-        button.contentHorizontalAlignment = (UIControlContentHorizontalAlignment)[param[@(kHSYCocoaKitOfButtonPropretyTypeTextAlignment)] integerValue];
+    
+    NSNumber *horizontalAlignment = param[@(kHSYCocoaKitOfButtonPropretyTypeTextAlignment)] ? param[@(kHSYCocoaKitOfButtonPropretyTypeTextAlignment)] : param[HSYCocoaKitButtonTextAlignment];
+    if (horizontalAlignment) {
+        button.contentHorizontalAlignment = (UIControlContentHorizontalAlignment)[horizontalAlignment integerValue];
     }
     
     [[[button rac_signalForControlEvents:UIControlEventTouchUpInside] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(UIButton *btn) {
@@ -171,19 +188,25 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
 
 #pragma mark - Create ImageView
 
-+ (UIImageView *)createImageViewByParam:(NSDictionary <NSNumber *, id>*)param
++ (UIImageView *)createImageViewByParam:(NSDictionary<id, id> *)param
 {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     imageView.backgroundColor = CLEAR_COLOR;
     imageView.clipsToBounds = YES;
     imageView.layer.masksToBounds = YES;
-    if (param[@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName)]) {
-        imageView.image = param[@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName)];
+    
+    UIImage *norImage = param[@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName)] ? param[@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName)] : param[HSYCocoaKitImageNorImage];
+    if (norImage) {
+        imageView.image = norImage;
     }
-    if (param[@(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName)]) {
-        imageView.highlightedImage = param[@(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName)];
+    
+    UIImage *highImage = param[@(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName)] ? param[@(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName)] : param[HSYCocoaKitImagePreImage];
+    if (highImage) {
+        imageView.highlightedImage = highImage;
     }
-    UIViewContentMode mode = (param[@(kHSYCocoaKitOfImageViewPropretyTypeViewContentMode)] ? ((UIViewContentMode)[param[@(kHSYCocoaKitOfImageViewPropretyTypeViewContentMode)] integerValue]) : UIViewContentModeScaleToFill);
+    
+    NSNumber *contentMode = param[@(kHSYCocoaKitOfImageViewPropretyTypeViewContentMode)] ? param[@(kHSYCocoaKitOfImageViewPropretyTypeViewContentMode)] : param[HSYCocoaKitImageContentMode];
+    UIViewContentMode mode = (contentMode ? ((UIViewContentMode)[contentMode integerValue]) : UIViewContentModeScaleToFill);
     imageView.contentMode = mode;
     
     return imageView;
@@ -191,21 +214,22 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
 
 #pragma mark - Create Label
 
-+ (UILabel *)createLabelByParam:(NSDictionary <NSNumber *, id>*)param
++ (UILabel *)createLabelByParam:(NSDictionary<id, id> *)param
 {
     UILabel *label = nil;
     
-    NSString *text = (param[@(kHSYCocoaKitOfLabelPropretyTypeText)] ? param[@(kHSYCocoaKitOfLabelPropretyTypeText)] : @"");
-    UIFont *font = (param[@(kHSYCocoaKitOfLabelPropretyTypeTextFont)] ? param[@(kHSYCocoaKitOfLabelPropretyTypeTextFont)] : UI_SYSTEM_FONT_16);
+    NSString *text = (param[@(kHSYCocoaKitOfLabelPropretyTypeText)] ? param[@(kHSYCocoaKitOfLabelPropretyTypeText)] : (param[HSYCocoaKitLabelText] ? param[HSYCocoaKitLabelText] : @""));
+    UIFont *font = (param[@(kHSYCocoaKitOfLabelPropretyTypeTextFont)] ? param[@(kHSYCocoaKitOfLabelPropretyTypeTextFont)] : (param[HSYCocoaKitLabelFont] ? param[HSYCocoaKitLabelFont] : UI_SYSTEM_FONT_16));
     CGRect rect = CGRectZero;
     if (param[@(kHSYCocoaKitOfLabelPropretyTypeFrame)]) {
         NSValue *rectValue = param[@(kHSYCocoaKitOfLabelPropretyTypeFrame)];
         rect = rectValue.CGRectValue;
     }
-    if (param[@(kHSYCocoaKitOfLabelPropretyTypeMaxSize)]) {
-        NSValue *sizeValue = param[@(kHSYCocoaKitOfLabelPropretyTypeMaxSize)];
-        CGFloat width = sizeValue.CGSizeValue.width;
-        CGFloat height = sizeValue.CGSizeValue.height;
+    
+    NSValue *valueCGSize = param[@(kHSYCocoaKitOfLabelPropretyTypeMaxSize)] ? param[@(kHSYCocoaKitOfLabelPropretyTypeMaxSize)] : param[HSYCocoaKitLabelComputeSize];
+    if (valueCGSize) {
+        CGFloat width = valueCGSize.CGSizeValue.width;
+        CGFloat height = valueCGSize.CGSizeValue.height;
         if ([param[@(kHSYCocoaKitOfLabelPropretyTypeIsUniline)] boolValue]) {
             label = [UILabel initWithUnilineText:text
                                             font:font
@@ -222,48 +246,73 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
         label.text = text;
         label.font = font;
     }
-    label.backgroundColor = (param[@(kHSYCocoaKitOfLabelPropretyTypeBackgroundColor)] ? param[@(kHSYCocoaKitOfLabelPropretyTypeBackgroundColor)] : CLEAR_COLOR);
-    label.textColor = (param[@(kHSYCocoaKitOfLabelPropretyTypeTextColor)] ? param[@(kHSYCocoaKitOfLabelPropretyTypeTextColor)] : BLACK_COLOR);
-    label.textAlignment = (param[@(kHSYCocoaKitOfLabelPropretyTypeTextAlignment)] ? ((NSTextAlignment)[param[@(kHSYCocoaKitOfLabelPropretyTypeTextAlignment)] integerValue]) : NSTextAlignmentLeft);
+    
+    UIColor *backgroundColor = param[@(kHSYCocoaKitOfLabelPropretyTypeBackgroundColor)] ? param[@(kHSYCocoaKitOfLabelPropretyTypeBackgroundColor)] : param[HSYCocoaKitLabelBackgroundColor];
+    label.backgroundColor = (backgroundColor ? backgroundColor : CLEAR_COLOR);
+    
+    UIColor *textColor = param[@(kHSYCocoaKitOfLabelPropretyTypeTextColor)] ? param[@(kHSYCocoaKitOfLabelPropretyTypeTextColor)] : param[HSYCocoaKitLabelTextColor];
+    label.textColor = (textColor ? textColor : BLACK_COLOR);
+    
+    NSNumber *alignment = param[@(kHSYCocoaKitOfLabelPropretyTypeTextAlignment)] ? param[@(kHSYCocoaKitOfLabelPropretyTypeTextAlignment)] : param[HSYCocoaKitLabelTextAlignment];
+    label.textAlignment = (alignment ? ((NSTextAlignment)[alignment integerValue]) : NSTextAlignmentLeft);
     
     return label;
 }
 
 #pragma mark - Create TextFiled
 
-+ (UITextField *)createTextFiledByParam:(NSDictionary <NSNumber *, id>*)param
++ (UITextField *)createTextFiledByParam:(NSDictionary<id, id> *)param
 {
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectZero];
     
-    if (param[@(kHSYCocoaKitOfTextFiledPropretyTypeBorderWidth)]) {
-        textField.layer.borderWidth = [param[@(kHSYCocoaKitOfTextFiledPropretyTypeBorderWidth)] floatValue];
+    NSNumber *borderWidth = param[@(kHSYCocoaKitOfTextFiledPropretyTypeBorderWidth)] ? param[@(kHSYCocoaKitOfTextFiledPropretyTypeBorderWidth)] : param[HSYCocoaKitTextFiledBorderWidth];
+    if (borderWidth) {
+        textField.layer.borderWidth = [borderWidth floatValue];
     }
+    
+    UIColor *borderColor = param[@(kHSYCocoaKitOfTextFiledPropretyTypeBorderColor)] ? param[@(kHSYCocoaKitOfTextFiledPropretyTypeBorderColor)] : param[HSYCocoaKitTextFiledBorderColor];
     if (param[@(kHSYCocoaKitOfTextFiledPropretyTypeBorderColor)]) {
-        textField.layer.borderColor = [param[@(kHSYCocoaKitOfTextFiledPropretyTypeBorderColor)] CGColor];
+        textField.layer.borderColor = [borderColor CGColor];
     }
-    if (param[@(kHSYCocoaKitOfTextFiledPropretyTypeTextAlignment)]) {
-        textField.textAlignment = ((NSTextAlignment)[param[@(kHSYCocoaKitOfLabelPropretyTypeTextAlignment)] integerValue]);
+    
+    NSNumber *alignment = param[@(kHSYCocoaKitOfTextFiledPropretyTypeTextAlignment)] ? param[@(kHSYCocoaKitOfTextFiledPropretyTypeTextAlignment)] : param[HSYCocoaKitTextFiledTextAlignment];
+    if (alignment) {
+        textField.textAlignment = ((NSTextAlignment)[alignment integerValue]);
     }
-    if (param[@(kHSYCocoaKitOfTextFiledPropretyTypeFont)]) {
-        textField.font = param[@(kHSYCocoaKitOfTextFiledPropretyTypeFont)];
+    
+    UIFont *font = param[@(kHSYCocoaKitOfTextFiledPropretyTypeFont)] ? param[@(kHSYCocoaKitOfTextFiledPropretyTypeFont)] : param[HSYCocoaKitTextFiledFont];
+    if (font) {
+        textField.font = font;
     }
-    if (param[@(kHSYCocoaKitOfTextFiledPropretyTypeReturnKeyType)]) {
-        textField.returnKeyType = (UIReturnKeyType)[param[@(kHSYCocoaKitOfTextFiledPropretyTypeReturnKeyType)] integerValue];
+    
+    NSNumber *returnKey = param[@(kHSYCocoaKitOfTextFiledPropretyTypeReturnKeyType)] ? param[@(kHSYCocoaKitOfTextFiledPropretyTypeReturnKeyType)] : param[HSYCocoaKitTextFiledReturnKeyType];
+    if (returnKey) {
+        textField.returnKeyType = (UIReturnKeyType)[returnKey integerValue];
     }
-    if (param[@(kHSYCocoaKitOfTextFiledPropretyTypeKeyboardType)]) {
-        textField.keyboardType = (UIKeyboardType)[param[@(kHSYCocoaKitOfTextFiledPropretyTypeKeyboardType)] integerValue];
+    
+    NSNumber *keyboard = param[@(kHSYCocoaKitOfTextFiledPropretyTypeKeyboardType)] ? param[@(kHSYCocoaKitOfTextFiledPropretyTypeKeyboardType)] : param[HSYCocoaKitTextFiledKeyboardType];
+    if (keyboard) {
+        textField.keyboardType = (UIKeyboardType)[keyboard integerValue];
     }
-    if (param[@(kHSYCocoaKitOfTextFiledPropretyTypeTextColor)]) {
-        textField.textColor = param[@(kHSYCocoaKitOfTextFiledPropretyTypeTextColor)];
+    
+    UIColor *textColor = param[@(kHSYCocoaKitOfTextFiledPropretyTypeTextColor)] ? param[@(kHSYCocoaKitOfTextFiledPropretyTypeTextColor)] : param[HSYCocoaKitTextFiledTextColor];
+    if (textColor) {
+        textField.textColor = textColor;
     }
-    if (param[@(kHSYCocoaKitOfTextFiledPropretyTypeBackgroundColor)]) {
-        textField.backgroundColor = param[@(kHSYCocoaKitOfTextFiledPropretyTypeBackgroundColor)];
+    
+    UIColor *backgroundColor = param[@(kHSYCocoaKitOfTextFiledPropretyTypeBackgroundColor)] ? param[@(kHSYCocoaKitOfTextFiledPropretyTypeBackgroundColor)] : param[HSYCocoaKitTextFiledBackgroundColor];
+    if (backgroundColor) {
+        textField.backgroundColor = backgroundColor;
     }
-    if (param[@(kHSYCocoaKitOfTextFiledPropretyTypeText)]) {
-        textField.text = param[@(kHSYCocoaKitOfTextFiledPropretyTypeText)];
+    
+    NSString *text = param[@(kHSYCocoaKitOfTextFiledPropretyTypeText)] ? param[@(kHSYCocoaKitOfTextFiledPropretyTypeText)] : param[HSYCocoaKitTextFiledText];
+    if (text) {
+        textField.text = text;
     }
-    if (param[@(kHSYCocoaKitOfTextFiledPropretyTypePlaceholderString)]) {
-        textField.placeholder = param[@(kHSYCocoaKitOfTextFiledPropretyTypePlaceholderString)];
+    
+    NSString *placeholder = param[@(kHSYCocoaKitOfTextFiledPropretyTypePlaceholderString)] ? param[@(kHSYCocoaKitOfTextFiledPropretyTypePlaceholderString)] : param[HSYCocoaKitTextFiledPlaceholder];
+    if (placeholder) {
+        textField.placeholder = placeholder;
     }
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     return textField;
@@ -282,43 +331,63 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
 
 #pragma mark - Create TextView
 
-+ (UITextView *)createTextViewByParam:(NSDictionary <NSNumber *, id>*)param
++ (UITextView *)createTextViewByParam:(NSDictionary<id, id> *)param
 {
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
-    if (param[@(kHSYCocoaKitOfTextViewPropretyTypeBorderWidth)]) {
-        textView.layer.borderWidth = [param[@(kHSYCocoaKitOfTextViewPropretyTypeBorderWidth)] floatValue];
+    
+    NSNumber *borderWidth = param[@(kHSYCocoaKitOfTextViewPropretyTypeBorderWidth)] ? param[@(kHSYCocoaKitOfTextViewPropretyTypeBorderWidth)] : param[HSYCocoaKitTextViewBorderWidth];
+    if (borderWidth) {
+        textView.layer.borderWidth = [borderWidth floatValue];
     }
-    if (param[@(kHSYCocoaKitOfTextViewPropretyTypeBorderColor)]) {
-        textView.layer.borderColor = [param[@(kHSYCocoaKitOfTextViewPropretyTypeBorderColor)] CGColor];
+    
+    UIColor *borderColor = param[@(kHSYCocoaKitOfTextViewPropretyTypeBorderColor)] ? param[@(kHSYCocoaKitOfTextViewPropretyTypeBorderColor)] : param[HSYCocoaKitTextViewBorderColor];
+    if (borderColor) {
+        textView.layer.borderColor = [borderColor CGColor];
     }
-    if (param[@(kHSYCocoaKitOfTextViewPropretyTypeTextAlignment)]) {
-        textView.textAlignment = ((NSTextAlignment)[param[@(kHSYCocoaKitOfTextViewPropretyTypeTextAlignment)] integerValue]);
+    
+    NSNumber *alignment = param[@(kHSYCocoaKitOfTextViewPropretyTypeTextAlignment)] ? param[@(kHSYCocoaKitOfTextViewPropretyTypeTextAlignment)] : param[HSYCocoaKitTextViewTextAlignment];
+    if (alignment) {
+        textView.textAlignment = ((NSTextAlignment)[alignment integerValue]);
     }
-    if (param[@(kHSYCocoaKitOfTextViewPropretyTypeFont)]) {
-        textView.font = param[@(kHSYCocoaKitOfTextViewPropretyTypeFont)];
+    
+    UIFont *font = param[@(kHSYCocoaKitOfTextViewPropretyTypeFont)] ? param[@(kHSYCocoaKitOfTextViewPropretyTypeFont)] : param[HSYCocoaKitTextViewFont];
+    if (font) {
+        textView.font = font;
     }
-    if (param[@(kHSYCocoaKitOfTextViewPropretyTypeReturnKeyType)]) {
-        textView.returnKeyType = (UIReturnKeyType)[param[@(kHSYCocoaKitOfTextViewPropretyTypeReturnKeyType)] integerValue];
+    
+    NSNumber *returnKey = param[@(kHSYCocoaKitOfTextViewPropretyTypeReturnKeyType)] ? param[@(kHSYCocoaKitOfTextViewPropretyTypeReturnKeyType)] : param[HSYCocoaKitTextViewReturnKeyType];
+    if (returnKey) {
+        textView.returnKeyType = (UIReturnKeyType)[returnKey integerValue];
     }
-    if (param[@(kHSYCocoaKitOfTextViewPropretyTypeKeyboardType)]) {
-        textView.keyboardType = (UIKeyboardType)[param[@(kHSYCocoaKitOfTextViewPropretyTypeKeyboardType)] integerValue];
+    
+    NSNumber *keyboard = param[@(kHSYCocoaKitOfTextViewPropretyTypeKeyboardType)] ? param[@(kHSYCocoaKitOfTextViewPropretyTypeKeyboardType)] : param[HSYCocoaKitTextViewKeyboardType];
+    if (keyboard) {
+        textView.keyboardType = (UIKeyboardType)[keyboard integerValue];
     }
-    if (param[@(kHSYCocoaKitOfTextViewPropretyTypeTextColor)]) {
-        textView.textColor = param[@(kHSYCocoaKitOfTextViewPropretyTypeTextColor)];
+    
+    UIColor *textColor = param[@(kHSYCocoaKitOfTextViewPropretyTypeTextColor)] ? param[@(kHSYCocoaKitOfTextViewPropretyTypeTextColor)] : param[HSYCocoaKitTextViewTextColor];
+    if (textColor) {
+        textView.textColor = textColor;
     }
-    if (param[@(kHSYCocoaKitOfTextViewPropretyTypeBackgroundColor)]) {
-        textView.backgroundColor = param[@(kHSYCocoaKitOfTextViewPropretyTypeBackgroundColor)];
+    
+    UIColor *backgroundColor = param[@(kHSYCocoaKitOfTextViewPropretyTypeBackgroundColor)] ? param[@(kHSYCocoaKitOfTextViewPropretyTypeBackgroundColor)] : param[HSYCocoaKitTextViewBackgroundColor];
+    if (backgroundColor) {
+        textView.backgroundColor = backgroundColor;
     }
-    if (param[@(kHSYCocoaKitOfTextViewPropretyTypeText)]) {
-        textView.text = param[@(kHSYCocoaKitOfTextViewPropretyTypeText)];
+    
+    NSString *text = param[@(kHSYCocoaKitOfTextViewPropretyTypeText)] ? param[@(kHSYCocoaKitOfTextViewPropretyTypeText)] : param[HSYCocoaKitTextViewText];
+    if (text) {
+        textView.text = text;
     }
-    if ([param[@(kHSYCocoaKitOfTextViewPropretyTypePlaceholder)] length] > 0) {
-        textView.placeholder = param[@(kHSYCocoaKitOfTextViewPropretyTypePlaceholder)];
+    
+    NSString *placeholder = param[@(kHSYCocoaKitOfTextViewPropretyTypePlaceholder)] ? param[@(kHSYCocoaKitOfTextViewPropretyTypePlaceholder)] : param[HSYCocoaKitTextViewPlaceholder];
+    if ([placeholder length] > 0) {
+        textView.placeholder = placeholder;
     }
     return textView;
 }
 
-+ (UITextView *)createTextViewByParam:(NSDictionary <NSNumber *, id>*)param didChangeSubscribeNext:(void(^)(NSString *text))next
++ (UITextView *)createTextViewByParam:(NSDictionary<id, id> *)param didChangeSubscribeNext:(void(^)(NSString *text))next
 {
     UITextView *textView = [self.class createTextViewByParam:param];
     if (next) {
@@ -332,9 +401,10 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
 
 #pragma mark - Create TableView
 
-+ (UITableView *)createTabelViewByParam:(NSDictionary <NSNumber *, id>*)param
++ (UITableView *)createTabelViewByParam:(NSDictionary<id, id> *)param
 {
-    UITableViewStyle style = (param[@(kHSYCocoaKitOfTableViewPropretyTypeTableViewStyle)] ? ((UITableViewStyle)[param[@(kHSYCocoaKitOfTableViewPropretyTypeTableViewStyle)] integerValue]) : UITableViewStylePlain);
+    NSNumber *styleNumber = param[@(kHSYCocoaKitOfTableViewPropretyTypeTableViewStyle)] ? param[@(kHSYCocoaKitOfTableViewPropretyTypeTableViewStyle)] : param[HSYCocoaKitTableViewStyle];
+    UITableViewStyle style = (styleNumber ? (UITableViewStyle)styleNumber.integerValue : UITableViewStylePlain);
     
     CGRect rect = CGRectZero;
     if (param[@(kHSYCocoaKitOfTableViewPropretyTypeFrame)]) {
@@ -344,26 +414,34 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:rect style:style];
     tableView.backgroundColor = [UIColor clearColor];
-    if (param[@(kHSYCocoaKitOfTableViewPropretyTypeDelegate)]) {
-        id<UITableViewDelegate>delegate = param[@(kHSYCocoaKitOfTableViewPropretyTypeDelegate)];
+    
+    id<UITableViewDelegate>delegate = param[@(kHSYCocoaKitOfTableViewPropretyTypeDelegate)] ? param[@(kHSYCocoaKitOfTableViewPropretyTypeDelegate)] : param[HSYCocoaKitTableViewDelegate];
+    if (delegate) {
         tableView.delegate = delegate;
     }
-    if (param[@(kHSYCocoaKitOfTableViewPropretyTypeDataSource)]) {
-        id<UITableViewDataSource>dataSource = param[@(kHSYCocoaKitOfTableViewPropretyTypeDataSource)];
+    
+    id<UITableViewDataSource>dataSource = param[@(kHSYCocoaKitOfTableViewPropretyTypeDataSource)] ? param[@(kHSYCocoaKitOfTableViewPropretyTypeDataSource)] : param[HSYCocoaKitTableViewDataSource];
+    if (dataSource) {
         tableView.dataSource = dataSource;
     }
     
     tableView.clipsToBounds = YES;
-    tableView.scrollEnabled = (param[@(kHSYCocoaKitOfTableViewPropretyTypeScrollEnabled)] ? [param[@(kHSYCocoaKitOfTableViewPropretyTypeScrollEnabled)] boolValue] : YES);
-    if ([param[@(kHSYCocoaKitOfTableViewPropretyTypeHiddenCellLine)] boolValue]) {
+    NSNumber *scrollEnabled = param[@(kHSYCocoaKitOfTableViewPropretyTypeScrollEnabled)] ? param[@(kHSYCocoaKitOfTableViewPropretyTypeScrollEnabled)] : param[HSYCocoaKitTableViewScrollEnabled];
+    tableView.scrollEnabled = (scrollEnabled ? [scrollEnabled boolValue] : YES);
+    
+    NSNumber *hiddenCellLine = param[@(kHSYCocoaKitOfTableViewPropretyTypeHiddenCellLine)] ? param[@(kHSYCocoaKitOfTableViewPropretyTypeHiddenCellLine)] : param[HSYCocoaKitTableViewHiddenLine];
+    if ([hiddenCellLine boolValue]) {
         //去掉单元格的分割线
         tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     }
-    if (param[@(kHSYCocoaKitOfTableViewPropretyTypeTableFooterView)]) {
-        tableView.tableFooterView = param[@(kHSYCocoaKitOfTableViewPropretyTypeTableFooterView)];
+    
+    UIView *tableFooterView = param[@(kHSYCocoaKitOfTableViewPropretyTypeTableFooterView)] ? param[@(kHSYCocoaKitOfTableViewPropretyTypeTableFooterView)] : param[HSYCocoaKitTableViewFooterView];
+    if (tableFooterView) {
+        tableView.tableFooterView = tableFooterView;
     }
-    if (param[@(kHSYCocoaKitOfTableViewPropretyTypeRegisterClass)]) {
-        NSDictionary *registers = param[@(kHSYCocoaKitOfTableViewPropretyTypeRegisterClass)];
+    
+    NSDictionary *registers = param[@(kHSYCocoaKitOfTableViewPropretyTypeRegisterClass)] ? param[@(kHSYCocoaKitOfTableViewPropretyTypeRegisterClass)] : param[HSYCocoaKitTableViewRegisterClass];
+    if (registers) {
         Class class = NSClassFromString(registers.allKeys.firstObject);
         NSString *identifier = registers.allValues.firstObject;
         [tableView registerClass:class forCellReuseIdentifier:identifier];
@@ -374,7 +452,7 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
 
 #pragma mark - Create ScrollView
 
-+ (UIScrollView *)createScrollViewByParam:(NSDictionary <NSNumber *, id>*)param
++ (UIScrollView *)createScrollViewByParam:(NSDictionary<id, id> *)param
 {
     CGRect rect = CGRectZero;
     if (param[@(kHSYCocoaKitOfScrollViewPropretyTypeFrame)]) {
@@ -382,26 +460,35 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
         rect = value.CGRectValue;
     }
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:rect];
-    if (param[@(kHSYCocoaKitOfScrollViewPropretyTypeDelegate)]) {
-        id<UIScrollViewDelegate>delegate = param[@(kHSYCocoaKitOfScrollViewPropretyTypeDelegate)];
+    
+    id<UIScrollViewDelegate>delegate = param[@(kHSYCocoaKitOfScrollViewPropretyTypeDelegate)] ? param[@(kHSYCocoaKitOfScrollViewPropretyTypeDelegate)] : param[HSYCocoaKitScrollViewDelegate];
+    if (delegate) {
         scrollView.delegate = delegate;
     }
-    if (param[@(kHSYCocoaKitOfScrollViewPropretyTypeContentSize)]) {
-        NSValue *sizeValue = param[@(kHSYCocoaKitOfScrollViewPropretyTypeContentSize)];
-        scrollView.contentSize = sizeValue.CGSizeValue;
+    
+    NSValue *valueCGSize = param[@(kHSYCocoaKitOfScrollViewPropretyTypeContentSize)] ? param[@(kHSYCocoaKitOfScrollViewPropretyTypeContentSize)] : param[HSYCocoaKitScrollViewContentSize];
+    if (valueCGSize) {
+        scrollView.contentSize = valueCGSize.CGSizeValue;
     }
-    if (param[@(kHSYCocoaKitOfScrollViewPropretyTypeContentOffset)]) {
-        NSValue *offsetValue = param[@(kHSYCocoaKitOfScrollViewPropretyTypeContentOffset)];
+    
+    NSValue *offsetValue = param[@(kHSYCocoaKitOfScrollViewPropretyTypeContentOffset)] ? param[@(kHSYCocoaKitOfScrollViewPropretyTypeContentOffset)] : param[HSYCocoaKitScrollViewContentOffset];
+    if (offsetValue) {
         scrollView.contentOffset = offsetValue.CGPointValue;
     }
-    if (param[@(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled)]) {
-        scrollView.pagingEnabled = [param[@(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled)] boolValue];//整页翻动
+    
+    NSNumber *pagingEnabled = param[@(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled)] ? param[@(kHSYCocoaKitOfScrollViewPropretyTypePagingEnabled)] : param[HSYCocoaKitScrollViewPagingEnabled];
+    if (pagingEnabled) {
+        scrollView.pagingEnabled = [pagingEnabled boolValue];//整页翻动
     }
-    if (param[@(kHSYCocoaKitOfScrollViewPropretyTypeScrollEnabled)]) {
-        scrollView.scrollEnabled = [param[@(kHSYCocoaKitOfScrollViewPropretyTypeScrollEnabled)] boolValue];//滚动
+    
+    NSNumber *scrollEnabled = param[@(kHSYCocoaKitOfScrollViewPropretyTypeScrollEnabled)] ? param[@(kHSYCocoaKitOfScrollViewPropretyTypeScrollEnabled)] : param[HSYCocoaKitScrollViewScrollEnabled];
+    if (scrollEnabled) {
+        scrollView.scrollEnabled = [scrollEnabled boolValue];//滚动
     }
-    if (param[@(kHSYCocoaKitOfScrollViewPropretyTypeBounces)]) {
-        scrollView.bounces = [param[@(kHSYCocoaKitOfScrollViewPropretyTypeBounces)] boolValue];//控制控件遇到边框是否反弹
+    
+    NSNumber *bounces = param[@(kHSYCocoaKitOfScrollViewPropretyTypeBounces)] ? param[@(kHSYCocoaKitOfScrollViewPropretyTypeBounces)] : param[HSYCocoaKitScrollViewBounces];
+    if (bounces) {
+        scrollView.bounces = [bounces boolValue];//控制控件遇到边框是否反弹
     }
     
     //隐藏滚动条
@@ -413,47 +500,54 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
 
 #pragma mark - Create CollectionView
 
-+ (UICollectionView *)createCollectionViewByParam:(NSDictionary <NSNumber *, id>*)param
++ (UICollectionView *)createCollectionViewByParam:(NSDictionary<id, id> *)param
 {
     CGRect rect = CGRectZero;
     if (param[@(kHSYCocoaKitOfCollectionViewPropretyTypeFrame)]) {
         NSValue *value = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeFrame)];
         rect = value.CGRectValue;
     }
-    UICollectionViewFlowLayout *flowLayout = nil;
-    if (param[@(kHSYCocoaKitOfCollectionViewPropretyTypeLayout)]) {
-        flowLayout = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeLayout)];
-    } else {
-        flowLayout = [NSObject createFlowLayoutByParam:@{
-                                                         @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection) : @(UICollectionViewScrollDirectionVertical),
-                                                         @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH, 44.0f)],
-                                                         
-                                                         }];
+    
+    UICollectionViewFlowLayout *flowLayout = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeLayout)] ? param[@(kHSYCocoaKitOfCollectionViewPropretyTypeLayout)] : param[HSYCocoaKitCollectionViewFlowLayout];
+    if (!flowLayout) {
+        flowLayout = [NSObject createFlowLayoutByParam:@{@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection) : @(UICollectionViewScrollDirectionVertical), @(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize) : [NSValue valueWithCGSize:CGSizeMake(IPHONE_WIDTH, 44.0f)], }];
     }
+    
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:rect collectionViewLayout:flowLayout];
-    if (param[@(kHSYCocoaKitOfCollectionViewPropretyTypeDelegate)]) {
-        id<UICollectionViewDelegate>delegate = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeDelegate)];
+    
+    id<UICollectionViewDelegate>delegate = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeDelegate)] ? param[@(kHSYCocoaKitOfCollectionViewPropretyTypeDelegate)] : param[HSYCocoaKitCollectionViewDelegate];
+    if (delegate) {
         collectionView.delegate = delegate;
     }
-    if (param[@(kHSYCocoaKitOfCollectionViewPropretyTypeDataSource)]) {
-        id<UICollectionViewDataSource>dataSource = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeDataSource)];
+    
+    id<UICollectionViewDataSource>dataSource = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeDataSource)] ? param[@(kHSYCocoaKitOfCollectionViewPropretyTypeDataSource)] : param[HSYCocoaKitCollectionViewDataSource];
+    if (dataSource) {
         collectionView.dataSource = dataSource;
     }
-    if (param[@(kHSYCocoaKitOfCollectionViewPropretyTypeScrollEnabled)]) {
-        collectionView.scrollEnabled = [param[@(kHSYCocoaKitOfCollectionViewPropretyTypeScrollEnabled)] boolValue];
+    
+    NSNumber *scrollEnabled = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeScrollEnabled)] ? param[@(kHSYCocoaKitOfCollectionViewPropretyTypeScrollEnabled)] : param[HSYCocoaKitCollectionViewScrollEnabled];
+    if (scrollEnabled) {
+        collectionView.scrollEnabled = [scrollEnabled boolValue];
     }
+    
     collectionView.backgroundColor = [UIColor clearColor];
-    if (param[@(kHSYCocoaKitOfCollectionViewPropretyTypeHiddenScrollIndicator)]) {
+    
+    NSNumber *hiddenScrollIndicator = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeHiddenScrollIndicator)] ? param[@(kHSYCocoaKitOfCollectionViewPropretyTypeHiddenScrollIndicator)] : param[HSYCocoaKitCollectionViewHiddenScrollIndicator];
+    if (hiddenScrollIndicator) {
         //控制控件遇到边框是否反弹
-        collectionView.showsVerticalScrollIndicator = [param[@(kHSYCocoaKitOfCollectionViewPropretyTypeHiddenScrollIndicator)] boolValue];
-        collectionView.showsHorizontalScrollIndicator = [param[@(kHSYCocoaKitOfCollectionViewPropretyTypeHiddenScrollIndicator)] boolValue];
+        collectionView.showsVerticalScrollIndicator = [hiddenScrollIndicator boolValue];
+        collectionView.showsHorizontalScrollIndicator = [hiddenScrollIndicator boolValue];
     }
-    if (param[@(kHSYCocoaKitOfCollectionViewPropretyTypeBounces)]) {
-        collectionView.bounces = [param[@(kHSYCocoaKitOfCollectionViewPropretyTypeBounces)] boolValue];//控制控件遇到边框是否反弹
+    
+    NSNumber *bounces = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeBounces)] ? param[@(kHSYCocoaKitOfCollectionViewPropretyTypeBounces)] : param[HSYCocoaKitCollectionViewBounces];
+    if (bounces) {
+        collectionView.bounces = [bounces boolValue];//控制控件遇到边框是否反弹
     }
+    
     //必须注册cell，此处使用建言宏中断，以方便代码检查
-    NSParameterAssert(param[@(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass)]);
-    for (NSDictionary *registers in param[@(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass)]) {
+    NSArray<NSDictionary *> *registerClasses = param[@(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass)] ? param[@(kHSYCocoaKitOfCollectionViewPropretyTypeRegisterClass)] : param[HSYCocoaKitCollectionViewRegisterClass];
+    NSParameterAssert(registerClasses);
+    for (NSDictionary *registers in registerClasses) {
         Class class = NSClassFromString(registers.allKeys.firstObject);
         NSString *identifier = registers.allValues.firstObject;
         [collectionView registerClass:class forCellWithReuseIdentifier:identifier];
@@ -461,30 +555,43 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
     return collectionView;
 }
 
-+ (UICollectionViewFlowLayout *)createFlowLayoutByParam:(NSDictionary <NSNumber *, id>*)param
++ (UICollectionViewFlowLayout *)createFlowLayoutByParam:(NSDictionary<id, id> *)param
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.scrollDirection = (param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection)] ? (UICollectionViewScrollDirection)[param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection)] integerValue] : UICollectionViewScrollDirectionVertical);                       //滚动方向
-    if (param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset)]) {
-        NSValue *insetValue = param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset)];
-        flowLayout.sectionInset = insetValue.UIEdgeInsetsValue;                         //设置其边界
+    
+    //滚动方向
+    NSNumber *scrollDirection = param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection)] ? param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeDirection)] : (param[HSYCocoaKitCollectionViewFlowLayoutDirection] ? param[HSYCocoaKitCollectionViewFlowLayoutDirection] : UICollectionViewScrollDirectionVertical);
+    flowLayout.scrollDirection = (UICollectionViewScrollDirection)scrollDirection.integerValue;
+    
+    //设置其边界
+    NSValue *insetValue = param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset)] ? param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeSectionInset)] : param[HSYCocoaKitCollectionViewFlowLayoutSectionInset];
+    if (insetValue) {
+        flowLayout.sectionInset = insetValue.UIEdgeInsetsValue;
     }
-    if (param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize)]) {
-        NSValue *itemValue = param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize)];
+    
+    //设置每个cell的size
+    NSValue *itemValue = param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize)] ? param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeItemSize)] : param[HSYCocoaKitCollectionViewFlowLayoutItemSize];
+    if (itemValue) {
         flowLayout.itemSize = itemValue.CGSizeValue;                                    //设置每个cell的size
     }
-    if (param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeLineSpacing)]) {
-        flowLayout.minimumLineSpacing = [param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeLineSpacing)] floatValue];
+    
+    NSNumber *minimumLineSpacing = param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeLineSpacing)] ? param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeLineSpacing)] : param[HSYCocoaKitCollectionViewFlowLayoutLineSpacing];
+    if (minimumLineSpacing) {
+        flowLayout.minimumLineSpacing = [minimumLineSpacing floatValue];
     }
-    if (param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeInteritemSpacing)]) {
-        flowLayout.minimumInteritemSpacing = [param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeInteritemSpacing)] floatValue];
+    
+    NSNumber *minimumInteritemSpacing = param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeInteritemSpacing)] ? param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeInteritemSpacing)] : param[HSYCocoaKitCollectionViewFlowLayoutInteritemSpacing];
+    if (minimumInteritemSpacing) {
+        flowLayout.minimumInteritemSpacing = [minimumInteritemSpacing floatValue];
     }
-    if (param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeHeaderReferenceSize)]) {
-        NSValue *headerValue = param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeHeaderReferenceSize)];
+    
+    NSValue *headerValue = param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeHeaderReferenceSize)] ? param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeHeaderReferenceSize)] : param[HSYCocoaKitCollectionViewFlowLayoutHeaderReferenceSize];
+    if (headerValue) {
         flowLayout.headerReferenceSize = headerValue.CGSizeValue;
     }
-    if (param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeFooterReferenceSize)]) {
-        NSValue *footerValue = param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeFooterReferenceSize)];
+    
+    NSValue *footerValue = param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeFooterReferenceSize)] ? param[@(kHSYCocoaKitOfCollectionViewFlowLayoutPropretyTypeFooterReferenceSize)] : param[HSYCocoaKitCollectionViewFlowLayoutFooterReferenceSize];
+    if (footerValue) {
         flowLayout.footerReferenceSize = footerValue.CGSizeValue;
     }
     
@@ -493,30 +600,44 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
 
 #pragma mark - Create UISlider
 
-+ (UISlider *)createSliderByParam:(NSDictionary <NSNumber *, id>*)param changedValue:(void(^)(CGFloat news))newValue
++ (UISlider *)createSliderByParam:(NSDictionary<id, id> *)param changedValue:(void(^)(CGFloat news))newValue
 {
     UISlider *slider = [[UISlider alloc] init];
-    if (param[@(kHSYCocoaKitOfSliderPropertyTypeNorThumbImage)]) {
-        [slider setThumbImage:param[@(kHSYCocoaKitOfSliderPropertyTypeNorThumbImage)] forState:UIControlStateNormal];
+    UIImage *norThumbImage = param[@(kHSYCocoaKitOfSliderPropertyTypeNorThumbImage)] ? param[@(kHSYCocoaKitOfSliderPropertyTypeNorThumbImage)] : param[HSYCocoaKitSliderNorThumbImage];
+    if (norThumbImage) {
+        [slider setThumbImage:norThumbImage forState:UIControlStateNormal];
     }
+    
+    UIImage *preThumbImage = param[@(kHSYCocoaKitOfSliderPropertyTypePreThumbImage)] ? param[@(kHSYCocoaKitOfSliderPropertyTypePreThumbImage)] : param[HSYCocoaKitSliderPreThumbImage];
     if (param[@(kHSYCocoaKitOfSliderPropertyTypePreThumbImage)]) {
-        [slider setThumbImage:param[@(kHSYCocoaKitOfSliderPropertyTypePreThumbImage)] forState:UIControlStateHighlighted];
+        [slider setThumbImage:preThumbImage forState:UIControlStateHighlighted];
     }
-    if (param[@(kHSYCocoaKitOfSliderPropertyTypeNorMinimumTrackTintColor)]) {
-        [slider setMinimumTrackTintColor:param[@(kHSYCocoaKitOfSliderPropertyTypeNorMinimumTrackTintColor)]];
+    
+    UIColor *minimumTrackTintColor = param[@(kHSYCocoaKitOfSliderPropertyTypeNorMinimumTrackTintColor)] ? param[@(kHSYCocoaKitOfSliderPropertyTypeNorMinimumTrackTintColor)] : param[HSYCocoaKitSliderNorMinimumTrackTintColor];
+    if (minimumTrackTintColor) {
+        [slider setMinimumTrackTintColor:minimumTrackTintColor];
     }
-    if (param[@(kHSYCocoaKitOfSliderPropertyTypePreMinimumTrackTintColor)]) {
-        [slider setMaximumTrackTintColor:param[@(kHSYCocoaKitOfSliderPropertyTypePreMinimumTrackTintColor)]];
+    
+    UIColor *maximumTrackTintColor = param[@(kHSYCocoaKitOfSliderPropertyTypePreMinimumTrackTintColor)] ? param[@(kHSYCocoaKitOfSliderPropertyTypePreMinimumTrackTintColor)] : param[HSYCocoaKitSliderPreMinimumTrackTintColor];
+    if (maximumTrackTintColor) {
+        [slider setMaximumTrackTintColor:maximumTrackTintColor];
     }
-    if (param[@(kHSYCocoaKitOfSliderPropertyTypeMaximumValue)]) {
-        slider.maximumValue = [param[@(kHSYCocoaKitOfSliderPropertyTypeMaximumValue)] floatValue];
+    
+    NSNumber *maximumValue = param[@(kHSYCocoaKitOfSliderPropertyTypeMaximumValue)] ? param[@(kHSYCocoaKitOfSliderPropertyTypeMaximumValue)] : param[HSYCocoaKitSliderMaximumValue];
+    if (maximumValue) {
+        slider.maximumValue = [maximumValue floatValue];
     }
-    if (param[@(kHSYCocoaKitOfSliderPropertyTypeMinimumValue)]) {
-        slider.minimumValue = [param[@(kHSYCocoaKitOfSliderPropertyTypeMinimumValue)] floatValue];
+    
+    NSNumber *minimumValue = param[@(kHSYCocoaKitOfSliderPropertyTypeMinimumValue)] ? param[@(kHSYCocoaKitOfSliderPropertyTypeMinimumValue)] : param[HSYCocoaKitSliderMinimumValue];
+    if (minimumValue) {
+        slider.minimumValue = [minimumValue floatValue];
     }
-    if (param[@(kHSYCocoaKitOfSliderPropertyTypeValue)]) {
-        slider.value = [param[@(kHSYCocoaKitOfSliderPropertyTypeValue)] floatValue];
+    
+    NSNumber *values = param[@(kHSYCocoaKitOfSliderPropertyTypeValue)] ? param[@(kHSYCocoaKitOfSliderPropertyTypeValue)] : param[HSYCocoaKitSliderValue];
+    if (values) {
+        slider.value = [values floatValue];
     }
+    
     [[[slider rac_signalForControlEvents:UIControlEventValueChanged] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(UISlider *x) {
         if (newValue) {
             newValue(x.value);
