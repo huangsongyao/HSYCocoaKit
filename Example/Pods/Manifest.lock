@@ -39,7 +39,7 @@ PODS:
     - "UITableView+FDTemplateLayoutCell (~> 1.6)"
     - "UITextView+Placeholder (~> 1.1.1)"
   - JSONModel (1.7.0)
-  - lottie-ios (2.5.0)
+  - lottie-ios (2.5.2)
   - Masonry (1.1.0)
   - MBProgressHUD (0.9.2)
   - RegexKitLite (4.0)
@@ -85,7 +85,7 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HSYCocoaKit: 5321226cd4ebf90029c1ec4efac4f16376d90c28
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
-  lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
+  lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
