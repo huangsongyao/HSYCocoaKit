@@ -46,15 +46,17 @@
         //创建scrollview
         [self hsy_scrollView];
         
-        //创建按钮集合
+        //创建按钮属性集合
         CGFloat x = 0.0f;
         CGFloat w = self.hsy_button_w;
         CGFloat h = self.hsy_button_h;
+        CGFloat itemSpacing = self.hsy_button_spacing;
         UIColor *selectedTitleColor = [self hsy_titleColorObjects].allKeys.firstObject;
         UIColor *normalTitleColor = [self hsy_titleColorObjects].allValues.firstObject;
         UIFont *selectedFont = [self hsy_titleFontObjects].allKeys.firstObject;
         UIFont *normalFont = [self hsy_titleFontObjects].allValues.firstObject;
         
+        //默认的初始位置
         NSNumber *index = self.hsy_defaultsSelectedIndex;
         _selectedIndex = index.integerValue;
         
@@ -63,9 +65,9 @@
             CGRect rect = CGRectMake(x, 0, w, h);
             CGRect imageRect = CGRectZero;
             CGRect titleRect = CGRectMake(0, 0, w, h);
-            BOOL isButton = (i == index.integerValue);
-            UIColor *titleColor = (isButton ? selectedTitleColor : normalTitleColor);
-            UIFont *font = (isButton ? selectedFont : normalFont);
+            BOOL isSelectedButton = (i == index.integerValue);
+            UIColor *titleColor = (isSelectedButton ? selectedTitleColor : normalTitleColor);
+            UIFont *font = (isSelectedButton ? selectedFont : normalFont);
             NSString *title = controls[i];
             NSDictionary *dicButton = @{
                                         @(kHSYCocoaKitCustomButtonPropertyTypeTitle) : title,
@@ -81,10 +83,10 @@
                     block(btn, index);
                 }
             }];
-            button.selected = isButton;
+            button.selected = isSelectedButton;
             [self.scrollView addSubview:button];
             [self.segmentedButton addObject:button];
-            x = button.right;
+            x = button.right + itemSpacing;
         }
         [self.scrollView setContentSize:CGSizeMake(x, self.height)];
         
@@ -178,7 +180,7 @@
     [self addSubview:self.scrollView];
 }
 
-#pragma mark - W && H
+#pragma mark - Width && Height && Spacing
 
 - (CGFloat)hsy_button_w
 {
@@ -196,6 +198,15 @@
         return size.height;
     }
     return self.height;
+}
+
+- (CGFloat)hsy_button_spacing
+{
+    CGFloat itemSpacing = [self.paramters[@(kHSYCocoaKitCustomSegmentedTypeButtonSpacing)] floatValue];
+    if (itemSpacing > 0.0f) {
+        return itemSpacing;
+    }
+    return 0.0f;
 }
 
 #pragma mark - Scroll Animation

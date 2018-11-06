@@ -19,6 +19,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitCustomSegmentedType) {
     kHSYCocoaKitCustomSegmentedTypeLineSize,                            //选中的下划线size--NSValue--CGSize
     kHSYCocoaKitCustomSegmentedTypeLineRoundedCorners,                  //选中的是否使用圆角--NSNumber
     kHSYCocoaKitCustomSegmentedTypeButtonSize,                          //按钮点击区域--NSValue--CGSize
+    kHSYCocoaKitCustomSegmentedTypeButtonSpacing,                       //按钮间距--NSNumber--CGFloat
     kHSYCocoaKitCustomSegmentedTypeBackgroundImage,                     //背景图片--UIImage
     kHSYCocoaKitCustomSegmentedTypeSelectedIndex,                       //选中位置--NSNumber
     kHSYCocoaKitCustomSegmentedTypeAnimationDuration,                   //动画时间--NSNumber

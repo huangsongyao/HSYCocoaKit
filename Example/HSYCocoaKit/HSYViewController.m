@@ -158,7 +158,7 @@ HSYCocoaKitPropertyKey const HSYCocoaKitPropertyKeyNorBackgroundImage = @"3333";
     button2.frame = CGRectMake(button.right, button.bottom + 50, 60, 56);
     [self.view addSubview:button2];
     
-    HSYBaseSegmentedPageControl *control = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:CGRectMake(0, button.bottom + 100, IPHONE_WIDTH, 64) paramters:@{@(kHSYCocoaKitCustomSegmentedTypeButtonSize) : [NSValue valueWithCGSize:CGSizeMake(75, 64)]} pageControls:@[@"123", @"456", @"789", @"101112", @"444", @"5555", @"66666", @"7777777"] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
+    HSYBaseSegmentedPageControl *control = [HSYBaseSegmentedPageControl hsy_showSegmentedPageControlFrame:CGRectMake(0, button.bottom + 100, IPHONE_WIDTH, 64) paramters:@{@(kHSYCocoaKitCustomSegmentedTypeButtonSize) : [NSValue valueWithCGSize:CGSizeMake(75, 64)], @(kHSYCocoaKitCustomSegmentedTypeButtonSpacing) : @(15.0f)} pageControls:@[@"123", @"456", @"789", @"101112", @"444", @"5555", @"66666", @"7777777"] selectedBlock:^(HSYBaseCustomButton *button, NSInteger index) {
     }];
     [self.view addSubview:control];
     
