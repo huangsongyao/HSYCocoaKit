@@ -88,7 +88,8 @@
             [self.segmentedButton addObject:button];
             x = button.right + itemSpacing;
         }
-        [self.scrollView setContentSize:CGSizeMake(x, self.height)];
+        CGFloat contentX = x > 0.0f ? (x - itemSpacing) : x;
+        [self.scrollView setContentSize:CGSizeMake(contentX, self.height)];
         
         //底部的横线
         if ([paramters[@(kHSYCocoaKitCustomSegmentedTypeShowBottomLine)] boolValue]) {
