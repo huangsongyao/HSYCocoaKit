@@ -101,7 +101,7 @@
         if (!right) {
             index = ((self.hsy_pages.count + (self.hsy_currentPage - 1 - 2)) % self.hsy_pages.count);
         }
-        NSLog(@"index = %ld", index);
+        NSLog(@"index = %ld", (long)index);
         HSYCustomBannerBaseCell *cell = [self.hsy_dataSource hsy_revisionBannerView:self cellForPageAtIndex:index];
         cell.hsy_delegate = self;
         CGFloat x = (right ? (self.hsy_pages.count + (HSYCOCOAKIT_INFINITE_SCROLL_DEFAULT_OFFSET_COUNT - 1)) * self.width : 0.0f);

@@ -247,7 +247,7 @@ static CGFloat imgBottom = 11.0f;
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         [self hsy_refreshToPullDown:^RACSignal *{
-            return [[HSYNetWorkingManager shareInstance] rac_newsCent:@"04" page:[NSString stringWithFormat:@"%ld", self.page] size:[NSString stringWithFormat:@"%ld", self.size]];
+            return [[HSYNetWorkingManager shareInstance] rac_newsCent:@"04" page:[NSString stringWithFormat:@"%ld", (long)self.page] size:[NSString stringWithFormat:@"%ld", (long)self.size]];
         } toMap:^NSMutableArray *(RACTuple *tuple) {
             NSMutableArray *array = [[NSMutableArray alloc] init];
             CXACMHomePageJSONModel *model = [NSObject hsy_resultObjectToJSONModelWithClasses:[CXACMHomePageJSONModel class] json:tuple.second];
@@ -268,7 +268,7 @@ static CGFloat imgBottom = 11.0f;
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         [self hsy_refreshToPullUp:^RACSignal *{
-            return [[HSYNetWorkingManager shareInstance] rac_newsCent:@"04" page:[NSString stringWithFormat:@"%ld", self.page] size:[NSString stringWithFormat:@"%ld", self.size]];
+            return [[HSYNetWorkingManager shareInstance] rac_newsCent:@"04" page:[NSString stringWithFormat:@"%ld", (long)self.page] size:[NSString stringWithFormat:@"%ld", (long)self.size]];
         } toMap:^NSMutableArray *(RACTuple *tuple) {
             NSMutableArray *array = [[NSMutableArray alloc] init];
             CXACMHomePageJSONModel *model = [NSObject hsy_resultObjectToJSONModelWithClasses:[CXACMHomePageJSONModel class] json:tuple.second];

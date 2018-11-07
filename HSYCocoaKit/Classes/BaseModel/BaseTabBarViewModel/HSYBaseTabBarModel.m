@@ -57,7 +57,7 @@
             digital = 99;
             suffix = @"+";
         }
-        string = [NSString stringWithFormat:@"%@%ld", suffix, digital];
+        string = [NSString stringWithFormat:@"%@%ld", suffix, (long)digital];
     } else if (digital == -1) {
         string = @"";
     }

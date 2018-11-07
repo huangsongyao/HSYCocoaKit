@@ -12,20 +12,20 @@
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitCustomSegmentedType) {
     
     kHSYCocoaKitCustomSegmentedTypeTitleFont            = 7888,         //正常的字体--UIFont
-    kHSYCocoaKitCustomSegmentedTypeSelectedTitleFont,                   //选中后的字体--UIFont
-    kHSYCocoaKitCustomSegmentedTypeNorTitleColor,                       //未选中的字体颜色--UIColor
-    kHSYCocoaKitCustomSegmentedTypeSelTitleColor,                       //选中后的字体颜色--UIColor
-    kHSYCocoaKitCustomSegmentedTypeLineColor,                           //选中的下划线颜色--UIColor
-    kHSYCocoaKitCustomSegmentedTypeLineSize,                            //选中的下划线size--NSValue--CGSize
-    kHSYCocoaKitCustomSegmentedTypeLineRoundedCorners,                  //选中的是否使用圆角--NSNumber
-    kHSYCocoaKitCustomSegmentedTypeButtonSize,                          //按钮点击区域--NSValue--CGSize
-    kHSYCocoaKitCustomSegmentedTypeButtonSpacing,                       //按钮间距--NSNumber--CGFloat
-    kHSYCocoaKitCustomSegmentedTypeBackgroundImage,                     //背景图片--UIImage
-    kHSYCocoaKitCustomSegmentedTypeSelectedIndex,                       //选中位置--NSNumber
-    kHSYCocoaKitCustomSegmentedTypeAnimationDuration,                   //动画时间--NSNumber
-    kHSYCocoaKitCustomSegmentedTypeShowBottomLine,                      //是否底部的横线--NSNumber
-    kHSYCocoaKitCustomSegmentedTypeBottomLineSize,                      //底部横线的size--NSValue--CGSize
-    kHSYCocoaKitCustomSegmentedTypeBottomLineColor,                     //底部横线的颜色--UIColor
+    kHSYCocoaKitCustomSegmentedTypeSelectedTitleFont    = 7889,         //选中后的字体--UIFont
+    kHSYCocoaKitCustomSegmentedTypeNorTitleColor        = 7890,         //未选中的字体颜色--UIColor
+    kHSYCocoaKitCustomSegmentedTypeSelTitleColor        = 7891,         //选中后的字体颜色--UIColor
+    kHSYCocoaKitCustomSegmentedTypeLineColor            = 7892,         //选中的下划线颜色--UIColor
+    kHSYCocoaKitCustomSegmentedTypeLineSize             = 7893,         //选中的下划线size--NSValue--CGSize
+    kHSYCocoaKitCustomSegmentedTypeLineRoundedCorners   = 7894,         //选中的是否使用圆角--NSNumber
+    kHSYCocoaKitCustomSegmentedTypeButtonSize           = 7895,         //按钮点击区域--NSValue--CGSize
+    kHSYCocoaKitCustomSegmentedTypeButtonSpacing        = 7896,         //按钮间距--NSNumber--CGFloat
+    kHSYCocoaKitCustomSegmentedTypeBackgroundImage      = 7897,         //背景图片--UIImage
+    kHSYCocoaKitCustomSegmentedTypeSelectedIndex        = 7898,         //选中位置--NSNumber
+    kHSYCocoaKitCustomSegmentedTypeAnimationDuration    = 7899,         //动画时间--NSNumber
+    kHSYCocoaKitCustomSegmentedTypeShowBottomLine       = 7900,         //是否底部的横线--NSNumber
+    kHSYCocoaKitCustomSegmentedTypeBottomLineSize       = 7901,         //底部横线的size--NSValue--CGSize
+    kHSYCocoaKitCustomSegmentedTypeBottomLineColor      = 7902,         //底部横线的颜色--UIColor
     
 };
 
