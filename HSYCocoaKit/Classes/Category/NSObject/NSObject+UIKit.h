@@ -21,6 +21,7 @@ FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonTitle
 FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonTitleFont;
 FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonCornerRadius;
 FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonTextAlignment;
+FOUNDATION_EXPORT HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonSkipFirst;
 
 //UIButton
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfButtonPropretyType) {
@@ -36,6 +37,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfButtonPropretyType) {
     kHSYCocoaKitOfButtonPropretyTypeTitleFont,                              //UIFont
     kHSYCocoaKitOfButtonPropretyTypeCornerRadius,                           //NSNumber\CGFloat
     kHSYCocoaKitOfButtonPropretyTypeTextAlignment,                          //NSNumber\(UIControlContentHorizontalAlignment)
+    kHSYCocoaKitOfButtonPropretyTypeSkipFirst,                              //NSNumber
     
 };
 
@@ -86,6 +88,7 @@ FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFile
 FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledBackgroundColor;
 FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledText;
 FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledPlaceholder;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledSkipFirst;
 
 //UITextField
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfTextFiledPropretyType) {
@@ -100,6 +103,8 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfTextFiledPropretyType) {
     kHSYCocoaKitOfTextFiledPropretyTypeBackgroundColor,                     //UIColor
     kHSYCocoaKitOfTextFiledPropretyTypeText,                                //NSString
     kHSYCocoaKitOfTextFiledPropretyTypePlaceholderString,                   //NSString
+    kHSYCocoaKitOfTextFiledPropretyTypeSkipFirst,                           //NSNumber
+    
 };
 
 typedef NSString *HSYCocoaKitUIKitTextViewPropertyKey;
@@ -113,6 +118,7 @@ FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewT
 FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewBackgroundColor;
 FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewText;
 FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewPlaceholder;
+FOUNDATION_EXPORT HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewSkipFirst;
 
 //UITextView
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfTextViewPropretyType) {
@@ -127,6 +133,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitOfTextViewPropretyType) {
     kHSYCocoaKitOfTextViewPropretyTypeBackgroundColor,                      //UIColor
     kHSYCocoaKitOfTextViewPropretyTypeText,                                 //NSString
     kHSYCocoaKitOfTextViewPropretyTypePlaceholder,                          //NSString
+    kHSYCocoaKitOfTextViewPropretyTypeSkipFirst,                            //NSNumber
     
 };
 

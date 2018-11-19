@@ -25,6 +25,7 @@ HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonTitleColor = @"kHSYCoco
 HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonTitleFont = @"kHSYCocoaKitButtonTitleFont";
 HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonCornerRadius = @"kHSYCocoaKitButtonCornerRadius";
 HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonTextAlignment = @"kHSYCocoaKitButtonTextAlignment";
+HSYCocoaKitUIKitButtonPropertyKey const HSYCocoaKitButtonSkipFirst = @"kHSYCocoaKitButtonSkipFirst";
 
 //UIImageView Key
 HSYCocoaKitUIKitImagePropertyKey const HSYCocoaKitImageNorImage = @"kHSYCocoaKitImageNorImage";
@@ -51,6 +52,7 @@ HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledTextColor = @"kHS
 HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledBackgroundColor = @"kHSYCocoaKitTextFiledBackgroundColor";
 HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledText = @"kHSYCocoaKitTextFiledText";
 HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledPlaceholder = @"kHSYCocoaKitTextFiledPlaceholder";
+HSYCocoaKitUIKitTextFieldPropertyKey const HSYCocoaKitTextFiledSkipFirst = @"kHSYCocoaKitTextFiledSkipFirst";
 
 //UITextView Key
 HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewBorderWidth = @"kHSYCocoaKitTextViewBorderWidth";
@@ -63,6 +65,7 @@ HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewTextColor = @"kHSYC
 HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewBackgroundColor = @"kHSYCocoaKitTextViewBackgroundColor";
 HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewText = @"kHSYCocoaKitTextViewText";
 HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewPlaceholder = @"kHSYCocoaKitTextViewPlaceholder";
+HSYCocoaKitUIKitTextViewPropertyKey const HSYCocoaKitTextViewSkipFirst = @"kHSYCocoaKitTextViewSkipFirst";
 
 //UITableView Key
 HSYCocoaKitUIKitTableViewPropertyKey const HSYCocoaKitTableViewStyle = @"kHSYCocoaKitTableViewStyle";
@@ -177,7 +180,8 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
         button.contentHorizontalAlignment = (UIControlContentHorizontalAlignment)[horizontalAlignment integerValue];
     }
     
-    [[[button rac_signalForControlEvents:UIControlEventTouchUpInside] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(UIButton *btn) {
+    NSInteger skip = param[@(kHSYCocoaKitOfButtonPropretyTypeSkipFirst)] ? ([param[@(kHSYCocoaKitOfButtonPropretyTypeSkipFirst)] boolValue] ? 1 : 0) : (param[HSYCocoaKitButtonSkipFirst] ? ([param[HSYCocoaKitButtonSkipFirst] boolValue] ? 1 : 0) : 0);
+    [[[[button rac_signalForControlEvents:UIControlEventTouchUpInside] skip:skip] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(UIButton *btn) {
         if (next) {
             next(btn);
         }
@@ -322,7 +326,8 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
 {
     UITextField *textField = [self.class createTextFiledByParam:param];
     if (next) {
-        [[[textField rac_textSignal] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
+        NSInteger skip = param[@(kHSYCocoaKitOfTextFiledPropretyTypeSkipFirst)] ? ([param[@(kHSYCocoaKitOfTextFiledPropretyTypeSkipFirst)] boolValue] ? 1 : 0) : (param[HSYCocoaKitTextFiledSkipFirst] ? ([param[HSYCocoaKitTextFiledSkipFirst] boolValue] ? 1 : 0) : 0);
+        [[[[textField rac_textSignal] skip:skip] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
             next(text);
         }];
     }
@@ -391,7 +396,8 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
 {
     UITextView *textView = [self.class createTextViewByParam:param];
     if (next) {
-        [[[textView rac_textSignal] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
+        NSInteger skip = param[@(kHSYCocoaKitOfTextViewPropretyTypeSkipFirst)] ? ([param[@(kHSYCocoaKitOfTextViewPropretyTypeSkipFirst)] boolValue] ? 1 : 0) : (param[HSYCocoaKitTextViewSkipFirst] ? ([param[HSYCocoaKitTextViewSkipFirst] boolValue] ? 1 : 0) : 0);
+        [[[[textView rac_textSignal] skip:skip] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
             next(text);
         }];
     }
