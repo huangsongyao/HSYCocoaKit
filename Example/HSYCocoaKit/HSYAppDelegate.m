@@ -19,6 +19,7 @@
 #import "NSBundle+CFBundle.h"
 #import "HSYCocoaKitWebSocketManager.h"
 #import "HSYCustomScript.h"
+#import "NSMapTable+KeyValue.h"
 
 @interface dddMidel : JSONModel
 
@@ -139,6 +140,9 @@
     }];
     
     NSLog(@"%@", @([@"wo我" isChineseCharacters]));
+    
+    NSMapTable *map = [NSMapTable hsy_mapTableWithOptions:@{@(NSMapTableWeakMemory) : @(NSMapTableStrongMemory)} keyAndValues:@[@{@"key" : @"value"}]];
+    NSLog(@"map = %@", map);
 //    [[HSYFMDBOperationManager shareInstance] hsy_insertDataToTableName:@"testDatabaseTable" fieldParams:[HSYFMDBOperationManager hsy_testTableByFields] insertDatas:[@[@"user", @"userId"] mutableCopy] completed:^(BOOL result, HSYFMDBOperationFieldInfo *info) {
 //        NSLog(@"tested success");
 //    }];

@@ -41,6 +41,7 @@
 #import "NSDate+Timestamp.h"
 #import "NSDecimalNumber+Computer.h"
 #import "NSFileManager+Finder.h"
+#import "NSMapTable+KeyValue.h"
 #import "NSMutableArray+BasicAlgorithm.h"
 #import "NSObject+JSONModelForRuntime.h"
 #import "NSObject+Property.h"
