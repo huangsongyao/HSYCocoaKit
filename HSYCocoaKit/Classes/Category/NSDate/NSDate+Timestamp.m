@@ -156,13 +156,6 @@ static NSInteger _TimeSp = 1000;                    //时间戳倍数
     return [[NSDate formatterWithString:D_HHmmss] stringFromDate:self];
 }
 
-#pragma mark - String To Show NSDate
-
-+ (NSDate *)dateyyyyMMddHHmmssFromString:(NSString *)string
-{
-    return [[NSDate formatterWithString:D_yyyyMMddHHmmss] dateFromString:string];
-}
-
 #pragma mark - Next Day && Last Day
 
 + (NSDate *)nextDay

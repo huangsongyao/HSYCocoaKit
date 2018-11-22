@@ -81,6 +81,14 @@ static const NSString *Saturday     = @"星期六";
 #pragma mark - 时间戳和字符串显示格式转换时间变为特定的时间字符串
 
 /**
+ 时间戳转时间NSDate
+
+ @param timestamp 时间戳
+ @return 对应的NSDate
+ */
++ (NSDate *)toDate:(NSTimeInterval)timestamp;
+
+/**
  将时间戳转为对应格式的字符串-----时间格式详情见顶部的宏
 
  @param format 字符串实现时间的格式，如果“yyyy-MM-dd HH:mm:ss”
