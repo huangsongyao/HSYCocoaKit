@@ -45,6 +45,14 @@ static const NSString *Saturday     = @"星期六";
 
 @interface NSDate (Timestamp)
 
+/**
+ 返回一个日期格式器NSDateFormatter单例
+
+ @param string 日期格式，例如宏D_yyyyMMddHHmmss的字符串
+ @return 日期格式器
+ */
++ (NSDateFormatter *)formatterWithString:(NSString *)string;
+
 #pragma mark - 当前设备所在地区的真实时间
 
 /**
