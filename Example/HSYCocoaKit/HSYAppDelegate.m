@@ -145,8 +145,6 @@
     NSMapTable *map = [NSMapTable hsy_mapTableWithOptions:@{@(NSMapTableWeakMemory) : @(NSMapTableStrongMemory)} keyAndValues:@[@{@"key" : @"value"}]];
     NSLog(@"map = %@", map);
     
-    long long tet = [[NSDate date] timestampMillisecond];
-    NSLog(@"%@", [NSDate dateyyyyMMddHHmmssFromString:[NSString stringWithFormat:@"%lldlld", tet/1000]]);
 //    [[HSYFMDBOperationManager shareInstance] hsy_insertDataToTableName:@"testDatabaseTable" fieldParams:[HSYFMDBOperationManager hsy_testTableByFields] insertDatas:[@[@"user", @"userId"] mutableCopy] completed:^(BOOL result, HSYFMDBOperationFieldInfo *info) {
 //        NSLog(@"tested success");
 //    }];

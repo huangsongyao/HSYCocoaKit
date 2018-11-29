@@ -20,13 +20,15 @@
 #import "UIView+RotationAnimated.h"
 #import "UIImageView+Scale.h"
 
-#define REFRESH_WILL_START_TITLE            @"下拉刷新"
-#define REFRESH_WILL_START_UP_TITLE         @"上拉加载"
-#define REFRESH_RELEASE_START_TITLE         @"松开立即更新"
-#define REFRESH_LOADING_TITLE               @"正在刷新..."
-#define REFRESH_UP_LOADING_TITLE            @"正在加载..."
-#define REFRESH_UPDATE_NOT_MORE             @"已经到底了~"
-#define MID_TRIGGER_PERCENT                 1.0f
+#define REFRESH_WILL_START_TITLE                @"下拉刷新"
+#define REFRESH_WILL_START_UP_TITLE             @"上拉加载"
+#define REFRESH_RELEASE_START_TITLE             @"松开立即更新"
+#define REFRESH_LOADING_TITLE                   @"正在刷新..."
+#define REFRESH_UP_LOADING_TITLE                @"正在加载..."
+#define REFRESH_UPDATE_NOT_MORE                 @"已经到底了~"
+#define MID_TRIGGER_PERCENT                     1.0f
+
+static NSTimeInterval defaultRefreshDuration    = 1.0f;
 
 @interface HSYCustomRefreshView ()
 
@@ -254,6 +256,16 @@
 + (CGFloat)hsy_triggerPercent
 {
     return MID_TRIGGER_PERCENT;
+}
+
+#pragma mark - Getter
+
+- (NSTimeInterval)hsy_loadRefreshDuration
+{
+    if (!_hsy_loadRefreshDuration) {
+        _hsy_loadRefreshDuration = defaultRefreshDuration;
+    }
+    return _hsy_loadRefreshDuration;
 }
 
 /*

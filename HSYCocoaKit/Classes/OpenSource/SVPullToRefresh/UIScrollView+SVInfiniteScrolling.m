@@ -196,7 +196,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 
 - (void)setScrollViewContentInset:(UIEdgeInsets)contentInset
 {
-    [UIView animateWithDuration:0.3
+    [UIView animateWithDuration:self.loadingView.hsy_loadRefreshDuration
                           delay:0
                         options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState
                      animations:^{

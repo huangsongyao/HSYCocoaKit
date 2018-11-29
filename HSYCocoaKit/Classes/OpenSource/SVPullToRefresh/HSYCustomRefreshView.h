@@ -13,6 +13,7 @@
 
 //YES表示使用根据下拉位移映射至[0, 1]的动态过度旋转，NO表示使用根据过度点做正向和反向的旋转动画过度，默认为NO
 @property (nonatomic, assign) BOOL hsy_pullDownRotation;
+@property (nonatomic, assign) NSTimeInterval hsy_loadRefreshDuration;
 
 /**
  入口方法预留的入参，YES表示下拉视图，NO表示上拉视图
@@ -162,6 +163,7 @@
  @return 下拉偏转角度
  */
 + (CGFloat)hsy_triggerPercent;
+
 
 @end
 
