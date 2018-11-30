@@ -59,6 +59,17 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
                            remove:remove];
 }
 
+- (instancetype)initWithUnobserverDefaults:(void(^)(HSYCustomWindows *view))remove
+{
+    UIImage *backgroundImage = [UIImage imageWithFillColor:WHITE_COLOR];
+    return [self initWithDefaults:HSYCOCOAKIT_ANCHOR_POINT_X05_Y05
+                         position:CGPointZero
+       immediatelyCompletedSignal:YES
+              addkeyboardObserver:NO
+                  backgroundImage:backgroundImage
+                           remove:remove];
+}
+
 - (instancetype)initWithUnimmediatelyDefaults:(void(^)(HSYCustomWindows *view))remove
 {
     UIImage *backgroundImage = [UIImage imageWithFillColor:WHITE_COLOR];
@@ -76,6 +87,7 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
     return [self initWithDefaults:anchorPoint
                          position:position
        immediatelyCompletedSignal:YES
+              addkeyboardObserver:YES
                   backgroundImage:backgroundImage
                            remove:remove];
 }
@@ -88,6 +100,7 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
     return [self initWithDefaults:anchorPoint
                          position:position
        immediatelyCompletedSignal:NO
+              addkeyboardObserver:YES
                   backgroundImage:backgroundImage
                            remove:remove];
 }
@@ -95,6 +108,7 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
 - (instancetype)initWithDefaults:(CGPoint)anchorPoint
                         position:(CGPoint)position
       immediatelyCompletedSignal:(BOOL)immediately
+             addkeyboardObserver:(BOOL)addObserver
                  backgroundImage:(UIImage *)backgroundImage
                           remove:(void(^)(HSYCustomWindows *view))remove
 {
@@ -133,17 +147,19 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
         }];
         
         //添加键盘监听
-        [[[self hsy_keyboardObserver:immediately] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
-            @strongify(self);
-            CGFloat y = (self.height - self.hsy_wicketView.height)/2;
-            if (![tuple.third boolValue]) {
-                y = [tuple.second CGRectValue].origin.y - self.hsy_wicketView.height;
-            }
-            [UIView animateWithDuration:0.25 animations:^{
+        if (addObserver) {
+            [[[self hsy_keyboardObserver:immediately] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(RACTuple *tuple) {
                 @strongify(self);
-                self.hsy_wicketView.y = y;
+                CGFloat y = (self.height - self.hsy_wicketView.height)/2;
+                if (![tuple.third boolValue]) {
+                    y = [tuple.second CGRectValue].origin.y - self.hsy_wicketView.height;
+                }
+                [UIView animateWithDuration:0.25 animations:^{
+                    @strongify(self);
+                    self.hsy_wicketView.y = y;
+                }];
             }];
-        }];
+        }
         
         //添加默认的不响应类
         self.hsy_unResponseClases = [self.class hsy_defaultUnReponseClasses];
