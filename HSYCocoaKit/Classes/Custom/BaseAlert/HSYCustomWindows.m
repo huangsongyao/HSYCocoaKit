@@ -70,6 +70,17 @@ static NSTimeInterval kHSYCocoaKitDefaultDuration = 0.35f;
                            remove:remove];
 }
 
+- (instancetype)initWithUnimmediatelyUnobserverDefaults:(void(^)(HSYCustomWindows *view))remove
+{
+    UIImage *backgroundImage = [UIImage imageWithFillColor:WHITE_COLOR];
+    return [self initWithDefaults:HSYCOCOAKIT_ANCHOR_POINT_X05_Y05
+                         position:CGPointZero
+       immediatelyCompletedSignal:NO
+              addkeyboardObserver:NO
+                  backgroundImage:backgroundImage
+                           remove:remove];
+}
+
 - (instancetype)initWithUnimmediatelyDefaults:(void(^)(HSYCustomWindows *view))remove
 {
     UIImage *backgroundImage = [UIImage imageWithFillColor:WHITE_COLOR];

@@ -42,6 +42,14 @@ static CGFloat kHSYCocoaKitMinScale                 = 0.0f;
 - (instancetype)initWithUnobserverDefaults:(void(^)(HSYCustomWindows *view))remove;
 
 /**
+ 初始化，默认主体小弹窗为锚点(0.5, 0.5)的位置，默认主体小窗口的背景图片为白色，本方法“不释放”键盘监听或者单击remove手势的冷信号，并且不添加键盘监听事件
+
+ @param remove 点击空白部分的单击手势的回调事件
+ @return HSYCustomWindows
+ */
+- (instancetype)initWithUnimmediatelyUnobserverDefaults:(void(^)(HSYCustomWindows *view))remove;
+
+/**
  初始化，默认主体小弹窗为锚点(0.5, 0.5)的位置，默认主体小窗口的背景图片为白色，本方法“不释放”键盘监听或者单击remove手势的冷信号
 
  @param remove 点击空白部分的单击手势的回调事件
