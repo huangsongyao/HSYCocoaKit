@@ -200,5 +200,10 @@ static HSYNetWorkingManager *networkingManager;
     return manager;
 }
 
-
 @end
+
+NSString *HSYCocoaKitQueryStringFromParameters(NSDictionary *parameters)
+{
+    NSString *queryString = AFQueryStringFromParameters(parameters);
+    return queryString;
+}

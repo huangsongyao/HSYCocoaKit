@@ -11,6 +11,8 @@
 #import "ReactiveCocoa.h"
 #import "AFURLSessionManager+RACSignal.h"
 
+FOUNDATION_EXPORT NSString * HSYCocoaKitQueryStringFromParameters(NSDictionary *parameters);
+
 typedef NS_ENUM(NSUInteger, kHSYCocoaKitHTTPStatementSerializer) {
     
     //request声明为[AFHTTPRequestSerializer serializer]格式，response声明为[AFHTTPResponseSerializer serializer]格式
