@@ -185,13 +185,6 @@
     //test JSONModel Rumtime
     tttttttMidel *tes = [[tttttttMidel alloc] init];
     [tes setJSONModelRuntimeNullValue];
-    tes.name = @"123";
-    tttttttMidel *tes1 = [[tttttttMidel alloc] init];
-    [tes1 setJSONModelRuntimeNullValue];
-    tes1.name = @"345";
-    
-    NSArray *res = [[@[tes, tes1] mutableCopy] hsy_elementClassifyForKeyPath:@"self"];
-    NSLog(@"res = %@", res);
     
     // Override point for customization after application launch.
     return YES;
