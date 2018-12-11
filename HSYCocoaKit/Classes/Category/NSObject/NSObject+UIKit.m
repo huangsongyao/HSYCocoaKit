@@ -322,11 +322,11 @@ HSYCocoaKitUIKitSliderPropertyKey const HSYCocoaKitSliderValue = @"kHSYCocoaKitS
     return textField;
 }
 
-+ (UITextField *)createTextFiledByParam:(NSDictionary <NSNumber *, id>*)param didChangeSubscribeNext:(void(^)(NSString *text))next
++ (UITextField *)createTextFiledByParam:(NSDictionary <id, id>*)param didChangeSubscribeNext:(void(^)(NSString *text))next
 {
     UITextField *textField = [self.class createTextFiledByParam:param];
     if (next) {
-        NSInteger skip = param[@(kHSYCocoaKitOfTextFiledPropretyTypeSkipFirst)] ? ([param[@(kHSYCocoaKitOfTextFiledPropretyTypeSkipFirst)] boolValue] ? 1 : 0) : (param[HSYCocoaKitTextFiledSkipFirst] ? ([param[HSYCocoaKitTextFiledSkipFirst] boolValue] ? 1 : 0) : 0);
+        NSInteger skip = param[@(kHSYCocoaKitOfTextFiledPropretyTypeSkipFirst)] ? ([param[@(kHSYCocoaKitOfTextFiledPropretyTypeSkipFirst)] boolValue] ? 1 : 0) : (param[HSYCocoaKitTextFiledSkipFirst] ? ([param[HSYCocoaKitTextFiledSkipFirst] integerValue] ? 1 : 0) : 0);
         [[[[textField rac_textSignal] skip:skip] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(NSString *text) {
             next(text);
         }];
