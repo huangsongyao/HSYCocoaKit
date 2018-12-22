@@ -303,7 +303,7 @@ static NSInteger _TimeSp = 1000;                    //时间戳倍数
 + (BOOL)beforeToDate:(NSNumber *)timestamp
 {
     unsigned long long selfSecond = [NSDate date].timestampMillisecond;
-    return (selfSecond < (timestamp.longLongValue/_TimeSp));
+    return (selfSecond/_TimeSp < (timestamp.longLongValue/_TimeSp));
 }
 
 #pragma mark - Current Data => Current Year、Month、Day
