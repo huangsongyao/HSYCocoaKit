@@ -7,6 +7,7 @@
 //
 
 #import "NSString+Regular.h"
+#import "NSString+Replace.h"
 
 @implementation NSString (Regular)
 
@@ -100,7 +101,7 @@
         return kHSYCocoaKitRegularResultLengthIsZero;
     }
     NSString *emailRegex = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSString *realSelf = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *realSelf = self.stringByTrimmingCharacters;
     BOOL isPassRegex = [realSelf isValidateByRegex:emailRegex];
     if (isPassRegex) {
         return kHSYCocoaKitRegularResultConform;
@@ -138,7 +139,7 @@
     if (self.length == 0) {
         return kHSYCocoaKitRegularResultLengthIsZero;
     }
-    NSString *realSelf = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *realSelf = self.stringByTrimmingCharacters;
     if (realSelf.length < prefix.integerValue || realSelf.length > suffix.integerValue) {
         return kHSYCocoaKitRegularResultUnconform;
     }

@@ -28,6 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)stringByReplaceSomeCrashedUnicode;
 
 /**
+ 去除字符串首尾的空格
+
+ @return 过滤后的字符串
+ */
+- (NSString *)stringByTrimmingCharacters;
+
+/**
  过滤字符串中的空格符
 
  @return 无空格符的字符串

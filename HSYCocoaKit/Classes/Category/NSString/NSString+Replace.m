@@ -76,6 +76,11 @@
     return [self stringByReplacingOccurrencesOfString:symbol withString:content];
 }
 
+- (NSString *)stringByTrimmingCharacters
+{
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
 #pragma mark - TecimalPlace Change To unit
 
 + (NSString *)unitFromDecimal:(NSInteger)decimal
