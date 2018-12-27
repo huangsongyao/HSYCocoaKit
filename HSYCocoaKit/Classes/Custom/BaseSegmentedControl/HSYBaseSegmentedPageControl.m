@@ -333,7 +333,11 @@
 
 - (CGFloat)lineOffsetX
 {
-    CGFloat offsetX = ((self.scrollView.contentSizeWidth / self.segmentedButton.count) - self.selectedImageView.width)/2;
+    CGFloat offset = 0.0f;
+    if ([self.paramters[@(kHSYCocoaKitCustomSegmentedTypeButtonSpacing)] floatValue] > 0.0f) {
+        offset = (self.segmentedButton.count - 1) * [self.paramters[@(kHSYCocoaKitCustomSegmentedTypeButtonSpacing)] floatValue];
+    }
+    CGFloat offsetX = (((self.scrollView.contentSizeWidth - offset) / self.segmentedButton.count) - self.selectedImageView.width)/2;
     return offsetX;
 }
 
