@@ -72,4 +72,40 @@ NSString *const kHSYCocoaKitCIFilterInputCorrectionLevelIsLow         = @"L";
     return qrCodeImage;
 }
 
+#pragma mark - Create Logo QRCode Image
+
++ (UIImage *)filterLogoQrCodeImage:(NSString *)qrString qrCorrectionLevel:(NSString *)level withImageSize:(CGFloat)size logo:(NSString *)logo logoSize:(CGFloat)logoSize
+{
+    UIImage *qrCodeImage = [CIDetector filterQrCodeImage:qrString qrCorrectionLevel:level withImageSize:size];
+    UIImage *logoImage = [UIImage imageNamed:logo];
+    if (!logoImage) {
+        return qrCodeImage;
+    }
+    UIGraphicsBeginImageContext(qrCodeImage.size);
+    [qrCodeImage drawInRect:(CGRect){CGPointZero, qrCodeImage.size}];
+    CGRect logoRect = (CGRect){(qrCodeImage.size.width - logoSize)/2.0f, (qrCodeImage.size.height - logoSize)/2.0f, CGSizeMake(logoSize, logoSize)};
+    [logoImage drawInRect:logoRect];
+    
+    UIImage *logoQrCodeImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return logoQrCodeImage;
+}
+
++ (UIImage *)filterHighLogoQrCodeImage:(NSString *)qrString withImageSize:(CGFloat)size logo:(NSString *)logo logoSize:(CGFloat)logoSize
+{
+    return [self.class filterLogoQrCodeImage:qrString qrCorrectionLevel:kHSYCocoaKitCIFilterInputCorrectionLevelIsHigh withImageSize:size logo:logo logoSize:logoSize];
+}
+
++ (UIImage *)filterMiddleLogoQrCodeImage:(NSString *)qrString withImageSize:(CGFloat)size logo:(NSString *)logo logoSize:(CGFloat)logoSize
+{
+    return [self.class filterLogoQrCodeImage:qrString qrCorrectionLevel:kHSYCocoaKitCIFilterInputCorrectionLevelIsMiddle withImageSize:size logo:logo logoSize:logoSize];
+}
+
++ (UIImage *)filterLowLogoQrCodeImage:(NSString *)qrString withImageSize:(CGFloat)size logo:(NSString *)logo logoSize:(CGFloat)logoSize
+{
+    return [self.class filterLogoQrCodeImage:qrString qrCorrectionLevel:kHSYCocoaKitCIFilterInputCorrectionLevelIsLow withImageSize:size logo:logo logoSize:logoSize];
+}
+
+
 @end
