@@ -51,6 +51,7 @@ NSInteger const kHSYCocoaKitBaseCellBottomLineTag        = 163;
 + (UIView *)hsy_line:(UIColor *)color
 {
     UIView *line = [[UIView alloc] initWithFrame:CGRectZero];
+    line.tag = kHSYCocoaKitBaseCellBottomLineTag;
     line.backgroundColor = color;
     return line;
 }
