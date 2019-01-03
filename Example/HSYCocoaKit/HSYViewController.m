@@ -67,7 +67,7 @@ HSYCocoaKitPropertyKey const HSYCocoaKitPropertyKeyNorBackgroundImage = @"3333";
 {
     self.hsy_viewModel = [[HSYViewControllerModel alloc] init];
     [super viewDidLoad];
-//    NSString *tstring = HSYCocoaKitButtonNorBackgroundImage;
+//      NSString *tstring = HSYCocoaKitButtonNorBackgroundImage;
     NSLog(@"%@", HSYCocoaKitPropertyKeyNorBackgroundImage);
 //    [UIViewController hsy_rac_showAlertViewController:self title:@"tttt" message:@"77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777" alertActionTitles:@[]]
     

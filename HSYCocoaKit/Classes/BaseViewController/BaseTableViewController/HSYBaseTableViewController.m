@@ -129,4 +129,25 @@
     [self hsy_closePullUp:self.tableView];
 }
 
+#pragma mark - UIScrollViewDelegate
+
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+//{
+//    //自然滚动停止
+//    _toScrollStoped = (!scrollView.tracking && !scrollView.dragging && !scrollView.decelerating);
+//}
+//
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//    //手指按压屏幕停止滚动
+//    if (!decelerate) {
+//        _toScrollStoped = (scrollView.tracking && !scrollView.dragging && !scrollView.decelerating);
+//    }
+//}
+//
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    _toScrollStoped = YES;
+//}
+
 @end
