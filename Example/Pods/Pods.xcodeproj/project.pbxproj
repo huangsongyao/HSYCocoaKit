@@ -692,6 +692,8 @@
 		AE134B28D00EA4CE1EB7A1E11B72280C /* TYLinkTextStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C4ECB54E22C2E415A363102A7CBAE36 /* TYLinkTextStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE6C15FD2D82C2C61357D0E1F5B9473A /* RACTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A570F84E42C63FB05C3B190CFA767C /* RACTuple.m */; };
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4155C178A229A76306AAE1CB3EFED015 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AED87BC221F019CE00369AC0 /* UIViewController+SystemShare.h in Headers */ = {isa = PBXBuildFile; fileRef = AED87BC021F019CE00369AC0 /* UIViewController+SystemShare.h */; };
+		AED87BC321F019CE00369AC0 /* UIViewController+SystemShare.m in Sources */ = {isa = PBXBuildFile; fileRef = AED87BC121F019CE00369AC0 /* UIViewController+SystemShare.m */; };
 		AEE32B5832CD0B59328707EDC2511D48 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = F127000A8C9AA72AEB9066EC85F8C928 /* JSONModel+networking.m */; };
 		AEE9644DA0EFCF945438E125BA4F0724 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5E8650A10C3AA0675C9C99B3F56EA /* GCDAsyncUdpSocket.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		AEE9F9CA85E3D612E57C3B1FF414EEFC /* class_scanning_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 631C23AAA8526ACA2B89A9C096BDE944 /* class_scanning_bg@2x.png */; };
@@ -1955,6 +1957,8 @@
 		AD4C8522F18A28D0644E80590758CB14 /* UISwitch+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UISwitch+RACSignalSupport.h"; sourceTree = "<group>"; };
 		AE10FEEC01B8634622DB798BEBCD8A10 /* UIStepper+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIStepper+RACSignalSupport.h"; sourceTree = "<group>"; };
 		AE56AE23062A55ED1BDE0417EBBC4982 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableView+FDTemplateLayoutCell.h"; path = "Classes/UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
+		AED87BC021F019CE00369AC0 /* UIViewController+SystemShare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SystemShare.h"; sourceTree = "<group>"; };
+		AED87BC121F019CE00369AC0 /* UIViewController+SystemShare.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SystemShare.m"; sourceTree = "<group>"; };
 		AEF3FBC744A157372C724E83E42D066B /* LOTFillRenderer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LOTFillRenderer.m; path = "lottie-ios/Classes/RenderSystem/RenderNodes/LOTFillRenderer.m"; sourceTree = "<group>"; };
 		AF12824B34B53C08C1209FBA226DDE0D /* NSURLConnection+RACSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSURLConnection+RACSupport.m"; sourceTree = "<group>"; };
 		AF3066C3FD03004EBE5D97E7B3C1A338 /* HSYBaseCollectionReusableView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HSYBaseCollectionReusableView.h; sourceTree = "<group>"; };
@@ -4761,6 +4765,8 @@
 				5522D325292D8271E5EFF14F1FCB9BF3 /* UIViewController+Runtime.m */,
 				0241AD254793FB424250751B7C9604C0 /* UIViewController+Window.h */,
 				85C0ED60386A3E92D402FEE1E6A2B1D3 /* UIViewController+Window.m */,
+				AED87BC021F019CE00369AC0 /* UIViewController+SystemShare.h */,
+				AED87BC121F019CE00369AC0 /* UIViewController+SystemShare.m */,
 			);
 			path = UIViewController;
 			sourceTree = "<group>";
@@ -4971,6 +4977,7 @@
 				35E10B613BA1F5F4D3BC30374B2693D2 /* HSYBaseSegmentedPageControlModel.h in Headers */,
 				6B181BB18E3E876426297C7C067D974D /* HSYBaseSegmentedPageViewController.h in Headers */,
 				7B5C9B7A9DA92BB0A6E84A93B131C07D /* HSYBaseTabBarItemCollectionViewCell.h in Headers */,
+				AED87BC221F019CE00369AC0 /* UIViewController+SystemShare.h in Headers */,
 				4ABB6D8B644EA2B3BE6669DFF88F3362 /* HSYBaseTabBarModel.h in Headers */,
 				E461CBA6659FCD75EC4D06B693C589E9 /* HSYBaseTabBarViewController.h in Headers */,
 				23DA9A6E22EF9F0748F8D4A5A4BBCCA2 /* HSYBaseTableModel.h in Headers */,
@@ -6243,6 +6250,7 @@
 				7020CF64A870667C1E2FDA83CE2DFE7C /* NSString+RACSequenceAdditions.m in Sources */,
 				9255CBC47F33F37B2F52FE19AF459771 /* NSString+RACSupport.m in Sources */,
 				25E9ACE4D575D553444D8353455078DA /* NSString+Regular.m in Sources */,
+				AED87BC321F019CE00369AC0 /* UIViewController+SystemShare.m in Sources */,
 				456FA31378B479E545E9AB261BFEEE1C /* NSString+Replace.m in Sources */,
 				C0F422DB781B3A0DB9F840E76BD0F6BB /* NSString+Size.m in Sources */,
 				9ED9300865711E69FF696C081C872661 /* NSURLConnection+RACSupport.m in Sources */,
