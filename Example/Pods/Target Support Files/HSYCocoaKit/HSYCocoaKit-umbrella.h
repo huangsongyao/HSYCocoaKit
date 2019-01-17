@@ -78,6 +78,7 @@
 #import "UIViewController+NavigationItem.h"
 #import "UIViewController+QRCode.h"
 #import "UIViewController+Runtime.h"
+#import "UIViewController+SystemShare.h"
 #import "UIViewController+Window.h"
 #import "HSYCustomGestureView.h"
 #import "HSYCustomWindows.h"

@@ -55,6 +55,7 @@
 #import "UIColor+Hex.h"
 #import "UIImage+Canvas.h"
 #import "UIImage+Compression.h"
+#import "UIViewController+SystemShare.h"
 #import "UIImage+Finder.h"
 #import "UIImage+PNG.h"
 #import "UIImageView+Scale.h"
