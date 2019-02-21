@@ -44,6 +44,10 @@
 @property (nonatomic, copy) RACSignal *(^hsy_responseRuntimeDelegate)(UIViewControllerRuntimeDelegateObject *object);
 //監聽父控制器切換通知
 @property (nonatomic, copy) void(^selectedItem)(NSIndexPath *indexPath, UIViewController *viewController);
+//设置底部tabBar的背景
+@property (nonatomic, strong, setter=hsy_setTabBarBackgroundImage:) UIImage *tabBarBackgroundImage;
+//设置底部tabBar的顶部的横线的颜色
+@property (nonatomic, strong, setter=hsy_setTabBarTopLineColor:) UIColor *lineInTabBarTopColor;
 
 - (instancetype)initWithConfigs:(NSArray<HSYBaseTabBarControllerConfig *> *)configs;
 

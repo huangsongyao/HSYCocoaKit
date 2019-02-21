@@ -24,6 +24,8 @@ static CGFloat const kHSYCocoaKitDefaultItemLabelOffsetTop        = 4.5f;
 static CGFloat const kHSYCocoaKitDefaultItemRedPointOffsetTop     = 4.0f;
 static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
 
+static NSInteger const kHSYCocoaKitTabBarLineTag                  = 7324;
+
 @implementation UIViewController (TabBar)
 
 - (RACSignal *)hsy_layoutTabBarReset
@@ -81,6 +83,7 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
         //顶部的横线
         UIView *line = [[UIView alloc] initWithSize:CGSizeMake(self.tabBarBackgroundImageView.width, [self.hsy_lineDictionary.allKeys.firstObject floatValue])];
         line.backgroundColor = self.hsy_lineDictionary.allValues.firstObject;
+        line.tag = kHSYCocoaKitTabBarLineTag;
         [self.tabBarBackgroundImageView addSubview:line];
     }
     
@@ -113,6 +116,24 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
 {
     [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_updateTabBarItemConfigs:tabBarItemConfigs];
     [self collectionView:self.collectionView didSelectItemAtIndexPath:self.currenctSelectedIndex];
+}
+
+#pragma mark - Reload TabBar UI For Setter
+
+- (void)hsy_setTabBarBackgroundImage:(UIImage *)tabBarBackgroundImage
+{
+    _tabBarBackgroundImage = tabBarBackgroundImage;
+    self.tabBarBackgroundImageView.image = tabBarBackgroundImage;
+    self.tabBarBackgroundImageView.highlightedImage = tabBarBackgroundImage;
+}
+
+- (void)hsy_setTabBarTopLineColor:(UIColor *)lineInTabBarTopColor
+{
+    _lineInTabBarTopColor = lineInTabBarTopColor;
+    UIView *line = [self.tabBarBackgroundImageView viewWithTag:kHSYCocoaKitTabBarLineTag];
+    if (line) {
+        line.backgroundColor = lineInTabBarTopColor;
+    }
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
