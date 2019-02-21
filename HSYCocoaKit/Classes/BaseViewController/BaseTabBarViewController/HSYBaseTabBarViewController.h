@@ -62,6 +62,13 @@
  */
 - (void)hsy_setRedPointInPage:(NSInteger)page redPointNumbers:(NSNumber *)numbers;
 
+/**
+ 外部更新tabBar
+
+ @param tabBarItemConfigs 新的完整数据源
+ */
+- (void)hsy_reloadTabBar:(NSArray<HSYBaseTabBarControllerConfig *> *)tabBarItemConfigs;
+
 #pragma mark - Load
 
 /**

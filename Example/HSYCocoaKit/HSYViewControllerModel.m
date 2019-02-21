@@ -90,7 +90,7 @@
 
 - (RACSignal *)testRequest
 {
-    NSString *urlStr = @"http://api.artvoice.com.cn:8080/driver/get_last_driver?hardware=100";
+    NSString *urlStr = @"https://api.github.com/emojis";
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         [self hsy_requestNetwork:^RACSignal *{
             RACSignal *signal = [[HSYNetWorkingManager shareInstance] test:urlStr];

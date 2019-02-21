@@ -81,4 +81,11 @@
  */
 - (NSArray<UIViewController *> *)hsy_tabBarItemViewControllers:(CGFloat)height;
 
+/**
+ 更新底部tabBar的items的数据源
+
+ @param newItemConfigs 新的数据源，方法会根据新的完整数据分离出需要更新的新的tabBar底部数据
+ */
+- (void)hsy_updateTabBarItemConfigs:(NSArray<HSYBaseTabBarControllerConfig *> *)newItemConfigs;
+
 @end

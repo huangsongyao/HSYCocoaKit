@@ -45,6 +45,7 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
 @interface HSYBaseTabBarViewController () <UIViewControllerRuntimeDelegate>
 
 @property (nonatomic, strong) UIImageView *tabBarBackgroundImageView;
+@property (nonatomic, copy, readonly) NSIndexPath *currenctSelectedIndex;
 
 @end
 
@@ -106,6 +107,14 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
     }
 }
 
+#pragma mark - Reload TabBar
+
+- (void)hsy_reloadTabBar:(NSArray<HSYBaseTabBarControllerConfig *> *)tabBarItemConfigs
+{
+    [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_updateTabBarItemConfigs:tabBarItemConfigs];
+    [self collectionView:self.collectionView didSelectItemAtIndexPath:self.currenctSelectedIndex];
+}
+
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -130,6 +139,7 @@ static CGFloat const kHSYCocoaKitDefaultItemRedPointCentryRight   = 6.0f;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    _currenctSelectedIndex = indexPath;
     UIView *view = [(HSYBaseTabBarModel *)self.hsy_viewModel hsy_reloadDatas:indexPath];
     [self.view addSubview:view];
     [self.collectionView reloadData];

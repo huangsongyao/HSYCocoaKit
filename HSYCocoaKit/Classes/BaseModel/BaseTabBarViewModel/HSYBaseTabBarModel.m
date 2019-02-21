@@ -92,6 +92,29 @@
     return self;
 }
 
+#pragma mark - Update TabBar Item Configs
+
+- (NSArray<HSYBaseTabBarConfigItem *> *)hsy_tabBarItemConfigs:(NSArray<HSYBaseTabBarControllerConfig *> *)configs
+{
+    NSMutableArray<HSYBaseTabBarConfigItem *> *itemConfigs = [NSMutableArray arrayWithCapacity:configs.count];
+    for (HSYBaseTabBarControllerConfig *config in configs) {
+        HSYBaseTabBarConfigItem *item = [[HSYBaseTabBarConfigItem alloc] initWithTitle:config.hsy_title normalParamter:@{@"normalImage" : config.imageParamter.allKeys.firstObject, @"normalColor" : config.titleColorParamter.allKeys.firstObject, @"normalFont" : config.fontParamter.allKeys.firstObject, } selectedParamter:@{@"selectedImage" : config.imageParamter.allValues.firstObject, @"selectedColor" : config.titleColorParamter.allValues.firstObject, @"selectedFont" : config.fontParamter.allValues.firstObject, }];
+        item.selectedItem = ([configs indexOfObject:config] == 0);
+        [itemConfigs addObject:item];
+    }
+    if (itemConfigs.count == 0) {
+        itemConfigs = [self.hsy_configItems copy];
+    }
+    return [itemConfigs mutableCopy];
+}
+
+- (void)hsy_updateTabBarItemConfigs:(NSArray<HSYBaseTabBarControllerConfig *> *)newItemConfigs
+{
+    _hsy_configItems = [self hsy_tabBarItemConfigs:newItemConfigs];
+}
+
+#pragma mark - Reload Datas
+
 - (UIView *)hsy_reloadDatas:(NSIndexPath *)indexPath
 {
     for (HSYBaseTabBarConfigItem *item in self.hsy_configItems) {
