@@ -32,6 +32,7 @@
  */
 + (RACSignal *)hsy_rac_showAlertController:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message alertActionTitles:(NSArray<NSString *> *)alertActionTitles NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
 
+
 /**
  sheet show
  
@@ -42,5 +43,6 @@
  @return RACSignal点击事件的信号
  */
 + (RACSignal *)hsy_rac_showSheetController:(UIViewController *)viewController title:(NSString *)title message:(NSString *)message sheetActionTitles:(NSArray<NSString *> *)sheetActionTitles NS_AVAILABLE_IOS(HSY_AVAILABLE_IOS_8);
+
 
 @end

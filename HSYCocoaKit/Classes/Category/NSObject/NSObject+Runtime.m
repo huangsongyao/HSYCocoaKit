@@ -161,5 +161,20 @@
     return [results mutableCopy];
 }
 
+#pragma mark - Get Class Privately API
+
++ (void)getRuntimePrivatelyMethodsAPI:(id)object
+{
+    unsigned int count = 0;
+    Method *methods = class_copyMethodList(object_getClass(object), &count);
+    NSLog(@"\n %@ all private API list", object);
+    for (NSInteger i = 0; i < count; i ++) {
+        Method method = methods[i];
+        SEL sel = method_getName(method);
+        NSLog(@"%@", NSStringFromSelector(sel));
+    }
+    NSLog(@"completed ! \n");
+    free(methods);
+}
 
 @end

@@ -66,5 +66,11 @@
  */
 + (NSArray<NSString *> *)objectRuntimeNames:(id)object;
 
+/**
+ 获取对象所在类的所有私有+公有的Methods
+
+ @param object object
+ */
++ (void)getRuntimePrivatelyMethodsAPI:(id)object;
 
 @end
