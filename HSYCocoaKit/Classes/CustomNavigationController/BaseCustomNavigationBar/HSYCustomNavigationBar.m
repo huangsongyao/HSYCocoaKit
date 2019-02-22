@@ -33,7 +33,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
         height = IPHONE_NAVIGATION_BAR_HEIGHT;
     }
     if (self = [super initWithFrame:CGRectMake(0, 0, width, height)]) {
-        UIImage *image = [UIImage imageWithFillColor:NAV_DEFAULT_COLOR];
+        UIImage *image = [UIImage imageWithFillColor:CLEAR_COLOR];
         [self setCustomNavigationBarBackgroundImage:image];
         if ([object isKindOfClass:[NSString class]] || !object) {
             _customNavigationItem = [[UINavigationItem alloc] initWithTitle:object];
@@ -136,7 +136,7 @@ static NSInteger const kHSYCustomNavigationBarBottomLineTag = 2334;
 - (instancetype)initWithObject:(id)object
 {
     if (self = [super initWithSize:CGSizeMake(IPHONE_WIDTH, IPHONE_BAR_HEIGHT)]) {
-        self.backgroundColor = NAV_DEFAULT_COLOR;
+        self.backgroundColor = CLEAR_COLOR;
         self.backgroundImage = [NSObject createImageViewByParam:@{}];
         self.backgroundImage.frame = self.bounds;
         [self addSubview:self.backgroundImage];
