@@ -36,6 +36,8 @@ static NSNumber *kHSYCocoaKitDefaultItemTextAlignment   = nil;
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = CLEAR_COLOR;
+        self.contentView.backgroundColor = self.backgroundColor;
         self.hsy_label = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeTextFont) : kHSYCocoaKitDefaultItemFont, @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : kHSYCocoaKitDefaultItemTextAlignment, @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : kHSYCocoaKitDefaultItemTextColor, }];
         [self.contentView addSubview:self.hsy_label];
         [self.hsy_label mas_makeConstraints:^(MASConstraintMaker *make) {
