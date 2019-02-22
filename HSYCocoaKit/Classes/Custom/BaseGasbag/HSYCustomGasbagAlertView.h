@@ -32,7 +32,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitGasbagAlertType) {
 @property (nonatomic, copy) void(^hsy_completedGasbag)(BOOL finished, HSYCustomGasbagObject *gasbagObject);
 
 /**
- 初始化，默认为kHSYCocoaKitGasbagAlertTypeBottom格式
+ 初始化，默认为kHSYCocoaKitGasbagAlertTypeBottom格式，dataSources为@[]
 
  @param backgroundImage 主体小窗口背景图
  @param position 锚点下的位置
@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitGasbagAlertType) {
 - (instancetype)initWithDefaultBackgroundImage:(UIImage *)backgroundImage position:(CGPoint)position;
 
 /**
- 初始化
+ 初始化，默认为dataSources为@[]
 
  @param backgroundImage 主体小窗口背景图
  @param position 锚点下的位置
@@ -51,14 +51,32 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitGasbagAlertType) {
 - (instancetype)initWithBackgroundImage:(UIImage *)backgroundImage position:(CGPoint)position anchorType:(kHSYCocoaKitGasbagAlertType)type;
 
 /**
+ 初始化
+
+ @param backgroundImage 主体小窗口背景图
+ @param position 锚点下的位置
+ @param type 气囊的方向枚举
+ @param dataSources 数据源
+ @return HSYCustomGasbagAlertView
+ */
+- (instancetype)initWithBackgroundImage:(UIImage *)backgroundImage position:(CGPoint)position anchorType:(kHSYCocoaKitGasbagAlertType)type dataSources:(NSArray *)dataSources;
+
+/**
  show方法
  */
 - (void)hsy_showGasbag;
 
 /**
- remove方法
+ 单纯的remove方法，会调用"- hsy_removeGasbag:"方法，并传入一个nil
  */
 - (void)hsy_removeGasbag;
+
+/**
+ 选中item后的remove方法
+
+ @param object 选中item后，传入对应的item项的object
+ */
+- (void)hsy_removeGasbag:(HSYCustomGasbagObject *)object;
 
 /**
  通过枚举类型返回对应锚点

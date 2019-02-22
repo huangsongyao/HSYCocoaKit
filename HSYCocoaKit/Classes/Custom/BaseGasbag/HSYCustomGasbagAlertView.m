@@ -12,6 +12,10 @@
 #import "NSBundle+PrivateFileResource.h"
 #import "UIImageView+Scale.h"
 
+static UIFont *kHSYCocoaKitDefaultItemFont              = nil;
+static UIColor *kHSYCocoaKitDefaultItemTextColor        = nil;
+static NSNumber *kHSYCocoaKitDefaultItemTextAlignment   = nil;
+
 //********************************************气囊list数据格式********************************************
 
 @implementation HSYCustomGasbagObject
@@ -32,7 +36,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.hsy_label = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeTextFont) : [HSYCustomGasbagAlertView hsy_gasbagCellTitleFont], @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : [HSYCustomGasbagAlertView hsy_gasbagCellTextAlignment], @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : [HSYCustomGasbagAlertView hsy_gasbagCellTitleColor], }];
+        self.hsy_label = [NSObject createLabelByParam:@{@(kHSYCocoaKitOfLabelPropretyTypeTextFont) : kHSYCocoaKitDefaultItemFont, @(kHSYCocoaKitOfLabelPropretyTypeTextAlignment) : kHSYCocoaKitDefaultItemTextAlignment, @(kHSYCocoaKitOfLabelPropretyTypeTextColor) : kHSYCocoaKitDefaultItemTextColor, }];
         [self.contentView addSubview:self.hsy_label];
         [self.hsy_label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
@@ -159,6 +163,11 @@
         @strongify(self);
         [self hsy_removeGasbag];
     }]) {
+        
+        kHSYCocoaKitDefaultItemFont = self.class.hsy_gasbagCellTitleFont;
+        kHSYCocoaKitDefaultItemTextColor = self.class.hsy_gasbagCellTitleColor;
+        kHSYCocoaKitDefaultItemTextAlignment = self.class.hsy_gasbagCellTextAlignment;
+        
         self.hsy_gasbagView = [[HSYCustomGasbagView alloc] initWithDataSources:dataSources];
         self.hsy_gasbagView.frame = self.hsy_wicketView.bounds;
         self.hsy_gasbagView.hsy_delgate = self;
