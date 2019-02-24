@@ -118,7 +118,14 @@
     return kHSYHUDModelCodeTypeDefault;
 }
 
-#pragma mark - Setting
+#pragma mark - Getter
+
+- (UIActivityIndicatorView *)hsy_activityIndicatorView
+{
+    return self.activityIndicatorView;
+}
+
+#pragma mark - Setter
 
 - (void)showSystemLoading:(BOOL)hsy_showLoading
 {

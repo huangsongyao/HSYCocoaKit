@@ -174,4 +174,13 @@
  */
 - (HSYCustomNavigationBar *)hsy_realCustomNativigation;
 
+#pragma mark - Getter
+
+/**
+ 系统默认的loading页面
+
+ @return UIActivityIndicatorView
+ */
+- (UIActivityIndicatorView *)hsy_activityIndicatorView;
+
 @end
