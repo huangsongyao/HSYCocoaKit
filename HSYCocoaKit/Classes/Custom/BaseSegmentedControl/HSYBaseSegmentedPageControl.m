@@ -406,7 +406,7 @@
 
 - (void)setBottomLineColor:(UIColor *)lineInBottomColor
 {
-    if ([paramters[@(kHSYCocoaKitCustomSegmentedTypeShowBottomLine)] boolValue && self.lineInBottom) {
+    if ([self.paramters[@(kHSYCocoaKitCustomSegmentedTypeShowBottomLine)] boolValue] && self.lineInBottom) {
         self.paramters[@(kHSYCocoaKitCustomSegmentedTypeBottomLineColor)] = lineInBottomColor;
         self.lineInBottom.backgroundColor = lineInBottomColor;
     }
