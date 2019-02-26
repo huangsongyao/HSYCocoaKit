@@ -122,6 +122,16 @@
 
 - (UIActivityIndicatorView *)hsy_activityIndicatorView
 {
+    if (!self.activityIndicatorView) {
+        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.activityIndicatorView.frame = self.view.bounds;
+        self.activityIndicatorView.backgroundColor = WHITE_COLOR;
+        if (self.customNavigationBar && !self.customNavigationBar.hidden) {
+            self.activityIndicatorView.frame = CGRectMake(0, self.customNavigationBar.bottom, IPHONE_WIDTH, (self.view.height - self.customNavigationBar.bottom));
+        }
+        [self.view addSubview:self.activityIndicatorView];
+        [self.view bringSubviewToFront:self.activityIndicatorView];
+    }
     return self.activityIndicatorView;
 }
 
@@ -132,14 +142,7 @@
     _hsy_showLoading = hsy_showLoading;
     if (hsy_showLoading) {
         if (!self.activityIndicatorView) {
-            self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            self.activityIndicatorView.frame = self.view.bounds;
-            self.activityIndicatorView.backgroundColor = WHITE_COLOR;
-            if (self.customNavigationBar && !self.customNavigationBar.hidden) {
-                self.activityIndicatorView.frame = CGRectMake(0, self.customNavigationBar.bottom, IPHONE_WIDTH, (self.view.height - self.customNavigationBar.bottom));
-            }
-            [self.view addSubview:self.activityIndicatorView];
-            [self.view bringSubviewToFront:self.activityIndicatorView];
+            _activityIndicatorView = self.hsy_activityIndicatorView;
         }
         if (![self.activityIndicatorView isAnimating]) {
             [self.activityIndicatorView startAnimating];

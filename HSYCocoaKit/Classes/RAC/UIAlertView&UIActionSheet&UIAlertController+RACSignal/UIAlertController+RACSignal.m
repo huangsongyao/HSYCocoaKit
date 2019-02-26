@@ -43,7 +43,6 @@ static NSString *kHSYCocoaKitTupleTagKey        = @"HSYCocoaKitTupleTagKey";
             action.hsy_alertActionTuple = RACTuplePack(@([alertActions indexOfObject:dic]));
             [alertController addAction:action];
         }
-        @weakify(alertController);
         [viewController presentViewController:alertController animated:YES completion:^{}];
         return [RACDisposable disposableWithBlock:^{
             NSLog(@"release methods “- hsy_rac_showAlertController:title:message:alertActions:”");
@@ -82,7 +81,6 @@ static NSString *kHSYCocoaKitTupleTagKey        = @"HSYCocoaKitTupleTagKey";
             action.hsy_alertActionTuple = RACTuplePack(@([sheetActions indexOfObject:dic]));
             [sheetController addAction:action];
         }
-        @weakify(sheetController);
         [viewController presentViewController:sheetController animated:YES completion:^{}];
         return [RACDisposable disposableWithBlock:^{
             NSLog(@"release methods “- hsy_rac_showSheetController:title:message:alertActions:”");

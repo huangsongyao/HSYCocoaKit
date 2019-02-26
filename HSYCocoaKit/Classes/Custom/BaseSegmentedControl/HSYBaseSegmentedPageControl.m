@@ -14,6 +14,7 @@
 #import "ReactiveCocoa.h"
 #import "UIScrollView+Page.h"
 #import "Masonry.h"
+#import "NSArray+RACSignal.h"
 
 #define DEFAULT_LINE_SIZE                       CGSizeMake((self.scrollView.contentSizeWidth / self.segmentedButton.count), 1.0f)
 #define DEFAULT_LINE_ANIMATION_DURATION         0.35f
@@ -23,8 +24,9 @@
 
 @property (nonatomic, strong) UIImageView *selectedImageView;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
+@property (nonatomic, strong) UIView *lineInBottom;
 @property (nonatomic, strong, readonly) NSArray *pageControls;
-@property (nonatomic, strong, readonly) NSDictionary<NSNumber *, id> *paramters;
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSNumber *, id> *paramters;
 
 @end
 
@@ -37,7 +39,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         _pageControls = controls;
-        _paramters = paramters;
+        _paramters = [NSMutableDictionary dictionaryWithDictionary:paramters];
         _segmentedButton = [NSMutableArray arrayWithCapacity:controls.count];
         
         //创建背景图片
@@ -93,10 +95,10 @@
         
         //底部的横线
         if ([paramters[@(kHSYCocoaKitCustomSegmentedTypeShowBottomLine)] boolValue]) {
-            UIView *line = [[UIView alloc] initWithFrame:CGRectZero];
-            line.backgroundColor = (paramters[@(kHSYCocoaKitCustomSegmentedTypeBottomLineColor)] ? paramters[@(kHSYCocoaKitCustomSegmentedTypeBottomLineColor)] : RGB(204, 204, 204));
-            [self addSubview:line];
-            [line mas_makeConstraints:^(MASConstraintMaker *make) {
+            self.lineInBottom = [[UIView alloc] initWithFrame:CGRectZero];
+            self.lineInBottom.backgroundColor = (paramters[@(kHSYCocoaKitCustomSegmentedTypeBottomLineColor)] ? paramters[@(kHSYCocoaKitCustomSegmentedTypeBottomLineColor)] : RGB(204, 204, 204));
+            [self addSubview:self.lineInBottom];
+            [self.lineInBottom mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.bottom.equalTo(self.mas_bottom);
                 make.centerX.equalTo(self.mas_centerX);
                 CGSize size = CGSizeMake(IPHONE_WIDTH, 0.5f);
@@ -361,13 +363,54 @@
     return [super intrinsicContentSize];
 }
 
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
+#pragma mark - Setter
+
+- (void)setSegmentedPageControlBackgroundImage:(UIImage *)segmentedBackgroundImage
+{
+    self.paramters[@(kHSYCocoaKitCustomSegmentedTypeBackgroundImage)] = segmentedBackgroundImage;
+    self.backgroundImageView.image = segmentedBackgroundImage;
+    self.backgroundImageView.highlightedImage = segmentedBackgroundImage;
+}
+
+- (void)setSelectedItemLineColor:(UIColor *)selectedLineColor
+{
+    UIImage *image = [UIImage imageWithFillColor:selectedLineColor];
+    self.paramters[@(kHSYCocoaKitCustomSegmentedTypeLineColor)] = selectedLineColor;
+    self.selectedImageView.image = image;
+    self.selectedImageView.highlightedImage = image;
+}
+
+- (void)setSelectedItemTitleColor:(UIColor *)selectedTitleColor
+{
+    self.paramters[@(kHSYCocoaKitCustomSegmentedTypeSelTitleColor)] = selectedTitleColor;
+    HSYBaseCustomButton *selectedButton = self.segmentedButton[self.selectedIndex];
+    [selectedButton setTitleColor:selectedTitleColor forState:UIControlStateNormal];
+    [selectedButton setTitleColor:selectedTitleColor forState:UIControlStateHighlighted];
+}
+
+- (void)setNormalItemTitleColor:(UIColor *)normalTitleColor
+{
+    self.paramters[@(kHSYCocoaKitCustomSegmentedTypeNorTitleColor)] = normalTitleColor;
+    @weakify(self);
+    [[[self.segmentedButton rac_filterUntilCompleted:^BOOL(id predicate) {
+        @strongify(self);
+        HSYBaseCustomButton *button = (HSYBaseCustomButton *)predicate;
+        return (![self.segmentedButton[self.selectedIndex] isEqual:button]);
+    }] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYBaseCustomButton *normalCustomButton) {
+        @strongify(self);
+        UIColor *normalColor = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeNorTitleColor)];
+        [normalCustomButton setTitleColor:normalColor forState:UIControlStateNormal];
+        [normalCustomButton setTitleColor:normalColor forState:UIControlStateHighlighted];
+    }];
+}
+
+- (void)setBottomLineColor:(UIColor *)lineInBottomColor
+{
+    if ([paramters[@(kHSYCocoaKitCustomSegmentedTypeShowBottomLine)] boolValue] && self.lineInBottom) {
+        self.paramters[@(kHSYCocoaKitCustomSegmentedTypeBottomLineColor)] = lineInBottomColor;
+        self.lineInBottom.backgroundColor = lineInBottomColor;
+    }
+}
 
 @end
 

@@ -110,7 +110,7 @@
 
 - (void)hsy_updateTabBarItemConfigs:(NSArray<HSYBaseTabBarControllerConfig *> *)newItemConfigs
 {
-    _hsy_configItems = [self hsy_tabBarItemConfigs:newItemConfigs];
+    _hsy_configItems = [NSMutableArray arrayWithArray:[self hsy_tabBarItemConfigs:newItemConfigs]];
 }
 
 #pragma mark - Reload Datas

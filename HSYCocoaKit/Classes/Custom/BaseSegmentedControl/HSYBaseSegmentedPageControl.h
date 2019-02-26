@@ -31,9 +31,22 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitCustomSegmentedType) {
 
 @interface HSYBaseSegmentedPageControl : UIView
 
+//数据源
 @property (nonatomic, strong, readonly) NSMutableArray<HSYBaseCustomButton *> *segmentedButton;
+//横向滚动容器
 @property (nonatomic, strong, readonly) UIScrollView *scrollView;
+//选中的位置
 @property (nonatomic, assign, setter=setCurrentSelectedItem:) NSInteger selectedIndex;
+//背景图片
+@property (nonatomic, setter=setSegmentedPageControlBackgroundImage:) UIImage *segmentedBackgroundImage;
+//选中的item项的底部的下划线的颜色
+@property (nonatomic, setter=setSelectedItemLineColor:) UIColor *selectedLineColor;
+//选中的item项的颜色
+@property (nonatomic, setter=setSelectedItemTitleColor:) UIColor *selectedTitleColor;
+//未选中的item项的颜色
+@property (nonatomic, setter=setNormalItemTitleColor:) UIColor *normalTitleColor;
+//底部的横线的颜色
+@property (nonatomic, setter=setBottomLineColor:) UIColor *lineInBottomColor;
 
 /**
  外部设置横线的比例进度
