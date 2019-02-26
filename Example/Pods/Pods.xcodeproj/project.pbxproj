@@ -58,7 +58,6 @@
 		0C4C3E27B3E21DB207845CAC97A0D864 /* LOTCacheProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C79E4A4E0D7CE49D7C4C5E76C9C8A58A /* LOTCacheProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C6F3899415BF99C9DC8ECD16B42DC57 /* HSYCocoaKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAF4FE915A4F558AF8180102371E085 /* HSYCocoaKit-dummy.m */; };
 		0C9995B45C012FC0453ACB13A7B27C93 /* RVMViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = D3846B4988621BE9B4ABA763EE467865 /* RVMViewModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0CD21DF04E20CB007D0D343E92C6853E /* HSYBaseSegmentedPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 84666F6D1150B4D92D998B9A10B19861 /* HSYBaseSegmentedPageControl.m */; };
 		0CD8634869EEC040DFABDA3C460AFCD6 /* UIImage+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = D85D1905994F5ABED0547C880460D87C /* UIImage+Compression.m */; };
 		0D178FB4837B7001F1EB76119283B361 /* TKRoundedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 239E47938B5A9D5AEDCE220BADE28A53 /* TKRoundedView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0D1FFD30267C0776FD3E88EFF51E312F /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F4CDFCE51B7D23390E961C8A26CEC6 /* UIImageView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -705,6 +704,7 @@
 		AE01D274FDD24437FE419BCF7A2B3EBA /* RACBehaviorSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9490CF11EB195ED33F0E6FC584D229B5 /* RACBehaviorSubject.m */; };
 		AE4528CE832316102A1749DB7F0E6806 /* RACEXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F73647B572CC7F30C99A7BF53BE50C58 /* RACEXTRuntimeExtensions.m */; };
 		AE56C4C2F84C01AA56CD73F5C0509502 /* RACScopedDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A232AEFB486BDA70079FEE5581DCE85 /* RACScopedDisposable.m */; };
+		AE728A13222553C100AAFC96 /* HSYBaseSegmentedPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AE728A12222553C100AAFC96 /* HSYBaseSegmentedPageControl.m */; };
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4155C178A229A76306AAE1CB3EFED015 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE9CE68BAF53A70C436896807BD5AB90 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0BF500B3933780279A81C4A28B52CE /* UITableView+FDTemplateLayoutCellDebug.m */; };
 		AED97D3B0F95FE929E136D5694CE4BF8 /* LOTBezierData.h in Headers */ = {isa = PBXBuildFile; fileRef = BA3ACECE0F3F6ECAFA2075DD1C51C906 /* LOTBezierData.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -1781,7 +1781,6 @@
 		83B7997397AAB7EAAAAB9EF8C322D5E4 /* HSYFMDBOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HSYFMDBOperation.m; sourceTree = "<group>"; };
 		83E69CB2FFF519B6DD36A458E20D7E18 /* HSYBaseQRCodeViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HSYBaseQRCodeViewController.m; sourceTree = "<group>"; };
 		84295652BF2CE1A9DC14E9B4FFC79CD6 /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		84666F6D1150B4D92D998B9A10B19861 /* HSYBaseSegmentedPageControl.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HSYBaseSegmentedPageControl.m; sourceTree = "<group>"; };
 		848CB23316FCEC00948887D9FBD332A0 /* SDWebImage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SDWebImage.xcconfig; sourceTree = "<group>"; };
 		84E553051E633BC2C0FE9D3705622665 /* LOTShapeRepeater.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LOTShapeRepeater.m; path = "lottie-ios/Classes/Models/LOTShapeRepeater.m"; sourceTree = "<group>"; };
 		856571DB0E35F4748C79D96E12117108 /* UIColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UIColor.h; path = "lottie-ios/Classes/MacCompatibility/UIColor.h"; sourceTree = "<group>"; };
@@ -1954,6 +1953,7 @@
 		AD4C8522F18A28D0644E80590758CB14 /* UISwitch+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UISwitch+RACSignalSupport.h"; sourceTree = "<group>"; };
 		AE10FEEC01B8634622DB798BEBCD8A10 /* UIStepper+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIStepper+RACSignalSupport.h"; sourceTree = "<group>"; };
 		AE56AE23062A55ED1BDE0417EBBC4982 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableView+FDTemplateLayoutCell.h"; path = "Classes/UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
+		AE728A12222553C100AAFC96 /* HSYBaseSegmentedPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSYBaseSegmentedPageControl.m; sourceTree = "<group>"; };
 		AEF3FBC744A157372C724E83E42D066B /* LOTFillRenderer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LOTFillRenderer.m; path = "lottie-ios/Classes/RenderSystem/RenderNodes/LOTFillRenderer.m"; sourceTree = "<group>"; };
 		AF023099153A796E432B264037C49262 /* NSObject+JSONModelForRuntime.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JSONModelForRuntime.m"; sourceTree = "<group>"; };
 		AF12824B34B53C08C1209FBA226DDE0D /* NSURLConnection+RACSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSURLConnection+RACSupport.m"; sourceTree = "<group>"; };
@@ -3654,7 +3654,7 @@
 			isa = PBXGroup;
 			children = (
 				EA06446E234DDB25B5E67E6D899BFA27 /* HSYBaseSegmentedPageControl.h */,
-				84666F6D1150B4D92D998B9A10B19861 /* HSYBaseSegmentedPageControl.m */,
+				AE728A12222553C100AAFC96 /* HSYBaseSegmentedPageControl.m */,
 			);
 			path = BaseSegmentedControl;
 			sourceTree = "<group>";
@@ -6266,7 +6266,6 @@
 				417FB7462CC8763F7E0620AEC32678D4 /* HSYBaseRefleshModel.m in Sources */,
 				6D1EF296A500CA0C2175DFEEEBCD19F6 /* HSYBaseRefleshViewController.m in Sources */,
 				876B741EF9B4A386DB0496EABCDDE88D /* HSYBaseSegmentedPageConfig.m in Sources */,
-				0CD21DF04E20CB007D0D343E92C6853E /* HSYBaseSegmentedPageControl.m in Sources */,
 				BB1426799109C6CCB42197301FE7AC8A /* HSYBaseSegmentedPageControlModel.m in Sources */,
 				6788309B7D791522098570E4294FE102 /* HSYBaseSegmentedPageViewController.m in Sources */,
 				58EFF6D16807C34269C705A3FDA5E20D /* HSYBaseTabBarItemCollectionViewCell.m in Sources */,
@@ -6433,6 +6432,7 @@
 				7C6F5719E7CD6ACD9F3B0E9856BF4D19 /* UIImageView+Scale.m in Sources */,
 				6C061BA44653C75A41D6C4C619A1A1B1 /* UIImageView+UrlString.m in Sources */,
 				EF689EDF672E613A94228B5CC99D8473 /* UILabel+AttributedString.m in Sources */,
+				AE728A13222553C100AAFC96 /* HSYBaseSegmentedPageControl.m in Sources */,
 				C69ABEE264E42D7B10E86861C99513D1 /* UILabel+SuggestSize.m in Sources */,
 				D3561FC28E62F47C01FD6B7A6AFCF4FD /* UINavigationBar+Background.m in Sources */,
 				32E0BB98B1EB0E4EF8D418BE4CF13C22 /* UINavigationController+Pop.m in Sources */,
