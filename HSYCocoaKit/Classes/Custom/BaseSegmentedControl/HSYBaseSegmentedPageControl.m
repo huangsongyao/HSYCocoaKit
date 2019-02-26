@@ -26,7 +26,7 @@
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 @property (nonatomic, strong) UIView *lineInBottom;
 @property (nonatomic, strong, readonly) NSArray *pageControls;
-@property (nonatomic, strong, readonly) NSMutableDictionary<NSNumber *, id> *paramters;
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSNumber *, id> *segmentedConfigParamters;
 
 @end
 
@@ -39,7 +39,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         _pageControls = controls;
-        _paramters = [NSMutableDictionary dictionaryWithDictionary:paramters];
+        _segmentedConfigParamters = [NSMutableDictionary dictionaryWithDictionary:paramters];
         _segmentedButton = [NSMutableArray arrayWithCapacity:controls.count];
         
         //创建背景图片
@@ -122,20 +122,20 @@
         return;
     }
     UIImage *image = [UIImage imageWithFillColor:SEGMENTED_CONTROL_DEFAULT_SELECTED_COLOR];
-    if (self.paramters[@(kHSYCocoaKitCustomSegmentedTypeLineColor)]) {
-        image = [UIImage imageWithFillColor:self.paramters[@(kHSYCocoaKitCustomSegmentedTypeLineColor)]];
+    if (self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeLineColor)]) {
+        image = [UIImage imageWithFillColor:self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeLineColor)]];
     }
     NSDictionary *dic = @{
                           @(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image,
                           @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image,
                           };
     self.selectedImageView = [NSObject createImageViewByParam:dic];
-    CGSize size = [self.paramters[@(kHSYCocoaKitCustomSegmentedTypeLineSize)] CGSizeValue];
+    CGSize size = [self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeLineSize)] CGSizeValue];
     if (CGSizeEqualToSize(size, CGSizeZero)) {
         size = DEFAULT_LINE_SIZE;
     }
     self.selectedImageView.size = size;
-    if ([self.paramters[@(kHSYCocoaKitCustomSegmentedTypeLineRoundedCorners)] boolValue]) {
+    if ([self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeLineRoundedCorners)] boolValue]) {
         self.selectedImageView.layer.cornerRadius = self.selectedImageView.height/2;
     }
     self.selectedImageView.y = (self.height - self.selectedImageView.height);
@@ -148,7 +148,7 @@
 
 - (NSNumber *)hsy_defaultsSelectedIndex
 {
-    NSNumber *index = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeSelectedIndex)];
+    NSNumber *index = self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeSelectedIndex)];
     if (!index) {
         index = @(0);
     }
@@ -157,7 +157,7 @@
 
 - (void)hsy_backgroundImageView
 {
-    UIImage *image = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeBackgroundImage)];
+    UIImage *image = self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeBackgroundImage)];
     if (!image) {
         image = [UIImage imageWithFillColor:WHITE_COLOR];
     }
@@ -187,7 +187,7 @@
 
 - (CGFloat)hsy_button_w
 {
-    CGSize size = [self.paramters[@(kHSYCocoaKitCustomSegmentedTypeButtonSize)] CGSizeValue];
+    CGSize size = [self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeButtonSize)] CGSizeValue];
     if (!CGSizeEqualToSize(size, CGSizeZero)) {
         return size.width;
     }
@@ -196,7 +196,7 @@
 
 - (CGFloat)hsy_button_h
 {
-    CGSize size = [self.paramters[@(kHSYCocoaKitCustomSegmentedTypeButtonSize)] CGSizeValue];
+    CGSize size = [self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeButtonSize)] CGSizeValue];
     if (!CGSizeEqualToSize(size, CGSizeZero)) {
         return size.height;
     }
@@ -205,7 +205,7 @@
 
 - (CGFloat)hsy_button_spacing
 {
-    CGFloat itemSpacing = [self.paramters[@(kHSYCocoaKitCustomSegmentedTypeButtonSpacing)] floatValue];
+    CGFloat itemSpacing = [self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeButtonSpacing)] floatValue];
     if (itemSpacing > 0.0f) {
         return itemSpacing;
     }
@@ -219,7 +219,7 @@
     if (!self.selectedImageView) {
         return;
     }
-    NSTimeInterval duration = [self.paramters[@(kHSYCocoaKitCustomSegmentedTypeAnimationDuration)] floatValue];
+    NSTimeInterval duration = [self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeAnimationDuration)] floatValue];
     if (duration == 0.0f) {
         duration = DEFAULT_LINE_ANIMATION_DURATION;
     }
@@ -269,11 +269,11 @@
 
 - (NSDictionary *)hsy_titleColorObjects
 {
-    UIColor *selectedTitleColor = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeSelTitleColor)];
+    UIColor *selectedTitleColor = self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeSelTitleColor)];
     if (!selectedTitleColor) {
         selectedTitleColor = SEGMENTED_CONTROL_DEFAULT_SELECTED_COLOR;
     }
-    UIColor *normalTitleColor = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeNorTitleColor)];
+    UIColor *normalTitleColor = self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeNorTitleColor)];
     if (!normalTitleColor) {
         normalTitleColor = BLACK_COLOR;
     }
@@ -282,11 +282,11 @@
 
 - (NSDictionary *)hsy_titleFontObjects
 {
-    UIFont *normalFont = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeTitleFont)];
+    UIFont *normalFont = self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeTitleFont)];
     if (!normalFont) {
         normalFont = UI_SYSTEM_FONT_15;
     }
-    UIFont *selectedFont = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeSelectedTitleFont)];
+    UIFont *selectedFont = self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeSelectedTitleFont)];
     if (!selectedFont) {
         selectedFont = UI_SYSTEM_FONT_16;
     }
@@ -336,8 +336,8 @@
 - (CGFloat)lineOffsetX
 {
     CGFloat offset = 0.0f;
-    if ([self.paramters[@(kHSYCocoaKitCustomSegmentedTypeButtonSpacing)] floatValue] > 0.0f) {
-        offset = (self.segmentedButton.count - 1) * [self.paramters[@(kHSYCocoaKitCustomSegmentedTypeButtonSpacing)] floatValue];
+    if ([self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeButtonSpacing)] floatValue] > 0.0f) {
+        offset = (self.segmentedButton.count - 1) * [self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeButtonSpacing)] floatValue];
     }
     CGFloat offsetX = (((self.scrollView.contentSizeWidth - offset) / self.segmentedButton.count) - self.selectedImageView.width)/2;
     return offsetX;
@@ -367,7 +367,7 @@
 
 - (void)setSegmentedPageControlBackgroundImage:(UIImage *)segmentedBackgroundImage
 {
-    self.paramters[@(kHSYCocoaKitCustomSegmentedTypeBackgroundImage)] = segmentedBackgroundImage;
+    self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeBackgroundImage)] = segmentedBackgroundImage;
     self.backgroundImageView.image = segmentedBackgroundImage;
     self.backgroundImageView.highlightedImage = segmentedBackgroundImage;
 }
@@ -375,14 +375,14 @@
 - (void)setSelectedItemLineColor:(UIColor *)selectedLineColor
 {
     UIImage *image = [UIImage imageWithFillColor:selectedLineColor];
-    self.paramters[@(kHSYCocoaKitCustomSegmentedTypeLineColor)] = selectedLineColor;
+    self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeLineColor)] = selectedLineColor;
     self.selectedImageView.image = image;
     self.selectedImageView.highlightedImage = image;
 }
 
 - (void)setSelectedItemTitleColor:(UIColor *)selectedTitleColor
 {
-    self.paramters[@(kHSYCocoaKitCustomSegmentedTypeSelTitleColor)] = selectedTitleColor;
+    self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeSelTitleColor)] = selectedTitleColor;
     HSYBaseCustomButton *selectedButton = self.segmentedButton[self.selectedIndex];
     [selectedButton setTitleColor:selectedTitleColor forState:UIControlStateNormal];
     [selectedButton setTitleColor:selectedTitleColor forState:UIControlStateHighlighted];
@@ -390,7 +390,7 @@
 
 - (void)setNormalItemTitleColor:(UIColor *)normalTitleColor
 {
-    self.paramters[@(kHSYCocoaKitCustomSegmentedTypeNorTitleColor)] = normalTitleColor;
+    self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeNorTitleColor)] = normalTitleColor;
     @weakify(self);
     [[[self.segmentedButton rac_filterUntilCompleted:^BOOL(id predicate) {
         @strongify(self);
@@ -398,7 +398,7 @@
         return (![self.segmentedButton[self.selectedIndex] isEqual:button]);
     }] deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(HSYBaseCustomButton *normalCustomButton) {
         @strongify(self);
-        UIColor *normalColor = self.paramters[@(kHSYCocoaKitCustomSegmentedTypeNorTitleColor)];
+        UIColor *normalColor = self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeNorTitleColor)];
         [normalCustomButton setTitleColor:normalColor forState:UIControlStateNormal];
         [normalCustomButton setTitleColor:normalColor forState:UIControlStateHighlighted];
     }];
@@ -406,8 +406,8 @@
 
 - (void)setBottomLineColor:(UIColor *)lineInBottomColor
 {
-    if ([self.paramters[@(kHSYCocoaKitCustomSegmentedTypeShowBottomLine)] boolValue] && self.lineInBottom) {
-        self.paramters[@(kHSYCocoaKitCustomSegmentedTypeBottomLineColor)] = lineInBottomColor;
+    if (self.lineInBottom && [self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeShowBottomLine)] boolValue]) {
+        self.segmentedConfigParamters[@(kHSYCocoaKitCustomSegmentedTypeBottomLineColor)] = lineInBottomColor;
         self.lineInBottom.backgroundColor = lineInBottomColor;
     }
 }
