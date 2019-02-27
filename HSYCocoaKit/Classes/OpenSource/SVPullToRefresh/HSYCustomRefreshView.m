@@ -28,7 +28,8 @@
 #define REFRESH_UPDATE_NOT_MORE                 @"已经到底了~"
 #define MID_TRIGGER_PERCENT                     1.0f
 
-static NSTimeInterval defaultRefreshDuration    = 1.0f;
+static NSTimeInterval kHSYCocoaKitKefaultRefreshDuration        = 1.0f;
+static NSInteger const kHSYCocoaKitReloadBackgroundImageTag     = 2324;
 
 @interface HSYCustomRefreshView ()
 
@@ -108,18 +109,25 @@ static NSTimeInterval defaultRefreshDuration    = 1.0f;
 
 - (void)hsy_updateLongTopBackgroundImage:(UIImage *)image
 {
-    UIImageView *imageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image, }];
-    [self.hsy_backgroundView addSubview:imageView];
-    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.hsy_backgroundView.mas_left);
-        make.right.equalTo(self.hsy_backgroundView.mas_right);
-        if (self.isPullDown) {
-            make.bottom.equalTo(self.hsy_backgroundView.mas_bottom);
-        } else {
-            make.top.equalTo(self.hsy_backgroundView.mas_top);
-        }
-        make.height.equalTo(@([UIImageView hsy_scaleHeight:self.width image:image]));
-    }];
+    UIImageView *imageView = [self.hsy_backgroundView viewWithTag:kHSYCocoaKitReloadBackgroundImageTag];
+    if (!imageView) {
+        imageView = [NSObject createImageViewByParam:@{@(kHSYCocoaKitOfImageViewPropretyTypeNorImageViewName) : image, @(kHSYCocoaKitOfImageViewPropretyTypePreImageViewName) : image, }];
+        imageView.tag = kHSYCocoaKitReloadBackgroundImageTag;
+        [self.hsy_backgroundView addSubview:imageView];
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.hsy_backgroundView.mas_left);
+            make.right.equalTo(self.hsy_backgroundView.mas_right);
+            if (self.isPullDown) {
+                make.bottom.equalTo(self.hsy_backgroundView.mas_bottom);
+            } else {
+                make.top.equalTo(self.hsy_backgroundView.mas_top);
+            }
+            make.height.equalTo(@([UIImageView hsy_scaleHeight:self.width image:image]));
+        }];
+    } else {
+        imageView.image = image;
+        imageView.highlightedImage = image;
+    }
 }
 
 #pragma mark - Observer Scroll Percent
@@ -263,7 +271,7 @@ static NSTimeInterval defaultRefreshDuration    = 1.0f;
 - (NSTimeInterval)hsy_loadRefreshDuration
 {
     if (!_hsy_loadRefreshDuration) {
-        _hsy_loadRefreshDuration = defaultRefreshDuration;
+        _hsy_loadRefreshDuration = kHSYCocoaKitKefaultRefreshDuration;
     }
     return _hsy_loadRefreshDuration;
 }
