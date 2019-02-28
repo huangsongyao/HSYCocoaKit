@@ -14,6 +14,10 @@
 #import "UIViewController+NavigationItem.h"
 #import "HSYBaseTabBarViewController.h"
 #import "UIViewController+Runtime.h"
+#import "HSYBaseTableViewController.h"
+
+static NSString *tableString = @"tableView";
+static NSString *collectionString = @"collectionView";
 
 @implementation UIViewController (SegmentdPage)
 
@@ -167,8 +171,10 @@
         if ([vc isKindOfClass:[UINavigationController class]]) {
             UINavigationController *nav = (UINavigationController *)vc;
             [nav.viewControllers firstObject].hsy_runtimeDelegate = self;
+            [self dobi_observerChilsScroll:nav.viewControllers.firstObject];
         } else {
             vc.hsy_runtimeDelegate = self;
+            [self dobi_observerChilsScroll:vc];
         }
         //分页控制设置完子控制器布局后，对每个子控制器均发送一个信号，自控制器如果订阅该冷信号，可在next中调整自控制view布局
         [[[vc hsy_layoutReset] rac_willDeallocSignal] subscribeCompleted:^{
@@ -178,13 +184,23 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)dobi_observerChilsScroll:(UIViewController *)viewController
+{
+    if ([viewController isKindOfClass:NSClassFromString(@"HSYBaseRefleshViewController")]) {
+        HSYBaseRefleshViewController *refreshViewController = (HSYBaseRefleshViewController *)viewController;
+        if (self.hsy_observerChilsScrollControllerDidScroll) {
+            refreshViewController.hsy_scrollViewDidScroll = ^(UIScrollView *scrollView) {
+                self.hsy_observerChilsScrollControllerDidScroll(scrollView);
+            };
+        }
+    }
+}
+
 #pragma mark - Add Subview
 
 + (NSMutableArray<UIViewController *> *)hsy_addSubViewController:(NSMutableArray *)hsy_viewControllers titles:(NSArray *)titles configs:(NSMutableArray *)configs height:(CGFloat)height
 {
     CGFloat x = 0.0f;
-    NSString *tableString = @"tableView";
-    NSString *collectionString = @"collectionView";
     NSMutableArray *viewControllers = [NSMutableArray arrayWithCapacity:configs.count];
     for (UIViewController *vc in hsy_viewControllers) {
         NSInteger i = [hsy_viewControllers indexOfObject:vc];

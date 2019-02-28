@@ -148,8 +148,8 @@ HSYCocoaKitPropertyKey const HSYCocoaKitPropertyKeyNorBackgroundImage = @"3333";
     UIButton *button2 = [NSObject createButtonByParam:@{} clickedOnSubscribeNext:^(UIButton *button) {
 //        @strongify(self);
         
-//        HSYBViewController *vc = [[HSYBViewController alloc] init];
-        HSYWebTestViewController *vc = [[HSYWebTestViewController alloc] init];
+        HSYBViewController *vc = [[HSYBViewController alloc] init];
+//        HSYWebTestViewController *vc = [[HSYWebTestViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
 //        [UIApplication openSafariServer:@"https://www.baidu.com/"];
 //        [UIApplication openSafari:@"https://www.baidu.com/"];

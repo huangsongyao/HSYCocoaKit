@@ -163,5 +163,13 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitZeroValue) {
     [self hsy_closePullUp:self.collectionView];
 }
 
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.hsy_scrollViewDidScroll) {
+        self.hsy_scrollViewDidScroll(scrollView);
+    }
+}
 
 @end

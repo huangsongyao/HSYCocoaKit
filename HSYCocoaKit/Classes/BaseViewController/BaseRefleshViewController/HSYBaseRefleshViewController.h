@@ -31,6 +31,9 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitRefreshForPullUpCompletedStatus) {
 @property (nonatomic, assign) kHSYCocoaKitRefreshForPullUpCompletedStatus pullUpStatus;
 //上拉或下拉加载完成功后的回调内容
 @property (nonatomic, copy) RACSignal *(^hsy_refreshRequestSuccess)(BOOL isPullDown, HSYCocoaKitRACSubscribeNotification *signal);
+//子控制器对于UIScrollviewDelegate的委托监听
+@property (nonatomic, copy) void(^hsy_scrollViewDidScroll)(UIScrollView *scrollView);
+
 
 /**
  根据UIScrollView类族是否签订了上拉刷新功能，在网络请求成功后，提供接口允许子类动态更新上拉功能是否继续启用
