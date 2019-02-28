@@ -184,6 +184,8 @@ static NSString *collectionString = @"collectionView";
     // Do any additional setup after loading the view.
 }
 
+#pragma mark - Observer Chils Scrolling
+
 - (void)dobi_observerChilsScroll:(UIViewController *)viewController
 {
     if ([viewController isKindOfClass:NSClassFromString(@"HSYBaseRefleshViewController")]) {
@@ -202,32 +204,32 @@ static NSString *collectionString = @"collectionView";
 {
     CGFloat x = 0.0f;
     NSMutableArray *viewControllers = [NSMutableArray arrayWithCapacity:configs.count];
-    for (UIViewController *vc in hsy_viewControllers) {
-        NSInteger i = [hsy_viewControllers indexOfObject:vc];
+    for (UIViewController *viewController in hsy_viewControllers) {
+        NSInteger i = [hsy_viewControllers indexOfObject:viewController];
         NSString *title = titles[i];
-        if ([vc respondsToSelector:@selector(view)]) {
-            vc.view.height = height;
-            vc.view.origin = CGPointMake(x, 0);
+        if ([viewController respondsToSelector:@selector(view)]) {
+            viewController.view.height = height;
+            viewController.view.origin = CGPointMake(x, 0);
         }
-        if ([vc respondsToSelector:NSSelectorFromString(tableString)]) {
-            UITableViewController *tvc = (UITableViewController *)vc;
-            tvc.tableView.frame = tvc.view.bounds;
-        } else if ([vc respondsToSelector:NSSelectorFromString(collectionString)]) {
-            UICollectionViewController *cvc = (UICollectionViewController *)vc;
-            cvc.collectionView.frame = cvc.view.bounds;
+        if ([viewController respondsToSelector:NSSelectorFromString(tableString)]) {
+            UITableViewController *tableViewController = (UITableViewController *)viewController;
+            tableViewController.tableView.frame = tableViewController.view.bounds;
+        } else if ([viewController respondsToSelector:NSSelectorFromString(collectionString)]) {
+            UICollectionViewController *collectionViewController = (UICollectionViewController *)viewController;
+            collectionViewController.collectionView.frame = collectionViewController.view.bounds;
         }
         BOOL hidden = ![configs[i] showNavigationBar];
-        vc.navigationItem.title = title;
-        vc.navigationController.navigationBar.hidden = hidden;
-        if ([vc isKindOfClass:[HSYBaseViewController class]]) {
-            HSYBaseViewController *basevc = (HSYBaseViewController *)vc;
-            if (basevc.customNavigationBar) {
-                [(HSYBaseViewController *)vc hsy_customNavigationBarNavigationItem].title = title;
-                [(HSYBaseViewController *)vc customNavigationBar].hidden = hidden;
+        viewController.navigationItem.title = title;
+        viewController.navigationController.navigationBar.hidden = hidden;
+        if ([viewController isKindOfClass:[HSYBaseViewController class]]) {
+            HSYBaseViewController *baseViewController = (HSYBaseViewController *)viewController;
+            if (baseViewController.customNavigationBar) {
+                [(HSYBaseViewController *)viewController hsy_customNavigationBarNavigationItem].title = title;
+                [(HSYBaseViewController *)viewController customNavigationBar].hidden = hidden;
             }
         }
-        x = vc.view.right;
-        [viewControllers addObject:vc];
+        x = viewController.view.right;
+        [viewControllers addObject:viewController];
     }
     return viewControllers;
 }
