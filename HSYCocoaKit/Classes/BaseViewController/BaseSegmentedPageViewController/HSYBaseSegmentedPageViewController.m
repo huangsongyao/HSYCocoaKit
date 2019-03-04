@@ -37,7 +37,7 @@ static NSString *collectionString = @"collectionView";
 
 //********************************************************************************************************
 
-@interface HSYBaseSegmentedPageViewController () <UIScrollViewDelegate, UIViewControllerRuntimeDelegate>
+@interface HSYBaseSegmentedPageViewController () <UIViewControllerRuntimeDelegate>
 
 @property (nonatomic, assign) BOOL canScroll;
 
@@ -262,6 +262,9 @@ static NSString *collectionString = @"collectionView";
         CGFloat scale = scrollView.contentOffset.x / (self.scrollView.width * ([(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_titles].count - 1));
         [self.segmentedPageControl hsy_setContentOffsetFromScale:scale];
     }
+    if (self.scrollViewDidScroll) {
+        self.scrollViewDidScroll(scrollView);
+    }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
@@ -270,6 +273,9 @@ static NSString *collectionString = @"collectionView";
     _currentSelectedIndex = @(scrollView.currentPage);
     if (self.scrollEndFinished) {
         self.scrollEndFinished(self.currentSelectedIndex.integerValue, [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_viewControllers][self.currentSelectedIndex.integerValue]);
+    }
+    if (self.scrollViewDidEndScrollingAnimation) {
+        self.scrollViewDidEndScrollingAnimation(scrollView);
     }
     NSLog(@"- scrollViewDidEndScrollingAnimation: 按钮翻页结束, 当前页面位置:%@=%@", self.currentSelectedIndex, @(self.segmentedPageControl.selectedIndex));
 }
@@ -281,7 +287,24 @@ static NSString *collectionString = @"collectionView";
     if (self.scrollEndFinished) {
         self.scrollEndFinished(self.currentSelectedIndex.integerValue, [(HSYBaseSegmentedPageControlModel *)self.hsy_viewModel hsy_viewControllers][self.currentSelectedIndex.integerValue]);
     }
+    if (self.scrollViewDidEndDecelerating) {
+        self.scrollViewDidEndDecelerating(scrollView);
+    }
     NSLog(@"- scrollViewDidEndDecelerating: 滚动手势结束, 当前页面位置:%@=%@", self.currentSelectedIndex, @(self.segmentedPageControl.selectedIndex));
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.scrollViewWillBeginDragging) {
+        self.scrollViewWillBeginDragging(scrollView);
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (self.scrollViewWillDecelerate) {
+        self.scrollViewWillDecelerate(scrollView);
+    }
 }
 
 #pragma mark - UIViewControllerRuntimeDelegate

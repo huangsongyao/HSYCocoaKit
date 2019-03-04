@@ -32,7 +32,7 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitBaseSegmentedPageControl) {
 //*****************************************************************************************************
 
 @class UIViewControllerRuntimeDelegateObject;
-@interface HSYBaseSegmentedPageViewController : HSYBaseViewController
+@interface HSYBaseSegmentedPageViewController : HSYBaseViewController <UIScrollViewDelegate>
 
 #pragma mark -- 以下属性请在执行[super viewDidLoad]前设置
 
@@ -59,6 +59,13 @@ typedef NS_ENUM(NSUInteger, kHSYCocoaKitBaseSegmentedPageControl) {
 @property (nonatomic, strong, readonly) HSYBaseSegmentedPageControl *segmentedPageControl;
 //滚动结束后的监听事件，HSYBaseSegmentedPageViewController子类可以实现本属性，监听滚动状态，用于处理model中vc
 @property (nonatomic, copy) void(^scrollEndFinished)(const NSInteger index, const UIViewController *viewController);
+//常用UIScrollViewDelegate委托监听
+@property (nonatomic, copy) void(^scrollViewWillBeginDragging)(UIScrollView *scrollView);
+@property (nonatomic, copy) void(^scrollViewDidEndDecelerating)(UIScrollView *scrollView);
+@property (nonatomic, copy) void(^scrollViewWillDecelerate)(UIScrollView *scrollView);
+@property (nonatomic, copy) void(^scrollViewDidEndScrollingAnimation)(UIScrollView *scrollView);
+@property (nonatomic, copy) void(^scrollViewDidScroll)(UIScrollView *scrollView);
+
 //监听子控制器的UIViewControllerRuntimeDelegate委托响应，子类可通过这个block处理子控制器回调给segmentedPageController的信号
 @property (nonatomic, copy) RACSignal *(^hsy_responseRuntimeDelegate)(UIViewControllerRuntimeDelegateObject *object);
 //监听HSYBaseTableViewController和HSYCollectionViewController两个类族的子类对象对于scrollDidScroll委托的状态
