@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HSYCocoaKit'
-  s.version          = '0.6.31'
+  s.version          = '0.6.4'
   s.summary          = 'A short description of HSYCocoaKit.'
 
 # This description is used to generate tags and improve search results.
