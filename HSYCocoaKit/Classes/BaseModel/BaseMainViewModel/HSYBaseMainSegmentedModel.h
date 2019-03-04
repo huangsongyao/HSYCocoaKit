@@ -5,7 +5,7 @@
 //  Created by huangsongyao on 2019/3/4.
 //
 
-#import <HSYCocoaKit/HSYCocoaKit.h>
+#import "HSYBaseRefleshModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -5,11 +5,12 @@
 //  Created by huangsongyao on 2019/3/4.
 //
 
-#import <HSYCocoaKit/HSYCocoaKit.h>
+#import "HSYBaseViewController.h"
 #import "HSYBasePageScrollView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class HSYBaseSegmentedPageViewController;
 @interface HSYBaseMainSegmentedViewController : HSYBaseViewController <HSYBasePageScrollDelegate>
  
 //主界面的ScorllView
